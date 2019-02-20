@@ -565,23 +565,39 @@
       <log_file path="$USER_HOME$/system/tomcat/Unnamed_SEHPortal804e0e3c/logs/localhost*" checked="true" skipped="true" show_all="false" alias="Tomcat Log" />
       <log_file path="C:/tomcat5/logs/SEHPortal.log" checked="true" skipped="true" show_all="false" alias="SEHPortal" />
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <RunnerSettings RunnerId="Cover" />
       <RunnerSettings RunnerId="Debug">
         <option name="DEBUG_PORT" value="3772" />
         <option name="TRANSPORT" value="0" />
         <option name="LOCAL" value="true" />
       </RunnerSettings>
       <RunnerSettings RunnerId="Run" />
-      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Debug">
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Cover">
         <option name="USE_ENV_VARIABLES" value="true" />
         <STARTUP>
           <option name="USE_DEFAULT" value="true" />
-          <option name="SCRIPT" value="C:/Program Files/Java/jdk1.6.0_21/bin/java  &quot;-Dcatalina.base=C:/Documents and Settings/janderson.SEHINC/.IntelliJIdea90/system/tomcat/Unnamed_SEHPortal804e0e3c&quot; -Dcatalina.home=C:/tomcat5 -Djava.io.tmpdir=C:/tomcat5/temp -jar C:/tomcat5/bin/bootstrap.jar start" />
+          <option name="SCRIPT" value="" />
           <option name="VM_PARAMETERS" value="" />
           <option name="PROGRAM_PARAMETERS" value="" />
         </STARTUP>
         <SHUTDOWN>
           <option name="USE_DEFAULT" value="true" />
-          <option name="SCRIPT" value="C:/Program Files/Java/jdk1.6.0_21/bin/java  &quot;-Dcatalina.base=C:/Documents and Settings/janderson.SEHINC/.IntelliJIdea90/system/tomcat/Unnamed_SEHPortal804e0e3c&quot; -Dcatalina.home=C:/tomcat5 -Djava.io.tmpdir=C:/tomcat5/temp -jar C:/tomcat5/bin/bootstrap.jar stop" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Debug">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="C:\Program Files\Java\jdk1.6.0_21\bin\java  &quot;-Dcatalina.base=C:\Documents and Settings\janderson.SEHINC\.IntelliJIdea90\system\tomcat\Unnamed_SEHPortal804e0e3c&quot; -Dcatalina.home=C:\tomcat5 -Djava.io.tmpdir=C:\tomcat5\temp -jar C:\tomcat5\bin\bootstrap.jar start" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="C:\Program Files\Java\jdk1.6.0_21\bin\java  &quot;-Dcatalina.base=C:\Documents and Settings\janderson.SEHINC\.IntelliJIdea90\system\tomcat\Unnamed_SEHPortal804e0e3c&quot; -Dcatalina.home=C:\tomcat5 -Djava.io.tmpdir=C:\tomcat5\temp -jar C:\tomcat5\bin\bootstrap.jar stop" />
           <option name="VM_PARAMETERS" value="" />
           <option name="PROGRAM_PARAMETERS" value="" />
         </SHUTDOWN>
@@ -590,13 +606,13 @@
         <option name="USE_ENV_VARIABLES" value="true" />
         <STARTUP>
           <option name="USE_DEFAULT" value="true" />
-          <option name="SCRIPT" value="C:/Program Files/Java/jdk1.6.0_21/bin/java  &quot;-Dcatalina.base=C:/Documents and Settings/janderson.SEHINC/.IntelliJIdea90/system/tomcat/Unnamed_SEHPortal804e0e3c&quot; -Dcatalina.home=C:/tomcat5 -Djava.io.tmpdir=C:/tomcat5/temp -jar C:/tomcat5/bin/bootstrap.jar start" />
+          <option name="SCRIPT" value="C:\Program Files\Java\jdk1.6.0_21\bin\java  &quot;-Dcatalina.base=C:\Documents and Settings\janderson.SEHINC\.IntelliJIdea90\system\tomcat\Unnamed_SEHPortal804e0e3c&quot; -Dcatalina.home=C:\tomcat5 -Djava.io.tmpdir=C:\tomcat5\temp -jar C:\tomcat5\bin\bootstrap.jar start" />
           <option name="VM_PARAMETERS" value="" />
           <option name="PROGRAM_PARAMETERS" value="" />
         </STARTUP>
         <SHUTDOWN>
           <option name="USE_DEFAULT" value="true" />
-          <option name="SCRIPT" value="C:/Program Files/Java/jdk1.6.0_21/bin/java  &quot;-Dcatalina.base=C:/Documents and Settings/janderson.SEHINC/.IntelliJIdea90/system/tomcat/Unnamed_SEHPortal804e0e3c&quot; -Dcatalina.home=C:/tomcat5 -Djava.io.tmpdir=C:/tomcat5/temp -jar C:/tomcat5/bin/bootstrap.jar stop" />
+          <option name="SCRIPT" value="C:\Program Files\Java\jdk1.6.0_21\bin\java  &quot;-Dcatalina.base=C:\Documents and Settings\janderson.SEHINC\.IntelliJIdea90\system\tomcat\Unnamed_SEHPortal804e0e3c&quot; -Dcatalina.home=C:\tomcat5 -Djava.io.tmpdir=C:\tomcat5\temp -jar C:\tomcat5\bin\bootstrap.jar stop" />
           <option name="VM_PARAMETERS" value="" />
           <option name="PROGRAM_PARAMETERS" value="" />
         </SHUTDOWN>
@@ -606,35 +622,6 @@
         <option name="BuildArtifacts" enabled="false">
           <artifact name="PermiTrack Artifact" />
         </option>
-      </method>
-    </configuration>
-    <configuration default="false" name="TEST Server" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Remote" APPLICATION_SERVER_NAME="Tomcat 5">
-      <option name="HOST" value="test.app.mypermitrack.com" />
-      <option name="LOCAL" value="false" />
-      <option name="OPEN_IN_BROWSER" value="false" />
-      <option name="OPEN_IN_BROWSER_URL" value="http://test.app.mypermitrack.com:8:8080/" />
-      <deployment />
-      <server-settings>
-        <data>
-          <option name="stagingRemotePath" value="" />
-          <option name="transportHostId" />
-          <option name="transportStagingTarget">
-            <TransportTarget>
-              <option name="id" value="da2046ea-1f82-4f7a-81ff-c6eb2333cece" />
-            </TransportTarget>
-          </option>
-        </data>
-      </server-settings>
-      <RunnerSettings RunnerId="Debug">
-        <option name="DEBUG_PORT" value="8888" />
-        <option name="TRANSPORT" value="0" />
-        <option name="LOCAL" value="false" />
-      </RunnerSettings>
-      <RunnerSettings RunnerId="Run" />
-      <ConfigurationWrapper RunnerId="Debug" />
-      <ConfigurationWrapper RunnerId="Run" />
-      <method>
-        <option name="Make" enabled="false" />
       </method>
     </configuration>
   </component>

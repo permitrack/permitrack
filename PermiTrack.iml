@@ -524,11 +524,11 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://C:/Program Files (x86)/Java/jdk1.6.0_21/lib/tools.jar!/" />
+          <root url="jar://C:/Program Files (x86)/Java/jdk1.6.0_31/lib/tools.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES>
-          <root url="jar://C:/Program Files (x86)/Java/jdk1.6.0_21/lib/tools.jar!/" />
+          <root url="jar://C:/Program Files (x86)/Java/jdk1.6.0_31/lib/tools.jar!/" />
         </SOURCES>
       </library>
     </orderEntry>
