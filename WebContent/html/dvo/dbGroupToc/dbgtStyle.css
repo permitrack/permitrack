@@ -1,0 +1,108 @@
+A
+{
+    border: 0;
+    margin: 0;
+    padding: 0;
+}
+
+A.offsite
+{
+    color: #004454;
+    text-decoration: none;
+}
+
+A:active
+{
+    color: #004454;
+    text-decoration: none;
+}
+
+A:visited
+{
+    color: #004454;
+    text-decoration: none;
+}
+
+A:hover
+{
+    color: #004454;
+    text-decoration: underline;
+}
+
+A:link
+{
+    color: #004454;
+    text-decoration: none;
+}
+
+BODY
+{
+    color: #004454;
+    background-color: White;
+    margin: 0 0 0 0;
+    font-family: "Tahoma", "Verdana", "Arial", "Helvetica", sans-serif;
+    font-size: 9pt;
+}
+
+IMG
+{
+    border: 0;
+    margin: 0;
+    padding: 0;
+    vertical-align: text-bottom;
+}
+
+INPUT
+{
+    font-family: "Tahoma", "Verdana", "Arial", "Helvetica", sans-serif;
+    font-size: 9pt;
+    font-weight: bold;
+}
+
+TD
+{
+    margin: 0 0;
+    COLOR: #004454;
+    text-align: left;
+    font-family: "Tahoma", "Verdana", "Arial", "Helvetica", sans-serif;
+    COLOR: #004454;
+    font-size: 9pt;
+    font-weight: normal;
+}
+
+TH
+{
+    margin: 0 0;
+    COLOR: #004454;
+    text-align: left;
+    font-family: "Tahoma", "Verdana", "Arial", "Helvetica", sans-serif;
+    font-size: 9pt;
+    font-weight: bold;
+}
+
+TR
+{
+    background-color: transparent;
+}
+
+TR.Highlight
+{
+    background-color: #DDDDDD;
+}
+
+.LayerListTitle
+{
+    FONT-WEIGHT: bold;
+    FONT-SIZE: 10pt;
+    COLOR: #004454;
+    FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif
+}
+
+.LayerListHelp
+{
+    margin: 0 0;
+    text-align: left;
+    font-family: "Tahoma", "Verdana", "Arial", "Helvetica", sans-serif;
+    font-size: 7pt;
+    font-weight: normal;
+}

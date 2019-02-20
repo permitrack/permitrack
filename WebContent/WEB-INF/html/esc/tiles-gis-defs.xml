@@ -1,0 +1,40 @@
+<!DOCTYPE tiles-definitions PUBLIC
+    "-//Apache Software Foundation//DTD Tiles Configuration 1.3//EN"
+    "http://struts.apache.org/dtds/tiles-config_1_3.dtd">
+<tiles-definitions>
+    <definition name="gis.baseLayout"
+                extends="html.baseLayout">
+        <put name="primaryMenu"
+             value="/html/esc/primarynavigation.jsp" />
+        <put name="secondaryMenu"
+             value="/html/esc/secondarynavigation.jsp" />
+    </definition>
+    <definition name="gis.import.page"
+                extends="gis.baseLayout">
+        <put name="title"
+             value="GIS Table Import" />
+        <put name="content"
+             value="/html/esc/gis/importtable.jsp" />
+    </definition>
+    <definition name="gis.import.ack.page"
+                extends="gis.baseLayout">
+        <put name="title"
+             value="GIS Table Import Success" />
+        <put name="content"
+             value="/html/esc/gis/importack.jsp" />
+    </definition>
+    <definition name="gis.search.page"
+                extends="gis.baseLayout">
+        <put name="title"
+             value="GIS Search" />
+        <put name="content"
+             value="/html/esc/gis/gissearch.jsp" />
+    </definition>
+    <definition name="gis.search.results.page"
+                extends="gis.baseLayout">
+        <put name="title"
+             value="GIS Search Results" />
+        <put name="content"
+             value="/html/esc/gis/gissearchresults.jsp" />
+    </definition>
+</tiles-definitions>

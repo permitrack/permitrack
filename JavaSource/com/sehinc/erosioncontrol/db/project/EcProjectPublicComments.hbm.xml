@@ -1,0 +1,53 @@
+<?xml version="1.0"?><!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping>
+    <!-- -->
+    <class name="com.sehinc.erosioncontrol.db.project.EcProjectPublicComments"
+           table="EC_PROJECT_PUBLIC_COMMENTS">
+        <id name="id"
+            type="integer">
+            <column name="ID" />
+            <generator class="identity" />
+        </id>
+        <property name="projectId"
+                  type="integer"
+                  column="PROJECT_ID" />
+        <property name="clientOwnerId"
+                  type="integer"
+                  column="CLIENT_OWNER_ID" />
+        <property name="firstName"
+                  type="string"
+                  column="FIRST_NAME" />
+        <property name="lastName"
+                  type="string"
+                  column="LAST_NAME" />
+        <property name="StreetAddress"
+                  type="string"
+                  column="STREET_ADDRESS" />
+        <property name="city"
+                  type="string"
+                  column="CITY" />
+        <property name="state"
+                  type="string"
+                  column="STATE" />
+        <property name="zipCode"
+                  type="string"
+                  column="ZIP_CODE" />
+        <property name="phone"
+                  type="string"
+                  column="PHONE" />
+        <property name="emailAddress"
+                  type="string"
+                  column="EMAIL_ADDRESS" />
+        <property name="ipAddress"
+                  type="string"
+                  column="IP_ADDRESS" />
+        <property name="comments"
+                  type="string"
+                  column="COMMENTS" />
+        <property name="createTimestamp"
+                  type="timestamp"
+                  column="CREATE_TS" />
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?><!DOCTYPE struts-config PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 1.3//EN"
+    "http://struts.apache.org/dtds/struts-config_1_3.dtd">
+<struts-config>
+    <form-beans>
+        <form-bean name="adminForm"
+                   type="com.sehinc.environment.action.admin.AdminForm" />
+    </form-beans>
+    <global-forwards>
+        <forward name="admin.client.list.action"
+                 path="/adminclientlistaction.do"
+                 redirect="true" />
+    </global-forwards>
+    <action-mappings>
+        <action path="/adminclientlistaction"
+                type="com.sehinc.environment.action.admin.AdminAction"
+                name="adminForm"
+                parameter="secondaryMenuItem=list"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="ev.admin.client.list.page" />
+        </action>
+        <action path="/adminclientselect"
+                type="com.sehinc.environment.action.admin.AdminClientSelectAction"
+                name="adminForm"
+                input="ev.admin.client.list.page"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     module="/html/env/permit"
+                     path="/permitlistpage.do" />
+        </action>
+        <action path="/remoteadminreturn"
+                type="com.sehinc.environment.action.admin.RemoteAdminReturnAction"
+                name="adminForm"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="/adminclientlistaction.do"
+                     redirect="true" />
+        </action>
+    </action-mappings>
+    <controller processorClass="org.apache.struts.action.RequestProcessor"
+                contentType="text/html" />
+    <plug-in className="org.apache.struts.tiles.TilesPlugin">
+        <set-property property="definitions-config"
+                      value="/WEB-INF/html/tiles-defs.xml, /WEB-INF/html/env/tiles-defs.xml, /WEB-INF/html/env/tiles-admin-defs.xml" />
+        <set-property property="definitions-debug"
+                      value="2" />
+        <set-property property="definitions-parser-details"
+                      value="2" />
+        <set-property property="definitions-parser-validate"
+                      value="true" />
+        <set-property property="moduleAware"
+                      value="true" />
+    </plug-in>
+    <plug-in className="org.apache.struts.validator.ValidatorPlugIn">
+        <set-property property="pathnames"
+                      value="/org/apache/struts/validator/validator-rules.xml, /WEB-INF/html/env/validation-admin.xml" />
+    </plug-in>
+</struts-config>

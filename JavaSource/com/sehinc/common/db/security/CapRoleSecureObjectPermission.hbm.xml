@@ -1,0 +1,30 @@
+<?xml version="1.0"?><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <!--
+            Auto-generated mapping file from
+            the hibernate.org cfg2hbm engine
+    -->
+    <class name="com.sehinc.common.db.security.CapRoleSecureObjectPermission"
+           table="CAP_ROLE_SECURE_OBJECT_PERMISSION">
+        <id name="id"
+            type="integer">
+            <column name="ID" />
+            <generator class="identity" />
+        </id>
+        <property name="roleId"
+                  type="integer"
+                  column="ROLE_ID" />
+        <property name="secureObjectId"
+                  type="integer"
+                  column="SECURE_OBJECT_ID" />
+        <property name="permissionId"
+                  type="integer"
+                  column="PERMISSION_ID" />
+    </class>
+    <query name="com.sehinc.common.db.security.CapRoleSecureObjectPermission.byRoleId">
+        select data
+        from com.sehinc.common.db.security.CapRoleSecureObjectPermission as data
+        where data.roleId = :roleId
+    </query>
+</hibernate-mapping>

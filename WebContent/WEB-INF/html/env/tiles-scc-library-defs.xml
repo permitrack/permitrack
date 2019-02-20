@@ -1,0 +1,52 @@
+<!DOCTYPE tiles-definitions PUBLIC
+    "-//Apache Software Foundation//DTD Tiles Configuration 1.3//EN"
+    "http://struts.apache.org/dtds/tiles-config_1_3.dtd">
+<tiles-definitions>
+    <definition name="scc.library.baseTitledLayout"
+                extends="ev.baseTitledLayout"></definition>
+    <definition name="scc.library.list.page"
+                extends="scc.library.baseTitledLayout">
+        <put name="title"
+             value="SCC Library List" />
+        <put name="description"
+             value="Listing of all SCC codes in the Library." />
+        <put name="content"
+             value="/html/env/scclibrary/scclibrarylist.jsp" />
+    </definition>
+    <definition name="scc.library.view.page"
+                extends="scc.library.baseTitledLayout">
+        <put name="title"
+             value="SCC Library" />
+        <put name="description"
+             value="View details of an SCC library item." />
+        <put name="content"
+             value="/html/env/scclibrary/scclibraryview.jsp" />
+    </definition>
+    <definition name="scc.library.edit.page"
+                extends="scc.library.baseTitledLayout">
+        <put name="title"
+             value="SCC Library" />
+        <put name="description"
+             value="Edit an SCC library item." />
+        <put name="content"
+             value="/html/env/scclibrary/scclibraryedit.jsp" />
+    </definition>
+    <definition name="scc.library.create.page"
+                extends="scc.library.baseTitledLayout">
+        <put name="title"
+             value="SCC Library" />
+        <put name="description"
+             value="Create an SCC library item." />
+        <put name="content"
+             value="/html/env/scclibrary/scclibrarycreate.jsp" />
+    </definition>
+    <definition name="scc.library.delete.page"
+                extends="scc.library.baseTitledLayout">
+        <put name="title"
+             value="SCC Library" />
+        <put name="description"
+             value="Delete an SCC library item." />
+        <put name="content"
+             value="/html/env/scclibrary/scclibrarydelete.jsp" />
+    </definition>
+</tiles-definitions>

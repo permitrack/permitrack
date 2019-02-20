@@ -1,0 +1,432 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE jasperReport PUBLIC "-//JasperReports//DTD Report Design//EN"
+"http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
+
+<jasperReport
+name="MPCAPermitReport"
+pageWidth="595"
+pageHeight="842"
+columnWidth="515"
+columnSpacing="0"
+leftMargin="40"
+rightMargin="40"
+topMargin="40"
+bottomMargin="40"
+scriptletClass="com.sehinc.stormwater.action.report.PlanReportScriptlet">
+
+<reportFont name="Arial_Normal" isDefault="true" fontName="Arial" size="12" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="true"/>
+<reportFont name="Arial_Bold" isDefault="false" fontName="Arial" size="12" isBold="true" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="true"/>
+<reportFont name="Arial_Italic" isDefault="false" fontName="Arial" size="12" isItalic="true" pdfFontName="Helvetica-Oblique" pdfEncoding="Cp1252" isPdfEmbedded="true"/>
+<reportFont name="Arial_Small" isDefault="true" fontName="Arial" size="10" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="true"/>
+<reportFont name="Arial_Small_Bold" isDefault="false" fontName="Arial" size="10" isBold="true" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="true"/>
+<reportFont name="Arial_Small_Italic" isDefault="false" fontName="Arial" size="10" isItalic="true" pdfFontName="Helvetica-Oblique" pdfEncoding="Cp1252" isPdfEmbedded="true"/>
+
+
+
+	<parameter name="PlanId" class="java.lang.Integer"/>
+<queryString><![CDATA[select [plan].[id] as PLAN_ID, [plan].name as Plan_Name, mcm.number as MCM_IDENTIFIER ,mcm.name as mcm_name, bmp.number,
+bmp.name,bmp.section as SECTION, bmp.id as BMP_ID, bmp.FIELD_TYPE1 as FIELD_TYPE1, bmp.FIELD_VALUE1 as FIELD_VALUE1,
+bmp.FIELD_TYPE2 as FIELD_TYPE2, bmp.FIELD_VALUE2 as FIELD_VALUE2, bmp.FIELD_TYPE3 as FIELD_TYPE3, bmp.FIELD_VALUE3 as FIELD_VALUE3,
+bmp.FIELD_TYPE4 as FIELD_TYPE4, bmp.FIELD_VALUE4 as FIELD_VALUE4, bmp.FIELD_TYPE5 as FIELD_TYPE5, bmp.FIELD_VALUE5 as FIELD_VALUE5,
+[user].FIRST_NAME as FIRST_NAME, [user].LAST_NAME as LAST_NAME,[user].MIDDLE_NAME as MIDDLE_NAME, [user].DEPARTMENT as DEPARTMENT,
+[user].PRIMARY_PHONE as PRIMARY_PHONE, [user].EMAIL_ADDRESS as EMAIL_ADDRESS
+from [plan] left outer join mcm on [plan].id = mcm.plan_id and mcm.status_cd = 1
+left outer join bmp on mcm.id = bmp.mcm_id and bmp.status_cd = 1
+left outer join [user] on bmp.owner_id = [user].id and [user].status_cd = 1
+where [plan].id = $P{PlanId}
+order by mcm.number, bmp.section, bmp.number]]></queryString>
+
+<field name = "PLAN_ID"          class = "java.lang.Integer"/>
+<field name = "Plan_Name"        class = "java.lang.String"/>
+<field name = "MCM_IDENTIFIER"   class = "java.lang.Integer"/>
+<field name = "mcm_name"         class = "java.lang.String"/>
+<field name = "NUMBER"           class = "java.lang.Integer"/>
+<field name = "NAME"             class = "java.lang.String"/>
+<field name = "SECTION"          class = "java.lang.String"/>
+<field name = "BMP_ID"           class = "java.lang.Integer"/>
+<field name = "FIELD_TYPE1"      class = "java.lang.Integer"/>
+<field name = "FIELD_VALUE1"     class = "java.lang.String"/>
+<field name = "FIELD_TYPE2"      class = "java.lang.Integer"/>
+<field name = "FIELD_VALUE2"     class = "java.lang.String"/>
+<field name = "FIELD_TYPE3"      class = "java.lang.Integer"/>
+<field name = "FIELD_VALUE3"     class = "java.lang.String"/>
+<field name = "FIELD_TYPE4"      class = "java.lang.Integer"/>
+<field name = "FIELD_VALUE4"     class = "java.lang.String"/>
+<field name = "FIELD_TYPE5"      class = "java.lang.Integer"/>
+<field name = "FIELD_VALUE5"    class = "java.lang.String"/>
+<field name = "FIRST_NAME"       class = "java.lang.String"/>
+<field name = "LAST_NAME"        class = "java.lang.String"/>
+<field name = "MIDDLE_NAME"      class = "java.lang.String"/>
+<field name = "DEPARTMENT"       class = "java.lang.String"/>
+<field name = "PRIMARY_PHONE"    class = "java.lang.String"/>
+<field name = "EMAIL_ADDRESS"    class = "java.lang.String"/>
+
+
+<group name="abc" isStartNewPage="true">
+  <groupExpression>
+    $F{BMP_ID}
+  </groupExpression>
+  <groupHeader>
+    <band height ="100">
+      <textField isBlankWhenNull="true">
+        <reportElement x="0" y="5" width="515" height="40"/>
+        <textElement textAlignment="Center">
+          <font reportFont="Arial_Bold"/>
+        </textElement>
+		<textFieldExpression class="java.lang.String">
+			<![CDATA["BMP Summary Sheet"]]>
+		</textFieldExpression>
+	  </textField>
+      <rectangle>
+        <reportElement x="0" y="25"  positionType="Float" width="515" height="60"/>
+        <graphicElement/>
+      </rectangle>
+      <textField isBlankWhenNull="true">
+        <reportElement x="0" y="30" width="256" height="20"/>
+        <textElement textAlignment="Right">
+          <font reportFont="Arial_Bold"/>
+        </textElement>
+		<textFieldExpression class="java.lang.String">
+			<![CDATA["MS4 Name:"]]>
+		</textFieldExpression>
+	  </textField>
+      <textField isBlankWhenNull="true">
+        <reportElement x="259" y="30" width="256" height="20"/>
+        <textElement textAlignment="Left">
+          <font reportFont="Arial_Normal"/>
+        </textElement>
+        <textFieldExpression>
+          <![CDATA[$F{Plan_Name}]]>
+        </textFieldExpression>
+      </textField>
+      <line>
+        <reportElement x="0" y="45" width="515" height="0"/>
+        <graphicElement/>
+      </line>
+      <textField isBlankWhenNull="true">
+        <reportElement x="0" y="50" width="256" height="20"/>
+        <textElement textAlignment="Right">
+          <font reportFont="Arial_Bold"/>
+        </textElement>
+		<textFieldExpression class="java.lang.String">
+			<![CDATA["Minimum Control Measure:"]]>
+		</textFieldExpression>
+	  </textField>
+      <textField isBlankWhenNull="true">
+        <reportElement x="259" y="50" width="256" height="20"/>
+        <textElement textAlignment="Left">
+          <font reportFont="Arial_Normal"/>
+        </textElement>
+        <textFieldExpression>
+          <![CDATA[$F{MCM_IDENTIFIER}  + "  " + $F{mcm_name}]]>
+        </textFieldExpression>
+      </textField>
+      <line>
+        <reportElement x="0" y="65" width="515" height="0"/>
+        <graphicElement/>
+      </line>
+      <textField isBlankWhenNull="true">
+        <reportElement x="0" y="70" width="256" height="20"/>
+        <textElement textAlignment="Right">
+          <font reportFont="Arial_Bold"/>
+        </textElement>
+		<textFieldExpression class="java.lang.String">
+			<![CDATA["Unique BMP Identification Number:"]]>
+		</textFieldExpression>
+	  </textField>
+      <textField isBlankWhenNull="true">
+        <reportElement x="259" y="70" width="256" height="20"/>
+        <textElement textAlignment="Left">
+          <font reportFont="Arial_Normal"/>
+        </textElement>
+        <textFieldExpression class="java.lang.String">
+        <![CDATA[((com.sehinc.stormwater.action.report.PlanReportScriptlet)$P{REPORT_SCRIPTLET}).formatBMPIdentifier($F{PLAN_ID}, $F{MCM_IDENTIFIER}, $F{NUMBER}, $F{SECTION})]]>
+        </textFieldExpression>
+      </textField>
+    </band>
+  </groupHeader>
+</group>
+
+
+<group name = "BMPTitle">
+  <groupHeader>
+    <band height ="20">
+      <textField isBlankWhenNull="true">
+        <reportElement x="5" y="0" width="75" height="20"/>
+        <textElement textAlignment="Left">
+          <font reportFont="Arial_Bold"/>
+        </textElement>
+		<textFieldExpression class="java.lang.String">
+			<![CDATA["BMP Title:"]]>
+		</textFieldExpression>
+	  </textField>
+      <textField isStretchWithOverflow="true" isBlankWhenNull="true">
+        <reportElement x="80" y="0" width="430" height="20"/>
+        <textElement markup="html">
+          <font reportFont="Arial_Normal"/>
+        </textElement>
+        <textFieldExpression>
+          <![CDATA[$F{NAME}]]>
+        </textFieldExpression>
+      </textField>
+    </band>
+  </groupHeader>
+  <groupFooter>
+  </groupFooter>
+</group>
+
+
+<group name="Description">
+  <groupHeader>
+    <band height = "50">
+      <rectangle>
+        <reportElement x="0" y="0" positionType="Float" width="515" height="50"/>
+        <graphicElement stretchType="RelativeToBandHeight" pen="1Point" />
+      </rectangle>
+      <textField>
+        <reportElement x="5" y="0" width="505" height="20"/>
+        <textElement verticalAlignment="Top" textAlignment="Left">
+          <font reportFont="Arial_Bold"/>
+        </textElement>
+        <textFieldExpression >
+          <![CDATA[com.sehinc.stormwater.db.plan.BMPFieldType.getNameById($F{FIELD_TYPE1})]]>
+        </textFieldExpression>
+      </textField>
+      <textField isStretchWithOverflow="true" isBlankWhenNull="true">
+        <reportElement x="5" y="20" width="505" height="30"/>
+        <textElement verticalAlignment="Top" textAlignment="Left" markup="html">
+          <font reportFont="Arial_Normal"/>
+        </textElement>
+        <textFieldExpression>
+          <![CDATA[com.sehinc.stormwater.action.report.BMPReportHelper.formatField($F{BMP_ID}, $F{FIELD_TYPE1}, $F{FIELD_VALUE1}, $F{MCM_IDENTIFIER})]]>
+        </textFieldExpression>
+      </textField>
+    </band>
+  </groupHeader>
+  <groupFooter>
+  </groupFooter>
+</group>
+
+<group name="Justification">
+  <groupHeader>
+    <band height ="50">
+      <rectangle>
+        <reportElement x="0" y="0" positionType="Float" width="515" height="50"/>
+        <graphicElement stretchType="RelativeToBandHeight" pen="1Point" />
+      </rectangle>
+      <textField>
+        <reportElement x="5" y="0" width="505" height="20"/>
+        <textElement verticalAlignment="Top" textAlignment="Left">
+          <font reportFont="Arial_Bold"/>
+        </textElement>
+        <textFieldExpression>
+          <![CDATA[com.sehinc.stormwater.db.plan.BMPFieldType.getNameById( $F{FIELD_TYPE2})]]>
+        </textFieldExpression>
+      </textField>
+      <textField isStretchWithOverflow="true" isBlankWhenNull="true">
+        <reportElement x="5" y="20" width="505" height="30"/>
+        <textElement verticalAlignment="Top" textAlignment="Left" markup="html">
+          <font reportFont="Arial_Normal"/>
+        </textElement>
+        <textFieldExpression>
+          <![CDATA[com.sehinc.stormwater.action.report.BMPReportHelper.formatField( $F{BMP_ID}, $F{FIELD_TYPE2}, $F{FIELD_VALUE2}, $F{MCM_IDENTIFIER})]]>
+        </textFieldExpression>
+      </textField>
+    </band>
+  </groupHeader>
+  <groupFooter>
+  </groupFooter>
+</group>
+
+<group name="EducationProgram">
+  <groupHeader>
+    <band height ="50">
+      <rectangle>
+        <reportElement x="0" y="0" positionType="Float" width="515" height="50"/>
+        <graphicElement stretchType="RelativeToBandHeight" pen="1Point" />
+      </rectangle>
+      <textField>
+        <reportElement x="5" y="0" width="505" height="20"/>
+        <textElement verticalAlignment="Top" textAlignment="Left">
+          <font reportFont="Arial_Bold"/>
+        </textElement>
+        <textFieldExpression>
+          <![CDATA[com.sehinc.stormwater.db.plan.BMPFieldType.getNameById( $F{FIELD_TYPE3})]]>
+        </textFieldExpression>
+      </textField>
+      <textField  isStretchWithOverflow="true" isBlankWhenNull="true">
+        <reportElement x="5" y="20" width="505" height="30"/>
+        <textElement verticalAlignment="Top" textAlignment="Left">
+          <font reportFont="Arial_Normal"/>
+        </textElement>
+        <textFieldExpression>
+          <![CDATA[com.sehinc.stormwater.action.report.BMPReportHelper.formatField( $F{BMP_ID}, $F{FIELD_TYPE3}, $F{FIELD_VALUE3}, $F{MCM_IDENTIFIER})]]>
+        </textFieldExpression>
+      </textField>
+    </band>
+  </groupHeader>
+  <groupFooter>
+  </groupFooter>
+</group>
+
+<group name ="AnnualReportingItems">
+  <groupHeader>
+    <band height = "50">
+      <rectangle>
+        <reportElement x="0" y="0" positionType="Float" width="515" height="50"/>
+        <graphicElement stretchType="RelativeToBandHeight" pen="1Point" />
+      </rectangle>
+      <textField>
+        <reportElement x="5" y="0" width="505" height="20"/>
+        <textElement verticalAlignment="Top" textAlignment="Left">
+          <font reportFont="Arial_Bold"/>
+        </textElement>
+        <textFieldExpression>
+          <![CDATA[com.sehinc.stormwater.db.plan.BMPFieldType.getNameById( $F{FIELD_TYPE4})]]>
+        </textFieldExpression>
+      </textField>
+      <textField isStretchWithOverflow="true" isBlankWhenNull="true">
+        <reportElement x="5" y="20" width="505" height="30"/>
+        <textElement verticalAlignment="Top" textAlignment="Left">
+          <font reportFont="Arial_Normal"/>
+        </textElement>
+        <textFieldExpression>
+          <![CDATA[com.sehinc.stormwater.action.report.BMPReportHelper.formatField( $F{BMP_ID}, $F{FIELD_TYPE4}, $F{FIELD_VALUE4}, $F{MCM_IDENTIFIER})]]>
+        </textFieldExpression>
+      </textField>
+    </band>
+  </groupHeader>
+  <groupFooter>
+  </groupFooter>
+</group>
+
+<group name="xyz">
+  <groupHeader>
+    <band height="50">
+      <printWhenExpression>new Boolean($F{FIELD_TYPE5}.intValue() != 0)</printWhenExpression>
+      <rectangle>
+        <reportElement x="0" y="0" positionType="Float" width="515" height="50"/>
+        <graphicElement stretchType="RelativeToBandHeight" pen="1Point" />
+      </rectangle>
+      <textField>
+        <reportElement x="5" y="0" width="505" height="20"/>
+        <textElement  verticalAlignment="Top" textAlignment="Left">
+          <font reportFont="Arial_Bold"/>
+        </textElement>
+        <textFieldExpression>
+          <![CDATA[($F{FIELD_TYPE5}.intValue() != 0 ) ?
+          (new java.lang.String(com.sehinc.stormwater.db.plan.BMPFieldType.getNameById( $F{FIELD_TYPE5}) )) : (new java.lang.String(" "))]]>
+        </textFieldExpression>
+      </textField>
+      <textField isStretchWithOverflow="true" isBlankWhenNull="true">
+        <reportElement x="5" y="20" width="505" height="30"/>
+        <textElement  verticalAlignment="Top" textAlignment="Left">
+          <font reportFont="Arial_Normal"/>
+        </textElement>
+        <textFieldExpression>
+         <![CDATA[($F{FIELD_TYPE5}.intValue() !=0 ) ?
+         (new java.lang.String(com.sehinc.stormwater.action.report.BMPReportHelper.formatField
+         ($F{BMP_ID}, $F{FIELD_TYPE5},$F{FIELD_VALUE5},$F{MCM_IDENTIFIER}) )) :
+         (new java.lang.String(" "))]]>
+        </textFieldExpression>
+      </textField>
+    </band>
+  </groupHeader>
+  <groupFooter>
+  </groupFooter>
+</group>
+
+<group name="def">
+  <groupHeader>
+    <band height = "75">
+      <rectangle>
+        <reportElement x="0" y="0" positionType="Float" width="515" height="75"/>
+        <graphicElement stretchType="RelativeToBandHeight" pen="1Point" />
+      </rectangle>
+      <textField isBlankWhenNull="true">
+        <reportElement x="5" y="0" width="505" height="15"/>
+        <textElement verticalAlignment="Top" textAlignment="Left">
+          <font reportFont="Arial_Bold"/>
+        </textElement>
+		<textFieldExpression class="java.lang.String">
+			<![CDATA["Responsible Party for this BMP:"]]>
+		</textFieldExpression>
+	  </textField>
+      <textField isBlankWhenNull="true">
+        <reportElement x="5" y="15" width="100" height="15"/>
+        <textElement verticalAlignment="Top" textAlignment="Left">
+          <font reportFont="Arial_Bold"/>
+        </textElement>
+		<textFieldExpression class="java.lang.String">
+			<![CDATA["Name:"]]>
+		</textFieldExpression>
+	  </textField>
+      <textField isBlankWhenNull="true">
+        <reportElement x="101" y="15" width="409" height="15"/>
+        <textElement verticalAlignment="Top" textAlignment="Left">
+          <font reportFont="Arial_Normal"/>
+        </textElement>
+        <textFieldExpression>
+          <![CDATA[($F{FIRST_NAME} != null) ?
+          (new java.lang.String($F{FIRST_NAME} + " " + $F{LAST_NAME}) ): (new java.lang.String(" "))]]>
+        </textFieldExpression>
+      </textField>
+      <textField isBlankWhenNull="true">
+        <reportElement x="5" y="30" width="100" height="15"/>
+        <textElement verticalAlignment="Top" textAlignment="Left">
+          <font reportFont="Arial_Bold"/>
+        </textElement>
+		<textFieldExpression class="java.lang.String">
+			<![CDATA["Department:"]]>
+		</textFieldExpression>
+	  </textField>
+      <textField isBlankWhenNull="true">
+        <reportElement x="101" y="30" width="409" height="15"/>
+        <textElement verticalAlignment="Top" textAlignment="Left">
+          <font reportFont="Arial_Normal"/>
+        </textElement>
+        <textFieldExpression>
+          <![CDATA[($F{DEPARTMENT} != null) ?
+          (new java.lang.String($F{DEPARTMENT} )) :(new java.lang.String(" "))]]>
+        </textFieldExpression>
+      </textField>
+      <textField isBlankWhenNull="true">
+        <reportElement x="5" y="45" width="100" height="15"/>
+        <textElement verticalAlignment="Top" textAlignment="Left">
+          <font reportFont="Arial_Bold"/>
+        </textElement>
+		<textFieldExpression class="java.lang.String">
+			<![CDATA["Phone:"]]>
+		</textFieldExpression>
+	  </textField>
+      <textField isBlankWhenNull="true">
+        <reportElement x="101" y="45" width="409" height="15"/>
+        <textFieldExpression>
+          <![CDATA[($F{PRIMARY_PHONE} != null) ?
+          (new java.lang.String($F{PRIMARY_PHONE} )) :(new java.lang.String(" "))]]>
+        </textFieldExpression>
+      </textField>
+      <textField isBlankWhenNull="true">
+        <reportElement x="5" y="60" width="100" height="15"/>
+        <textElement verticalAlignment="Top" textAlignment="Left">
+          <font reportFont="Arial_Bold"/>
+        </textElement>
+		<textFieldExpression class="java.lang.String">
+			<![CDATA["Email:"]]>
+		</textFieldExpression>
+	  </textField>
+      <textField isBlankWhenNull="true">
+        <reportElement x="101" y="60" width="409" height="15"/>
+        <textFieldExpression>
+          <![CDATA[($F{EMAIL_ADDRESS} != null) ?
+          (new java.lang.String($F{EMAIL_ADDRESS} )) :(new java.lang.String(" "))]]>
+        </textFieldExpression>
+      </textField>
+    </band>
+  </groupHeader>
+  <groupFooter>
+  </groupFooter>
+</group>
+</jasperReport>
+
+

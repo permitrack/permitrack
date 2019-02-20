@@ -1,0 +1,60 @@
+<?xml version="1.0"?><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <!--
+            Auto-generated mapping file from
+            the hibernate.org cfg2hbm engine
+    -->
+    <class name="com.sehinc.erosioncontrol.action.project.ProjectSearchListForm"
+           table="USER_SEARCHES">
+        <id name="id"
+            type="integer">
+            <column name="ID" />
+            <generator class="identity" />
+        </id>
+        <property name="searchName"
+                  type="string"
+                  column="SEARCH_NAME" />
+        <property name="isDefaultSearch"
+                  type="boolean"
+                  column="IS_DEFAULT_SEARCH"
+                  access="field" />
+        <property name="projectsPerPage"
+                  type="int"
+                  column="PROJECTS_PER_PAGE" />
+        <property name="searchProjectName"
+                  type="string"
+                  column="SEARCH_PROJECT_NAME" />
+        <property name="searchAddress"
+                  type="string"
+                  column="SEARCH_ADDRESS" />
+        <property name="searchCity"
+                  type="string"
+                  column="SEARCH_CITY" />
+        <property name="searchState"
+                  type="string"
+                  column="SEARCH_STATE" />
+        <property name="searchZip"
+                  type="string"
+                  column="SEARCH_ZIP" />
+        <property name="searchZonesString"
+                  type="string"
+                  column="SEARCH_ZONES" />
+        <property name="searchProjectTypesString"
+                  type="string"
+                  column="SEARCH_PROJECT_TYPES" />
+        <property name="searchProjectStatusesString"
+                  type="string"
+                  column="SEARCH_PROJECT_STATUSES" />
+        <property name="sortColumn"
+                  type="string"
+                  column="SORT_COLUMN" />
+        <property name="sortDirection"
+                  type="string"
+                  column="SORT_DIRECTION" />
+        <property name="userId"
+                  type="int"
+                  not-null="true"
+                  column="USER_ID" />
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="NE_Air_Form_2_0_Stack" pageWidth="540" pageHeight="108" columnWidth="540" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<reportFont name="Arial_Normal" isDefault="true" fontName="Arial" size="12" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Bold" isDefault="false" fontName="Arial" size="12" isBold="true" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Italic" isDefault="false" fontName="Arial" size="12" isItalic="true" pdfFontName="Helvetica-Oblique" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Bold_Italic" isDefault="false" fontName="Arial" size="12" isBold="true" isItalic="true" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Small" isDefault="true" fontName="Arial" size="10" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Small_Bold" isDefault="false" fontName="Arial" size="10" isBold="true" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Small_Italic" isDefault="false" fontName="Arial" size="10" isItalic="true" pdfFontName="Helvetica-Oblique" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Small_Bold_Italic" isDefault="false" fontName="Arial" size="10" isBold="true" isItalic="true" pdfFontName="Helvetica-Oblique" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<parameter name="ASSET_ID" class="java.lang.Integer"/>
+	<queryString>
+		<![CDATA[select z.*,
+               aa.stk_latitude,
+	       aa.stk_longitude,
+               aa.stk_height,
+               aa.stk_diameter,
+               aa.stk_exit_temp,
+               aa.stk_exit_velocity,
+               aa.stk_exit_flow_rate,
+               aa.stk_description
+            from (
+                select a.id asset_id,
+                a.number a_number
+                from env_asset a
+                WHERE a.id = $P{ASSET_ID}
+                 ) z
+            LEFT JOIN env_asset_attr aa
+            ON aa.asset_id = z.asset_id]]>
+	</queryString>
+	<field name="asset_id" class="java.lang.Integer"/>
+	<field name="a_number" class="java.lang.String"/>
+	<field name="stk_latitude" class="java.lang.String"/>
+	<field name="stk_longitude" class="java.lang.String"/>
+	<field name="stk_height" class="java.lang.String"/>
+	<field name="stk_diameter" class="java.lang.String"/>
+	<field name="stk_exit_temp" class="java.lang.String"/>
+	<field name="stk_exit_velocity" class="java.lang.String"/>
+	<field name="stk_exit_flow_rate" class="java.lang.String"/>
+	<field name="stk_description" class="java.lang.String"/>
+	<title>
+		<band height="62" splitType="Stretch">
+			<rectangle>
+				<reportElement mode="Opaque" x="1" y="20" width="51" height="42"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Opaque" x="52" y="20" width="92" height="42"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Opaque" x="144" y="20" width="52" height="42"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Opaque" x="196" y="20" width="52" height="42"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Opaque" x="248" y="20" width="45" height="42"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Opaque" x="293" y="20" width="50" height="42"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Opaque" x="343" y="20" width="74" height="42"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Opaque" x="417" y="20" width="58" height="42"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Opaque" x="475" y="20" width="64" height="42"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="0" width="540" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font reportFont="Arial_Bold"/>
+				</textElement>
+				<text><![CDATA[Stack Parameters]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2" y="21" width="49" height="40"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font reportFont="Arial_Small_Bold" size="9"/>
+				</textElement>
+				<text><![CDATA[Process Number]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="53" y="21" width="90" height="40"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font reportFont="Arial_Small_Bold" size="9"/>
+				</textElement>
+				<text><![CDATA[Stack Description (including lining type)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="145" y="21" width="50" height="40"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font reportFont="Arial_Small_Bold" size="9"/>
+				</textElement>
+				<text><![CDATA[Latitude]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="197" y="21" width="50" height="40"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font reportFont="Arial_Small_Bold" size="9"/>
+				</textElement>
+				<text><![CDATA[Longitude]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="249" y="21" width="43" height="40"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font reportFont="Arial_Small_Bold" size="9"/>
+				</textElement>
+				<text><![CDATA[Height (ft)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="294" y="21" width="48" height="40"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font reportFont="Arial_Small_Bold" size="9"/>
+				</textElement>
+				<text><![CDATA[Inside Diameter (ft)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="344" y="21" width="72" height="40"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font reportFont="Arial_Small_Bold" size="9"/>
+				</textElement>
+				<text><![CDATA[Exit Gas Temperature (Deg F)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="418" y="21" width="56" height="40"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font reportFont="Arial_Small_Bold" size="9"/>
+				</textElement>
+				<text><![CDATA[Exit Gas Velocity (ft/sec)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="476" y="21" width="62" height="40"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font reportFont="Arial_Small_Bold" size="9"/>
+				</textElement>
+				<text><![CDATA[Exit Gas Flow Rate (Cu ft/min)]]></text>
+			</staticText>
+		</band>
+	</title>
+	<detail>
+		<band height="45" splitType="Stretch">
+			<rectangle>
+				<reportElement mode="Opaque" x="1" y="0" width="51" height="44"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Opaque" x="52" y="0" width="92" height="44" isRemoveLineWhenBlank="true"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Opaque" x="144" y="0" width="52" height="44" isRemoveLineWhenBlank="true"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Opaque" x="196" y="0" width="52" height="44" isRemoveLineWhenBlank="true"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Opaque" x="248" y="0" width="45" height="44" isRemoveLineWhenBlank="true"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Opaque" x="293" y="0" width="50" height="44" isRemoveLineWhenBlank="true"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Opaque" x="343" y="0" width="74" height="44" isRemoveLineWhenBlank="true"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Opaque" x="417" y="0" width="58" height="44" isRemoveLineWhenBlank="true"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Opaque" x="475" y="0" width="64" height="44" isRemoveLineWhenBlank="true"/>
+			</rectangle>
+			<textField isBlankWhenNull="true">
+				<reportElement x="2" y="1" width="49" height="42" isRemoveLineWhenBlank="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font reportFont="Arial_Small"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{a_number}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="53" y="1" width="90" height="42" isRemoveLineWhenBlank="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font reportFont="Arial_Small"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{stk_description}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="145" y="1" width="50" height="42" isRemoveLineWhenBlank="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font reportFont="Arial_Small"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{stk_latitude}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="197" y="1" width="50" height="42" isRemoveLineWhenBlank="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font reportFont="Arial_Small"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{stk_longitude}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="249" y="1" width="43" height="42" isRemoveLineWhenBlank="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font reportFont="Arial_Small"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{stk_height}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="294" y="1" width="48" height="42" isRemoveLineWhenBlank="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font reportFont="Arial_Small"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{stk_diameter}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="344" y="1" width="72" height="42" isRemoveLineWhenBlank="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font reportFont="Arial_Small"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{stk_exit_temp}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="418" y="1" width="56" height="42" isRemoveLineWhenBlank="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font reportFont="Arial_Small"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{stk_exit_velocity}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="476" y="1" width="62" height="42" isRemoveLineWhenBlank="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font reportFont="Arial_Small"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{stk_exit_flow_rate}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

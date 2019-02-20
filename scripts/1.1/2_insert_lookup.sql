@@ -1,0 +1,138 @@
+if exists (select * from dbo.sysobjects where id = object_id(N'[dbo].[FK_ENV_ASSET_TYPE_LOOKUP_ENV_ASSET_TYPE1]') and OBJECTPROPERTY(id, N'IsForeignKey') = 1)
+ALTER TABLE [dbo].[ENV_ASSET_TYPE] DROP CONSTRAINT FK_ENV_ASSET_TYPE_LOOKUP_ENV_ASSET_TYPE1
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'[dbo].[FK_ENV_SOURCE_LOOKUP_ENV_SOURCE_TYPE]') and OBJECTPROPERTY(id, N'IsForeignKey') = 1)
+ALTER TABLE [dbo].[ENV_SOURCE] DROP CONSTRAINT FK_ENV_SOURCE_LOOKUP_ENV_SOURCE_TYPE
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'[dbo].[FK_ENV_ASSET_EMITTED_SUBSTANCE_LOOKUP_ENV_SUBSTANCE_TYPE]') and OBJECTPROPERTY(id, N'IsForeignKey') = 1)
+ALTER TABLE [dbo].[ENV_ASSET_EMITTED_SUBSTANCE_TYPE] DROP CONSTRAINT FK_ENV_ASSET_EMITTED_SUBSTANCE_LOOKUP_ENV_SUBSTANCE_TYPE
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'[dbo].[FK_ENV_PERMIT_SUBSTANCE_LOOKUP_ENV_SUBSTANCE_TYPE]') and OBJECTPROPERTY(id, N'IsForeignKey') = 1)
+ALTER TABLE [dbo].[ENV_PERMIT_SUBSTANCE] DROP CONSTRAINT FK_ENV_PERMIT_SUBSTANCE_LOOKUP_ENV_SUBSTANCE_TYPE
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'[dbo].[FK_ENV_SUBSTANCE_LOOKUP_ENV_SUBSTANCE_TYPE]') and OBJECTPROPERTY(id, N'IsForeignKey') = 1)
+ALTER TABLE [dbo].[ENV_SUBSTANCE] DROP CONSTRAINT FK_ENV_SUBSTANCE_LOOKUP_ENV_SUBSTANCE_TYPE
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'[dbo].[FK_ENV_ASSET_ATTR_LOOKUP_ENV_UNIT_OF_MEASURE]') and OBJECTPROPERTY(id, N'IsForeignKey') = 1)
+ALTER TABLE [dbo].[ENV_ASSET_ATTR] DROP CONSTRAINT FK_ENV_ASSET_ATTR_LOOKUP_ENV_UNIT_OF_MEASURE
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'[dbo].[FK_ENV_SOURCE_SUBSTANCE_LOOKUP_ENV_UNIT_OF_MEASURE]') and OBJECTPROPERTY(id, N'IsForeignKey') = 1)
+ALTER TABLE [dbo].[ENV_SOURCE_SUBSTANCE] DROP CONSTRAINT FK_ENV_SOURCE_SUBSTANCE_LOOKUP_ENV_UNIT_OF_MEASURE
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'[dbo].[FK_ENV_SOURCE_USAGE_ENV_READING_DISPLAY_TYPE]') and OBJECTPROPERTY(id, N'IsForeignKey') = 1)
+ALTER TABLE [dbo].[ENV_SOURCE_USAGE] DROP CONSTRAINT FK_ENV_SOURCE_USAGE_ENV_READING_DISPLAY_TYPE
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'[dbo].[LOOKUP_ENV_ASSET_TYPE]') and OBJECTPROPERTY(id, N'IsUserTable') = 1)
+drop table [dbo].[LOOKUP_ENV_ASSET_TYPE]
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'[dbo].[LOOKUP_ENV_FACILITY_CONTACT_TYPE]') and OBJECTPROPERTY(id, N'IsUserTable') = 1)
+drop table [dbo].[LOOKUP_ENV_FACILITY_CONTACT_TYPE]
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'[dbo].[LOOKUP_ENV_SOURCE_TYPE]') and OBJECTPROPERTY(id, N'IsUserTable') = 1)
+drop table [dbo].[LOOKUP_ENV_SOURCE_TYPE]
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'[dbo].[LOOKUP_ENV_STATUS_CODE]') and OBJECTPROPERTY(id, N'IsUserTable') = 1)
+drop table [dbo].[LOOKUP_ENV_STATUS_CODE]
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'[dbo].[LOOKUP_ENV_SUBSTANCE_TYPE]') and OBJECTPROPERTY(id, N'IsUserTable') = 1)
+drop table [dbo].[LOOKUP_ENV_SUBSTANCE_TYPE]
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'[dbo].[LOOKUP_ENV_UNIT_OF_MEASURE]') and OBJECTPROPERTY(id, N'IsUserTable') = 1)
+drop table [dbo].[LOOKUP_ENV_UNIT_OF_MEASURE]
+GO
+
+CREATE TABLE [dbo].[LOOKUP_ENV_ASSET_TYPE] (
+	[CODE] [int] NOT NULL ,
+	[DESCRIPTION] [varchar] (50) COLLATE SQL_Latin1_General_CP1_CI_AS NULL ,
+	[CLIENT_ID] [int] NOT NULL ,
+	[ORDER_NUM] [int] NOT NULL 
+) ON [PRIMARY]
+GO
+
+CREATE TABLE [dbo].[LOOKUP_ENV_FACILITY_CONTACT_TYPE] (
+	[CODE] [int] NOT NULL ,
+	[DESCRIPTION] [varchar] (50) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL ,
+	[CLIENT_ID] [int] NOT NULL ,
+	[ORDER_NUM] [int] NOT NULL 
+) ON [PRIMARY]
+GO
+
+CREATE TABLE [dbo].[LOOKUP_ENV_SOURCE_TYPE] (
+	[CODE] [int] NOT NULL ,
+	[DESCRIPTION] [varchar] (50) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL ,
+	[CLIENT_ID] [int] NOT NULL ,
+	[ORDER_NUM] [int] NOT NULL 
+) ON [PRIMARY]
+GO
+
+CREATE TABLE [dbo].[LOOKUP_ENV_STATUS_CODE] (
+	[CODE] [varchar] (4) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL ,
+	[DESCRIPTION] [varchar] (50) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL ,
+	[ORDER_NUM] [int] NOT NULL 
+) ON [PRIMARY]
+GO
+
+CREATE TABLE [dbo].[LOOKUP_ENV_SUBSTANCE_TYPE] (
+	[CODE] [int] NOT NULL ,
+	[DESCRIPTION] [varchar] (50) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL ,
+	[CLIENT_ID] [int] NOT NULL ,
+	[ORDER_NUM] [int] NOT NULL 
+) ON [PRIMARY]
+GO
+
+CREATE TABLE [dbo].[LOOKUP_ENV_UNIT_OF_MEASURE] (
+	[CODE] [int] NOT NULL ,
+	[DESCRIPTION] [varchar] (50) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL ,
+	[CLIENT_ID] [int] NOT NULL ,
+	[ORDER_NUM] [int] NOT NULL 
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[LOOKUP_ENV_ASSET_TYPE] WITH NOCHECK ADD 
+	CONSTRAINT [PK_ENV_ORG_UNIT_TYPE] PRIMARY KEY  CLUSTERED 
+	(
+		[CODE]
+	)  ON [PRIMARY] 
+GO
+
+ALTER TABLE [dbo].[LOOKUP_ENV_FACILITY_CONTACT_TYPE] WITH NOCHECK ADD 
+	CONSTRAINT [PK_ENV_ROLE_TYPE] PRIMARY KEY  CLUSTERED 
+	(
+		[CODE]
+	)  ON [PRIMARY] 
+GO
+
+ALTER TABLE [dbo].[LOOKUP_ENV_SOURCE_TYPE] WITH NOCHECK ADD 
+	CONSTRAINT [PK_LOOKUP_ENV_SOURCE_TYPE] PRIMARY KEY  CLUSTERED 
+	(
+		[CODE]
+	)  ON [PRIMARY] 
+GO
+
+ALTER TABLE [dbo].[LOOKUP_ENV_SUBSTANCE_TYPE] WITH NOCHECK ADD 
+	CONSTRAINT [PK_LOOKUP_ENV_SUBSTANCE_TYPE] PRIMARY KEY  CLUSTERED 
+	(
+		[CODE]
+	)  ON [PRIMARY] 
+GO
+
+ALTER TABLE [dbo].[LOOKUP_ENV_UNIT_OF_MEASURE] WITH NOCHECK ADD 
+	CONSTRAINT [PK_ENV_READING_DISPLAY_TYPE] PRIMARY KEY  CLUSTERED 
+	(
+		[CODE]
+	)  ON [PRIMARY] 
+GO
+

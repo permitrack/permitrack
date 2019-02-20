@@ -1,0 +1,1 @@
+DELETE FROM env_asset_type WHERE asset_type_cd in (4,5);

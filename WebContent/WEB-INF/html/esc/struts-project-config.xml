@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?><!DOCTYPE struts-config PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 1.3//EN"
+    "http://struts.apache.org/dtds/struts-config_1_3.dtd">
+<struts-config>
+    <form-beans>
+        <form-bean name="projectForm"
+                   type="com.sehinc.erosioncontrol.action.project.ProjectForm" />
+        <form-bean name="projectListItemForm"
+                   type="com.sehinc.erosioncontrol.action.project.ProjectListItemForm" />
+        <form-bean name="projectEmailForm"
+                   type="com.sehinc.erosioncontrol.action.project.ProjectEmailForm" />
+        <form-bean name="projectZoneForm"
+                   type="com.sehinc.erosioncontrol.action.project.ProjectZoneForm" />
+        <form-bean name="projectZoneListForm"
+                   type="com.sehinc.erosioncontrol.action.project.ProjectZoneListForm" />
+        <form-bean name="projectZoneDeleteForm"
+                   type="com.sehinc.erosioncontrol.action.project.ProjectZoneDeleteForm" />
+        <form-bean name="projectTypeForm"
+                   type="com.sehinc.erosioncontrol.action.project.ProjectTypeForm" />
+        <form-bean name="projectSearchListForm"
+                   type="com.sehinc.erosioncontrol.action.project.ProjectSearchListForm" />
+    </form-beans>
+    <global-forwards>
+        <forward name="project.list.page"
+                 path="/projectlistpage.do"
+                 redirect="true" />
+        <forward name="project.view.page"
+                 path="/projectviewpage.do"
+                 redirect="true" />
+        <forward name="project.create.page"
+                 path="/projectcreatestep1.do"
+                 redirect="true" />
+        <forward name="project.edit.page"
+                 path="/projecteditpage.do"
+                 redirect="true" />
+        <forward name="project.email.page"
+                 path="/projectemailpage.do"
+                 redirect="true" />
+        <forward name="project.zone.list.page"
+                 path="/projectzonelistpage.do"
+                 redirect="true" />
+    </global-forwards>
+    <action-mappings>
+        <action path="/projectlistpage"
+                type="com.sehinc.erosioncontrol.action.project.ProjectListPageAction"
+                name="projectSearchListForm"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="project.list.page" />
+        </action>
+        <action path="/projectlistitempage"
+                type="com.sehinc.erosioncontrol.action.project.ProjectListItemPageAction"
+                name="projectListItemForm"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="project.list.item.page" />
+        </action>
+        <action path="/sendnotifications"
+                type="com.sehinc.erosioncontrol.action.project.SendNotifications">
+            <forward name="continue"
+                     path="project.list.page" />
+        </action>
+        <action path="/projectlistitemsaveaction"
+                type="com.sehinc.erosioncontrol.action.project.ProjectListItemSaveAction"
+                name="projectListItemForm"
+                input="project.list.item.page"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="/projectlistpage.do"
+                     redirect="true" />
+        </action>
+        <action path="/projectviewpage"
+                type="com.sehinc.erosioncontrol.action.project.ProjectViewPageAction"
+                name="projectForm"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="project.view.page" />
+            <forward name="fail"
+                     path="/projectlistpage.do"
+                     redirect="true" />
+        </action>
+        <action path="/projectcreatestep1"
+                type="com.sehinc.erosioncontrol.action.project.ProjectCreateAction"
+                name="projectForm"
+                scope="request"
+                validate="false"
+                parameter="action=createstep1">
+            <forward name="continue"
+                     path="project.create.step1.page" />
+        </action>
+        <action path="/projectcreatestep2"
+                type="com.sehinc.erosioncontrol.action.project.ProjectCreateAction"
+                name="projectForm"
+                scope="request"
+                validate="false"
+                parameter="action=createstep2">
+            <forward name="continue"
+                     path="project.create.step2.page" />
+        </action>
+        <action path="/projectcreatestep3"
+                type="com.sehinc.erosioncontrol.action.project.ProjectCreateAction"
+                name="projectForm"
+                scope="request"
+                validate="false"
+                parameter="action=createstep3">
+            <forward name="continue"
+                     path="/projectviewpage.do"
+                     redirect="true" />
+        </action>
+        <action path="/projecteditpage"
+                type="com.sehinc.erosioncontrol.action.project.ProjectEditPageAction"
+                name="projectForm"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="project.edit.page" />
+        </action>
+        <action path="/projecteditaction"
+                type="com.sehinc.erosioncontrol.action.project.ProjectEditAction"
+                name="projectForm"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="/projectviewpage.do"
+                     redirect="true" />
+        </action>
+        <action path="/projectemailpage"
+                type="com.sehinc.erosioncontrol.action.project.ProjectEmailPageAction"
+                name="projectEmailForm"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="project.email.page" />
+        </action>
+        <action path="/projectemailaction"
+                type="com.sehinc.erosioncontrol.action.project.ProjectEmailAction"
+                name="projectEmailForm"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="/projectlistpage.do"
+                     redirect="true" />
+        </action>
+        <action path="/projectzonelistpage"
+                type="com.sehinc.erosioncontrol.action.project.ProjectZoneListPageAction"
+                name="projectZoneListForm"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="project.zone.list.page" />
+        </action>
+        <action path="/projectzonecreatepage"
+                type="com.sehinc.erosioncontrol.action.project.ProjectZoneCreatePageAction"
+                name="projectZoneForm"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="project.zone.create.page" />
+        </action>
+        <action path="/projectzonecreateaction"
+                type="com.sehinc.erosioncontrol.action.project.ProjectZoneCreateAction"
+                name="projectZoneForm"
+                input="project.zone.create.page"
+                scope="request"
+                validate="true"
+                cancellable="true">
+            <forward name="continue"
+                     path="/projectzonelistpage.do"
+                     redirect="true" />
+        </action>
+        <action path="/projectzoneeditpage"
+                type="com.sehinc.erosioncontrol.action.project.ProjectZoneEditPageAction"
+                name="projectZoneForm"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="project.zone.edit.page" />
+        </action>
+        <action path="/projectzoneeditaction"
+                type="com.sehinc.erosioncontrol.action.project.ProjectZoneEditAction"
+                name="projectZoneForm"
+                input="project.zone.edit.page"
+                scope="request"
+                validate="true"
+                cancellable="true">
+            <forward name="continue"
+                     path="/projectzonelistpage.do"
+                     redirect="true" />
+        </action>
+        <action path="/projectzonedeletepage"
+                type="com.sehinc.erosioncontrol.action.project.ProjectZoneDeletePageAction"
+                name="projectZoneDeleteForm"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="project.zone.delete.page" />
+        </action>
+        <action path="/projectzonedeleteaction"
+                type="com.sehinc.erosioncontrol.action.project.ProjectZoneDeleteAction"
+                name="projectZoneDeleteForm"
+                input="project.zone.delete.page"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="/projectzonelistpage.do"
+                     redirect="true" />
+        </action>
+        <action path="/projecttypelistpage"
+                type="com.sehinc.erosioncontrol.action.project.ProjectTypeListPageAction"
+                name="projectTypeForm"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="projecttype.list.page" />
+        </action>
+        <action path="/projecttypecreatepage"
+                type="com.sehinc.erosioncontrol.action.project.ProjectTypeCreatePageAction"
+                name="projectTypeForm"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="projecttype.create.page" />
+        </action>
+        <action path="/projecttypecreate"
+                type="com.sehinc.erosioncontrol.action.project.ProjectTypeCreateAction"
+                name="projectTypeForm"
+                input="projecttype.create.page"
+                scope="request"
+                validate="true"
+                cancellable="true">
+            <forward name="continue"
+                     path="/projecttypelistpage.do"
+                     redirect="true" />
+        </action>
+        <action path="/projecttypeviewpage"
+                type="com.sehinc.erosioncontrol.action.project.ProjectTypeViewPageAction"
+                name="projectTypeForm"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="projecttype.view.page" />
+        </action>
+        <action path="/projecttypeeditpage"
+                type="com.sehinc.erosioncontrol.action.project.ProjectTypeEditPageAction"
+                name="projectTypeForm"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="projecttype.edit.page" />
+        </action>
+        <action path="/projecttypeedit"
+                type="com.sehinc.erosioncontrol.action.project.ProjectTypeEditAction"
+                name="projectTypeForm"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="/projecttypeviewpage.do"
+                     redirect="true" />
+        </action>
+        <action path="/projecttypedelete"
+                type="com.sehinc.erosioncontrol.action.project.ProjectTypeDeleteAction"
+                name="projectTypeForm"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="/projecttypelistpage.do"
+                     redirect="true" />
+        </action>
+    </action-mappings>
+    <controller processorClass="org.apache.struts.action.RequestProcessor"
+                contentType="text/html" />
+    <plug-in className="org.apache.struts.tiles.TilesPlugin">
+        <set-property property="definitions-config"
+                      value="/WEB-INF/html/tiles-defs.xml, /WEB-INF/html/esc/tiles-project-defs.xml" />
+        <set-property property="definitions-debug"
+                      value="2" />
+        <set-property property="definitions-parser-details"
+                      value="2" />
+        <set-property property="definitions-parser-validate"
+                      value="true" />
+        <set-property property="moduleAware"
+                      value="true" />
+    </plug-in>
+    <plug-in className="org.apache.struts.validator.ValidatorPlugIn">
+        <set-property property="pathnames"
+                      value="/org/apache/struts/validator/validator-rules.xml, /WEB-INF/html/esc/validation-project.xml" />
+    </plug-in>
+</struts-config>

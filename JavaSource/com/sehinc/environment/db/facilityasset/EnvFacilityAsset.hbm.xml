@@ -1,0 +1,44 @@
+<?xml version="1.0"?><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <!--
+            Auto-generated mapping file from
+            the hibernate.org cfg2hbm engine
+    -->
+    <class name="com.sehinc.environment.db.facilityasset.EnvFacilityAsset"
+           table="ENV_FACILITY_ASSET">
+        <id name="id"
+            type="integer">
+            <column name="ID" />
+            <generator class="identity" />
+        </id>
+        <property name="facilityId"
+                  type="integer"
+                  column="FACILITY_ID" />
+        <property name="assetId"
+                  type="integer"
+                  column="ASSET_ID" />
+        <property name="createTimestamp"
+                  type="timestamp"
+                  column="CREATE_TS" />
+        <property name="updateTimestamp"
+                  type="timestamp"
+                  column="UPDATE_TS" />
+        <property name="updateUserId"
+                  type="integer"
+                  column="UPDATE_USER_ID" />
+    </class>
+    <query name="EnvFacilityAsset.findByFacilityId">
+        from com.sehinc.environment.db.facilityasset.EnvFacilityAsset as fa
+        where fa.facilityId = :facilityId
+    </query>
+    <query name="EnvFacilityAsset.findByAssetId">
+        from com.sehinc.environment.db.facilityasset.EnvFacilityAsset as fa
+        where fa.assetId = :assetId
+    </query>
+    <query name="EnvFacilityAsset.findByFacilityAndAssetId">
+        from com.sehinc.environment.db.facilityasset.EnvFacilityAsset as fa
+        where fa.assetId = :assetId
+        and fa.facilityId = :facilityId
+    </query>
+</hibernate-mapping>

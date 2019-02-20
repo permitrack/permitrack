@@ -1,0 +1,78 @@
+<?xml version="1.0"?><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <!--
+            Auto-generated mapping file from
+            the hibernate.org cfg2hbm engine
+    -->
+    <class name="com.sehinc.erosioncontrol.db.bmp.EcBmp"
+           table="EC_BMP">
+        <id name="id"
+            type="integer">
+            <column name="ID" />
+            <generator class="identity" />
+        </id>
+        <property name="clientId"
+                  type="integer"
+                  column="CLIENT_ID" />
+        <many-to-one name="category"
+                     class="com.sehinc.erosioncontrol.db.bmp.EcBmpCategory"
+                     column="BMP_CATEGORY_ID"
+                     lazy="false" />
+        <property name="name"
+                  type="string"
+                  column="NAME" />
+        <property name="description"
+                  type="string"
+                  column="DESCRIPTION" />
+        <property name="weblink"
+                  type="string"
+                  column="WEBLINK" />
+        <many-to-one name="status"
+                     class="com.sehinc.erosioncontrol.db.code.StatusCodeData"
+                     column="STATUS_CD"
+                     lazy="false" />
+        <property name="createTimestamp"
+                  type="timestamp"
+                  column="CREATE_TS" />
+        <property name="updateTimestamp"
+                  type="timestamp"
+                  column="UPDATE_TS" />
+        <property name="updateUserId"
+                  type="integer"
+                  column="UPDATE_USER_ID" />
+    </class>
+    <query name="com.sehinc.erosioncontrol.db.bmp.EcBmp.bmpListByClientId">
+        from com.sehinc.erosioncontrol.db.bmp.EcBmp as bmp
+        where bmp.clientId = :clientId and bmp.status.code = :statusCode
+        order by bmp.category.name ASC, bmp.name ASC
+    </query>
+    <query name="com.sehinc.erosioncontrol.db.bmp.EcBmp.bmpByName">
+        from com.sehinc.erosioncontrol.db.bmp.EcBmp as bmp
+        where upper(bmp.name) = upper(:bmpName) and
+        bmp.clientId = :clientId and
+        bmp.status.code = :statusCode
+    </query>
+    <query name="com.sehinc.erosioncontrol.db.bmp.EcBmp.bmpByCatIdAndName">
+        from com.sehinc.erosioncontrol.db.bmp.EcBmp as bmp
+        where upper(bmp.name) = upper(:bmpName) and
+        bmp.category.id = :categoryId and
+        bmp.clientId = :clientId and
+        bmp.status.code = :statusCode
+    </query>
+    <query name="com.sehinc.erosioncontrol.db.bmp.EcBmp.duplicateBmpInCategory">
+        from com.sehinc.erosioncontrol.db.bmp.EcBmp as bmp
+        where not bmp.id = :bmpId and
+        upper(bmp.name) = upper(:name) and
+        bmp.category.id = :categoryId and
+        bmp.clientId = :clientId and
+        bmp.status.code = :statusCode
+    </query>
+    <query name="com.sehinc.erosioncontrol.db.bmp.EcBmp.bmpListByCatId">
+        from com.sehinc.erosioncontrol.db.bmp.EcBmp as bmp
+        where bmp.clientId = :clientId and
+        bmp.category.id = :categoryId and
+        bmp.status.code = :statusCode
+        order by bmp.name ASC
+    </query>
+</hibernate-mapping>

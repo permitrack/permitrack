@@ -1,0 +1,270 @@
+<?xml version="1.0"?>
+<!DOCTYPE jasperReport PUBLIC "-//JasperReports//DTD Report Design//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
+
+<jasperReport 
+		name="ProjectPartnerSummaryReport"
+		printOrder="Horizontal"
+		pageWidth="842" 
+		pageHeight="595" 
+		orientation="Landscape"
+		columnWidth="762" 
+		columnSpacing="0" 
+		leftMargin="0" 
+		rightMargin="0" 
+		topMargin="0" 
+		bottomMargin="0">
+	<reportFont name="Arial_Normal" isDefault="true" fontName="Arial" size="12" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Bold" isDefault="false" fontName="Arial" size="12" isBold="true" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Italic" isDefault="false" fontName="Arial" size="12" isItalic="true" pdfFontName="Helvetica-Oblique" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Bold_Italic" isDefault="false" fontName="Arial" size="12" isItalic="true" isBold="true" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Small" isDefault="true" fontName="Arial" size="10" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Small_Bold" isDefault="false" fontName="Arial" size="10" isBold="true" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Small_Italic" isDefault="false" fontName="Arial" size="10" isItalic="true" pdfFontName="Helvetica-Oblique" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Small_Bold_Italic" isDefault="false" fontName="Arial" size="10" isItalic="true" isBold="true" pdfFontName="Helvetica-Oblique" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<parameter name="ReportTitle" class="java.lang.String"/>
+	<parameter name="ClientName" class="java.lang.String"/>
+	<parameter name="ClientId" class="java.lang.Integer"/>
+	<queryString><![CDATA[SELECT 1 MY_ORDER, CLIENT.ID OWNER_ID, CLIENT.ID PARTNER_ID, CLIENT.NAME OWNER_NAME, CLIENT.NAME PARTNER_NAME, 'Project Owner' PARTNER_TYPE_NAME,
+							SUM(CASE WHEN EC_PROJECT.PERMIT_AUTHORITY_CLIENT_ID = EC_PROJECT.OWNER_CLIENT_ID THEN 1 ELSE 0 END) PERMIT_AUTHORITY_SUM,
+							SUM(CASE WHEN EC_PROJECT.PERMITTED_CLIENT_ID = EC_PROJECT.OWNER_CLIENT_ID THEN 1 ELSE 0 END) PERMITTED_SUM,
+							SUM(CASE WHEN EC_PROJECT.AUTHORIZED_INSPECTOR_CLIENT_ID = EC_PROJECT.OWNER_CLIENT_ID THEN 1 ELSE 0 END) AUTHORIZED_INSPECTOR_SUM,
+							COUNT(EC_PROJECT.ID) PROJECT_COUNT
+						FROM EC_PROJECT, CLIENT
+						WHERE EC_PROJECT.OWNER_CLIENT_ID = $P{ClientId} AND
+						      EC_PROJECT.OWNER_CLIENT_ID = CLIENT.ID
+						GROUP BY CLIENT.ID, CLIENT.NAME
+						UNION
+						SELECT 2 MY_ORDER, OC.ID OWNER_ID, CLIENT.ID PARTNER_ID, OC.NAME OWNER_NAME, CLIENT.NAME PARTNER_NAME, EC_CLIENT_RELATIONSHIP_TYPE.NAME PARTNER_TYPE_NAME,
+							SUM(CASE WHEN EC_PROJECT.PERMIT_AUTHORITY_CLIENT_ID = EC_CLIENT_RELATIONSHIP.RELATED_CLIENT_ID THEN 1 ELSE 0 END) PERMIT_AUTHORITY_SUM,
+							SUM(CASE WHEN EC_PROJECT.PERMITTED_CLIENT_ID = EC_CLIENT_RELATIONSHIP.RELATED_CLIENT_ID THEN 1 ELSE 0 END) PERMITTED_SUM,
+							SUM(CASE WHEN EC_PROJECT.AUTHORIZED_INSPECTOR_CLIENT_ID = EC_CLIENT_RELATIONSHIP.RELATED_CLIENT_ID THEN 1 ELSE 0 END) AUTHORIZED_INSPECTOR_SUM,
+							SUM(CASE WHEN EC_PROJECT.PERMIT_AUTHORITY_CLIENT_ID = EC_CLIENT_RELATIONSHIP.RELATED_CLIENT_ID OR
+							EC_PROJECT.PERMITTED_CLIENT_ID = EC_CLIENT_RELATIONSHIP.RELATED_CLIENT_ID OR
+							EC_PROJECT.AUTHORIZED_INSPECTOR_CLIENT_ID = EC_CLIENT_RELATIONSHIP.RELATED_CLIENT_ID THEN 1 ELSE 0 END) PROJECT_COUNT
+						FROM EC_PROJECT, CLIENT, CLIENT OC, EC_CLIENT_RELATIONSHIP, EC_CLIENT_RELATIONSHIP_TYPE
+						WHERE EC_PROJECT.OWNER_CLIENT_ID = $P{ClientId} AND
+							EC_PROJECT.OWNER_CLIENT_ID = OC.ID AND
+							EC_PROJECT.OWNER_CLIENT_ID = EC_CLIENT_RELATIONSHIP.CLIENT_ID AND
+							EC_CLIENT_RELATIONSHIP.RELATED_CLIENT_ID = CLIENT.ID AND
+							EC_CLIENT_RELATIONSHIP.CLIENT_RELATIONSHIP_TYPE_ID = EC_CLIENT_RELATIONSHIP_TYPE.ID
+						GROUP BY OC.ID, CLIENT.ID, OC.NAME, CLIENT.NAME, EC_CLIENT_RELATIONSHIP_TYPE.NAME
+						UNION
+						SELECT 3 MY_ORDER, OC.ID OWNER_ID, CLIENT.ID PARTNER_ID, OC.NAME OWNER_NAME, CLIENT.NAME PARTNER_NAME, EC_CLIENT_RELATIONSHIP_TYPE.NAME PARTNER_TYPE_NAME,
+							SUM(CASE WHEN EC_PROJECT.PERMIT_AUTHORITY_CLIENT_ID = $P{ClientId} THEN 1 ELSE 0 END) PERMIT_AUTHORITY_SUM,
+							SUM(CASE WHEN EC_PROJECT.PERMITTED_CLIENT_ID = $P{ClientId} THEN 1 ELSE 0 END) PERMITTED_SUM,
+							SUM(CASE WHEN EC_PROJECT.AUTHORIZED_INSPECTOR_CLIENT_ID = $P{ClientId} THEN 1 ELSE 0 END) AUTHORIZED_INSPECTOR_SUM,
+							SUM(CASE WHEN EC_PROJECT.PERMIT_AUTHORITY_CLIENT_ID = $P{ClientId} OR
+							EC_PROJECT.PERMITTED_CLIENT_ID = $P{ClientId} OR
+							EC_PROJECT.AUTHORIZED_INSPECTOR_CLIENT_ID = $P{ClientId} THEN 1 ELSE 0 END) PROJECT_COUNT
+						FROM EC_PROJECT, CLIENT, CLIENT OC, EC_CLIENT_RELATIONSHIP, EC_CLIENT_RELATIONSHIP_TYPE
+						WHERE EC_PROJECT.OWNER_CLIENT_ID <> $P{ClientId} AND
+							EC_PROJECT.OWNER_CLIENT_ID = OC.ID AND
+							EC_PROJECT.OWNER_CLIENT_ID = EC_CLIENT_RELATIONSHIP.CLIENT_ID AND
+							EC_CLIENT_RELATIONSHIP.RELATED_CLIENT_ID = $P{ClientId} AND
+							EC_CLIENT_RELATIONSHIP.RELATED_CLIENT_ID = CLIENT.ID AND
+							EC_CLIENT_RELATIONSHIP.CLIENT_RELATIONSHIP_TYPE_ID = EC_CLIENT_RELATIONSHIP_TYPE.ID
+						GROUP BY OC.ID, CLIENT.ID, OC.NAME, CLIENT.NAME, EC_CLIENT_RELATIONSHIP_TYPE.NAME
+						ORDER BY MY_ORDER ASC, PARTNER_TYPE_NAME ASC, PARTNER_NAME ASC]]></queryString>
+	<field name="MY_ORDER" class="java.lang.Integer"/>
+	<field name="OWNER_ID" class="java.lang.Integer"/>
+	<field name="OWNER_NAME" class="java.lang.String"/>
+	<field name="PARTNER_ID" class="java.lang.Integer"/>
+	<field name="PARTNER_NAME" class="java.lang.String"/>
+	<field name="PARTNER_TYPE_NAME" class="java.lang.String"/>
+	<field name="PERMIT_AUTHORITY_SUM" class="java.lang.Integer"/>
+	<field name="PERMITTED_SUM" class="java.lang.Integer"/>
+	<field name="AUTHORIZED_INSPECTOR_SUM" class="java.lang.Integer"/>
+	<field name="PROJECT_COUNT" class="java.lang.Integer"/>
+
+	<group name="MyOrderGroup">
+		<groupExpression>
+			<![CDATA[$F{MY_ORDER}]]>
+		</groupExpression>
+		<groupHeader>
+			<band height="35">
+				<printWhenExpression>(new java.lang.Boolean($F{MY_ORDER}.intValue() != 2))</printWhenExpression>
+				<line>
+					<reportElement x="0" y="0" width="762" height="0"/>
+					<graphicElement stretchType="NoStretch"/>
+				</line>							
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="0" y="1" width="762" height="15">
+						<printWhenExpression>(new java.lang.Boolean($F{MY_ORDER}.intValue() == 1))</printWhenExpression>
+					</reportElement>
+					<textElement verticalAlignment="Bottom">
+						<font reportFont="Arial_Bold_Italic"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String">
+						<![CDATA["Projects Owned by " + $P{ClientName}]]>
+					</textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="0" y="1" width="762" height="15">
+						<printWhenExpression>(new java.lang.Boolean($F{MY_ORDER}.intValue() == 3))</printWhenExpression>
+					</reportElement>
+					<textElement verticalAlignment="Bottom">
+						<font reportFont="Arial_Bold_Italic"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String">
+						<![CDATA["Projects Not Owned by " + $P{ClientName}]]>
+					</textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement x="0" y="17" width="150" height="15">
+						<printWhenExpression>(new java.lang.Boolean($F{MY_ORDER}.intValue() == 1))</printWhenExpression>
+					</reportElement>
+					<textElement verticalAlignment="Bottom">
+						<font reportFont="Arial_Small_Bold"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String">
+						<![CDATA["Partner"]]>
+					</textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement x="0" y="17" width="150" height="15">
+						<printWhenExpression>(new java.lang.Boolean($F{MY_ORDER}.intValue() == 3))</printWhenExpression>
+					</reportElement>
+					<textElement verticalAlignment="Bottom">
+						<font reportFont="Arial_Small_Bold"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String">
+						<![CDATA["Project Owner"]]>
+					</textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement x="150" y="17" width="120" height="15"/>
+					<textElement verticalAlignment="Bottom">
+						<font reportFont="Arial_Small_Bold"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String">
+						<![CDATA["Relationship Type"]]>
+					</textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement x="270" y="17" width="120" height="15"/>
+					<textElement  verticalAlignment="Bottom">
+						<font reportFont="Arial_Small_Bold"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String">
+						<![CDATA["# of Related Projects"]]>
+					</textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement x="390" y="17" width="120" height="15"/>
+					<textElement  verticalAlignment="Bottom">
+						<font reportFont="Arial_Small_Bold"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String">
+						<![CDATA["Permit Authority"]]>
+					</textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement x="510" y="17" width="120" height="15"/>
+					<textElement  verticalAlignment="Bottom">
+						<font reportFont="Arial_Small_Bold"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String">
+						<![CDATA["Permittee"]]>
+					</textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement x="630" y="17" width="120" height="15"/>
+					<textElement  verticalAlignment="Bottom">
+						<font reportFont="Arial_Small_Bold"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String">
+						<![CDATA["Authorized Inspector"]]>
+					</textFieldExpression>
+				</textField>
+			<line>
+				<reportElement x="0" y="33" width="762" height="0"/>
+				<graphicElement stretchType="NoStretch"/>
+			</line>							
+			</band>
+		</groupHeader>
+	</group>
+
+	<title>
+		<band height="30">
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="0" y="0" width="762" height="30"/>
+				<textElement verticalAlignment="Bottom">
+					<font reportFont="Arial_Bold" size="14"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{ReportTitle}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+
+	<detail>
+		<band height="15">
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="0" y="0" width="150" height="15">
+					<printWhenExpression>(new java.lang.Boolean($F{MY_ORDER}.intValue() == 1 || $F{MY_ORDER}.intValue() == 2))</printWhenExpression>
+				</reportElement>				
+				<textElement verticalAlignment="Top">
+					<font reportFont="Arial_Small"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String">
+					<![CDATA[$F{PARTNER_NAME}]]>
+				</textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="0" y="0" width="150" height="15">
+					<printWhenExpression>(new java.lang.Boolean($F{MY_ORDER}.intValue() == 3))</printWhenExpression>
+				</reportElement>				
+				<textElement verticalAlignment="Top">
+					<font reportFont="Arial_Small"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String">
+					<![CDATA[$F{OWNER_NAME}]]>
+				</textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="150" y="0" width="120" height="15"/>
+				<textElement verticalAlignment="Top">
+					<font reportFont="Arial_Small"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String">
+					<![CDATA[$F{PARTNER_TYPE_NAME}]]>
+				</textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="270" y="0" width="120" height="15"/>
+				<textElement verticalAlignment="Top">
+					<font reportFont="Arial_Small"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer">
+					<![CDATA[$F{PROJECT_COUNT}]]>
+				</textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="390" y="0" width="120" height="15"/>
+				<textElement verticalAlignment="Top">
+					<font reportFont="Arial_Small"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer">
+					<![CDATA[$F{PERMIT_AUTHORITY_SUM}]]>
+				</textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="510" y="0" width="120" height="15"/>
+				<textElement verticalAlignment="Top">
+					<font reportFont="Arial_Small"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer">
+					<![CDATA[$F{PERMITTED_SUM}]]>
+				</textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="630" y="0" width="120" height="15"/>
+				<textElement verticalAlignment="Top">
+					<font reportFont="Arial_Small"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer">
+					<![CDATA[$F{AUTHORIZED_INSPECTOR_SUM}]]>
+				</textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

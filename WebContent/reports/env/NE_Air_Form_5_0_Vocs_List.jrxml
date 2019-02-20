@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="NE_Air_Form_5_0_Haps_List" pageWidth="540" pageHeight="250" columnWidth="540" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<reportFont name="Arial_Normal" isDefault="true" fontName="Arial" size="12" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Bold" isDefault="false" fontName="Arial" size="12" isBold="true" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Italic" isDefault="false" fontName="Arial" size="12" isItalic="true" pdfFontName="Helvetica-Oblique" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Bold_Italic" isDefault="false" fontName="Arial" size="12" isBold="true" isItalic="true" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Small" isDefault="true" fontName="Arial" size="10" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Small_Bold" isDefault="false" fontName="Arial" size="10" isBold="true" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Small_Italic" isDefault="false" fontName="Arial" size="10" isItalic="true" pdfFontName="Helvetica-Oblique" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Small_Bold_Italic" isDefault="false" fontName="Arial" size="10" isBold="true" isItalic="true" pdfFontName="Helvetica-Oblique" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<parameter name="FacilityId" class="java.lang.Integer"/>
+	<parameter name="year" class="java.lang.Integer"/>
+	<queryString>
+		<![CDATA[exec sp_all_vocs_for_facility @yearInt = $P{year}, @facilityId=$P{FacilityId}]]>
+	</queryString>
+	<field name="SOURCE_LBS_VOC" class="java.math.BigDecimal"/>
+	<field name="SOURCE_NAME" class="java.lang.String"/>
+	<field name="EMISSIONS" class="java.math.BigDecimal"/>
+	<field name="GALLONS" class="java.math.BigDecimal"/>
+	<field name="PN" class="java.lang.String"/>
+	<columnHeader>
+		<band height="31" splitType="Stretch">
+			<rectangle>
+				<reportElement mode="Transparent" x="0" y="1" width="92" height="30"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="1" width="92" height="30"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font reportFont="Arial_Bold"/>
+				</textElement>
+				<text><![CDATA[Material Name]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement mode="Transparent" x="92" y="1" width="118" height="30"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="322" y="1" width="75" height="30"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="322" y="1" width="75" height="30"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font reportFont="Arial_Bold"/>
+				</textElement>
+				<text><![CDATA[VOC Content]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement mode="Transparent" x="397" y="1" width="70" height="30"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="397" y="1" width="70" height="30"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font reportFont="Arial_Bold"/>
+				</textElement>
+				<text><![CDATA[Total VOC (lbs/yr)]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement mode="Transparent" x="467" y="1" width="70" height="30"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="467" y="1" width="70" height="30"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font reportFont="Arial_Bold"/>
+				</textElement>
+				<text><![CDATA[Total VOC Emitted (lbs/yr)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="92" y="1" width="118" height="30"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font reportFont="Arial_Bold"/>
+				</textElement>
+				<text><![CDATA[Process Number]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="210" y="1" width="112" height="30"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font reportFont="Arial_Bold"/>
+				</textElement>
+				<text><![CDATA[Amount Used]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="25" splitType="Stretch">
+			<rectangle>
+				<reportElement mode="Transparent" x="92" y="0" width="118" height="25"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="322" y="0" width="75" height="25"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="0" y="0" width="92" height="25"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="397" y="0" width="70" height="25"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="467" y="0" width="70" height="25"/>
+			</rectangle>
+			<textField pattern="###0.00" isBlankWhenNull="true">
+				<reportElement x="322" y="0" width="75" height="25"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{SOURCE_LBS_VOC}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.0000" isBlankWhenNull="true">
+				<reportElement x="397" y="0" width="70" height="25"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{EMISSIONS}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.0000" isBlankWhenNull="true">
+				<reportElement x="467" y="0" width="70" height="25"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{EMISSIONS}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="92" y="0" width="118" height="25"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{PN}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="0" y="0" width="92" height="25"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{SOURCE_NAME}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00" isBlankWhenNull="true">
+				<reportElement x="210" y="0" width="112" height="25"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{GALLONS}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

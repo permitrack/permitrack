@@ -1,0 +1,25 @@
+<?xml version="1.0"?><!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping>
+    <class name="com.sehinc.stormwater.db.plan.GoalActivityFormInstanceData"
+           table="GOAL_ACTIVITY_FORM_INSTANCE">
+        <id name="id"
+            type="integer"
+            column="ID">
+            <generator class="identity" />
+        </id>
+        <many-to-one name="formInstance"
+                     class="com.sehinc.common.db.forms.FormInstanceData"
+                     column="FORM_INSTANCE_ID"
+                     lazy="false" />
+        <property name="goalActivityId"
+                  type="integer"
+                  column="GOAL_ACTIVITY_ID" />
+    </class>
+    <query name="com.sehinc.stormwater.db.plan.GoalActivityFormInstanceData.byGoalActivityId">
+        from com.sehinc.stormwater.db.plan.GoalActivityFormInstanceData as goalActivityFormInstance
+        where goalActivityFormInstance.goalActivityId = :goalActivityId
+    </query>
+</hibernate-mapping>
+

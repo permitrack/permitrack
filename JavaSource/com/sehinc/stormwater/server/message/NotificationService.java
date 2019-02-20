@@ -1,0 +1,429 @@
+package com.sehinc.stormwater.server.message;
+
+import com.sehinc.common.config.ApplicationProperties;
+import com.sehinc.common.db.sql.SQLHelper;
+import com.sehinc.common.db.sql.SQLHelperPreparedStatement;
+import com.sehinc.common.message.HtmlEmailMessage;
+import com.sehinc.common.service.message.EmailService;
+import com.sehinc.common.util.DateUtil;
+import com.sehinc.stormwater.db.plan.BMPFormatter;
+import com.sehinc.stormwater.db.plan.GoalActivityFrequencyData;
+import com.sehinc.stormwater.db.plan.PlanPermitType;
+import com.sehinc.stormwater.server.permitperiod.PermitPeriodService;
+import com.sehinc.stormwater.value.message.NotificationValue;
+import com.sehinc.stormwater.value.message.NotificationValueSQLHelper;
+import org.apache.log4j.Logger;
+
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.internet.InternetAddress;
+import java.util.*;
+
+public class NotificationService
+{
+    private static
+    Logger
+        LOG =
+        Logger.getLogger(NotificationService.class);
+    private
+    EmailService
+        emailService;
+
+    public NotificationService()
+    {
+        emailService =
+            new EmailService();
+    }
+
+    public void processNotifications()
+    {
+        LOG.debug("In ProcessNotifications");
+        Hashtable
+            receivers =
+            new Hashtable();
+        Date
+            processDate =
+            new Date();
+        Iterator
+            results =
+            getNotifications(processDate).iterator();
+        while (results.hasNext())
+        {
+            NotificationValue
+                notificationValue =
+                (NotificationValue) results.next();
+            if (validateNotificationDate(notificationValue,
+                                         processDate))
+            {
+                String
+                    toAddress =
+                    notificationValue.getOwnerEmailAddress();
+                LOG.debug("toAddress = "
+                          + notificationValue.getOwnerEmailAddress());
+                if (toAddress
+                    != null)
+                {
+                    if (!receivers.containsKey(toAddress))
+                    {
+                        ArrayList
+                            noticeList =
+                            new ArrayList();
+                        LOG.info("adding to new: "
+                                 + toAddress);
+                        noticeList.add(notificationValue);
+                        receivers.put(toAddress,
+                                      noticeList);
+                    }
+                    else
+                    {
+                        ArrayList
+                            noticeList =
+                            (ArrayList) receivers.get(toAddress);
+                        LOG.info("adding to existing: "
+                                 + toAddress);
+                        noticeList.add(notificationValue);
+                    }
+                }
+            }
+        }
+        Enumeration
+            addressKeys =
+            receivers.keys();
+        while (addressKeys.hasMoreElements())
+        {
+            boolean
+                first =
+                true;
+            Integer
+                currentPlanId =
+                null;
+            HtmlEmailMessage
+                emailMessage =
+                new HtmlEmailMessage();
+            StringBuffer
+                messageContent =
+                new StringBuffer();
+            String
+                toAddressKey =
+                (String) addressKeys.nextElement();
+            ArrayList
+                notificationList =
+                (ArrayList) receivers.get(toAddressKey);
+            LOG.debug("Sending email to "
+                      + toAddressKey);
+            Iterator
+                notificationIterator =
+                notificationList.iterator();
+            while (notificationIterator.hasNext())
+            {
+                NotificationValue
+                    notification =
+                    (NotificationValue) notificationIterator.next();
+                BMPFormatter
+                    bmpFormatter =
+                    (PlanPermitType.getById(notification.getPermitTypeId())
+                     == null)
+                        ? BMPFormatter.DEFAULT
+                        : PlanPermitType.getById(notification.getPermitTypeId())
+                            .getBMPFormatter();
+                if (first)
+                {
+                    messageContent.append(notification.getOwnerFirstName()
+                                          + ","
+                                          + HtmlEmailMessage.NEWLINE
+                                          + HtmlEmailMessage.NEWLINE);
+                    if (notificationList.size()
+                        == 1)
+                    {
+                        messageContent.append("The following notice was auto-generated by the Stormwater+ (MS4)."
+                                              + HtmlEmailMessage.NEWLINE);
+                    }
+                    else
+                    {
+                        messageContent.append("The following notices were auto-generated by the Stormwater+ (MS4)."
+                                              + HtmlEmailMessage.NEWLINE);
+                    }
+                    first =
+                        false;
+                }
+                if (currentPlanId
+                    == null
+                    || !currentPlanId.equals(notification.getPlanId()))
+                {
+                    currentPlanId =
+                        notification.getPlanId();
+                    messageContent.append(HtmlEmailMessage.NEWLINE);
+                    messageContent.append(notification.getPlanName());
+                    messageContent.append(HtmlEmailMessage.NEWLINE);
+                    messageContent.append(HtmlEmailMessage.NEWLINE);
+                }
+                messageContent.append("Measurable Goal:  "
+                                      + bmpFormatter.formatGoalIdentifier(notification.getMcmNumber(),
+                                                                          notification.getBmpNumber(),
+                                                                          notification.getBmpSection(),
+                                                                          notification.getGoalNumber())
+                                      + " "
+                                      + notification.getGoalName());
+                messageContent.append(HtmlEmailMessage.NEWLINE);
+                messageContent.append(HtmlEmailMessage.SPACE
+                                      + HtmlEmailMessage.SPACE
+                                      + HtmlEmailMessage.SPACE
+                                      + HtmlEmailMessage.SPACE
+                                      + HtmlEmailMessage.SPACE);
+                messageContent.append("Notification Frequency:  "
+                                      + notification.getGoalActivityFrequencyName());
+                if (GoalActivityFrequencyData.DATE
+                    .equals(notification.getGoalActivityFrequency()))
+                {
+                    messageContent.append(" - "
+                                          + DateUtil.mdyDate(notification.getGoalDate()));
+                }
+                messageContent.append(HtmlEmailMessage.NEWLINE);
+                messageContent.append(HtmlEmailMessage.SPACE
+                                      + HtmlEmailMessage.SPACE
+                                      + HtmlEmailMessage.SPACE
+                                      + HtmlEmailMessage.SPACE
+                                      + HtmlEmailMessage.SPACE);
+                messageContent.append("Notify Days In Advance:  "
+                                      + notification.getNotifyDaysInAdvance());
+                messageContent.append(HtmlEmailMessage.NEWLINE);
+                messageContent.append(HtmlEmailMessage.SPACE
+                                      + HtmlEmailMessage.SPACE
+                                      + HtmlEmailMessage.SPACE
+                                      + HtmlEmailMessage.SPACE
+                                      + HtmlEmailMessage.SPACE);
+                messageContent.append("Activities Entered In "
+                                      + notification.getPermitTimePeriodName()
+                                      + ":  "
+                                      + notification.getGoalActivityCount());
+                messageContent.append(HtmlEmailMessage.NEWLINE);
+                messageContent.append(HtmlEmailMessage.NEWLINE);
+            }
+            messageContent.append("You can access the PermiTrack Client Access Point by clicking on the following link: "
+                                  + ApplicationProperties.getProperty("base.url"));
+            messageContent.append(HtmlEmailMessage.NEWLINE
+                                  + HtmlEmailMessage.NEWLINE);
+            messageContent.append("To access PermiTrack support, contact PermiTrack via email "
+                                  + ApplicationProperties.getProperty("mail.support.address")
+                                  + " with the subject \"Customer Support\", or call 612-284-6331.");
+            messageContent.append(HtmlEmailMessage.NEWLINE);
+            try
+            {
+                InternetAddress[]
+                    fromAddrs =
+                    new InternetAddress[1];
+                fromAddrs[0] =
+                    new InternetAddress(ApplicationProperties.getProperty("mail.noreply.address"));
+                emailMessage.setFrom(fromAddrs);
+                InternetAddress[]
+                    toAddrs =
+                    new InternetAddress[1];
+                toAddrs[0] =
+                    new InternetAddress(toAddressKey);
+                emailMessage.setRecipients(Message.RecipientType.TO,
+                                           toAddrs);
+                emailMessage.setSubject("PermiTrack Client Access Point Notification");
+                emailMessage.setText(messageContent.toString());
+                LOG.info(emailMessage.toString());
+                LOG.info("Before send email");
+                emailService.send(emailMessage);
+                LOG.info("Successfully sent email");
+            }
+            catch (MessagingException me)
+            {
+                LOG.info("Error sending email notification.  "
+                         + me.getMessage());
+            }
+        }
+    }
+
+    public List getNotifications(Date processDate)
+    {
+        List
+            results =
+            new ArrayList();
+        LOG.debug("In getNotifications");
+        StringBuffer
+            buffer =
+            new StringBuffer();
+        NotificationValueSQLHelper
+            notificationValueSQLHelper =
+            new NotificationValueSQLHelper();
+        buffer.append("SELECT ");
+        buffer.append(notificationValueSQLHelper.getValueSubQuery());
+        buffer.append(" FROM [PLAN] LEFT OUTER JOIN MCM ON [PLAN].ID = MCM.PLAN_ID AND MCM.STATUS_CD = 1");
+        buffer.append("   LEFT OUTER JOIN BMP ON MCM.ID = BMP.MCM_ID AND BMP.STATUS_CD = 1");
+        buffer.append("     LEFT OUTER JOIN GOAL ON BMP.ID = GOAL.BMP_ID AND GOAL.STATUS_CD = 1");
+        buffer.append("       LEFT OUTER JOIN GOAL_PERMIT_TIME_PERIOD ON GOAL.ID = GOAL_PERMIT_TIME_PERIOD.GOAL_ID");
+        buffer.append("         LEFT OUTER JOIN PERMIT_TIME_PERIOD ON GOAL_PERMIT_TIME_PERIOD.PERMIT_TIME_PERIOD_ID = PERMIT_TIME_PERIOD.ID");
+        buffer.append("           LEFT OUTER JOIN [USER] MCM_USER ON MCM.OWNER_ID = MCM_USER.ID AND MCM_USER.STATUS_CD = 1");
+        buffer.append("             LEFT OUTER JOIN [USER] BMP_USER ON BMP.OWNER_ID = BMP_USER.ID AND BMP_USER.STATUS_CD = 1");
+        buffer.append("               LEFT OUTER JOIN [USER] GOAL_USER ON GOAL.OWNER_ID = GOAL_USER.ID AND GOAL_USER.STATUS_CD = 1");
+        buffer.append(" WHERE [PLAN].STATUS_CD = 1 AND");
+        buffer.append("       GOAL.IS_NOTIFY = 1 AND");
+        buffer.append("       GOAL_PERMIT_TIME_PERIOD.IS_COMPLETE = 0 AND");
+        buffer.append("       (PERMIT_TIME_PERIOD.START_DATE <= '"
+                      + DateUtil.mdyDate(processDate)
+                      + "' AND");
+        buffer.append("        PERMIT_TIME_PERIOD.END_DATE >= '"
+                      + DateUtil.mdyDate(processDate)
+                      + "')");
+        buffer.append(" ORDER BY [PLAN].[NAME] ASC, [PLAN].[ID] ASC, MCM.NUMBER ASC, BMP.NUMBER ASC, BMP.SECTION ASC, GOAL.NUMBER ASC");
+        SQLHelperPreparedStatement
+            statement =
+            new SQLHelperPreparedStatement(buffer.toString());
+        Iterator
+            iter =
+            SQLHelper.retrieveValueList(statement,
+                                        notificationValueSQLHelper)
+                .iterator();
+        while (iter.hasNext())
+        {
+            NotificationValue
+                notificationValue =
+                (NotificationValue) iter.next();
+            notificationValue.setGoalActivityCount(PermitPeriodService.getGoalActivityCountInTimePeriod(notificationValue.getGoalId(),
+                                                                                                        notificationValue.getPermitTimePeriodId()));
+            results.add(notificationValue);
+        }
+        LOG.info("getNotifications returned "
+                 + results.size());
+        return results;
+    }
+
+    private boolean validateNotificationDate(NotificationValue notificationValue, Date processDate)
+    {
+        if (GoalActivityFrequencyData.WEEKLY
+            .equals(notificationValue.getGoalActivityFrequency()))
+        {
+            return validateWeeklyNotification(notificationValue,
+                                              processDate);
+        }
+        if (GoalActivityFrequencyData.MONTHLY
+            .equals(notificationValue.getGoalActivityFrequency()))
+        {
+            return validateMonthlyNotification(notificationValue,
+                                               processDate);
+        }
+        if (GoalActivityFrequencyData.QUARTERLY
+            .equals(notificationValue.getGoalActivityFrequency()))
+        {
+            return validateQuarterlyNotification(notificationValue,
+                                                 processDate);
+        }
+        if (GoalActivityFrequencyData.ANNUALLY
+            .equals(notificationValue.getGoalActivityFrequency()))
+        {
+            return validateAnnuallyNotification(notificationValue,
+                                                processDate);
+        }
+        if (GoalActivityFrequencyData.DATE
+            .equals(notificationValue.getGoalActivityFrequency()))
+        {
+            return validateDateNotification(notificationValue,
+                                            processDate);
+        }
+        return false;
+    }
+
+    private boolean validateWeeklyNotification(NotificationValue notificationValue, Date processDate)
+    {
+        Calendar
+            processTime =
+            Calendar.getInstance();
+        processTime.setTime(processDate);
+        processTime.add(Calendar.DATE,
+                        notificationValue.getNotifyDaysInAdvance()
+                            .intValue());
+        if (processTime.get(Calendar.DAY_OF_WEEK)
+            == Calendar.MONDAY)
+        {
+            return true;
+        }
+        return false;
+    }
+
+    private boolean validateMonthlyNotification(NotificationValue notificationValue, Date processDate)
+    {
+        Calendar
+            processTime =
+            Calendar.getInstance();
+        processTime.setTime(processDate);
+        processTime.add(Calendar.DATE,
+                        notificationValue.getNotifyDaysInAdvance()
+                            .intValue());
+        if (processTime.get(Calendar.DAY_OF_MONTH)
+            == 1)
+        {
+            return true;
+        }
+        return false;
+    }
+
+    private boolean validateQuarterlyNotification(NotificationValue notificationValue, Date processDate)
+    {
+        Calendar
+            processTime =
+            Calendar.getInstance();
+        processTime.setTime(processDate);
+        processTime.add(Calendar.DATE,
+                        notificationValue.getNotifyDaysInAdvance()
+                            .intValue());
+        if (processTime.get(Calendar.DAY_OF_MONTH)
+            == 1
+            && (processTime.get(Calendar.MONTH)
+                == Calendar.JANUARY
+                ||
+                processTime.get(Calendar.MONTH)
+                == Calendar.APRIL
+                ||
+                processTime.get(Calendar.MONTH)
+                == Calendar.JULY
+                ||
+                processTime.get(Calendar.MONTH)
+                == Calendar.OCTOBER))
+        {
+            return true;
+        }
+        return false;
+    }
+
+    private boolean validateAnnuallyNotification(NotificationValue notificationValue, Date processDate)
+    {
+        Calendar
+            processTime =
+            Calendar.getInstance();
+        processTime.setTime(processDate);
+        processTime.add(Calendar.DATE,
+                        notificationValue.getNotifyDaysInAdvance()
+                            .intValue());
+        if (processTime.get(Calendar.DAY_OF_MONTH)
+            == 1
+            && processTime.get(Calendar.MONTH)
+               == Calendar.JANUARY)
+        {
+            return true;
+        }
+        return false;
+    }
+
+    private boolean validateDateNotification(NotificationValue notificationValue, Date processDate)
+    {
+        Calendar
+            processTime =
+            Calendar.getInstance();
+        processTime.setTime(processDate);
+        Calendar
+            notificationTime =
+            Calendar.getInstance();
+        notificationTime.setTime(notificationValue.getGoalDate());
+        if (processTime.get(Calendar.DAY_OF_MONTH)
+            == notificationTime.get(Calendar.DAY_OF_MONTH)
+            && processTime.get(Calendar.MONTH)
+               == notificationTime.get(Calendar.MONTH))
+        {
+            return true;
+        }
+        return false;
+    }
+}

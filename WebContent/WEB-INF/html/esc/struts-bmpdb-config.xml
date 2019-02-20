@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?><!DOCTYPE struts-config PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 1.3//EN"
+    "http://struts.apache.org/dtds/struts-config_1_3.dtd">
+<struts-config>
+    <form-beans>
+        <form-bean name="BMPLibraryDBListForm"
+                   type="com.sehinc.erosioncontrol.action.bmpdb.BMPLibraryDBListForm" />
+        <form-bean name="BMPLibraryEditForm"
+                   type="com.sehinc.erosioncontrol.action.bmpdb.BMPLibraryEditForm" />
+    </form-beans>
+    <global-forwards></global-forwards>
+    <action-mappings>
+        <action path="/adminbmplibrarypage"
+                type="com.sehinc.erosioncontrol.action.bmpdb.BMPLibraryListPageAction"
+                name="BMPLibraryDBListForm"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="bmp.library.list.page" />
+        </action>
+        <action path="/adminbmplibraryeditpage"
+                type="com.sehinc.erosioncontrol.action.bmpdb.BMPLibraryEditPageAction"
+                name="BMPLibraryEditForm"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="bmp.library.edit.page" />
+        </action>
+        <action path="/adminbmpeditaction"
+                type="com.sehinc.erosioncontrol.action.bmpdb.BMPLibraryEditAction"
+                name="BMPLibraryEditForm"
+                input="bmp.library.edit.page"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="/adminbmplibrarypage.do"
+                     redirect="true" />
+        </action>
+        <action path="/bmploadlibraryaction"
+                type="com.sehinc.erosioncontrol.action.bmpdb.BMPLoadLibraryAction"
+                name="BMPLibraryDBListForm"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="bmp.load.library.page" />
+            <forward name="cancel"
+                     module="/html/esc/bmp"
+                     path="/bmplistpage.do" />
+            <forward name="return"
+                     module="/html/esc/bmp"
+                     path="/bmplistpage.do" />
+        </action>
+        <action path="/bmpaddlibraryaction"
+                type="com.sehinc.erosioncontrol.action.bmpdb.BMPAddLibraryAction"
+                name="BMPLibraryDBListForm"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="bmp.add.library.page" />
+            <forward name="cancel"
+                     module="/html/esc/bmp"
+                     path="/bmplistpage.do" />
+            <forward name="return"
+                     module="/html/esc/bmp"
+                     path="/bmplistpage.do" />
+        </action>
+    </action-mappings>
+    <controller processorClass="org.apache.struts.action.RequestProcessor"
+                contentType="text/html" />
+    <plug-in className="org.apache.struts.tiles.TilesPlugin">
+        <set-property property="definitions-config"
+                      value="/WEB-INF/html/tiles-defs.xml, /WEB-INF/html/esc/tiles-bmpdb-defs.xml" />
+        <set-property property="definitions-debug"
+                      value="2" />
+        <set-property property="definitions-parser-details"
+                      value="2" />
+        <set-property property="definitions-parser-validate"
+                      value="true" />
+        <set-property property="moduleAware"
+                      value="true" />
+    </plug-in>
+    <plug-in className="org.apache.struts.validator.ValidatorPlugIn">
+        <set-property property="pathnames"
+                      value="/org/apache/struts/validator/validator-rules.xml, /WEB-INF/html/esc/validation-bmpdb.xml" />
+    </plug-in>
+</struts-config>

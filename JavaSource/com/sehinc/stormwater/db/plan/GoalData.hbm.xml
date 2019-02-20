@@ -1,0 +1,90 @@
+<?xml version="1.0"?><!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping>
+    <!-- -->
+    <class name="com.sehinc.stormwater.db.plan.GoalData"
+           table="GOAL">
+        <id name="id"
+            type="integer"
+            column="id">
+            <generator class="identity" />
+        </id>
+        <property name="bmpId"
+                  type="integer"
+                  column="BMP_ID" />
+        <property name="name"
+                  type="string"
+                  column="NAME" />
+        <property name="description"
+                  type="string"
+                  column="DESCRIPTION" />
+        <property name="ownerId"
+                  type="integer"
+                  column="OWNER_ID" />
+        <property name="goalActivityFormId"
+                  type="integer"
+                  column="GOAL_ACTIVITY_FORM_ID" />
+        <property name="allowAttachments"
+                  type="boolean"
+                  column="ALLOW_ATTACHMENTS" />
+        <property name="goalActivityFrequencyId"
+                  type="integer"
+                  column="GOAL_ACTIVITY_FREQUENCY_ID" />
+        <many-to-one name="status"
+                     class="com.sehinc.erosioncontrol.db.code.StatusCodeData"
+                     column="STATUS_CD"
+                     lazy="false" />
+        <property name="notify"
+                  type="boolean"
+                  column="IS_NOTIFY" />
+        <property name="notifyDaysInAdvance"
+                  type="integer"
+                  column="NOTIFY_DAYS_IN_ADVANCE" />
+        <property name="number"
+                  type="integer"
+                  column="NUMBER" />
+        <property name="goalDate"
+                  type="timestamp"
+                  column="GOAL_DATE" />
+        <property name="createTimestamp"
+                  type="timestamp"
+                  column="create_ts" />
+        <property name="updateTimestamp"
+                  type="timestamp"
+                  column="update_ts" />
+        <property name="updateUserId"
+                  type="integer"
+                  column="update_user_id" />
+    </class>
+    <class name="com.sehinc.stormwater.value.plan.GoalValue"
+           table="GOAL">
+        <id name="id"
+            type="integer"
+            column="id">
+            <generator class="identity" />
+        </id>
+        <property name="name"
+                  type="string"
+                  column="NAME" />
+        <property name="bmpId"
+                  type="integer"
+                  column="BMP_ID" />
+        <property name="number"
+                  type="integer"
+                  column="NUMBER" />
+    </class>
+    <query name="com.sehinc.stormwater.db.plan.GoalValue.byPlanId">
+        from com.sehinc.stormwater.value.plan.GoalValue as goal
+        where goal.id in
+        (
+        select goal.id from com.sehinc.stormwater.db.plan.GoalData goal where
+        goal.status.code = :statusCode and goal.bmpId in
+        (
+        select bmp.id from BMPData bmp where bmp.status.code = :statusCode and bmp.mcmId in
+        (select mcm.id from MCMData mcm where mcm.planId = :planId and mcm.status.code = :statusCode)
+        )
+        )
+        order by goal.number
+    </query>
+</hibernate-mapping>

@@ -1,0 +1,52 @@
+<?xml version="1.0"?><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <!--
+            Auto-generated mapping file from
+            the hibernate.org cfg2hbm engine
+    -->
+    <class name="com.sehinc.erosioncontrol.db.project.EcProjectBmp"
+           table="EC_PROJECT_BMP">
+        <id name="id"
+            type="integer">
+            <column name="ID" />
+            <generator class="identity" />
+        </id>
+        <property name="projectId"
+                  type="integer"
+                  column="PROJECT_ID" />
+        <property name="bmpName"
+                  type="string"
+                  column="BMP_NAME" />
+        <property name="categoryName"
+                  type="string"
+                  column="CATEGORY_NAME" />
+        <property name="description"
+                  type="string"
+                  column="DESCRIPTION" />
+        <property name="isRequired"
+                  type="boolean"
+                  column="IS_REQUIRED" />
+        <many-to-one name="inspectionBmpCondition"
+                     class="com.sehinc.erosioncontrol.db.inspection.EcInspectionBmpCondition"
+                     column="INSPECTION_BMP_CONDITION_ID"
+                     not-null="false"
+                     not-found="ignore"
+                     lazy="false" />
+        <many-to-one name="inspectionBmpStatus"
+                     class="com.sehinc.erosioncontrol.db.inspection.EcInspectionBmpStatus"
+                     column="INSPECTION_BMP_STATUS_ID"
+                     not-null="false"
+                     not-found="ignore"
+                     lazy="false" />
+        <property name="createTimestamp"
+                  type="timestamp"
+                  column="CREATE_TS" />
+        <property name="updateTimestamp"
+                  type="timestamp"
+                  column="UPDATE_TS" />
+        <property name="updateUserId"
+                  type="integer"
+                  column="UPDATE_USER_ID" />
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,91 @@
+<?xml version="1.0"?><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <!--
+            Auto-generated mapping file from
+            the hibernate.org cfg2hbm engine
+    -->
+    <class name="com.sehinc.environment.db.facility.EnvFacility"
+           table="ENV_FACILITY">
+        <id name="id"
+            type="integer">
+            <column name="ID" />
+            <generator class="identity" />
+        </id>
+        <property name="name"
+                  type="string"
+                  column="NAME" />
+        <property name="number"
+                  type="string"
+                  column="NUMBER" />
+        <property name="description"
+                  type="string"
+                  column="DESCRIPTION" />
+        <property name="clientId"
+                  type="integer"
+                  column="CLIENT_ID" />
+        <property name="activeTs"
+                  type="timestamp"
+                  column="ACTIVE_TS" />
+        <property name="inactiveTs"
+                  type="timestamp"
+                  column="INACTIVE_TS" />
+        <property name="phone"
+                  type="string"
+                  column="PHONE_NUMBER" />
+        <property name="fax"
+                  type="string"
+                  column="FAX_NUMBER" />
+        <property name="mailingAddressId"
+                  type="integer"
+                  column="MAILING_ADDRESS_ID" />
+        <property name="physicalAddressId"
+                  type="integer"
+                  column="PHYSICAL_ADDRESS_ID" />
+        <property name="countyName"
+                  type="string"
+                  column="COUNTY_NAME" />
+        <property name="sicCode"
+                  type="string"
+                  column="SIC_CODE" />
+        <property name="classDesc"
+                  type="string"
+                  column="CLASS" />
+        <property name="dailyHrsOp"
+                  type="integer"
+                  column="DAILY_HRS_OP" />
+        <property name="daysOpWeek"
+                  type="integer"
+                  column="DAYS_OP_WEEK" />
+        <property name="weeksOpYear"
+                  type="integer"
+                  column="WEEKS_OP_YEAR" />
+        <property name="businessHrs"
+                  type="string"
+                  column="BUSINESS_HRS" />
+        <many-to-one name="status"
+                     class="com.sehinc.environment.db.code.EnvStatusCodeData"
+                     column="STATUS_CD"
+                     lazy="false" />
+        <property name="createTimestamp"
+                  type="timestamp"
+                  column="CREATE_TS" />
+        <property name="updateTimestamp"
+                  type="timestamp"
+                  column="UPDATE_TS" />
+        <property name="updateUserId"
+                  type="integer"
+                  column="UPDATE_USER_ID" />
+    </class>
+    <query name="EnvFacility.findByClientId">
+        from com.sehinc.environment.db.facility.EnvFacility as facility
+        where facility.clientId = :clientId
+        and facility.status.code = :statusCode
+    </query>
+    <query name="EnvFacility.findByFacilityNameAndClientId">
+        from com.sehinc.environment.db.facility.EnvFacility as facility
+        where facility.clientId = :clientId
+        and facility.name = :name
+        and facility.status.code = :statusCode
+    </query>
+</hibernate-mapping>

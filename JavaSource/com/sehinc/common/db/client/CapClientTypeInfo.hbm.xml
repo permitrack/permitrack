@@ -1,0 +1,29 @@
+<?xml version="1.0"?><!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping>
+    <!-- -->
+    <class name="com.sehinc.common.db.client.CapClientTypeInfo"
+           table="CAP_CLIENT_TYPE_INFO">
+        <id name="id"
+            type="integer"
+            column="id">
+            <generator class="identity" />
+        </id>
+        <property name="name"
+                  type="string"
+                  column="NAME" />
+        <property name="description"
+                  type="string"
+                  column="DESCRIPTION" />
+    </class>
+    <query name="com.sehinc.common.db.client.CapClientTypeInfo.byClientId">
+        select capClientTypeInfo
+        from com.sehinc.common.db.client.CapClientTypeInfo as capClientTypeInfo,
+        com.sehinc.common.db.client.CapClientType as capClientType,
+        com.sehinc.common.db.client.ClientData as capClient
+        where capClient.id = :clientId and
+        capClient.id = capClientType.clientId and
+        capClientType.clientTypeId = capClientTypeInfo.id
+    </query>
+</hibernate-mapping>

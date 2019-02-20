@@ -1,0 +1,260 @@
+<?xml version="1.0"?>
+<!DOCTYPE jasperReport PUBLIC "-//JasperReports//DTD Report Design//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
+
+<jasperReport name="SourcesBySubstance_Report" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<parameter name="clientId" class="java.lang.Integer"/>
+	<queryString>
+		<![CDATA[select z.*,
+	st.description source_type
+from (
+	select t.*,
+	       source.part_number,
+	       source.batch_number,
+	       source.description src_desc,
+	       source.source_type_cd
+	from   (
+			select sub.*,
+			       ss.source_id,
+			       ss.ratio
+			from  ( select substance.id substance_id,
+				       substance.part_num cas_num,
+				       substance.name sub_name
+				from env_substance substance
+				WHERE substance.client_id = $P{clientId}
+				and   substance.status_cd = 1
+				GROUP BY substance.id,
+				         substance.part_num,
+				         substance.name) as sub
+			LEFT JOIN env_source_substance ss
+			ON   ss.substance_id = sub.substance_id
+			GROUP BY sub.substance_id,
+				 sub.cas_num,
+			         sub.sub_name,
+			         ss.source_id,
+			         ss.ratio
+	        ) as t
+	LEFT JOIN env_source source
+	ON source.id = t.source_id
+	WHERE source.client_id = $P{clientId}
+	AND   source.status_cd = 1
+	GROUP BY t.substance_id,
+		 t.cas_num,
+		 t.sub_name,
+		 t.source_id,
+		 t.ratio,
+		 source.part_number,
+		 source.batch_number,
+		 source.description,
+	  	 source.source_type_cd
+        UNION
+	select n.*
+	from   (
+		select t.*,
+		       source.part_number,
+		       source.batch_number,
+		       source.description src_desc,
+		       source.source_type_cd
+		from   (
+				select sub.*,
+				       ss.source_id,
+				       ss.ratio
+				from  ( select substance.id substance_id,
+					       substance.part_num cas_num,
+					       substance.name sub_name
+					from env_substance substance
+					WHERE substance.client_id = $P{clientId}
+					and   substance.status_cd = 1
+					GROUP BY substance.id,
+					         substance.part_num,
+					         substance.name) as sub
+				LEFT JOIN env_source_substance ss
+				ON   ss.substance_id = sub.substance_id
+				GROUP BY sub.substance_id,
+					 sub.cas_num,
+				         sub.sub_name,
+				         ss.source_id,
+				         ss.ratio
+		        ) as t
+		LEFT JOIN env_source source
+		ON source.id = t.source_id
+		GROUP BY t.substance_id,
+			 t.cas_num,
+			 t.sub_name,
+			 t.source_id,
+			 t.ratio,
+			 source.part_number,
+			 source.batch_number,
+			 source.description,
+		  	 source.source_type_cd
+		) n
+		WHERE n.source_id is NULL
+      ) as z
+LEFT JOIN lookup_env_source_type st
+ON   st.code = z.source_type_cd
+GROUP BY z.substance_id,
+	 z.cas_num,
+	 z.sub_name,
+	 z.source_id,
+	 z.ratio,
+	 z.part_number,
+	 z.batch_number,
+	 z.src_desc,
+	 z.source_type_cd,
+         st.description]]>
+	</queryString>
+	<field name="substance_id" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="cas_num" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="sub_name" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="source_id" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="ratio" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="part_number" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="batch_number" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="src_desc" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="source_type_cd" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="source_type" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<group name="substance">
+		<groupExpression><![CDATA[$F{substance_id}]]></groupExpression>
+		<groupHeader>
+			<band height="101">
+				<textField isBlankWhenNull="true">
+					<reportElement x="123" y="37" width="336" height="20"/>
+					<textElement>
+						<font fontName="Arial"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{cas_num}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="112" y="17" width="347" height="20"/>
+					<textElement>
+						<font fontName="Arial"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{sub_name}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="123" y="57" width="336" height="20"/>
+					<textElement>
+						<font fontName="Arial"/>
+					</textElement>
+					<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{ratio}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="23" y="17" width="89" height="20"/>
+					<textElement>
+						<font fontName="Arial" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Substance name:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="23" y="37" width="100" height="20"/>
+					<textElement>
+						<font fontName="Arial" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Part/CAS Number:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="23" y="57" width="100" height="20"/>
+					<textElement>
+						<font fontName="Arial" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Ratio:]]></text>
+				</staticText>
+				<line>
+					<reportElement x="59" y="99" width="496" height="2" isRemoveLineWhenBlank="true">
+						<printWhenExpression><![CDATA[($F{part_number} != null) ? Boolean.TRUE : Boolean.FALSE]]></printWhenExpression>
+					</reportElement>
+				</line>
+				<staticText>
+					<reportElement x="59" y="79" width="100" height="20" isRemoveLineWhenBlank="true">
+						<printWhenExpression><![CDATA[($F{part_number} != null) ? Boolean.TRUE : Boolean.FALSE]]></printWhenExpression>
+					</reportElement>
+					<textElement verticalAlignment="Bottom">
+						<font fontName="Arial" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Source description]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="159" y="79" width="100" height="20" isRemoveLineWhenBlank="true">
+						<printWhenExpression><![CDATA[($F{part_number} != null) ? Boolean.TRUE : Boolean.FALSE]]></printWhenExpression>
+					</reportElement>
+					<textElement verticalAlignment="Bottom">
+						<font fontName="Arial" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Number]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="259" y="79" width="100" height="20" isRemoveLineWhenBlank="true">
+						<printWhenExpression><![CDATA[($F{part_number} != null) ? Boolean.TRUE : Boolean.FALSE]]></printWhenExpression>
+					</reportElement>
+					<textElement verticalAlignment="Bottom">
+						<font fontName="Arial" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Batch]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="359" y="79" width="100" height="20" isRemoveLineWhenBlank="true">
+						<printWhenExpression><![CDATA[($F{part_number} != null) ? Boolean.TRUE : Boolean.FALSE]]></printWhenExpression>
+					</reportElement>
+					<textElement verticalAlignment="Bottom">
+						<font fontName="Arial" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Type]]></text>
+				</staticText>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="11"/>
+		</groupFooter>
+	</group>
+	<group name="sources">
+		<groupExpression><![CDATA[$F{source_id}]]></groupExpression>
+		<groupHeader>
+			<band height="27">
+				<textField isBlankWhenNull="true">
+					<reportElement x="159" y="4" width="100" height="20" isRemoveLineWhenBlank="true"/>
+					<textElement/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{part_number}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="259" y="4" width="100" height="20" isRemoveLineWhenBlank="true"/>
+					<textElement/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{batch_number}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="59" y="4" width="100" height="20" isRemoveLineWhenBlank="true"/>
+					<textElement/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{src_desc}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="359" y="4" width="100" height="20" isRemoveLineWhenBlank="true"/>
+					<textElement/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{source_type}]]></textFieldExpression>
+				</textField>
+				<line>
+					<reportElement x="59" y="24" width="496" height="2" isRemoveLineWhenBlank="true">
+						<printWhenExpression><![CDATA[($F{part_number} != null) ? Boolean.TRUE : Boolean.FALSE]]></printWhenExpression>
+					</reportElement>
+				</line>
+			</band>
+		</groupHeader>
+	</group>
+</jasperReport>

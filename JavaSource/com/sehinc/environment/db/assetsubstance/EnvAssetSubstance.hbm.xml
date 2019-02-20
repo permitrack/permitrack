@@ -1,0 +1,39 @@
+<?xml version="1.0"?><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <!--
+            Auto-generated mapping file from
+            the hibernate.org cfg2hbm engine
+    -->
+    <class name="com.sehinc.environment.db.assetsubstance.EnvAssetSubstance"
+           table="ENV_ASSET_EMITTED_SUBSTANCE_TYPE">
+        <id name="id"
+            type="integer">
+            <column name="ID" />
+            <generator class="identity" />
+        </id>
+        <property name="assetId"
+                  type="integer"
+                  column="ASSET_ID" />
+        <property name="substanceTypeCd"
+                  type="integer"
+                  column="SUBSTANCE_TYPE_CD" />
+        <property name="efficiencyFactor"
+                  type="integer"
+                  column="EFFICIENCY_FACTOR" />
+        <property name="additionalInfo"
+                  type="string"
+                  column="ADDL_INFO" />
+    </class>
+    <query name="EnvAssetSubstance.findByAssetId">
+        from com.sehinc.environment.db.assetsubstance.EnvAssetSubstance as A
+        where A.assetId = :assetId
+        order by A.assetId ASC
+    </query>
+    <query name="EnvAssetSubstance.findByAssetIdAndSubstanceTypeCd">
+        from com.sehinc.environment.db.assetsubstance.EnvAssetSubstance as A
+        where A.assetId = :assetId
+        and A.substanceTypeCd = :substanceTypeCd
+        order by A.substanceTypeCd ASC
+    </query>
+</hibernate-mapping>

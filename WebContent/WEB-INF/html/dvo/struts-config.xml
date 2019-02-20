@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?><!DOCTYPE struts-config PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 1.3//EN"
+    "http://struts.apache.org/dtds/struts-config_1_3.dtd">
+<struts-config>
+    <form-beans>
+        <form-bean name="clientForm"
+                   type="com.sehinc.dataview.action.client.ClientForm" />
+    </form-beans>
+    <global-forwards>
+        <forward name="dataview"
+                 module="/html/dvo"
+                 path="/dataview.do"
+                 redirect="true" />
+        <forward name="dataview.page"
+                 path="dvo.dataview.page"
+                 redirect="true" />
+        <forward name="client.select.page"
+                 path="/clientselectpage.do"
+                 redirect="true" />
+        <forward name="client.select.action"
+                 module="/html/dvo"
+                 path="/clientselect.do"
+                 redirect="true" />
+    </global-forwards>
+    <action-mappings>
+        <action path="/defaultaction"
+                type="com.sehinc.dataview.action.base.DefaultAction"
+                name="clientForm"
+                input="dvo.dataview.page"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="dvo.dataview.page"
+                     redirect="true" />
+        </action>
+        <action path="/dataview"
+                type="com.sehinc.dataview.action.base.DefaultAction"
+                name="clientForm"
+                input="dvo.dataview.page"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="dvo.dataview.page" />
+        </action>
+        <action path="/clientselectpage"
+                forward="dvo.client.select.page" />
+        <action path="/clientselect"
+                type="com.sehinc.dataview.action.client.ClientSelectAction"
+                name="clientForm"
+                input="dvo.client.select.page"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="dvo.dataview.page" />
+        </action>
+    </action-mappings>
+    <controller processorClass="org.apache.struts.action.RequestProcessor"
+                contentType="text/html" />
+    <plug-in className="org.apache.struts.tiles.TilesPlugin">
+        <set-property property="definitions-config"
+                      value="/WEB-INF/html/tiles-defs.xml, /WEB-INF/html/dvo/tiles-dvo-defs.xml" />
+        <set-property property="definitions-debug"
+                      value="2" />
+        <set-property property="definitions-parser-details"
+                      value="2" />
+        <set-property property="definitions-parser-validate"
+                      value="true" />
+        <set-property property="moduleAware"
+                      value="true" />
+    </plug-in>
+    <plug-in className="org.apache.struts.validator.ValidatorPlugIn">
+        <set-property property="pathnames"
+                      value="/org/apache/struts/validator/validator-rules.xml, /WEB-INF/html/dvo/validation-client.xml" />
+    </plug-in>
+</struts-config>

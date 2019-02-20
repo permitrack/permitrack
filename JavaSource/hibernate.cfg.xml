@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<!--
+    Description of comp/env: http://www.java.net/node/655393
+-->
+<hibernate-configuration>
+    <session-factory name="CAPSessionFactory">
+        <!-- standalone datasource properties -->
+        <property name="hibernate.connection.datasource">java:/comp/env/jdbc/CAPDB</property>
+        <property name="hibernate.transaction.factory_class">org.hibernate.transaction.JDBCTransactionFactory</property>
+        <property name="hibernate.show_sql">false</property>
+        <property name="hibernate.use_outer_join">true</property>
+        <property name="hibernate.bytecode.use_reflection_optimizer">false</property>
+        <property name="hibernate.max_fetch_depth">3</property>
+        <property name="hibernate.dialect">org.hibernate.dialect.SQLServerDialect</property>
+        <property name="hibernate.generate_statistics">true</property>
+        <!-- c3p0 connection pool properties -->
+        <property name="hibernate.c3p0.acquire_increment">2</property>
+        <property name="hibernate.c3p0.max_size">100</property>
+        <property name="hibernate.c3p0.timeout">0</property>
+        <property name="hibernate.c3p0.max_statements">0</property>
+        <property name="hibernate.c3p0.idle_test_period">1800</property>
+        <property name="hibernate.c3p0.min_size">10</property>
+        <!-- Disable second-level cache. -->
+        <property name="cache.provider_class">org.hibernate.cache.NoCacheProvider</property>
+        <property name="cache.use_query_cache">false</property>
+        <property name="cache.use_minimal_puts">false</property>
+        <property name="max_fetch_depth">3</property>
+        <!-- Print SQL to stdout. -->
+        <!--Leave at false unless debugging-->
+        <property name="show_sql">false</property>
+        <property name="format_sql">false</property>
+        <!-- Bind the getCurrentSession() method to the thread. -->
+        <property name="current_session_context_class">thread</property>
+        <!-- ***************************** -->
+        <!-- ** PORTAL PACKAGE MAPPINGS ** -->
+        <!-- ***************************** -->
+        <mapping resource="com/sehinc/portal/db/info/InfoEvents.hbm.xml" />
+        <mapping resource="com/sehinc/portal/db/info/InfoTips.hbm.xml" />
+        <mapping resource="com/sehinc/portal/db/info/InfoVersion.hbm.xml" />
+        <mapping resource="com/sehinc/portal/db/info/InfoEnhancements.hbm.xml" />
+        <!-- ***************************** -->
+        <!-- ** COMMON PACKAGE MAPPINGS ** -->
+        <!-- ***************************** -->
+        <mapping resource="com/sehinc/common/db/client/CapClientContact.hbm.xml" />
+        <mapping resource="com/sehinc/common/db/client/ClientData.hbm.xml" />
+        <mapping resource="com/sehinc/common/db/client/ClientModule.hbm.xml" />
+        <mapping resource="com/sehinc/common/db/client/ClientUserData.hbm.xml" />
+        <mapping resource="com/sehinc/common/db/client/CapClientType.hbm.xml" />
+        <mapping resource="com/sehinc/common/db/client/CapClientTypeInfo.hbm.xml" />
+        <mapping resource="com/sehinc/common/db/client/DvClientInformation.hbm.xml" />
+        <mapping resource="com/sehinc/common/db/client/EcClientInformation.hbm.xml" />
+        <mapping resource="com/sehinc/common/db/contact/CapContact.hbm.xml" />
+        <mapping resource="com/sehinc/common/db/contact/CapContactShort.hbm.xml" />
+        <mapping resource="com/sehinc/common/db/contact/CapContactOrganization.hbm.xml" />
+        <!--<mapping resource="com/sehinc/common/db/contact/CapContactPhone.hbm.xml" />-->
+        <mapping resource="com/sehinc/common/db/contact/CapContactType.hbm.xml" />
+        <mapping resource="com/sehinc/common/db/security/CapModule.hbm.xml" />
+        <mapping resource="com/sehinc/common/db/security/CapPermission.hbm.xml" />
+        <mapping resource="com/sehinc/common/db/security/CapRole.hbm.xml" />
+        <mapping resource="com/sehinc/common/db/security/CapRoleSecureObjectPermission.hbm.xml" />
+        <mapping resource="com/sehinc/common/db/security/CapSecureObject.hbm.xml" />
+        <mapping resource="com/sehinc/common/db/security/SecurityLevelData.hbm.xml" />
+        <mapping resource="com/sehinc/common/db/user/AddressData.hbm.xml" />
+        <mapping resource="com/sehinc/common/db/user/CapUserModule.hbm.xml" />
+        <mapping resource="com/sehinc/common/db/user/CapUserRole.hbm.xml" />
+        <mapping resource="com/sehinc/common/db/user/CapUserAgent.hbm.xml" />
+        <mapping resource="com/sehinc/common/db/user/CapMarkup.hbm.xml" />
+        <mapping resource="com/sehinc/common/db/user/CapModuleMarkup.hbm.xml" />
+        <mapping resource="com/sehinc/common/db/user/CapState.hbm.xml" />
+        <mapping resource="com/sehinc/common/db/user/CapCountry.hbm.xml" />
+        <mapping resource="com/sehinc/common/db/user/UserData.hbm.xml" />
+        <mapping resource="com/sehinc/common/db/group/GroupData.hbm.xml" />
+        <!--<mapping resource="com/sehinc/common/db/message/MessageData.hbm.xml" />-->
+        <mapping resource="com/sehinc/common/db/option/DataElement.hbm.xml" />
+        <mapping resource="com/sehinc/common/db/option/DataElementOptionValue.hbm.xml" />
+        <mapping resource="com/sehinc/common/db/forms/ElementData.hbm.xml" />
+        <mapping resource="com/sehinc/common/db/forms/ElementTypeData.hbm.xml" />
+        <mapping resource="com/sehinc/common/db/forms/ElementValueData.hbm.xml" />
+        <mapping resource="com/sehinc/common/db/forms/ElementDomainData.hbm.xml" />
+        <mapping resource="com/sehinc/common/db/forms/DomainData.hbm.xml" />
+        <mapping resource="com/sehinc/common/db/forms/DomainValueData.hbm.xml" />
+        <mapping resource="com/sehinc/common/db/forms/FormData.hbm.xml" />
+        <mapping resource="com/sehinc/common/db/forms/FormInstanceData.hbm.xml" />
+        <mapping resource="com/sehinc/common/db/forms/SectionData.hbm.xml" />
+        <mapping resource="com/sehinc/common/db/forms/SubSectionData.hbm.xml" />
+        <mapping resource="com/sehinc/common/db/code/ContactTypeData.hbm.xml" />
+        <mapping resource="com/sehinc/common/db/report/CapReportObject.hbm.xml" />
+        <mapping resource="com/sehinc/common/db/report/CapReportAccess.hbm.xml" />
+        <!-- ************************************** -->
+        <!-- ** EROSION CONTROL PACKAGE MAPPINGS ** -->
+        <!-- ************************************** -->
+        <mapping resource="com/sehinc/erosioncontrol/db/bmp/EcBmp.hbm.xml" />
+        <mapping resource="com/sehinc/erosioncontrol/db/bmp/EcBmpCategory.hbm.xml" />
+        <mapping resource="com/sehinc/erosioncontrol/db/bmpdb/EcBmpDb.hbm.xml" />
+        <mapping resource="com/sehinc/erosioncontrol/db/bmpdb/EcBmpCategoryDb.hbm.xml" />
+        <mapping resource="com/sehinc/erosioncontrol/db/bmpdb/EcBmpLibraryDb.hbm.xml" />
+        <mapping resource="com/sehinc/erosioncontrol/db/client/EcClientType.hbm.xml" />
+        <mapping resource="com/sehinc/erosioncontrol/db/client/EcClientRelationship.hbm.xml" />
+        <mapping resource="com/sehinc/erosioncontrol/db/client/EcClientRelationshipType.hbm.xml" />
+        <mapping resource="com/sehinc/erosioncontrol/db/client/EcClientProjectRole.hbm.xml" />
+        <mapping resource="com/sehinc/erosioncontrol/db/client/EcClientProjectRolePermission.hbm.xml" />
+        <mapping resource="com/sehinc/erosioncontrol/db/client/EcClientRelationPermission.hbm.xml" />
+        <mapping resource="com/sehinc/erosioncontrol/db/event/EcEvent.hbm.xml" />
+        <mapping resource="com/sehinc/erosioncontrol/db/event/EcEventType.hbm.xml" />
+        <mapping resource="com/sehinc/erosioncontrol/db/event/EcEventProject.hbm.xml" />
+        <mapping resource="com/sehinc/erosioncontrol/db/inspection/EcInspection.hbm.xml" />
+        <mapping resource="com/sehinc/erosioncontrol/db/inspection/EcInspectionDocument.hbm.xml" />
+        <mapping resource="com/sehinc/erosioncontrol/db/inspection/EcInspectionAction.hbm.xml" />
+        <mapping resource="com/sehinc/erosioncontrol/db/inspection/EcInspectionBmp.hbm.xml" />
+        <mapping resource="com/sehinc/erosioncontrol/db/inspection/EcInspectionBmpCondition.hbm.xml" />
+        <mapping resource="com/sehinc/erosioncontrol/db/inspection/EcInspectionBmpDocument.hbm.xml" />
+        <mapping resource="com/sehinc/erosioncontrol/db/inspection/EcInspectionBmpStatus.hbm.xml" />
+        <mapping resource="com/sehinc/erosioncontrol/db/inspection/EcInspectionReason.hbm.xml" />
+        <mapping resource="com/sehinc/erosioncontrol/db/inspection/EcInspectionTemplate.hbm.xml" />
+        <mapping resource="com/sehinc/erosioncontrol/db/inspection/EcInspectionTemplateBmp.hbm.xml" />
+        <mapping resource="com/sehinc/erosioncontrol/db/project/EcEndPointType.hbm.xml" />
+        <mapping resource="com/sehinc/erosioncontrol/db/project/EcProject.hbm.xml" />
+        <mapping resource="com/sehinc/erosioncontrol/db/project/EcProjectBmp.hbm.xml" />
+        <mapping resource="com/sehinc/erosioncontrol/db/project/EcProjectContact.hbm.xml" />
+        <mapping resource="com/sehinc/erosioncontrol/db/project/EcProjectContactType.hbm.xml" />
+        <mapping resource="com/sehinc/erosioncontrol/db/project/EcProjectDocument.hbm.xml" />
+        <mapping resource="com/sehinc/erosioncontrol/db/project/EcProjectPublicComments.hbm.xml" />
+        <mapping resource="com/sehinc/erosioncontrol/db/project/EcProjectType.hbm.xml" />
+        <mapping resource="com/sehinc/erosioncontrol/db/project/EcZone.hbm.xml" />
+        <mapping resource="com/sehinc/erosioncontrol/db/user/EcUserPreferences.hbm.xml" />
+        <mapping resource="com/sehinc/erosioncontrol/db/gis/EcGISCoord.hbm.xml" />
+        <mapping resource="com/sehinc/erosioncontrol/db/project/ProjectStatusCodeData.hbm.xml" />
+        <mapping resource="com/sehinc/erosioncontrol/db/code/StatusCodeData.hbm.xml" />
+        <mapping resource="com/sehinc/erosioncontrol/action/project/ProjectSearchListForm.hbm.xml" />
+        <mapping resource="com/sehinc/erosioncontrol/db/user/EcUserSearch.hbm.xml" />
+        <mapping resource="com/sehinc/erosioncontrol/db/user/EcUserDefaultSearch.hbm.xml" />
+        <mapping resource="com/sehinc/erosioncontrol/db/user/EcSearch.hbm.xml" />
+        <mapping resource="com/sehinc/erosioncontrol/db/correctiveaction/EcCorrectiveAction.hbm.xml" />
+        <mapping resource="com/sehinc/erosioncontrol/db/event/EcEventDocument.hbm.xml" />
+        <!-- ********************************* -->
+        <!-- ** STORMWATER PACKAGE MAPPINGS ** -->
+        <!-- ********************************* -->
+        <mapping resource="com/sehinc/stormwater/db/bmpdb/BMPDBCategoryData.hbm.xml" />
+        <mapping resource="com/sehinc/stormwater/db/bmpdb/BMPDBData.hbm.xml" />
+        <mapping resource="com/sehinc/stormwater/db/bmpdb/BMPDBGoalData.hbm.xml" />
+        <mapping resource="com/sehinc/stormwater/db/permitperiod/GoalPermitTimePeriodData.hbm.xml" />
+        <mapping resource="com/sehinc/stormwater/db/permitperiod/PermitPeriodData.hbm.xml" />
+        <mapping resource="com/sehinc/stormwater/db/permitperiod/PermitTimePeriodData.hbm.xml" />
+        <mapping resource="com/sehinc/stormwater/db/plan/BMPData.hbm.xml" />
+        <mapping resource="com/sehinc/stormwater/db/plan/BMPDeleteReasonData.hbm.xml" />
+        <mapping resource="com/sehinc/stormwater/db/plan/GoalActivityData.hbm.xml" />
+        <mapping resource="com/sehinc/stormwater/db/plan/GoalActivityDeleteReasonData.hbm.xml" />
+        <mapping resource="com/sehinc/stormwater/db/plan/GoalActivityFileLocationData.hbm.xml" />
+        <mapping resource="com/sehinc/stormwater/db/plan/GoalActivityFormData.hbm.xml" />
+        <mapping resource="com/sehinc/stormwater/db/plan/GoalActivityFrequencyData.hbm.xml" />
+        <mapping resource="com/sehinc/stormwater/db/plan/GoalActivityFormInstance.hbm.xml" />
+        <mapping resource="com/sehinc/stormwater/db/plan/GoalData.hbm.xml" />
+        <mapping resource="com/sehinc/stormwater/db/plan/GoalDeleteReasonData.hbm.xml" />
+        <mapping resource="com/sehinc/stormwater/db/plan/MCMData.hbm.xml" />
+        <mapping resource="com/sehinc/stormwater/db/plan/MCMDeleteReasonData.hbm.xml" />
+        <!--<mapping resource="com/sehinc/stormwater/db/plan/OutfallInformationData.hbm.xml" />-->
+        <!--<mapping resource="com/sehinc/stormwater/db/plan/OutfallInspectionData.hbm.xml" />-->
+        <mapping resource="com/sehinc/stormwater/db/plan/PlanData.hbm.xml" />
+        <mapping resource="com/sehinc/stormwater/db/plan/PlanDeleteReasonData.hbm.xml" />
+        <mapping resource="com/sehinc/stormwater/db/plan/PlanPublishData.hbm.xml" />
+        <!-- ********************************** -->
+        <!-- ** ENVIRONMENT PACKAGE MAPPINGS ** -->
+        <!-- ********************************** -->
+        <mapping resource="com/sehinc/environment/db/code/EnvStatusCodeData.hbm.xml" />
+        <mapping resource="com/sehinc/environment/db/permit/EnvPermit.hbm.xml" />
+        <mapping resource="com/sehinc/environment/db/substance/EnvSubstance.hbm.xml" />
+        <mapping resource="com/sehinc/environment/db/permit/EnvPermitDetail.hbm.xml" />
+        <mapping resource="com/sehinc/environment/db/permitsubstance/EnvPermitSubstance.hbm.xml" />
+        <mapping resource="com/sehinc/environment/db/sourcesubstance/EnvSourceSubstance.hbm.xml" />
+        <mapping resource="com/sehinc/environment/db/source/EnvSource.hbm.xml" />
+        <mapping resource="com/sehinc/environment/db/process/EnvProcess.hbm.xml" />
+        <mapping resource="com/sehinc/environment/db/processasset/EnvProcessAsset.hbm.xml" />
+        <mapping resource="com/sehinc/environment/db/asset/EnvAsset.hbm.xml" />
+        <mapping resource="com/sehinc/environment/db/assetsource/EnvAssetSource.hbm.xml" />
+        <mapping resource="com/sehinc/environment/db/permitasset/EnvPermitAsset.hbm.xml" />
+        <mapping resource="com/sehinc/environment/db/permitfacility/EnvPermitFacility.hbm.xml" />
+        <mapping resource="com/sehinc/environment/db/asset/EnvAssetAttr.hbm.xml" />
+        <mapping resource="com/sehinc/environment/db/facility/EnvFacility.hbm.xml" />
+        <mapping resource="com/sehinc/environment/db/facility/EnvFacilityContact.hbm.xml" />
+        <mapping resource="com/sehinc/environment/db/facilityasset/EnvFacilityAsset.hbm.xml" />
+        <mapping resource="com/sehinc/environment/db/sourceusage/EnvSourceUsage.hbm.xml" />
+        <mapping resource="com/sehinc/environment/db/controlusage/EnvControlUsage.hbm.xml" />
+        <mapping resource="com/sehinc/environment/db/lookup/EnvSubstanceTypeData.hbm.xml" />
+        <mapping resource="com/sehinc/environment/db/lookup/EnvSourceTypeData.hbm.xml" />
+        <mapping resource="com/sehinc/environment/db/lookup/EnvAssetTypeData.hbm.xml" />
+        <mapping resource="com/sehinc/environment/db/lookup/EnvFacilityContactTypeData.hbm.xml" />
+        <mapping resource="com/sehinc/environment/db/lookup/EnvUnitOfMeasureData.hbm.xml" />
+        <mapping resource="com/sehinc/environment/db/lookup/EnvDisplayColorData.hbm.xml" />
+        <mapping resource="com/sehinc/environment/db/sourcesubstance/EnvSourceTypeSubTypeMap.hbm.xml" />
+        <mapping resource="com/sehinc/environment/db/assetsubstance/EnvAssetSubstance.hbm.xml" />
+        <mapping resource="com/sehinc/environment/db/scc/EnvSccInfoLibrary.hbm.xml" />
+        <mapping resource="com/sehinc/environment/db/scc/EnvSccInfo.hbm.xml" />
+        <mapping resource="com/sehinc/environment/db/sourcescc/EnvSourceSccInfo.hbm.xml" />
+        <mapping resource="com/sehinc/environment/db/substancescc/EnvSubstanceSccInfo.hbm.xml" />
+        <mapping resource="com/sehinc/environment/db/lookup/EnvUnitOfMeasureMap.hbm.xml" />
+    </session-factory>
+</hibernate-configuration>

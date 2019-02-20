@@ -1,0 +1,236 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Frameset//EN">
+<HTML>
+    <HEAD>
+        <META http-equiv=Pragma
+              content=no-cache>
+        <META http-equiv=CACHE-CONTROL
+              content=NO-CACHE>
+        <META http-equiv=PRAGMAS
+              content=NO-CACHE>
+        <META http-equiv=Content-Type
+              content="text/html; charset=ISO-8859-1">
+        <SCRIPT language=JavaScript
+                src="./javascript/aimsResource.js"
+                type=text/javascript></SCRIPT>
+        <SCRIPT language=JavaScript
+                src="./javascript/dataViewVariables.jsp"
+                type=text/javascript></SCRIPT>
+        <SCRIPT language=JavaScript
+                type=text/javascript>
+            //document.domain="192.168.200.199";
+            var theTitle = "";
+            theTitle =
+            'DataViewOnline: '
+                + theClientName;
+            var cmdString = document.location.search;
+            var webParams = cmdString;
+            var reloadTimer = 0;
+            var browser = navigator.appName;
+            var moreStuff = 'onresize="reloadApp()"';
+            var addNS = 0;
+            if (browser
+                == "Netscape")
+            {
+                addNS =
+                3;
+            }
+            var formURL = "jsForm.htm";
+            var connectorType = "Servlet"; //Types are "Servlet" or "JSP"
+            if (connectorType
+                == "JSP")
+            {
+                formURL =
+                "jspForm.jsp";
+            }
+            document.writeln("<TITLE>"
+                                 + theTitle
+                                 + "</TITLE>");
+            function doIt()
+            {
+                MapFrame.useJava =
+                false;
+                MapFrame.checkParams();
+                MapFrame.LoadParcelFields();	//Load Parcel Fields
+            }
+            function replacePlus(inText)
+            {
+                var re = /\+/g;
+                inText =
+                inText.replace(re,
+                               " ");
+                return inText;
+            }
+            function reloadApp()
+            {
+                reloadTimer =
+                window.setTimeout("document.location = 'viewer.htm' + cmdString",
+                                  1000);
+            }
+        </SCRIPT>
+        <LINK href="gis.css"
+              type=text/css
+              rel=stylesheet>
+        <!-- frames -->
+        <META content="MSHTML 6.00.2800.1226"
+              name=GENERATOR>
+    </HEAD>
+    <FRAMESET onresize=reloadApp()
+              frameSpacing=0
+              frameBorder=0
+              onload=doIt()
+              cols=10,*,10,245,0,60>
+        <FRAME name=blankframe
+               marginWidth=0
+               marginHeight=0
+               src="./blank.htm"
+               scrolling=no
+               RESIZE="No">
+        <FRAMESET onresize=reloadApp()
+                  frameSpacing=0
+                  rows=25,40,*,20,75
+                  frameBorder=0
+                  onload=doIt()>
+            <FRAME name=TopFrame
+                   marginWidth=0
+                   marginHeight=0
+                   src="./topframe.htm"
+                   scrolling=no
+                   RESIZE="No">
+            <FRAMESET onresize=reloadApp()
+                      frameSpacing=0
+                      frameBorder=0
+                      onload=doIt()
+                      cols=*,185>
+                <FRAMESET onresize=reloadApp()
+                          rows=35,0
+                          onload=doIt()>
+                    <FRAME name=ToolFrame
+                           marginWidth=0
+                           marginHeight=0
+                           src="./toolbar.htm"
+                           scrolling=no
+                           RESIZE="No">
+                </FRAMESET>
+                <FRAME name=LogoFrame
+                       marginWidth=0
+                       marginHeight=0
+                       src="./logo.htm"
+                       scrolling=no
+                       RESIZE="No">
+            </FRAMESET>
+            <FRAMESET onresize=reloadApp()
+                      rows=15,*,15,1
+                      onload=doIt()>
+                <FRAME name=NorthFrame
+                       marginWidth=0
+                       marginHeight=0
+                       src="./panNorth.htm"
+                       scrolling=no
+                       RESIZE="No">
+                <FRAMESET onresize=reloadApp()
+                          onload=doIt()
+                          cols=15,*,15>
+                    <FRAME name=WestFrame
+                           marginWidth=0
+                           marginHeight=0
+                           src="./panWest.htm"
+                           scrolling=no
+                           RESIZE="No">
+                    <FRAME name=MapFrame
+                           marginWidth=0
+                           marginHeight=0
+                           src="./mapFrame.htm"
+                           scrolling=no
+                           RESIZE="No">
+                    <FRAME name=EastFrame
+                           marginWidth=0
+                           marginHeight=0
+                           src="./panEast.htm"
+                           scrolling=no
+                           RESIZE="No">
+                </FRAMESET>
+                <FRAME name=SouthFrame
+                       marginWidth=0
+                       marginHeight=0
+                       src="./panSouth.htm"
+                       scrolling=no
+                       RESIZE="No">
+                <FRAME name=blankframe
+                       marginWidth=0
+                       marginHeight=0
+                       src="./blank.htm"
+                       scrolling=no
+                       RESIZE="No">
+            </FRAMESET>
+            <FRAMESET onresize=reloadApp()
+                      frameSpacing=0
+                      frameBorder=0
+                      onload=doIt()
+                      cols=*,200>
+                <FRAME name=StatusFrame
+                       marginWidth=0
+                       marginHeight=0
+                       src="./status.htm"
+                       scrolling=no
+                       RESIZE="No">
+                <FRAME name=ScaleFrame
+                       marginWidth=0
+                       marginHeight=0
+                       src="./coordinates.htm"
+                       scrolling=no
+                       RESIZE="No">
+            </FRAMESET>
+            <FRAME name=SearchFrame
+                   marginWidth=0
+                   marginHeight=0
+                   src="./addresssearch.htm"
+                   RESIZE="No">
+        </FRAMESET>
+        <FRAME name=blankframe
+               marginWidth=0
+               marginHeight=0
+               src="./blank.htm"
+               scrolling=no
+               RESIZE="No">
+        <FRAMESET onresize=reloadApp()
+                  frameSpacing=0
+                  rows=30,55,*,15
+                  frameBorder=0
+                  onload=doIt()>
+            <FRAME name=blankframe
+                   marginWidth=0
+                   marginHeight=0
+                   src="./blank.htm"
+                   scrolling=no
+                   RESIZE="No">
+            <FRAME name=SwitchFrame
+                   marginWidth=0
+                   marginHeight=0
+                   src="./options.htm"
+                   scrolling=no
+                   RESIZE="No">
+            <FRAME name=TOCFrame
+                   marginWidth=0
+                   marginHeight=0
+                   src="./toc.htm"
+                   RESIZE="No">
+            <FRAME name=blankframe
+                   marginWidth=0
+                   marginHeight=0
+                   src="./blank.htm"
+                   scrolling=no
+                   RESIZE="No">
+        </FRAMESET>
+        <FRAME name=TextFrame
+               marginWidth=0
+               marginHeight=0
+               src="./text.htm"
+               RESIZE="No">
+        <FRAME name=PostFrame
+               marginWidth=5
+               marginHeight=5
+               src="./jsForm.htm"
+               scrolling=no
+               RESIZE="No">
+    </FRAMESET>
+</HTML>

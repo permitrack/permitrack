@@ -1,0 +1,5 @@
+
+
+
+ALTER TABLE EC_BMP
+ADD WEBLINK varchar(200) NULL

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="NE_Air_Form_5_0" pageWidth="550" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="550" leftMargin="0" rightMargin="0" topMargin="10" bottomMargin="10" isTitleNewPage="true">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<reportFont name="Arial_Normal" isDefault="true" fontName="Arial" size="12" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Bold" isDefault="false" fontName="Arial" size="12" isBold="true" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Italic" isDefault="false" fontName="Arial" size="12" isItalic="true" pdfFontName="Helvetica-Oblique" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Bold_Italic" isDefault="false" fontName="Arial" size="12" isBold="true" isItalic="true" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Small" isDefault="true" fontName="Arial" size="10" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Small_Bold" isDefault="false" fontName="Arial" size="10" isBold="true" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Small_Italic" isDefault="false" fontName="Arial" size="10" isItalic="true" pdfFontName="Helvetica-Oblique" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Small_Bold_Italic" isDefault="false" fontName="Arial" size="10" isBold="true" isItalic="true" pdfFontName="Helvetica-Oblique" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<parameter name="FacilityId" class="java.lang.Integer"/>
+	<parameter name="year" class="java.lang.Integer"/>
+	<parameter name="NE_Air_Form_0_0_Facility_Info_File" class="java.io.File"/>
+	<parameter name="NE_Air_Form_5_0_Vocs_Total_File" class="java.io.File"/>
+	<parameter name="NE_Air_Form_5_0_Vocs_List_File" class="java.io.File"/>
+	<queryString>
+		<![CDATA[SELECT 1 AS TEST_QUERY]]>
+	</queryString>
+	<group name="sources">
+		<groupExpression><![CDATA[$P{FacilityId}]]></groupExpression>
+		<groupHeader>
+			<band height="76" splitType="Stretch">
+				<subreport>
+					<reportElement x="0" y="1" width="550" height="70"/>
+					<subreportParameter name="year">
+						<subreportParameterExpression><![CDATA[$P{year}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="FacilityId">
+						<subreportParameterExpression><![CDATA[$P{FacilityId}]]></subreportParameterExpression>
+					</subreportParameter>
+					<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					<subreportExpression class="java.io.File"><![CDATA[$P{NE_Air_Form_5_0_Vocs_List_File}]]></subreportExpression>
+				</subreport>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="30" splitType="Stretch">
+				<staticText>
+					<reportElement x="0" y="0" width="550" height="30"/>
+					<textElement>
+						<font reportFont="Arial_Small_Bold" size="9"/>
+					</textElement>
+					<text><![CDATA[*Transfer these tonnages to Form 12.0 Emissions Fee Calculation Worksheet to aid in determination of total plant emissions and any chargeable emissions. Be sure emissions are only counted once.]]></text>
+				</staticText>
+			</band>
+		</groupFooter>
+	</group>
+	<group name="total">
+		<groupExpression><![CDATA[$P{FacilityId}]]></groupExpression>
+		<groupHeader>
+			<band height="70" splitType="Stretch">
+				<subreport>
+					<reportElement x="0" y="0" width="550" height="60"/>
+					<subreportParameter name="year">
+						<subreportParameterExpression><![CDATA[$P{year}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="FacilityId">
+						<subreportParameterExpression><![CDATA[$P{FacilityId}]]></subreportParameterExpression>
+					</subreportParameter>
+					<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					<subreportExpression class="java.io.File"><![CDATA[$P{NE_Air_Form_5_0_Vocs_Total_File}]]></subreportExpression>
+				</subreport>
+			</band>
+		</groupHeader>
+	</group>
+	<pageHeader>
+		<band height="120" splitType="Stretch">
+			<subreport>
+				<reportElement x="0" y="23" width="550" height="70"/>
+				<subreportParameter name="year">
+					<subreportParameterExpression><![CDATA[$P{year}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="FacilityId">
+					<subreportParameterExpression><![CDATA[$P{FacilityId}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.io.File"><![CDATA[$P{NE_Air_Form_0_0_Facility_Info_File}]]></subreportExpression>
+			</subreport>
+			<staticText>
+				<reportElement x="0" y="97" width="550" height="17"/>
+				<textElement>
+					<font reportFont="Arial_Small_Bold" size="9"/>
+				</textElement>
+				<text><![CDATA[List any volatile organic chemicals manufactured or used.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="2" width="550" height="19" isPrintInFirstWholeBand="true" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font reportFont="Arial_Bold"/>
+				</textElement>
+				<text><![CDATA[FORM 5.0 VOLATILE ORGANIC COMPOUND (VOC) WORKSHEET]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+</jasperReport>

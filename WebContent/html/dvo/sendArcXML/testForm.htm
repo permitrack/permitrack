@@ -1,0 +1,46 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+    <head>
+        <title>Test ArcXML Submission Form</title>
+    </head>
+    <body>
+        <FORM ACTION="http://aardvark/servlet/com.esri.esrimap.Esrimap?ServiceName=basicworld&Form=True&Encode=False"
+              METHOD="POST"
+              name="theForm">
+            <!-- <input type="text" name="ServiceName" value="basicworld" size="40"><br> -->
+            ArcXML Request:
+            <br>
+            <textarea cols="60"
+                      rows="10"
+                      name="ArcXMLRequest"></textarea>
+            <br>
+            Process Function:
+            <input type="text"
+                   name="JavaScriptFunction"
+                   size="40">
+            <br>
+            Redirect URL:
+            <INPUT TYPE="text"
+                   NAME="RedirectURL"
+                   VALUE=""
+                   size="40">
+            <br>
+            Background Color
+            <INPUT TYPE="text"
+                   NAME="BgColor"
+                   VALUE="#808080"
+                   size="40">
+            <br>
+            Character Set:
+            <INPUT TYPE="text"
+                   NAME="FormCharset"
+                   VALUE="UTF-8"
+                   size="40">
+            <br>
+            <!-- Form:<input type="text" name="Form" value="True" size="40"><br> -->
+            <input type="submit"
+                   name="SubmitButton"
+                   value="Submit">
+        </FORM>
+    </body>
+</html>

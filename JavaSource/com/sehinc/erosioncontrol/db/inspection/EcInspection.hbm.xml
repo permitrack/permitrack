@@ -1,0 +1,165 @@
+<?xml version="1.0"?><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <!--
+            Auto-generated mapping file from
+            the hibernate.org cfg2hbm engine
+    -->
+    <class name="com.sehinc.erosioncontrol.db.inspection.EcInspection"
+           table="EC_INSPECTION">
+        <id name="id"
+            type="integer">
+            <column name="ID" />
+            <generator class="identity" />
+        </id>
+        <version name="version"
+                 column="version"
+                 insert="false"
+                 type="long" />
+        <property name="projectId"
+                  type="integer"
+                  column="PROJECT_ID" />
+        <property name="clientId"
+                  type="integer"
+                  column="CLIENT_ID" />
+        <property name="inspectionDate"
+                  type="timestamp"
+                  column="INSPECTION_DATE" />
+        <property name="hours"
+                  type="integer"
+                  column="TIME_HOUR" />
+        <property name="minutes"
+                  type="integer"
+                  column="TIME_MINUTE" />
+        <property name="timePeriod"
+                  type="string"
+                  column="TIME_PERIOD" />
+        <property name="enteredDate"
+                  type="timestamp"
+                  column="ENTERED_DATE" />
+        <property name="weatherTrends"
+                  type="string"
+                  column="WEATHER_TRENDS" />
+        <property name="temperature"
+                  type="string"
+                  column="TEMPERATURE" />
+        <property name="comment"
+                  type="string"
+                  column="COMMENT" />
+        <property name="precipEndDate"
+                  type="timestamp"
+                  column="PRECIP_END_DATE" />
+        <property name="precipAmount"
+                  type="string"
+                  column="PRECIP_AMOUNT" />
+        <property name="precipSource"
+                  type="string"
+                  column="PRECIP_SOURCE" />
+        <many-to-one name="status"
+                     class="com.sehinc.erosioncontrol.db.code.StatusCodeData"
+                     column="STATUS_CD"
+                     lazy="false" />
+        <property name="inspectionActionComment"
+                  type="string"
+                  column="INSPECTION_ACTION_COMMENT" />
+        <many-to-one name="inspectionAction"
+                     class="com.sehinc.erosioncontrol.db.inspection.EcInspectionAction"
+                     column="INSPECTION_ACTION_ID"
+                     lazy="false" />
+        <many-to-one name="inspectionReason"
+                     class="com.sehinc.erosioncontrol.db.inspection.EcInspectionReason"
+                     column="INSPECTION_REASON_ID"
+                     lazy="false" />
+        <property name="createTimestamp"
+                  type="timestamp"
+                  column="CREATE_TS" />
+        <property name="updateTimestamp"
+                  type="timestamp"
+                  column="UPDATE_TS" />
+        <property name="updateUserId"
+                  type="integer"
+                  column="UPDATE_USER_ID" />
+        <many-to-one name="inspector"
+                     class="com.sehinc.common.db.contact.CapContact"
+                     column="INSPECTOR_ID"
+                     lazy="false" />
+        <set name="overdueLogEntries"
+             table="EC_INSPECTION_OVERDUE_EMAIL_LOG"
+             lazy="false">
+            <key column="INSPECTION_ID" />
+            <composite-element class="com.sehinc.erosioncontrol.db.inspection.EcInspectionOverdueEmailLogEntry">
+                <!--<property name="id" column="id" type="integer"/>-->
+                <property name="sendDate"
+                          column="SEND_DATE"
+                          type="date" />
+                <property name="thresholdLevel"
+                          column="THRESHOLD_LEVEL"
+                          type="integer" />
+            </composite-element>
+        </set>
+    </class>
+    <query name="com.sehinc.erosioncontrol.db.inspection.EcInspection.inspectionListByInspectionDateAsc">
+        from com.sehinc.erosioncontrol.db.inspection.EcInspection as inspection
+        where inspection.projectId = :projectId and
+        inspection.status.code in (1, 4)
+        order by inspection.inspectionDate ASC
+    </query>
+    <query name="com.sehinc.erosioncontrol.db.inspection.EcInspection.inspectionListByInspectionDateDesc">
+        from com.sehinc.erosioncontrol.db.inspection.EcInspection as inspection
+        where inspection.projectId = :projectId and
+        inspection.status.code in (1, 4)
+        order by inspection.inspectionDate DESC
+    </query>
+    <query name="com.sehinc.erosioncontrol.db.inspection.EcInspection.inspectionListByEnteredDateAsc">
+        from com.sehinc.erosioncontrol.db.inspection.EcInspection as inspection
+        where inspection.projectId = :projectId and
+        inspection.status.code in (1, 4)
+        order by inspection.enteredDate ASC
+    </query>
+    <query name="com.sehinc.erosioncontrol.db.inspection.EcInspection.inspectionListByEnteredDateDesc">
+        from com.sehinc.erosioncontrol.db.inspection.EcInspection as inspection
+        where inspection.projectId = :projectId and
+        inspection.status.code in (1, 4)
+        order by inspection.enteredDate DESC
+    </query>
+    <query name="com.sehinc.erosioncontrol.db.inspection.EcInspection.inspectionListByInspectorNameAsc">
+        select inspection
+        from com.sehinc.erosioncontrol.db.inspection.EcInspection as inspection, com.sehinc.common.db.user.UserData inspector
+        where inspection.updateUserId = inspector.id and
+        inspection.projectId = :projectId and
+        inspection.status.code in (1, 4)
+        order by inspector.lastName ASC, inspector.firstName ASC
+    </query>
+    <query name="com.sehinc.erosioncontrol.db.inspection.EcInspection.inspectionListByInspectorNameDesc">
+        select inspection
+        from com.sehinc.erosioncontrol.db.inspection.EcInspection as inspection, com.sehinc.common.db.user.UserData inspector
+        where inspection.updateUserId = inspector.id and
+        inspection.projectId = :projectId and
+        inspection.status.code in (1, 4)
+        order by inspector.lastName DESC, inspector.firstName DESC
+    </query>
+    <query name="com.sehinc.erosioncontrol.db.inspection.EcInspection.inspectionListByReasonAsc">
+        from com.sehinc.erosioncontrol.db.inspection.EcInspection as inspection
+        where inspection.projectId = :projectId and
+        inspection.status.code in (1, 4)
+        order by inspection.inspectionReason.name ASC
+    </query>
+    <query name="com.sehinc.erosioncontrol.db.inspection.EcInspection.inspectionListByReasonDesc">
+        from com.sehinc.erosioncontrol.db.inspection.EcInspection as inspection
+        where inspection.projectId = :projectId and
+        inspection.status.code in (1, 4)
+        order by inspection.inspectionReason.name Desc
+    </query>
+    <query name="com.sehinc.erosioncontrol.db.inspection.EcInspection.inspectionListByStatusAsc">
+        from com.sehinc.erosioncontrol.db.inspection.EcInspection as inspection
+        where inspection.projectId = :projectId and
+        inspection.status.code in (1, 4)
+        order by inspection.status.code ASC
+    </query>
+    <query name="com.sehinc.erosioncontrol.db.inspection.EcInspection.inspectionListByStatusDesc">
+        from com.sehinc.erosioncontrol.db.inspection.EcInspection as inspection
+        where inspection.projectId = :projectId and
+        inspection.status.code in (1, 4)
+        order by inspection.status.code DESC
+    </query>
+</hibernate-mapping>

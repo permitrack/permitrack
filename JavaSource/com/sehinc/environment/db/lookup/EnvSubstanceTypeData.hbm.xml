@@ -1,0 +1,31 @@
+<?xml version="1.0"?><!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping>
+    <class name="com.sehinc.environment.db.lookup.EnvSubstanceTypeData"
+           table="LOOKUP_ENV_SUBSTANCE_TYPE">
+        <id name="code"
+            type="integer"
+            column="CODE">
+            <generator class="identity" />
+        </id>
+        <property name="clientId"
+                  column="CLIENT_ID"
+                  type="integer" />
+        <property name="description"
+                  column="DESCRIPTION"
+                  type="string" />
+        <property name="displayOrder"
+                  column="ORDER_NUM"
+                  type="integer" />
+    </class>
+    <query name="EnvSubstanceTypeData.findAllByClientId">
+        from com.sehinc.environment.db.lookup.EnvSubstanceTypeData as substanceType
+        where substanceType.clientId in (:clientId, 0)
+        order by substanceType.displayOrder ASC
+    </query>
+    <query name="EnvSubstanceTypeData.findByCode">
+        from com.sehinc.environment.db.lookup.EnvSubstanceTypeData as substanceType
+        where substanceType.code = :code
+    </query>
+</hibernate-mapping>

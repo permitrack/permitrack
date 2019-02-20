@@ -1,0 +1,47 @@
+<?xml version="1.0"?><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <!--
+            Auto-generated mapping file from
+            the hibernate.org cfg2hbm engine
+    -->
+    <class name="com.sehinc.erosioncontrol.db.bmp.EcBmpCategory"
+           table="EC_BMP_CATEGORY">
+        <id name="id"
+            type="integer">
+            <column name="ID" />
+            <generator class="identity" />
+        </id>
+        <property name="clientId"
+                  type="integer"
+                  column="CLIENT_ID" />
+        <property name="name"
+                  type="string"
+                  column="NAME" />
+        <many-to-one name="status"
+                     class="com.sehinc.erosioncontrol.db.code.StatusCodeData"
+                     column="STATUS_CD"
+                     lazy="false" />
+        <property name="createTimestamp"
+                  type="timestamp"
+                  column="CREATE_TS" />
+        <property name="updateTimestamp"
+                  type="timestamp"
+                  column="UPDATE_TS" />
+        <property name="updateUserId"
+                  type="integer"
+                  column="UPDATE_USER_ID" />
+    </class>
+    <query name="com.sehinc.erosioncontrol.db.bmp.EcBmpCategory.bmpCategoryByName">
+        from com.sehinc.erosioncontrol.db.bmp.EcBmpCategory as bmpCategory
+        where upper(bmpCategory.name) = upper(:categoryName) and
+        bmpCategory.clientId = :clientId and
+        bmpCategory.status.code = :statusCode
+    </query>
+    <query name="com.sehinc.erosioncontrol.db.bmp.EcBmpCategory.bmpCategoriesByClientId">
+        from com.sehinc.erosioncontrol.db.bmp.EcBmpCategory as bmpCategory
+        where bmpCategory.clientId = :clientId and
+        bmpCategory.status.code = :statusCode
+        order by bmpCategory.name ASC
+    </query>
+</hibernate-mapping>

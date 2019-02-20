@@ -1,0 +1,39 @@
+<?xml version="1.0"?><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <!--
+            Auto-generated mapping file from
+            the hibernate.org cfg2hbm engine
+    -->
+    <class name="com.sehinc.environment.db.facility.EnvFacilityContact"
+           table="ENV_FACILITY_CONTACT">
+        <id name="id"
+            type="integer">
+            <column name="ID" />
+            <generator class="identity" />
+        </id>
+        <property name="facilityId"
+                  type="integer"
+                  column="FACILITY_ID" />
+        <property name="contactId"
+                  type="integer"
+                  column="CAP_CONTACT_ID" />
+        <property name="roleCd"
+                  type="integer"
+                  column="ROLE_CD" />
+    </class>
+    <query name="EnvFacilityContact.findByFacilityId">
+        from com.sehinc.environment.db.facility.EnvFacilityContact as fc
+        where fc.facilityId = :facilityId
+    </query>
+    <query name="EnvFacilityContact.findByFacilityIdAndContactId">
+        from com.sehinc.environment.db.facility.EnvFacilityContact as fc
+        where fc.facilityId = :facilityId
+        and fc.contactId = :contactId
+    </query>
+    <query name="EnvFacilityContact.findByFacilityIdAndRoleCd">
+        from com.sehinc.environment.db.facility.EnvFacilityContact as fc
+        where fc.facilityId = :facilityId
+        and fc.roleCd = :roleCd
+    </query>
+</hibernate-mapping>

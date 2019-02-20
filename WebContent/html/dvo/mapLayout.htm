@@ -1,0 +1,151 @@
+<html>
+    <head>
+        <title>DataViewOnline Map</title>
+        <link rel="stylesheet"
+              type="text/css"
+              href="../../css/dvo.css" />
+        <script type="text/javascript"
+                language="javascript">
+            function init()
+            {
+                document.getElementById("mainMapImg").src
+                        = opener.printMapURL;
+                document.getElementById("mapLegendImg").src
+                        = opener.printLegURL;
+                var mapTitle = document.getElementById("mapTitle");
+                mapTitle.appendChild(document.createTextNode(opener.theMapTitle));
+                var mapComments = document.getElementById("mapComments");
+                mapComments.appendChild(document.createTextNode(opener.theMapComments));
+                var mapDisclaimer = document.getElementById("mapDisclaimer");
+                mapDisclaimer.className
+                        = opener.thePrintOrientation;
+                document.getElementById("mapLegend").className
+                        = opener.thePrintoutLegend;
+                document.getElementById("map").className
+                        = opener.theMapPageSize
+                        + opener.thePrintOrientation;
+                document.body.className
+                        = opener.theMapPageSize
+                        + opener.thePrintOrientation;
+                var legend = document.getElementById("mapLegend")
+                legend.className
+                        = opener.thePrintoutLegend;
+            }
+        </script>
+        <style type="text/css">
+            body
+            {
+                font-family: verdana, sans-serif;
+                font-size: 10pt;
+            }
+
+            #border
+            {
+                border: solid 2px black;
+            }
+
+            #mapTitle
+            {
+                text-align: center;
+                font-size: large
+            }
+
+            #mapComments
+            {
+                text-align: center;
+                height: 1.1em;
+                overflow: hidden
+            }
+
+            #mapImage
+            {
+                float: left;
+                padding-left: 2px;
+            }
+
+            #map.letterportrait
+            {
+                width: 660px;
+                height: 900px;
+                margin: 3px;
+                overflow: hidden;
+            }
+
+            #map.letterlandscape
+            {
+                width: 900px;
+                height: 675px;
+                margin: 3px;
+                overflow: hidden;
+            }
+
+            #map.bsizeportrait
+            {
+                width: 855px;
+                height: 1390px;
+                margin: 3px;
+                overflow: hidden;
+            }
+
+            #map.bsizelandscape
+            {
+                width: 1390px;
+                height: 870px;
+                margin: 3px;
+                overflow: hidden;
+            }
+
+            #mapLegend
+            {
+                float: left;
+                width: 200px;
+            }
+
+                /*#sidebar.portrait { clear:both;}*/
+            #mapDisclaimer.landscape
+            {
+                text-align: center;
+                clear: both;
+            }
+
+            #mapDisclaimer.portrait
+            {
+                text-align: left;
+            }
+
+            div.NoLegend
+            {
+                display: none;
+            }
+        </style>
+    </head>
+    <body bgcolor="#ffffff"
+          TEXT="Black"
+          LEFTMARGIN=0
+          TOPMARGIN=0
+          onload="javascript:init();window.focus()">
+        <div id="border">
+            <div id="map">
+                <div id="mapTitle"></div>
+                <div id="mapComments"></div>
+                <div id="mapImage">
+                    <IMG BORDER="2"
+                         SRC="./images/map.gif"
+                         HSPACE=0
+                         VSPACE=0
+                         BORDER=0
+                         ALT=""
+                         id="mainMapImg">
+                </div>
+                <!--<div id="sidebar" style="bottom:0px;">-->
+                <div id="mapLegend">
+                    <IMG SRC="./images/map.gif"
+                         id="mapLegendImg"
+                         alt="legend">
+                </div>
+                <div id="mapDisclaimer">Disclaimer: This map is neither a legally recorded map nor a survey and is not intended to be used as one. This map is a compilation of records, information and data from city, county, state and federal offices, and is to be used for reference purposes only.</div>
+                <!--</div>-->
+            </div>
+        </div>
+    </body>
+</html>

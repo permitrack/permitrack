@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="SemiAnnualReport" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="762" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<reportFont name="Arial_Normal" isDefault="true" fontName="Arial" size="12" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Bold" isDefault="false" fontName="Arial" size="12" isBold="true" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Italic" isDefault="false" fontName="Arial" size="12" isItalic="true" pdfFontName="Helvetica-Oblique" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Bold_Italic" isDefault="false" fontName="Arial" size="12" isBold="true" isItalic="true" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Small" isDefault="true" fontName="Arial" size="10" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Small_Bold" isDefault="false" fontName="Arial" size="10" isBold="true" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Small_Italic" isDefault="false" fontName="Arial" size="10" isItalic="true" pdfFontName="Helvetica-Oblique" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Small_Bold_Italic" isDefault="false" fontName="Arial" size="10" isBold="true" isItalic="true" pdfFontName="Helvetica-Oblique" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<parameter name="year" class="java.lang.Integer"/>
+	<parameter name="ClientName" class="java.lang.String"/>
+	<parameter name="SemiAnnualDetailFile" class="java.io.File"/>
+	<parameter name="SemiAnnualHeaderFile" class="java.io.File"/>
+	<parameter name="period" class="java.lang.String"/>
+	<parameter name="PermitName" class="java.lang.String"/>
+	<parameter name="PermitId" class="java.lang.Integer"/>
+	<parameter name="ClientAddress" class="java.lang.String"/>
+	<parameter name="ContactName" class="java.lang.String"/>
+	<parameter name="ContactTitle" class="java.lang.String"/>
+	<parameter name="ContactPhone" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT PD.ID AS PERMIT_DETAIL_ID,
+             PD.NAME AS PERMIT_DETAIL_NAME
+     FROM ENV_PERMIT AS P,
+          ENV_PERMIT_DETAIL AS PD
+     WHERE P.ID = $P{PermitId}
+           AND P.STATUS_CD = 1
+           AND PD.PERMIT_ID = P.ID
+           AND PD.STATUS_CD = 1
+     GROUP BY P.ID, P.NAME, PD.ID, PD.NAME]]>
+	</queryString>
+	<field name="PERMIT_DETAIL_ID" class="java.lang.Integer"/>
+	<field name="PERMIT_DETAIL_NAME" class="java.lang.String"/>
+	<group name="PERMIT_DETAIL" isStartNewPage="true">
+		<groupExpression><![CDATA[$F{PERMIT_DETAIL_ID}]]></groupExpression>
+		<groupHeader>
+			<band height="68" splitType="Stretch">
+        <subreport>
+            <reportElement x="0" y="3" width="779" height="65"/>
+            <subreportParameter name="PermitDetailId">
+                <subreportParameterExpression><![CDATA[$F{PERMIT_DETAIL_ID}]]></subreportParameterExpression>
+            </subreportParameter>
+            <subreportParameter name="SemiAnnualHeaderFile">
+                <subreportParameterExpression><![CDATA[$P{SemiAnnualHeaderFile}]]></subreportParameterExpression>
+            </subreportParameter>
+            <subreportParameter name="PermitName">
+                <subreportParameterExpression><![CDATA[$P{PermitName}]]></subreportParameterExpression>
+            </subreportParameter>
+            <subreportParameter name="ClientName">
+                <subreportParameterExpression><![CDATA[$P{ClientName}]]></subreportParameterExpression>
+            </subreportParameter>
+            <subreportParameter name="year">
+                <subreportParameterExpression><![CDATA[$P{year}]]></subreportParameterExpression>
+            </subreportParameter>
+            <subreportParameter name="PermitDetailName">
+                <subreportParameterExpression><![CDATA[$F{PERMIT_DETAIL_NAME}]]></subreportParameterExpression>
+            </subreportParameter>
+            <connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+            <subreportExpression class="java.io.File"><![CDATA[$P{SemiAnnualDetailFile}]]></subreportExpression>
+        </subreport>
+    </band>
+		</groupHeader>
+	</group>
+	<title>
+		<band height="92" splitType="Stretch">
+    <staticText>
+        <reportElement x="0" y="31" width="112" height="20"/>
+        <textElement verticalAlignment="Bottom">
+					<font reportFont="Arial_Bold" size="12"/>
+        </textElement>
+        <text><![CDATA[Company Name:]]></text>
+    </staticText>
+    <staticText>
+        <reportElement x="0" y="51" width="112" height="20"/>
+        <textElement verticalAlignment="Bottom">
+            <font reportFont="Arial_Bold" size="12"/>
+        </textElement>
+        <text><![CDATA[Contact:]]></text>
+    </staticText>
+    <staticText>
+        <reportElement x="0" y="71" width="112" height="20"/>
+        <textElement verticalAlignment="Bottom">
+            <font reportFont="Arial_Bold" size="12"/>
+        </textElement>
+        <text><![CDATA[Reporting Period:]]></text>
+    </staticText>
+    <staticText>
+        <reportElement x="364" y="31" width="100" height="20"/>
+        <textElement verticalAlignment="Bottom">
+            <font reportFont="Arial_Bold" size="12"/>
+        </textElement>
+        <text><![CDATA[Address:]]></text>
+    </staticText>
+    <staticText>
+        <reportElement x="364" y="71" width="100" height="20"/>
+        <textElement verticalAlignment="Bottom">
+            <font reportFont="Arial_Bold" size="12"/>
+        </textElement>
+        <text><![CDATA[Phone Number:]]></text>
+    </staticText>
+    <staticText>
+        <reportElement x="364" y="51" width="100" height="20"/>
+        <textElement verticalAlignment="Bottom">
+					<font reportFont="Arial_Bold" size="12"/>
+        </textElement>
+        <text><![CDATA[Title:]]></text>
+    </staticText>
+    <textField>
+        <reportElement x="112" y="31" width="252" height="20"/>
+        <textElement verticalAlignment="Bottom">
+            <font reportFont="Arial_Normal" size="12"/>
+        </textElement>
+        <textFieldExpression class="java.lang.String"><![CDATA[$P{ClientName}]]></textFieldExpression>
+    </textField>
+    <textField>
+        <reportElement x="112" y="71" width="252" height="20"/>
+        <textElement verticalAlignment="Bottom">
+            <font reportFont="Arial_Normal" size="12"/>
+        </textElement>
+        <textFieldExpression class="java.lang.String"><![CDATA[$P{period} + " " + $P{year}]]></textFieldExpression>
+    </textField>
+    <line>
+        <reportElement x="0" y="51" width="729" height="1"/>
+    </line>
+    <line>
+        <reportElement x="0" y="71" width="729" height="1"/>
+    </line>
+    <line>
+        <reportElement x="0" y="91" width="729" height="1"/>
+    </line>
+    <textField>
+        <reportElement x="0" y="0" width="802" height="31"/>
+        <textElement textAlignment="Center" verticalAlignment="Middle">
+            <font reportFont="Arial_Bold" size="18"/>
+        </textElement>
+        <textFieldExpression class="java.lang.String"><![CDATA["MACT Semi-Annual Compliance Report"]]></textFieldExpression>
+    </textField>
+			<textField>
+				<reportElement x="112" y="51" width="252" height="20"/>
+				<textElement verticalAlignment="Bottom">
+					<font reportFont="Arial_Normal" size="12"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{ContactName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="464" y="31" width="252" height="20"/>
+				<textElement verticalAlignment="Bottom">
+					<font reportFont="Arial_Normal" size="12"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{ClientAddress}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="464" y="51" width="252" height="20"/>
+				<textElement verticalAlignment="Bottom">
+					<font reportFont="Arial_Normal" size="12"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{ContactTitle}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="464" y="72" width="252" height="20"/>
+				<textElement verticalAlignment="Bottom">
+					<font reportFont="Arial_Normal" size="12"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{ContactPhone}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<summary>
+		<band height="172" splitType="Stretch">
+    <staticText>
+        <reportElement x="364" y="32" width="100" height="20"/>
+        <textElement verticalAlignment="Bottom">
+            <font reportFont="Arial_Bold" size="12"/>
+        </textElement>
+        <text><![CDATA[Title:]]></text>
+    </staticText>
+    <staticText>
+        <reportElement x="0" y="52" width="112" height="20"/>
+        <textElement verticalAlignment="Bottom">
+            <font reportFont="Arial_Bold" size="12"/>
+        </textElement>
+        <text><![CDATA[Signed:]]></text>
+    </staticText>
+    <staticText>
+        <reportElement x="364" y="52" width="100" height="20"/>
+        <textElement verticalAlignment="Bottom">
+            <font reportFont="Arial_Bold" size="12"/>
+        </textElement>
+        <text><![CDATA[Date:]]></text>
+    </staticText>
+    <staticText>
+        <reportElement x="0" y="32" width="112" height="20"/>
+        <textElement verticalAlignment="Bottom">
+            <font reportFont="Arial_Bold" size="12"/>
+        </textElement>
+        <text><![CDATA[Name:]]></text>
+    </staticText>
+    <textField>
+        <reportElement x="0" y="0" width="790" height="32"/>
+        <textElement verticalAlignment="Bottom">
+            <font reportFont="Arial_Normal" size="12"/>
+        </textElement>
+        <textFieldExpression class="java.lang.String"><![CDATA["I certify that based on information and belief formed after reasonable inquiry, there are no deviations from the emission limitations set forth in " + $P{PermitName} + " during the reporting period."]]></textFieldExpression>
+    </textField>
+    <staticText>
+        <reportElement x="0" y="135" width="112" height="20"/>
+        <textElement verticalAlignment="Bottom">
+            <font reportFont="Arial_Bold" size="12"/>
+        </textElement>
+        <text><![CDATA[Signed:]]></text>
+    </staticText>
+    <textField>
+        <reportElement x="0" y="83" width="790" height="32"/>
+        <textElement verticalAlignment="Bottom">
+            <font reportFont="Arial_Normal" size="12"/>
+        </textElement>
+        <textFieldExpression class="java.lang.String"><![CDATA["I certify that based on information and belief formed after reasonable inquiry, the statements and information contained in this form are true, accurate, and complete."]]></textFieldExpression>
+    </textField>
+    <staticText>
+        <reportElement x="364" y="115" width="100" height="20"/>
+        <textElement verticalAlignment="Bottom">
+            <font reportFont="Arial_Bold" size="12"/>
+        </textElement>
+        <text><![CDATA[Title:]]></text>
+    </staticText>
+    <staticText>
+        <reportElement x="0" y="115" width="112" height="20"/>
+        <textElement verticalAlignment="Bottom">
+					<font reportFont="Arial_Bold" size="12"/>
+        </textElement>
+        <text><![CDATA[Name:]]></text>
+    </staticText>
+    <staticText>
+        <reportElement x="364" y="135" width="100" height="20"/>
+        <textElement verticalAlignment="Bottom">
+            <font reportFont="Arial_Bold" size="12"/>
+        </textElement>
+        <text><![CDATA[Date:]]></text>
+    </staticText>
+    <line>
+        <reportElement x="0" y="72" width="729" height="1"/>
+    </line>
+    <line>
+        <reportElement x="0" y="51" width="729" height="1"/>
+    </line>
+    <line>
+        <reportElement x="0" y="154" width="729" height="1"/>
+    </line>
+    <line>
+        <reportElement x="0" y="134" width="729" height="1"/>
+    </line>
+		</band>
+	</summary>
+</jasperReport>

@@ -1,0 +1,241 @@
+
+-- more wet pond inspection data part 2
+-- sub sections
+
+insert into sub_section
+(sub_section_id, section_id, title, description, order_num)
+values
+(39, 27, 'Is the wet pond a multi-cell system?', 'Multi-cell system?', 8)
+
+insert into sub_section
+(sub_section_id, section_id, title, description, order_num)
+values
+(40, 27, 'Does the water in the pond have:', 'Does the water have', 9)
+
+insert into sub_section
+(sub_section_id, section_id, title, description, order_num)
+values
+(41, 27, 'Evidence of illicit storm sewer discharges?', 'Illicit discharges?', 10)
+
+insert into sub_section
+(sub_section_id, section_id, title, description, order_num)
+values
+(42, 27, 'Does the wet pond smell like gasoline or oil?', 'Gasoline or oil?', 11)
+
+insert into sub_section
+(sub_section_id, section_id, title, description, order_num)
+values
+(43, 29, 'Indications of any of the following?', 'Evidence of the following?', 12)
+
+
+
+
+-- elements. elements for subsection 39 'wet pond multi cell'
+
+insert into element
+(element_id, title, element_type_id, child_element_id, name, 
+data_type, sub_section_id, order_num, 
+required, allow_other, is_child, display_title, size, max_length)
+values
+(257, 'Multi-cell system?', 3, null, 'multi_cell', 'string', 39, 1, 'N', 'N', 'N', 'N', null, null)
+
+insert into element
+(element_id, title, element_type_id, child_element_id, name, 
+data_type, sub_section_id, order_num, 
+required, allow_other, is_child, display_title, size, max_length)
+values
+(258, 'If yes, how many cells are present?', 3, null, 'cells_present', 'string', 39, 2, 'N', 'N', 'N', 'Y', null, null)
+
+
+-- elements. elements for subsection 40 'pond water'
+
+insert into element
+(element_id, title, element_type_id, child_element_id, name, 
+data_type, sub_section_id, order_num, 
+required, allow_other, is_child, display_title, size, max_length)
+values
+(259, 'Surface sheen (from oils/gasoline)', 3, null, 'surface_sheen', 'string', 40, 1, 'N', 'N', 'N', 'Y', null, null)
+
+insert into element
+(element_id, title, element_type_id, child_element_id, name, 
+data_type, sub_section_id, order_num, 
+required, allow_other, is_child, display_title, size, max_length)
+values
+(260, 'Murky color (from suspended solids)', 3, null, 'murky_color', 'string', 40, 2, 'N', 'N', 'N', 'Y', null, null)
+
+insert into element
+(element_id, title, element_type_id, child_element_id, name, 
+data_type, sub_section_id, order_num, 
+required, allow_other, is_child, display_title, size, max_length)
+values
+(261, 'Green color (from algae or other bio)', 3, null, 'green_color', 'string', 40, 3, 'N', 'N', 'N', 'Y', null, null)
+
+insert into element
+(element_id, title, element_type_id, child_element_id, name, 
+data_type, sub_section_id, order_num, 
+required, allow_other, is_child, display_title, size, max_length)
+values
+(262, 'Invasive, tolerant fish species', 3, null, 'invasive_fish', 'string', 40, 4, 'N', 'N', 'N', 'Y', null, null)
+
+insert into element
+(element_id, title, element_type_id, child_element_id, name, 
+data_type, sub_section_id, order_num, 
+required, allow_other, is_child, display_title, size, max_length)
+values
+(263, 'Other', 1, null, 'water_pond_other', 'string', 40, 5, 'N', 'N', 'N', 'Y', 20, 20)
+
+
+-- elements. 'illicit discharge?'
+
+insert into element
+(element_id, title, element_type_id, child_element_id, name, 
+data_type, sub_section_id, order_num, 
+required, allow_other, is_child, display_title, size, max_length)
+values
+(264, 'Evidence of disharge?', 3, null, 'evidence_discharge', 'string', 41, 1, 'N', 'N', 'N', 'N', null, null)
+
+insert into element
+(element_id, title, element_type_id, child_element_id, name, 
+data_type, sub_section_id, order_num, 
+required, allow_other, is_child, display_title, size, max_length)
+values
+(265, 'If yes, please describe', 2, null, 'evidence_describe', 'string', 41, 2, 'N', 'N', 'N', 'Y', null, null)
+
+
+-- element insert 'smell like gas or oil'
+
+insert into element
+(element_id, title, element_type_id, child_element_id, name, 
+data_type, sub_section_id, order_num, 
+required, allow_other, is_child, display_title, size, max_length)
+values
+(266, 'Does it smell like gas', 3, null, 'smell_like_gas', 'string', 42, 1, 'N', 'N', 'N', 'N', null, null)
+
+
+-- element insert 'indications of following'
+
+insert into element
+(element_id, title, element_type_id, child_element_id, name, 
+data_type, sub_section_id, order_num, 
+required, allow_other, is_child, display_title, size, max_length)
+values
+(267, 'Sediment deposition', 3, null, 'sediment', 'string', 43, 1, 'N', 'N', 'N', 'Y', null, null)
+
+insert into element
+(element_id, title, element_type_id, child_element_id, name, 
+data_type, sub_section_id, order_num, 
+required, allow_other, is_child, display_title, size, max_length)
+values
+(268, 'Excessive vegetation (that needs removal)', 3, null, 'excessive_veg', 'string', 43, 2, 'N', 'N', 'N', 'Y', null, null)
+
+insert into element
+(element_id, title, element_type_id, child_element_id, name, 
+data_type, sub_section_id, order_num, 
+required, allow_other, is_child, display_title, size, max_length)
+values
+(269, 'Litter, large debris, solid waste', 3, null, 'litter', 'string', 43, 3, 'N', 'N', 'N', 'Y', null, null)
+
+insert into element
+(element_id, title, element_type_id, child_element_id, name, 
+data_type, sub_section_id, order_num, 
+required, allow_other, is_child, display_title, size, max_length)
+values
+(270, 'Other', 1, null, 'bottom_other', 'string', 43, 4, 'N', 'N', 'N', 'Y', 20, 20)
+
+
+-- domain insertion.  cell amount
+
+insert into domain
+(domain_id, name)
+values
+(36, 'Cell number')
+
+insert into domain_value
+(domain_value_id, domain_value, order_num, domain_id)
+values
+(124, '2 cells', 1, 36)
+
+insert into domain_value
+(domain_value_id, domain_value, order_num, domain_id)
+values
+(125, '3 cells', 2, 36)
+
+insert into domain_value
+(domain_value_id, domain_value, order_num, domain_id)
+values
+(126, '4 or more', 3, 36)
+
+insert into element_domain  -- 'Multi-cell system?'
+(element_domain_id, element_id, domain_id, default_domain_value_id, allow_select)
+values
+(118, 257, 35, null, 'N')
+
+insert into element_domain  -- 'If yes, how many cells are present?'
+(element_domain_id, element_id, domain_id, default_domain_value_id, allow_select)
+values
+(119, 258, 36, null, 'Y')
+
+insert into element_domain  -- 'Surface sheen (from oils/gasoline)'
+(element_domain_id, element_id, domain_id, default_domain_value_id, allow_select)
+values
+(120, 259, 35, null, 'N')
+
+insert into element_domain  -- 'Murky color (from suspended solids)'
+(element_domain_id, element_id, domain_id, default_domain_value_id, allow_select)
+values
+(121, 260, 35, null, 'N')
+
+insert into element_domain  -- 'Green color (from algae or other bio)'
+(element_domain_id, element_id, domain_id, default_domain_value_id, allow_select)
+values
+(122, 261, 35, null, 'N')
+
+insert into element_domain  -- 'Invasive, tolerant fish species such as carp or shiners'
+(element_domain_id, element_id, domain_id, default_domain_value_id, allow_select)
+values
+(123, 262, 35, null, 'N')
+
+insert into element_domain  -- 'illicit discharge?'
+(element_domain_id, element_id, domain_id, default_domain_value_id, allow_select)
+values
+(124, 264, 30, null, 'N')
+
+insert into element_domain  -- 'smell like gas or oil'
+(element_domain_id, element_id, domain_id, default_domain_value_id, allow_select)
+values
+(125, 266, 35, null, 'N')
+
+insert into element_domain  -- 'Sediment deposition'
+(element_domain_id, element_id, domain_id, default_domain_value_id, allow_select)
+values
+(126, 267, 35, null, 'N')
+
+insert into element_domain  -- 'Excessive vegetation'
+(element_domain_id, element_id, domain_id, default_domain_value_id, allow_select)
+values
+(127, 268, 35, null, 'N')
+
+insert into element_domain  -- 'Litter, large debris, solid waste'
+(element_domain_id, element_id, domain_id, default_domain_value_id, allow_select)
+values
+(128, 269, 35, null, 'N')
+
+
+
+-- element insert 'sediment deposition is evident'
+
+insert into element
+(element_id, title, element_type_id, child_element_id, name, 
+data_type, sub_section_id, order_num, 
+required, allow_other, is_child, display_title, size, max_length)
+values
+(271, 'Source of sediment deposition, if evident', 3, 272, 'sediment_source', 'string', 43, 5, 'N', 'Y', 'N', 'Y', null, null)
+
+insert into element
+(element_id, title, element_type_id, child_element_id, name, 
+data_type, sub_section_id, order_num, 
+required, allow_other, is_child, display_title, size, max_length)
+values
+(272, 'Other', 1, null, 'sediment_source_other', 'string', 43, 6, 'N', 'N', 'Y', 'Y', 20, 20)
+
+

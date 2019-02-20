@@ -1,0 +1,64 @@
+<?xml version="1.0"?><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <!--
+            Auto-generated mapping file from
+            the hibernate.org cfg2hbm engine
+    -->
+    <class name="com.sehinc.common.db.user.CapUserRole"
+           table="CAP_USER_ROLE">
+        <id name="id"
+            type="integer">
+            <column name="ID" />
+            <generator class="identity" />
+        </id>
+        <property name="userId"
+                  type="integer"
+                  column="USER_ID" />
+        <property name="roleId"
+                  type="integer"
+                  column="ROLE_ID" />
+    </class>
+    <query name="com.sehinc.common.db.user.CapUserRole.findByModuleAndClient">
+        select userRole
+        from com.sehinc.common.db.user.CapUserRole as userRole,
+        com.sehinc.common.db.security.CapRole as role
+        where userRole.roleId = role.id and
+        role.moduleId = :moduleId and
+        role.clientId = :clientId and
+        role.status.code = :statusCode
+    </query>
+    <query name="com.sehinc.common.db.user.CapUserRole.findByModuleAndUser">
+        select userRole
+        from com.sehinc.common.db.user.CapUserRole as userRole,
+        com.sehinc.common.db.security.CapRole as role
+        where userRole.userId = :userId and
+        userRole.roleId = role.id and
+        role.moduleId = :moduleId and
+        role.status.code = :statusCode
+    </query>
+    <query name="com.sehinc.common.db.user.CapUserRole.countByRoleId">
+        select count(userRole.id)
+        from com.sehinc.common.db.user.CapUserRole as userRole,
+        com.sehinc.common.db.security.CapRole as role
+        where userRole.roleId = :roleId and
+        userRole.roleId = role.id and
+        role.status.code = :statusCode
+    </query>
+    <query name="com.sehinc.common.db.user.CapUserRole.findByRoleId">
+        select userRole
+        from com.sehinc.common.db.user.CapUserRole as userRole
+        where userRole.roleId = :roleId
+    </query>
+    <query name="com.sehinc.common.db.user.CapUserRole.findByUserId">
+        select userRole
+        from com.sehinc.common.db.user.CapUserRole as userRole
+        where userRole.userId = :userId
+    </query>
+    <query name="com.sehinc.common.db.user.CapUserRole.findByUserIdAndRoleId">
+        select userRole
+        from com.sehinc.common.db.user.CapUserRole as userRole
+        where userRole.userId = :userId
+        and userRole.roleId = :roleId
+    </query>
+</hibernate-mapping>

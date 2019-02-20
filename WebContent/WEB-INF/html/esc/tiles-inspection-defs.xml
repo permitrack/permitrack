@@ -1,0 +1,100 @@
+<!DOCTYPE tiles-definitions PUBLIC
+    "-//Apache Software Foundation//DTD Tiles Configuration 1.3//EN"
+    "http://struts.apache.org/dtds/tiles-config_1_3.dtd">
+<tiles-definitions>
+    <definition name="inspection.baseLayout"
+                extends="html.baseLayout">
+        <put name="primaryMenu"
+             value="/html/esc/primarynavigation.jsp" />
+        <put name="secondaryMenu"
+             value="/html/esc/secondarynavigation.jsp" />
+    </definition>
+    <definition name="inspection.baseTitledLayout"
+                extends="html.baseTitledLayout">
+        <put name="primaryMenu"
+             value="/html/esc/primarynavigation.jsp" />
+        <put name="secondaryMenu"
+             value="/html/esc/secondarynavigation.jsp" />
+    </definition>
+    <definition name="inspection.list.page"
+                extends="inspection.baseTitledLayout">
+        <put name="title"
+             value="Inspection List" />
+        <put name="description"
+             value="Click on the column headings to sort the list." />
+        <put name="content"
+             value="/html/esc/inspection/inspectionlist.jsp" />
+    </definition>
+    <definition name="inspection.view.page"
+                extends="inspection.baseTitledLayout">
+        <put name="title"
+             value="View Inspection" />
+        <put name="description"
+             value="" />
+        <put name="content"
+             value="/html/esc/inspection/inspectionview.jsp" />
+    </definition>
+    <definition name="inspection.edit.page"
+                extends="inspection.baseTitledLayout">
+        <put name="title"
+             value="Edit Inspection" />
+        <put name="description"
+             value="" />
+        <put name="content"
+             value="/html/esc/inspection/inspectionedit.jsp" />
+    </definition>
+<!--    <definition name="inspection.delete.page"
+                extends="inspection.baseTitledLayout">
+        <put name="title"
+             value="Delete Inspection" />
+        <put name="description"
+             value="" />
+        <put name="content"
+             value="/html/esc/inspection/inspectiondelete.jsp" />
+    </definition>-->
+    <definition name="inspection.create.page"
+                extends="inspection.baseTitledLayout">
+        <put name="title"
+             value="Create a New Inspection" />
+        <put name="description"
+             value="" />
+        <put name="content"
+             value="/html/esc/inspection/inspectioncreate.jsp" />
+    </definition>
+    <definition name="inspection.email.page"
+                extends="inspection.baseTitledLayout">
+        <put name="title"
+             value="Email Inspection Report" />
+        <put name="description"
+             value="Select the project contacts to receive this inspection report.  Click 'Send' to send the email to the selected contacts, or click 'Skip' to complete your inspection." />
+        <put name="content"
+             value="/html/esc/inspection/inspectionemail.jsp" />
+    </definition>
+    <definition name="inspection.template.list.page"
+                extends="inspection.baseTitledLayout">
+        <put name="title"
+             value="Inspection Template List" />
+        <put name="description"
+             value="An inspection template is a set of Best Management Practices (BMPs) that can be assigned to new projects." />
+        <put name="content"
+             value="/html/esc/inspection/inspectiontemplatelist.jsp" />
+    </definition>
+    <definition name="inspection.template.edit.page"
+                extends="inspection.baseTitledLayout">
+        <put name="title"
+             value="Edit Inspection Template" />
+        <put name="description"
+             value="" />
+        <put name="content"
+             value="/html/esc/inspection/inspectiontemplateedit.jsp" />
+    </definition>
+    <definition name="inspection.template.create.page"
+                extends="inspection.baseTitledLayout">
+        <put name="title"
+             value="Create Inspection Template" />
+        <put name="description"
+             value="" />
+        <put name="content"
+             value="/html/esc/inspection/inspectiontemplatecreate.jsp" />
+    </definition>
+</tiles-definitions>

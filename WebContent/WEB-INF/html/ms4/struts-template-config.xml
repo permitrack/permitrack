@@ -1,0 +1,336 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?><!DOCTYPE struts-config PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 1.3//EN"
+    "http://struts.apache.org/dtds/struts-config_1_3.dtd">
+<struts-config>
+    <form-beans>
+        <form-bean name="planForm"
+                   type="com.sehinc.stormwater.action.template.PlanTemplateForm" />
+        <form-bean name="mcmForm"
+                   type="com.sehinc.stormwater.action.template.MCMTemplateForm" />
+        <form-bean name="bmpDbSelectForm"
+                   type="com.sehinc.stormwater.action.bmpdb.BMPDBListForm" />
+        <form-bean name="bmpForm"
+                   type="com.sehinc.stormwater.action.template.BMPTemplateForm" />
+        <form-bean name="goalForm"
+                   type="com.sehinc.stormwater.action.template.GoalTemplateForm" />
+        <form-bean name="mcmBmpDbSelectForm"
+                   type="org.apache.struts.validator.DynaValidatorForm">
+            <form-property name="bmp_db_id"
+                           type="java.lang.Integer" />
+        </form-bean>
+        <form-bean name="subNodeForm"
+                   type="com.sehinc.stormwater.action.plan.SubNodeForm" />
+    </form-beans>
+    <global-forwards>
+        <forward name="plan.template.list.action"
+                 path="/plantemplatelistaction.do"
+                 redirect="true" />
+<!--
+        <forward name="plan.template.view.action"
+                 path="/plantemplateviewaction.do"
+                 redirect="true" />
+-->
+<!--
+        <forward name="mcm.template.view.action"
+                 path="/mcmtemplateviewaction.do"
+                 redirect="true" />
+-->
+<!--
+        <forward name="bmp.template.view.action"
+                 path="/bmptemplateviewaction.do"
+                 redirect="true" />
+-->
+    </global-forwards>
+    <action-mappings>
+        <action path="/plantemplatelistaction"
+                type="com.sehinc.stormwater.action.template.PlanTemplateListAction"
+                parameter="secondaryMenuItem=list;mode=template">
+            <forward name="continue"
+                     path="plan.template.list.page" />
+        </action>
+        <action path="/plantemplateviewaction"
+                type="com.sehinc.stormwater.action.template.PlanTemplateViewAction"
+                name="planForm"
+                parameter="secondaryMenuItem=view;mode=template"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="plan.template.view.page" />
+        </action>
+        <action path="/plantemplateeditaction"
+                type="com.sehinc.stormwater.action.template.PlanTemplateViewAction"
+                name="planForm"
+                parameter="secondaryMenuItem=edit;mode=template"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="plan.template.edit.page" />
+        </action>
+        <action path="/plantemplateedit"
+                type="com.sehinc.stormwater.action.template.PlanTemplateEditAction"
+                name="planForm"
+                input="plan.template.edit.page"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="/plantemplateviewaction.do"
+                     redirect="true" />
+        </action>
+        <action path="/plantemplatedelete"
+                type="com.sehinc.stormwater.action.template.PlanTemplateDeleteAction"
+                name="planForm"
+                input="plan.template.edit.page"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="/plantemplatelistaction.do"
+                     redirect="true" />
+        </action>
+        <action path="/mcmtemplatecreateaction"
+                type="com.sehinc.stormwater.action.template.PlanTemplateNewMCMAction"
+                name="mcmForm"
+                parameter="secondaryMenuItem=create;mode=template"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="mcm.template.new.page" />
+        </action>
+        <action path="/mcmtemplatecreate"
+                type="com.sehinc.stormwater.action.template.PlanTemplateCreateMCMAction"
+                name="mcmForm"
+                input="mcm.template.new.page"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="/plantemplateviewaction.do"
+                     redirect="true" />
+        </action>
+        <action path="/mcmtemplateviewaction"
+                type="com.sehinc.stormwater.action.template.MCMTemplateAction"
+                name="mcmForm"
+                parameter="secondaryMenuItem=view;mode=template"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="mcm.template.view.page" />
+        </action>
+        <action path="/mcmtemplateeditaction"
+                type="com.sehinc.stormwater.action.template.MCMTemplateAction"
+                name="mcmForm"
+                parameter="secondaryMenuItem=edit;mode=template"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="mcm.template.edit.page" />
+        </action>
+        <action path="/mcmtemplateedit"
+                type="com.sehinc.stormwater.action.template.MCMTemplateEditAction"
+                name="mcmForm"
+                input="mcm.template.edit.page"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="/mcmtemplateviewaction.do"
+                     redirect="true" />
+        </action>
+        <action path="/mcmtemplatedelete"
+                type="com.sehinc.stormwater.action.template.MCMTemplateDeleteAction"
+                name="mcmForm"
+                input="mcm.template.edit.page"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="/plantemplateviewaction.do"
+                     redirect="true" />
+        </action>
+        <action path="/bmp0templatecreateaction"
+                type="com.sehinc.stormwater.action.template.MCMTemplateNewBMP0Action"
+                name="bmpForm"
+                parameter="secondaryMenuItem=create;mode=template"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="bmp.template.new.page" />
+        </action>
+        <action path="/bmp1templatecreateaction"
+                type="com.sehinc.stormwater.action.template.MCMTemplateNewBMP1Action"
+                name="bmpForm"
+                parameter="secondaryMenuItem=create;mode=template"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="bmp.template.new.page" />
+        </action>
+        <action path="/bmp2templatecreateaction"
+                type="com.sehinc.stormwater.action.template.MCMTemplateNewBMP2Action"
+                name="bmpForm"
+                parameter="secondaryMenuItem=create;mode=template"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="bmp.template.new.page" />
+        </action>
+        <action path="/bmptemplatecreate"
+                type="com.sehinc.stormwater.action.template.MCMTemplateCreateBMPAction"
+                name="bmpForm"
+                input="bmp.template.new.page"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="/mcmtemplateviewaction.do"
+                     redirect="true" />
+        </action>
+        <action path="/bmpdbtemplatecreateaction"
+                type="com.sehinc.stormwater.action.template.MCMTemplateViewBMPDBAction"
+                name="bmpDbSelectForm"
+                parameter="secondaryMenuItem=select;mode=template"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="mcm.template.select.bmp.db.page" />
+        </action>
+        <action path="/bmpdbtemplatecreate"
+                type="com.sehinc.stormwater.action.template.MCMTemplateSelectBMPDBAction"
+                name="mcmBmpDbSelectForm"
+                input="mcm.template.select.bmp.db.page"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="/bmptemplateeditaction.do"
+                     redirect="true" />
+        </action>
+        <action path="/bmptemplateviewaction"
+                type="com.sehinc.stormwater.action.template.BMPTemplateAction"
+                name="bmpForm"
+                parameter="secondaryMenuItem=view;mode=template"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="bmp.template.view.page" />
+        </action>
+        <action path="/bmptemplateeditaction"
+                type="com.sehinc.stormwater.action.template.BMPTemplateAction"
+                name="bmpForm"
+                parameter="secondaryMenuItem=edit;mode=template"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="bmp.template.edit.page" />
+        </action>
+        <action path="/bmptemplateedit"
+                type="com.sehinc.stormwater.action.template.BMPTemplateEditAction"
+                name="bmpForm"
+                input="bmp.template.edit.page"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="/bmptemplateviewaction.do"
+                     redirect="true" />
+        </action>
+        <action path="/bmptemplatedelete"
+                type="com.sehinc.stormwater.action.template.BMPTemplateDeleteAction"
+                name="bmpForm"
+                input="bmp.template.edit.page"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="/mcmtemplateviewaction.do"
+                     redirect="true" />
+        </action>
+        <action path="/goaltemplatecreateaction"
+                type="com.sehinc.stormwater.action.template.BMPTemplateNewGoalAction"
+                name="goalForm"
+                parameter="secondaryMenuItem=create;mode=template"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="goal.template.new.page" />
+        </action>
+        <action path="/goaltemplatecreate"
+                type="com.sehinc.stormwater.action.template.BMPTemplateCreateGoalAction"
+                name="goalForm"
+                input="goal.template.new.page"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="/bmptemplateviewaction.do"
+                     redirect="true" />
+        </action>
+        <action path="/goaltemplateviewaction"
+                type="com.sehinc.stormwater.action.template.GoalTemplateAction"
+                name="goalForm"
+                parameter="secondaryMenuItem=view;mode=template"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="goal.template.view.page" />
+        </action>
+        <action path="/goaltemplateeditaction"
+                type="com.sehinc.stormwater.action.template.GoalTemplateAction"
+                name="goalForm"
+                parameter="secondaryMenuItem=edit;mode=template"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="goal.template.edit.page" />
+        </action>
+        <action path="/goaltemplateedit"
+                type="com.sehinc.stormwater.action.template.GoalTemplateEditAction"
+                name="goalForm"
+                input="goal.template.edit.page"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="/goaltemplateviewaction.do"
+                     redirect="true" />
+        </action>
+        <action path="/goaltemplatedelete"
+                type="com.sehinc.stormwater.action.template.GoalTemplateDeleteAction"
+                name="goalForm"
+                input="goal.template.edit.page"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="/bmptemplateviewaction.do"
+                     redirect="true" />
+        </action>
+        <action path="/subnodeviewaction"
+                type="com.sehinc.stormwater.action.plan.SubNodeViewAction"
+                name="subNodeForm"
+                parameter="secondaryMenuItem=view"
+                scope="request"
+                validate="false">
+            <forward name="bmp"
+                     path="/bmptemplateviewaction.do"
+                     redirect="false" />
+            <forward name="mcm"
+                     path="/mcmtemplateviewaction.do"
+                     redirect="false" />
+            <forward name="goal"
+                     path="/goaltemplateviewaction.do"
+                     redirect="false" />
+            <forward name="continue"
+                     path="/plantemplateviewaction.do"
+                     redirect="false" />
+        </action>
+    </action-mappings>
+    <controller processorClass="org.apache.struts.action.RequestProcessor"
+                contentType="text/html" />
+    <plug-in className="org.apache.struts.tiles.TilesPlugin">
+        <set-property property="definitions-config"
+                      value="/WEB-INF/html/tiles-defs.xml, /WEB-INF/html/ms4/tiles-template-defs.xml" />
+        <set-property property="definitions-debug"
+                      value="2" />
+        <set-property property="definitions-parser-details"
+                      value="2" />
+        <set-property property="definitions-parser-validate"
+                      value="true" />
+        <set-property property="moduleAware"
+                      value="true" />
+    </plug-in>
+    <plug-in className="org.apache.struts.validator.ValidatorPlugIn">
+        <set-property property="pathnames"
+                      value="/org/apache/struts/validator/validator-rules.xml,
+                                              /WEB-INF/html/ms4/validation-template.xml" />
+    </plug-in>
+</struts-config>

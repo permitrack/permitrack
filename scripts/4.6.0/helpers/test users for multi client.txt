@@ -1,0 +1,25 @@
+Test users for multi client
+
+Super Admin
+wpsadmin
+
+
+Regular "User"
+DJeske
+16DP4H71
+
+
+"Client Administrator"
+jstory
+hib040408
+
+
+Hardly any access and only one module
+swguest
+storm
+
+escguest
+runoff
+
+
+

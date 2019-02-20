@@ -1,0 +1,35 @@
+// dot 2.28.0 on Windows 7 6.1
+// SchemaSpy rev 590
+digraph "EC_CLIENT_RELATIONSHIP_PERMISSION" {
+  graph [
+    rankdir="RL"
+    bgcolor="#f7f7f7"
+    nodesep="0.18"
+    ranksep="0.46"
+    fontname="Helvetica"
+    fontsize="11"
+  ];
+  node [
+    fontname="Helvetica"
+    fontsize="11"
+    shape="plaintext"
+  ];
+  edge [
+    arrowsize="0.8"
+  ];
+  "EC_CLIENT_RELATIONSHIP_PERMISSION" [
+    label=<
+    <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" BGCOLOR="#ffffff">
+      <TR><TD COLSPAN="3" BGCOLOR="#9bab96" ALIGN="CENTER">EC_CLIENT_RELATIONSHIP_PERMISSION</TD></TR>
+      <TR><TD PORT="ID" COLSPAN="3" BGCOLOR="#bed1b8" ALIGN="LEFT">ID</TD></TR>
+      <TR><TD PORT="CAP_CLIENT_TYPE_ID" COLSPAN="3" ALIGN="LEFT">CAP_CLIENT_TYPE_ID</TD></TR>
+      <TR><TD PORT="EC_CLIENT_RELATIONSHIP_TYPE_ID" COLSPAN="3" ALIGN="LEFT">EC_CLIENT_RELATIONSHIP_TYPE_ID</TD></TR>
+      <TR><TD PORT="CAP_SECURE_OBJECT_ID" COLSPAN="3" ALIGN="LEFT">CAP_SECURE_OBJECT_ID</TD></TR>
+      <TR><TD PORT="CAP_PERMISSION_ID" COLSPAN="3" ALIGN="LEFT">CAP_PERMISSION_ID</TD></TR>
+      <TR><TD PORT="Description" COLSPAN="3" ALIGN="LEFT">Description</TD></TR>
+      <TR><TD ALIGN="LEFT" BGCOLOR="#f7f7f7">  </TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">22 rows</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">  </TD></TR>
+    </TABLE>>
+    URL="tables/EC_CLIENT_RELATIONSHIP_PERMISSION.html"
+    tooltip="EC_CLIENT_RELATIONSHIP_PERMISSION"
+  ];
+}

@@ -1,0 +1,34 @@
+<?xml version="1.0"?><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!--suppress HibernateMappingDatasourceDomInspection -->
+<hibernate-mapping>
+    <!--
+            Auto-generated mapping file from
+            the hibernate.org cfg2hbm engine
+    -->
+    <class name="com.sehinc.erosioncontrol.db.correctiveaction.EcCorrectiveAction">
+        <id name="id"
+            type="integer">
+            <column name="ID" />
+            <generator class="identity" />
+        </id>
+        <property name="inspectionDate"
+                  type="timestamp"
+                  column="inspection_date" />
+        <property name="projectId"
+                  type="integer"
+                  column="projectId" />
+        <property name="projectName"
+                  type="string"
+                  column="name" />
+        <property name="bmpCategoryName"
+                  type="string"
+                  column="bmp_category_name" />
+        <property name="bmpName"
+                  type="string"
+                  column="bmp_name" />
+        <property name="bmpComment"
+                  type="string"
+                  column="comment" />
+    </class>
+</hibernate-mapping>

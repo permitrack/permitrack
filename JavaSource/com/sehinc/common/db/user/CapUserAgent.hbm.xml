@@ -1,0 +1,28 @@
+<?xml version="1.0"?><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.sehinc.common.db.user.CapUserAgent"
+           table="CAP_USER_AGENT">
+        <id name="id"
+            type="integer">
+            <column name="ID" />
+            <generator class="identity" />
+        </id>
+        <property name="name"
+                  type="string"
+                  column="NAME" />
+        <property name="pattern"
+                  type="string"
+                  column="PATTERN" />
+        <property name="capMarkupId"
+                  type="integer"
+                  column="CAP_MARKUP_ID" />
+        <property name="evalSequence"
+                  type="integer"
+                  column="EVAL_SEQUENCE" />
+    </class>
+    <query name="com.sehinc.common.db.user.CapUserAgent.allRowsOrderedBySequence">
+        from com.sehinc.common.db.user.CapUserAgent as agent
+        order by agent.evalSequence
+    </query>
+</hibernate-mapping>

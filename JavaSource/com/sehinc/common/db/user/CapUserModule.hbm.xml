@@ -1,0 +1,56 @@
+<?xml version="1.0"?><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <!--
+            Auto-generated mapping file from
+            the hibernate.org cfg2hbm engine
+    -->
+    <class name="com.sehinc.common.db.user.CapUserModule"
+           table="CAP_USER_MODULE">
+        <id name="id"
+            type="integer">
+            <column name="ID" />
+            <generator class="identity" />
+        </id>
+        <property name="userId"
+                  type="integer"
+                  column="USER_ID" />
+        <property name="moduleId"
+                  type="integer"
+                  column="MODULE_ID" />
+        <property name="clientId"
+                  type="integer"
+                  column="CLIENT_ID" />
+        <property name="isActive"
+                  type="boolean"
+                  column="IS_ACTIVE" />
+    </class>
+    <query name="com.sehinc.common.db.user.CapUserModule.findByUser">
+        select userModule
+        from com.sehinc.common.db.user.CapUserModule as userModule,
+        com.sehinc.common.db.security.CapModule as module
+        where userModule.userId = :userId and
+        userModule.clientId = :clientId and
+        userModule.isActive = 1 and
+        userModule.moduleId = module.id
+        order by module.orderNum
+    </query>
+    <query name="com.sehinc.common.db.user.CapUserModule.findByUserAndModule">
+        select userModule
+        from com.sehinc.common.db.user.CapUserModule as userModule
+        where userModule.userId = :userId and
+        userModule.clientId = :clientId and
+        userModule.isActive = 1 and
+        userModule.moduleId = :moduleId
+    </query>
+    <query name="com.sehinc.common.db.user.CapUserModule.findByUserIdAndModuleCode">
+        select userModule
+        from com.sehinc.common.db.user.CapUserModule as userModule,
+        com.sehinc.common.db.security.CapModule as module
+        where userModule.userId = :userId and
+        userModule.clientId = :clientId and
+        userModule.isActive = 1 and
+        userModule.moduleId = module.id and
+        module.code = :code
+    </query>
+</hibernate-mapping>

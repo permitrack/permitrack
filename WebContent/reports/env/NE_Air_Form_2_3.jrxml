@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="NE_Air_Form_2_3" pageWidth="550" pageHeight="842" columnWidth="550" leftMargin="0" rightMargin="0" topMargin="10" bottomMargin="10" isTitleNewPage="true">
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<reportFont name="Arial_Normal" isDefault="true" fontName="Arial" size="12" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Bold" isDefault="false" fontName="Arial" size="12" isBold="true" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Italic" isDefault="false" fontName="Arial" size="12" isItalic="true" pdfFontName="Helvetica-Oblique" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Bold_Italic" isDefault="false" fontName="Arial" size="12" isBold="true" isItalic="true" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Small" isDefault="true" fontName="Arial" size="10" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Small_Bold" isDefault="false" fontName="Arial" size="10" isBold="true" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Small_Italic" isDefault="false" fontName="Arial" size="10" isItalic="true" pdfFontName="Helvetica-Oblique" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Small_Bold_Italic" isDefault="false" fontName="Arial" size="10" isBold="true" isItalic="true" pdfFontName="Helvetica-Oblique" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<parameter name="FacilityId" class="java.lang.Integer"/>
+	<parameter name="year" class="java.lang.Integer"/>
+	<parameter name="NE_Air_Form_2_3_Emissions_File" class="java.io.File"/>
+	<parameter name="NE_Air_Form_0_0_Facility_Info_File" class="java.io.File"/>
+	<queryString>
+		<![CDATA[EXEC sp_assets_and_sccs_for_facility_year_ghg @yearInt=$P{year}, @facilityId=$P{FacilityId}]]>
+	</queryString>
+	<field name="ASSET_ID" class="java.lang.Integer"/>
+	<field name="ASSET_NUMBER" class="java.lang.String"/>
+	<field name="ASSET_NAME" class="java.lang.String"/>
+	<field name="PROC_NUM" class="java.lang.String"/>
+	<field name="SCC_ID" class="java.lang.Integer"/>
+	<field name="SCC_NUMBER" class="java.lang.String"/>
+	<field name="SCC_DESCRIPTION" class="java.lang.String"/>
+	<field name="SCC_RAW_MATERIAL" class="java.lang.String"/>
+	<field name="SCC_EMITTING_PROCESS" class="java.lang.String"/>
+	<detail>
+		<band height="241" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="550" height="19"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font reportFont="Arial_Bold"/>
+				</textElement>
+				<text><![CDATA[FORM 2.3 GREENHOUSE GAS EMISSIONS]]></text>
+			</staticText>
+			<subreport>
+				<reportElement x="0" y="19" width="550" height="60"/>
+				<subreportParameter name="year">
+					<subreportParameterExpression><![CDATA[$P{year}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="FacilityId">
+					<subreportParameterExpression><![CDATA[$P{FacilityId}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.io.File"><![CDATA[$P{NE_Air_Form_0_0_Facility_Info_File}]]></subreportExpression>
+			</subreport>
+			<rectangle>
+				<reportElement mode="Transparent" x="312" y="97" width="226" height="37" isRemoveLineWhenBlank="true"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="205" y="194" width="81" height="42"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="420" y="194" width="118" height="42"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="1" y="134" width="211" height="32" isRemoveLineWhenBlank="true"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="2" y="194" width="52" height="42"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="123" y="194" width="82" height="42"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="54" y="194" width="69" height="42"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="212" y="134" width="326" height="32" isRemoveLineWhenBlank="true"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="199" y="97" width="113" height="37" isRemoveLineWhenBlank="true"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="1" y="97" width="198" height="37" isRemoveLineWhenBlank="true"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="286" y="194" width="134" height="42"/>
+			</rectangle>
+			<textField isBlankWhenNull="true">
+				<reportElement x="201" y="119" width="110" height="14" isRemoveLineWhenBlank="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font reportFont="Arial_Small"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{PROC_NUM}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="14" y="151" width="187" height="14" isRemoveLineWhenBlank="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font reportFont="Arial_Small"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{SCC_NUMBER}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="176" width="540" height="19"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font reportFont="Arial_Bold"/>
+				</textElement>
+				<text><![CDATA[Emissions Calculations]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="79" width="540" height="19"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font reportFont="Arial_Bold"/>
+				</textElement>
+				<text><![CDATA[Point Identification]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="123" y="194" width="82" height="42"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font reportFont="Arial_Small_Bold"/>
+				</textElement>
+				<text><![CDATA[Emission Factor (lb/unit) (B)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="54" y="194" width="69" height="42"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font reportFont="Arial_Small_Bold"/>
+				</textElement>
+				<text><![CDATA[Annual Throughput (A)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="420" y="224" width="118" height="12"/>
+				<textElement textAlignment="Center">
+					<font reportFont="Arial_Small_Bold"/>
+				</textElement>
+				<text><![CDATA[ {A x B x C/2000}]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="420" y="194" width="118" height="30"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font reportFont="Arial_Small_Bold"/>
+				</textElement>
+				<text><![CDATA[Actual Emissions (tons/yr)*]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="38" y="118" width="148" height="15"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font reportFont="Arial_Small"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{ASSET_NUMBER}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="14" y="98" width="100" height="20" isRemoveLineWhenBlank="true"/>
+				<textElement verticalAlignment="Middle">
+					<font reportFont="Arial_Small_Bold"/>
+				</textElement>
+				<text><![CDATA[Point No.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="329" y="98" width="100" height="20" isRemoveLineWhenBlank="true"/>
+				<textElement verticalAlignment="Middle">
+					<font reportFont="Arial_Small_Bold"/>
+				</textElement>
+				<text><![CDATA[Point Description]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="205" y="194" width="81" height="42"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font reportFont="Arial_Small_Bold"/>
+				</textElement>
+				<text><![CDATA[Emission Factor Source**]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="205" y="98" width="106" height="20" isRemoveLineWhenBlank="true"/>
+				<textElement verticalAlignment="Middle">
+					<font reportFont="Arial_Small_Bold"/>
+				</textElement>
+				<text><![CDATA[Process Number]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2" y="194" width="52" height="42"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font reportFont="Arial_Small_Bold"/>
+				</textElement>
+				<text><![CDATA[Air Pollutant]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="286" y="194" width="134" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font reportFont="Arial_Small_Bold"/>
+				</textElement>
+				<text><![CDATA[Emission Control (C)]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="214" y="151" width="320" height="14" isRemoveLineWhenBlank="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font reportFont="Arial_Small"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{SCC_DESCRIPTION} + " " + $F{SCC_RAW_MATERIAL} + " " + $F{SCC_EMITTING_PROCESS}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="329" y="118" width="171" height="15" isRemoveLineWhenBlank="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font reportFont="Arial_Small"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{ASSET_NAME}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="286" y="214" width="134" height="22"/>
+				<textElement textAlignment="Center">
+					<font reportFont="Arial_Small_Bold"/>
+				</textElement>
+				<text><![CDATA[(1.0 - Control Efficiency)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="224" y="135" width="100" height="16" isRemoveLineWhenBlank="true"/>
+				<textElement verticalAlignment="Middle">
+					<font reportFont="Arial_Small_Bold"/>
+				</textElement>
+				<text><![CDATA[SCC Description]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="14" y="135" width="172" height="16" isRemoveLineWhenBlank="true"/>
+				<textElement verticalAlignment="Middle">
+					<font reportFont="Arial_Small_Bold"/>
+				</textElement>
+				<text><![CDATA[Source Classification Code (SCC)]]></text>
+			</staticText>
+		</band>
+		<band height="501">
+			<subreport>
+				<reportElement x="0" y="0" width="550" height="501"/>
+				<subreportParameter name="SCC_EMITTING_PROCESS">
+					<subreportParameterExpression><![CDATA[$F{SCC_EMITTING_PROCESS}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="ASSET_NUMBER">
+					<subreportParameterExpression><![CDATA[$F{ASSET_NUMBER}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="year">
+					<subreportParameterExpression><![CDATA[$P{year}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="PROC_NUM">
+					<subreportParameterExpression><![CDATA[$F{PROC_NUM}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="SCC_ID">
+					<subreportParameterExpression><![CDATA[$F{SCC_ID}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="SCC_DESCRIPTION">
+					<subreportParameterExpression><![CDATA[$F{SCC_DESCRIPTION}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="ASSET_NAME">
+					<subreportParameterExpression><![CDATA[$F{ASSET_NAME}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="FacilityId">
+					<subreportParameterExpression><![CDATA[$P{FacilityId}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="SCC_RAW_MATERIAL">
+					<subreportParameterExpression><![CDATA[$F{SCC_RAW_MATERIAL}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="SCC_NUMBER">
+					<subreportParameterExpression><![CDATA[$F{SCC_NUMBER}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="ASSET_ID">
+					<subreportParameterExpression><![CDATA[$F{ASSET_ID}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.io.File"><![CDATA[$P{NE_Air_Form_2_3_Emissions_File}]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+</jasperReport>

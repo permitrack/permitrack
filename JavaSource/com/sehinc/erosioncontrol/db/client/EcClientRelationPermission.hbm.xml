@@ -1,0 +1,40 @@
+<?xml version="1.0"?><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <!--
+            Auto-generated mapping file from
+            the hibernate.org cfg2hbm engine
+    -->
+    <class name="com.sehinc.erosioncontrol.db.client.EcClientRelationPermission"
+           table="EC_CLIENT_RELATIONSHIP_PERMISSION">
+        <id name="id"
+            type="integer">
+            <column name="ID" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="clientType"
+                     class="com.sehinc.common.db.client.CapClientTypeInfo"
+                     column="CAP_CLIENT_TYPE_ID"
+                     lazy="false" />
+        <many-to-one name="clientRelationshipType"
+                     class="com.sehinc.erosioncontrol.db.client.EcClientRelationshipType"
+                     column="EC_CLIENT_RELATIONSHIP_TYPE_ID"
+                     lazy="false" />
+        <many-to-one name="secureObject"
+                     class="com.sehinc.common.db.security.CapSecureObject"
+                     column="CAP_SECURE_OBJECT_ID"
+                     lazy="false" />
+        <many-to-one name="permission"
+                     class="com.sehinc.common.db.security.CapPermission"
+                     column="CAP_PERMISSION_ID"
+                     lazy="false" />
+        <property name="description"
+                  type="string"
+                  column="DESCRIPTION" />
+    </class>
+    <query name="com.sehinc.erosioncontrol.db.client.EcClientRelationPermission.findByClientTypeIdAndRelationshipTypeId">
+        from com.sehinc.erosioncontrol.db.client.EcClientRelationPermission as permission
+        where permission.clientType.id = :clientTypeId and
+        permission.clientRelationshipType.id = :clientRelationshipTypeId
+    </query>
+</hibernate-mapping>

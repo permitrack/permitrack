@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?><!DOCTYPE form-validation PUBLIC
+    "-//Apache Software Foundation//DTD Commons Validator Rules Configuration 1.0//EN"
+    "http://jakarta.apache.org/commons/dtds/validator_1_0.dtd">
+<form-validation>
+    <formset>
+        <form name="SourceForm">
+            <field property="partNumber"
+                   depends="required,maxlength">
+                <arg0 key="source.partNumber" />
+                <arg1 name="maxlength"
+                      key="${var:maxlength}"
+                      resource="false" />
+                <var>
+                    <var-name>maxlength</var-name>
+                    <var-value>50</var-value>
+                </var>
+            </field>
+            <field property="description"
+                   depends="required,maxlength">
+                <arg0 key="source.desc" />
+                <arg1 name="maxlength"
+                      key="${var:maxlength}"
+                      resource="false" />
+                <var>
+                    <var-name>maxlength</var-name>
+                    <var-value>50</var-value>
+                </var>
+            </field>
+            <field property="infoOrigin"
+                   depends="maxlength">
+                <arg0 key="source.info.origin" />
+                <arg1 name="maxlength"
+                      key="${var:maxlength}"
+                      resource="false" />
+                <var>
+                    <var-name>maxlength</var-name>
+                    <var-value>50</var-value>
+                </var>
+            </field>
+            <field property="pctSolidsWeight"
+                   depends="float">
+                <arg0 key="source.pct.solids.weight" />
+            </field>
+            <field property="pctSolidsVolume"
+                   depends="float">
+                <arg0 key="source.pct.solids.volume" />
+            </field>
+            <field property="lbsHaps"
+                   depends="float">
+                <arg0 key="source.lbs.haps" />
+            </field>
+            <field property="density"
+                   depends="float">
+                <arg0 key="source.density" />
+            </field>
+            <field property="lbsVoc"
+                   depends="float">
+                <arg0 key="source.lbs.voc" />
+            </field>
+        </form>
+        <form name="SourceSubstanceForm">
+            <field property="ratio"
+                   depends="float">
+                <arg0 key="source.substance.ratio1" />
+            </field>
+            <field property="natGasEmFactor"
+                   depends="float">
+                <arg0 key="source.substance.ratio2" />
+            </field>
+            <field property="bulkLiqEmFactor"
+                   depends="float">
+                <arg0 key="source.substance.ratio3" />
+            </field>
+        </form>
+        <form name="SourceSccForm">
+            <field property="sccInfoId"
+                   depends="required">
+                <arg0 key="scc.number" />
+            </field>
+        </form>
+    </formset>
+</form-validation>

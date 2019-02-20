@@ -1,0 +1,14 @@
+<!DOCTYPE tiles-definitions PUBLIC
+    "-//Apache Software Foundation//DTD Tiles Configuration 1.3//EN"
+    "http://struts.apache.org/dtds/tiles-config_1_3.dtd">
+<tiles-definitions>
+    <definition name="ev.baseTitledLayout"
+                extends="html.baseTitledLayout">
+        <put name="primaryMenu"
+             value="/html/env/primarynavigation.jsp" />
+        <put name="secondaryMenu"
+             value="/html/env/secondarynavigation.jsp" />
+        <put name="tertiaryMenu"
+             value="/html/env/tertiarynavigation.jsp" />
+    </definition>
+</tiles-definitions>

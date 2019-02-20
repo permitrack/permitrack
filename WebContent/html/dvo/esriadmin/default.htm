@@ -1,0 +1,29 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	<title>Untitled</title>
+</head>
+
+<body bgcolor="#336699" text="White" >
+<script language="JavaScript" type="text/javascript">
+	var hostName = document.location.host;
+	var protocol = document.location.protocol;
+	var cmd = document.location.search;
+	var url = "logincheck.jsp" + cmd;
+	/*
+	if (cmd!="") {
+		if (cmd.indexOf("host=")==-1) {
+			url += "&host=" + hostName;
+		} 
+	} else {
+		url += "?host=" + hostName;
+	}
+	*/
+	document.location=url;
+</script>
+
+</body>
+</html>
+
+

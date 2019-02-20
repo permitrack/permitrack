@@ -1,0 +1,46 @@
+if exists (select * from dbo.sysobjects where id = object_id(N'[dbo].[FK_ENV_PROCESS_ASSET_ENV_PROCESS]') and OBJECTPROPERTY(id, N'IsForeignKey') = 1)
+ALTER TABLE [dbo].[ENV_PROCESS_ASSET] DROP CONSTRAINT FK_ENV_PROCESS_ASSET_ENV_PROCESS
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'[dbo].[FK_ENV_PROCESS_ASSET_ENV_ASSET]') and OBJECTPROPERTY(id, N'IsForeignKey') = 1)
+ALTER TABLE [dbo].[ENV_PROCESS_ASSET] DROP CONSTRAINT FK_ENV_PROCESS_ASSET_ENV_ASSET
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'[dbo].[ENV_PROCESS_ASSET]') and OBJECTPROPERTY(id, N'IsUserTable') = 1)
+drop table [dbo].[ENV_PROCESS_ASSET]
+GO
+
+CREATE TABLE [dbo].[ENV_PROCESS_ASSET] (
+	[ID] [int] IDENTITY (1, 1) NOT NULL ,
+	[PROCESS_ID] [int] NULL ,
+	[ASSET_ID] [int] NULL ,
+	[STATUS_CD] [varchar] (4) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	[ACTIVE_TS] [datetime] NULL ,
+	[INACTIVE_TS] [datetime] NULL ,
+	[CREATE_TS] [datetime] NOT NULL ,
+	[UPDATE_TS] [datetime] NOT NULL ,
+	[UPDATE_USER_ID] [int] NOT NULL 
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[ENV_PROCESS_ASSET] WITH NOCHECK ADD 
+	CONSTRAINT [PK_ENV_PROCESS_ASSET] PRIMARY KEY  CLUSTERED 
+	(
+		[ID]
+	) ON [PRIMARY] 
+GO
+
+ALTER TABLE [dbo].[ENV_PROCESS_ASSET] ADD 
+	CONSTRAINT [FK_ENV_PROCESS_ASSET_ENV_PROCESS] FOREIGN KEY 
+	(
+		[PROCESS_ID]
+	) REFERENCES [dbo].[ENV_PROCESS] (
+		[ID]
+	),
+	CONSTRAINT [FK_ENV_PROCESS_ASSET_ENV_ASSET] FOREIGN KEY 
+	(
+		[ASSET_ID]
+	) REFERENCES [dbo].[ENV_ASSET] (
+		[ID]
+	)
+GO

@@ -1,0 +1,22 @@
+<?xml version="1.0"?><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.sehinc.common.db.user.CapMarkup"
+           table="CAP_MARKUP">
+        <id name="id"
+            type="integer">
+            <column name="ID" />
+            <generator class="identity" />
+        </id>
+        <property name="name"
+                  type="string"
+                  column="NAME" />
+        <property name="markup"
+                  type="string"
+                  column="MARKUP" />
+    </class>
+    <query name="com.sehinc.common.db.user.CapMarkup.byMarkupId">
+        from com.sehinc.common.db.user.CapMarkup as markup
+        where markup.id = :markupId
+    </query>
+</hibernate-mapping>

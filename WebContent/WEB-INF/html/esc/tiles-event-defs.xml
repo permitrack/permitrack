@@ -1,0 +1,61 @@
+<!DOCTYPE tiles-definitions PUBLIC
+    "-//Apache Software Foundation//DTD Tiles Configuration 1.3//EN"
+    "http://struts.apache.org/dtds/tiles-config_1_3.dtd">
+<tiles-definitions>
+    <definition name="event.baseLayout"
+                extends="html.baseLayout">
+        <put name="primaryMenu"
+             value="/html/esc/primarynavigation.jsp" />
+        <put name="secondaryMenu"
+             value="/html/esc/secondarynavigation.jsp" />
+    </definition>
+    <definition name="event.list.tile"
+                extends="event.baseLayout">
+        <put name="title"
+             value="Event List" />
+        <put name="content"
+             value="/html/esc/event/eventList.jsp" />
+    </definition>
+    <definition name="event.create.tile"
+                extends="event.baseLayout">
+        <put name="title"
+             value="Define Event" />
+        <put name="content"
+             value="/html/esc/event/eventCreate.jsp" />
+    </definition>
+    <definition name="event.create.project.search.tile"
+                extends="event.baseLayout">
+        <put name="title"
+             value="Event Project Search" />
+        <put name="content"
+             value="/html/esc/event/eventCreateProjectSearch.jsp" />
+    </definition>
+    <definition name="event.create.project.search.results.tile"
+                extends="event.baseLayout">
+        <put name="title"
+             value="Event Project Search Results" />
+        <put name="content"
+             value="/html/esc/event/eventCreateProjectSearchResults.jsp" />
+    </definition>
+    <definition name="event.created.ack.tile"
+                extends="event.baseLayout">
+        <put name="title"
+             value="Event Acknowledgment" />
+        <put name="content"
+             value="/html/esc/event/eventCreatedAckUI.jsp" />
+    </definition>
+    <definition name="event.compliance.report.tile"
+                extends="event.baseLayout">
+        <put name="title"
+             value="Compliance Report" />
+        <put name="content"
+             value="/html/esc/event/eventComplianceReport.jsp" />
+    </definition>
+    <definition name="event.error.tile"
+                extends="event.baseLayout">
+        <put name="title"
+             value="Event Error" />
+        <put name="errors"
+             value="/html/esc/event/eventErrors.jsp" />
+    </definition>
+</tiles-definitions>

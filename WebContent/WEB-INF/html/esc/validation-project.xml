@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?><!DOCTYPE form-validation PUBLIC
+    "-//Apache Software Foundation//DTD Commons Validator Rules Configuration 1.0//EN"
+    "http://jakarta.apache.org/commons/dtds/validator_1_0.dtd">
+<form-validation>
+    <formset>
+        <form name="projectZoneForm">
+            <field property="name"
+                   depends="required,maxlength">
+                <arg0 key="project.zone.name" />
+                <arg1 name="maxlength"
+                      key="${var:maxlength}"
+                      resource="false" />
+                <var>
+                    <var-name>maxlength</var-name>
+                    <var-value>30</var-value>
+                </var>
+            </field>
+            <field property="description"
+                   depends="maxlength">
+                <arg0 key="project.zone.description" />
+                <arg1 name="maxlength"
+                      key="${var:maxlength}"
+                      resource="false" />
+                <var>
+                    <var-name>maxlength</var-name>
+                    <var-value>200</var-value>
+                </var>
+            </field>
+        </form>
+        <form name="projectTypeForm">
+            <field property="name"
+                   depends="required">
+                <arg0 key="project.type.name" />
+            </field>
+            <field property="description"
+                   depends="maxlength">
+                <arg0 key="project.type.description" />
+                <arg1 name="maxlength"
+                      key="${var:maxlength}"
+                      resource="false" />
+                <var>
+                    <var-name>maxlength</var-name>
+                    <var-value>200</var-value>
+                </var>
+            </field>
+            <field property="endPointTypeId"
+                   depends="required">
+                <arg0 key="project.type.ept" />
+            </field>
+            <field property="extendedOnlineAccessMonths"
+                   depends="required">
+                <arg0 key="project.type.eolam" />
+            </field>
+        </form>
+    </formset>
+</form-validation>

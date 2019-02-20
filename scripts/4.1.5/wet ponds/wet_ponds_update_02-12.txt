@@ -1,0 +1,62 @@
+
+
+insert into element
+(element_id, title, element_type_id, child_element_id, name, 
+data_type, sub_section_id, order_num, 
+required, allow_other, is_child, display_title, size, max_length)
+values
+(293, 'Other ID', 1, null, 'other_pond_id', 'string', 31, 2, 'N', 'N', 'N', 'Y', 40, 50)
+
+insert into element
+(element_id, title, element_type_id, child_element_id, name, 
+data_type, sub_section_id, order_num, 
+required, allow_other, is_child, display_title, size, max_length)
+values
+(294, 'Pond Classification', 1, null, 'pond_classification', 'string', 31, 3, 'N', 'N', 'N', 'Y', 40, 50)
+
+
+
+
+update element
+set order_num = 4
+where element_id = 209
+
+update element
+set order_num = 5
+where element_id = 210
+
+update element
+set order_num = 6
+where element_id = 211
+
+update element
+set order_num = 7
+where element_id = 212
+
+update element
+set order_num = 8
+where element_id = 213
+
+update element
+set order_num = 9
+where element_id = 214
+
+update element
+set order_num = 10
+where element_id = 215
+
+update element
+set order_num = 11
+where element_id = 216
+
+update element
+set order_num = 12
+where element_id = 217
+
+update element
+set order_num = 13
+where element_id = 218
+
+update element
+set order_num = 14
+where element_id = 219

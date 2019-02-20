@@ -1,0 +1,387 @@
+<META HTTP-EQUIV="Pragma"
+      CONTENT="no-cache">
+<META HTTP-EQUIV="CACHE-CONTROL"
+      CONTENT="NO-CACHE">
+<META HTTP-EQUIV="PRAGMAS"
+      CONTENT="NO-CACHE">
+<meta http-equiv="Content-Type"
+      content="text/html; charset=ISO-8859-1">
+<html>
+    <HEAD>
+        <script language="javascript">
+            document.writeln('<LINK rel="stylesheet" type="text/css" href="gis.css" /> ');
+            var t;
+            var t2 = "";
+            if (opener)
+            {
+                t =
+                opener.parent.MapFrame;
+                t2 =
+                "opener.parent.MapFrame";
+            }
+            else
+            {
+                t =
+                parent.MapFrame;
+                t2 =
+                "parent.MapFrame";
+            }
+            var theReply = t.lastXMLResponse;
+            t.myLastParcelSelected =
+            theReply;
+            var theError = t.getXMLErrorMessage(theReply);
+            var fList = "";
+            var lpos1 = 1;
+            var lpos2 = 1;
+            var epos = 1;
+            var spos = 1;
+            var morePoints = true;
+            var moreFeatures = true;
+            var featureCount = t.justGetFeatureCount(theReply);
+            var pos = 0;
+            var startpos = 0;
+            var endpos = t.xmlEndPos;
+            var stillMore = false
+            pos =
+            theReply.indexOf('hasmore="true"',
+                             endpos);
+            if (pos
+                != -1)
+            {
+                stillMore =
+                true;
+            }
+            pos =
+            0;
+            var tempCount = 0;
+            var selectedData = "";
+            var inData = "";
+            var xStr = "";
+            var yStr = "";
+            var tempString = "";
+            var fCount = featureCount;
+            t.selectCount =
+            0;
+            var tempString = "";
+            var theFrame = t2;
+            if (featureCount
+                > 0)
+            {
+                t.newSelectCount +=
+                1;
+                multipleCount =
+                (featureCount
+                    > 1);
+                document.writeln('<title>Query/Select Results</title>');
+                document.writeln('<LINK rel="stylesheet" type="text/css" href="gis.css" />');
+                if (multipleCount)
+                {
+                    //BEGINNING PAGE FOR MORE THAN 1 SELECTION
+                    document.writeln();
+                    document.writeln('</head>');
+                    document.writeln('<body bgcolor="#FFFFFF" TEXT="#0B4657" link="#D47816" vlink="#D47816" alink="#D47816" LEFTMARGIN=0 onload="window.focus()">');
+                    document.writeln('');
+                    if (featureCount
+                        < 50)
+                    {
+                        document.writeln('<center><P class=Table><b>Search Results</b><br>'
+                                             + featureCount
+                                             + ' records returned');
+                    }
+                    else
+                    {
+                        document.writeln('<center><P class=Table><b>Search Results</b><br>More than '
+                                             + featureCount
+                                             + ' records were found. Only the first 50 are displayed below.<br>');
+                    }
+                    if (t.toolMode
+                        != 25)
+                    {
+                        if (t.queryStartRecord
+                            > 1)
+                        {
+                            var prevRecord = t.queryStartRecord
+                                - t.maxFeaturesReturned;
+                            if (prevRecord
+                                < 1)
+                            {
+                                prevRecord =
+                                1;
+                            }
+                            document.write('<a href="javascript:'
+                                               + t2
+                                               + '.getMoreData('
+                                               + prevRecord
+                                               + ')">'
+                                               + t.msgList[61]
+                                               + t.maxFeaturesReturned
+                                               + t.msgList[62]
+                                               + '</a>&nbsp;&nbsp;&nbsp;&nbsp;');
+                        }
+                        if (stillMore)
+                        {
+                            var nextRecord = featureCount
+                                + t.queryStartRecord;
+                            document.writeln('<a href="javascript:'
+                                                 + t2
+                                                 + '.getMoreData('
+                                                 + nextRecord
+                                                 + ')">'
+                                                 + t.msgList[63]
+                                                 + '</a>');
+                        }
+                    }
+                    document.writeln('</center><br><table border=0 width=220 cellspacing="0" cellpadding="2"> ');
+                }
+                else
+                {
+                    //BEGINNING PAGE FOR ONLY 1 SELECTION
+                    //ENTER JAVASCRIPT TO SELECT THE PARCEL
+                    document.writeln('</head>');
+                    document.writeln('<body bgcolor="#FFFFFF" TEXT="#0B4657" link="#D47816" vlink="#D47816" alink="#D47816" onload="window.focus()">');
+                    document.writeln('<P class=bodytitle><b>Attributes:</b><br> ');
+                    document.writeln('<br><table border=0 width=220 cellspacing="0" cellpadding="2"> ');
+                }
+                endpos =
+                1;
+                var theSwitcher = true;
+                var theSepticHeader = false;
+                for (var i = 0; i
+                    < fCount; i++)
+                {
+                    //   if (t.toolMode!=4)
+                    //    {
+                    //       var theXYs = t.getEnvelopeXYs(theReply, endpos)
+                    //      t.selectLeft[t.selectCount] = theXYs[0];
+                    //      t.selectBottom[t.selectCount] = theXYs[1];
+                    //     t.selectRight[t.selectCount] = theXYs[2];
+                    //      t.selectTop[t.selectCount] = theXYs[3];
+                    //     endpos = t.xmlEndPos;
+                    //  }
+                    inData =
+                    t.parseRecordString(theReply,
+                                        endpos);
+                    endpos =
+                    t.xmlEndPos;
+                    //selectedData = clearLeadingSpace(inData);
+                    selectedData =
+                    inData;
+                    epos =
+                    theReply.indexOf("</FEATURE",
+                                     endpos);
+                    var showHyper = false;
+                    if (t.hyperLinkLayers
+                        != null)
+                    {
+                        for (var s1 = 0; s1
+                            < t.hyperLinkLayers.length; s1++)
+                        {
+                            if (t.hyperLinkLayers[s1]
+                                == t.LayerName[t.ActiveLayerIndex])
+                            {
+                                showHyper =
+                                true;
+                            }
+                        }
+                    }
+                    var fName1 = t.getFieldNames(selectedData);
+                    var fValue1 = t.getFieldValues(selectedData);
+                    t.selectPoints[t.selectCount] =
+                    t.getIdValue(fName1,
+                                 fValue1);
+                    var idFieldNum = -1;
+                    var shapeFieldNum = -1;
+                    if (theSwitcher)
+                    {
+                        document.writeln('<table width="100%" border="0" cellspacing="0" cellpadding="0" bgcolor="#D8E6FE">');
+                        theSwitcher =
+                        false;
+                    }
+                    else
+                    {
+                        document.writeln('<table width="100%" border="0" cellspacing="0" cellpadding="0" bgcolor="white">');
+                        theSwitcher =
+                        true;
+                    }
+                    for (var f = 0; f
+                        < fName1.length; f++)
+                    {
+                        {
+                            if ((fName1[f]
+                                != "SHAPE")
+                                && (fName1[f]
+                                != "#SHAPE#"))
+                            {
+                                document.writeln('				<tr>');
+                                document.writeln('					<td width=220 class="table" nowrap><b> '
+                                                     + fName1[f]
+                                                     + '</b>');
+                                document.writeln('					'
+                                                     + fValue1[f]
+                                                     + '</td>');
+                                document.writeln('				</tr>');
+                            }
+                        }
+                    }
+                    fName1 =
+                    null;
+                    fValue1 =
+                    null;
+                    t.selectCount +=
+                    1;
+                } //End For
+                document.writeln('</table><FONT FACE="Arial" SIZE="-2">');
+                if (t.toolMode
+                    != 25)
+                {
+                    if (t.queryStartRecord
+                        > 1)
+                    {
+                        var prevRecord = t.queryStartRecord
+                            - t.maxFeaturesReturned;
+                        if (prevRecord
+                            < 1)
+                        {
+                            prevRecord =
+                            1;
+                        }
+                        document.write('<a href="javascript:'
+                                           + t2
+                                           + '.getMoreData('
+                                           + prevRecord
+                                           + ')">'
+                                           + t.msgList[61]
+                                           + t.maxFeaturesReturned
+                                           + t.msgList[62]
+                                           + '</a>&nbsp;&nbsp;&nbsp;');
+                    }
+                    if (stillMore)
+                    {
+                        var nextRecord = featureCount
+                            + t.queryStartRecord;
+                        document.writeln('<a href="javascript:'
+                                             + t2
+                                             + '.getMoreData('
+                                             + nextRecord
+                                             + ')">'
+                                             + t.msgList[63]
+                                             + '</a>');
+                    }
+                }
+                if ((t.toolMode
+                    != 4)
+                    && (t.toolMode
+                    != 25)) //(t.queryStartRecord==1) &&
+                {
+                    if ((t.selectCount
+                        == 1)
+                        && (t.zoomToSingleSelect))
+                    {
+                        var fWidth = t.selectRight[0]
+                            - t.selectLeft[0];
+                        var fHeight = t.selectTop[0]
+                            - t.selectBottom[0];
+                        var mWMargin = 0;
+                        var mHMargin = 0;
+                        if (t.selectType
+                            == "point")
+                        {
+                            mWMargin =
+                            t.fullWidth
+                                * t.selectPointMargin;
+                            mHMargin =
+                            t.fullHeight
+                                * t.selectPointMargin;
+                            if (mWMargin
+                                > t.xDistance
+                                / 2)
+                            {
+                                mWMargin =
+                                t.xDistance
+                                    / 2;
+                                mHMargin =
+                                t.yDistance
+                                    / 2;
+                            }
+                        }
+                        else
+                        {
+                            mWMargin =
+                            fWidth
+                                * t.selectMargin;
+                            mHMargin =
+                            fHeight
+                                * t.selectMargin;
+                        }
+                        t.saveLastExtent();
+                        t.eLeft =
+                        t.selectLeft[0]
+                            - mWMargin;
+                        t.eRight =
+                        t.selectRight[0]
+                            + mWMargin;
+                        t.eTop =
+                        t.selectTop[0]
+                            + mHMargin;
+                        t.eBottom =
+                        t.selectBottom[0]
+                            - mHMargin;
+                    }
+                    //t.sendMapXML();
+                }
+                t.sendMapXML();
+            }
+            else
+            {
+                //No records found - Give them a blank frame
+                document.writeln('	<title>'
+                                     + t.titleList[8]
+                                     + '</title>');
+                document.writeln('</head>');
+                document.writeln('<body BGCOLOR="White" TEXT="Black" LEFTMARGIN=0 TOPMARGIN=0>');
+                document.writeln('<FONT FACE="Arial"><B>'
+                                     + t.LayerName[t.ActiveLayerIndex]
+                                     + '</B></font><FONT FACE="Arial" size="-2">');
+                document.writeln('<br>'
+                                     + t.msgList[64]);
+                //If Debugging Turned On - Show the Error
+                if (t.debugOn
+                    > 0)
+                {
+                    document.writeln('<p>'
+                                         + t.msgList[65]
+                                         + '<br>');
+                    document.writeln(untag(theReply));
+                }
+                else
+                {
+                    if (theError
+                        != "")
+                    {
+                        document.writeln('<p>'
+                                             + t.msgList[66]
+                                             + '<br>');
+                        document.writeln(theError);
+                    }
+                }
+                document.writeln('</FONT>');
+                document.writeln('</body>');
+            }
+            if (t.toolMode
+                == 4)
+            {
+                t.selectCount =
+                0;
+            }
+            t.hideRetrieveData();
+            parent.SwitchFrame.newIMS.IMSopt.selectedIndex =
+            0;
+        </script>
+    </head>
+    <br>
+    <br>
+    <input style="width:15em;"
+           type="button"
+           value="View Map Layers"
+           onclick="parent.MapFrame.clickFunction('toc');">
+</html>

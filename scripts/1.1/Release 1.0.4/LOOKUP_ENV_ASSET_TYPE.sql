@@ -1,0 +1,6 @@
+if exists (select * from dbo.sysobjects where id = object_id(N'[dbo].[FK_ENV_ASSET_TYPE_LOOKUP_ENV_ASSET_TYPE1]') and OBJECTPROPERTY(id, N'IsForeignKey') = 1)
+ALTER TABLE [dbo].[ENV_ASSET_TYPE] DROP CONSTRAINT FK_ENV_ASSET_TYPE_LOOKUP_ENV_ASSET_TYPE1
+GO
+
+
+DELETE FROM LOOKUP_ENV_ASSET_TYPE WHERE code in (4,5);

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="NE_Air_Form_1_1_Process" pageWidth="540" pageHeight="842" columnWidth="540" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<reportFont name="Arial_Normal" isDefault="true" fontName="Arial" size="12" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Bold" isDefault="false" fontName="Arial" size="12" isBold="true" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Italic" isDefault="false" fontName="Arial" size="12" isItalic="true" pdfFontName="Helvetica-Oblique" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Bold_Italic" isDefault="false" fontName="Arial" size="12" isBold="true" isItalic="true" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Small" isDefault="true" fontName="Arial" size="10" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Small_Bold" isDefault="false" fontName="Arial" size="10" isBold="true" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Small_Italic" isDefault="false" fontName="Arial" size="10" isItalic="true" pdfFontName="Helvetica-Oblique" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Small_Bold_Italic" isDefault="false" fontName="Arial" size="10" isBold="true" isItalic="true" pdfFontName="Helvetica-Oblique" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<parameter name="ID" class="java.lang.Integer"/>
+	<parameter name="PROCESS_NUMBER" class="java.lang.String"/>
+	<parameter name="NAME" class="java.lang.String"/>
+	<parameter name="DESCRIPTION" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT
+PRC.ID AS PRC_SUB_ID, PRC.PROCESS_NUMBER, PRC.NAME AS PRC_NAME,
+PRC.DESCRIPTION AS PRC_DESC,
+ASS.ID AS ASSET_ID, ASS.NAME AS ASSET_NAME, ASS.NUMBER AS ASSET_NUM, CONTROLS.ADDL_INFO
+FROM ENV_PROCESS AS PRC
+LEFT JOIN ENV_PROCESS_ASSET AS PASS ON PASS.PROCESS_ID = PRC.ID
+LEFT JOIN ENV_ASSET AS ASS ON ASS.ID = PASS.ASSET_ID
+LEFT JOIN ENV_ASSET_EMITTED_SUBSTANCE_TYPE AS CONTROLS
+ON CONTROLS.ASSET_ID = ASS.ID
+WHERE PARENT_PROCESS_ID = $P{ID}
+AND PASS.STATUS_CD = 1
+ORDER BY PROCESS_NUMBER]]>
+	</queryString>
+	<field name="PRC_SUB_ID" class="java.lang.Integer"/>
+	<field name="PROCESS_NUMBER" class="java.lang.String"/>
+	<field name="PRC_NAME" class="java.lang.String"/>
+	<field name="PRC_DESC" class="java.lang.String"/>
+	<field name="ASSET_ID" class="java.lang.Integer"/>
+	<field name="ASSET_NAME" class="java.lang.String"/>
+	<field name="ASSET_NUM" class="java.lang.String"/>
+	<field name="ADDL_INFO" class="java.lang.String"/>
+	<group name="SUB_PROC_GROUP">
+		<groupExpression><![CDATA[$F{PRC_SUB_ID}]]></groupExpression>
+		<groupHeader>
+			<band height="15" splitType="Stretch">
+				<textField>
+					<reportElement x="56" y="0" width="30" height="15"/>
+					<textElement verticalAlignment="Top">
+						<font reportFont="Arial_Small_Bold"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{PROCESS_NUMBER}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="86" y="0" width="269" height="15"/>
+					<textElement>
+						<font reportFont="Arial_Small"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{PRC_DESC} + " " + $F{ASSET_NUM} + " " + $F{ASSET_NAME}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="355" y="0" width="185" height="15"/>
+					<textElement>
+						<font reportFont="Arial_Small"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{ADDL_INFO}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+	</group>
+	<columnHeader>
+		<band height="15" splitType="Stretch">
+			<staticText>
+				<reportElement x="41" y="0" width="314" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font reportFont="Arial_Small_Bold"/>
+				</textElement>
+				<text><![CDATA[Process Numbers]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="355" y="0" width="185" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font reportFont="Arial_Small_Bold"/>
+				</textElement>
+				<text><![CDATA[Control Devices]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<columnFooter>
+		<band height="5" splitType="Stretch"/>
+	</columnFooter>
+</jasperReport>

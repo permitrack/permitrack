@@ -1,0 +1,547 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="NE_Air_Form_1_0_Subreport" pageWidth="540" pageHeight="280" columnWidth="540" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<reportFont name="Arial_Normal" isDefault="true" fontName="Arial" size="12" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Bold" isDefault="false" fontName="Arial" size="12" isBold="true" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Italic" isDefault="false" fontName="Arial" size="12" isItalic="true" pdfFontName="Helvetica-Oblique" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Bold_Italic" isDefault="false" fontName="Arial" size="12" isBold="true" isItalic="true" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Small" isDefault="true" fontName="Arial" size="10" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Small_Bold" isDefault="false" fontName="Arial" size="10" isBold="true" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Small_Italic" isDefault="false" fontName="Arial" size="10" isItalic="true" pdfFontName="Helvetica-Oblique" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Small_Bold_Italic" isDefault="false" fontName="Arial" size="10" isBold="true" isItalic="true" pdfFontName="Helvetica-Oblique" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<parameter name="FacilityId" class="java.lang.Integer"/>
+	<parameter name="year" class="java.lang.Integer"/>
+	<parameter name="clientId" class="java.lang.Integer"/>
+	<queryString>
+		<![CDATA[EXEC sp_form_12_grand_total @yearInt=$P{year}, @facilityId=$P{FacilityId}, @clientId=$P{clientId}]]>
+	</queryString>
+	<field name="CO" class="java.math.BigDecimal"/>
+	<field name="NH3" class="java.math.BigDecimal"/>
+	<field name="NOX" class="java.math.BigDecimal"/>
+	<field name="LEADS" class="java.math.BigDecimal"/>
+	<field name="PM10" class="java.math.BigDecimal"/>
+	<field name="PM2_5" class="java.math.BigDecimal"/>
+	<field name="SOX" class="java.math.BigDecimal"/>
+	<field name="VOC" class="java.math.BigDecimal"/>
+	<field name="GREATEST_HAP" class="java.math.BigDecimal"/>
+	<field name="OTHER_HAPS" class="java.math.BigDecimal"/>
+	<field name="VOCnoHAPS" class="java.math.BigDecimal"/>
+	<field name="CH4" class="java.math.BigDecimal"/>
+	<field name="CO2" class="java.math.BigDecimal"/>
+	<field name="N2O" class="java.math.BigDecimal"/>
+	<title>
+		<band height="265" splitType="Stretch">
+			<rectangle>
+				<reportElement mode="Transparent" x="0" y="18" width="54" height="26"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="54" y="18" width="54" height="26"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="108" y="18" width="54" height="26"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="162" y="18" width="54" height="26"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="216" y="18" width="54" height="26"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="270" y="18" width="54" height="26"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="324" y="18" width="54" height="26"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="378" y="18" width="54" height="26"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="432" y="18" width="54" height="26"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="486" y="18" width="53" height="26"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="486" y="44" width="53" height="42"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="162" y="44" width="54" height="42"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="432" y="44" width="54" height="42"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="324" y="44" width="54" height="42"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="270" y="44" width="54" height="42"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="54" y="44" width="54" height="42"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="378" y="44" width="54" height="42"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="0" y="44" width="54" height="42"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="216" y="44" width="54" height="42"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="108" y="44" width="54" height="42"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="432" y="195" width="54" height="26"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="378" y="195" width="54" height="26"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="270" y="195" width="54" height="26"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="0" y="195" width="54" height="26"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="54" y="195" width="54" height="26"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="324" y="195" width="54" height="26"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="486" y="195" width="53" height="26"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="162" y="195" width="54" height="26"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="216" y="195" width="54" height="26"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="108" y="195" width="54" height="26"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Opaque" x="54" y="221" width="54" height="42" backcolor="#CCCCCC"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="108" y="221" width="54" height="42"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Opaque" x="0" y="221" width="54" height="42" backcolor="#CCCCCC"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="216" y="221" width="54" height="42"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="162" y="221" width="54" height="42"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="432" y="221" width="54" height="42"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="378" y="221" width="54" height="42"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="486" y="221" width="53" height="42"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Opaque" x="270" y="221" width="54" height="42" backcolor="#CCCCCC"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="324" y="221" width="54" height="42"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="18" width="54" height="26"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font reportFont="Arial_Small_Bold" size="9"/>
+				</textElement>
+				<text><![CDATA[CO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="54" y="18" width="54" height="26"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font reportFont="Arial_Small_Bold" size="9"/>
+				</textElement>
+				<text><![CDATA[NH3]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="108" y="18" width="54" height="26"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font reportFont="Arial_Small_Bold" size="9"/>
+				</textElement>
+				<text><![CDATA[NOx]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="162" y="18" width="54" height="26"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font reportFont="Arial_Small_Bold" size="9"/>
+				</textElement>
+				<text><![CDATA[Lead]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="216" y="18" width="54" height="26"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font reportFont="Arial_Small_Bold" size="9"/>
+				</textElement>
+				<text><![CDATA[PM10]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="270" y="18" width="54" height="26"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font reportFont="Arial_Small_Bold" size="9"/>
+				</textElement>
+				<text><![CDATA[PM2.5]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="324" y="18" width="54" height="26"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font reportFont="Arial_Small_Bold" size="9"/>
+				</textElement>
+				<text><![CDATA[SOx]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="378" y="18" width="54" height="26"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font reportFont="Arial_Small_Bold" size="9"/>
+				</textElement>
+				<text><![CDATA[VOC]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="432" y="18" width="54" height="26"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font reportFont="Arial_Small_Bold" size="9"/>
+				</textElement>
+				<text><![CDATA[Greatest Single HAP]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="486" y="18" width="53" height="26"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font reportFont="Arial_Small_Bold" size="9"/>
+				</textElement>
+				<text><![CDATA[Other HAPs]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="3" width="539" height="15"/>
+				<textElement textAlignment="Center">
+					<font reportFont="Arial_Small_Bold"/>
+				</textElement>
+				<text><![CDATA[Total Plant Emissions (Tons Per Year)]]></text>
+			</staticText>
+			<textField pattern="###0.00">
+				<reportElement x="0" y="44" width="54" height="42"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{CO}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00">
+				<reportElement x="54" y="44" width="54" height="42"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{NH3}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00">
+				<reportElement x="108" y="44" width="54" height="42"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{NOX}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00">
+				<reportElement x="162" y="44" width="54" height="42"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{LEADS}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00">
+				<reportElement x="216" y="44" width="54" height="42"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{PM10}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00">
+				<reportElement x="270" y="44" width="54" height="42"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{PM2_5}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00">
+				<reportElement x="324" y="44" width="54" height="42"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{SOX}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00">
+				<reportElement x="378" y="44" width="54" height="42"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{VOC}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00">
+				<reportElement x="432" y="44" width="54" height="42"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{GREATEST_HAP}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00">
+				<reportElement x="486" y="44" width="53" height="42"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{OTHER_HAPS}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="180" width="539" height="15"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font reportFont="Arial_Small_Bold"/>
+				</textElement>
+				<text><![CDATA[Chargeable Emissions (Tons)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="54" y="195" width="54" height="26"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font reportFont="Arial_Small_Bold" size="9"/>
+				</textElement>
+				<text><![CDATA[NH3]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="486" y="195" width="53" height="26"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font reportFont="Arial_Small_Bold" size="9"/>
+				</textElement>
+				<text><![CDATA[Other HAPs]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="216" y="195" width="54" height="26"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font reportFont="Arial_Small_Bold" size="9"/>
+				</textElement>
+				<text><![CDATA[PM10]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="378" y="195" width="54" height="26"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font reportFont="Arial_Small_Bold" size="9"/>
+				</textElement>
+				<text><![CDATA[VOC]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="270" y="195" width="54" height="26"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font reportFont="Arial_Small_Bold" size="9"/>
+				</textElement>
+				<text><![CDATA[PM2.5]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="195" width="54" height="26"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font reportFont="Arial_Small_Bold" size="9"/>
+				</textElement>
+				<text><![CDATA[CO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="108" y="195" width="54" height="26"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font reportFont="Arial_Small_Bold" size="9"/>
+				</textElement>
+				<text><![CDATA[NOx]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="162" y="195" width="54" height="26"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font reportFont="Arial_Small_Bold" size="9"/>
+				</textElement>
+				<text><![CDATA[Lead]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="324" y="195" width="54" height="26"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font reportFont="Arial_Small_Bold" size="9"/>
+				</textElement>
+				<text><![CDATA[SOx]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="432" y="195" width="54" height="26"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font reportFont="Arial_Small_Bold" size="9"/>
+				</textElement>
+				<text><![CDATA[Greatest Single HAP]]></text>
+			</staticText>
+			<textField pattern="###0.00">
+				<reportElement x="378" y="221" width="54" height="42"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{VOCnoHAPS}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00">
+				<reportElement x="162" y="221" width="54" height="42"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{LEADS}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="221" width="54" height="42"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[NO FEES]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="54" y="221" width="54" height="42"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[NO FEES]]></text>
+			</staticText>
+			<textField pattern="###0.00">
+				<reportElement x="108" y="221" width="54" height="42"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{NOX}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00">
+				<reportElement x="432" y="221" width="54" height="42"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{GREATEST_HAP}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="270" y="221" width="54" height="42"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[NO FEES]]></text>
+			</staticText>
+			<textField pattern="###0.00">
+				<reportElement x="486" y="221" width="53" height="42"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{OTHER_HAPS}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00">
+				<reportElement x="216" y="221" width="54" height="42"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{PM10}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00">
+				<reportElement x="324" y="221" width="54" height="42"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{SOX}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="323" y="107" width="54" height="26"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font reportFont="Arial_Small_Bold" size="9"/>
+				</textElement>
+				<text><![CDATA[HFCs]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement mode="Transparent" x="323" y="107" width="54" height="26"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="377" y="107" width="54" height="26"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="107" y="107" width="54" height="26"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font reportFont="Arial_Small_Bold" size="9"/>
+				</textElement>
+				<text><![CDATA[CO2]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="269" y="107" width="54" height="26"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font reportFont="Arial_Small_Bold" size="9"/>
+				</textElement>
+				<text><![CDATA[PFCs]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement mode="Transparent" x="107" y="107" width="54" height="26"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="269" y="107" width="54" height="26"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="269" y="133" width="54" height="42"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="215" y="133" width="54" height="42"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="215" y="107" width="54" height="26"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font reportFont="Arial_Small_Bold" size="9"/>
+				</textElement>
+				<text><![CDATA[CH4]]></text>
+			</staticText>
+			<textField pattern="###0.00">
+				<reportElement x="323" y="133" width="54" height="42"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement mode="Transparent" x="323" y="133" width="54" height="42"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="107" y="92" width="324" height="15"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font reportFont="Arial_Small_Bold"/>
+				</textElement>
+				<text><![CDATA[Total Plant Greenhouse Gas Emissions (Tons Per Year)]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement mode="Opaque" x="377" y="133" width="54" height="42" backcolor="#CCCCCC"/>
+			</rectangle>
+			<textField pattern="###0.00">
+				<reportElement x="269" y="133" width="54" height="42"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="161" y="107" width="54" height="26"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font reportFont="Arial_Small_Bold" size="9"/>
+				</textElement>
+				<text><![CDATA[N2O]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement mode="Opaque" x="269" y="133" width="54" height="42" backcolor="#CCCCCC"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="215" y="107" width="54" height="26"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Opaque" x="323" y="133" width="54" height="42" backcolor="#CCCCCC"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="377" y="107" width="54" height="26"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font reportFont="Arial_Small_Bold" size="9"/>
+				</textElement>
+				<text><![CDATA[SF6]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="377" y="134" width="54" height="42"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement mode="Transparent" x="161" y="107" width="54" height="26"/>
+			</rectangle>
+			<textField pattern="###0.00" isBlankWhenNull="true">
+				<reportElement x="215" y="133" width="54" height="42"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{CH4}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00" isBlankWhenNull="true">
+				<reportElement x="161" y="133" width="54" height="42"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{N2O}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00" isBlankWhenNull="true">
+				<reportElement x="107" y="133" width="54" height="42"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{CO2}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+</jasperReport>

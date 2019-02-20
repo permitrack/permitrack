@@ -1,0 +1,620 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+    <HEAD>
+        <TITLE>Toolbar</TITLE>
+        <META http-equiv=Pragma
+              content=no-cache>
+        <META http-equiv=CACHE-CONTROL
+              content=NO-CACHE>
+        <META http-equiv=PRAGMAS
+              content=NO-CACHE>
+        <META http-equiv=Content-Type
+              content="text/html; charset=iso-8859-1">
+        <META content="MSHTML 6.00.2800.1226"
+              name=GENERATOR>
+        <SCRIPT language=JAVASCRIPT>
+            function revertToolPic(lastMode)   // reset tool icons
+            {
+                if (parent.MapFrame.useZoomIn)
+                {
+                    document.zoomin.src =
+                    "./toolbar/inup.gif";
+                }
+                if (parent.MapFrame.useZoomOut)
+                {
+                    document.zoomout.src =
+                    "./toolbar/outup.gif";
+                }
+                if (parent.MapFrame.usePan)
+                {
+                    document.pan.src =
+                    "./toolbar/panup.gif";
+                }
+                if (parent.MapFrame.useMeasure)
+                {
+                    document.measure.src =
+                    "./toolbar/lineup.gif";
+                }
+                if (parent.MapFrame.useIdentify)
+                {
+                    document.identify.src =
+                    "./toolbar/infoup.gif";
+                }
+                if (parent.MapFrame.useSelect)
+                {
+                    document.select.src =
+                    "./toolbar/selectup.gif";
+                }
+                document.adhoc.src =
+                "./toolbar/queryup.gif";
+                document.link.src =
+                "./toolbar/attached_filesup.gif";
+                document.buffer.src =
+                "./toolbar/bufferup.gif";
+            }
+            function hideLinkButton()
+            {
+                document.getElementById('linkButton').style.display =
+                "none";
+            }
+            function showLinkButton()
+            {
+                document.getElementById('linkButton').style.display =
+                "block";
+            }
+            function UpdateIcon(fName, tMode)
+            {
+                if (tMode
+                    == "on")
+                {
+                    revertToolPic(parent.MapFrame.modeName);
+                }
+                switch (fName)
+                {
+                    case "Hyperlink" :
+                        if ((tMode
+                            == "over")
+                            && (fName
+                            != parent.MapFrame.modeName))
+                        {
+                            document.link.src =
+                            "./toolbar/attached_filesover.gif";
+                        }
+                        if ((tMode
+                            == "out")
+                            && (fName
+                            != parent.MapFrame.modeName))
+                        {
+                            document.link.src =
+                            "./toolbar/attached_filesup.gif";
+                        }
+                        if (tMode
+                            == "on")
+                        {
+                            document.link.src =
+                            "./toolbar/attached_filesdown.gif";
+                        }
+                        if (tMode
+                            == "off")
+                        {
+                            document.link.src =
+                            "./toolbar/attached_filesup.gif";
+                        }
+                        break;
+                    case "Select Point" :
+                        if ((tMode
+                            == "over")
+                            && (fName
+                            != parent.MapFrame.modeName))
+                        {
+                            document.identify.src =
+                            "./toolbar/infoover.gif";
+                        }
+                        if ((tMode
+                            == "out")
+                            && (fName
+                            != parent.MapFrame.modeName))
+                        {
+                            document.identify.src =
+                            "./toolbar/infoup.gif";
+                        }
+                        if (tMode
+                            == "on")
+                        {
+                            document.identify.src =
+                            "./toolbar/infodown.gif";
+                        }
+                        if (tMode
+                            == "off")
+                        {
+                            document.identify.src =
+                            "./toolbar/infoup.gif";
+                        }
+                        break;
+                    case "Zoom In" :
+                        if ((tMode
+                            == "over")
+                            && (fName
+                            != parent.MapFrame.modeName))
+                        {
+                            document.zoomin.src =
+                            "./toolbar/inover.gif";
+                        }
+                        if ((tMode
+                            == "out")
+                            && (fName
+                            != parent.MapFrame.modeName))
+                        {
+                            document.zoomin.src =
+                            "./toolbar/inup.gif";
+                        }
+                        if (tMode
+                            == "on")
+                        {
+                            document.zoomin.src =
+                            "./toolbar/indown.gif";
+                        }
+                        if (tMode
+                            == "off")
+                        {
+                            document.zoomin.src =
+                            "./toolbar/inup.gif";
+                        }
+                        break;
+                    case "Zoom Out" :
+                        if ((tMode
+                            == "over")
+                            && (fName
+                            != parent.MapFrame.modeName))
+                        {
+                            document.zoomout.src =
+                            "./toolbar/outover.gif";
+                        }
+                        if ((tMode
+                            == "out")
+                            && (fName
+                            != parent.MapFrame.modeName))
+                        {
+                            document.zoomout.src =
+                            "./toolbar/outup.gif";
+                        }
+                        if (tMode
+                            == "on")
+                        {
+                            document.zoomout.src =
+                            "./toolbar/outdown.gif";
+                        }
+                        if (tMode
+                            == "off")
+                        {
+                            document.zoomout.src =
+                            "./toolbar/outup.gif";
+                        }
+                        break;
+                    case "Select Rectangle" :
+                        if ((tMode
+                            == "over")
+                            && (fName
+                            != parent.MapFrame.modeName))
+                        {
+                            document.select.src =
+                            "./toolbar/selectover.gif";
+                        }
+                        if ((tMode
+                            == "out")
+                            && (fName
+                            != parent.MapFrame.modeName))
+                        {
+                            document.select.src =
+                            "./toolbar/selectup.gif";
+                        }
+                        if (tMode
+                            == "on")
+                        {
+                            document.select.src =
+                            "./toolbar/selectdown.gif";
+                        }
+                        if (tMode
+                            == "off")
+                        {
+                            document.select.src =
+                            "./toolbar/selectup.gif";
+                        }
+                        break;
+                    case "Pan" :
+                        if ((tMode
+                            == "over")
+                            && (fName
+                            != parent.MapFrame.modeName))
+                        {
+                            document.pan.src =
+                            "./toolbar/panover.gif";
+                        }
+                        if ((tMode
+                            == "out")
+                            && (fName
+                            != parent.MapFrame.modeName))
+                        {
+                            document.pan.src =
+                            "./toolbar/panup.gif";
+                        }
+                        if (tMode
+                            == "on")
+                        {
+                            document.pan.src =
+                            "./toolbar/pandown.gif";
+                        }
+                        if (tMode
+                            == "off")
+                        {
+                            document.pan.src =
+                            "./toolbar/panup.gif";
+                        }
+                        break;
+                    case "Measure" :
+                        if ((tMode
+                            == "over")
+                            && (fName
+                            != parent.MapFrame.modeName))
+                        {
+                            document.measure.src =
+                            "./toolbar/lineover.gif";
+                        }
+                        if ((tMode
+                            == "out")
+                            && (fName
+                            != parent.MapFrame.modeName))
+                        {
+                            document.measure.src =
+                            "./toolbar/lineup.gif";
+                        }
+                        if (tMode
+                            == "on")
+                        {
+                            document.measure.src =
+                            "./toolbar/linedown.gif";
+                        }
+                        if (tMode
+                            == "off")
+                        {
+                            document.measure.src =
+                            "./toolbar/lineup.gif";
+                        }
+                        break;
+                    case "Location" :
+                        if (tMode
+                            == "over")
+                        {
+                            document.refmap.src =
+                            "./toolbar/locationover.gif";
+                        }
+                        if (tMode
+                            == "out")
+                        {
+                            document.refmap.src =
+                            "./toolbar/locationup.gif";
+                        }
+                        break;
+                    case "Full" :
+                        if (tMode
+                            == "over")
+                        {
+                            document.zoomfull.src =
+                            "./toolbar/allover.gif";
+                        }
+                        if (tMode
+                            == "out")
+                        {
+                            document.zoomfull.src =
+                            "./toolbar/allup.gif";
+                        }
+                        break;
+                    case "Last" :
+                        if (tMode
+                            == "over")
+                        {
+                            document.zoomlast.src =
+                            "./toolbar/backover.gif";
+                        }
+                        if (tMode
+                            == "out")
+                        {
+                            document.zoomlast.src =
+                            "./toolbar/backup.gif";
+                        }
+                        break;
+                    case "Print" :
+                        if (tMode
+                            == "over")
+                        {
+                            document.printing.src =
+                            "./toolbar/printover.gif";
+                        }
+                        if (tMode
+                            == "out")
+                        {
+                            document.printing.src =
+                            "./toolbar/printup.gif";
+                        }
+                        if (tMode
+                            == "on")
+                        {
+                            document.printing.src =
+                            "./toolbar/printdown.gif";
+                        }
+                        break;
+                    case "Clear" :
+                        if (tMode
+                            == "over")
+                        {
+                            document.clear.src =
+                            "./toolbar/deselectover.gif";
+                        }
+                        if (tMode
+                            == "out")
+                        {
+                            document.clear.src =
+                            "./toolbar/deselectup.gif";
+                        }
+                        break;
+                    case "Mailing" :
+                        if (tMode
+                            == "over")
+                        {
+                            document.mailing.src =
+                            "./toolbar/mailing_labelsover.gif";
+                        }
+                        if (tMode
+                            == "out")
+                        {
+                            document.mailing.src =
+                            "./toolbar/mailing_labelsup.gif";
+                        }
+                        if (tMode
+                            == "on")
+                        {
+                            document.mailing.src =
+                            "./toolbar/mailing_labelsdown.gif";
+                        }
+                        break;
+                    case "Buffer" :
+                        if (tMode
+                            == "over")
+                        {
+                            document.buffer.src =
+                            "./toolbar/bufferover.gif";
+                        }
+                        if (tMode
+                            == "out")
+                        {
+                            document.buffer.src =
+                            "./toolbar/bufferup.gif";
+                        }
+                        if (tMode
+                            == "on")
+                        {
+                            document.buffer.src =
+                            "./toolbar/bufferdown.gif";
+                        }
+                        break;
+                    case "Adhoc" :
+                        if (tMode
+                            == "over")
+                        {
+                            document.adhoc.src =
+                            "./toolbar/queryover.gif";
+                        }
+                        if (tMode
+                            == "out")
+                        {
+                            document.adhoc.src =
+                            "./toolbar/queryup.gif";
+                        }
+                        if (tMode
+                            == "on")
+                        {
+                            document.adhoc.src =
+                            "./toolbar/querydown.gif";
+                        }
+                        break;
+                    default : //alert("nothing");
+                }
+            }
+        </SCRIPT>
+        <LINK href="gis.css"
+              type=text/css
+              rel=stylesheet>
+    </HEAD>
+    <BODY bgColor=#ffffff>
+        <DIV id=overDiv
+             style="Z-INDEX: 1000; VISIBILITY: hidden; POSITION: absolute"></DIV>
+        <SCRIPT language=JavaScript
+                src="javascript/overlib.js"></SCRIPT>
+        <TABLE cellSpacing=0
+               cellPadding=0
+               border=0>
+            <TBODY>
+                <TR>
+                    <TD>
+                        <TABLE borderColor=#999999
+                               cellSpacing=0
+                               cols=15
+                               cellPadding=0
+                               width=364
+                               height=32
+                               bgColor=#ffffff
+                               border=1>
+                            <TBODY>
+                                <TR>
+                                    <TD>
+                                        <IMG onmousedown=parent.MapFrame.toggleOVMap();
+                                             onmouseover="UpdateIcon('Location','over'); src='./toolbar/locationover.gif'; return overlib('Turn Location Map On/Off',WIDTH,'152',FGCOLOR, '#eeeeee',BGCOLOR, '#004454', RIGHT, ABOVE, SNAPX, 10, SNAPY, 10); "
+                                             onmouseout="UpdateIcon('Location','out'); return nd();"
+                                             height=32
+                                             src="./toolbar/locationup.gif"
+                                             width=32
+                                             border=0
+                                             name=refmap>
+                                    </TD>
+                                    <TD>
+                                        <IMG
+                                            onmousedown="parent.MapFrame.clickFunction('selectpoint'); UpdateIcon('Select Point','on');"
+                                            onmouseover="UpdateIcon('Select Point','over'); return overlib('Get Info',WIDTH,'52', FGCOLOR, '#eeeeee',BGCOLOR, '#004454', RIGHT, ABOVE, SNAPX, 10, SNAPY, 10);"
+                                            onmouseout="UpdateIcon('Select Point','out'); return nd();"
+                                            height=32
+                                            src="./toolbar/infoup.gif"
+                                            width=32
+                                            border=0
+                                            name=identify>
+                                    </TD>
+                                    <TD>
+                                        <IMG
+                                            onmousedown="parent.MapFrame.clickFunction('selectbox'); UpdateIcon('Select Rectangle','on');"
+                                            onmouseover="UpdateIcon('Select Rectangle','over'); return overlib('Select',WIDTH,'40', FGCOLOR, '#eeeeee',BGCOLOR, '#004454', RIGHT, ABOVE, SNAPX, 1, SNAPY, 1);"
+                                            onmouseout="UpdateIcon('Select Rectangle','out'); return nd();"
+                                            height=32
+                                            src="./toolbar/selectup.gif"
+                                            width=32
+                                            border=0
+                                            name=select>
+                                    </TD>
+                                    <TD>
+                                        <IMG onmousedown=parent.MapFrame.clearSelection();
+                                             onmouseover="UpdateIcon('Clear','over'); return overlib('Clear Selection',WIDTH,'90',FGCOLOR, '#eeeeee',BGCOLOR, '#004454', RIGHT, ABOVE, SNAPX, 1, SNAPY, 1);"
+                                             onmouseout="UpdateIcon('Clear','out'); return nd();"
+                                             height=32
+                                             src="./toolbar/deselectup.gif"
+                                             width=32
+                                             border=0
+                                             name=clear>
+                                    </TD>
+                                    <TD>
+                                        <IMG
+                                            onmousedown="parent.MapFrame.clickFunction('zoomin'); UpdateIcon('Zoom In','on');"
+                                            onmouseover="UpdateIcon('Zoom In','over'); return overlib('Zoom In',WIDTH,'55',FGCOLOR, '#eeeeee',BGCOLOR, '#004454', RIGHT, ABOVE, SNAPX, 1, SNAPY, 1);"
+                                            onmouseout="UpdateIcon('Zoom In','out'); return nd();"
+                                            height=32
+                                            src="./toolbar/indown.gif"
+                                            width=32
+                                            border=0
+                                            name=zoomin>
+                                    </TD>
+                                    <TD>
+                                        <IMG
+                                            onmousedown="parent.MapFrame.clickFunction('zoomout'); UpdateIcon('Zoom Out','on');"
+                                            onmouseover="UpdateIcon('Zoom Out','over'); return overlib('Zoom Out',WIDTH,'65',FGCOLOR, '#eeeeee',BGCOLOR, '#004454', RIGHT, ABOVE, SNAPX, 1, SNAPY, 1);"
+                                            onmouseout="UpdateIcon('Zoom Out','out'); return nd();"
+                                            height=32
+                                            src="./toolbar/outup.gif"
+                                            width=32
+                                            border=0
+                                            name=zoomout>
+                                    </TD>
+                                    <TD>
+                                        <IMG
+                                            onmousedown="parent.MapFrame.clickFunction('fullextent');"
+                                            onmouseover="UpdateIcon('Full','over'); return overlib('Zoom to Full Map',WIDTH,'103',FGCOLOR, '#eeeeee',BGCOLOR, '#004454', LEFT, ABOVE, SNAPX, 1, SNAPY, 1);"
+                                            onmouseout="UpdateIcon('Full','out'); return nd();"
+                                            height=32
+                                            src="./toolbar/allup.gif"
+                                            width=32
+                                            border=0
+                                            name=zoomfull>
+                                    </TD>
+                                    <TD>
+                                        <IMG
+                                            onmousedown="parent.MapFrame.clickFunction('zoomlast');"
+                                            onmouseover="UpdateIcon('Last','over'); return overlib('Go Back to Last Map',WIDTH,'120',FGCOLOR, '#eeeeee',BGCOLOR, '#004454', LEFT, ABOVE, SNAPX, 1, SNAPY, 1);"
+                                            onmouseout="UpdateIcon('Last','out'); return nd();"
+                                            height=32
+                                            src="./toolbar/backup.gif"
+                                            width=32
+                                            border=0
+                                            name=zoomlast>
+                                    </TD>
+                                    <TD>
+                                        <IMG
+                                            onmousedown="parent.MapFrame.clickFunction('pan'); UpdateIcon('Pan','on');"
+                                            onmouseover="UpdateIcon('Pan','over'); return overlib('Pan',WIDTH,'20',FGCOLOR, '#eeeeee',BGCOLOR, '#004454', LEFT, ABOVE, SNAPX, 1, SNAPY, 1);"
+                                            onmouseout="UpdateIcon('Pan','out'); return nd();"
+                                            height=32
+                                            src="./toolbar/panup.gif"
+                                            width=32
+                                            border=0
+                                            name=pan>
+                                    </TD>
+                                    <TD>
+                                        <IMG
+                                            onmousedown="parent.MapFrame.clickFunction('measure'); UpdateIcon('Measure','on');"
+                                            onmouseover="UpdateIcon('Measure','over'); return overlib('Measure',WIDTH,'50',FGCOLOR, '#eeeeee',BGCOLOR, '#004454', LEFT, ABOVE, SNAPX, 1, SNAPY, 1);"
+                                            onmouseout="UpdateIcon('Measure','out'); return nd();"
+                                            height=32
+                                            src="./toolbar/lineup.gif"
+                                            width=32
+                                            border=0
+                                            name=measure>
+                                    </TD>
+                                    <TD>
+                                        <IMG
+                                            onmousedown="parent.MapFrame.displayAdHocWindow();"
+                                            onmouseover="UpdateIcon('Adhoc','over'); return overlib('Ad Hoc Query',WIDTH,'80',FGCOLOR, '#eeeeee',BGCOLOR, '#004454', LEFT, ABOVE, SNAPX, 1, SNAPY, 1);"
+                                            onmouseout="UpdateIcon('Adhoc','out'); return nd();"
+                                            height=32
+                                            src="./toolbar/queryup.gif"
+                                            width=32
+                                            border=0
+                                            name=adhoc>
+                                    </TD>
+                                    <TD>
+                                        <IMG
+                                            onmousedown="parent.TOCFrame.location='printmap.htm'"
+                                            onmouseover="UpdateIcon('Print','over'); return overlib('Print Map',WIDTH,'60',FGCOLOR, '#eeeeee',BGCOLOR, '#004454', LEFT, ABOVE, SNAPX, 1, SNAPY, 1);"
+                                            onmouseout="UpdateIcon('Print','out'); return nd();"
+                                            height=32
+                                            src="./toolbar/printup.gif"
+                                            width=32
+                                            border=0
+                                            name=printing>
+                                    </TD>
+                                    <TD>
+                                        <IMG
+                                            onmousedown="parent.MapFrame.displayMailingLabelData()"
+                                            onmouseover="UpdateIcon('Mailing','over'); return overlib('Mailing Labels',WIDTH,'80',FGCOLOR, '#eeeeee',BGCOLOR, '#004454', LEFT, ABOVE, SNAPX, 1, SNAPY, 1);"
+                                            onmouseout="UpdateIcon('Mailing','out'); return nd();"
+                                            height=32
+                                            src="./toolbar/mailing_labelsup.gif"
+                                            width=32
+                                            border=0
+                                            name=mailing>
+                                    </TD>
+                                    <TD>
+                                        <IMG onmousedown="parent.MapFrame.clickFunction('buffer'); UpdateIcon('Buffer','on');"
+                                             onmouseover="UpdateIcon('Buffer','over'); return overlib('Create Buffer',WIDTH,'80',FGCOLOR, '#eeeeee',BGCOLOR, '#004454', LEFT, ABOVE, SNAPX, 1, SNAPY, 1);"
+                                             onmouseout="UpdateIcon('Buffer','out'); return nd();"
+                                             height=32
+                                             src="./toolbar/bufferup.gif"
+                                             width=32
+                                             border=0
+                                             name=buffer>
+                                    </TD>
+                                    <TD id="linkButton"
+                                        style="display:block;">
+                                        <IMG
+                                            onmousedown="parent.MapFrame.clickFunction('hyperlink'); UpdateIcon('Hyperlink','on');"
+                                            onmouseover="UpdateIcon('Hyperlink','over'); return overlib('Attached Documents',WIDTH,'80',FGCOLOR, '#eeeeee',BGCOLOR, '#004454', LEFT, ABOVE, SNAPX, 1, SNAPY, 1);"
+                                            onmouseout="UpdateIcon('Hyperlink','out'); return nd();"
+                                            height=32
+                                            src="./toolbar/attached_filesup.gif"
+                                            width=32
+                                            border=0
+                                            name=link>
+                                    </TD>
+                                </TR>
+                            </TBODY>
+                        </TABLE>
+                    </TD>
+                </TR>
+            </TBODY>
+        </TABLE>
+    </BODY>
+</HTML>

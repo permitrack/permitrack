@@ -1,0 +1,128 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+    <HEAD>
+        <TITLE>Switch Frame</TITLE>
+        <META http-equiv=Content-Type
+              content="text/html; charset=windows-1252">
+        <META http-equiv=Pragma
+              content=no-cache>
+        <META http-equiv=CACHE-CONTROL
+              content=NO-CACHE>
+        <META http-equiv=PRAGMAS
+              content=NO-CACHE>
+        <LINK href="gis.css"
+              type=text/css
+              rel=stylesheet>
+        <SCRIPT language=JavaScript>
+            function SwitchApplication(theSelect)
+            {
+                if (theSelect
+                    !== "legend")
+                {
+                    parent.MapFrame.legendVisible =
+                    false;
+                }
+                switch (theSelect)
+                {
+                    case "attachedDocuments":
+                        parent.TOCFrame.location =
+                        "attachedDocuments.jsp";
+                        break;
+                    case "saveMap":
+                        parent.MapFrame.downloadMap();
+                        break;
+                    case "legend":
+                        parent.MapFrame.clickFunction('legend');
+                        break;
+                    case "layerlist":
+                        parent.MapFrame.clickFunction('toc');
+                        break;
+                    case "print":
+                        parent.TOCFrame.location =
+                        "printmap.htm";
+                        break;
+                    case "report":
+                        parent.MapFrame.PrintReport();
+                        break;
+                    case "SetUnits":
+                        parent.TOCFrame.location =
+                        "settings.htm";
+                        break;
+                    case "SetMode":
+                        parent.TOCFrame.location =
+                        "selectionmode.htm";
+                        break;
+                    case "help":
+                        parent.TOCFrame.location =
+                        "help/help.htm";
+                        break;
+                    default:
+                    //parent.TOCFrame.location = theSelect;
+                }
+            }
+            function checkban()
+            {
+                if (document.layers
+                    || document.all)
+                {
+                    return checknumber()
+                }
+                else
+                {
+                    return true
+                }
+            }
+            function update()
+            {
+                var newurl = document.newIMS.IMSopt.value.toLowerCase();
+                if (newurl
+                    != "legend")
+                {
+                    newWin(newurl);
+                }
+            }
+        </SCRIPT>
+        <META content="MSHTML 6.00.2800.1226"
+              name=GENERATOR>
+    </HEAD>
+    <BODY bgColor=#ffffff>
+        <TABLE cellSpacing=0
+               cellPadding=0
+               border=0>
+            <TBODY>
+                <TR height=10>
+                    <TD width=10></TD>
+                    <TD>
+                        <FORM name=newIMS>
+                            <P class=bodytitle
+                               align=left>
+                                <B>
+                                    <FONT color=#004454>Options:</FONT>
+                                    <FONT face=verdana
+                                          color=#004454>
+                                        <BR>
+                                    </FONT>
+                                </B>
+                                <SELECT style="FONT-SIZE: 10px; BACKGROUND: #ffffff; WIDTH: 180px; FONT-FAMILY: verdana"
+                                        onchange=SwitchApplication(newIMS.IMSopt.value);
+                                        name=IMSopt>
+                                    <OPTION value=Choose
+                                            selected>Select option...
+                                    </OPTION>
+                                    <OPTION value=attachedDocuments>Attached Documents</OPTION>
+                                    <OPTION value=help>Help</OPTION>
+                                    <OPTION value=legend>Legend</OPTION>
+                                    <OPTION value=layerlist>Layer List</OPTION>
+                                    <OPTION value=print>Print Map</OPTION>
+                                    <OPTION value=report>Print Report</OPTION>
+                                    <OPTION value=saveMap>Save Map</OPTION>
+                                    <OPTION value=SetMode>Set Selection Mode</OPTION>
+                                    <OPTION value=SetUnits>Set Scale/Units</OPTION>
+                                </SELECT>
+                        </FORM>
+                    </TD>
+                </TR>
+            </TBODY>
+        </TABLE>
+    </BODY>
+</HTML>

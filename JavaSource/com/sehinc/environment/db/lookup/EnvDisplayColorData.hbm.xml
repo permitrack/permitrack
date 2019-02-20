@@ -1,0 +1,28 @@
+<?xml version="1.0"?><!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping>
+    <class name="com.sehinc.environment.db.lookup.EnvDisplayColorData"
+           table="LOOKUP_ENV_DISPLAY_COLOR">
+        <id name="code"
+            type="string"
+            column="CODE">
+            <generator class="identity" />
+        </id>
+        <property name="description"
+                  column="DESCRIPTION"
+                  type="string" />
+        <property name="displayOrder"
+                  column="ORDER_NUM"
+                  type="integer" />
+    </class>
+    <query name="EnvDisplayColorData.findAllInOrder">
+        from com.sehinc.environment.db.lookup.EnvDisplayColorData as displayColor
+        order by displayColor.displayOrder ASC
+    </query>
+    <query name="EnvDisplayColorData.findByCode">
+        from com.sehinc.environment.db.lookup.EnvDisplayColorData as displayColor
+        where displayColor.code = :code
+        order by displayColor.displayOrder ASC
+    </query>
+</hibernate-mapping>

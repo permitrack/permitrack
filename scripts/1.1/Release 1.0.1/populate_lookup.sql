@@ -1,0 +1,14 @@
+insert into LOOKUP_ENV_UNIT_OF_MEASURE
+(CODE, DESCRIPTION, CLIENT_ID, ORDER_NUM)
+values
+(12, 'Tons/Year', 0, 12)
+
+insert into LOOKUP_ENV_ASSET_TYPE
+(CODE, DESCRIPTION, CLIENT_ID, ORDER_NUM)
+values
+(4, 'Building Heat', 0, 4)
+
+insert into LOOKUP_ENV_ASSET_TYPE
+(CODE, DESCRIPTION, CLIENT_ID, ORDER_NUM)
+values
+(5, 'Process Asset', 0, 5)

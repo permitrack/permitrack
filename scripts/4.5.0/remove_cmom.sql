@@ -1,0 +1,1 @@
+update cap_module set status_cd = 2 where code = 'CMOM'

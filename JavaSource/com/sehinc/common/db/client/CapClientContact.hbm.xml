@@ -1,0 +1,49 @@
+<?xml version="1.0"?><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <!--
+            Auto-generated mapping file from
+            the hibernate.org cfg2hbm engine
+    -->
+    <class name="com.sehinc.common.db.client.CapClientContact"
+           table="CAP_CLIENT_CONTACT">
+        <id name="id"
+            type="integer">
+            <column name="ID" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="client"
+                     class="com.sehinc.common.db.client.ClientData"
+                     column="CLIENT_ID"
+                     lazy="false" />
+        <many-to-one name="contact"
+                     class="com.sehinc.common.db.contact.CapContact"
+                     column="CONTACT_ID"
+                     lazy="false" />
+        <many-to-one name="contactType"
+                     class="com.sehinc.common.db.contact.CapContactType"
+                     column="CONTACT_TYPE_ID"
+                     lazy="false" />
+    </class>
+    <query name="com.sehinc.common.db.client.CapClientContact.byClientId">
+        from com.sehinc.common.db.client.CapClientContact as type
+        where type.client.id = :clientId
+    </query>
+    <query name="com.sehinc.common.db.client.CapClientContact.byClientIdContactId">
+        from com.sehinc.common.db.client.CapClientContact as type
+        where type.client.id = :clientId
+        and type.contact.id = :contactId
+    </query>
+    <query name="com.sehinc.common.db.client.CapClientContact.byClientIdContactIdContactTypeId">
+        from com.sehinc.common.db.client.CapClientContact as type
+        where type.client.id = :clientId
+        and type.contact.id = :contactId
+        and type.contactType.id = :contactTypeId
+    </query>
+    <query name="com.sehinc.common.db.client.CapClientContact.byClientIdContactIdModuleId">
+        from com.sehinc.common.db.client.CapClientContact as type
+        where type.client.id = :clientId
+        and type.contact.id = :contactId
+        and type.contactType.moduleId = :moduleId
+    </query>
+</hibernate-mapping>

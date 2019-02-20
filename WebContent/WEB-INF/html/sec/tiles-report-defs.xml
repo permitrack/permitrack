@@ -1,0 +1,21 @@
+<!DOCTYPE tiles-definitions PUBLIC
+    "-//Apache Software Foundation//DTD Tiles Configuration 1.3//EN"
+    "http://struts.apache.org/dtds/tiles-config_1_3.dtd">
+<tiles-definitions>
+    <definition name="sec.report.baseTitledLayout"
+                extends="html.baseTitledLayout">
+        <put name="primaryMenu"
+             value="/html/sec/primarynavigation.jsp" />
+        <put name="secondaryMenu"
+             value="/html/sec/secondarynavigation.jsp" />
+    </definition>
+    <definition name="report.access.edit.page"
+                extends="sec.report.baseTitledLayout">
+        <put name="title"
+             value="Report Access" />
+        <put name="description"
+             value="Control which reports this client has access to." />
+        <put name="content"
+             value="/html/sec/report/reportaccessedit.jsp" />
+    </definition>
+</tiles-definitions>

@@ -1,0 +1,92 @@
+<?xml version="1.0"?><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <!--
+            Auto-generated mapping file from
+            the hibernate.org cfg2hbm engine
+    -->
+    <class name="com.sehinc.erosioncontrol.db.user.EcSearch"
+           table="EC_SEARCH">
+        <id name="id"
+            type="integer">
+            <column name="ID" />
+            <generator class="identity" />
+        </id>
+        <property name="name"
+                  type="string"
+                  column="NAME" />
+        <property name="projectName"
+                  type="string"
+                  column="PROJECT_NAME" />
+        <property name="address"
+                  type="string"
+                  column="ADDRESS" />
+        <property name="city"
+                  type="string"
+                  column="CITY" />
+        <property name="state"
+                  type="string"
+                  column="STATE" />
+        <property name="zip"
+                  type="string"
+                  column="ZIP" />
+        <property name="zones"
+                  type="string"
+                  column="ZONES" />
+        <property name="types"
+                  type="string"
+                  column="TYPES" />
+        <property name="statuses"
+                  type="string"
+                  column="STATUSES" />
+        <property name="permitNum"
+                  type="string"
+                  column="PERMIT_NUM" />
+        <property name="areaMin"
+                  type="string"
+                  column="AREA_MIN" />
+        <property name="areaMax"
+                  type="string"
+                  column="AREA_MAX" />
+        <property name="totalAreaMin"
+                  type="string"
+                  column="TOTAL_AREA_MIN" />
+        <property name="totalAreaMax"
+                  type="string"
+                  column="TOTAL_AREA_MAX" />
+        <property name="impAreaMin"
+                  type="string"
+                  column="IMP_AREA_MIN" />
+        <property name="impAreaMax"
+                  type="string"
+                  column="IMP_AREA_MAX" />
+        <property name="startDateA"
+                  type="string"
+                  column="START_DATE_A" />
+        <property name="startDateB"
+                  type="string"
+                  column="START_DATE_B" />
+        <property name="effDateA"
+                  type="string"
+                  column="EFF_DATE_A" />
+        <property name="effDateB"
+                  type="string"
+                  column="EFF_DATE_B" />
+        <property name="seedDateA"
+                  type="string"
+                  column="SEED_DATE_A" />
+        <property name="seedDateB"
+                  type="string"
+                  column="SEED_DATE_B" />
+        <property name="permitAuthName"
+                  type="string"
+                  column="PERMIT_AUTH_NAME" />
+        <property name="permiteeName"
+                  type="string"
+                  column="PERMITEE_NAME" />
+        <property name="inspectorName"
+                  type="string"
+                  column="INSPECTOR_NAME" />
+    </class>
+</hibernate-mapping>
+

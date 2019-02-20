@@ -1,0 +1,16 @@
+<!DOCTYPE tiles-definitions PUBLIC
+    "-//Apache Software Foundation//DTD Tiles Configuration 1.3//EN"
+    "http://struts.apache.org/dtds/tiles-config_1_3.dtd">
+<tiles-definitions>
+    <definition name="ev.admin.baseTitledLayout"
+                extends="ev.baseTitledLayout" />
+    <definition name="ev.admin.client.list.page"
+                extends="ev.admin.baseTitledLayout">
+        <put name="title"
+             value="Clients" />
+        <put name="description"
+             value="Select a client to administer from the list." />
+        <put name="content"
+             value="/html/env/admin/adminclientlist.jsp" />
+    </definition>
+</tiles-definitions>

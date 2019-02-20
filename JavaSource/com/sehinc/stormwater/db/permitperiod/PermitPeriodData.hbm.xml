@@ -1,0 +1,30 @@
+<?xml version="1.0"?><!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping>
+    <!-- -->
+    <class name="com.sehinc.stormwater.db.permitperiod.PermitPeriodData"
+           table="permit_period">
+        <id name="id"
+            type="integer"
+            column="id">
+            <generator class="identity" />
+        </id>
+        <property name="name"
+                  type="string"
+                  column="name" />
+        <many-to-one name="status"
+                     class="com.sehinc.erosioncontrol.db.code.StatusCodeData"
+                     column="STATUS_CD"
+                     lazy="false" />
+        <property name="createTimestamp"
+                  type="timestamp"
+                  column="create_ts" />
+        <property name="updateTimestamp"
+                  type="timestamp"
+                  column="update_ts" />
+        <property name="updateUserId"
+                  type="integer"
+                  column="update_user_id" />
+    </class>
+</hibernate-mapping>

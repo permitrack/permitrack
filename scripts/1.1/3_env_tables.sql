@@ -1,0 +1,906 @@
+if exists (select * from dbo.sysobjects where id = object_id(N'[dbo].[FK_ENV_PERMIT_DETAIL_ENV_PERMIT]') and OBJECTPROPERTY(id, N'IsForeignKey') = 1)
+ALTER TABLE [dbo].[ENV_PERMIT_DETAIL] DROP CONSTRAINT FK_ENV_PERMIT_DETAIL_ENV_PERMIT
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'[dbo].[FK_ENV_ASSET_TYPE_LOOKUP_ENV_ASSET_TYPE1]') and OBJECTPROPERTY(id, N'IsForeignKey') = 1)
+ALTER TABLE [dbo].[ENV_ASSET_TYPE] DROP CONSTRAINT FK_ENV_ASSET_TYPE_LOOKUP_ENV_ASSET_TYPE1
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'[dbo].[FK_ENV_SOURCE_LOOKUP_ENV_SOURCE_TYPE]') and OBJECTPROPERTY(id, N'IsForeignKey') = 1)
+ALTER TABLE [dbo].[ENV_SOURCE] DROP CONSTRAINT FK_ENV_SOURCE_LOOKUP_ENV_SOURCE_TYPE
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'[dbo].[FK_ENV_ASSET_EMITTED_SUBSTANCE_LOOKUP_ENV_SUBSTANCE_TYPE]') and OBJECTPROPERTY(id, N'IsForeignKey') = 1)
+ALTER TABLE [dbo].[ENV_ASSET_EMITTED_SUBSTANCE_TYPE] DROP CONSTRAINT FK_ENV_ASSET_EMITTED_SUBSTANCE_LOOKUP_ENV_SUBSTANCE_TYPE
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'[dbo].[FK_ENV_PERMIT_SUBSTANCE_LOOKUP_ENV_SUBSTANCE_TYPE]') and OBJECTPROPERTY(id, N'IsForeignKey') = 1)
+ALTER TABLE [dbo].[ENV_PERMIT_SUBSTANCE] DROP CONSTRAINT FK_ENV_PERMIT_SUBSTANCE_LOOKUP_ENV_SUBSTANCE_TYPE
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'[dbo].[FK_ENV_SUBSTANCE_LOOKUP_ENV_SUBSTANCE_TYPE]') and OBJECTPROPERTY(id, N'IsForeignKey') = 1)
+ALTER TABLE [dbo].[ENV_SUBSTANCE] DROP CONSTRAINT FK_ENV_SUBSTANCE_LOOKUP_ENV_SUBSTANCE_TYPE
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'[dbo].[FK_ENV_ASSET_ATTR_LOOKUP_ENV_UNIT_OF_MEASURE]') and OBJECTPROPERTY(id, N'IsForeignKey') = 1)
+ALTER TABLE [dbo].[ENV_ASSET_ATTR] DROP CONSTRAINT FK_ENV_ASSET_ATTR_LOOKUP_ENV_UNIT_OF_MEASURE
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'[dbo].[FK_ENV_SOURCE_SUBSTANCE_LOOKUP_ENV_UNIT_OF_MEASURE]') and OBJECTPROPERTY(id, N'IsForeignKey') = 1)
+ALTER TABLE [dbo].[ENV_SOURCE_SUBSTANCE] DROP CONSTRAINT FK_ENV_SOURCE_SUBSTANCE_LOOKUP_ENV_UNIT_OF_MEASURE
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'[dbo].[FK_ENV_SOURCE_USAGE_ENV_READING_DISPLAY_TYPE]') and OBJECTPROPERTY(id, N'IsForeignKey') = 1)
+ALTER TABLE [dbo].[ENV_SOURCE_USAGE] DROP CONSTRAINT FK_ENV_SOURCE_USAGE_ENV_READING_DISPLAY_TYPE
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'[dbo].[FK_ENV_FACILITY_ENV_PERMIT_DETAIL]') and OBJECTPROPERTY(id, N'IsForeignKey') = 1)
+ALTER TABLE [dbo].[ENV_FACILITY] DROP CONSTRAINT FK_ENV_FACILITY_ENV_PERMIT_DETAIL
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'[dbo].[FK_ENV_PERMIT_ASSET_ENV_PERMIT_DETAIL]') and OBJECTPROPERTY(id, N'IsForeignKey') = 1)
+ALTER TABLE [dbo].[ENV_PERMIT_ASSET] DROP CONSTRAINT FK_ENV_PERMIT_ASSET_ENV_PERMIT_DETAIL
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'[dbo].[ENV_PERMIT_FACILITY_ENV_PERMIT_DETAIL]') and OBJECTPROPERTY(id, N'IsForeignKey') = 1)
+ALTER TABLE [dbo].[ENV_PERMIT_FACILITY] DROP CONSTRAINT FK_ENV_PERMIT_FACILITY_ENV_PERMIT_DETAIL
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'[dbo].[ENV_FACILITY_ASSET_ENV_FACILITY]') and OBJECTPROPERTY(id, N'IsForeignKey') = 1)
+ALTER TABLE [dbo].[ENV_FACILITY_ASSET] DROP CONSTRAINT FK_ENV_FACILITY_ASSET_ENV_FACILITY
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'[dbo].[FK_ENV_PERMIT_SUBSTANCE_ENV_PERMIT_DETAIL]') and OBJECTPROPERTY(id, N'IsForeignKey') = 1)
+ALTER TABLE [dbo].[ENV_PERMIT_SUBSTANCE] DROP CONSTRAINT FK_ENV_PERMIT_SUBSTANCE_ENV_PERMIT_DETAIL
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'[dbo].[FK_ENV_ASSET_SOURCE_ENV_SOURCE]') and OBJECTPROPERTY(id, N'IsForeignKey') = 1)
+ALTER TABLE [dbo].[ENV_ASSET_SOURCE] DROP CONSTRAINT FK_ENV_ASSET_SOURCE_ENV_SOURCE
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'[dbo].[FK_ENV_SOURCE_SUBSTANCE_ENV_SOURCE]') and OBJECTPROPERTY(id, N'IsForeignKey') = 1)
+ALTER TABLE [dbo].[ENV_SOURCE_SUBSTANCE] DROP CONSTRAINT FK_ENV_SOURCE_SUBSTANCE_ENV_SOURCE
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'[dbo].[FK_ENV_SOURCE_SUBSTANCE_ENV_SUBSTANCE]') and OBJECTPROPERTY(id, N'IsForeignKey') = 1)
+ALTER TABLE [dbo].[ENV_SOURCE_SUBSTANCE] DROP CONSTRAINT FK_ENV_SOURCE_SUBSTANCE_ENV_SUBSTANCE
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'[dbo].[FK_ENV_ASSET_ENV_FACILITY]') and OBJECTPROPERTY(id, N'IsForeignKey') = 1)
+ALTER TABLE [dbo].[ENV_ASSET] DROP CONSTRAINT FK_ENV_ASSET_ENV_FACILITY
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'[dbo].[FK_ENV_FACILITY_CONTACTS_ENV_FACILITY_ATTR]') and OBJECTPROPERTY(id, N'IsForeignKey') = 1)
+ALTER TABLE [dbo].[ENV_FACILITY_CONTACT] DROP CONSTRAINT FK_ENV_FACILITY_CONTACTS_ENV_FACILITY_ATTR
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'[dbo].[FK_ENV_ASSET_ENV_ASSET]') and OBJECTPROPERTY(id, N'IsForeignKey') = 1)
+ALTER TABLE [dbo].[ENV_ASSET] DROP CONSTRAINT FK_ENV_ASSET_ENV_ASSET
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'[dbo].[FK_ENV_ASSET_ATTR_ENV_ASSET]') and OBJECTPROPERTY(id, N'IsForeignKey') = 1)
+ALTER TABLE [dbo].[ENV_ASSET_ATTR] DROP CONSTRAINT FK_ENV_ASSET_ATTR_ENV_ASSET
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'[dbo].[FK_ENV_ASSET_EMITTED_SUBSTANCE_TYPE_ENV_ASSET]') and OBJECTPROPERTY(id, N'IsForeignKey') = 1)
+ALTER TABLE [dbo].[ENV_ASSET_EMITTED_SUBSTANCE_TYPE] DROP CONSTRAINT FK_ENV_ASSET_EMITTED_SUBSTANCE_TYPE_ENV_ASSET
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'[dbo].[FK_ENV_ASSET_SOURCE_ENV_ASSET]') and OBJECTPROPERTY(id, N'IsForeignKey') = 1)
+ALTER TABLE [dbo].[ENV_ASSET_SOURCE] DROP CONSTRAINT FK_ENV_ASSET_SOURCE_ENV_ASSET
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'[dbo].[FK_ENV_ASSET_TYPE_ENV_ASSET]') and OBJECTPROPERTY(id, N'IsForeignKey') = 1)
+ALTER TABLE [dbo].[ENV_ASSET_TYPE] DROP CONSTRAINT FK_ENV_ASSET_TYPE_ENV_ASSET
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'[dbo].[FK_ENV_PERMIT_ASSET_ENV_ASSET]') and OBJECTPROPERTY(id, N'IsForeignKey') = 1)
+ALTER TABLE [dbo].[ENV_PERMIT_ASSET] DROP CONSTRAINT FK_ENV_PERMIT_ASSET_ENV_ASSET
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'[dbo].[FK_ENV_PERMIT_FACILITY_ENV_FACILITY]') and OBJECTPROPERTY(id, N'IsForeignKey') = 1)
+ALTER TABLE [dbo].[ENV_PERMIT_FACILITY] DROP CONSTRAINT FK_ENV_PERMIT_FACILITY_ENV_FACILITY
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'[dbo].[FK_ENV_FACILITY_ASSET_ENV_ASSET]') and OBJECTPROPERTY(id, N'IsForeignKey') = 1)
+ALTER TABLE [dbo].[ENV_FACILITY_ASSET] DROP CONSTRAINT FK_ENV_FACILITY_ASSET_ENV_ASSET
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'[dbo].[FK_ENV_PROCESS_ENV_ORG_UNIT]') and OBJECTPROPERTY(id, N'IsForeignKey') = 1)
+ALTER TABLE [dbo].[ENV_PROCESS] DROP CONSTRAINT FK_ENV_PROCESS_ENV_ORG_UNIT
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'[dbo].[FK_ENV_SOURCE_USAGE_ENV_ASSET_SOURCE]') and OBJECTPROPERTY(id, N'IsForeignKey') = 1)
+ALTER TABLE [dbo].[ENV_SOURCE_USAGE] DROP CONSTRAINT FK_ENV_SOURCE_USAGE_ENV_ASSET_SOURCE
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'[dbo].[FK_ENV_PROCESS_ENV_PROCESS]') and OBJECTPROPERTY(id, N'IsForeignKey') = 1)
+ALTER TABLE [dbo].[ENV_PROCESS] DROP CONSTRAINT FK_ENV_PROCESS_ENV_PROCESS
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'[dbo].[ENV_SOURCE_USAGE]') and OBJECTPROPERTY(id, N'IsUserTable') = 1)
+drop table [dbo].[ENV_SOURCE_USAGE]
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'[dbo].[ENV_ASSET_ATTR]') and OBJECTPROPERTY(id, N'IsUserTable') = 1)
+drop table [dbo].[ENV_ASSET_ATTR]
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'[dbo].[ENV_ASSET_EMITTED_SUBSTANCE_TYPE]') and OBJECTPROPERTY(id, N'IsUserTable') = 1)
+drop table [dbo].[ENV_ASSET_EMITTED_SUBSTANCE_TYPE]
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'[dbo].[ENV_ASSET_SOURCE]') and OBJECTPROPERTY(id, N'IsUserTable') = 1)
+drop table [dbo].[ENV_ASSET_SOURCE]
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'[dbo].[ENV_ASSET_TYPE]') and OBJECTPROPERTY(id, N'IsUserTable') = 1)
+drop table [dbo].[ENV_ASSET_TYPE]
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'[dbo].[ENV_PERMIT_ASSET]') and OBJECTPROPERTY(id, N'IsUserTable') = 1)
+drop table [dbo].[ENV_PERMIT_ASSET]
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'[dbo].[ENV_PERMIT_FACILITY]') and OBJECTPROPERTY(id, N'IsUserTable') = 1)
+drop table [dbo].[ENV_PERMIT_FACILITY]
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'[dbo].[ENV_FACILITY_ASSET]') and OBJECTPROPERTY(id, N'IsUserTable') = 1)
+drop table [dbo].[ENV_FACILITY_ASSET]
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'[dbo].[ENV_PROCESS]') and OBJECTPROPERTY(id, N'IsUserTable') = 1)
+drop table [dbo].[ENV_PROCESS]
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'[dbo].[ENV_ASSET]') and OBJECTPROPERTY(id, N'IsUserTable') = 1)
+drop table [dbo].[ENV_ASSET]
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'[dbo].[ENV_FACILITY_CONTACT]') and OBJECTPROPERTY(id, N'IsUserTable') = 1)
+drop table [dbo].[ENV_FACILITY_CONTACT]
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'[dbo].[ENV_FACILITY]') and OBJECTPROPERTY(id, N'IsUserTable') = 1)
+drop table [dbo].[ENV_FACILITY]
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'[dbo].[ENV_PERMIT_SUBSTANCE]') and OBJECTPROPERTY(id, N'IsUserTable') = 1)
+drop table [dbo].[ENV_PERMIT_SUBSTANCE]
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'[dbo].[ENV_SOURCE_SUBSTANCE]') and OBJECTPROPERTY(id, N'IsUserTable') = 1)
+drop table [dbo].[ENV_SOURCE_SUBSTANCE]
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'[dbo].[ENV_PERMIT_DETAIL]') and OBJECTPROPERTY(id, N'IsUserTable') = 1)
+drop table [dbo].[ENV_PERMIT_DETAIL]
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'[dbo].[ENV_SOURCE]') and OBJECTPROPERTY(id, N'IsUserTable') = 1)
+drop table [dbo].[ENV_SOURCE]
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'[dbo].[ENV_SUBSTANCE]') and OBJECTPROPERTY(id, N'IsUserTable') = 1)
+drop table [dbo].[ENV_SUBSTANCE]
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'[dbo].[ENV_PERMIT]') and OBJECTPROPERTY(id, N'IsUserTable') = 1)
+drop table [dbo].[ENV_PERMIT]
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'[dbo].[ENV_SOURCE_TYPE_SUB_TYPE_MAP]') and OBJECTPROPERTY(id, N'IsUserTable') = 1)
+drop table [dbo].[ENV_SOURCE_TYPE_SUB_TYPE_MAP]
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'[dbo].[LOOKUP_ENV_ASSET_TYPE]') and OBJECTPROPERTY(id, N'IsUserTable') = 1)
+drop table [dbo].[LOOKUP_ENV_ASSET_TYPE]
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'[dbo].[LOOKUP_ENV_SOURCE_TYPE]') and OBJECTPROPERTY(id, N'IsUserTable') = 1)
+drop table [dbo].[LOOKUP_ENV_SOURCE_TYPE]
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'[dbo].[LOOKUP_ENV_SUBSTANCE_TYPE]') and OBJECTPROPERTY(id, N'IsUserTable') = 1)
+drop table [dbo].[LOOKUP_ENV_SUBSTANCE_TYPE]
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'[dbo].[LOOKUP_ENV_UNIT_OF_MEASURE]') and OBJECTPROPERTY(id, N'IsUserTable') = 1)
+drop table [dbo].[LOOKUP_ENV_UNIT_OF_MEASURE]
+GO
+
+CREATE TABLE [dbo].[ENV_PERMIT] (
+	[ID] [int] IDENTITY (1, 1) NOT NULL ,
+	[NAME] [varchar] (50) COLLATE SQL_Latin1_General_CP1_CI_AS NULL ,
+	[DESCRIPTION] [varchar] (200) COLLATE SQL_Latin1_General_CP1_CI_AS NULL ,
+	[CLIENT_ID] [int] NOT NULL ,
+	[ACTIVE_TS] [datetime] NULL ,
+	[INACTIVE_TS] [datetime] NULL ,
+	[STATUS_CD] [varchar] (4) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL ,
+	[CREATE_TS] [datetime] NOT NULL ,
+	[UPDATE_TS] [datetime] NOT NULL ,
+	[UPDATE_USER_ID] [int] NOT NULL 
+) ON [PRIMARY]
+GO
+
+CREATE TABLE [dbo].[ENV_SOURCE_TYPE_SUB_TYPE_MAP] (
+	[ID] [int] IDENTITY (1, 1) NOT NULL ,
+	[SOURCE_TYPE_CD] [int] NOT NULL ,
+	[SUBSTANCE_TYPE_CD] [int] NOT NULL 
+) ON [PRIMARY]
+GO
+
+CREATE TABLE [dbo].[LOOKUP_ENV_ASSET_TYPE] (
+	[CODE] [int] NOT NULL ,
+	[DESCRIPTION] [varchar] (50) COLLATE SQL_Latin1_General_CP1_CI_AS NULL ,
+	[CLIENT_ID] [int] NOT NULL ,
+	[ORDER_NUM] [int] NOT NULL 
+) ON [PRIMARY]
+GO
+
+CREATE TABLE [dbo].[LOOKUP_ENV_SOURCE_TYPE] (
+	[CODE] [int] NOT NULL ,
+	[DESCRIPTION] [varchar] (50) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL ,
+	[CLIENT_ID] [int] NOT NULL ,
+	[ORDER_NUM] [int] NOT NULL 
+) ON [PRIMARY]
+GO
+
+CREATE TABLE [dbo].[LOOKUP_ENV_SUBSTANCE_TYPE] (
+	[CODE] [int] NOT NULL ,
+	[DESCRIPTION] [varchar] (50) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL ,
+	[CLIENT_ID] [int] NOT NULL ,
+	[ORDER_NUM] [int] NOT NULL 
+) ON [PRIMARY]
+GO
+
+CREATE TABLE [dbo].[LOOKUP_ENV_UNIT_OF_MEASURE] (
+	[CODE] [int] NOT NULL ,
+	[DESCRIPTION] [varchar] (50) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL ,
+	[CLIENT_ID] [int] NOT NULL ,
+	[ORDER_NUM] [int] NOT NULL 
+) ON [PRIMARY]
+GO
+
+CREATE TABLE [dbo].[ENV_PERMIT_DETAIL] (
+	[ID] [int] IDENTITY (1, 1) NOT NULL ,
+	[NAME] [varchar] (50) COLLATE SQL_Latin1_General_CP1_CI_AS NULL ,
+	[DESCRIPTION] [varchar] (200) COLLATE SQL_Latin1_General_CP1_CI_AS NULL ,
+	[AVG_PERIOD] [int] NOT NULL ,
+	[AVG_PERIOD_UM] [int] NULL ,
+	[VOC_LIMIT] [float] NULL ,
+	[VOC_LIMIT_UM] [int] NULL ,
+	[HAPS_LIMIT] [float] NULL ,
+	[HAPS_LIMIT_UM] [int] NULL ,
+	[MMBTU_LIMIT] [float] NULL ,
+	[MMBTU_LIMIT_UM] [int] NULL ,
+	[PERMIT_ID] [int] NOT NULL ,
+	[STATUS_CD] [varchar] (4) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL ,
+	[CREATE_TS] [datetime] NOT NULL ,
+	[UPDATE_TS] [datetime] NOT NULL ,
+	[UPDATE_USER_ID] [int] NOT NULL 
+) ON [PRIMARY]
+GO
+
+CREATE TABLE [dbo].[ENV_SOURCE] (
+	[ID] [int] IDENTITY (1, 1) NOT NULL ,
+	[DISPLAY_NAME] [varchar] (50) COLLATE SQL_Latin1_General_CP1_CI_AS NULL ,
+	[CLIENT_ID] [int] NOT NULL ,
+	[PART_NUMBER] [varchar] (50) COLLATE SQL_Latin1_General_CP1_CI_AS NULL ,
+	[BATCH_NUMBER] [varchar] (50) COLLATE SQL_Latin1_General_CP1_CI_AS NULL ,
+	[DESCRIPTION] [varchar] (20) COLLATE SQL_Latin1_General_CP1_CI_AS NULL ,
+	[LBS_VOC] [float] NULL ,
+	[LBS_VOC_UM] [int] NULL ,
+	[DENSITY] [float] NULL ,
+	[DENSITY_UM] [int] NULL ,
+	[LBS_HAPS] [float] NULL ,
+	[LBS_HAPS_UM] [int] NULL ,
+	[PCT_SOLIDS_VOLUME] [float] NULL ,
+	[PCT_SOLIDS_WEIGHT] [float] NULL ,
+	[INFO_ORIGIN] [varchar] (50) COLLATE SQL_Latin1_General_CP1_CI_AS NULL ,
+	[SOURCE_TYPE_CD] [int] NOT NULL ,
+	[STATUS_CD] [varchar] (4) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL ,
+	[CREATE_TS] [datetime] NOT NULL ,
+	[UPDATE_TS] [datetime] NOT NULL ,
+	[UPDATE_USER_ID] [int] NOT NULL 
+) ON [PRIMARY]
+GO
+
+CREATE TABLE [dbo].[ENV_SUBSTANCE] (
+	[ID] [int] IDENTITY (1, 1) NOT NULL ,
+	[NAME] [varchar] (50) COLLATE SQL_Latin1_General_CP1_CI_AS NULL ,
+	[PART_NUM] [varchar] (50) COLLATE SQL_Latin1_General_CP1_CI_AS NULL ,
+	[SUBSTANCE_TYPE_CD] [int] NOT NULL ,
+	[CLIENT_ID] [int] NOT NULL ,
+	[STATUS_CD] [varchar] (4) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL ,
+	[CREATE_TS] [datetime] NOT NULL ,
+	[UPDATE_TS] [datetime] NOT NULL ,
+	[UPDATE_USER_ID] [int] NOT NULL 
+) ON [PRIMARY]
+GO
+
+CREATE TABLE [dbo].[ENV_FACILITY] (
+	[ID] [int] IDENTITY (1, 1) NOT NULL ,
+	[NAME] [varchar] (50) COLLATE SQL_Latin1_General_CP1_CI_AS NULL ,
+	[NUMBER] [varchar] (50) COLLATE SQL_Latin1_General_CP1_CI_AS NULL ,
+	[DESCRIPTION] [varchar] (50) COLLATE SQL_Latin1_General_CP1_CI_AS NULL ,
+	[CLIENT_ID] [int] NOT NULL ,
+	[PERMIT_DETAIL_ID] [int] NULL ,
+	[ACTIVE_TS] [datetime] NULL ,
+	[INACTIVE_TS] [datetime] NULL ,
+	[PHONE_NUMBER] [varchar] (20) COLLATE SQL_Latin1_General_CP1_CI_AS NULL ,
+	[FAX_NUMBER] [varchar] (20) COLLATE SQL_Latin1_General_CP1_CI_AS NULL ,
+	[MAILING_ADDRESS_ID] [int] NULL ,
+	[PHYSICAL_ADDRESS_ID] [int] NULL ,
+	[COUNTY_NAME] [varchar] (50) COLLATE SQL_Latin1_General_CP1_CI_AS NULL ,
+	[SIC_CODE] [varchar] (50) COLLATE SQL_Latin1_General_CP1_CI_AS NULL ,
+	[CLASS] [varchar] (50) COLLATE SQL_Latin1_General_CP1_CI_AS NULL ,
+	[DAILY_HRS_OP] [int] NULL ,
+	[DAYS_OP_WEEK] [int] NULL ,
+	[WEEKS_OP_YEAR] [int] NULL ,
+	[BUSINESS_HRS] [varchar] (50) COLLATE SQL_Latin1_General_CP1_CI_AS NULL ,
+	[STATUS_CD] [varchar] (4) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL ,
+	[CREATE_TS] [datetime] NOT NULL ,
+	[UPDATE_TS] [datetime] NOT NULL ,
+	[UPDATE_USER_ID] [int] NOT NULL 
+) ON [PRIMARY]
+GO
+
+CREATE TABLE [dbo].[ENV_PERMIT_SUBSTANCE] (
+	[ID] [int] IDENTITY (1, 1) NOT NULL ,
+	[PERMIT_DETAIL_ID] [int] NOT NULL ,
+	[SUBSTANCE_TYPE_CD] [int] NOT NULL ,
+	[CHARGEABLE] [bit] NOT NULL ,
+	[CREATE_TS] [datetime] NOT NULL ,
+	[UPDATE_TS] [datetime] NOT NULL ,
+	[UPDATE_USER_ID] [int] NOT NULL 
+) ON [PRIMARY]
+GO
+
+CREATE TABLE [dbo].[ENV_SOURCE_SUBSTANCE] (
+	[ID] [int] IDENTITY (1, 1) NOT NULL ,
+	[SUBSTANCE_ID] [int] NOT NULL ,
+	[SOURCE_ID] [int] NOT NULL ,
+	[RATIO] [float] NULL ,
+	[UNIT_OF_MEASURE_CD] [int] NOT NULL ,
+	[STATUS_CD] [varchar] (4) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL ,
+	[CREATE_TS] [datetime] NOT NULL ,
+	[UPDATE_TS] [datetime] NOT NULL ,
+	[UPDATE_USER_ID] [int] NOT NULL 
+) ON [PRIMARY]
+GO
+
+CREATE TABLE [dbo].[ENV_ASSET] (
+	[ID] [int] IDENTITY (1, 1) NOT NULL ,
+	[FACILITY_ID] [int] NULL ,
+	[PARENT_ASSET_ID] [int] NULL ,
+	[NAME] [varchar] (50) COLLATE SQL_Latin1_General_CP1_CI_AS NULL ,
+	[NUMBER] [varchar] (50) COLLATE SQL_Latin1_General_CP1_CI_AS NULL ,
+	[DESCRIPTION] [varchar] (50) COLLATE SQL_Latin1_General_CP1_CI_AS NULL ,
+	[CLIENT_ID] [int] NOT NULL ,
+	[ACTIVE_TS] [datetime] NULL ,
+	[INACTIVE_TS] [datetime] NULL ,
+	[LOCATION] [varchar] (50) COLLATE SQL_Latin1_General_CP1_CI_AS NULL ,
+	[PERMIT_SHIELD] [bit] NULL ,
+	[POINT] [bit] NULL ,
+	[SCC_NUM] [varchar] (50) COLLATE SQL_Latin1_General_CP1_CI_AS NULL ,
+	[SCC_DESCRIPTION] [varchar] (200) COLLATE SQL_Latin1_General_CP1_CI_AS NULL ,
+	[STATUS_CD] [varchar] (4) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL ,
+	[CREATE_TS] [datetime] NOT NULL ,
+	[UPDATE_TS] [datetime] NOT NULL ,
+	[UPDATE_USER_ID] [int] NOT NULL 
+) ON [PRIMARY]
+GO
+
+CREATE TABLE [dbo].[ENV_FACILITY_CONTACT] (
+	[ID] [int] IDENTITY (1, 1) NOT NULL ,
+	[FACILITY_ID] [int] NOT NULL ,
+	[CAP_CONTACT_ID] [int] NOT NULL ,
+	[ROLE_CD] [int] NULL 
+) ON [PRIMARY]
+GO
+
+CREATE TABLE [dbo].[ENV_ASSET_ATTR] (
+	[ID] [int] IDENTITY (1, 1) NOT NULL ,
+	[ASSET_ID] [int] NOT NULL ,
+	[TANK_CARRIER] [varchar] (50) COLLATE SQL_Latin1_General_CP1_CI_AS NULL ,
+	[TANK_LOADING_METHOD] [varchar] (50) COLLATE SQL_Latin1_General_CP1_CI_AS NULL ,
+	[TANK_VAPOR_RECOVERY] [bit] NULL ,
+	[TANK_TYPE_DESC] [varchar] (50) COLLATE SQL_Latin1_General_CP1_CI_AS NULL ,
+	[TANK_CONTENTS_DESC] [varchar] (50) COLLATE SQL_Latin1_General_CP1_CI_AS NULL ,
+	[TANK_DIAMETER] [varchar] (50) COLLATE SQL_Latin1_General_CP1_CI_AS NULL ,
+	[TANK_HEIGHT] [varchar] (50) COLLATE SQL_Latin1_General_CP1_CI_AS NULL ,
+	[TANK_CAPACITY] [varchar] (50) COLLATE SQL_Latin1_General_CP1_CI_AS NULL ,
+	[STK_LATITUDE] [varchar] (20) COLLATE SQL_Latin1_General_CP1_CI_AS NULL ,
+	[STK_LONGITUDE] [varchar] (20) COLLATE SQL_Latin1_General_CP1_CI_AS NULL ,
+	[STK_HEIGHT] [varchar] (20) COLLATE SQL_Latin1_General_CP1_CI_AS NULL ,
+	[STK_DIAMETER] [varchar] (20) COLLATE SQL_Latin1_General_CP1_CI_AS NULL ,
+	[STK_EXIT_TEMP] [varchar] (20) COLLATE SQL_Latin1_General_CP1_CI_AS NULL ,
+	[STK_EXIT_VELOCITY] [varchar] (20) COLLATE SQL_Latin1_General_CP1_CI_AS NULL ,
+	[STK_EXIT_FLOW_RATE] [varchar] (20) COLLATE SQL_Latin1_General_CP1_CI_AS NULL ,
+	[STK_DESCRIPTION] [varchar] (200) COLLATE SQL_Latin1_General_CP1_CI_AS NULL ,
+	[EP_RATED_MMBTU] [float] NULL ,
+	[EP_CAPACITY_MMBTU] [float] NULL ,
+	[EP_UNIT_OF_MEASURE_CD] [int] NULL 
+) ON [PRIMARY]
+GO
+
+CREATE TABLE [dbo].[ENV_ASSET_EMITTED_SUBSTANCE_TYPE] (
+	[ID] [int] IDENTITY (1, 1) NOT NULL ,
+	[ASSET_ID] [int] NOT NULL ,
+	[SUBSTANCE_TYPE_CD] [int] NOT NULL ,
+	[EFFICIENCY_FACTOR] [int] NULL ,
+	[ADDL_INFO] [varchar] (200) COLLATE SQL_Latin1_General_CP1_CI_AS NULL 
+) ON [PRIMARY]
+GO
+
+CREATE TABLE [dbo].[ENV_ASSET_SOURCE] (
+	[ID] [int] IDENTITY (1, 1) NOT NULL ,
+	[ASSET_ID] [int] NOT NULL ,
+	[SOURCE_ID] [int] NOT NULL ,
+	[STATUS_CD] [varchar] (4) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL ,
+	[ACTIVE_TS] [datetime] NULL ,
+	[INACTIVE_TS] [datetime] NULL ,
+	[CREATE_TS] [datetime] NOT NULL ,
+	[UPDATE_TS] [datetime] NOT NULL ,
+	[UPDATE_USER_ID] [int] NOT NULL 
+) ON [PRIMARY]
+GO
+
+CREATE TABLE [dbo].[ENV_ASSET_TYPE] (
+	[ASSET_ID] [int] NOT NULL ,
+	[ASSET_TYPE_CD] [int] NOT NULL 
+) ON [PRIMARY]
+GO
+
+CREATE TABLE [dbo].[ENV_PERMIT_ASSET] (
+	[ID] [int] IDENTITY (1, 1) NOT NULL ,
+	[PERMIT_DETAIL_ID] [int] NOT NULL ,
+	[ASSET_ID] [int] NOT NULL ,
+	[CREATE_TS] [datetime] NOT NULL ,
+	[UPDATE_TS] [datetime] NOT NULL ,
+	[UPDATE_USER_ID] [int] NOT NULL 
+) ON [PRIMARY]
+GO
+
+CREATE TABLE [dbo].[ENV_PERMIT_FACILITY] (
+	[ID] [int] IDENTITY (1, 1) NOT NULL ,
+	[PERMIT_DETAIL_ID] [int] NOT NULL ,
+	[FACILITY_ID] [int] NOT NULL ,
+	[CREATE_TS] [datetime] NOT NULL ,
+	[UPDATE_TS] [datetime] NOT NULL ,
+	[UPDATE_USER_ID] [int] NOT NULL 
+) ON [PRIMARY]
+GO
+
+CREATE TABLE [dbo].[ENV_FACILITY_ASSET] (
+	[ID] [int] IDENTITY (1, 1) NOT NULL ,
+	[FACILITY_ID] [int] NOT NULL ,
+	[ASSET_ID] [int] NOT NULL ,
+	[CREATE_TS] [datetime] NOT NULL ,
+	[UPDATE_TS] [datetime] NOT NULL ,
+	[UPDATE_USER_ID] [int] NOT NULL 
+) ON [PRIMARY]
+GO
+
+
+CREATE TABLE [dbo].[ENV_PROCESS] (
+	[ID] [int] IDENTITY (1, 1) NOT NULL ,
+	[PARENT_PROCESS_ID] [int] NULL ,
+	[PROCESS_NUMBER] [varchar] (50) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL ,
+	[NAME] [varchar] (50) COLLATE SQL_Latin1_General_CP1_CI_AS NULL ,
+	[DESCRIPTION] [varchar] (75) COLLATE SQL_Latin1_General_CP1_CI_AS NULL ,
+	[ASSET_ID] [int] NULL ,
+	[CLIENT_ID] [int] NOT NULL ,
+	[CREATE_TS] [datetime] NOT NULL ,
+	[UPDATE_TS] [datetime] NOT NULL ,
+	[UPDATE_USER_ID] [int] NOT NULL 
+) ON [PRIMARY]
+GO
+
+CREATE TABLE [dbo].[ENV_SOURCE_USAGE] (
+	[ID] [int] IDENTITY (1, 1) NOT NULL ,
+	[ASSET_SOURCE_ID] [int] NOT NULL ,
+	[METER_READING] [float] NULL ,
+	[PERIOD_START_TS] [datetime] NULL ,
+	[PERIOD_END_TS] [datetime] NULL ,
+	[UNIT_OF_MEASURE_CD] [int] NOT NULL ,
+	[CREATE_TS] [datetime] NOT NULL ,
+	[UPDATE_TS] [datetime] NOT NULL ,
+	[UPDATE_USER_ID] [int] NOT NULL 
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[ENV_PERMIT] WITH NOCHECK ADD 
+	CONSTRAINT [PK_ENV_PERMIT] PRIMARY KEY  CLUSTERED 
+	(
+		[ID]
+	)  ON [PRIMARY] 
+GO
+
+ALTER TABLE [dbo].[ENV_SOURCE_TYPE_SUB_TYPE_MAP] WITH NOCHECK ADD 
+	CONSTRAINT [PK_SOURCE_TYPE_SUB_TYPE_MAP] PRIMARY KEY  CLUSTERED 
+	(
+		[ID]
+	)  ON [PRIMARY] 
+GO
+
+ALTER TABLE [dbo].[LOOKUP_ENV_ASSET_TYPE] WITH NOCHECK ADD 
+	CONSTRAINT [PK_ENV_ORG_UNIT_TYPE] PRIMARY KEY  CLUSTERED 
+	(
+		[CODE]
+	)  ON [PRIMARY] 
+GO
+
+ALTER TABLE [dbo].[LOOKUP_ENV_SOURCE_TYPE] WITH NOCHECK ADD 
+	CONSTRAINT [PK_LOOKUP_ENV_SOURCE_TYPE] PRIMARY KEY  CLUSTERED 
+	(
+		[CODE]
+	)  ON [PRIMARY] 
+GO
+
+ALTER TABLE [dbo].[LOOKUP_ENV_SUBSTANCE_TYPE] WITH NOCHECK ADD 
+	CONSTRAINT [PK_LOOKUP_ENV_SUBSTANCE_TYPE] PRIMARY KEY  CLUSTERED 
+	(
+		[CODE]
+	)  ON [PRIMARY] 
+GO
+
+ALTER TABLE [dbo].[LOOKUP_ENV_UNIT_OF_MEASURE] WITH NOCHECK ADD 
+	CONSTRAINT [PK_ENV_READING_DISPLAY_TYPE] PRIMARY KEY  CLUSTERED 
+	(
+		[CODE]
+	)  ON [PRIMARY] 
+GO
+
+ALTER TABLE [dbo].[ENV_PERMIT_DETAIL] WITH NOCHECK ADD 
+	CONSTRAINT [PK_ENV_PERMIT_DETAIL] PRIMARY KEY  CLUSTERED 
+	(
+		[ID]
+	)  ON [PRIMARY] 
+GO
+
+ALTER TABLE [dbo].[ENV_SOURCE] WITH NOCHECK ADD 
+	CONSTRAINT [PK_ENV_SOURCE] PRIMARY KEY  CLUSTERED 
+	(
+		[ID]
+	)  ON [PRIMARY] 
+GO
+
+ALTER TABLE [dbo].[ENV_SUBSTANCE] WITH NOCHECK ADD 
+	CONSTRAINT [PK_ENV_SUBSTANCE] PRIMARY KEY  CLUSTERED 
+	(
+		[ID]
+	)  ON [PRIMARY] 
+GO
+
+ALTER TABLE [dbo].[ENV_FACILITY] WITH NOCHECK ADD 
+	CONSTRAINT [PK_ENV_FACILITY_ATTR] PRIMARY KEY  CLUSTERED 
+	(
+		[ID]
+	)  ON [PRIMARY] 
+GO
+
+ALTER TABLE [dbo].[ENV_PERMIT_SUBSTANCE] WITH NOCHECK ADD 
+	CONSTRAINT [PK_ENV_PERMIT_SUBSTANCE] PRIMARY KEY  CLUSTERED 
+	(
+		[ID]
+	)  ON [PRIMARY] 
+GO
+
+ALTER TABLE [dbo].[ENV_SOURCE_SUBSTANCE] WITH NOCHECK ADD 
+	CONSTRAINT [PK_ENV_SOURCE_SUBSTANCE] PRIMARY KEY  CLUSTERED 
+	(
+		[ID]
+	)  ON [PRIMARY] 
+GO
+
+ALTER TABLE [dbo].[ENV_ASSET] WITH NOCHECK ADD 
+	CONSTRAINT [PK_ENV_ORG_UNIT] PRIMARY KEY  CLUSTERED 
+	(
+		[ID]
+	)  ON [PRIMARY] 
+GO
+
+ALTER TABLE [dbo].[ENV_FACILITY_CONTACT] WITH NOCHECK ADD 
+	CONSTRAINT [PK_ENV_FACILITY_CONTACTS] PRIMARY KEY  CLUSTERED 
+	(
+		[ID]
+	)  ON [PRIMARY] 
+GO
+
+ALTER TABLE [dbo].[ENV_ASSET_ATTR] WITH NOCHECK ADD 
+	CONSTRAINT [PK_ENV_STORAGE_TANK_ATTR] PRIMARY KEY  CLUSTERED 
+	(
+		[ID]
+	)  ON [PRIMARY] 
+GO
+
+ALTER TABLE [dbo].[ENV_ASSET_EMITTED_SUBSTANCE_TYPE] WITH NOCHECK ADD 
+	CONSTRAINT [PK_ENV_ASSET_EMITTED_SUBSTANCE] PRIMARY KEY  CLUSTERED 
+	(
+		[ID]
+	)  ON [PRIMARY] 
+GO
+
+ALTER TABLE [dbo].[ENV_ASSET_SOURCE] WITH NOCHECK ADD 
+	CONSTRAINT [PK_ENV_UNIT_SOURCE] PRIMARY KEY  CLUSTERED 
+	(
+		[ID]
+	)  ON [PRIMARY] 
+GO
+
+ALTER TABLE [dbo].[ENV_PERMIT_ASSET] WITH NOCHECK ADD 
+	CONSTRAINT [PK_ENV_PERMIT_ASSET] PRIMARY KEY  CLUSTERED 
+	(
+		[ID]
+	)  ON [PRIMARY] 
+GO
+
+ALTER TABLE [dbo].[ENV_PERMIT_FACILITY] WITH NOCHECK ADD 
+	CONSTRAINT [PK_ENV_PERMIT_FACILITY] PRIMARY KEY  CLUSTERED 
+	(
+		[ID]
+	)  ON [PRIMARY] 
+GO
+
+ALTER TABLE [dbo].[ENV_FACILITY_ASSET] WITH NOCHECK ADD 
+	CONSTRAINT [PK_ENV_FACILITY_ASSET] PRIMARY KEY  CLUSTERED 
+	(
+		[ID]
+	)  ON [PRIMARY] 
+GO
+
+ALTER TABLE [dbo].[ENV_PROCESS] WITH NOCHECK ADD 
+	CONSTRAINT [PK_ENV_PROCESS] PRIMARY KEY  CLUSTERED 
+	(
+		[ID]
+	)  ON [PRIMARY] 
+GO
+
+ALTER TABLE [dbo].[ENV_SOURCE_USAGE] WITH NOCHECK ADD 
+	CONSTRAINT [PK_ENV_SOURCE_USAGE] PRIMARY KEY  CLUSTERED 
+	(
+		[ID]
+	)  ON [PRIMARY] 
+GO
+
+ALTER TABLE [dbo].[ENV_FACILITY_CONTACT] ADD 
+	CONSTRAINT [IX_ENV_FACILITY_CONTACTS] UNIQUE  NONCLUSTERED 
+	(
+		[ID]
+	)  ON [PRIMARY] 
+GO
+
+ALTER TABLE [dbo].[ENV_PERMIT_DETAIL] ADD 
+	CONSTRAINT [FK_ENV_PERMIT_DETAIL_ENV_PERMIT] FOREIGN KEY 
+	(
+		[PERMIT_ID]
+	) REFERENCES [dbo].[ENV_PERMIT] (
+		[ID]
+	)
+GO
+
+ALTER TABLE [dbo].[ENV_SOURCE] ADD 
+	CONSTRAINT [FK_ENV_SOURCE_LOOKUP_ENV_SOURCE_TYPE] FOREIGN KEY 
+	(
+		[SOURCE_TYPE_CD]
+	) REFERENCES [dbo].[LOOKUP_ENV_SOURCE_TYPE] (
+		[CODE]
+	)
+GO
+
+ALTER TABLE [dbo].[ENV_SUBSTANCE] ADD 
+	CONSTRAINT [FK_ENV_SUBSTANCE_LOOKUP_ENV_SUBSTANCE_TYPE] FOREIGN KEY 
+	(
+		[SUBSTANCE_TYPE_CD]
+	) REFERENCES [dbo].[LOOKUP_ENV_SUBSTANCE_TYPE] (
+		[CODE]
+	)
+GO
+
+ALTER TABLE [dbo].[ENV_FACILITY] ADD 
+	CONSTRAINT [FK_ENV_FACILITY_ENV_PERMIT_DETAIL] FOREIGN KEY 
+	(
+		[PERMIT_DETAIL_ID]
+	) REFERENCES [dbo].[ENV_PERMIT_DETAIL] (
+		[ID]
+	)
+GO
+
+ALTER TABLE [dbo].[ENV_PERMIT_SUBSTANCE] ADD 
+	CONSTRAINT [FK_ENV_PERMIT_SUBSTANCE_ENV_PERMIT_DETAIL] FOREIGN KEY 
+	(
+		[PERMIT_DETAIL_ID]
+	) REFERENCES [dbo].[ENV_PERMIT_DETAIL] (
+		[ID]
+	),
+	CONSTRAINT [FK_ENV_PERMIT_SUBSTANCE_LOOKUP_ENV_SUBSTANCE_TYPE] FOREIGN KEY 
+	(
+		[SUBSTANCE_TYPE_CD]
+	) REFERENCES [dbo].[LOOKUP_ENV_SUBSTANCE_TYPE] (
+		[CODE]
+	)
+GO
+
+ALTER TABLE [dbo].[ENV_SOURCE_SUBSTANCE] ADD 
+	CONSTRAINT [FK_ENV_SOURCE_SUBSTANCE_ENV_SOURCE] FOREIGN KEY 
+	(
+		[SOURCE_ID]
+	) REFERENCES [dbo].[ENV_SOURCE] (
+		[ID]
+	),
+	CONSTRAINT [FK_ENV_SOURCE_SUBSTANCE_ENV_SUBSTANCE] FOREIGN KEY 
+	(
+		[SUBSTANCE_ID]
+	) REFERENCES [dbo].[ENV_SUBSTANCE] (
+		[ID]
+	),
+	CONSTRAINT [FK_ENV_SOURCE_SUBSTANCE_LOOKUP_ENV_UNIT_OF_MEASURE] FOREIGN KEY 
+	(
+		[UNIT_OF_MEASURE_CD]
+	) REFERENCES [dbo].[LOOKUP_ENV_UNIT_OF_MEASURE] (
+		[CODE]
+	)
+GO
+
+ALTER TABLE [dbo].[ENV_ASSET] ADD 
+	CONSTRAINT [FK_ENV_ASSET_ENV_ASSET] FOREIGN KEY 
+	(
+		[PARENT_ASSET_ID]
+	) REFERENCES [dbo].[ENV_ASSET] (
+		[ID]
+	),
+	CONSTRAINT [FK_ENV_ASSET_ENV_FACILITY] FOREIGN KEY 
+	(
+		[FACILITY_ID]
+	) REFERENCES [dbo].[ENV_FACILITY] (
+		[ID]
+	)
+GO
+
+ALTER TABLE [dbo].[ENV_FACILITY_CONTACT] ADD 
+	CONSTRAINT [FK_ENV_FACILITY_CONTACTS_ENV_FACILITY_ATTR] FOREIGN KEY 
+	(
+		[FACILITY_ID]
+	) REFERENCES [dbo].[ENV_FACILITY] (
+		[ID]
+	)
+GO
+
+ALTER TABLE [dbo].[ENV_ASSET_ATTR] ADD 
+	CONSTRAINT [FK_ENV_ASSET_ATTR_ENV_ASSET] FOREIGN KEY 
+	(
+		[ASSET_ID]
+	) REFERENCES [dbo].[ENV_ASSET] (
+		[ID]
+	),
+	CONSTRAINT [FK_ENV_ASSET_ATTR_LOOKUP_ENV_UNIT_OF_MEASURE] FOREIGN KEY 
+	(
+		[EP_UNIT_OF_MEASURE_CD]
+	) REFERENCES [dbo].[LOOKUP_ENV_UNIT_OF_MEASURE] (
+		[CODE]
+	)
+GO
+
+ALTER TABLE [dbo].[ENV_ASSET_EMITTED_SUBSTANCE_TYPE] ADD 
+	CONSTRAINT [FK_ENV_ASSET_EMITTED_SUBSTANCE_LOOKUP_ENV_SUBSTANCE_TYPE] FOREIGN KEY 
+	(
+		[SUBSTANCE_TYPE_CD]
+	) REFERENCES [dbo].[LOOKUP_ENV_SUBSTANCE_TYPE] (
+		[CODE]
+	),
+	CONSTRAINT [FK_ENV_ASSET_EMITTED_SUBSTANCE_TYPE_ENV_ASSET] FOREIGN KEY 
+	(
+		[ASSET_ID]
+	) REFERENCES [dbo].[ENV_ASSET] (
+		[ID]
+	)
+GO
+
+ALTER TABLE [dbo].[ENV_ASSET_SOURCE] ADD 
+	CONSTRAINT [FK_ENV_ASSET_SOURCE_ENV_ASSET] FOREIGN KEY 
+	(
+		[ASSET_ID]
+	) REFERENCES [dbo].[ENV_ASSET] (
+		[ID]
+	),
+	CONSTRAINT [FK_ENV_ASSET_SOURCE_ENV_SOURCE] FOREIGN KEY 
+	(
+		[SOURCE_ID]
+	) REFERENCES [dbo].[ENV_SOURCE] (
+		[ID]
+	)
+GO
+
+ALTER TABLE [dbo].[ENV_ASSET_TYPE] ADD 
+	CONSTRAINT [FK_ENV_ASSET_TYPE_ENV_ASSET] FOREIGN KEY 
+	(
+		[ASSET_ID]
+	) REFERENCES [dbo].[ENV_ASSET] (
+		[ID]
+	),
+	CONSTRAINT [FK_ENV_ASSET_TYPE_LOOKUP_ENV_ASSET_TYPE1] FOREIGN KEY 
+	(
+		[ASSET_TYPE_CD]
+	) REFERENCES [dbo].[LOOKUP_ENV_ASSET_TYPE] (
+		[CODE]
+	)
+GO
+
+ALTER TABLE [dbo].[ENV_PERMIT_ASSET] ADD 
+	CONSTRAINT [FK_ENV_PERMIT_ASSET_ENV_ASSET] FOREIGN KEY 
+	(
+		[ASSET_ID]
+	) REFERENCES [dbo].[ENV_ASSET] (
+		[ID]
+	),
+	CONSTRAINT [FK_ENV_PERMIT_ASSET_ENV_PERMIT_DETAIL] FOREIGN KEY 
+	(
+		[PERMIT_DETAIL_ID]
+	) REFERENCES [dbo].[ENV_PERMIT_DETAIL] (
+		[ID]
+	)
+GO
+
+ALTER TABLE [dbo].[ENV_PERMIT_FACILITY] ADD 
+	CONSTRAINT [FK_ENV_PERMIT_FACILITY_ENV_FACILITY] FOREIGN KEY 
+	(
+		[FACILITY_ID]
+	) REFERENCES [dbo].[ENV_FACILITY] (
+		[ID]
+	),
+	CONSTRAINT [FK_ENV_PERMIT_FACILITY_ENV_PERMIT_DETAIL] FOREIGN KEY 
+	(
+		[PERMIT_DETAIL_ID]
+	) REFERENCES [dbo].[ENV_PERMIT_DETAIL] (
+		[ID]
+	)
+GO
+
+ALTER TABLE [dbo].[ENV_FACILITY_ASSET] ADD 
+	CONSTRAINT [FK_ENV_FACILITY_ASSET_ENV_FACILITY] FOREIGN KEY 
+	(
+		[FACILITY_ID]
+	) REFERENCES [dbo].[ENV_FACILITY] (
+		[ID]
+	),
+	CONSTRAINT [FK_ENV_FACILITY_ASSET_ENV_ASSET] FOREIGN KEY 
+	(
+		[ASSET_ID]
+	) REFERENCES [dbo].[ENV_ASSET] (
+		[ID]
+	)
+GO
+
+ALTER TABLE [dbo].[ENV_PROCESS] ADD 
+	CONSTRAINT [FK_ENV_PROCESS_ENV_ORG_UNIT] FOREIGN KEY 
+	(
+		[ASSET_ID]
+	) REFERENCES [dbo].[ENV_ASSET] (
+		[ID]
+	),
+	CONSTRAINT [FK_ENV_PROCESS_ENV_PROCESS] FOREIGN KEY 
+	(
+		[PARENT_PROCESS_ID]
+	) REFERENCES [dbo].[ENV_PROCESS] (
+		[ID]
+	)
+GO
+
+ALTER TABLE [dbo].[ENV_SOURCE_USAGE] ADD 
+	CONSTRAINT [FK_ENV_SOURCE_USAGE_ENV_ASSET_SOURCE] FOREIGN KEY 
+	(
+		[ASSET_SOURCE_ID]
+	) REFERENCES [dbo].[ENV_ASSET_SOURCE] (
+		[ID]
+	),
+	CONSTRAINT [FK_ENV_SOURCE_USAGE_ENV_READING_DISPLAY_TYPE] FOREIGN KEY 
+	(
+		[UNIT_OF_MEASURE_CD]
+	) REFERENCES [dbo].[LOOKUP_ENV_UNIT_OF_MEASURE] (
+		[CODE]
+	)
+GO
+

@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?><!DOCTYPE struts-config PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 1.3//EN"
+    "http://struts.apache.org/dtds/struts-config_1_3.dtd">
+<struts-config>
+    <form-beans>
+        <form-bean name="inspectionForm"
+                   type="com.sehinc.erosioncontrol.action.inspection.InspectionForm" />
+        <form-bean name="inspectionListForm"
+                   type="com.sehinc.erosioncontrol.action.inspection.InspectionListForm" />
+        <form-bean name="inspectionTemplateForm"
+                   type="com.sehinc.erosioncontrol.action.inspection.InspectionTemplateForm" />
+        <form-bean name="inspectionTemplateListForm"
+                   type="com.sehinc.erosioncontrol.action.inspection.InspectionTemplateListForm" />
+        <form-bean name="inspectionEmailForm"
+                   type="com.sehinc.erosioncontrol.action.inspection.InspectionEmailForm" />
+    </form-beans>
+    <global-forwards>
+        <forward name="inspection.list.page"
+                 path="/inspectionlistpage.do"
+                 redirect="true" />
+        <forward name="inspection.view.page"
+                 path="/inspectionviewpage.do"
+                 redirect="true" />
+        <forward name="inspection.create.page"
+                 path="/inspectioncreatepage.do"
+                 redirect="true" />
+        <forward name="inspection.email.page"
+                 path="/inspectionemailpage.do"
+                 redirect="true" />
+        <forward name="inspection.template.list.page"
+                 path="/inspectiontemplatelistpage.do"
+                 redirect="true" />
+    </global-forwards>
+    <action-mappings>
+        <action path="/inspectionlistpage"
+                type="com.sehinc.erosioncontrol.action.inspection.InspectionListPageAction"
+                name="inspectionListForm"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="inspection.list.page" />
+        </action>
+        <action path="/inspectionviewpage"
+                type="com.sehinc.erosioncontrol.action.inspection.InspectionViewPageAction"
+                name="inspectionForm"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="inspection.view.page" />
+        </action>
+        <action path="/inspectioncreatepage"
+                type="com.sehinc.erosioncontrol.action.inspection.InspectionCreatePageAction"
+                name="inspectionForm"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="inspection.create.page" />
+        </action>
+        <action path="/inspectioncreateaction"
+                type="com.sehinc.erosioncontrol.action.inspection.InspectionCreateAction"
+                input="inspection.create.page"
+                name="inspectionForm"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="/inspectionviewpage.do"
+                     redirect="true" />
+        </action>
+        <action path="/inspectioneditpage"
+                type="com.sehinc.erosioncontrol.action.inspection.InspectionEditPageAction"
+                name="inspectionForm"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="inspection.edit.page" />
+        </action>
+        <action path="/inspectioneditaction"
+                type="com.sehinc.erosioncontrol.action.inspection.InspectionEditAction"
+                input="inspection.edit.page"
+                name="inspectionForm"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="/inspectionviewpage.do"
+                     redirect="true" />
+        </action>
+        <!--input="inspection.delete.page"-->
+        <action path="/inspectiondeleteaction"
+                type="com.sehinc.erosioncontrol.action.inspection.InspectionDeleteAction"
+                name="inspectionForm"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="/inspectionlistpage.do"
+                     redirect="true" />
+        </action>
+        <action path="/inspectionemailpage"
+                type="com.sehinc.erosioncontrol.action.inspection.InspectionEmailPageAction"
+                name="inspectionEmailForm"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="inspection.email.page" />
+        </action>
+        <action path="/inspectionemailaction"
+                type="com.sehinc.erosioncontrol.action.inspection.InspectionEmailAction"
+                name="inspectionEmailForm"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="/inspectionlistpage.do"
+                     redirect="true" />
+        </action>
+        <action path="/inspectiontemplatelistpage"
+                type="com.sehinc.erosioncontrol.action.inspection.InspectionTemplateListPageAction"
+                name="inspectionTemplateListForm"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="inspection.template.list.page" />
+        </action>
+        <action path="/inspectiontemplatecreatepage"
+                type="com.sehinc.erosioncontrol.action.inspection.InspectionTemplateCreatePageAction"
+                name="inspectionTemplateForm"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="inspection.template.create.page" />
+        </action>
+        <action path="/inspectiontemplatecreateaction"
+                type="com.sehinc.erosioncontrol.action.inspection.InspectionTemplateCreateAction"
+                name="inspectionTemplateForm"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="/inspectiontemplatelistpage.do"
+                     redirect="true" />
+        </action>
+        <action path="/inspectiontemplateeditpage"
+                type="com.sehinc.erosioncontrol.action.inspection.InspectionTemplateEditPageAction"
+                name="inspectionTemplateForm"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="inspection.template.edit.page" />
+        </action>
+        <action path="/inspectiontemplateeditaction"
+                type="com.sehinc.erosioncontrol.action.inspection.InspectionTemplateEditAction"
+                name="inspectionTemplateForm"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="/inspectiontemplatelistpage.do"
+                     redirect="true" />
+        </action>
+        <action path="/inspectiontemplatedeleteaction"
+                type="com.sehinc.erosioncontrol.action.inspection.InspectionTemplateDeleteAction"
+                name="inspectionTemplateForm"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="/inspectiontemplatelistpage.do"
+                     redirect="true" />
+        </action>
+    </action-mappings>
+    <controller processorClass="org.apache.struts.action.RequestProcessor"
+                contentType="text/html" />
+    <plug-in className="org.apache.struts.tiles.TilesPlugin">
+        <set-property property="definitions-config"
+                      value="/WEB-INF/html/tiles-defs.xml, /WEB-INF/html/esc/tiles-inspection-defs.xml" />
+        <set-property property="definitions-debug"
+                      value="2" />
+        <set-property property="definitions-parser-details"
+                      value="2" />
+        <set-property property="definitions-parser-validate"
+                      value="true" />
+        <set-property property="moduleAware"
+                      value="true" />
+    </plug-in>
+    <plug-in className="org.apache.struts.validator.ValidatorPlugIn">
+        <set-property property="pathnames"
+                      value="/org/apache/struts/validator/validator-rules.xml, /WEB-INF/html/esc/validation-inspection.xml" />
+    </plug-in>
+</struts-config>

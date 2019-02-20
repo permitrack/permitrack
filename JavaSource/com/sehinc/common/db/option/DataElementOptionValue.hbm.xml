@@ -1,0 +1,24 @@
+<?xml version="1.0"?><!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping>
+    <!-- -->
+    <class name="com.sehinc.common.db.option.DataElementOptionValue"
+           table="DATA_ELEMENT_OPTION_VALUE">
+        <id name="id"
+            type="integer"
+            column="id">
+            <generator class="identity" />
+        </id>
+        <many-to-one name="dataElement"
+                     class="com.sehinc.common.db.option.DataElement"
+                     column="[DATA_ELEMENT_ID]"
+                     lazy="false" />
+        <property name="sequence"
+                  type="integer"
+                  column="SEQUENCE" />
+        <property name="value"
+                  type="string"
+                  column="[VALUE]" />
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?><!DOCTYPE form-validation PUBLIC
+    "-//Apache Software Foundation//DTD Commons Validator Rules Configuration 1.0//EN"
+    "http://jakarta.apache.org/commons/dtds/validator_1_0.dtd">
+<form-validation>
+    <formset>
+        <form name="SourceUsageForm">
+            <field property="periodStartTsString"
+                   depends="date">
+                <arg0 key="source.usage.period.start" />
+                <var>
+                    <var-name>datePatternStrict</var-name>
+                    <var-value>MM/dd/yyyy</var-value>
+                </var>
+            </field>
+            <field property="periodEndTsString"
+                   depends="date">
+                <arg0 key="source.usage.period.end" />
+                <var>
+                    <var-name>datePatternStrict</var-name>
+                    <var-value>MM/dd/yyyy</var-value>
+                </var>
+            </field>
+            <field property="meterReading"
+                   depends="required,float">
+                <arg0 key="source.usage.meter.reading" />
+            </field>
+        </form>
+        <form name="SourceUsageMultiForm">
+            <field property="startDateString"
+                   depends="required,date">
+                <arg0 key="source.usage.period.start" />
+                <var>
+                    <var-name>datePatternStrict</var-name>
+                    <var-value>MM/dd/yyyy</var-value>
+                </var>
+            </field>
+            <field property="endDateString"
+                   depends="required,date">
+                <arg0 key="source.usage.period.end" />
+                <var>
+                    <var-name>datePatternStrict</var-name>
+                    <var-value>MM/dd/yyyy</var-value>
+                </var>
+            </field>
+        </form>
+    </formset>
+</form-validation>

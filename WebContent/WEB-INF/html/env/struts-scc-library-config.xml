@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?><!DOCTYPE struts-config PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 1.3//EN"
+    "http://struts.apache.org/dtds/struts-config_1_3.dtd">
+<struts-config>
+    <form-beans>
+        <form-bean name="SccLibraryForm"
+                   type="com.sehinc.environment.action.scclibrary.SccLibraryForm" />
+    </form-beans>
+    <global-forwards>
+        <forward name="scc.library.list.page"
+                 path="/scclibrarylistpage.do"
+                 redirect="true" />
+    </global-forwards>
+    <action-mappings>
+        <action path="/scclibrarylistpage"
+                type="com.sehinc.environment.action.scclibrary.SccLibraryListPageAction"
+                name="SccLibraryForm"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="scc.library.list.page" />
+        </action>
+        <action path="/scclibraryviewpage"
+                type="com.sehinc.environment.action.scclibrary.SccLibraryViewPageAction"
+                name="SccLibraryForm"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="scc.library.view.page" />
+        </action>
+        <action path="/scclibrarycreatepage"
+                type="com.sehinc.environment.action.scclibrary.SccLibraryCreatePageAction"
+                name="SccLibraryForm"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="scc.library.create.page" />
+        </action>
+        <action path="/scclibrarycreateaction"
+                type="com.sehinc.environment.action.scclibrary.SccLibraryCreateAction"
+                input="scc.library.create.page"
+                name="SccLibraryForm"
+                scope="request"
+                validate="true"
+                cancellable="true">
+            <forward name="continue"
+                     path="/scclibraryviewpage.do"
+                     redirect="true" />
+        </action>
+        <action path="/scclibraryeditpage"
+                type="com.sehinc.environment.action.scclibrary.SccLibraryEditPageAction"
+                name="SccLibraryForm"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="scc.library.edit.page" />
+        </action>
+        <action path="/scclibraryeditaction"
+                type="com.sehinc.environment.action.scclibrary.SccLibraryEditAction"
+                input="scc.library.edit.page"
+                name="SccLibraryForm"
+                scope="request"
+                validate="true"
+                cancellable="true">
+            <forward name="continue"
+                     path="/scclibraryviewpage.do"
+                     redirect="true" />
+        </action>
+        <action path="/scclibrarydeleteaction"
+                type="com.sehinc.environment.action.scclibrary.SccLibraryDeleteAction"
+                name="SccLibraryForm"
+                input="scc.library.delete.page"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="/scclibrarylistpage.do"
+                     redirect="true" />
+        </action>
+    </action-mappings>
+    <controller processorClass="org.apache.struts.action.RequestProcessor"
+                contentType="text/html" />
+    <plug-in className="org.apache.struts.tiles.TilesPlugin">
+        <set-property property="definitions-config"
+                      value="/WEB-INF/html/tiles-defs.xml, /WEB-INF/html/env/tiles-defs.xml, /WEB-INF/html/env/tiles-scc-library-defs.xml" />
+        <set-property property="definitions-debug"
+                      value="2" />
+        <set-property property="definitions-parser-details"
+                      value="2" />
+        <set-property property="definitions-parser-validate"
+                      value="true" />
+        <set-property property="moduleAware"
+                      value="true" />
+    </plug-in>
+    <plug-in className="org.apache.struts.validator.ValidatorPlugIn">
+        <set-property property="pathnames"
+                      value="/org/apache/struts/validator/validator-rules.xml, /WEB-INF/html/env/validation-scc-library.xml" />
+    </plug-in>
+</struts-config>

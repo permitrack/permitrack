@@ -1,0 +1,23 @@
+<!DOCTYPE tiles-definitions PUBLIC
+    "-//Apache Software Foundation//DTD Tiles Configuration 1.3//EN"
+    "http://struts.apache.org/dtds/tiles-config_1_3.dtd">
+<tiles-definitions>
+    <definition name="dvo.baseLayout"
+                extends="html.baseLayout" />
+    <definition name="dvo.baseTitledLayout"
+                extends="html.baseTitledLayout" />
+    <definition name="dvo.dataview.page"
+                extends="dvo.baseLayout">
+        <put name="content"
+             value="/html/dvo/dataview.jsp" />
+    </definition>
+    <definition name="dvo.client.select.page"
+                extends="dvo.baseTitledLayout">
+        <put name="title"
+             value="DataView Online" />
+        <put name="description"
+             value="Select a client from the list." />
+        <put name="content"
+             value="/html/dvo/clientselect.jsp" />
+    </definition>
+</tiles-definitions>

@@ -1,0 +1,45 @@
+<?xml version="1.0"?><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <!--
+            Auto-generated mapping file from
+            the hibernate.org cfg2hbm engine
+    -->
+    <class name="com.sehinc.common.db.contact.CapContactOrganization"
+           table="CAP_CONTACT_ORGANIZATION">
+        <id name="id"
+            type="integer">
+            <column name="ID" />
+            <generator class="identity" />
+        </id>
+        <property name="clientId"
+                  type="integer"
+                  column="CLIENT_ID" />
+        <property name="isClient"
+                  type="boolean"
+                  column="IS_CLIENT" />
+        <property name="refClientId"
+                  type="integer"
+                  column="REF_CLIENT_ID" />
+        <property name="name"
+                  type="string"
+                  column="NAME" />
+        <many-to-one name="address"
+                     class="com.sehinc.common.db.user.AddressData"
+                     column="ADDRESS_ID"
+                     lazy="false" />
+        <many-to-one name="status"
+                     class="com.sehinc.erosioncontrol.db.code.StatusCodeData"
+                     column="STATUS_CD"
+                     lazy="false" />
+        <property name="createTimestamp"
+                  type="timestamp"
+                  column="CREATE_TS" />
+        <property name="updateTimestamp"
+                  type="timestamp"
+                  column="UPDATE_TS" />
+        <property name="updateUserId"
+                  type="integer"
+                  column="UPDATE_USER_ID" />
+    </class>
+</hibernate-mapping>

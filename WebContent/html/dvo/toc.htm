@@ -1,0 +1,194 @@
+<meta http-equiv="Content-Type"
+      content="text/html; charset=ISO-8859-1">
+<HTML>
+    <HEAD>
+        <TITLE>LayerList</TITLE>
+        <META HTTP-EQUIV="Pragma"
+              CONTENT="no-cache">
+        <!--
+            toc.htm, as altered for use with the dbGroupToc v.1.5 modification.
+            Use this as a replacement for the default toc.htm of the html viewer.
+            Based on the 3.1 code set, but references to strings in aimsResource.js
+            have been hardcoded to make this code compatible with the 3.0 code set.
+            Has also been successfully tested with the 4.0 code set.
+        -->
+        <LINK rel="stylesheet"
+              type="text/css"
+              href="./dbGroupToc/dbgtStyle.css" />
+        <SCRIPT language=JavaScript
+                src="./javascript/dbgtCode.js"
+                type=text/javascript></SCRIPT>
+        <SCRIPT language=JavaScript
+                src="./javascript/dbgtData.js"
+                type=text/javascript></SCRIPT>
+        <SCRIPT LANGUAGE="Javascript">
+            var t;
+            var tName = "";
+            var autoRefreshMap = true;
+            if (opener)
+            {
+                if (opener.name
+                    == "MapFrame")
+                {
+                    t =
+                    opener.parent.MapFrame;
+                    tName =
+                    "opener.parent.MapFrame.";
+                }
+                else
+                {
+                    t =
+                    opener;
+                    tName =
+                    "opener.";
+                }
+            }
+            else
+            {
+                if (parent.MapFrame
+                    != null)
+                {
+                    t =
+                    parent.MapFrame;
+                    tName =
+                    "parent.MapFrame.";
+                }
+                else
+                {
+                    t =
+                    document;
+                }
+            }
+            function showLayerInfo(i)
+            {
+                t.showLayerInfo(i);
+            }
+            function updateLayers()
+            {
+                t.sendMapXML();
+                ///MY TEST
+                parent.MapFrame.updateStatus(parent.MapFrame.modeName);
+            }
+            function closeIt()
+            {
+                t.LayerListOpen =
+                false;
+                window.close();
+            }
+            function startUp()
+            {
+                if (opener)
+                {
+                    t.LayerListOpen =
+                    true;
+                    window.focus();
+                }
+            }
+            function ReloadTocHtm()
+            {
+                document.location =
+                "toc.htm";
+            }
+            function toggleAutoRefresh()
+            {
+                t.toc.autoRefreshMap =
+                !t.toc.autoRefreshMap;
+                return false;
+            }
+            function popTocHelp()
+            {
+                var win = window.open('',
+                                      'tocHelpWin',
+                                      'width=400,height=300,scrollbars');
+                win.document.open();
+                win.document.writeln('<HTML><HEAD><TITLE>Toc Help</TITLE></HEAD><BODY>');
+                win.document.writeln(t.toc.writeHelpHTML());
+                win.document.writeln('</BODY></HTML>');
+                win.document.close();
+            }
+            function SetLabelVisibility(checkbox)
+            {
+                if (checkbox.status
+                    == 1)
+                {
+                    t.showDVOLabels =
+                    true;
+                }
+                else
+                {
+                    t.showDVOLabels =
+                    false;
+                }
+            }
+        </SCRIPT>
+    </HEAD>
+    <BODY BGCOLOR="White"
+          onload="startUp()">
+        <CENTER>
+            <SCRIPT TYPE="text/javascript"
+                    LANGUAGE="JavaScript">
+                if (opener)
+                {
+                    document.writeln('<INPUT TYPE="button" NAME="hideButton" VALUE="Hide LayerList" onClick="closeIt()">');
+                    document.writeln("<HR WIDTH='75%'>");
+                }
+            </SCRIPT>
+            <SCRIPT TYPE="text/javascript"
+                    LANGUAGE="JavaScript">
+                var isNav = (navigator.appName.indexOf("Netscape")
+                    >= 0);
+                var isNavPre5 = ((isNav)
+                    && (parseFloat(navigator.appVersion)
+                    < 5));
+                var useUglyMethod = ((isNavPre5)
+                    || (!document.getElementById));
+                if (useUglyMethod)
+                {
+                    document.writeln(t.toc.writeHTML());
+                }
+                else
+                {
+                    // the toc will be written to this div
+                    document.writeln('<DIV id="divToc"> </DIV>');
+                }
+                document.writeln('<FORM>');
+                document.writeln('<INPUT TYPE="button" NAME="btnRefresh" VALUE="Refresh Map" onClick="updateLayers()">');
+                document.writeln('<BR>');
+                var sChecked = "checked"; //( (typeof(t.toc.autoRefreshMap) != "undefined" && t.toc.autoRefreshMap) ? 'checked' : '');
+                document.writeln('<INPUT TYPE="checkbox" NAME="chkAutoRefresh" onmousedown="toggleAutoRefresh()"'
+                                     + sChecked
+                                     + '>Auto Refresh');
+                document.writeln('</FORM>');
+                if (useUglyMethod)
+                {
+                    document.writeln(t.toc.writeHelpHTML());
+                    t.toc.refresh =
+                    ReloadTocHtm();
+                }
+                else
+                {
+                    // the toc help will be written to this div
+                    document.writeln('<DIV id="divTocHelp"> </DIV>');
+                    var divToc = document.getElementById("divToc");
+                    var divTocHelp = document.getElementById("divTocHelp");
+                    //t.toc.setOutput( divToc,	divTocHelp );
+                    if (t.toc
+                        != null)
+                    {
+                        t.toc.setOutput(divToc,
+                                        null);
+                        t.toc.refresh();
+                    }
+                }
+                document.writeln('<INPUT TYPE="button" NAME="btnHelp" VALUE="Layer Help" onClick="popTocHelp()">');
+                document.write('<td><br><br><input type="Checkbox" onclick="SetLabelVisibility(this)" name="LabelLabelled"');
+                if (t.showDVOLabels
+                    == true)
+                {
+                    document.write(' checked value=1');
+                }
+                document.write('>Show Labels</td>');
+            </SCRIPT>
+        </CENTER>
+    </BODY>
+</HTML>

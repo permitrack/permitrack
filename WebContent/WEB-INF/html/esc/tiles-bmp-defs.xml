@@ -1,0 +1,48 @@
+<!DOCTYPE tiles-definitions PUBLIC
+    "-//Apache Software Foundation//DTD Tiles Configuration 1.3//EN"
+    "http://struts.apache.org/dtds/tiles-config_1_3.dtd">
+<tiles-definitions>
+    <definition name="BMP.baseTitledLayout"
+                extends="html.baseTitledLayout">
+        <put name="primaryMenu"
+             value="/html/esc/primarynavigation.jsp" />
+        <put name="secondaryMenu"
+             value="/html/esc/secondarynavigation.jsp" />
+    </definition>
+    <definition name="BMP.list.page"
+                extends="BMP.baseTitledLayout">
+        <put name="title"
+             value="BMP List" />
+        <put name="description"
+             value="List of all BMP Libraries, grouped by category." />
+        <put name="content"
+             value="/html/esc/bmp/bmplist.jsp" />
+    </definition>
+    <definition name="BMP.view.page"
+                extends="BMP.baseTitledLayout">
+        <put name="title"
+             value="BMP" />
+        <put name="description"
+             value="View Best Management Practice details." />
+        <put name="content"
+             value="/html/esc/bmp/bmpview.jsp" />
+    </definition>
+    <definition name="BMP.edit.page"
+                extends="BMP.baseTitledLayout">
+        <put name="title"
+             value="BMP" />
+        <put name="description"
+             value="Edit a Best Management Practice." />
+        <put name="content"
+             value="/html/esc/bmp/bmpedit.jsp" />
+    </definition>
+    <definition name="BMP.create.page"
+                extends="BMP.baseTitledLayout">
+        <put name="title"
+             value="BMP" />
+        <put name="description"
+             value="Create a new Best Management Practice.  Choose an existing category from the list, or enter a new category name." />
+        <put name="content"
+             value="/html/esc/bmp/bmpcreate.jsp" />
+    </definition>
+</tiles-definitions>

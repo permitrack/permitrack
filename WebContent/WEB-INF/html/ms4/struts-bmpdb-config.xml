@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?><!DOCTYPE struts-config PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 1.3//EN"
+    "http://struts.apache.org/dtds/struts-config_1_3.dtd">
+<struts-config>
+    <form-beans>
+        <form-bean name="bmpForm"
+                   type="com.sehinc.stormwater.action.bmpdb.BMPDBForm" />
+        <form-bean name="bmpDbListForm"
+                   type="com.sehinc.stormwater.action.bmpdb.BMPDBListForm" />
+        <form-bean name="goalForm"
+                   type="com.sehinc.stormwater.action.bmpdb.BMPDBGoalForm" />
+    </form-beans>
+    <global-forwards>
+        <forward name="bmpdb.list.action"
+                 path="/bmpdblistpageaction.do"
+                 redirect="true" />
+<!--
+        <forward name="bmpdb.view.action"
+                 path="/bmpdbviewaction.do"
+                 redirect="true" />
+-->
+    </global-forwards>
+    <action-mappings>
+        <action path="/bmpdblistaction"
+                type="com.sehinc.stormwater.action.bmpdb.BMPDBListAction"
+                name="bmpDbListForm"
+                parameter="secondaryMenuItem=list"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="/bmpdblistpageaction.do"
+                     redirect="true" />
+        </action>
+        <action path="/bmpdblistpageaction"
+                type="com.sehinc.stormwater.action.bmpdb.BMPDBListAction"
+                name="bmpDbListForm"
+                parameter="secondaryMenuItem=list"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="bmpdb.list.page" />
+        </action>
+        <action path="/bmpdbviewaction"
+                type="com.sehinc.stormwater.action.bmpdb.BMPDBAction"
+                name="bmpForm"
+                parameter="secondaryMenuItem=view;mode=library"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="bmpdb.view.page" />
+        </action>
+        <action path="/bmpdbnewaction"
+                type="com.sehinc.stormwater.action.bmpdb.BMPDBNewAction"
+                name="bmpForm"
+                parameter="secondaryMenuItem=create;action=newstep1;mode=library"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="bmpdb.new.page1" />
+        </action>
+        <action path="/bmpdbnewstep2action"
+                type="com.sehinc.stormwater.action.bmpdb.BMPDBNewAction"
+                name="bmpForm"
+                input="bmpdb.new.page1"
+                parameter="secondaryMenuItem=create;action=newstep2;mode=library"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="bmpdb.new.page2" />
+        </action>
+        <action path="/bmplibrarycreate"
+                type="com.sehinc.stormwater.action.bmpdb.BMPDBCreateAction"
+                name="bmpForm"
+                input="bmpdb.new.page2"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="/bmpdbviewaction.do"
+                     redirect="true" />
+        </action>
+        <action path="/bmplibraryeditaction"
+                type="com.sehinc.stormwater.action.bmpdb.BMPDBAction"
+                name="bmpForm"
+                parameter="secondaryMenuItem=edit;mode=library"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="bmpdb.edit.page" />
+        </action>
+        <action path="/bmplibraryedit"
+                type="com.sehinc.stormwater.action.bmpdb.BMPDBEditAction"
+                name="bmpForm"
+                input="bmpdb.edit.page"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="/bmpdbviewaction.do"
+                     redirect="true" />
+        </action>
+        <action path="/bmpdbdelete"
+                type="com.sehinc.stormwater.action.bmpdb.BMPDBDeleteAction"
+                name="bmpForm"
+                input="bmpdb.edit.page"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="/bmpdblistpageaction.do"
+                     redirect="true" />
+        </action>
+        <action path="/goallibrarycreateaction"
+                type="com.sehinc.stormwater.action.bmpdb.BMPDBNewGoalAction"
+                name="goalForm"
+                parameter="secondaryMenuItem=create;mode=library"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="bmpdb.new.goal.page" />
+        </action>
+        <action path="/goallibrarycreate"
+                type="com.sehinc.stormwater.action.bmpdb.BMPDBCreateGoalAction"
+                name="goalForm"
+                input="bmpdb.new.goal.page"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="/bmpdbviewaction.do"
+                     redirect="true" />
+        </action>
+        <action path="/goallibraryviewaction"
+                type="com.sehinc.stormwater.action.bmpdb.BMPDBGoalAction"
+                name="goalForm"
+                parameter="secondaryMenuItem=view;mode=library"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="bmpdb.goal.view.page" />
+        </action>
+        <action path="/goallibraryeditaction"
+                type="com.sehinc.stormwater.action.bmpdb.BMPDBGoalAction"
+                name="goalForm"
+                parameter="secondaryMenuItem=edit;mode=library"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="bmpdb.goal.edit.page" />
+        </action>
+        <action path="/goallibraryedit"
+                type="com.sehinc.stormwater.action.bmpdb.BMPDBGoalEditAction"
+                name="goalForm"
+                input="bmpdb.goal.edit.page"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="/goallibraryviewaction.do"
+                     redirect="true" />
+        </action>
+        <action path="/bmpdbgoaldelete"
+                type="com.sehinc.stormwater.action.bmpdb.BMPDBGoalDeleteAction"
+                name="goalForm"
+                input="bmpdb.goal.edit.page"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="/bmpdbviewaction.do"
+                     redirect="true" />
+        </action>
+    </action-mappings>
+    <controller processorClass="org.apache.struts.action.RequestProcessor"
+                contentType="text/html" />
+    <plug-in className="org.apache.struts.tiles.TilesPlugin">
+        <set-property property="definitions-config"
+                      value="/WEB-INF/html/tiles-defs.xml, /WEB-INF/html/ms4/tiles-bmpdb-defs.xml" />
+        <set-property property="definitions-debug"
+                      value="2" />
+        <set-property property="definitions-parser-details"
+                      value="2" />
+        <set-property property="definitions-parser-validate"
+                      value="true" />
+        <set-property property="moduleAware"
+                      value="true" />
+    </plug-in>
+    <plug-in className="org.apache.struts.validator.ValidatorPlugIn">
+        <set-property property="pathnames"
+                      value="/org/apache/struts/validator/validator-rules.xml, /WEB-INF/html/ms4/validation-bmpdb.xml" />
+    </plug-in>
+</struts-config>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?><!DOCTYPE struts-config PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 1.3//EN"
+    "http://struts.apache.org/dtds/struts-config_1_3.dtd">
+<struts-config>
+    <form-beans>
+        <form-bean name="ReportAccessForm"
+                   type="com.sehinc.security.action.report.ReportAccessForm" />
+    </form-beans>
+    <global-forwards>
+        <forward name="report.access.edit.page"
+                 path="/reportaccesseditpageaction.do"
+                 redirect="true" />
+    </global-forwards>
+    <action-mappings>
+        <action path="/reportaccesseditpageaction"
+                type="com.sehinc.security.action.report.ReportAccessEditPageAction"
+                name="ReportAccessForm"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="report.access.edit.page" />
+        </action>
+        <action path="/reportaccesseditaction"
+                type="com.sehinc.security.action.report.ReportAccessEditAction"
+                input="report.access.edit.page"
+                name="ReportAccessForm"
+                scope="request"
+                validate="false"
+                cancellable="true">
+            <forward name="continue"
+                     path="/reportaccesseditpageaction.do"
+                     redirect="true" />
+        </action>
+    </action-mappings>
+    <controller processorClass="org.apache.struts.action.RequestProcessor"
+                contentType="text/html" />
+    <plug-in className="org.apache.struts.tiles.TilesPlugin">
+        <set-property property="definitions-config"
+                      value="/WEB-INF/html/tiles-defs.xml, /WEB-INF/html/sec/tiles-report-defs.xml" />
+        <set-property property="definitions-debug"
+                      value="2" />
+        <set-property property="definitions-parser-details"
+                      value="2" />
+        <set-property property="definitions-parser-validate"
+                      value="true" />
+        <set-property property="moduleAware"
+                      value="true" />
+    </plug-in>
+    <plug-in className="org.apache.struts.validator.ValidatorPlugIn">
+        <set-property property="pathnames"
+                      value="/org/apache/struts/validator/validator-rules.xml" />
+    </plug-in>
+</struts-config>

@@ -1,0 +1,9 @@
+if exists (select * from dbo.sysobjects where id = object_id(N'[dbo].[FK_ENV_PROCESS_ENV_ORG_UNIT]') and OBJECTPROPERTY(id, N'IsForeignKey') = 1)
+ALTER TABLE [dbo].[ENV_PROCESS] DROP CONSTRAINT FK_ENV_PROCESS_ENV_ORG_UNIT
+GO
+
+ALTER TABLE [dbo].[ENV_PROCESS] 
+DROP COLUMN ASSET_ID
+
+ALTER TABLE [dbo].[ENV_PROCESS]
+ADD ORDER_NUM [int] NULL

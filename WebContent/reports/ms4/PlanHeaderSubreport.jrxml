@@ -1,0 +1,102 @@
+<?xml version="1.0"?>
+<!DOCTYPE jasperReport PUBLIC "-//JasperReports//DTD Report Design//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
+
+<jasperReport 
+		name="PlanHeaderSubreport" 
+		pageWidth="595" 
+		pageHeight="842" 
+		columnWidth="515" 
+		columnSpacing="0" 
+		leftMargin="0" 
+		rightMargin="0" 
+		topMargin="0" 
+		bottomMargin="0"
+		scriptletClass="com.sehinc.stormwater.action.report.PlanReportScriptlet">
+	<reportFont name="Arial_Normal" isDefault="true" fontName="Arial" size="12" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="true"/>
+	<reportFont name="Arial_Bold" isDefault="false" fontName="Arial" size="12" isBold="true" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="true"/>
+	<reportFont name="Arial_Italic" isDefault="false" fontName="Arial" size="12" isItalic="true" pdfFontName="Helvetica-Oblique" pdfEncoding="Cp1252" isPdfEmbedded="true"/>
+	<parameter name="ReportTitle" class="java.lang.String"/>
+	<parameter name="TimeFrameDescription" class="java.lang.String"/>
+	<parameter name="ClientName" class="java.lang.String"/>
+	<parameter name="ClientWebSite" class="java.lang.String"/>
+	<parameter name="PlanName" class="java.lang.String"/>
+	<parameter name="PlanId" class="java.lang.Integer"/>
+	<parameter name="LogoLocation" class="java.lang.String"/>
+	<queryString><![CDATA[SELECT ID, NAME, NUMBER
+	                      FROM MCM
+	                      WHERE PLAN_ID = $P{PlanId}
+	                      AND STATUS_CD = 1
+	                      ORDER BY NUMBER ASC]]></queryString>
+	<field name="ID" class="java.lang.Integer"/>
+	<field name="NAME" class="java.lang.String"/>
+	<field name="NUMBER" class="java.lang.String"/>
+	<variable name="MCMNumber" class="java.lang.Integer" resetType="None" calculation="System">
+		<variableExpression>($V{MCMNumber} != null)?(new Integer($V{MCMNumber}.intValue() + 1)):(new Integer(1))</variableExpression>
+		<initialValueExpression>new Integer(1)</initialValueExpression>
+	</variable>
+	<group name="MCMGroup" minHeightToStartNewPage="20" isStartNewPage="false">
+		<groupExpression>
+			$F{ID}
+		</groupExpression>
+		<groupHeader>
+			<band height="20">
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="0" y="0" width="515" height="15"/>
+					<textElement textAlignment="Left"/>
+					<textFieldExpression class="java.lang.String">
+						<![CDATA[$F{NUMBER} + ". " + $F{NAME}]]>
+					</textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+	</group>
+	<title>
+		<band height="191">
+			<image hyperlinkType="Reference" scaleImage="RetainShape">
+				<reportElement x="0" y="0" width="515" height="50">
+					<printWhenExpression>new Boolean($P{LogoLocation} != null)</printWhenExpression>
+				</reportElement>
+				<imageExpression>$P{LogoLocation}</imageExpression>
+				<hyperlinkReferenceExpression>
+					$P{ClientWebSite}
+				</hyperlinkReferenceExpression>				
+			</image>
+			<textField isBlankWhenNull="true">
+				<reportElement x="0" y="50" width="515" height="20"/>
+				<textElement textAlignment="Left" lineSpacing="Single">
+					<font reportFont="Arial_Normal" size="14"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{ClientName}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="70" width="515" height="0"/>
+				<graphicElement stretchType="NoStretch"/>
+			</line>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="0" y="71" width="515" height="60" />
+				<textElement textAlignment="Left" lineSpacing="Single">
+					<font reportFont="Arial_Bold" size="20"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{ReportTitle}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="0" y="131" width="515" height="20">
+					<printWhenExpression>new Boolean($P{TimeFrameDescription} != null)</printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Left" lineSpacing="Single">
+					<font reportFont="Arial_Bold" size="14"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{TimeFrameDescription}]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report" isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="0" y="171" width="515" height="20"/>
+				<textElement textAlignment="Left" lineSpacing="Single">
+					<font reportFont="Arial_Normal" />
+				</textElement>
+				<textFieldExpression class="java.lang.String">
+				  <![CDATA["This program consists of the following " + $F{NUMBER} + " Minimum Control Measure(s)."]]>
+				</textFieldExpression>
+			</textField>
+		</band>
+	</title>
+</jasperReport>

@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?><!DOCTYPE struts-config PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 1.3//EN"
+    "http://struts.apache.org/dtds/struts-config_1_3.dtd">
+<struts-config>
+    <form-beans>
+        <form-bean name="userForm"
+                   type="com.sehinc.security.action.user.UserForm" />
+        <form-bean name="userSearchListForm"
+                   type="com.sehinc.security.action.user.UserSearchListForm" />
+        <form-bean name="projectSearchListForm"
+                   type="com.sehinc.security.action.user.UserSearchForm" />
+    </form-beans>
+    <global-forwards>
+        <forward name="user.list.page"
+                 path="/userlistpageaction.do"
+                 redirect="true" />
+        <forward name="user.search.list.page"
+                 path="/usersearchlistpageaction.do"
+                 redirect="true" />
+        <forward name="user.view.page"
+                 path="/userviewpageaction.do"
+                 redirect="true" />
+    </global-forwards>
+    <action-mappings>
+        <action path="/userlistpageaction"
+                type="com.sehinc.security.action.user.UserListPageAction"
+                name="userForm"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="user.list.page.tiles" />
+        </action>
+        <action path="/userviewpageaction"
+                type="com.sehinc.security.action.user.UserViewPageAction"
+                name="userForm"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="user.view.page.tiles" />
+        </action>
+        <action path="/usercreatepageaction"
+                type="com.sehinc.security.action.user.UserCreatePageAction"
+                name="userForm"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="user.create.page.tiles" />
+        </action>
+        <action path="/usercreateaction"
+                type="com.sehinc.security.action.user.UserCreateAction"
+                name="userForm"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="/userviewpageaction.do"
+                     redirect="true" />
+        </action>
+        <action path="/useraddpageaction"
+                type="com.sehinc.security.action.user.UserAddPageAction"
+                name="userForm"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="user.add.page.tiles" />
+        </action>
+        <action path="/useraddaction"
+                type="com.sehinc.security.action.user.UserAddAction"
+                name="userForm"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="/userlistpageaction.do"
+                     redirect="true" />
+        </action>
+        <action path="/usereditpageaction"
+                type="com.sehinc.security.action.user.UserEditPageAction"
+                name="userForm"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="user.edit.page.tiles" />
+        </action>
+        <action path="/usereditaction"
+                type="com.sehinc.security.action.user.UserEditAction"
+                name="userForm"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="/userviewpageaction.do"
+                     redirect="true" />
+        </action>
+        <action path="/userdeleteaction"
+                type="com.sehinc.security.action.user.UserDeleteAction"
+                name="userForm"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="/userlistpageaction.do"
+                     redirect="true" />
+        </action>
+        <action path="/userchangepasswordpageaction"
+                type="com.sehinc.security.action.user.UserChangePasswordPageAction"
+                name="userForm"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="user.change.password.page.tiles" />
+        </action>
+        <action path="/userchangepasswordaction"
+                type="com.sehinc.security.action.user.UserChangePasswordAction"
+                name="userForm"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="/userviewpageaction.do" />
+        </action>
+        <action path="/usersearchlistpageaction"
+                type="com.sehinc.security.action.user.UserSearchListPageAction"
+                name="userSearchListForm"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="user.search.list.page.tiles" />
+        </action>
+        <action path="/usersearchcreatepageaction"
+                type="com.sehinc.security.action.user.UserSearchCreatePageAction"
+                name="projectSearchListForm"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="user.search.create.page.tiles" />
+        </action>
+        <action path="/usersearchcreateaction"
+                type="com.sehinc.security.action.user.UserSearchCreateAction"
+                name="projectSearchListForm"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="/usersearchlistpageaction.do"
+                     redirect="true" />
+        </action>
+        <action path="/usersearcheditpageaction"
+                type="com.sehinc.security.action.user.UserSearchEditPageAction"
+                name="projectSearchListForm"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="user.search.edit.page.tiles" />
+        </action>
+        <action path="/usersearcheditaction"
+                type="com.sehinc.security.action.user.UserSearchEditAction"
+                name="projectSearchListForm"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="/usersearchlistpageaction.do"
+                     redirect="true" />
+        </action>
+        <action path="/usersearchdeleteaction"
+                type="com.sehinc.security.action.user.UserSearchDeleteAction"
+                name="projectSearchListForm"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="/usersearchlistpageaction.do"
+                     redirect="true" />
+        </action>
+    </action-mappings>
+    <controller processorClass="org.apache.struts.action.RequestProcessor"
+                contentType="text/html" />
+    <plug-in className="org.apache.struts.tiles.TilesPlugin">
+        <set-property property="definitions-config"
+                      value="/WEB-INF/html/tiles-defs.xml, /WEB-INF/html/sec/tiles-user-defs.xml" />
+        <set-property property="definitions-debug"
+                      value="2" />
+        <set-property property="definitions-parser-details"
+                      value="2" />
+        <set-property property="definitions-parser-validate"
+                      value="true" />
+        <set-property property="moduleAware"
+                      value="true" />
+    </plug-in>
+    <plug-in className="org.apache.struts.validator.ValidatorPlugIn">
+        <set-property property="pathnames"
+                      value="/org/apache/struts/validator/validator-rules.xml" />
+    </plug-in>
+</struts-config>

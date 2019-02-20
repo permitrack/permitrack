@@ -1,0 +1,27 @@
+<?xml version="1.0"?><!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping>
+    <class name="com.sehinc.environment.db.lookup.EnvSourceTypeData"
+           table="LOOKUP_ENV_SOURCE_TYPE">
+        <id name="code"
+            type="integer"
+            column="CODE">
+            <generator class="identity" />
+        </id>
+        <property name="clientId"
+                  column="CLIENT_ID"
+                  type="integer" />
+        <property name="description"
+                  column="DESCRIPTION"
+                  type="string" />
+        <property name="displayOrder"
+                  column="ORDER_NUM"
+                  type="integer" />
+    </class>
+    <query name="EnvSourceTypeData.findAllByClientId">
+        from com.sehinc.environment.db.lookup.EnvSourceTypeData as sourceType
+        where sourceType.clientId in (:clientId, 0)
+        order by sourceType.displayOrder ASC
+    </query>
+</hibernate-mapping>

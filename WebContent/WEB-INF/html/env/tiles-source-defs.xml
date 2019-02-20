@@ -1,0 +1,79 @@
+<!DOCTYPE tiles-definitions PUBLIC
+    "-//Apache Software Foundation//DTD Tiles Configuration 1.3//EN"
+    "http://struts.apache.org/dtds/tiles-config_1_3.dtd">
+<tiles-definitions>
+    <definition name="source.baseTitledLayout"
+                extends="ev.baseTitledLayout"></definition>
+    <definition name="source.list.page"
+                extends="source.baseTitledLayout">
+        <put name="title"
+             value="Source List" />
+        <put name="description"
+             value="Listing of all Sources." />
+        <put name="content"
+             value="/html/env/source/sourcelist.jsp" />
+    </definition>
+    <definition name="source.view.page"
+                extends="source.baseTitledLayout">
+        <put name="title"
+             value="Source" />
+        <put name="description"
+             value="View Source information." />
+        <put name="content"
+             value="/html/env/source/sourceview.jsp" />
+    </definition>
+    <definition name="source.edit.page"
+                extends="source.baseTitledLayout">
+        <put name="title"
+             value="Source" />
+        <put name="description"
+             value="Edit a Source." />
+        <put name="content"
+             value="/html/env/source/sourceedit.jsp" />
+    </definition>
+    <definition name="source.create.page"
+                extends="source.baseTitledLayout">
+        <put name="title"
+             value="Source" />
+        <put name="description"
+             value="Create a Source." />
+        <put name="content"
+             value="/html/env/source/sourcecreate.jsp" />
+    </definition>
+    <definition name="source.delete.page"
+                extends="source.baseTitledLayout">
+        <put name="title"
+             value="Source" />
+        <put name="description"
+             value="Delete a Source." />
+        <put name="content"
+             value="/html/env/source/sourcedelete.jsp" />
+    </definition>
+    <definition name="source.substance.create.page"
+                extends="source.baseTitledLayout">
+        <put name="title"
+             value="Source Substances" />
+        <put name="description"
+             value="Connect a Substance to a Source." />
+        <put name="content"
+             value="/html/env/source/sourcesubstancecreate.jsp" />
+    </definition>
+    <definition name="source.substance.multi.create.page"
+                extends="source.baseTitledLayout">
+        <put name="title"
+             value="Source Substances" />
+        <put name="description"
+             value="Create the unique mixture of Substances in the Source." />
+        <put name="content"
+             value="/html/env/source/sourcesubstancemulticreate.jsp" />
+    </definition>
+    <definition name="source.scc.create.page"
+                extends="source.baseTitledLayout">
+        <put name="title"
+             value="Source SCC Info" />
+        <put name="description"
+             value="Connect SCC Info to a Source." />
+        <put name="content"
+             value="/html/env/source/sourcescccreate.jsp" />
+    </definition>
+</tiles-definitions>

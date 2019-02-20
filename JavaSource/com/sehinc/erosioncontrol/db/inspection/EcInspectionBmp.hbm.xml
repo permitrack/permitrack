@@ -1,0 +1,55 @@
+<?xml version="1.0"?><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <!--
+            Auto-generated mapping file from
+            the hibernate.org cfg2hbm engine
+    -->
+    <class name="com.sehinc.erosioncontrol.db.inspection.EcInspectionBmp"
+           table="EC_INSPECTION_BMP">
+        <id name="id"
+            type="integer">
+            <column name="ID" />
+            <generator class="identity" />
+        </id>
+        <property name="inspectionId"
+                  type="integer"
+                  column="INSPECTION_ID" />
+        <property name="projectBmpId"
+                  type="integer"
+                  column="PROJECT_BMP_ID" />
+        <property name="bmpName"
+                  type="string"
+                  column="BMP_NAME" />
+        <property name="bmpCategoryName"
+                  type="string"
+                  column="BMP_CATEGORY_NAME" />
+        <property name="isInspected"
+                  type="integer"
+                  column="IS_INSPECTED" />
+        <many-to-one name="inspectionBmpStatus"
+                     class="com.sehinc.erosioncontrol.db.inspection.EcInspectionBmpStatus"
+                     column="INSPECTION_BMP_STATUS_ID"
+                     not-null="false"
+                     not-found="ignore"
+                     lazy="false" />
+        <property name="isRequired"
+                  type="boolean"
+                  column="IS_REQUIRED" />
+        <many-to-one name="inspectionBmpCondition"
+                     class="com.sehinc.erosioncontrol.db.inspection.EcInspectionBmpCondition"
+                     column="INSPECTION_BMP_CONDITION_ID"
+                     not-null="false"
+                     not-found="ignore"
+                     lazy="false" />
+        <property name="description"
+                  type="string"
+                  column="DESCRIPTION" />
+        <property name="comment"
+                  type="string"
+                  column="COMMENT" />
+        <property name="location"
+                  type="string"
+                  column="LOCATION" />
+    </class>
+</hibernate-mapping>

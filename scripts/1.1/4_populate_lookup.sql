@@ -1,0 +1,263 @@
+
+
+
+insert into LOOKUP_ENV_STATUS_CODE
+(CODE, DESCRIPTION, ORDER_NUM)
+values
+(1, 'Active', 1)
+
+insert into LOOKUP_ENV_STATUS_CODE
+(CODE, DESCRIPTION, ORDER_NUM)
+values
+(2, 'Inactive', 2)
+
+insert into LOOKUP_ENV_STATUS_CODE
+(CODE, DESCRIPTION, ORDER_NUM)
+values
+(3, 'Deleted', 3)
+
+insert into LOOKUP_ENV_STATUS_CODE
+(CODE, DESCRIPTION, ORDER_NUM)
+values
+(4, 'Incomplete', 4)
+
+insert into LOOKUP_ENV_STATUS_CODE
+(CODE, DESCRIPTION, ORDER_NUM)
+values
+(5, 'Archived', 5)
+
+insert into LOOKUP_ENV_STATUS_CODE
+(CODE, DESCRIPTION, ORDER_NUM)
+values
+(6, 'Closed', 6)
+
+insert into LOOKUP_ENV_STATUS_CODE
+(CODE, DESCRIPTION, ORDER_NUM)
+values
+(7, 'Auto Activate', 7)
+
+insert into LOOKUP_ENV_STATUS_CODE
+(CODE, DESCRIPTION, ORDER_NUM)
+values
+(8, 'Complete', 8)
+
+
+
+insert into LOOKUP_ENV_ASSET_TYPE
+(CODE, DESCRIPTION, CLIENT_ID, ORDER_NUM)
+values
+(1, 'Paint', 0, 1)
+
+insert into LOOKUP_ENV_ASSET_TYPE
+(CODE, DESCRIPTION, CLIENT_ID, ORDER_NUM)
+values
+(2, 'Natural Gas', 0, 2)
+
+insert into LOOKUP_ENV_ASSET_TYPE
+(CODE, DESCRIPTION, CLIENT_ID, ORDER_NUM)
+values
+(3, 'Bulk Liquid', 0, 3)
+
+
+
+
+insert into LOOKUP_ENV_SOURCE_TYPE
+(CODE, DESCRIPTION, CLIENT_ID, ORDER_NUM)
+values
+(1, 'Paint-Related', 0, 1)
+
+insert into LOOKUP_ENV_SOURCE_TYPE
+(CODE, DESCRIPTION, CLIENT_ID, ORDER_NUM)
+values
+(2, 'Natural Gas', 0, 2)
+
+insert into LOOKUP_ENV_SOURCE_TYPE
+(CODE, DESCRIPTION, CLIENT_ID, ORDER_NUM)
+values
+(3, 'Bulk Liquid', 0, 3)
+
+
+
+insert into LOOKUP_ENV_SUBSTANCE_TYPE
+(CODE, DESCRIPTION, CLIENT_ID, ORDER_NUM)
+values
+(1, 'VOC', 0, 1)
+
+insert into LOOKUP_ENV_SUBSTANCE_TYPE
+(CODE, DESCRIPTION, CLIENT_ID, ORDER_NUM)
+values
+(2, 'HAP (VOC)', 0, 2)
+
+insert into LOOKUP_ENV_SUBSTANCE_TYPE
+(CODE, DESCRIPTION, CLIENT_ID, ORDER_NUM)
+values
+(3, 'All VOCs', 0, 3)
+
+insert into LOOKUP_ENV_SUBSTANCE_TYPE
+(CODE, DESCRIPTION, CLIENT_ID, ORDER_NUM)
+values
+(4, 'CO', 0, 4)
+
+insert into LOOKUP_ENV_SUBSTANCE_TYPE
+(CODE, DESCRIPTION, CLIENT_ID, ORDER_NUM)
+values
+(5, 'NH3', 0, 5)
+
+insert into LOOKUP_ENV_SUBSTANCE_TYPE
+(CODE, DESCRIPTION, CLIENT_ID, ORDER_NUM)
+values
+(6, 'NOx', 0, 6)
+
+insert into LOOKUP_ENV_SUBSTANCE_TYPE
+(CODE, DESCRIPTION, CLIENT_ID, ORDER_NUM)
+values
+(7, 'Lead', 0, 7)
+
+insert into LOOKUP_ENV_SUBSTANCE_TYPE
+(CODE, DESCRIPTION, CLIENT_ID, ORDER_NUM)
+values
+(8, 'PM10', 0, 8)
+
+insert into LOOKUP_ENV_SUBSTANCE_TYPE
+(CODE, DESCRIPTION, CLIENT_ID, ORDER_NUM)
+values
+(9, 'PM2.5', 0, 9)
+
+insert into LOOKUP_ENV_SUBSTANCE_TYPE
+(CODE, DESCRIPTION, CLIENT_ID, ORDER_NUM)
+values
+(10, 'SOx', 0, 10)
+
+
+
+insert into LOOKUP_ENV_UNIT_OF_MEASURE
+(CODE, DESCRIPTION, CLIENT_ID, ORDER_NUM)
+values
+(1, 'Gallons', 0, 1)
+
+insert into LOOKUP_ENV_UNIT_OF_MEASURE
+(CODE, DESCRIPTION, CLIENT_ID, ORDER_NUM)
+values
+(2, 'Ounces', 0, 2)
+
+insert into LOOKUP_ENV_UNIT_OF_MEASURE
+(CODE, DESCRIPTION, CLIENT_ID, ORDER_NUM)
+values
+(3, 'Liters', 0, 3)
+
+insert into LOOKUP_ENV_UNIT_OF_MEASURE
+(CODE, DESCRIPTION, CLIENT_ID, ORDER_NUM)
+values
+(4, 'Tons', 0, 4)
+
+insert into LOOKUP_ENV_UNIT_OF_MEASURE
+(CODE, DESCRIPTION, CLIENT_ID, ORDER_NUM)
+values
+(5, 'MmCF', 0, 5)
+
+insert into LOOKUP_ENV_UNIT_OF_MEASURE
+(CODE, DESCRIPTION, CLIENT_ID, ORDER_NUM)
+values
+(6, 'Lbs/Gal', 0, 6)
+
+insert into LOOKUP_ENV_UNIT_OF_MEASURE
+(CODE, DESCRIPTION, CLIENT_ID, ORDER_NUM)
+values
+(7, 'Lbs/1000 Gal', 0, 7)
+
+insert into LOOKUP_ENV_UNIT_OF_MEASURE
+(CODE, DESCRIPTION, CLIENT_ID, ORDER_NUM)
+values
+(8, 'Lbs/MmCF', 0, 8)
+
+insert into LOOKUP_ENV_UNIT_OF_MEASURE
+(CODE, DESCRIPTION, CLIENT_ID, ORDER_NUM)
+values
+(9, 'Cubic Meters', 0, 9)
+
+insert into LOOKUP_ENV_UNIT_OF_MEASURE
+(CODE, DESCRIPTION, CLIENT_ID, ORDER_NUM)
+values
+(10, 'Cubic Feet', 0, 10)
+
+insert into LOOKUP_ENV_UNIT_OF_MEASURE
+(CODE, DESCRIPTION, CLIENT_ID, ORDER_NUM)
+values
+(11, 'Months', 0, 11)
+
+insert into LOOKUP_ENV_UNIT_OF_MEASURE
+(CODE, DESCRIPTION, CLIENT_ID, ORDER_NUM)
+values
+(12, 'Tons/Year', 0, 12)
+
+
+insert into LOOKUP_ENV_FACILITY_CONTACT_TYPE
+(CODE, DESCRIPTION, CLIENT_ID, ORDER_NUM)
+values
+(1, 'Primary Contact', 0, 1)
+
+insert into LOOKUP_ENV_FACILITY_CONTACT_TYPE
+(CODE, DESCRIPTION, CLIENT_ID, ORDER_NUM)
+values
+(2, 'Responsible Official', 0, 2)
+
+
+-- paint sources...
+insert into ENV_SOURCE_TYPE_SUB_TYPE_MAP
+(SOURCE_TYPE_CD, SUBSTANCE_TYPE_CD)
+values
+(1, 1)
+
+insert into ENV_SOURCE_TYPE_SUB_TYPE_MAP
+(SOURCE_TYPE_CD, SUBSTANCE_TYPE_CD)
+values
+(1, 2)
+
+
+-- bulk liquid sources...
+insert into ENV_SOURCE_TYPE_SUB_TYPE_MAP
+(SOURCE_TYPE_CD, SUBSTANCE_TYPE_CD)
+values
+(3, 3)
+
+
+-- natural gas sources...
+insert into ENV_SOURCE_TYPE_SUB_TYPE_MAP
+(SOURCE_TYPE_CD, SUBSTANCE_TYPE_CD)
+values
+(2, 3)
+
+insert into ENV_SOURCE_TYPE_SUB_TYPE_MAP
+(SOURCE_TYPE_CD, SUBSTANCE_TYPE_CD)
+values
+(2, 4)
+
+insert into ENV_SOURCE_TYPE_SUB_TYPE_MAP
+(SOURCE_TYPE_CD, SUBSTANCE_TYPE_CD)
+values
+(2, 5)
+
+insert into ENV_SOURCE_TYPE_SUB_TYPE_MAP
+(SOURCE_TYPE_CD, SUBSTANCE_TYPE_CD)
+values
+(2, 6)
+
+insert into ENV_SOURCE_TYPE_SUB_TYPE_MAP
+(SOURCE_TYPE_CD, SUBSTANCE_TYPE_CD)
+values
+(2, 7)
+
+insert into ENV_SOURCE_TYPE_SUB_TYPE_MAP
+(SOURCE_TYPE_CD, SUBSTANCE_TYPE_CD)
+values
+(2, 8)
+
+insert into ENV_SOURCE_TYPE_SUB_TYPE_MAP
+(SOURCE_TYPE_CD, SUBSTANCE_TYPE_CD)
+values
+(2, 9)
+
+insert into ENV_SOURCE_TYPE_SUB_TYPE_MAP
+(SOURCE_TYPE_CD, SUBSTANCE_TYPE_CD)
+values
+(2, 10)

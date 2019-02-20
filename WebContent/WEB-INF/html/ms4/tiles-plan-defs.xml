@@ -1,0 +1,240 @@
+<!DOCTYPE tiles-definitions PUBLIC
+    "-//Apache Software Foundation//DTD Tiles Configuration 1.3//EN"
+    "http://struts.apache.org/dtds/tiles-config_1_3.dtd">
+<tiles-definitions>
+    <definition name="plan.baseLayout"
+                extends="html.baseLayout">
+        <put name="primaryMenu"
+             value="/html/ms4/primarynavigation.jsp" />
+        <put name="secondaryMenu"
+             value="/html/ms4/secondarynavigation.jsp" />
+    </definition>
+    <definition name="plan.baseSplitPanelLayout"
+                extends="html.baseSplitPanelLayout">
+        <put name="primaryMenu"
+             value="/html/ms4/primarynavigation.jsp" />
+        <put name="secondaryMenu"
+             value="/html/ms4/secondarynavigation.jsp" />
+        <put name="leftPanel"
+             value="/html/ms4/plan/planhierarchy.jsp" />
+        <put name="tertiaryMenu"
+             value="/html/ms4/tertiarynavigation.jsp" />
+    </definition>
+    <definition name="plan.list.page"
+                extends="plan.baseLayout">
+        <put name="title"
+             value="Plan List" />
+        <put name="content"
+             value="/html/ms4/plan/planlist.jsp" />
+    </definition>
+    <definition name="plan.new.page"
+                extends="plan.baseLayout">
+        <put name="title"
+             value="Create New Plan" />
+        <put name="content"
+             value="/html/ms4/plan/planedit.jsp" />
+    </definition>
+    <definition name="plan.view.page"
+                extends="plan.baseSplitPanelLayout">
+        <put name="title"
+             value="Plan View" />
+        <put name="content"
+             value="/html/ms4/plan/planedit.jsp" />
+    </definition>
+    <definition name="plan.edit.page"
+                extends="plan.baseSplitPanelLayout">
+        <put name="title"
+             value="Edit Plan" />
+        <put name="content"
+             value="/html/ms4/plan/planedit.jsp" />
+    </definition>
+    <definition name="plan.delete.page"
+                extends="plan.baseSplitPanelLayout">
+        <put name="title"
+             value="Delete Plan" />
+        <put name="content"
+             value="/html/ms4/plan/plandelete.jsp" />
+    </definition>
+    <definition name="plan.publish.page"
+                extends="plan.baseLayout">
+        <put name="title"
+             value="Publish Plan" />
+        <put name="content"
+             value="/html/ms4/plan/planpublish.jsp" />
+    </definition>
+    <definition name="plan.published.page"
+                extends="plan.baseSplitPanelLayout">
+        <put name="title"
+             value="View Published Plan" />
+        <put name="content"
+             value="/html/ms4/plan/planpublished.jsp" />
+    </definition>
+    <definition name="plan.new.mcm.page"
+                extends="plan.baseSplitPanelLayout">
+        <put name="title"
+             value="Plan Add MCM" />
+        <put name="content"
+             value="/html/ms4/plan/mcmedit.jsp" />
+    </definition>
+    <definition name="mcm.view.page"
+                extends="plan.baseSplitPanelLayout">
+        <put name="title"
+             value="MCM View" />
+        <put name="content"
+             value="/html/ms4/plan/mcmedit.jsp" />
+    </definition>
+    <definition name="mcm.edit.page"
+                extends="plan.baseSplitPanelLayout">
+        <put name="title"
+             value="Edit MCM" />
+        <put name="content"
+             value="/html/ms4/plan/mcmedit.jsp" />
+    </definition>
+    <definition name="mcm.delete.page"
+                extends="plan.baseSplitPanelLayout">
+        <put name="title"
+             value="Delete MCM" />
+        <put name="content"
+             value="/html/ms4/plan/plandelete.jsp" />
+    </definition>
+    <definition name="mcm.new.bmp.page"
+                extends="plan.baseSplitPanelLayout">
+        <put name="title"
+             value="Add BMP" />
+        <put name="content"
+             value="/html/ms4/plan/bmpedit.jsp" />
+    </definition>
+    <definition name="mcm.select.bmp.db.page"
+                extends="plan.baseSplitPanelLayout">
+        <put name="title"
+             value="Select BMP from DB" />
+        <put name="content"
+             value="/html/ms4/plan/mcmselectbmpdb.jsp" />
+    </definition>
+    <definition name="bmp.view.page"
+                extends="plan.baseSplitPanelLayout">
+        <put name="title"
+             value="BMP View" />
+        <put name="content"
+             value="/html/ms4/plan/bmpedit.jsp" />
+    </definition>
+    <definition name="bmp.edit.page"
+                extends="plan.baseSplitPanelLayout">
+        <put name="title"
+             value="Edit BMP" />
+        <put name="content"
+             value="/html/ms4/plan/bmpedit.jsp" />
+    </definition>
+    <definition name="bmp.copy.page"
+                extends="plan.baseSplitPanelLayout">
+        <put name="title"
+             value="Copy BMP" />
+        <put name="content"
+             value="/html/ms4/plan/bmpcopy.jsp" />
+    </definition>
+    <definition name="bmp.move.page"
+                extends="plan.baseSplitPanelLayout">
+        <put name="title"
+             value="Move BMP" />
+        <put name="content"
+             value="/html/ms4/plan/bmpcopy.jsp" />
+    </definition>
+    <definition name="bmp.delete.page"
+                extends="plan.baseSplitPanelLayout">
+        <put name="title"
+             value="Delete BMP" />
+        <put name="content"
+             value="/html/ms4/plan/plandelete.jsp" />
+    </definition>
+    <definition name="bmp.new.goal.page"
+                extends="plan.baseSplitPanelLayout">
+        <put name="title"
+             value="Add Goal" />
+        <put name="content"
+             value="/html/ms4/plan/goaledit.jsp" />
+    </definition>
+    <definition name="bmp.db.select.category"
+                extends="plan.baseSplitPanelLayout">
+        <put name="title"
+             value="Select BMP DB Category" />
+        <put name="content"
+             value="/html/ms4/plan/bmpdblist.jsp" />
+    </definition>
+    <definition name="goal.view.page"
+                extends="plan.baseSplitPanelLayout">
+        <put name="title"
+             value="Goal View" />
+        <put name="content"
+             value="/html/ms4/plan/goaledit.jsp" />
+    </definition>
+    <definition name="goal.edit.page"
+                extends="plan.baseSplitPanelLayout">
+        <put name="title"
+             value="Edit Goal" />
+        <put name="content"
+             value="/html/ms4/plan/goaledit.jsp" />
+    </definition>
+    <definition name="goal.delete.page"
+                extends="plan.baseSplitPanelLayout">
+        <put name="title"
+             value="Delete Goal" />
+        <put name="content"
+             value="/html/ms4/plan/plandelete.jsp" />
+    </definition>
+    <definition name="goal.new.goalactivity.page"
+                extends="plan.baseSplitPanelLayout">
+        <put name="title"
+             value="Add Goal Activity" />
+        <put name="content"
+             value="/html/ms4/plan/goalactivityedit.jsp" />
+    </definition>
+    <definition name="goalactivity.view.page"
+                extends="plan.baseSplitPanelLayout">
+        <put name="title"
+             value="Goal Activity View" />
+        <put name="content"
+             value="/html/ms4/plan/goalactivityedit.jsp" />
+    </definition>
+    <definition name="goalactivity.edit.page"
+                extends="plan.baseSplitPanelLayout">
+        <put name="title"
+             value="Edit Goal Activity" />
+        <put name="content"
+             value="/html/ms4/plan/goalactivityedit.jsp" />
+    </definition>
+    <definition name="goalactivity.file.upload.page"
+                extends="plan.baseSplitPanelLayout">
+        <put name="title"
+             value="Edit Goal Activity" />
+        <put name="content"
+             value="/html/ms4/plan/goalactivityfileupload.jsp" />
+    </definition>
+    <definition name="goalactivity.delete.page"
+                extends="plan.baseSplitPanelLayout">
+        <put name="title"
+             value="Delete Goal Activity" />
+        <put name="content"
+             value="/html/ms4/plan/plandelete.jsp" />
+    </definition>
+    <definition name="form.edit.page"
+                extends="plan.baseSplitPanelLayout">
+        <put name="title"
+             value="Custom Form Edit" />
+        <put name="content"
+             value="/html/ms4/plan/formedit.jsp" />
+    </definition>
+    <definition name="form.view.page"
+                extends="plan.baseSplitPanelLayout">
+        <put name="title"
+             value="Custom Form View" />
+        <put name="content"
+             value="/html/ms4/plan/formedit.jsp" />
+    </definition>
+    <definition name="form.create.page"
+                extends="plan.baseSplitPanelLayout">
+        <put name="title"
+             value="Custom Form Create" />
+        <put name="content"
+             value="/html/ms4/plan/formedit.jsp" />
+    </definition>
+</tiles-definitions>

@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?><!DOCTYPE struts-config PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 1.3//EN"
+    "http://struts.apache.org/dtds/struts-config_1_3.dtd">
+<struts-config>
+    <form-beans>
+        <form-bean name="PermitForm"
+                   type="com.sehinc.environment.action.permit.PermitForm" />
+        <form-bean name="PermitDetailForm"
+                   type="com.sehinc.environment.action.permitdetail.PermitDetailForm" />
+        <form-bean name="PermitSubstanceForm"
+                   type="com.sehinc.environment.action.permitsubstance.PermitSubstanceForm" />
+        <form-bean name="PermitAssetForm"
+                   type="com.sehinc.environment.action.permitasset.PermitAssetForm" />
+        <form-bean name="PermitFacilityForm"
+                   type="com.sehinc.environment.action.permitfacility.PermitFacilityForm" />
+    </form-beans>
+    <global-forwards>
+        <forward name="permit.list.page"
+                 path="/permitlistpage.do"
+                 redirect="true" />
+        <forward name="permit.view.page"
+                 path="/permitviewpage.do"
+                 redirect="true" />
+        <forward name="permit.detail.view.page"
+                 path="/permitdetailviewpage.do"
+                 redirect="true" />
+    </global-forwards>
+    <action-mappings>
+        <action path="/permitlistpage"
+                type="com.sehinc.environment.action.permit.PermitListPageAction"
+                name="PermitForm"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="permit.list.page" />
+        </action>
+        <action path="/permitviewpage"
+                type="com.sehinc.environment.action.permit.PermitViewPageAction"
+                name="PermitForm"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="permit.view.page" />
+        </action>
+        <action path="/permitcreatepage"
+                type="com.sehinc.environment.action.permit.PermitCreatePageAction"
+                name="PermitForm"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="permit.create.page" />
+        </action>
+        <action path="/permitcreateaction"
+                type="com.sehinc.environment.action.permit.PermitCreateAction"
+                input="permit.create.page"
+                name="PermitForm"
+                scope="request"
+                validate="true"
+                cancellable="true">
+            <forward name="continue"
+                     path="/permitviewpage.do"
+                     redirect="true" />
+        </action>
+        <action path="/permiteditpage"
+                type="com.sehinc.environment.action.permit.PermitEditPageAction"
+                name="PermitForm"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="permit.edit.page" />
+        </action>
+        <action path="/permiteditaction"
+                type="com.sehinc.environment.action.permit.PermitEditAction"
+                input="permit.edit.page"
+                name="PermitForm"
+                scope="request"
+                validate="true"
+                cancellable="true">
+            <forward name="continue"
+                     path="/permitviewpage.do"
+                     redirect="true" />
+        </action>
+        <action path="/permitdeleteaction"
+                type="com.sehinc.environment.action.permit.PermitDeleteAction"
+                input="permit.delete.page"
+                name="PermitForm"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="/permitlistpage.do"
+                     redirect="true" />
+        </action>
+        <action path="/permitfacilitycreateaction"
+                type="com.sehinc.environment.action.permitfacility.PermitFacilityCreateAction"
+                input="permit.facility.create.page"
+                name="PermitFacilityForm"
+                scope="request"
+                validate="true"
+                cancellable="true">
+            <forward name="continue"
+                     path="/permitviewpage.do"
+                     redirect="true" />
+        </action>
+        <action path="/permitfacilitydeleteaction"
+                type="com.sehinc.environment.action.permitfacility.PermitFacilityDeleteAction"
+                name="PermitFacilityForm"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="/permitviewpage.do"
+                     redirect="true" />
+        </action>
+        <action path="/permitdetailviewpage"
+                type="com.sehinc.environment.action.permitdetail.PermitDetailViewPageAction"
+                name="PermitDetailForm"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="permit.detail.view.page" />
+        </action>
+        <action path="/permitdetailcreatepage"
+                type="com.sehinc.environment.action.permitdetail.PermitDetailCreatePageAction"
+                name="PermitDetailForm"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="permit.detail.create.page" />
+        </action>
+        <action path="/permitdetailcreateaction"
+                type="com.sehinc.environment.action.permitdetail.PermitDetailCreateAction"
+                input="permit.detail.create.page"
+                name="PermitDetailForm"
+                scope="request"
+                validate="true"
+                cancellable="true">
+            <forward name="continue"
+                     path="/permitdetailviewpage.do"
+                     redirect="true" />
+        </action>
+        <action path="/permitdetaileditpage"
+                type="com.sehinc.environment.action.permitdetail.PermitDetailEditPageAction"
+                name="PermitDetailForm"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="permit.detail.edit.page" />
+        </action>
+        <action path="/permitdetaileditaction"
+                type="com.sehinc.environment.action.permitdetail.PermitDetailEditAction"
+                input="permit.detail.edit.page"
+                name="PermitDetailForm"
+                scope="request"
+                validate="true"
+                cancellable="true">
+            <forward name="continue"
+                     path="/permitdetailviewpage.do"
+                     redirect="true" />
+        </action>
+        <action path="/permitdetaildeleteaction"
+                type="com.sehinc.environment.action.permitdetail.PermitDetailDeleteAction"
+                name="PermitDetailForm"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="/permitviewpage.do"
+                     redirect="true" />
+        </action>
+        <action path="/permitsubstancecreatepage"
+                type="com.sehinc.environment.action.permitsubstance.PermitSubstanceCreatePageAction"
+                name="PermitSubstanceForm"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="permit.substance.create.page" />
+        </action>
+        <action path="/permitsubstancecreateaction"
+                type="com.sehinc.environment.action.permitsubstance.PermitSubstanceCreateAction"
+                input="permit.substance.create.page"
+                name="PermitSubstanceForm"
+                scope="request"
+                validate="true"
+                cancellable="true">
+            <forward name="continue"
+                     path="/permitviewpage.do"
+                     redirect="true" />
+        </action>
+        <action path="/permitsubstancedeleteaction"
+                type="com.sehinc.environment.action.permitsubstance.PermitSubstanceDeleteAction"
+                name="PermitSubstanceForm"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="/permitviewpage.do"
+                     redirect="true" />
+        </action>
+        <action path="/permitassetcreatepage"
+                type="com.sehinc.environment.action.permitasset.PermitAssetCreatePageAction"
+                name="PermitAssetForm"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="permit.asset.create.page" />
+        </action>
+        <action path="/permitassetcreateaction"
+                type="com.sehinc.environment.action.permitasset.PermitAssetCreateAction"
+                input="permit.asset.create.page"
+                name="PermitAssetForm"
+                scope="request"
+                validate="true"
+                cancellable="true">
+            <forward name="continue"
+                     path="/permitdetailviewpage.do"
+                     redirect="true" />
+        </action>
+        <action path="/permitassetdeleteaction"
+                type="com.sehinc.environment.action.permitasset.PermitAssetDeleteAction"
+                name="PermitAssetForm"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="/permitdetailviewpage.do"
+                     redirect="true" />
+        </action>
+        <action path="/permitfacilitycreatepage"
+                type="com.sehinc.environment.action.permitfacility.PermitFacilityCreatePageAction"
+                name="PermitFacilityForm"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="permit.facility.create.page" />
+        </action>
+    </action-mappings>
+    <controller processorClass="org.apache.struts.action.RequestProcessor"
+                contentType="text/html" />
+    <plug-in className="org.apache.struts.tiles.TilesPlugin">
+        <set-property property="definitions-config"
+                      value="/WEB-INF/html/tiles-defs.xml, /WEB-INF/html/env/tiles-defs.xml, /WEB-INF/html/env/tiles-permit-defs.xml" />
+        <set-property property="definitions-debug"
+                      value="2" />
+        <set-property property="definitions-parser-details"
+                      value="2" />
+        <set-property property="definitions-parser-validate"
+                      value="true" />
+        <set-property property="moduleAware"
+                      value="true" />
+    </plug-in>
+    <plug-in className="org.apache.struts.validator.ValidatorPlugIn">
+        <set-property property="pathnames"
+                      value="/org/apache/struts/validator/validator-rules.xml, /WEB-INF/html/env/validation-permit.xml, /WEB-INF/html/env/validation-permitdetail.xml" />
+    </plug-in>
+</struts-config>

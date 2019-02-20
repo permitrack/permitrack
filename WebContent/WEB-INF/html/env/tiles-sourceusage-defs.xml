@@ -1,0 +1,115 @@
+<!DOCTYPE tiles-definitions PUBLIC
+    "-//Apache Software Foundation//DTD Tiles Configuration 1.3//EN"
+    "http://struts.apache.org/dtds/tiles-config_1_3.dtd">
+<tiles-definitions>
+    <definition name="sourceusage.baseTitledLayout"
+                extends="ev.baseTitledLayout"></definition>
+    <definition name="source.usage.readings.page"
+                extends="sourceusage.baseTitledLayout">
+        <put name="title"
+             value="Assets for Readings" />
+        <put name="description"
+             value="Display assets for which readings can be viewed or created." />
+        <put name="content"
+             value="/html/env/sourceusage/sourceusagereadings.jsp" />
+    </definition>
+    <definition name="control.usage.readings.page"
+                extends="sourceusage.baseTitledLayout">
+        <put name="title"
+             value="Assets with Controls" />
+        <put name="description"
+             value="Displays assets with controls for control malfunction entries." />
+        <put name="content"
+             value="/html/env/sourceusage/controlusagereadings.jsp" />
+    </definition>
+    <definition name="source.usage.list.page"
+                extends="sourceusage.baseTitledLayout">
+        <put name="title"
+             value="Readings List" />
+        <put name="description"
+             value="List of usage readings." />
+        <put name="content"
+             value="/html/env/sourceusage/sourceusagelist.jsp" />
+    </definition>
+    <definition name="control.usage.list.page"
+                extends="sourceusage.baseTitledLayout">
+        <put name="title"
+             value="Control Malfunctions" />
+        <put name="description"
+             value="List of control malfunctions." />
+        <put name="content"
+             value="/html/env/sourceusage/controlusagelist.jsp" />
+    </definition>
+    <definition name="source.usage.view.page"
+                extends="sourceusage.baseTitledLayout">
+        <put name="title"
+             value="View Metered Readings" />
+        <put name="description"
+             value="Usage readings." />
+        <put name="content"
+             value="/html/env/sourceusage/sourceusageview.jsp" />
+    </definition>
+    <definition name="source.usage.edit.page"
+                extends="sourceusage.baseTitledLayout">
+        <put name="title"
+             value="Edit Readings" />
+        <put name="description"
+             value="Edit Metered Readings Entry." />
+        <put name="content"
+             value="/html/env/sourceusage/sourceusageedit.jsp" />
+    </definition>
+    <definition name="source.usage.create.page"
+                extends="sourceusage.baseTitledLayout">
+        <put name="title"
+             value="Add Single Reading" />
+        <put name="description"
+             value="Enter metered reading data for a single Source." />
+        <put name="content"
+             value="/html/env/sourceusage/sourceusagecreate.jsp" />
+    </definition>
+    <definition name="control.usage.create.page"
+                extends="sourceusage.baseTitledLayout">
+        <put name="title"
+             value="Add Disfunctional Control" />
+        <put name="description"
+             value="Enter data for a disfunctional control." />
+        <put name="content"
+             value="/html/env/sourceusage/controlusagecreate.jsp" />
+    </definition>
+    <definition name="source.usage.multi.create.date.select.page"
+                extends="sourceusage.baseTitledLayout">
+        <put name="title"
+             value="Add Set of Readings" />
+        <put name="description"
+             value="Please select a Date Range to enter a set of readings for." />
+        <put name="content"
+             value="/html/env/sourceusage/sourceusagemulticreatedateselect.jsp" />
+    </definition>
+    <definition name="source.usage.multi.create.page"
+                extends="sourceusage.baseTitledLayout">
+        <put name="title"
+             value="Add Set of Readings" />
+        <put name="description"
+             value="Enter metered reading data for all of an Asset's Sources." />
+        <put name="content"
+             value="/html/env/sourceusage/sourceusagemulticreate.jsp" />
+    </definition>
+    <definition name="control.usage.view.page"
+                extends="sourceusage.baseTitledLayout">
+        <put name="title"
+             value="View Control Malfunction" />
+        <put name="description"
+             value="View a control malfunction entry." />
+        <put name="content"
+             value="/html/env/sourceusage/controlusageview.jsp" />
+    </definition>
+    <definition name="control.usage.edit.page"
+                extends="sourceusage.baseTitledLayout">
+        <put name="title"
+             value="Edit Control Malfunction" />
+        <put name="description"
+             value="Edit a control malfunctions entry." />
+        <put name="content"
+             value="/html/env/sourceusage/controlusagecreate.jsp" />
+    </definition>
+</tiles-definitions>

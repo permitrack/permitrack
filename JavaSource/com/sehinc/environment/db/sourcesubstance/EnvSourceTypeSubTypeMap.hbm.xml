@@ -1,0 +1,30 @@
+<?xml version="1.0"?><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <!--
+            Auto-generated mapping file from
+            the hibernate.org cfg2hbm engine
+    -->
+    <class name="com.sehinc.environment.db.sourcesubstance.EnvSourceTypeSubTypeMap"
+           table="ENV_SOURCE_TYPE_SUB_TYPE_MAP">
+        <id name="id"
+            type="integer">
+            <column name="ID" />
+            <generator class="identity" />
+        </id>
+        <property name="sourceTypeCd"
+                  type="integer"
+                  column="SOURCE_TYPE_CD" />
+        <property name="substanceTypeCd"
+                  type="integer"
+                  column="SUBSTANCE_TYPE_CD" />
+    </class>
+    <query name="EnvSourceTypeSubTypeMap.findBySourceTypeCd">
+        from com.sehinc.environment.db.sourcesubstance.EnvSourceTypeSubTypeMap as ss
+        where ss.sourceTypeCd = :sourceTypeCd
+    </query>
+    <query name="EnvSourceTypeSubTypeMap.findBySubstanceTypeCd">
+        from com.sehinc.environment.db.sourcesubstance.EnvSourceTypeSubTypeMap as ss
+        where ss.substanceTypeCd = :substanceTypeCd
+    </query>
+</hibernate-mapping>

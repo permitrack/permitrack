@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?><!DOCTYPE form-validation PUBLIC
+    "-//Apache Software Foundation//DTD Commons Validator Rules Configuration 1.0//EN"
+    "http://jakarta.apache.org/commons/dtds/validator_1_0.dtd">
+<form-validation>
+    <formset>
+        <form name="PermitDetailForm">
+            <field property="name"
+                   depends="required,maxlength">
+                <arg0 key="permit.detail.name" />
+                <arg1 name="maxlength"
+                      key="${var:maxlength}"
+                      resource="false" />
+                <var>
+                    <var-name>maxlength</var-name>
+                    <var-value>50</var-value>
+                </var>
+            </field>
+            <field property="description"
+                   depends="maxlength">
+                <arg0 key="permit.detail.desc" />
+                <arg1 name="maxlength"
+                      key="${var:maxlength}"
+                      resource="false" />
+                <var>
+                    <var-name>maxlength</var-name>
+                    <var-value>200</var-value>
+                </var>
+            </field>
+            <field property="avgPeriod"
+                   depends="integer,intRange">
+                <arg0 key="permit.detail.avg.period" />
+                <arg1 name="intRange"
+                      key="${var:min}"
+                      resource="false" />
+                <arg2 name="intRange"
+                      key="${var:max}"
+                      resource="false" />
+                <var>
+                    <var-name>min</var-name>
+                    <var-value>0</var-value>
+                </var>
+                <var>
+                    <var-name>max</var-name>
+                    <var-value>10000</var-value>
+                </var>
+            </field>
+            <field property="vocLimit"
+                   depends="float">
+                <arg0 key="permit.detail.voc.limit" />
+            </field>
+            <field property="hapsLimit"
+                   depends="float">
+                <arg0 key="permit.detail.haps.limit" />
+            </field>
+            <field property="mmbtuLimit"
+                   depends="float">
+                <arg0 key="permit.detail.mmbtu.limit" />
+            </field>
+        </form>
+    </formset>
+</form-validation>

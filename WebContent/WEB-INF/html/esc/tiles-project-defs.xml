@@ -1,0 +1,172 @@
+<!DOCTYPE tiles-definitions PUBLIC
+    "-//Apache Software Foundation//DTD Tiles Configuration 1.3//EN"
+    "http://struts.apache.org/dtds/tiles-config_1_3.dtd">
+<tiles-definitions>
+    <definition name="project.baseLayout"
+                extends="html.baseLayout">
+        <put name="primaryMenu"
+             value="/html/esc/primarynavigation.jsp" />
+        <put name="secondaryMenu"
+             value="/html/esc/secondarynavigation.jsp" />
+    </definition>
+    <definition name="project.baseTitledLayout"
+                extends="html.baseTitledLayout">
+        <put name="primaryMenu"
+             value="/html/esc/primarynavigation.jsp" />
+        <put name="secondaryMenu"
+             value="/html/esc/secondarynavigation.jsp" />
+    </definition>
+    <definition name="project.list.page"
+                extends="project.baseTitledLayout">
+        <put name="title"
+             value="Project List" />
+        <put name="description"
+             value="Manage all of your projects using the available options. Click on the column headings to sort the list." />
+        <put name="content"
+             value="/html/esc/project/projectlist.jsp" />
+    </definition>
+    <definition name="project.list.item.page"
+                extends="project.baseTitledLayout">
+        <put name="title"
+             value="Project List Preferences" />
+        <put name="description"
+             value="Choose the fields that you want to see on the project list page." />
+        <put name="content"
+             value="/html/esc/project/projectlistitem.jsp" />
+    </definition>
+    <definition name="project.view.page"
+                extends="project.baseTitledLayout">
+        <put name="title"
+             value="Project Information" />
+        <put name="description"
+             value="View project information." />
+        <put name="content"
+             value="/html/esc/project/projectview.jsp" />
+    </definition>
+    <definition name="project.edit.page"
+                extends="project.baseTitledLayout">
+        <put name="title"
+             value="Edit Project" />
+        <put name="description"
+             value="Edit project information.  Click 'Save' to save your changes." />
+        <put name="content"
+             value="/html/esc/project/projectedit.jsp" />
+    </definition>
+    <definition name="project.email.page"
+                extends="project.baseTitledLayout">
+        <put name="title"
+             value="Send Project Notification Emails" />
+        <put name="description"
+             value="Select the project contacts to receive the project update notification email.  Click 'Send' to send the email to the selected contacts, or click 'Skip' to return to the project listing." />
+        <put name="content"
+             value="/html/esc/project/projectemail.jsp" />
+    </definition>
+    <definition name="project.create.step1.page"
+                extends="project.baseTitledLayout">
+        <put name="title"
+             value="New Project" />
+        <put name="description"
+             value="Enter the new project information into the form below.  Click 'Continue' to complete the remainder of the project information." />
+        <put name="content"
+             value="/html/esc/project/projectcreatestep1.jsp" />
+    </definition>
+    <definition name="project.create.step2.page"
+                extends="project.baseTitledLayout">
+        <put name="title"
+             value="New Project" />
+        <put name="description"
+             value="Complete the information for your new project.  Click 'Save' to save your new project." />
+        <put name="content"
+             value="/html/esc/project/projectcreatestep2.jsp" />
+    </definition>
+    <definition name="project.zone.list.page"
+                extends="project.baseTitledLayout">
+        <put name="title"
+             value="Project Group List" />
+        <put name="description"
+             value="Manage project group information." />
+        <put name="content"
+             value="/html/esc/project/projectzonelist.jsp" />
+    </definition>
+    <definition name="project.zone.edit.page"
+                extends="project.baseTitledLayout">
+        <put name="title"
+             value="Edit Project Group" />
+        <put name="description"
+             value="Edit project group information.  Click 'Save' to save your changes." />
+        <put name="content"
+             value="/html/esc/project/projectzoneedit.jsp" />
+    </definition>
+    <definition name="project.zone.create.page"
+                extends="project.baseTitledLayout">
+        <put name="title"
+             value="New Project Group" />
+        <put name="description"
+             value="Create new project group for use in new or existing projects." />
+        <put name="content"
+             value="/html/esc/project/projectzonecreate.jsp" />
+    </definition>
+    <definition name="project.zone.delete.page"
+                extends="project.baseTitledLayout">
+        <put name="title"
+             value="Delete Project Group" />
+        <put name="description"
+             value="Choose whether to delete the project group or replace it with an existing group." />
+        <put name="content"
+             value="/html/esc/project/projectzonedelete.jsp" />
+    </definition>
+    <definition name="projecttype.list.page"
+                extends="project.baseTitledLayout">
+        <put name="title"
+             value="Project Type List" />
+        <put name="description"
+             value="Manage project type from the list below." />
+        <put name="content"
+             value="/html/esc/project/projecttypelist.jsp" />
+    </definition>
+    <definition name="projecttype.create.page"
+                extends="project.baseTitledLayout">
+        <put name="title"
+             value="New Project Type" />
+        <put name="description"
+             value="* = required field" />
+        <put name="content"
+             value="/html/esc/project/projecttypecreate.jsp" />
+    </definition>
+    <definition name="projecttype.view.page"
+                extends="project.baseTitledLayout">
+        <put name="title"
+             value="Project Type" />
+        <put name="description"
+             value="" />
+        <put name="content"
+             value="/html/esc/project/projecttypeview.jsp" />
+    </definition>
+    <definition name="projecttype.edit.page"
+                extends="project.baseTitledLayout">
+        <put name="title"
+             value="Edit Project Type" />
+        <put name="description"
+             value="* = required field" />
+        <put name="content"
+             value="/html/esc/project/projecttypeedit.jsp" />
+    </definition>
+    <definition name="projecttype.delete.page"
+                extends="project.baseTitledLayout">
+        <put name="title"
+             value="Delete Project Type" />
+        <put name="description"
+             value="" />
+        <put name="content"
+             value="/html/esc/project/projecttypedelete.jsp" />
+    </definition>
+    <definition name="gis.import.page"
+                extends="project.baseTitledLayout">
+        <put name="title"
+             value="GIS Table Import" />
+        <put name="description"
+             value="" />
+        <put name="content"
+             value="/html/esc/gis/importtable.jsp" />
+    </definition>
+</tiles-definitions>

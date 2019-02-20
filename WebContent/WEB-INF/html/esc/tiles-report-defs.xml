@@ -1,0 +1,30 @@
+<!DOCTYPE tiles-definitions PUBLIC
+    "-//Apache Software Foundation//DTD Tiles Configuration 1.3//EN"
+    "http://struts.apache.org/dtds/tiles-config_1_3.dtd">
+<tiles-definitions>
+    <definition name="report.baseTitledLayout"
+                extends="html.baseTitledLayout">
+        <put name="primaryMenu"
+             value="/html/esc/primarynavigation.jsp" />
+        <put name="secondaryMenu"
+             value="/html/esc/secondarynavigation.jsp" />
+    </definition>
+    <definition name="report.options.page"
+                extends="report.baseTitledLayout">
+        <put name="title"
+             value="Report Options" />
+        <put name="description"
+             value="You may choose to run a report from the list of available reports defined below." />
+        <put name="content"
+             value="/html/esc/report/reportoptions.jsp" />
+    </definition>
+    <definition name="admin.report.options.page"
+                extends="report.baseTitledLayout">
+        <put name="title"
+             value="Report Options" />
+        <put name="description"
+             value="You may choose to run a report from the list of available reports defined below." />
+        <put name="content"
+             value="/html/esc/report/adminreportoptions.jsp" />
+    </definition>
+</tiles-definitions>

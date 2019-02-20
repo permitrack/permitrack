@@ -1,0 +1,161 @@
+<META HTTP-EQUIV="Pragma"
+      CONTENT="no-cache">
+<META HTTP-EQUIV="CACHE-CONTROL"
+      CONTENT="NO-CACHE">
+<META HTTP-EQUIV="PRAGMAS"
+      CONTENT="NO-CACHE">
+<html>
+    <head>
+        <title>ArcIMS Help</title>
+        <SCRIPT LANGUAGE=JAVASCRIPT>
+            function ShowDocument(selectedDocumentURL)
+            {
+                var vars = "left=0,top=0,screenX=0,screenY=0,height=";
+                vars +=
+                (550);
+                vars +=
+                ",width=";
+                vars +=
+                (450);
+                vars +=
+                ",directories=0,fullscreen=0,status=1,toolbar=0,location=0,resizable=1,scrollbars=yes";
+                var Win = window.open(selectedDocumentURL,
+                                      "helppopup",
+                                      vars);
+            }
+        </SCRIPT>
+        <link rel="stylesheet"
+              type="text/css"
+              href="../gis.css">
+        <body bgcolor="#ffffff"
+              link="000066"
+              vlink="000066">
+    </head>
+    <TABLE WIDTH="187"
+           BORDER="0"
+           CELLSPACING="1"
+           class="help"
+           style="border-collapse: collapse"
+           bordercolor="#111111">
+        <TR>
+            <TD colspan=2
+                class="navtitle"
+                height="30"
+                width="183">
+                <p class="bodytitle">Help Index:
+            </TD>
+        </TR>
+        <TR>
+            <TD colspan=2
+                class="bodytitle"
+                height="13"
+                width="183">
+                <p class="help">
+                    <a href="JavaScript:ShowDocument('intro.htm')">Introduction</a>
+            </TD>
+        </TR>
+        <TR>
+            <TD colspan=2
+                class="navtitle"
+                height="13"
+                width="183">
+                <a href="JavaScript:ShowDocument('mapnav.htm')">Navigation Tools</a>
+            </TD>
+        </TR>
+        <TR>
+            <TD height="65"
+                width="1"></TD>
+            <TD class="nav"
+                height="65"
+                width="179">
+                Zoom In
+                <br>
+                Zoom Out
+                <br>
+                Pan
+                <br>
+                Zoom Full Extent
+                <br>
+                Zoom Previous
+                <br>
+            </TD>
+        </TR>
+        <TR>
+            <TD colspan=2
+                class="navtitle"
+                height="13"
+                width="183">
+                <a href="JavaScript:ShowDocument('select.htm')">Selection Tools</a>
+            </TD>
+        </TR>
+        <TR>
+            <TD height="26"
+                width="1"></TD>
+            <TD class="nav"
+                height="26"
+                width="179">
+                Parcel Select
+                <br>
+                Clear Selection
+                <br>
+            </TD>
+        <TR>
+            <TD colspan=2
+                class="navtitle"
+                height="13"
+                width="183">
+                <a href="JavaScript:ShowDocument('measure.htm')">Measurement Tools</a>
+            </TD>
+        </TR>
+        <TR>
+            <TD height="26"
+                width="1"></TD>
+            <TD class="nav"
+                height="26"
+                width="179">
+                Measure
+                <br>
+                Set Map/Measure Units
+                <br>
+            </TD>
+        </TR>
+        <TR>
+            <TD colspan=2
+                class="navtitle"
+                height="13"
+                width="180">
+                <a href="JavaScript:ShowDocument('attribute.htm')">Viewing Property Attributes</a>
+            </TD>
+        </TR>
+        <TR>
+            <TD class="navtitle"
+                height="13"
+                width="1"></TD>
+            <TD class="navtitle"
+                height="13"
+                width="179">
+                <p class="help">
+                    <span style="font-weight: 400">Search
+                        <br>
+                                                   Zoom and Select
+                    </span>
+            </TD>
+        </TR>
+        <TR>
+            <TD colspan=2
+                class="navtitle"
+                height="13"
+                width="183">
+                <p class="help">
+                    <a href="JavaScript:ShowDocument('print.htm')">Printing</a>
+                    <br>
+                    <span style="font-weight: 400">Property Information Map</span>
+            </TD>
+        </TR>
+    </TABLE>
+    <br>
+    <input type="button"
+           value="View Map Layers"
+           onclick="parent.MapFrame.clickFunction('toc');">
+    </body>
+</html>

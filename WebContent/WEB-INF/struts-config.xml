@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?><!DOCTYPE struts-config PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 1.3//EN"
+    "http://struts.apache.org/dtds/struts-config_1_3.dtd">
+<struts-config>
+    <display-name>Base Config</display-name>
+    <form-beans>
+        <form-bean name="loginForm"
+                   type="com.sehinc.portal.action.auth.LoginForm" />
+    </form-beans>
+    <global-exceptions>
+        <exception key="errors.general"
+                   type="java.lang.Exception"
+                   path="/error.do" />
+    </global-exceptions>
+    <global-forwards>
+        <forward name="default"
+                 extends="login.page"
+                 path="/" />
+        <forward name="login.page"
+                 path="/loginPageAction.do"
+                 redirect="true" />
+        <forward name="fail"
+                 module="/"
+                 path="/error.do" />
+        <forward name="page.permission.denied"
+                 module="/"
+                 path="/pagepermissiondenied.do" />
+        <forward name="error"
+                 module="/"
+                 path="/error.do" />
+    </global-forwards>
+    <action-mappings>
+        <action path="/error"
+                type="com.sehinc.portal.action.base.ErrorAction">
+            <forward name="html"
+                     path="error.page" />
+        </action>
+        <action path="/loginPageAction"
+                type="com.sehinc.portal.action.auth.LoginPageAction"
+                name="loginForm"
+                scope="request"
+                validate="false">
+            <forward name="html"
+                     path="html.auth.page" />
+            <forward name="failure"
+                     path="error.page" />
+        </action>
+        <action path="/htmlLoginAction"
+                type="com.sehinc.portal.action.auth.LoginAction"
+                name="loginForm"
+                input="/html/login.jsp">
+            <forward name="fail"
+                     path="/loginPageAction.do"
+                     redirect="true" />
+            <forward name="cancel"
+                     path="/loginPageAction.do"
+                     redirect="true" />
+        </action>
+        <action path="/logoutAction"
+                type="com.sehinc.portal.action.auth.LogoutAction">
+            <forward name="html"
+                     path="/loginPageAction.do"
+                     redirect="true" />
+            <forward name="EC"
+                     path="/loginPageAction.do"
+                     redirect="true" />
+            <forward name="SW"
+                     path="/loginPageAction.do"
+                     redirect="true" />
+            <forward name="DV"
+                     path="/loginPageAction.do"
+                     redirect="true" />
+            <forward name="SE"
+                     path="/loginPageAction.do"
+                     redirect="true" />
+            <forward name="EV"
+                     path="/loginPageAction.do"
+                     redirect="true" />
+        </action>
+        <action path="/pagepermissiondenied"
+                type="com.sehinc.portal.action.base.PagePermissionDenied">
+            <forward name="html"
+                     path="/error.do"
+                     redirect="false" />
+        </action>
+        <action path="/home"
+                type="com.sehinc.portal.action.base.DispatchAction">
+            <forward name="html"
+                     path="html.home.page" />
+        </action>
+        <action path="/contact"
+                type="com.sehinc.portal.action.base.DispatchAction">
+            <forward name="html"
+                     path="html.home.contact.page" />
+        </action>
+        <action path="/help"
+                type="com.sehinc.portal.action.base.DispatchAction">
+            <forward name="html"
+                     path="html.home.contact.help.page" />
+        </action>
+        <action path="/manualescuser"
+                type="com.sehinc.portal.action.base.DispatchAction">
+            <forward name="html"
+                     path="html.home.contact.help.manual.esc.user.page" />
+        </action>
+        <action path="/manualescadmin"
+                type="com.sehinc.portal.action.base.DispatchAction">
+            <forward name="html"
+                     path="html.home.contact.help.manual.esc.admin.page" />
+        </action>
+        <action path="/manualsettings"
+                type="com.sehinc.portal.action.base.DispatchAction">
+            <forward name="html"
+                     path="html.home.contact.help.manual.settings.page" />
+        </action>
+        <action path="/buy"
+                type="com.sehinc.portal.action.base.DispatchAction">
+            <forward name="html"
+                     path="html.home.subscribe.page" />
+        </action>
+        <action path="/about"
+                type="com.sehinc.portal.action.base.DispatchAction">
+            <forward name="html"
+                     path="html.home.contact.about.page" />
+        </action>
+        <action path="/partner"
+                type="com.sehinc.portal.action.base.DispatchAction">
+            <forward name="html"
+                     path="html.home.partner.page" />
+        </action>
+        <action path="/products"
+                type="com.sehinc.portal.action.base.DispatchAction">
+            <forward name="html"
+                     path="html.home.products.page" />
+        </action>
+        <action path="/projectmanagement"
+                type="com.sehinc.portal.action.base.DispatchAction">
+            <forward name="html"
+                     path="html.home.products.projectmanagement.page" />
+        </action>
+        <action path="/inspection"
+                type="com.sehinc.portal.action.base.DispatchAction">
+            <forward name="html"
+                     path="html.home.products.inspection.page" />
+        </action>
+        <action path="/emission"
+                type="com.sehinc.portal.action.base.DispatchAction">
+            <forward name="html"
+                     path="html.home.products.emissions.page" />
+        </action>
+        <action path="/gis"
+                type="com.sehinc.portal.action.base.DispatchAction">
+            <forward name="html"
+                     path="html.home.products.gis.page" />
+        </action>
+        <action path="/demo"
+                type="com.sehinc.portal.action.base.DispatchAction">
+            <forward name="html"
+                     path="html.home.products.demo.page" />
+        </action>
+    </action-mappings>
+    <controller processorClass="org.apache.struts.action.RequestProcessor"
+                contentType="text/html" />
+    <message-resources parameter="com.sehinc.portal.resources.PortalResources"
+                       null="false" />
+    <plug-in className="org.apache.struts.plugins.ModuleConfigVerifier" />
+</struts-config>

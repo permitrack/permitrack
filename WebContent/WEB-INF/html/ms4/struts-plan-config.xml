@@ -1,0 +1,710 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?><!DOCTYPE struts-config PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 1.3//EN"
+    "http://struts.apache.org/dtds/struts-config_1_3.dtd">
+<struts-config>
+    <form-beans>
+        <form-bean name="planForm"
+                   type="com.sehinc.stormwater.action.plan.PlanForm" />
+        <form-bean name="planDeleteForm"
+                   type="com.sehinc.stormwater.action.plan.PlanDeleteForm" />
+        <form-bean name="mcmForm"
+                   type="com.sehinc.stormwater.action.plan.MCMForm" />
+        <form-bean name="bmpForm"
+                   type="com.sehinc.stormwater.action.plan.BMPForm" />
+        <form-bean name="bmpCopyForm"
+                   type="com.sehinc.stormwater.action.plan.BMPCopyForm" />
+        <form-bean name="bmpDbSelectForm"
+                   type="com.sehinc.stormwater.action.bmpdb.BMPDBListForm" />
+        <form-bean name="goalForm"
+                   type="com.sehinc.stormwater.action.plan.GoalForm" />
+        <form-bean name="goalActivityForm"
+                   type="com.sehinc.stormwater.action.plan.GoalActivityForm" />
+        <form-bean name="subNodeForm"
+                   type="com.sehinc.stormwater.action.plan.SubNodeForm" />
+        <form-bean name="customForm"
+                   type="com.sehinc.common.forms.CustomForm" />
+        <form-bean name="bmpDbListForm"
+                   type="org.apache.struts.validator.DynaValidatorForm">
+            <form-property name="name"
+                           type="java.lang.String" />
+            <form-property name="bmpDbCategoryId"
+                           type="java.lang.Integer" />
+        </form-bean>
+        <form-bean name="mcmBmpDbSelectForm"
+                   type="org.apache.struts.validator.DynaValidatorForm">
+            <form-property name="bmp_db_id"
+                           type="java.lang.Integer" />
+        </form-bean>
+        <form-bean name="goalActivityDeleteFileLocationForm"
+                   type="org.apache.struts.validator.DynaValidatorForm">
+            <form-property name="fileId"
+                           type="java.lang.Integer" />
+        </form-bean>
+        <form-bean name="planPublishForm"
+                   type="org.apache.struts.validator.DynaValidatorForm">
+            <form-property name="planName"
+                           type="java.lang.String" />
+            <form-property name="startDate"
+                           type="java.lang.String" />
+            <form-property name="endDate"
+                           type="java.lang.String" />
+            <form-property name="dateOption"
+                           type="java.lang.String" />
+            <form-property name="isSystemAdmin"
+                           type="java.lang.String" />
+            <form-property name="isExport"
+                           type="java.lang.String" />
+            <form-property name="prevStartDate"
+                           type="java.lang.String" />
+            <form-property name="prevEndDate"
+                           type="java.lang.String" />
+            <form-property name="publishedDate"
+                           type="java.lang.String" />
+            <form-property name="publishedUser"
+                           type="java.lang.String" />
+        </form-bean>
+        <form-bean name="outfallInspectionDBForm"
+                   type="org.apache.struts.validator.DynaValidatorForm">
+            <form-property name="dbFile"
+                           type="org.apache.struts.upload.FormFile" />
+        </form-bean>
+        <form-bean name="planTemplateCreateForm"
+                   type="org.apache.struts.validator.DynaValidatorForm" />
+    </form-beans>
+    <global-forwards>
+        <forward name="plan.list.action"
+                 path="/planlistaction.do"
+                 redirect="true" />
+<!--
+        <forward name="plan.view.action"
+                 path="/planviewaction.do"
+                 redirect="true" />
+-->
+<!--
+        <forward name="mcm.view.action"
+                 path="/mcmview.do"
+                 redirect="true" />
+-->
+<!--
+        <forward name="bmp.view.action"
+                 path="/bmpviewaction.do"
+                 redirect="true" />
+-->
+<!--
+        <forward name="goal.view.action"
+                 path="/goalviewaction.do"
+                 redirect="true" />
+-->
+    </global-forwards>
+    <action-mappings>
+        <action path="/planlistaction"
+                type="com.sehinc.stormwater.action.plan.PlanListAction"
+                parameter="secondaryMenuItem=list">
+            <forward name="continue"
+                     path="plan.list.page" />
+        </action>
+        <action path="/planviewaction"
+                type="com.sehinc.stormwater.action.plan.PlanViewAction"
+                name="planForm"
+                parameter="secondaryMenuItem=view"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="plan.view.page" />
+        </action>
+        <action path="/plantemplatecreate"
+                type="com.sehinc.stormwater.action.plan.PlanTemplateCreateAction"
+                name="planTemplateCreateForm"
+                parameter="secondaryMenuItem=view"
+                input="plan.view.page"
+                scope="request"
+                validate="true"
+                cancellable="true">
+            <forward name="continue"
+                     path="/plantemplateviewaction.do"
+                     module="/html/ms4/template"
+                     redirect="true" />
+        </action>
+        <action path="/plannewaction"
+                type="com.sehinc.stormwater.action.plan.PlanNewAction"
+                name="planForm"
+                parameter="secondaryMenuItem=create"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="plan.new.page" />
+        </action>
+        <action path="/plancreate"
+                type="com.sehinc.stormwater.action.plan.PlanCreateAction"
+                name="planForm"
+                input="plan.new.page"
+                scope="request"
+                validate="true"
+                cancellable="true">
+            <forward name="continue"
+                     path="/planviewaction.do"
+                     redirect="true" />
+        </action>
+        <action path="/planeditaction"
+                type="com.sehinc.stormwater.action.plan.PlanViewAction"
+                name="planForm"
+                parameter="secondaryMenuItem=edit"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="plan.edit.page" />
+        </action>
+        <action path="/planedit"
+                type="com.sehinc.stormwater.action.plan.PlanEditAction"
+                name="planForm"
+                input="plan.edit.page"
+                scope="request"
+                validate="true"
+                cancellable="true">
+            <forward name="continue"
+                     path="/planviewaction.do"
+                     redirect="true" />
+        </action>
+        <action path="/plandeleteaction"
+                type="com.sehinc.stormwater.action.plan.PlanViewDeleteAction"
+                name="planDeleteForm"
+                parameter="secondaryMenuItem=delete;mode=plan"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="plan.delete.page" />
+        </action>
+        <action path="/plandelete"
+                type="com.sehinc.stormwater.action.plan.PlanDeleteAction"
+                name="planDeleteForm"
+                input="plan.delete.page"
+                scope="request"
+                validate="true"
+                cancellable="true">
+            <forward name="continue"
+                     path="/planlistaction.do"
+                     redirect="true" />
+        </action>
+        <action path="/planpublishaction"
+                type="com.sehinc.stormwater.action.plan.PlanViewPublishAction"
+                name="planPublishForm"
+                parameter="secondaryMenuItem=publish"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="plan.publish.page" />
+        </action>
+        <action path="/planpublish"
+                type="com.sehinc.stormwater.action.plan.PlanPublishAction"
+                name="planPublishForm"
+                input="plan.publish.page"
+                scope="request"
+                validate="true"
+                parameter="secondaryMenuItem=publish"
+                cancellable="true">
+            <forward name="continue"
+                     path="plan.published.page" />
+        </action>
+        <action path="/mcmcreateaction"
+                type="com.sehinc.stormwater.action.plan.PlanNewMCMAction"
+                name="mcmForm"
+                parameter="secondaryMenuItem=create"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="plan.new.mcm.page" />
+        </action>
+        <action path="/mcmcreate"
+                type="com.sehinc.stormwater.action.plan.PlanCreateMCMAction"
+                name="mcmForm"
+                input="/mcmcreateaction.do?valid=false"
+                scope="request"
+                validate="true"
+                cancellable="true">
+            <forward name="continue"
+                     path="/planviewaction.do"
+                     redirect="true" />
+        </action>
+        <action path="/mcmview"
+                type="com.sehinc.stormwater.action.plan.MCMAction"
+                name="mcmForm"
+                parameter="secondaryMenuItem=view"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="mcm.view.page" />
+        </action>
+        <action path="/mcmeditaction"
+                type="com.sehinc.stormwater.action.plan.MCMAction"
+                name="mcmForm"
+                parameter="secondaryMenuItem=edit"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="mcm.edit.page" />
+        </action>
+        <action path="/mcmedit"
+                type="com.sehinc.stormwater.action.plan.MCMEditAction"
+                name="mcmForm"
+                input="mcm.edit.page"
+                scope="request"
+                validate="true"
+                cancellable="true">
+            <forward name="continue"
+                     path="/mcmview.do"
+                     redirect="true" />
+        </action>
+        <action path="/mcmdeleteaction"
+                type="com.sehinc.stormwater.action.plan.MCMViewDeleteAction"
+                name="planDeleteForm"
+                parameter="secondaryMenuItem=delete;mode=mcm"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="mcm.delete.page" />
+        </action>
+        <action path="/mcmdelete"
+                type="com.sehinc.stormwater.action.plan.MCMDeleteAction"
+                name="planDeleteForm"
+                input="mcm.delete.page"
+                scope="request"
+                validate="true"
+                cancellable="true">
+            <forward name="continue"
+                     path="/planviewaction.do"
+                     redirect="true" />
+        </action>
+        <action path="/bmp0createaction"
+                type="com.sehinc.stormwater.action.plan.MCMNewBMP0Action"
+                name="bmpForm"
+                parameter="secondaryMenuItem=create"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="mcm.new.bmp.page" />
+        </action>
+        <action path="/bmp1createaction"
+                type="com.sehinc.stormwater.action.plan.MCMNewBMP1Action"
+                name="bmpForm"
+                parameter="secondaryMenuItem=create"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="mcm.new.bmp.page" />
+        </action>
+        <action path="/bmp2createaction"
+                type="com.sehinc.stormwater.action.plan.MCMNewBMP2Action"
+                name="bmpForm"
+                parameter="secondaryMenuItem=create"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="mcm.new.bmp.page" />
+        </action>
+        <action path="/bmpcreate"
+                type="com.sehinc.stormwater.action.plan.MCMCreateBMPAction"
+                name="bmpForm"
+                input="mcm.new.bmp.page"
+                scope="request"
+                validate="true"
+                cancellable="true">
+            <forward name="continue"
+                     path="/mcmview.do"
+                     redirect="true" />
+        </action>
+        <action path="/bmpdbcreateaction"
+                type="com.sehinc.stormwater.action.plan.MCMViewBMPDBAction"
+                name="bmpDbSelectForm"
+                parameter="secondaryMenuItem=create"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="mcm.select.bmp.db.page" />
+        </action>
+        <action path="/bmpdbcreate"
+                type="com.sehinc.stormwater.action.plan.MCMSelectBMPDBAction"
+                name="mcmBmpDbSelectForm"
+                input="mcm.select.bmp.db.page"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="/bmpeditaction.do"
+                     redirect="true" />
+        </action>
+        <action path="/bmpviewaction"
+                type="com.sehinc.stormwater.action.plan.BMPAction"
+                name="bmpForm"
+                parameter="secondaryMenuItem=view"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="bmp.view.page" />
+        </action>
+        <action path="/bmpeditaction"
+                type="com.sehinc.stormwater.action.plan.BMPAction"
+                name="bmpForm"
+                parameter="secondaryMenuItem=edit"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="bmp.edit.page" />
+        </action>
+        <action path="/bmpedit"
+                type="com.sehinc.stormwater.action.plan.BMPEditAction"
+                name="bmpForm"
+                input="bmp.edit.page"
+                scope="request"
+                validate="true"
+                cancellable="true">
+            <forward name="continue"
+                     path="/bmpviewaction.do"
+                     redirect="true" />
+        </action>
+        <action path="/bmpcopyaction"
+                type="com.sehinc.stormwater.action.plan.BMPViewCopyAction"
+                name="bmpCopyForm"
+                parameter="secondaryMenuItem=copy"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="bmp.copy.page" />
+        </action>
+        <action path="/bmpcopy"
+                type="com.sehinc.stormwater.action.plan.BMPCopyAction"
+                name="bmpCopyForm"
+                input="bmp.copy.page"
+                scope="request"
+                validate="true"
+                cancellable="true">
+            <forward name="continue"
+                     path="/bmpviewaction.do"
+                     redirect="true" />
+        </action>
+        <action path="/bmpmoveaction"
+                type="com.sehinc.stormwater.action.plan.BMPViewMoveAction"
+                name="bmpCopyForm"
+                parameter="secondaryMenuItem=move"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="bmp.move.page" />
+        </action>
+        <action path="/bmpmove"
+                type="com.sehinc.stormwater.action.plan.BMPCopyAction"
+                name="bmpCopyForm"
+                input="bmp.move.page"
+                scope="request"
+                validate="true"
+                cancellable="true">
+            <forward name="continue"
+                     path="/bmpviewaction.do"
+                     redirect="true" />
+        </action>
+        <action path="/bmpdbaddaction"
+                type="com.sehinc.stormwater.action.plan.BMPDBAddAction"
+                name="bmpDbListForm"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="bmp.db.select.category" />
+        </action>
+        <action path="/bmpdbcategoryadd"
+                type="com.sehinc.stormwater.action.plan.BMPDBAddAction"
+                name="bmpDbListForm"
+                input="bmp.db.select.category"
+                scope="request"
+                validate="true"
+                cancellable="true">
+            <forward name="continue"
+                     path="bmp.view.page" />
+        </action>
+        <action path="/bmpdeleteaction"
+                type="com.sehinc.stormwater.action.plan.BMPViewDeleteAction"
+                name="planDeleteForm"
+                parameter="secondaryMenuItem=delete;mode=bmp"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="bmp.delete.page" />
+        </action>
+        <action path="/bmpdelete"
+                type="com.sehinc.stormwater.action.plan.BMPDeleteAction"
+                name="planDeleteForm"
+                input="bmp.delete.page"
+                scope="request"
+                validate="true"
+                cancellable="true">
+            <forward name="continue"
+                     path="/mcmview.do"
+                     redirect="true" />
+        </action>
+        <action path="/goalcreateaction"
+                type="com.sehinc.stormwater.action.plan.BMPNewGoalAction"
+                name="goalForm"
+                parameter="secondaryMenuItem=create"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="bmp.new.goal.page" />
+        </action>
+        <action path="/goalcreate"
+                type="com.sehinc.stormwater.action.plan.BMPCreateGoalAction"
+                name="goalForm"
+                input="bmp.new.goal.page"
+                scope="request"
+                validate="true"
+                cancellable="true">
+            <forward name="continue"
+                     path="/bmpviewaction.do"
+                     redirect="true" />
+        </action>
+        <action path="/goalviewaction"
+                type="com.sehinc.stormwater.action.plan.GoalAction"
+                name="goalForm"
+                parameter="secondaryMenuItem=view"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="goal.view.page" />
+        </action>
+        <action path="/goaleditaction"
+                type="com.sehinc.stormwater.action.plan.GoalAction"
+                name="goalForm"
+                parameter="secondaryMenuItem=edit"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="goal.edit.page" />
+        </action>
+        <action path="/goaledit"
+                type="com.sehinc.stormwater.action.plan.GoalEditAction"
+                name="goalForm"
+                input="goal.edit.page"
+                scope="request"
+                validate="true"
+                cancellable="true">
+            <forward name="continue"
+                     path="/goalviewaction.do"
+                     redirect="true" />
+        </action>
+        <action path="/goaldeleteaction"
+                type="com.sehinc.stormwater.action.plan.GoalViewDeleteAction"
+                name="planDeleteForm"
+                parameter="secondaryMenuItem=delete;mode=goal"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="goal.delete.page" />
+        </action>
+        <action path="/goaldelete"
+                type="com.sehinc.stormwater.action.plan.GoalDeleteAction"
+                name="planDeleteForm"
+                input="goal.delete.page"
+                scope="request"
+                validate="true"
+                cancellable="true">
+            <forward name="continue"
+                     path="/bmpviewaction.do"
+                     redirect="true" />
+        </action>
+        <action path="/goalactivitycreateaction"
+                type="com.sehinc.stormwater.action.plan.GoalNewGoalActivityAction"
+                name="goalActivityForm"
+                parameter="secondaryMenuItem=create"
+                scope="request"
+                validate="false">
+            <forward name="default"
+                     path="goal.new.goalactivity.page" />
+            <forward name="custom"
+                     path="/formcreateaction.do" />
+        </action>
+        <action path="/goalactivitycreate"
+                type="com.sehinc.stormwater.action.plan.GoalCreateGoalActivityAction"
+                name="goalActivityForm"
+                input="goal.new.goalactivity.page"
+                scope="request"
+                validate="true"
+                cancellable="true" />
+<!--
+            <forward name="continue"
+                     path="/goalviewaction.do"
+                     redirect="true" />
+            <forward name="documents"
+                     path="goalactivity.file.upload.page" />
+        </action>
+-->
+        <action path="/goalactivityviewaction"
+                type="com.sehinc.stormwater.action.plan.GoalActivityAction"
+                name="goalActivityForm"
+                parameter="secondaryMenuItem=view"
+                scope="request"
+                validate="false">
+            <forward name="default"
+                     path="goalactivity.view.page" />
+            <forward name="custom"
+                     path="/formviewaction.do" />
+        </action>
+        <action path="/goalactivityfiledownload"
+                type="com.sehinc.stormwater.action.plan.GoalActivityFileDownloadAction" />
+        <action path="/goalactivityfileuploadaction"
+                type="com.sehinc.stormwater.action.plan.GoalActivityEditAction"
+                name="goalActivityForm"
+                parameter="attach=true"
+                scope="request"
+                validate="false"
+                cancellable="true">
+            <forward name="continue"
+                     path="goalactivity.file.upload.page" />
+        </action>
+        <action path="/goalactivityfileupload"
+                type="com.sehinc.stormwater.action.plan.GoalActivityFileUploadAction"
+                name="goalActivityForm"
+                scope="request"
+                validate="false"
+                cancellable="true" />
+        <!--input="goalactivity.file.upload.page"-->
+        <action path="/goalactivityeditaction"
+                type="com.sehinc.stormwater.action.plan.GoalActivityAction"
+                name="goalActivityForm"
+                parameter="secondaryMenuItem=edit"
+                scope="request"
+                validate="false" />
+<!--
+            <forward name="default"
+                     path="goalactivity.edit.page" />
+            <forward name="custom"
+                     path="/formeditaction.do" />
+        </action>
+-->
+        <action path="/goalactivityedit"
+                type="com.sehinc.stormwater.action.plan.GoalActivityEditAction"
+                name="goalActivityForm"
+                input="/goalactivityeditaction.do"
+                scope="request"
+                validate="true"
+                cancellable="true" />
+<!--
+            <forward name="documents"
+                     path="goalactivity.file.upload.page" />
+        </action>
+-->
+        <action path="/goalactivitydeleteaction"
+                type="com.sehinc.stormwater.action.plan.GoalActivityViewDeleteAction"
+                name="planDeleteForm"
+                parameter="secondaryMenuItem=delete;mode=goalactivity"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="goalactivity.delete.page" />
+        </action>
+        <action path="/goalactivitydelete"
+                type="com.sehinc.stormwater.action.plan.GoalActivityDeleteAction"
+                name="planDeleteForm"
+                input="goalactivity.delete.page"
+                scope="request"
+                validate="true"
+                cancellable="true">
+            <forward name="continue"
+                     path="/subnodeviewaction.do"
+                     redirect="true" />
+        </action>
+        <action path="/goalactivitydeletefilelocation"
+                type="com.sehinc.stormwater.action.plan.GoalActivityDeleteFileLocationAction"
+                name="goalActivityDeleteFileLocationForm"
+                input="goalactivity.edit.page"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="/goalactivityeditaction.do"
+                     redirect="true" />
+        </action>
+        <action path="/subnodeviewaction"
+                type="com.sehinc.stormwater.action.plan.SubNodeViewAction"
+                name="subNodeForm"
+                parameter="secondaryMenuItem=view"
+                scope="request"
+                validate="false">
+            <forward name="bmp"
+                     path="/bmpviewaction.do"
+                     redirect="false" />
+            <forward name="mcm"
+                     path="/mcmview.do"
+                     redirect="false" />
+            <forward name="goal"
+                     path="/goalviewaction.do"
+                     redirect="false" />
+            <forward name="goalactivity"
+                     path="/goalactivityviewaction.do"
+                     redirect="false" />
+            <forward name="continue"
+                     path="/planviewaction.do"
+                     redirect="false" />
+        </action>
+        <action path="/formeditaction"
+                type="com.sehinc.stormwater.action.plan.FormAction"
+                name="customForm"
+                scope="request"
+                validate="false">
+            <forward name="success"
+                     path="form.edit.page" />
+        </action>
+        <action path="/formedit"
+                type="com.sehinc.stormwater.action.plan.FormEditAction"
+                name="customForm"
+                input="form.edit.page"
+                parameter="secondaryMenuItem=edit"
+                scope="request"
+                validate="true"
+                cancellable="true">
+            <forward name="success"
+                     path="/planviewaction.do"
+                     redirect="true" />
+        </action>
+        <action path="/formviewaction"
+                type="com.sehinc.stormwater.action.plan.FormAction"
+                name="customForm"
+                scope="request"
+                validate="false">
+            <forward name="success"
+                     path="form.view.page" />
+        </action>
+        <action path="/formcreateaction"
+                type="com.sehinc.stormwater.action.plan.FormAction"
+                name="customForm"
+                scope="request"
+                validate="false">
+            <forward name="success"
+                     path="form.create.page" />
+        </action>
+        <action path="/formcreate"
+                type="com.sehinc.stormwater.action.plan.FormEditAction"
+                name="customForm"
+                input="form.create.page"
+                parameter="secondaryMenuItem=edit"
+                scope="request"
+                validate="true"
+                cancellable="true">
+            <forward name="success"
+                     path="/planviewaction.do"
+                     redirect="true" />
+        </action>
+    </action-mappings>
+    <controller processorClass="org.apache.struts.action.RequestProcessor"
+                contentType="text/html" />
+    <plug-in className="org.apache.struts.tiles.TilesPlugin">
+        <set-property property="definitions-config"
+                      value="/WEB-INF/html/tiles-defs.xml, /WEB-INF/html/ms4/tiles-plan-defs.xml" />
+        <set-property property="definitions-debug"
+                      value="2" />
+        <set-property property="definitions-parser-details"
+                      value="2" />
+        <set-property property="definitions-parser-validate"
+                      value="true" />
+        <set-property property="moduleAware"
+                      value="true" />
+    </plug-in>
+    <plug-in className="org.apache.struts.validator.ValidatorPlugIn">
+        <set-property property="pathnames"
+                      value="/org/apache/struts/validator/validator-rules.xml, /WEB-INF/html/ms4/validation-plan.xml" />
+    </plug-in>
+</struts-config>

@@ -1,0 +1,52 @@
+<?xml version="1.0"?><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <!--
+            Auto-generated mapping file from
+            the hibernate.org cfg2hbm engine
+    -->
+    <class name="com.sehinc.environment.db.sourceusage.EnvSourceUsage"
+           table="ENV_SOURCE_USAGE">
+        <id name="id"
+            type="integer">
+            <column name="ID" />
+            <generator class="identity" />
+        </id>
+        <version name="version"
+                 column="version"
+                 insert="false"
+                 type="long" />
+        <property name="assetSourceId"
+                  type="integer"
+                  column="ASSET_SOURCE_ID" />
+        <property name="periodStartTs"
+                  type="timestamp"
+                  column="PERIOD_START_TS" />
+        <property name="periodEndTs"
+                  type="timestamp"
+                  column="PERIOD_END_TS" />
+        <property name="meterReading"
+                  type="big_decimal"
+                  column="METER_READING" />
+        <property name="transferRate"
+                  type="big_decimal"
+                  column="TRANSFER_RATE" />
+        <many-to-one name="unitOfMeasureCd"
+                     class="com.sehinc.environment.db.lookup.EnvUnitOfMeasureData"
+                     column="UNIT_OF_MEASURE_CD"
+                     lazy="false" />
+        <property name="createTimestamp"
+                  type="timestamp"
+                  column="CREATE_TS" />
+        <property name="updateTimestamp"
+                  type="timestamp"
+                  column="UPDATE_TS" />
+        <property name="updateUserId"
+                  type="integer"
+                  column="UPDATE_USER_ID" />
+    </class>
+    <query name="EnvSourceUsage.findByAssetSourceId">
+        from com.sehinc.environment.db.sourceusage.EnvSourceUsage as sourceusage
+        where sourceusage.assetSourceId = :assetSourceId
+    </query>
+</hibernate-mapping>

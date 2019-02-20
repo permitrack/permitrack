@@ -1,0 +1,154 @@
+<?xml version="1.0"?><!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" ><!--
+    Back ticks for keyword/naming conflicts: https://hibernate.onjira.com/browse/HB-1315
+-->
+<hibernate-mapping>
+    <class name="com.sehinc.common.db.user.UserData"
+           table="`USER`">
+        <id name="id"
+            type="integer"
+            column="id">
+            <generator class="identity" />
+        </id>
+        <property name="username"
+                  type="string"
+                  column="username" />
+        <property name="password"
+                  type="string"
+                  column="password" />
+        <property name="firstName"
+                  type="string"
+                  column="FIRST_NAME" />
+        <property name="middleName"
+                  type="string"
+                  column="MIDDLE_NAME" />
+        <property name="lastName"
+                  type="string"
+                  column="LAST_NAME" />
+        <property name="title"
+                  type="string"
+                  column="TITLE" />
+        <property name="department"
+                  type="string"
+                  column="DEPARTMENT" />
+        <property name="emailAddress"
+                  type="string"
+                  column="EMAIL_ADDRESS" />
+        <property name="primaryPhone"
+                  type="string"
+                  column="PRIMARY_PHONE" />
+        <property name="secondaryPhone"
+                  type="string"
+                  column="SECONDARY_PHONE_1" />
+        <property name="faxPhone"
+                  type="string"
+                  column="FAX_PHONE" />
+        <property name="passwordExpirationDate"
+                  type="timestamp"
+                  column="PASSWORD_EXPIRATION_DATE" />
+        <property name="passwordChangeRequired"
+                  type="boolean"
+                  column="IS_PASSWORD_CHANGE_REQUIRED" />
+        <property name="lastLoginDate"
+                  type="timestamp"
+                  column="LAST_LOGIN_DATE" />
+        <many-to-one name="status"
+                     class="com.sehinc.erosioncontrol.db.code.StatusCodeData"
+                     column="STATUS_CD"
+                     lazy="false" />
+        <property name="createTimestamp"
+                  type="timestamp"
+                  column="create_ts" />
+        <property name="updateTimestamp"
+                  type="timestamp"
+                  column="update_ts" />
+        <property name="updateUserId"
+                  type="integer"
+                  column="update_user_id" />
+        <!-- associations -->
+        <!-- for now we will use the old (manual) way of handling relationships -->
+        <property name="groupId"
+                  type="integer"
+                  column="GROUP_ID" />
+        <property name="addressId"
+                  type="integer"
+                  column="ADDRESS_ID" />
+        <property name="contactId"
+                  type="integer"
+                  column="CONTACT_ID" />
+        <set name="searches"
+             cascade="save-update"
+             lazy="false">
+            <key column="USER_ID" />
+            <one-to-many class="com.sehinc.erosioncontrol.action.project.ProjectSearchListForm" />
+        </set>
+    </class>
+    <class name="com.sehinc.common.value.user.UserValue"
+           table="`USER`">
+        <id name="id"
+            type="integer"
+            column="id">
+            <generator class="identity" />
+        </id>
+        <property name="username"
+                  type="string"
+                  column="USERNAME" />
+        <property name="firstName"
+                  type="string"
+                  column="FIRST_NAME" />
+        <property name="lastName"
+                  type="string"
+                  column="LAST_NAME" />
+        <property name="groupId"
+                  type="integer"
+                  column="GROUP_ID" />
+        <property name="statusCode"
+                  type="string"
+                  column="STATUS_CD" />
+        <property name="emailAddress"
+                  type="string"
+                  column="EMAIL_ADDRESS" />
+        <property name="primaryPhone"
+                  type="string"
+                  column="PRIMARY_PHONE" />
+        <property name="lastLoginDate"
+                  type="timestamp"
+                  column="LAST_LOGIN_DATE" />
+    </class>
+    <query name="com.sehinc.common.value.user.UserValue.byGroupId">
+        from com.sehinc.common.value.user.UserValue as user
+        where user.statusCode = :statusCode and user.groupId = :groupId
+        order by user.lastName asc
+    </query>
+    <query name="com.sehinc.common.value.user.UserValue.byClientIdAndGroupId">
+        from com.sehinc.common.value.user.UserValue as user
+        where user.id in
+        ( select link.userId from com.sehinc.common.db.client.ClientUserData link where link.clientId = :clientId )
+        and user.statusCode = :statusCode and user.groupId = :groupId
+        order by user.lastName asc
+    </query>
+    <query name="com.sehinc.common.value.user.UserValue.byClientId">
+        from com.sehinc.common.value.user.UserValue as user
+        where user.id in
+        ( select link.userId from com.sehinc.common.db.client.ClientUserData link where link.clientId = :clientId )
+        and user.statusCode = :statusCode
+        order by user.lastName asc
+    </query>
+    <query name="com.sehinc.common.value.user.UserValue.byStatusCode">
+        from com.sehinc.common.value.user.UserValue as user
+        where statusCode = :statusCode
+        order by user.username asc
+    </query>
+    <query name="com.sehinc.common.value.user.UserValue.byClientIdAndStatusCode">
+        select user
+        from com.sehinc.common.value.user.UserValue as user,
+        com.sehinc.common.db.client.ClientUserData as clientUser
+        where user.id = clientUser.userId and
+        clientUser.clientId = :clientId and
+        user.statusCode = :statusCode and
+        user.username != 'wpsadmin'
+        order by user.lastName, user.firstName
+    </query>
+</hibernate-mapping>
+

@@ -1,0 +1,61 @@
+<!DOCTYPE tiles-definitions PUBLIC
+    "-//Apache Software Foundation//DTD Tiles Configuration 1.3//EN"
+    "http://struts.apache.org/dtds/tiles-config_1_3.dtd">
+<tiles-definitions>
+    <definition name="process.baseTitledLayout"
+                extends="ev.baseTitledLayout"></definition>
+    <definition name="process.list.page"
+                extends="process.baseTitledLayout">
+        <put name="title"
+             value="Process List" />
+        <put name="description"
+             value="Listing of all Processes." />
+        <put name="content"
+             value="/html/env/process/processlist.jsp" />
+    </definition>
+    <definition name="process.view.page"
+                extends="process.baseTitledLayout">
+        <put name="title"
+             value="Process" />
+        <put name="description"
+             value="View Process information." />
+        <put name="content"
+             value="/html/env/process/processview.jsp" />
+    </definition>
+    <definition name="process.edit.page"
+                extends="process.baseTitledLayout">
+        <put name="title"
+             value="Process" />
+        <put name="description"
+             value="Edit a Process." />
+        <put name="content"
+             value="/html/env/process/processedit.jsp" />
+    </definition>
+    <definition name="process.create.page"
+                extends="process.baseTitledLayout">
+        <put name="title"
+             value="Process" />
+        <put name="description"
+             value="Create a Process." />
+        <put name="content"
+             value="/html/env/process/processcreate.jsp" />
+    </definition>
+    <definition name="process.delete.page"
+                extends="process.baseTitledLayout">
+        <put name="title"
+             value="Process" />
+        <put name="description"
+             value="Delete a Process." />
+        <put name="content"
+             value="/html/env/process/processdelete.jsp" />
+    </definition>
+    <definition name="process.asset.create.page"
+                extends="process.baseTitledLayout">
+        <put name="title"
+             value="Process Asset" />
+        <put name="description"
+             value="Connect an Asset to a Process." />
+        <put name="content"
+             value="/html/env/process/processassetcreate.jsp" />
+    </definition>
+</tiles-definitions>

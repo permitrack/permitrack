@@ -1,0 +1,226 @@
+<?xml version="1.0"?>
+<!DOCTYPE jasperReport PUBLIC "-//JasperReports//DTD Report Design//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
+
+<jasperReport name="SubstancesBySource_Report" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<parameter name="clientId" class="java.lang.Integer"/>
+	<queryString>
+		<![CDATA[select z.*,
+	st.description source_type
+from (
+	select x.*,
+	       substance.part_num cas_num,
+	       substance.name sub_name
+	from (
+		select g.*,
+		       ss.substance_id,
+	 	       ss.ratio
+		from (
+			select source.id source_id,
+			       source.description src_desc,
+                               source.part_number src_num,
+                               source.batch_number src_batch,
+			       source.source_type_cd
+			from env_source source
+			where source.client_id = $P{clientId}
+			and   source.status_cd = 1
+
+			GROUP BY source.id,
+                                 source.description,
+                                 source.part_number,
+                                 source.batch_number,
+			         source.source_type_cd) as g
+		LEFT JOIN env_source_substance ss
+		ON ss.source_id = g.source_id
+		GROUP BY g.source_id,
+                         g.src_desc,
+                         g.src_num,
+                         g.src_batch,
+			 g.source_type_cd,
+			 ss.substance_id,
+	 		 ss.ratio) as x
+	LEFT JOIN env_substance substance
+	ON substance.id = x.substance_id
+	GROUP BY x.source_id,
+                 x.src_desc,
+                 x.src_num,
+                 x.src_batch,
+		 x.source_type_cd,
+		 x.substance_id,
+		 x.ratio,
+	         substance.part_num,
+	         substance.name) as z
+LEFT JOIN lookup_env_source_type st
+ON   st.code = z.source_type_cd
+GROUP BY z.source_id,
+         z.src_desc,
+         z.src_num,
+         z.src_batch,
+	 z.source_type_cd,
+	 z.substance_id,
+	 z.ratio,
+	 z.cas_num,
+	 z.sub_name,
+	st.description]]>
+	</queryString>
+	<field name="source_id" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="src_desc" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="src_num" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="src_batch" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="source_type_cd" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="substance_id" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="ratio" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="cas_num" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="sub_name" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="source_type" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<group name="sources">
+		<groupExpression><![CDATA[$F{source_id}]]></groupExpression>
+		<groupHeader>
+			<band height="116">
+				<textField>
+					<reportElement x="101" y="12" width="333" height="20"/>
+					<textElement>
+						<font fontName="Arial"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{src_num}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="101" y="32" width="333" height="20"/>
+					<textElement>
+						<font fontName="Arial"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{src_desc}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="101" y="52" width="333" height="20"/>
+					<textElement>
+						<font fontName="Arial"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{src_batch}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="101" y="72" width="333" height="20"/>
+					<textElement>
+						<font fontName="Arial"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{source_type}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="19" y="12" width="80" height="20"/>
+					<textElement>
+						<font fontName="Arial" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Source number:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="19" y="32" width="80" height="20"/>
+					<textElement>
+						<font fontName="Arial" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Description:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="19" y="52" width="80" height="20"/>
+					<textElement>
+						<font fontName="Arial" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Batch:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="19" y="72" width="80" height="20"/>
+					<textElement>
+						<font fontName="Arial" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Type:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="59" y="92" width="125" height="20" isRemoveLineWhenBlank="true">
+						<printWhenExpression><![CDATA[($F{sub_name} != null) ? Boolean.TRUE : Boolean.FALSE]]></printWhenExpression>
+					</reportElement>
+					<textElement verticalAlignment="Bottom">
+						<font fontName="Arial" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Substance Number]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="184" y="92" width="125" height="20" isRemoveLineWhenBlank="true">
+						<printWhenExpression><![CDATA[($F{sub_name} != null) ? Boolean.TRUE : Boolean.FALSE]]></printWhenExpression>
+					</reportElement>
+					<textElement verticalAlignment="Bottom">
+						<font fontName="Arial" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Name]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="309" y="92" width="125" height="20" isRemoveLineWhenBlank="true">
+						<printWhenExpression><![CDATA[($F{sub_name} != null) ? Boolean.TRUE : Boolean.FALSE]]></printWhenExpression>
+					</reportElement>
+					<textElement verticalAlignment="Bottom">
+						<font fontName="Arial" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Ratio]]></text>
+				</staticText>
+				<line>
+					<reportElement x="59" y="112" width="496" height="2" isRemoveLineWhenBlank="true">
+						<printWhenExpression><![CDATA[($F{sub_name} != null) ? Boolean.TRUE : Boolean.FALSE]]></printWhenExpression>
+					</reportElement>
+				</line>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="substances">
+		<groupExpression><![CDATA[$F{substance_id}]]></groupExpression>
+		<groupHeader>
+			<band height="25">
+				<textField isBlankWhenNull="true">
+					<reportElement x="59" y="3" width="125" height="20" isRemoveLineWhenBlank="true"/>
+					<textElement>
+						<font fontName="SansSerif"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{cas_num}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="184" y="3" width="125" height="20" isRemoveLineWhenBlank="true"/>
+					<textElement>
+						<font fontName="SansSerif"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{sub_name}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="309" y="3" width="125" height="20" isRemoveLineWhenBlank="true"/>
+					<textElement>
+						<font fontName="SansSerif"/>
+					</textElement>
+					<textFieldExpression class="java.lang.Double"><![CDATA[$F{ratio}]]></textFieldExpression>
+				</textField>
+				<line>
+					<reportElement x="59" y="23" width="496" height="1" isRemoveLineWhenBlank="true">
+						<printWhenExpression><![CDATA[($F{sub_name} != null) ? Boolean.TRUE : Boolean.FALSE]]></printWhenExpression>
+					</reportElement>
+				</line>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="7"/>
+		</groupFooter>
+	</group>
+</jasperReport>

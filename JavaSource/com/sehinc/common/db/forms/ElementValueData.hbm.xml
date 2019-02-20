@@ -1,0 +1,36 @@
+<?xml version="1.0"?><!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping>
+    <class name="com.sehinc.common.db.forms.ElementValueData"
+           table="ELEMENT_VALUE">
+        <id name="id"
+            type="integer"
+            column="ELEMENT_VALUE_ID">
+            <generator class="identity" />
+        </id>
+        <property name="formInstanceId"
+                  type="integer"
+                  column="FORM_INSTANCE_ID" />
+        <property name="elementId"
+                  type="integer"
+                  column="ELEMENT_ID" />
+        <property name="elementValue"
+                  type="string"
+                  column="ELEMENT_VALUE" />
+    </class>
+    <query name="com.sehinc.common.db.forms.ElementValueData.byFormInstanceIdAndElementId">
+        from com.sehinc.common.db.forms.ElementValueData as elementValue
+        where elementValue.formInstanceId = :formInstanceId
+        and elementValue.elementId = :elementId
+    </query>
+    <query name="com.sehinc.common.db.forms.ElementValueData.byFormInstanceIdAndElementType">
+        select elementValue
+        from com.sehinc.common.db.forms.ElementValueData as elementValue,
+        com.sehinc.common.db.forms.ElementData as element
+        where elementValue.formInstanceId = :formInstanceId
+        and elementValue.elementId = element.id
+        and element.elementType.htmlType = :htmlType
+    </query>
+</hibernate-mapping>
+

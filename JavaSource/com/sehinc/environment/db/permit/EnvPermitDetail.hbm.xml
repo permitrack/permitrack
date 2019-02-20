@@ -1,0 +1,79 @@
+<?xml version="1.0"?><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <!--
+            Auto-generated mapping file from
+            the hibernate.org cfg2hbm engine
+    -->
+    <class name="com.sehinc.environment.db.permit.EnvPermitDetail"
+           table="ENV_PERMIT_DETAIL">
+        <id name="id"
+            type="integer">
+            <column name="ID" />
+            <generator class="identity" />
+        </id>
+        <property name="name"
+                  type="string"
+                  column="NAME" />
+        <property name="description"
+                  type="string"
+                  column="DESCRIPTION" />
+        <property name="avgPeriod"
+                  type="integer"
+                  column="AVG_PERIOD" />
+        <many-to-one name="avgPeriodUm"
+                     class="com.sehinc.environment.db.lookup.EnvUnitOfMeasureData"
+                     column="AVG_PERIOD_UM"
+                     lazy="false" />
+        <property name="vocLimit"
+                  type="big_decimal"
+                  column="VOC_LIMIT" />
+        <many-to-one name="vocLimitUm"
+                     class="com.sehinc.environment.db.lookup.EnvUnitOfMeasureData"
+                     column="VOC_LIMIT_UM"
+                     lazy="false" />
+        <property name="hapsLimit"
+                  type="big_decimal"
+                  column="HAPS_LIMIT" />
+        <many-to-one name="hapsLimitUm"
+                     class="com.sehinc.environment.db.lookup.EnvUnitOfMeasureData"
+                     column="HAPS_LIMIT_UM"
+                     lazy="false" />
+        <property name="mmbtuLimit"
+                  type="big_decimal"
+                  column="MMBTU_LIMIT" />
+        <many-to-one name="mmbtuLimitUm"
+                     class="com.sehinc.environment.db.lookup.EnvUnitOfMeasureData"
+                     column="MMBTU_LIMIT_UM"
+                     lazy="false" />
+        <property name="permitId"
+                  type="integer"
+                  column="PERMIT_ID" />
+        <many-to-one name="status"
+                     class="com.sehinc.environment.db.code.EnvStatusCodeData"
+                     column="STATUS_CD"
+                     lazy="false" />
+        <property name="createTimestamp"
+                  type="timestamp"
+                  column="CREATE_TS" />
+        <property name="updateTimestamp"
+                  type="timestamp"
+                  column="UPDATE_TS" />
+        <property name="updateUserId"
+                  type="integer"
+                  column="UPDATE_USER_ID" />
+    </class>
+    <query name="EnvPermitDetail.permitDetailListByPermitId">
+        from com.sehinc.environment.db.permit.EnvPermitDetail as permit
+        where permit.permitId = :permitId
+        and permit.status.code = :statusCode
+        order by permit.name ASC
+    </query>
+    <query name="EnvPermitDetail.permitDetailByPermitIdAndName">
+        from com.sehinc.environment.db.permit.EnvPermitDetail as permit
+        where permit.permitId = :permitId
+        and permit.name = :name
+        and permit.status.code = :statusCode
+        order by permit.name ASC
+    </query>
+</hibernate-mapping>

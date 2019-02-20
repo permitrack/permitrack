@@ -1,0 +1,43 @@
+<META HTTP-EQUIV="Pragma"
+      CONTENT="no-cache">
+<META HTTP-EQUIV="CACHE-CONTROL"
+      CONTENT="NO-CACHE">
+<META HTTP-EQUIV="PRAGMAS"
+      CONTENT="NO-CACHE">
+<html>
+    <head>
+        <SCRIPT LANGUAGE="JavaScript"
+                TYPE="text/javascript">
+            if (parent.MapFrame
+                != null)
+            {
+                strApplicationName =
+                parent.MapFrame.strApplicationName;
+                document.writeln('<title>'
+                                     + parent.MapFrame.strApplicationName
+                                     + '</title>');
+            }
+        </script>
+        <SCRIPT language=JavaScript
+                src="./javascript/dataViewVariables.jsp"
+                type=text/javascript></SCRIPT>
+        <link rel="stylesheet"
+              type="text/css"
+              href="./gis.css">
+    </head>
+    <body bgcolor="#ffffff">
+        <table border="0"
+               cellpadding="0"
+               cellspacing="0"
+               width="100%">
+            <tr valign="middle">
+                <SCRIPT LANGUAGE="JavaScript"
+                        TYPE="text/javascript">
+                    document.writeln('<td class="title">');
+                    document.writeln(theClientName);
+                    document.writeln('</td>');
+                </script>
+            </tr>
+        </table>
+    </body>
+</html>

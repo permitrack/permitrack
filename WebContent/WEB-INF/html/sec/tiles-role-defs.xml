@@ -1,0 +1,93 @@
+<!DOCTYPE tiles-definitions PUBLIC
+    "-//Apache Software Foundation//DTD Tiles Configuration 1.3//EN"
+    "http://struts.apache.org/dtds/tiles-config_1_3.dtd">
+<tiles-definitions>
+    <definition name="sec.role.baseTitledLayout"
+                extends="html.baseTitledLayout">
+        <put name="primaryMenu"
+             value="/html/sec/primarynavigation.jsp" />
+        <put name="secondaryMenu"
+             value="/html/sec/secondarynavigation.jsp" />
+    </definition>
+    <definition name="role.list.page.tiles"
+                extends="sec.role.baseTitledLayout">
+        <put name="title"
+             value="Role List" />
+        <put name="description"
+             value="View all roles." />
+        <put name="content"
+             value="/html/sec/role/rolelist.jsp" />
+    </definition>
+    <definition name="role.ec.view.page.tiles"
+                extends="sec.role.baseTitledLayout">
+        <put name="title"
+             value="View Erosion Control (ESC) Roles" />
+        <put name="description"
+             value="View all Erosion Control (ESC) roles." />
+        <put name="content"
+             value="/html/sec/role/roleecview.jsp" />
+    </definition>
+    <definition name="role.ec.create.page.tiles"
+                extends="sec.role.baseTitledLayout">
+        <put name="title"
+             value="Create Erosion Control (ESC) Role" />
+        <put name="description"
+             value="Create a new Erosion Control (ESC) role." />
+        <put name="content"
+             value="/html/sec/role/roleeccreate.jsp" />
+    </definition>
+    <definition name="role.ec.edit.page.tiles"
+                extends="sec.role.baseTitledLayout">
+        <put name="title"
+             value="Edit Erosion Control Role" />
+        <put name="description"
+             value="Edit this Erosion Control (ESC) role." />
+        <put name="content"
+             value="/html/sec/role/roleecedit.jsp" />
+    </definition>
+    <definition name="role.ec.delete.page.tiles"
+                extends="sec.role.baseTitledLayout">
+        <put name="title"
+             value="Delete Erosion Control Role" />
+        <put name="description"
+             value="Delete this Erosion Control (ESC) role." />
+        <put name="content"
+             value="/html/sec/role/roleecdelete.jsp" />
+    </definition>
+    <definition name="role.ev.view.page.tiles"
+                extends="sec.role.baseTitledLayout">
+        <put name="title"
+             value="View PermiTrack-ENV Roles" />
+        <put name="description"
+             value="View all PermiTrack-ENV roles." />
+        <put name="content"
+             value="/html/sec/role/roleevview.jsp" />
+    </definition>
+    <definition name="role.ev.create.page.tiles"
+                extends="sec.role.baseTitledLayout">
+        <put name="title"
+             value="Create PermiTrack-ENV Role" />
+        <put name="description"
+             value="Create a new PermiTrack-ENV role." />
+        <put name="content"
+             value="/html/sec/role/roleevcreate.jsp" />
+    </definition>
+    <definition name="role.ev.edit.page.tiles"
+                extends="sec.role.baseTitledLayout">
+        <put name="title"
+             value="Edit PermiTrack-ENV Role" />
+        <put name="description"
+             value="Edit this PermiTrack-ENV role." />
+        <put name="content"
+             value="/html/sec/role/roleevedit.jsp" />
+    </definition>
+    <definition name="role.ev.delete.page.tiles"
+                extends="sec.role.baseTitledLayout">
+        <put name="title"
+             value="Delete PermiTrack-ENV Role" />
+        <put name="description"
+             value="Delete this PermiTrack-ENV role." />
+        <put name="content"
+             value="/html/sec/role/roleevdelete.jsp" />
+    </definition>
+</tiles-definitions>

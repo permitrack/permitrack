@@ -1,0 +1,49 @@
+
+--INFO_VERSION--
+
+INSERT INTO INFO_VERSION (VERSION_ID, RELEASE_DATE, STATUS_CD, CREATE_TS, UPDATE_TS, UPDATE_USER_ID)
+VALUES
+('4.1.6', 'Apr 26 2009 12:00AM', 3, NULL, NULL, NULL)
+
+INSERT INTO INFO_VERSION (VERSION_ID, RELEASE_DATE, STATUS_CD, CREATE_TS, UPDATE_TS, UPDATE_USER_ID)
+VALUES
+('4.1.7', 'May 27 2009 12:00AM', 3, NULL, NULL, NULL)
+
+INSERT INTO INFO_VERSION (VERSION_ID, RELEASE_DATE, STATUS_CD, CREATE_TS, UPDATE_TS, UPDATE_USER_ID)
+VALUES
+('4.1.9', 'Jul  6 2009 12:00AM', 3, NULL, NULL, NULL)
+
+INSERT INTO INFO_VERSION (VERSION_ID, RELEASE_DATE, STATUS_CD, CREATE_TS, UPDATE_TS, UPDATE_USER_ID)
+VALUES
+('4.2.0', 'Aug  3 2009 12:00AM', 1, NULL, NULL, NULL)
+
+
+
+---- INFO_EVENTS --
+INSERT INTO INFO_EVENTS
+(EVENT_DATE, TITLE, LINK, SUBTITLE, LOCATION, STATUS_CD, CREATE_TS, UPDATE_TS, UPDATE_USER_ID) 
+VALUES
+('August 16-20, 2009', 'StormCon', 'http://www.stormcon.com/sc.html', 'The North American Surface Water Quality Conference and Exposition', 'Anaheim Marriott - Anaheim, CA', 1, NULL, NULL, NULL)
+
+INSERT INTO INFO_EVENTS
+(EVENT_DATE, TITLE, LINK, SUBTITLE, LOCATION, STATUS_CD, CREATE_TS, UPDATE_TS, UPDATE_USER_ID) 
+VALUES
+('September 13-16, 2009', 'American Public Works Association', 'http://www.apwa.net/meetings/congress/2009', '2009 International Public Works Congress & Exposition', 'Columbus Convention Center - Columbus, OH', 1, NULL, NULL, NULL)
+
+INSERT INTO INFO_EVENTS
+(EVENT_DATE, TITLE, LINK, SUBTITLE, LOCATION, STATUS_CD, CREATE_TS, UPDATE_TS, UPDATE_USER_ID) 
+VALUES
+('September 16-18, 2009', 'Colorado Association of Stormwater and Floodplain Managers', 'http://www.casfm.org/', '20th Annual CASFM Conference', 'Crested Butte Mountain Resort - Crested Butte, CO', 1, NULL, NULL, NULL)
+
+INSERT INTO INFO_EVENTS
+(EVENT_DATE, TITLE, LINK, SUBTITLE, LOCATION, STATUS_CD, CREATE_TS, UPDATE_TS, UPDATE_USER_ID) 
+VALUES
+('2009 Dates TBD', 'IECA Mid-Atlantic Chapter', 'http://macieca.org/conferences_events.htm', '16th Annual Workshop and Trade Show', '', 1, NULL, NULL, NULL)
+
+
+INSERT INTO INFO_EVENTS
+(EVENT_DATE, TITLE, LINK, SUBTITLE, LOCATION, STATUS_CD, CREATE_TS, UPDATE_TS, UPDATE_USER_ID) 
+VALUES
+('2009 Dates TBD', 'IECA Northeast Chapter', 'http://www.ieca-nechapter.org/nec09.html', 'Annual Conference and Trade Exposition', '', 1, NULL, NULL, NULL)
+
+

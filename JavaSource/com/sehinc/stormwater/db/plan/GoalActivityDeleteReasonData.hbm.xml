@@ -1,0 +1,29 @@
+<?xml version="1.0"?><!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping>
+    <!-- -->
+    <class name="com.sehinc.stormwater.db.plan.GoalActivityDeleteReasonData"
+           table="GOAL_ACTIVITY_DELETE_REASON">
+        <id name="id"
+            type="integer"
+            column="id">
+            <generator class="identity" />
+        </id>
+        <property name="goalActivityId"
+                  type="integer"
+                  column="GOAL_ACTIVITY_ID" />
+        <property name="deleteReason"
+                  type="string"
+                  column="DELETE_REASON" />
+        <property name="createTimestamp"
+                  type="timestamp"
+                  column="create_ts" />
+        <property name="updateTimestamp"
+                  type="timestamp"
+                  column="update_ts" />
+        <property name="updateUserId"
+                  type="integer"
+                  column="update_user_id" />
+    </class>
+</hibernate-mapping>

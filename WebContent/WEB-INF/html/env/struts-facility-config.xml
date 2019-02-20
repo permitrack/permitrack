@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?><!DOCTYPE struts-config PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 1.3//EN"
+    "http://struts.apache.org/dtds/struts-config_1_3.dtd">
+<struts-config>
+    <form-beans>
+        <form-bean name="FacilityForm"
+                   type="com.sehinc.environment.action.facility.FacilityForm" />
+        <form-bean name="FacilityContactForm"
+                   type="com.sehinc.environment.action.facilitycontact.FacilityContactForm" />
+    </form-beans>
+    <global-forwards>
+        <forward name="facility.list.page"
+                 path="/facilitylistpage.do"
+                 redirect="true" />
+        <forward name="facility.view.page"
+                 path="/facilityviewpage.do"
+                 redirect="true" />
+    </global-forwards>
+    <action-mappings>
+        <action path="/facilitylistpage"
+                type="com.sehinc.environment.action.facility.FacilityListPageAction"
+                name="FacilityForm"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="facility.list.page" />
+        </action>
+        <action path="/facilityviewpage"
+                type="com.sehinc.environment.action.facility.FacilityViewPageAction"
+                name="FacilityForm"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="facility.view.page" />
+        </action>
+        <action path="/facilitycreatepage"
+                type="com.sehinc.environment.action.facility.FacilityCreatePageAction"
+                name="FacilityForm"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="facility.create.page" />
+        </action>
+        <action path="/facilitycreateaction"
+                type="com.sehinc.environment.action.facility.FacilityCreateAction"
+                input="facility.create.page"
+                name="FacilityForm"
+                scope="request"
+                validate="true"
+                cancellable="true">
+            <forward name="continue"
+                     path="/facilityviewpage.do"
+                     redirect="true" />
+        </action>
+        <action path="/facilityeditpage"
+                type="com.sehinc.environment.action.facility.FacilityEditPageAction"
+                name="FacilityForm"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="facility.edit.page" />
+        </action>
+        <action path="/facilityeditaction"
+                type="com.sehinc.environment.action.facility.FacilityEditAction"
+                input="facility.edit.page"
+                name="FacilityForm"
+                scope="request"
+                validate="true"
+                cancellable="true">
+            <forward name="continue"
+                     path="/facilityviewpage.do"
+                     redirect="true" />
+        </action>
+        <action path="/facilitydeleteaction"
+                type="com.sehinc.environment.action.facility.FacilityDeleteAction"
+                input="facility.delete.page"
+                name="FacilityForm"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="/facilitylistpage.do"
+                     redirect="true" />
+        </action>
+        <action path="/facilitycontactcreatepage"
+                type="com.sehinc.environment.action.facilitycontact.FacilityContactCreatePageAction"
+                name="FacilityContactForm"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="facility.contact.create.page" />
+        </action>
+        <action path="/facilitycontactcreateaction"
+                type="com.sehinc.environment.action.facilitycontact.FacilityContactCreateAction"
+                input="facility.contact.create.page"
+                name="FacilityContactForm"
+                scope="request"
+                validate="true"
+                cancellable="true">
+            <forward name="continue"
+                     path="/facilityviewpage.do"
+                     redirect="true" />
+        </action>
+        <action path="/facilitycontactdeleteaction"
+                type="com.sehinc.environment.action.facilitycontact.FacilityContactDeleteAction"
+                name="FacilityContactForm"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="/facilityviewpage.do"
+                     redirect="true" />
+        </action>
+    </action-mappings>
+    <controller processorClass="org.apache.struts.action.RequestProcessor"
+                contentType="text/html" />
+    <plug-in className="org.apache.struts.tiles.TilesPlugin">
+        <set-property property="definitions-config"
+                      value="/WEB-INF/html/tiles-defs.xml, /WEB-INF/html/env/tiles-defs.xml, /WEB-INF/html/env/tiles-facility-defs.xml" />
+        <set-property property="definitions-debug"
+                      value="2" />
+        <set-property property="definitions-parser-details"
+                      value="2" />
+        <set-property property="definitions-parser-validate"
+                      value="true" />
+        <set-property property="moduleAware"
+                      value="true" />
+    </plug-in>
+    <plug-in className="org.apache.struts.validator.ValidatorPlugIn">
+        <set-property property="pathnames"
+                      value="/org/apache/struts/validator/validator-rules.xml, /WEB-INF/html/env/validation-facility.xml" />
+    </plug-in>
+</struts-config>

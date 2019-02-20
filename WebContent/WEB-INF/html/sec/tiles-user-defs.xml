@@ -1,0 +1,111 @@
+<!DOCTYPE tiles-definitions PUBLIC
+    "-//Apache Software Foundation//DTD Tiles Configuration 1.3//EN"
+    "http://struts.apache.org/dtds/tiles-config_1_3.dtd">
+<tiles-definitions>
+    <definition name="sec.user.baseTitledLayout"
+                extends="html.baseTitledLayout">
+        <put name="primaryMenu"
+             value="/html/sec/primarynavigation.jsp" />
+        <put name="secondaryMenu"
+             value="/html/sec/secondarynavigation.jsp" />
+    </definition>
+    <definition name="user.list.page.tiles"
+                extends="sec.user.baseTitledLayout">
+        <put name="title"
+             value="User List" />
+        <put name="description"
+             value="List all active users." />
+        <put name="content"
+             value="/html/sec/user/userlist.jsp" />
+    </definition>
+    <definition name="user.view.page.tiles"
+                extends="sec.user.baseTitledLayout">
+        <put name="title"
+             value="View User" />
+        <put name="description"
+             value="View user information." />
+        <put name="content"
+             value="/html/sec/user/userview.jsp" />
+    </definition>
+    <definition name="user.create.page.tiles"
+                extends="sec.user.baseTitledLayout">
+        <put name="title"
+             value="Create User" />
+        <put name="description"
+             value="Create a new user. Required fields are marked with an asterisk." />
+        <put name="content"
+             value="/html/sec/user/usercreate.jsp" />
+    </definition>
+    <definition name="user.add.page.tiles"
+                extends="sec.user.baseTitledLayout">
+        <put name="title"
+             value="Add User" />
+        <put name="description"
+             value="Add an existing user to this Client." />
+        <put name="content"
+             value="/html/sec/user/useradd.jsp" />
+    </definition>
+    <definition name="user.edit.page.tiles"
+                extends="sec.user.baseTitledLayout">
+        <put name="title"
+             value="Edit User" />
+        <put name="description"
+             value="Edit this user. Required fields are marked with an asterisk." />
+        <put name="content"
+             value="/html/sec/user/useredit.jsp" />
+    </definition>
+    <definition name="user.delete.page.tiles"
+                extends="sec.user.baseTitledLayout">
+        <put name="title"
+             value="Delete User" />
+        <put name="description"
+             value="Delete this user." />
+        <put name="content"
+             value="/html/sec/user/userdelete.jsp" />
+    </definition>
+    <definition name="user.change.password.page.tiles"
+                extends="sec.user.baseTitledLayout">
+        <put name="title"
+             value="Change Password" />
+        <put name="description"
+             value="Enter a new password for this user." />
+        <put name="content"
+             value="/html/sec/user/userchangepassword.jsp" />
+    </definition>
+    <definition name="user.search.list.page.tiles"
+                extends="sec.user.baseTitledLayout">
+        <put name="title"
+             value="Saved Search Filters" />
+        <put name="description"
+             value="List of all Saved Search Filters for use in the ESC Project List." />
+        <put name="content"
+             value="/html/sec/user/searchlist.jsp" />
+    </definition>
+    <definition name="user.search.view.page.tiles"
+                extends="sec.user.baseTitledLayout">
+        <put name="title"
+             value="View Saved Search Filter" />
+        <put name="description"
+             value="View Saved Search Filter information." />
+        <put name="content"
+             value="/html/sec/user/searchview.jsp" />
+    </definition>
+    <definition name="user.search.create.page.tiles"
+                extends="sec.user.baseTitledLayout">
+        <put name="title"
+             value="Create Saved Search Filter" />
+        <put name="description"
+             value="Create a new Search Filter." />
+        <put name="content"
+             value="/html/sec/user/searchcreate.jsp" />
+    </definition>
+    <definition name="user.search.edit.page.tiles"
+                extends="sec.user.baseTitledLayout">
+        <put name="title"
+             value="Edit Saved Search Filter" />
+        <put name="description"
+             value="Edit this Search Filter." />
+        <put name="content"
+             value="/html/sec/user/searchedit.jsp" />
+    </definition>
+</tiles-definitions>

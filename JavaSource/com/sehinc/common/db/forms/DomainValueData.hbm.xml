@@ -1,0 +1,28 @@
+<?xml version="1.0"?><!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping>
+    <class name="com.sehinc.common.db.forms.DomainValueData"
+           table="DOMAIN_VALUE">
+        <id name="id"
+            type="integer"
+            column="DOMAIN_VALUE_ID">
+            <generator class="identity" />
+        </id>
+        <property name="domainValue"
+                  type="string"
+                  column="DOMAIN_VALUE" />
+        <property name="orderNum"
+                  type="integer"
+                  column="ORDER_NUM" />
+        <property name="domainId"
+                  type="integer"
+                  column="DOMAIN_ID" />
+    </class>
+    <query name="com.sehinc.common.db.forms.DomainValueData.byDomainId">
+        from com.sehinc.common.db.forms.DomainValueData as domainValue
+        where domainValue.domainId = :domainId
+        order by domainValue.orderNum
+    </query>
+</hibernate-mapping>
+

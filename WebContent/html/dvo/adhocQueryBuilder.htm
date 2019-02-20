@@ -1,0 +1,373 @@
+<META HTTP-EQUIV="Pragma"
+      CONTENT="no-cache">
+<META HTTP-EQUIV="CACHE-CONTROL"
+      CONTENT="NO-CACHE">
+<META HTTP-EQUIV="PRAGMAS"
+      CONTENT="NO-CACHE">
+<meta http-equiv="Content-Type"
+      content="text/html; charset=ISO-8859-1">
+<html>
+    <HEAD>
+        <title>Ad Hoc Query Builder</title>
+        <script language="javascript">
+            var t_query;
+            var t2_query = "";
+            var sampleList = new Array();
+            if (opener)
+            {
+                t_query =
+                opener.parent.MapFrame;
+                t2_query =
+                "opener.parent.MapFrame";
+            }
+            else
+            {
+                t_query =
+                parent.MapFrame;
+                t2_query =
+                "parent.MapFrame";
+            }
+            function AddIt(inVal)
+            {
+                var tLine;
+                tLine =
+                document.UniForm.QueryString.value;
+                if (inVal
+                    == 1)
+                {
+                    tLine =
+                    tLine
+                        + " = ";
+                }
+                if (inVal
+                    == 2)
+                {
+                    tLine =
+                    tLine
+                        + " <> ";
+                }
+                if (inVal
+                    == 3)
+                {
+                    tLine =
+                    tLine
+                        + " LIKE ";
+                }
+                if (inVal
+                    == 4)
+                {
+                    tLine =
+                    tLine
+                        + " > ";
+                }
+                if (inVal
+                    == 5)
+                {
+                    tLine =
+                    tLine
+                        + " >= ";
+                }
+                if (inVal
+                    == 6)
+                {
+                    tLine =
+                    tLine
+                        + " NOT ";
+                }
+                if (inVal
+                    == 7)
+                {
+                    tLine =
+                    tLine
+                        + " < ";
+                }
+                if (inVal
+                    == 8)
+                {
+                    tLine =
+                    tLine
+                        + " <= ";
+                }
+                if (inVal
+                    == 9)
+                {
+                    tLine =
+                    tLine
+                        + " % ";
+                }
+                document.UniForm.QueryString.value =
+                tLine;
+                return;
+            }
+            function AddToSQL(inVal)
+            {
+                var tLine;
+                tLine =
+                document.UniForm.CompleteQueryString.value;
+                if (inVal
+                    == 1)
+                {
+                    tLine =
+                    tLine
+                        + " AND ";
+                }
+                if (inVal
+                    == 2)
+                {
+                    tLine =
+                    tLine
+                        + " OR ";
+                }
+                if (inVal
+                    == 3)
+                {
+                    tLine =
+                    "("
+                        + tLine
+                        + ")";
+                }
+                document.UniForm.CompleteQueryString.value =
+                tLine;
+                return;
+            }
+            function ClearLine()
+            {
+                document.UniForm.QueryString.value =
+                "";
+                t_query.setQueryString =
+                "";
+                return;
+            }
+            function ClearSQL()
+            {
+                document.UniForm.CompleteQueryString.value =
+                "";
+                t_query.theCompleteSearchSet =
+                "";
+                return;
+            }
+            function AddtoCompleteQuery()
+            {
+                var cLine;
+                cLine =
+                document.UniForm.CompleteQueryString.value;
+                cLine =
+                cLine
+                    + document.UniForm.QueryString.value;
+                document.UniForm.CompleteQueryString.value =
+                cLine;
+            }
+            function SetFieldName()
+            {
+                document.UniForm.QueryString.value =
+                document.UniForm.FldNames.value;
+                t_query.fieldIndex =
+                document.UniForm.FldNames.selectedIndex;
+                t_query.setQueryString =
+                document.UniForm.QueryString.value;
+                var theField = t_query.LayerFields[t_query.fieldIndex];
+                t_query.tempGetSamples(theField);
+                return;
+            }
+            function AddSample()
+            {
+                var tLine;
+                tLine =
+                document.UniForm.QueryString.value;
+                tLine =
+                tLine
+                    + document.UniForm.Samples.value;
+                document.UniForm.QueryString.value =
+                tLine;
+                return;
+            }
+            function ShowSamples()
+            {
+                var theField = t_query.LayerFields[t_query.fieldIndex];
+                t_query.tempGetSamples(theField);
+                document.forms['UniForm'].Samples.options.length =
+                0; //clear
+                var SampleCount = t_query.selectData.length; //sampleList.length;
+                var tempString = "";
+                var dQuote = '"';
+                var qField = t_query.LayerFields[t_query.fieldIndex]
+                    + '="';
+                var theIndex = t_query.fieldIndex;
+                for (var i = 0; i
+                    < SampleCount; i++)
+                {
+                    var startpos = t_query.selectData[i].indexOf(qField,
+                                                                 0);
+                    startpos =
+                    startpos
+                        + qField.length;
+                    var endpos = t_query.selectData[i].indexOf('"',
+                                                               startpos);
+                    var ftval = parseInt(t_query.LayerFieldType[theIndex]);
+                    var vData = t_query.selectData[i].substring(startpos,
+                                                                endpos);
+                    tempString =
+                    t_query.selectData[i].substring(startpos,
+                                                    endpos);
+                    if ((ftval
+                        >= 12)
+                        && (ftval
+                        <= 15))
+                    {
+                        tempString =
+                        dQuote
+                            + vData
+                            + dQuote;
+                    }
+                    if (t_query.LayerFieldType[theIndex]
+                        == "91")
+                    {
+                        var theDateObj = new Date(parseFloat(t_query.selectData[i].substring(startpos,
+                                                                                             endpos)));
+                        var d = theDateObj.toUTCString();
+                        tempString =
+                        d.replace(/GMT|UTC/,
+                                  "");
+                        theDateObj =
+                        null;
+                    }
+                    tempString =
+                    tempString.replace("&amp;",
+                                       "&");
+                    document.forms['UniForm'].Samples.options[i] =
+                    new Option(tempString,
+                               tempString);
+                }
+                return;
+            }
+            function sendQuery()
+            {
+                t_query.toolMode =
+                11;
+                var theString = document.UniForm.CompleteQueryString.value;
+                if (theString
+                    != "")
+                {
+                    var ary = new Array("<",
+                                        ">",
+                                        "=",
+                                        " LIKE ",
+                                        " like ",
+                                        " IS ",
+                                        " is ");
+                    var va = 0;
+                    var arylen = ary.length;
+                    for (i =
+                         0; i
+                        < arylen; i++)
+                    {
+                        a =
+                        ary[i]
+                        s =
+                        theString.search(a)
+                        va =
+                        va
+                            + s
+                    }
+                    if (va
+                        == -7)
+                    {
+                        alert(t_query.msgList[109]);
+                    }
+                    else
+                    {
+                        sampleList =
+                        null;
+                        t_query.sendQueryString(theString);
+                        t =
+                        null;
+                    }
+                }
+                else
+                {
+                    alert(t_query.msgList[110]);
+                }
+                self.close();
+            }
+            document.writeln('</head>');
+            document.writeln('<body bgColor=#ffffff TOPMARGIN=0>');
+            document.writeln('<FORM name=UniForm onsubmit="return false;">');
+            document.writeln('<table bgColor=#CCCC99>');
+            document.writeln('<b>Ad Hoc Query Builder</b>');
+            document.writeln('    <tr>');
+            document.writeln('        <td valign=top>');
+            document.writeln('            <b>Fields:</b>');
+            document.writeln('            <br>');
+            document.writeln('            <select name=FldNames onclick=SetFieldName() >');//Populate Field Names
+            for (var i = 0; i
+                < t_query.LayerFieldCount; i++)
+            {
+                document.write('<option value="'
+                                   + t_query.LayerFields[i]
+                                   + '"');
+                if (i
+                    == t_query.fieldIndex)
+                {
+                    document.write(' selected');
+                }
+                document.writeln('>'
+                                     + t_query.LayerFields[i]);
+            }
+            document.writeln('            </select>');
+            document.writeln('        </td>');
+            document.writeln('        <td width=150 align=left>');
+            document.writeln('            <INPUT onclick=AddIt(1) type=button value=&nbsp;&nbsp;&nbsp;=&nbsp;&nbsp;&nbsp;>');
+            document.writeln('            <INPUT onclick=AddIt(2) type=button value=&nbsp;&nbsp;&lt;&gt;&nbsp;&nbsp;>');
+            document.writeln('            <INPUT onclick=AddIt(3) type=button value=Like>');
+            document.writeln('            <br>');
+            document.writeln('            <INPUT onclick=AddIt(4) type=button value=&nbsp;&nbsp;&nbsp;&gt;&nbsp;&nbsp;&nbsp;>');
+            document.writeln('            <INPUT onclick=AddIt(5) type=button value=&nbsp;&nbsp;&gt;=&nbsp;&nbsp;>');
+            document.writeln('            <INPUT onclick=AddIt(6) type=button value=&nbsp;Not>');
+            document.writeln('            <br>');
+            document.writeln('            <INPUT onclick=AddIt(7) type=button value=&nbsp;&nbsp;&nbsp;&lt;&nbsp;&nbsp;&nbsp;>');
+            document.writeln('            <INPUT onclick=AddIt(8) type=button value=&nbsp;&nbsp;&lt;=&nbsp;&nbsp;>');
+            document.writeln('            <INPUT onclick=AddIt(9) type=button value=&nbsp;&nbsp;%&nbsp;&nbsp;>');
+            document.writeln('        </td>');
+            document.writeln('        <td valign=top>');
+            document.writeln('            <b>Sample Values:</b>');
+            document.writeln('            <br>');
+            document.writeln('            <select name=Samples onchange=AddSample() >');
+            document.writeln('<option value=0>&nbsp;');
+            document.writeln('            </select>');
+            document.writeln('            <br>');
+            document.writeln('        <button onclick=ShowSamples()>Show Samples</button><br>');
+            document.writeln('        </td>');
+            document.writeln('    </tr><br><br>');
+            document.writeln('        <td rowspan="3">');
+            document.writeln('        <b>Search Line</b><br>');
+            document.writeln('        <INPUT type="text" size=40 name=QueryString value="'
+                                 + t_query.setQueryString
+                                 + '"><br>');
+            document.writeln('        <button onclick=AddtoCompleteQuery()>Add to Query</button>&nbsp;&nbsp;');
+            document.writeln('        <button onclick=ClearLine()>Clear</button><br>');
+            document.writeln('        </td>');
+            document.writeln('    </tr>');
+            document.writeln('    <tr>');
+            document.writeln('        <td rowspan="2"></td>');
+            document.writeln('        <td><br><b>Query Set</b>&nbsp;&nbsp;&nbsp;&nbsp;');
+            document.writeln('            <button onclick=AddToSQL(1)>and</button>');
+            document.writeln('            <button onclick=AddToSQL(2)>&nbsp;or&nbsp;</button>');
+            document.writeln('            <button onclick=AddToSQL(3)>&nbsp;(&nbsp;)&nbsp;</button>');
+            document.writeln('        </td>');
+            document.writeln('     </tr>');
+            document.writeln('    <tr>');
+            document.writeln('        <td>');
+            document.writeln('            <textarea rows="4" cols="30" name=CompleteQueryString >'
+                                 + t_query.theCompleteSearchSet
+                                 + '</textarea><br>');
+            document.writeln('            <button onclick=sendQuery()>Show matching records</button>');
+            document.writeln('            <button onclick=ClearSQL()>Clear</button>');
+            document.writeln('        </td>');
+            document.writeln('    </tr>');
+            document.writeln('    <tr>');
+            document.writeln('    </tr>');
+            document.writeln('</table>');
+            document.writeln('</FORM>');
+            document.writeln('</body>');
+        </script>
+</html>

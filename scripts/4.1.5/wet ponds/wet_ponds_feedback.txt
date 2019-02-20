@@ -1,0 +1,57 @@
+Change name to
+Pond Id 
+
+
+Default has insp been done to No
+
+Have any corrective actions been taken?: default to no
+
+Change wording of inlet structures to 'How many inlets are present'
+and change to text field to enter number of inlets
+validate to only enter numeric
+
+inlet "if yes, what with" dropdowns default to 'None'
+
+can we shift sections into multiple columns
+
+Are any of the inlet structures askew or misaligned? 
+default to No
+If yes, why -- default to None
+
+
+Gen. visual assessment
+Multi cell change to text field to enter number of cells
+
+
+Does the water in the pond have: 
+Default to No
+Change Fish Species to default "I don't know"
+Default rest of dropdowns to No
+
+
+Bottom section
+Defaults to No
+
+Change wording of sediment dropdown to say "pond" instead of "the practice"
+move sediment dropdown up below sediment yes/no
+Add "none" to the dropdown
+
+Banks section
+Change heading to "Banks / Sideslopes"
+default erosion to No
+
+
+Vegitation - Vegetation
+Default dropdowns to No
+outlet misaligned default to N/A instead of Select...
+Default evidence downstream dropdowns to No
+Change "the practice" to pond
+
+When is maintenance needed?:
+Default to No sign
+Then reverse the order in the dropdown
+Remove numbers
+
+Add attach photo right after the sketch
+
+Check out layout of finished downloadable report

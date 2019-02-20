@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?><!DOCTYPE struts-config PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 1.3//EN"
+    "http://struts.apache.org/dtds/struts-config_1_3.dtd">
+<struts-config>
+    <form-beans>
+        <form-bean name="statusForm"
+                   type="org.apache.struts.validator.DynaValidatorForm">
+            <form-property name="headerMessage"
+                           type="java.lang.String" />
+            <form-property name="bodyMessage"
+                           type="java.lang.String" />
+        </form-bean>
+    </form-beans>
+    <global-exceptions />
+    <global-forwards />
+    <action-mappings />
+</struts-config>

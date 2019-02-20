@@ -1,0 +1,41 @@
+<?xml version="1.0"?><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <!--
+            Auto-generated mapping file from
+            the hibernate.org cfg2hbm engine
+    -->
+    <class name="com.sehinc.erosioncontrol.db.bmpdb.EcBmpLibraryDb"
+           table="EC_BMP_LIBRARY_DB">
+        <id name="id"
+            type="integer">
+            <column name="ID" />
+            <generator class="identity" />
+        </id>
+        <property name="name"
+                  type="string"
+                  column="NAME" />
+        <property name="createTimestamp"
+                  type="timestamp"
+                  column="CREATE_TS" />
+        <property name="updateTimestamp"
+                  type="timestamp"
+                  column="UPDATE_TS" />
+        <property name="updateUserId"
+                  type="integer"
+                  column="UPDATE_USER_ID" />
+    </class>
+    <query name="com.sehinc.erosioncontrol.db.bmp.EcBmpLibraryDb.allLibrariesList">
+        select library.name, library.id from EcBmpLibraryDb as library
+        order by library.name asc
+    </query>
+    <query name="com.sehinc.erosioncontrol.db.bmp.EcBmpLibraryDb.libraryList">
+        select library.name, library.id from EcBmpLibraryDb as library
+        where library.id = :bmpLibraryId
+        order by library.name asc
+    </query>
+    <query name="com.sehinc.erosioncontrol.db.bmp.EcBmpLibraryDb.libraryNameById">
+        select library.name from EcBmpLibraryDb as library
+        where library.id = :bmpLibraryId
+    </query>
+</hibernate-mapping>

@@ -1,0 +1,39 @@
+<META HTTP-EQUIV="Pragma"
+      CONTENT="no-cache">
+<META HTTP-EQUIV="CACHE-CONTROL"
+      CONTENT="NO-CACHE">
+<META HTTP-EQUIV="PRAGMAS"
+      CONTENT="NO-CACHE">
+<html>
+    <head>
+        <title>SEH DataViewOnline</title>
+        <link rel="stylesheet"
+              type="text/css"
+              href="gis.css">
+        <script language="javascript">
+            function popupDisclaimer(theUrl)
+            {
+                theUrl =
+                document.location.protocol
+                    + "//www.mypermitrack.com/sehsvc/html/dvo/disclaimer.htm";
+                //alert(theUrl);
+                var vars = "left=0,top=0,screenX=0,screenY=0,height=";
+                vars +=
+                (screen.availHeight
+                    - 50);
+                vars +=
+                ",width=";
+                vars +=
+                (screen.availWidth
+                    - 10);
+                vars +=
+                ",directories=0,fullscreen=0,status=1,toolbar=0,location=0,locationbar=0,menubar=0,resizable=1,scrollbars=1";
+                var Win = window.open(theUrl,
+                                      "application",
+                                      vars);
+            }
+        </script>
+    </head>
+    <body onload="javascript:popupDisclaimer('notice.htm');">
+    </body>
+</html>

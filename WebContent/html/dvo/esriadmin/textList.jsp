@@ -1,0 +1,236 @@
+<%
+String[] textList = new String[250];
+// common title
+textList[0] = "Administrator";
+// login pages - login.jsp & firstlogin.jsp
+textList[1] = "A Username and Password are required.";
+textList[2] = "Confirm Password does not match Password.";
+textList[3] = "Login";
+textList[4] = "Please login to Administrator:";
+textList[5] = "Username:";
+textList[6] = "Password:";
+textList[7] = "  Login  ";
+textList[8] = "Please set a username and password:"; 
+textList[9] = "Confirm Password:";
+// home.jsp
+textList[10] = "Home";
+textList[11] = "Choose the Services you want to manage and click OK";
+textList[12] = "ArcIMS";
+textList[13] = "ArcSDE";
+textList[14] = "&nbsp;&nbsp;&nbsp;OK&nbsp;&nbsp;&nbsp;";
+// premenu.jps
+textList[15] = "Login check";
+textList[16] = "Must specify a site.";
+textList[17] = "Must enter a Username.";
+textList[18] = "Must enter a Password.";
+textList[19] = "Invalid Username or Password.\\nPlease try again.";
+textList[20] = "Initializing Username and Password";
+// setLogin.jsp
+textList[21] = "Setting Login";
+textList[22] = "Initializing Username and Password";
+// timeout.jsp
+textList[23] = "Session Timed Out";
+textList[24] = "Session Timeout";
+textList[25] = "Current Administration Session has stopped.<p> This may be due to an extended period of user inactivity,<br>";
+textList[26] = "or the server may have been restarted.";
+textList[27] = "Please log in again to continue.";
+// create_service.jsp, serviceprop.jsp, services.jsp
+textList[28] = "Manage Services";
+textList[29] = "Please enter a name for this service.";
+textList[30] = "Service names cannot have a space or any special characters.";
+textList[31] = "Please enter the path of the file to be uploaded for this service.";
+textList[32] = "Name already used by an existing service.";
+textList[33] = "Help";
+textList[34] = "Save Startup File";
+textList[35] = "Settings for New Service";
+textList[36] = "Name:";
+textList[37] = "Virtual Server:";
+textList[38] = "File Path:";
+textList[40] = "Settings for Image and Metadata Services";
+textList[41] = "Output File Path:";
+textList[42] = "Output URL:";
+textList[43] = "Clean Up Interval:";
+textList[44] = "Never";
+textList[45] = "Every";
+textList[46] = "Minutes";
+textList[47] = "Once an Hour";
+textList[48] = "Hours";
+textList[49] = "Twice a day";
+textList[50] = "Once a day";
+textList[51] = "Image Format:";
+textList[52] = "*Image Services only";
+textList[53] = "Image Memory Limit:";
+textList[54] = "MB - Pixels:";
+textList[55] = "Create";
+textList[56] = "Settings for ";
+textList[57] = "Status:";
+textList[58] = "Stop";
+textList[59] = "Start";
+textList[60] = "Started";
+textList[61] = "Stopped";
+textList[62] = "Upload File Path:";
+textList[63] = "Previous File Path:";
+textList[64] = "Update";
+textList[65] = "There are no services checked.";
+textList[66] = "The following services will be removed:";
+textList[67] = "Proceed?";
+textList[68] = "Delete";
+textList[69] = "No services currently present.";
+textList[70] = "Type:";
+textList[71] = "Service Name";
+// process_create_service.jsp, process_serviceprop.jsp
+textList[72] = "Service added and started.";
+textList[73] = "Unable to add service.";
+textList[74] = "Unable to upload file.";
+textList[75] = "Adding Service";
+textList[76] = "Service updated.";
+textList[77] = "Unable to update service. Service has been removed.";
+textList[78] = "Unable to upload file. Service has been removed.";
+// site_config.jsp, site_config_server.jsp, site_config_vserver.jsp, create_vserver.jsp, etc.
+textList[79] = "Properties";
+textList[80] = "Virtual Servers";
+textList[81] = "Spatial Servers";
+textList[82] = "Default Site Properties";
+textList[83] = "Output Directory:";
+textList[84] = "Image Memory Size:";
+textList[85] = "Updating Site Propertie";
+textList[86] = "Configure Site";
+textList[87] = "The following Virtual Servers will be removed:";
+textList[88] = "The following Virtual Servers have services.";
+textList[89] = "The services must be removed before proceeding.";
+textList[90] = "There are no removeable Virtual Servers checked.";
+textList[91] = "Default Virtual Servers cannot be deleted.";
+textList[92] = "No Virtual Servers currently present.";
+textList[93] = "Create New";
+textList[94] = "Virtual Server";
+textList[95] = "Type";
+textList[96] = "Services";
+textList[97] = "Instances";
+textList[98] = "Return to List";
+textList[99] = "Access:";
+textList[100] = "Check the Spatial Servers that this Virtual Server will use and specify the number of instances to run on each one.";
+textList[101] = "Server";
+textList[102] = "Creating Virtual Server";
+textList[103] = "Updating Virtual Server";
+textList[104] = "The following Spatial Servers will be removed:";
+textList[105] = "There are no removeable Servers checked.";
+textList[106] = "Default Spatial Servers cannot be deleted.";
+textList[107] = "No Servers currently present.";
+textList[108] = "Spatial Server";
+textList[109] = "Server Computer";
+textList[110] = "Create New Server";
+textList[111] = "Computer:";
+textList[112] = "Choose the computer from the list on which you want to create a new Spatial Server. ";
+textList[113] = "Removing Server";
+// aimsTabs.jsp
+textList[114] = "Home";
+textList[115] = "Add Service";
+textList[116] = "Description:";
+textList[117] = "Servers";
+textList[118] = "The computers on this list are those that are currently connected to the Application Server. ";
+textList[119] = "To connect to a new computer to the Application Server, you need to run the ArcIMS Installation program on that computer and install the Spatial Server. ";
+textList[120] = "See the ArcIMS Installation Guide for more information.";
+textList[121] = "Create Virtual Server";
+textList[122] = "Settings for New Virtual Server";
+textList[123] = "Check the Spatial Servers that this Virtual Server will use and specify the number of instances to run on each one.";
+textList[124] = "Create";
+textList[125] = "There are no servers checked.";
+textList[126] = "Manage Servers";
+textList[127] = "Pause";
+textList[128] = "Resume";
+textList[129] = "Instance";
+textList[130] = "Port";
+textList[131] = "Password";
+textList[132] = "Connections";
+textList[133] = "Set";
+textList[134] = "Status";
+textList[135] = "Unable to complete request to";
+textList[136] = "Not yet implemented.";
+textList[137] = "Server:";
+textList[138] = "Instance Name:";
+textList[139] = "Port:";
+textList[140] = "ArcSDE Release:";
+textList[141] = "Connections:";
+textList[142] = "Compress";
+textList[143] = "Warning:";
+textList[144] = "Compress will remove any states not referenced by a version<br>and requires exclusive database access.";
+textList[145] = "Connnections";
+textList[146] = "Connections for ";
+textList[147] = "User Name";
+textList[148] = "Process ID";
+textList[149] = "Start Time";
+textList[150] = "Terminate Connection";
+textList[151] = "Unknown";
+textList[152] = "Cancel";
+textList[153] = "Done";
+textList[154] = "  OK  ";
+textList[155] = "Waiting for response. . .";
+textList[156] = "Please enter password for this SDE Service and click OK";
+textList[157] = "There are no connections checked.";
+textList[158] = "The checked connections will be terminated.";
+textList[159] = "terminate";
+textList[160] = "This will stop this SDE Service. Continue?";
+textList[161] = "Unable to communicate with Application Server on ";
+textList[162] = "The changes you've made to the site are live. However, if you want these changes to appear the next time ArcIMS is restarted (e.g., after a reboot), you must save the changes to the Startup File.";
+textList[163] = "Do you want to save these changes to the Startup File now?";
+textList[164] = " Yes ";
+textList[165] = "  No  ";
+textList[166] = "Do not show this dialog again.";
+textList[167] = "Automatically save changes to the Startup File whenever necessary. This dialog will not appear.";
+textList[168] = "Default Image Format:";
+textList[169] = "Prompt to Save Startup File:";
+textList[170] = "Automatic Save Startup File:";
+textList[171] = "Yes";
+textList[172] = "No";
+textList[173] = "Save Dialog will not appear if Automatic Save is set to Yes.";
+textList[174] = "These properties will be written to the sitePreferences.properties file.";
+textList[175] = "System Name";
+textList[176] = "Node";
+textList[177] = "Administrator is not configured to administer ArcSDE services.";
+textList[178] = "Administrator is not configured to administer ArcIMS services.";
+textList[179] = "Server Name";
+textList[180] = "";
+//saveSite.jsp 
+//NOTE: Success must match the Java Connector Res.properties value of Success.
+textList[181] = "Success";
+
+//fix for ArcMap server fix
+textList[182] = "Recycle this Virtual Server:";
+textList[183] = "Hour:";
+textList[184] = "Minute:";
+textList[185] = "Time of the day:";
+textList[186] = "No empty spatial server available. Click the Create Spatial Server button to create new Spatial Server.";
+textList[187] = "New Server...";
+textList[188] = "View by:";
+textList[189] = "Virtual Server Type";
+textList[190] = "Instances";
+textList[191] = "Add More Instances";
+textList[192] = "The list below reflects the current Virtual Server configuration of this Spatial Server. " + 
+"Your ability to add more instances of a particular Virtual Server Type is shown in the " +
+"Add More Instances column. Some Virtual Servers can't be run together with others or " +
+"have more than one instance. In both of these cases, the Add More Instances column will " + 
+"display No.";
+textList[193] = "The following selected Spatial Servers are used by Virtual Servers. Uncheck this association in the Virtual Server's Settings page.";
+textList[194] = "AM";
+textList[195] = "PM";
+textList[196] = "Once a day";
+textList[197] = "Twice a day";
+textList[198] = "Three times a day";
+textList[199] = "Four times a day";
+textList[200] = "Every four hours";
+textList[201] = "Every two hours";
+textList[202] = "Every hour";
+textList[203] = "Connected to:";
+textList[204] = "Starting at:";
+//following four (205-208) is for create_service.jsp
+textList[205] = " cannot use a configuration file with the extension '.";
+textList[206] = "Please use a file with the extension of '.axl' or '.xml'.";
+textList[207] = "Please use a file with the extension of '.mxd' or '.pmf'.";
+textList[208] = "";
+textList[209] = "None Available.";
+textList[210] = "This container cannot be removed.";
+textList[211] = "This virtual server cannot be removed.";
+textList[212] = "A warning message was received from the ArcIMS Spatial Server.  View details?";
+textList[213] = "  Keycode required to unlock software.";
+
+%>

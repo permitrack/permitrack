@@ -1,0 +1,171 @@
+### ESRI ArcIMS v.9.1.0
+### Properties for the ArcIMS Servlet Connector (HTTP Request Handling)
+
+### Set this property to False to disable the Servlet Connector from accepting
+### HTTP requests.  ConnnectorPing is the only request that will be allowed when
+### disabled.
+enable=True
+
+### The name of the machine or machines on which the ArcIMS Application Server is running. 
+### If multiple appServerMachines are specified then multiple appServerClientPort must 
+### also be specified.
+### Example:
+### appServerMachine=129.103.35.97,123.151.62.57
+appServerMachine=@server.name@
+
+### The port on which the ArcIMS Servlet Connector communicates with the ArcIMS Application 
+### Server.  If multiple appServerMachines are specified,
+### multiple appServerClientPorts must also be specified.  
+### Example:
+### appServerClientPort=5300,5350
+appServerClientPort=5300
+
+### Set this to True if you want all requests to be sent to the first
+### appServerMachine until it fails to return a response.  Then requests will
+### be sent to the second machine in the appServerMachine list.  If failover is
+### set to False, the appServerMachines will be used in a round robin manner.
+### This property only works with ArcExplorer, Java Viewers, and HTML Viewers.
+failover=False
+
+### Set this to True if you desire additional debug information to be logged to
+### the servlet engine's stdout; this could be either its log file or its
+### cmd-window console.
+debug=False
+
+### Enables authentication of requests processed by the ArcIMS Servlet Connector.
+### Authentication allows restrictions to be placed on access to ArcIMS Services.
+### True or False. 
+authenticate=False
+
+### Basic or Digest.  More information can be found on Basic and Digest in the
+### Servlet Connector section of the ArcIMS Help.  Only used when
+### authenticate=True.
+# authMethods=Basic
+
+### Enables authentication with sessions.  True or False.
+### If set to "True", and based on browser settings, session information may be stored 
+### in the form of a cookie by the browser. The duration of the session is
+### the approximate time of the sessionTimeout property. If set to "False", 
+### session information is not enabled.
+# authenticateWithSessions=True
+
+### Session duration in seconds. Only used when the authenticate and authenticateWithSessions properties
+### are set to "True". 
+# sessionTimeout=120
+
+### Path and filename to the Access Control List file. Only used when authenticate=True. 
+### Windows Example:
+### aclFileName=<Servlet Engine Root Directory>/servlets/aimsacl.xml
+### Unix example:
+### aclFileName=<Servlet Engine Root Directory>/servlets/aimsacl.xml
+### Note: Use only forward slashes
+# aclFileName=
+
+### Specifying a realm name indicates to the user the access control list
+### settings in effect.  Generally it is useful to have the same realm name for
+### web sites using the same access control list.  The realm name is given with
+### the password prompt.  If not specified, realm defaults to "ArcIMS Network".
+### Only used when authenticate=True.
+# realm=ArcIMS Network
+
+### The useJdbc property enables authentication using JDBC.  True or False.
+### Only used when authenticate=True.
+# useJdbc=False
+
+### Name of the JDBC driver to be used.  Only used when authenticate=True and
+### useJdbc=True.  Example:  jdbcDriver=database.sql.JDBC.JDBCDriver
+# jdbcDriver=
+
+### JDBC database URL to the database that contains the permissions and users
+### table.  Only used when authenticate=True and useJdbc=True.
+### jdbc:<database type>:<database name>:@<machine name>.<domain>.<organizational code>
+### Examples:  jdbcUrl=jdbc:oracle:oci8:@arcims_maps.esri.com
+# jdbcUrl=
+
+### Authentication database's user name.  Only used when authenticate=True and
+### useJdbc=True.  Example:  jdbcUser=user1
+# jdbcUser=
+
+### Authentication database's password.  Only used when authenticate=True and
+### useJdbc=True.  Example:  jdbcPassword=password1
+# jdbcPassword=
+
+### Name of the authentication database's permissions table.  The permissions
+### table stores all of the individual authentication rules for each ArcIMS Service.
+### Only used when authenticate=True and useJdbc=True.
+# jdbcPermTable=
+
+### Name of the authentication database's users table. The users table stores all
+### of the user names and passwords.  Only used when authenticate=True and
+### useJdbc=True.
+# jdbcUserTable=
+
+### Name of the userid column found in both the permissions and users tables.
+### The userid column is the unique identifier between the users and permissions
+### tables.  Only used when authenticate=True and useJdbc=True.
+# jdbcUidColumn=
+
+### HTML viewer specific.  Enables the HTML viewer to connect to multiple hosts.
+### The ArcIMS Servlet Connector must be told to redirect to different ArcIMS Servlet
+### Connectors on different machines.  Set redirect to true to enable
+### redirection.  True or False.
+redirect=False
+
+### The redirectableHosts property requires the redirect property must be set to
+### True.  The redirectableHosts specifies the different hosts to connect to.
+### Multiple hosts can be set.  * can be specified to allow access to any host
+### on the network.  Only used when redirect=True.
+### Examples:  redirectableHosts=host1,host2,host3,host4
+###            redirectableHosts=*
+# redirectableHosts=
+
+### In ArcXML GET_IMAGE and GET_EXTRACT requests, the output directory for image and
+### zip files may be specified with an OUTPUT tag.  By setting the Servlet Connector property
+### spatialServer.AllowRequestOutput to False (initial setting; recommended), the OUTPUT
+### tag is ignored in requests processed through the ArcIMS Servlet Connector.  If this property
+### is set to true, ImageServers and ExtractServers will output to the directory requested.  Note:
+### If the property setting is omitted, the ArcIMS Spatial Server will allow the requested output
+### directory, as it will for requests processed through other connectors.
+spatialServer.AllowRequestOutput=False
+
+### The spatialServer.AllowResponsePath property determines if ArcXML responses sent by the
+### ArcIMS Spatial Server to the client contain pathnames to images, raster symbols, and zip
+### files.  By setting this property to False (initial setting; recommended), the pathnames are
+### omitted from the responses.  The URLs are unaffected.  If the property is set to true, the
+### pathnames are included in the response.  Note:  If the property setting is omitted, the ArcIMS
+### Spatial Server will allow the response to contain the pathnames, as it will for responses
+### processed through other connectors.  This property only restricts pathnames in the following
+### ArcXML responses:
+###      SERVICEINFO, RASTERMARKERSYMBOL image attribute
+###      SERVICEINFO, RASTERFILLSYMBOL image attribute
+###      SERVICEINFO, RASTERSHIELDSYMBOL image attribute
+###      IMAGE, LEGEND file attribute
+###      IMAGE, OUTPUT file attribute
+###      EXTRACT, OUTPUT, LAYOUT file attribute
+spatialServer.AllowResponsePath=False
+
+### The spatialServer.ForbiddenImageTypes property determines which output formats are forbidden when 
+### the OUTPUT type attribute is used in a GET_IMAGE request.  Valid output types are: 
+### 	Image Services:  gif, jpg, png8, png
+### 	ArcMap Image Services: gif, jpg, png8, png, bmp, tif
+### Using png as output type will block both png and png24 image formats.
+### By default, no output types are forbidden.  
+### Multiple types can be included in a comma delimited list.  In the following example, BMP 
+### and TIF formats are forbidden:
+### spatialServer.ForbiddenImageTypes=bmp,tif
+spatialServer.ForbiddenImageTypes=
+
+### The spatialServer.ForbiddenLayoutTypes property determines which output formats are 
+### forbidden when the OUTPUT type attribute is used in a GET_LAYOUT request.  Valid output 
+### types are: ai, bmp, emf, eps, gif, jpg, pdf, png8, png24, svg, tif.  By default, no output types are forbidden.  
+### Multiple types can be included in a comma delimited list.  In the following example, BMP and 
+### PDF formats are forbidden:
+### spatialServer.ForbiddenLayoutTypes=bmp,pdf
+### When a request is made using a forbidden format, a layout image is generated in the default 
+### service format.  For example, if a service is started using PNG8 as the output format, the layout 
+### will be generated in PNG8 format.  A warning message is written to the Spatial Server log file 
+### stating that a forbidden format was requested.
+spatialServer.ForbiddenLayoutTypes=
+
+
+

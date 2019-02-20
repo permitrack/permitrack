@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?><!DOCTYPE struts-config PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 1.3//EN"
+    "http://struts.apache.org/dtds/struts-config_1_3.dtd">
+<struts-config>
+    <form-beans>
+        <form-bean name="reportForm"
+                   type="com.sehinc.erosioncontrol.action.report.ReportForm" />
+    </form-beans>
+    <action-mappings>
+        <action path="/reportoptionspage"
+                type="com.sehinc.erosioncontrol.action.report.ReportOptionsAction"
+                name="reportForm"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="report.options.page" />
+        </action>
+        <action path="/adminreportoptionspage"
+                type="com.sehinc.erosioncontrol.action.report.AdminReportOptionsAction"
+                name="reportForm"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="admin.report.options.page" />
+        </action>
+        <action path="/reportrunaction"
+                type="com.sehinc.erosioncontrol.action.report.ReportRunAction"
+                name="reportForm"
+                input="report.options.page"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="/reportoptionspage.do"
+                     redirect="true" />
+            <forward name="fail"
+                     path="/reportoptionspage.do"
+                     redirect="true" />
+        </action>
+        <action path="/adminreportrunaction"
+                type="com.sehinc.erosioncontrol.action.report.ReportRunAction"
+                name="reportForm"
+                input="admin.report.options.page"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="/adminreportoptionspage.do"
+                     redirect="true" />
+            <forward name="fail"
+                     path="/adminreportoptionspage.do"
+                     redirect="true" />
+        </action>
+    </action-mappings>
+    <controller processorClass="org.apache.struts.action.RequestProcessor"
+                contentType="text/html" />
+    <plug-in className="org.apache.struts.tiles.TilesPlugin">
+        <set-property property="definitions-config"
+                      value="/WEB-INF/html/tiles-defs.xml, /WEB-INF/html/esc/tiles-report-defs.xml" />
+        <set-property property="definitions-debug"
+                      value="2" />
+        <set-property property="definitions-parser-details"
+                      value="2" />
+        <set-property property="definitions-parser-validate"
+                      value="true" />
+        <set-property property="moduleAware"
+                      value="true" />
+    </plug-in>
+    <plug-in className="org.apache.struts.validator.ValidatorPlugIn">
+        <set-property property="pathnames"
+                      value="/org/apache/struts/validator/validator-rules.xml" />
+    </plug-in>
+</struts-config>

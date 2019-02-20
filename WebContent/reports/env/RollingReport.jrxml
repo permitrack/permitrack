@@ -1,0 +1,130 @@
+<?xml version="1.0"?>
+<!DOCTYPE jasperReport PUBLIC "-//JasperReports//DTD Report Design//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
+
+<jasperReport name="RollingReport"
+    pageWidth="842" pageHeight="595" 
+    orientation="Landscape" columnWidth="762"
+    leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<parameter name="year" class="java.lang.Integer"/>
+	<parameter name="clientId" class="java.lang.Integer"/>
+	<parameter name="ClientName" class="java.lang.String"/>
+	<parameter name="GrandTotalFile" class="java.io.File"/>
+	<parameter name="PermitTotalFile" class="java.io.File"/>
+	<parameter name="PermitDetailTotalFile" class="java.io.File"/>
+	<queryString>
+		<![CDATA[SELECT P.ID AS PERMIT_ID,
+                        P.NAME AS PERMIT_NAME,
+                        PD.ID AS PERMIT_DETAIL_ID,
+                        PD.NAME AS PERMIT_DETAIL_NAME
+                FROM ENV_PERMIT AS P,
+                     ENV_PERMIT_DETAIL AS PD
+                WHERE P.CLIENT_ID = $P{clientId}
+                      AND P.STATUS_CD = 1
+                      AND PD.PERMIT_ID = P.ID
+                      AND PD.STATUS_CD = 1
+                GROUP BY P.ID, P.NAME, PD.ID, PD.NAME]]>
+	</queryString>
+	<field name="PERMIT_ID" class="java.lang.Integer"/>
+	<field name="PERMIT_NAME" class="java.lang.String"/>
+	<field name="PERMIT_DETAIL_ID" class="java.lang.Integer"/>
+	<field name="PERMIT_DETAIL_NAME" class="java.lang.String"/>
+	<group name="CLIENT" isStartNewPage="true">
+		<groupExpression><![CDATA[$P{clientId}]]></groupExpression>
+		<groupHeader>
+			<band height="364">
+				<subreport isUsingCache="true">
+					<reportElement x="0" y="3" width="555" height="361"/>
+					<subreportParameter name="year">
+						<subreportParameterExpression><![CDATA[$P{year}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="clientId">
+						<subreportParameterExpression><![CDATA[$P{clientId}]]></subreportParameterExpression>
+					</subreportParameter>
+					<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					<subreportExpression class="java.io.File"><![CDATA[$P{GrandTotalFile}]]></subreportExpression>
+				</subreport>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="PERMIT" isStartNewPage="true">
+		<groupExpression><![CDATA[$F{PERMIT_ID}]]></groupExpression>
+		<groupHeader>
+			<band height="340" >
+				<subreport>
+					<reportElement x="0" y="3" width="555" height="336"/>
+					<subreportParameter name="year">
+						<subreportParameterExpression><![CDATA[$P{year}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="permitId">
+						<subreportParameterExpression><![CDATA[$F{PERMIT_ID}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="permitName">
+						<subreportParameterExpression><![CDATA[$F{PERMIT_NAME}]]></subreportParameterExpression>
+					</subreportParameter>
+					<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					<subreportExpression class="java.io.File"><![CDATA[$P{PermitTotalFile}]]></subreportExpression>
+				</subreport>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="PERMIT_DETAIL" isStartNewPage="true">
+		<groupExpression><![CDATA[$F{PERMIT_DETAIL_ID}]]></groupExpression>
+		<groupHeader>
+			<band height="362" >
+				<subreport>
+					<reportElement x="0" y="3" width="555" height="359"/>
+					<subreportParameter name="permitDetailName">
+						<subreportParameterExpression><![CDATA[$F{PERMIT_DETAIL_NAME}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="year">
+						<subreportParameterExpression><![CDATA[$P{year}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="permitName">
+						<subreportParameterExpression><![CDATA[$F{PERMIT_NAME}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="permitDetailId">
+						<subreportParameterExpression><![CDATA[$F{PERMIT_DETAIL_ID}]]></subreportParameterExpression>
+					</subreportParameter>
+					<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					<subreportExpression class="java.io.File"><![CDATA[$P{PermitDetailTotalFile}]]></subreportExpression>
+				</subreport>
+			</band>
+		</groupHeader>
+	</group>
+	<title>
+		<band height="69" >
+			<textField isStretchWithOverflow="true">
+				<reportElement x="0" y="0" width="802" height="35"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="14" isItalic="true" isUnderline="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{ClientName}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="0" y="35" width="802" height="31"/>
+				<textElement>
+					<font fontName="Arial" size="24" isUnderline="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["12 Month Rolling Total for " + $P{year}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageFooter>
+		<band height="20">
+			<textField isStretchWithOverflow="true">
+				<reportElement x="330" y="0" width="80" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="410" y="0" width="40" height="20"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

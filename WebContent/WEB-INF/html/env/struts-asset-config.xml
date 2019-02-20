@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?><!DOCTYPE struts-config PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 1.3//EN"
+    "http://struts.apache.org/dtds/struts-config_1_3.dtd">
+<struts-config>
+    <form-beans>
+        <form-bean name="AssetForm"
+                   type="com.sehinc.environment.action.asset.AssetForm" />
+        <form-bean name="AssetSourceForm"
+                   type="com.sehinc.environment.action.assetsource.AssetSourceForm" />
+        <form-bean name="AssetSubstanceForm"
+                   type="com.sehinc.environment.action.assetsubstance.AssetSubstanceForm" />
+    </form-beans>
+    <global-forwards>
+        <forward name="asset.list.page"
+                 path="/assetlistpage.do"
+                 redirect="true" />
+        <forward name="asset.view.page"
+                 path="/assetviewpage.do"
+                 redirect="true" />
+    </global-forwards>
+    <action-mappings>
+        <action path="/assetlistpage"
+                type="com.sehinc.environment.action.asset.AssetListPageAction"
+                name="AssetForm"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="asset.list.page" />
+        </action>
+        <action path="/assetfulllistpage"
+                type="com.sehinc.environment.action.asset.AssetFullListPageAction"
+                name="AssetForm"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="asset.full.list.page" />
+        </action>
+        <action path="/assetviewpage"
+                type="com.sehinc.environment.action.asset.AssetViewPageAction"
+                name="AssetForm"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="asset.view.page" />
+        </action>
+        <action path="/assetcreatepage"
+                type="com.sehinc.environment.action.asset.AssetCreatePageAction"
+                name="AssetForm"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="asset.create.page" />
+        </action>
+        <action path="/assetcreateaction"
+                type="com.sehinc.environment.action.asset.AssetCreateAction"
+                input="asset.create.page"
+                name="AssetForm"
+                scope="request"
+                validate="true"
+                cancellable="true">
+            <forward name="continue"
+                     path="/assetviewpage.do"
+                     redirect="true" />
+        </action>
+        <action path="/asseteditpage"
+                type="com.sehinc.environment.action.asset.AssetEditPageAction"
+                name="AssetForm"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="asset.edit.page" />
+        </action>
+        <action path="/asseteditaction"
+                type="com.sehinc.environment.action.asset.AssetEditAction"
+                input="asset.edit.page"
+                name="AssetForm"
+                scope="request"
+                validate="true"
+                cancellable="true">
+            <forward name="continue"
+                     path="/assetviewpage.do"
+                     redirect="true" />
+        </action>
+        <action path="/assetdeleteaction"
+                type="com.sehinc.environment.action.asset.AssetDeleteAction"
+                name="AssetForm"
+                input="asset.delete.page"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="/assetlistpage.do"
+                     redirect="true" />
+        </action>
+        <action path="/assetsourcecreatepage"
+                type="com.sehinc.environment.action.assetsource.AssetSourceCreatePageAction"
+                name="AssetSourceForm"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="asset.source.create.page" />
+        </action>
+        <action path="/assetsourcecreateaction"
+                type="com.sehinc.environment.action.assetsource.AssetSourceCreateAction"
+                input="asset.source.create.page"
+                name="AssetSourceForm"
+                scope="request"
+                validate="true"
+                cancellable="true">
+            <forward name="continue"
+                     path="/assetviewpage.do"
+                     redirect="true" />
+        </action>
+        <action path="/assetsourcedeleteaction"
+                type="com.sehinc.environment.action.assetsource.AssetSourceDeleteAction"
+                name="AssetSourceForm"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="/assetviewpage.do"
+                     redirect="true" />
+        </action>
+        <action path="/assetsubstancecreatepage"
+                type="com.sehinc.environment.action.assetsubstance.AssetSubstanceCreatePageAction"
+                name="AssetSubstanceForm"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="asset.substance.create.page" />
+        </action>
+        <action path="/assetsubstancecreateaction"
+                type="com.sehinc.environment.action.assetsubstance.AssetSubstanceCreateAction"
+                input="asset.substance.create.page"
+                name="AssetSubstanceForm"
+                scope="request"
+                validate="true"
+                cancellable="true">
+            <forward name="continue"
+                     path="/assetviewpage.do"
+                     redirect="true" />
+        </action>
+        <action path="/assetsubstancedeleteaction"
+                type="com.sehinc.environment.action.assetsubstance.AssetSubstanceDeleteAction"
+                name="AssetSubstanceForm"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="/assetviewpage.do"
+                     redirect="true" />
+        </action>
+    </action-mappings>
+    <controller processorClass="org.apache.struts.action.RequestProcessor"
+                contentType="text/html" />
+    <plug-in className="org.apache.struts.tiles.TilesPlugin">
+        <set-property property="definitions-config"
+                      value="/WEB-INF/html/tiles-defs.xml, /WEB-INF/html/env/tiles-defs.xml, /WEB-INF/html/env/tiles-asset-defs.xml" />
+        <set-property property="definitions-debug"
+                      value="2" />
+        <set-property property="definitions-parser-details"
+                      value="2" />
+        <set-property property="definitions-parser-validate"
+                      value="true" />
+        <set-property property="moduleAware"
+                      value="true" />
+    </plug-in>
+    <plug-in className="org.apache.struts.validator.ValidatorPlugIn">
+        <set-property property="pathnames"
+                      value="/org/apache/struts/validator/validator-rules.xml, /WEB-INF/html/env/validation-asset.xml" />
+    </plug-in>
+</struts-config>

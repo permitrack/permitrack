@@ -1,0 +1,90 @@
+<?xml version="1.0"?><!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping>
+    <!-- -->
+    <class name="com.sehinc.stormwater.db.plan.PlanData"
+           table="`PLAN`">
+        <id name="id"
+            type="integer"
+            column="id">
+            <generator class="identity" />
+        </id>
+        <property name="name"
+                  type="string"
+                  column="NAME" />
+        <property name="description"
+                  type="string"
+                  column="DESCRIPTION" />
+        <property name="permitNumber"
+                  type="string"
+                  column="PERMIT_NUMBER" />
+        <property name="startDate"
+                  type="string"
+                  column="START_DATE" />
+        <property name="endDate"
+                  type="string"
+                  column="END_DATE" />
+        <many-to-one name="status"
+                     class="com.sehinc.erosioncontrol.db.code.StatusCodeData"
+                     column="STATUS_CD"
+                     lazy="false" />
+        <property name="template"
+                  type="boolean"
+                  column="IS_TEMPLATE" />
+        <property name="permitTypeId"
+                  type="integer"
+                  column="PERMIT_TYPE_ID" />
+        <property name="cmomProgram"
+                  type="boolean"
+                  column="CMOM_PROGRAM" />
+        <property name="createTimestamp"
+                  type="timestamp"
+                  column="create_ts" />
+        <property name="updateTimestamp"
+                  type="timestamp"
+                  column="update_ts" />
+        <property name="updateUserId"
+                  type="integer"
+                  column="update_user_id" />
+        <!-- associations -->
+        <!-- for now we will use the old (manual) way of handling relationships -->
+        <property name="clientId"
+                  type="integer"
+                  column="CLIENT_ID" />
+        <property name="permitPeriodId"
+                  type="integer"
+                  column="PERMIT_PERIOD_ID" />
+    </class>
+    <class name="com.sehinc.stormwater.value.plan.PlanValue"
+           table="`PLAN`">
+        <id name="id"
+            type="integer"
+            column="id">
+            <generator class="identity" />
+        </id>
+        <property name="name"
+                  type="string"
+                  column="NAME" />
+        <property name="permitPeriodId"
+                  type="integer"
+                  column="PERMIT_PERIOD_ID" />
+        <property name="statusCode"
+                  type="string"
+                  column="STATUS_CD" />
+        <property name="template"
+                  type="boolean"
+                  column="IS_TEMPLATE" />
+        <property name="permitTypeId"
+                  type="integer"
+                  column="PERMIT_TYPE_ID" />
+        <property name="cmomProgram"
+                  type="boolean"
+                  column="CMOM_PROGRAM" />
+    </class>
+    <query name="com.sehinc.stormwater.value.plan.PlanValue.byActive">
+        from com.sehinc.stormwater.value.plan.PlanValue as plan
+        where plan.id &gt; 1 and plan.statusCode = :statusCode and plan.template = 1 and plan.cmomProgram = 0
+        order by plan.name asc
+    </query>
+</hibernate-mapping>

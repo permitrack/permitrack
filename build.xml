@@ -1,0 +1,321 @@
+<project name="Development Build"
+         default="deploy-dev"
+         basedir=".">
+<!--
+    <property file="build-prod.properties" />
+-->
+    <!-- set global properties for this build -->
+    <property name="SEHPortal.dir"
+              value="./" />
+    <property name="build.dir"
+              value="./build" />
+    <property name="dist.dir"
+              value="${build.dir}/dist" />
+    <property name="web.dir"
+              value="./WebContent" />
+<!--
+    <property name="portal.dir"
+              value="./web/portal" />
+-->
+    <property name="lib.dir"
+              value="${web.dir}/WEB-INF/lib" />
+    <property name="src.dir"
+              value="./JavaSource" />
+    <property name="compile.dir"
+              value="${dist.dir}/WEB-INF/classes" />
+    <property name="compile.debug"
+              value="true" />
+    <property name="dontdeploy.lib.dir"
+              value="${lib.dir}/dont-deploy" />
+    <property name="esri.dir"
+              value="./EsriServletClasses" />
+    <property file="build-local.properties" />
+    <!-- BUILD PATHS -->
+    <path id="build.portal.classpath">
+        <!-- portal JARs -->
+        <fileset dir="${SEHPortal.dir}/${lib.dir}/">
+            <include name="**/*.jar" />
+        </fileset>
+        <!-- portal JARs not to be deployed -->
+        <fileset dir="${SEHPortal.dir}/${dontdeploy.lib.dir}/">
+            <include name="**/*.jar" />
+        </fileset>
+        <!-- ESRI servlet classes -->
+        <pathelement location="${esri.dir}" />
+    </path>
+    <filter token="webapp.name"
+            value="${webapp.name}" />
+    <filter token="app.env"
+            value="${app.env}" />
+    <filter token="app.version"
+            value="${app.version}" />
+    <filter token="server.name"
+            value="${server.name}" />
+    <filter token="base.url"
+            value="${base.url}" />
+    <filter token="base.public.directory"
+            value="${base.public.directory}" />
+    <filter token="base.public.web.path"
+            value="${base.public.web.path}" />
+    <filter token="base.public.web.url"
+            value="${base.public.web.url}" />
+    <filter token="portal.admin"
+            value="${portal.admin}" />
+    <filter token="base.document.directory"
+            value="${base.document.directory}" />
+    <filter token="base.webapp.context"
+            value="${base.webapp.context}" />
+    <filter token="file.download.servlet"
+            value="${file.download.servlet}" />
+    <filter token="file.stream.servlet"
+            value="${file.stream.servlet}" />
+    <filter token="erosioncontrol.public.report.servlet"
+            value="${erosioncontrol.public.report.servlet}" />
+    <filter token="public.file.download.servlet"
+            value="${public.file.download.servlet}" />
+    <filter token="image.servlet"
+            value="${image.servlet}" />
+    <filter token="mail.smtp.host"
+            value="${mail.smtp.host}" />
+    <filter token="mail.smtp.user"
+            value="${mail.smtp.user}" />
+    <filter token="mail.smtp.password"
+            value="${mail.smtp.password}" />
+    <filter token="mail.debug"
+            value="${mail.debug}" />
+    <filter token="mail.support.address"
+            value="${mail.support.address}" />
+    <filter token="mail.noreply.address"
+            value="${mail.noreply.address}" />
+    <filter token="db.server.name"
+            value="${db.server.name}" />
+    <filter token="db.name"
+            value="${db.name}" />
+    <filter token="db.user"
+            value="${db.user}" />
+    <filter token="db.password"
+            value="${db.password}" />
+    <filter token="log4j.log.dir"
+            value="${log4j.log.dir}" />
+    <filter token="log4j.log.level"
+            value="${log4j.log.level}" />
+    <filter token="log4j.root.log.level"
+            value="${log4j.root.log.level}" />
+    <filter token="message.hour.start"
+            value="${message.hour.start}" />
+    <filter token="message.hour.end"
+            value="${message.hour.end}" />
+    <filter token="message.wakeup.interval"
+            value="${message.wakeup.interval}" />
+    <filter token="google.map.key"
+            value="${google.map.key}" />
+    <filter token="google.map.yellow.marker"
+            value="${google.map.yellow.marker}" />
+    <filter token="google.map.red.marker"
+            value="${google.map.red.marker}" />
+    <filter token="google.map.black.marker"
+            value="${google.map.black.marker}" />
+    <filter token="google.map.green.marker"
+            value="${google.map.green.marker}" />
+    <filter token="google.map.marker.shadow"
+            value="${google.map.marker.shadow}" />
+<!--
+    <filter token="demo.client.id"
+            value="${demo.client.id}" />
+-->
+    <filter token="dv.login.url"
+            value="${dv.login.url}" />
+    <filter token="service.crm.url"
+            value="${service.crm.url}" />
+
+    <!--
+        <filter token="html.logout.page.url"
+                value="${html.logout.page.url}" />
+        <filter token="xhtml.logout.page.url"
+                value="${xhtml.logout.page.url}" />
+        <filter token="ec.logout.page.url"
+                value="${ec.logout.page.url}" />
+        <filter token="sw.logout.page.url"
+                value="${sw.logout.page.url}" />
+        <filter token="dvo.logout.page.url"
+                value="${dvo.logout.page.url}" />
+        <filter token="sec.logout.page.url"
+                value="${sec.logout.page.url}" />
+        <filter token="env.logout.page.url"
+                value="${env.logout.page.url}" />
+    -->
+    <!--
+        <filter token="cmom.logout.page.url"
+                value="${cmom.logout.page.url}" />
+    -->
+    <filter token="base.file.uploads.directory"
+            value="${base.file.uploads.directory}" />
+    <filter token="file.received.directory"
+            value="${file.received.directory}" />
+    <filter token="file.processed.directory"
+            value="${file.processed.directory}" />
+    <filter token="file.uploads.logs.directory"
+            value="${file.uploads.logs.directory}" />
+    <filter token="file.uploads.mappings.directory"
+            value="${file.uploads.mappings.directory}" />
+    <taskdef file="tomcatTasks.properties">
+        <classpath>
+            <pathelement path="${dontdeploy.lib.dir}/catalina-ant.jar" />
+        </classpath>
+    </taskdef>
+    <!-- TOMCAT TARGETS -->
+    <target name="upload"
+            description="Install application in Tomcat">
+        <echo message="Uploading file:${stage.dir}/${webapp.name}.war." />
+        <echo message="deploying application" />
+        <deploy url="${tomcat.manager.url}"
+                username="${tomcat.username}"
+                password="${tomcat.password}"
+                path="/${webapp.name}"
+                update="true"
+                war="file:${stage.dir}\${webapp.name}.war" />
+    </target>
+    <target name="compile">
+        <!-- <delete dir="${SEHPortal.dir}/${compile.dir}" failonerror="false" /> -->
+        <mkdir dir="${SEHPortal.dir}/${compile.dir}" />
+        <!-- copy ESRI classes -->
+        <copy todir="${SEHPortal.dir}/${compile.dir}">
+            <fileset dir="${esri.dir}">
+                <include name="**/*.*" />
+                <include name="**/*" />
+            </fileset>
+        </copy>
+        <!-- compile portal classes to build directory -->
+        <javac fork="true"
+               srcdir="${SEHPortal.dir}/${src.dir}"
+               destdir="${SEHPortal.dir}/${compile.dir}"
+               debug="${compile.debug}"
+               memoryinitialsize="256m"
+               memorymaximumsize="768m">
+            <classpath refid="build.portal.classpath" />
+        </javac>
+    </target>
+    <target name="stage"
+            depends="compile, build-war"
+            description="Build the sehsvc war file">
+        <!-- Nothing else to do here -->
+    </target>
+    <target name="deploy"
+            depends="compile, build-war, upload"
+            description="Deploy the SEH portal App to Tomcat">
+        <!-- Nothing else to do here -->
+    </target>
+    <target name="build-war"
+            depends="build-dist">
+        <delete file="${stage.dir}/${webapp.name}.war" />
+        <mkdir dir="${stage.dir}" />
+        <zip destfile="${stage.dir}/${webapp.name}.war"
+             basedir="${dist.dir}" />
+    </target>
+    <target name="build-dist">
+        <mkdir dir="${dist.dir}" />
+        <mkdir dir="${dist.dir}/META-INF" />
+        <mkdir dir="${dist.dir}/WEB-INF" />
+        <mkdir dir="${dist.dir}/WEB-INF/lib" />
+        <copy todir="${dist.dir}">
+            <fileset dir="${web.dir}">
+                <include name="**/*.*" />
+                <exclude name="**/*.mex" />
+                <exclude name="**/WEB-INF/lib/**" />
+                <exclude name="**/WEB-INF/classes/**" />
+            </fileset>
+        </copy>
+        <!-- update struts-config.xml -->
+        <copy file="${web.dir}/WEB-INF/struts-config.xml"
+              tofile="${dist.dir}/WEB-INF/struts-config.xml"
+              filtering="yes"
+              overwrite="yes" />
+        <!-- update MapView.jsp -->
+        <copy file="${web.dir}/public/html/esc/MapView.jsp"
+              tofile="${dist.dir}/public/html/esc/MapView.jsp"
+              filtering="yes"
+              overwrite="yes" />
+        <!-- update Esrimap_prop -->
+        <copy file="${esri.dir}/Esrimap_prop"
+              tofile="${dist.dir}/WEB-INF/classes/Esrimap_prop"
+              filtering="yes"
+              overwrite="yes" />
+        <!-- update context.xml -->
+        <copy file="${web.dir}/META-INF/context.xml"
+              tofile="${dist.dir}/META-INF/context.xml"
+              filtering="yes"
+              overwrite="yes" />
+        <!-- copy jars -->
+        <copy todir="${dist.dir}/WEB-INF/lib">
+            <fileset dir="${lib.dir}">
+                <include name="**/*.jar" />
+                <exclude name="**/j2ee.jar" />
+                <exclude name="**/dont-deploy/*.*" />
+            </fileset>
+        </copy>
+        <!-- also include configuration properties that go in the classes directory -->
+        <copy todir="${dist.dir}/WEB-INF/classes"
+              filtering="yes"
+              overwrite="yes">
+            <fileset dir="${src.dir}">
+                <include name="**/*.properties" />
+                <include name="**/*.xml" />
+                <include name="**/*.dtd" />
+            </fileset>
+        </copy>
+        <copy todir="${dist.dir}/WEB-INF/classes"
+              overwrite="yes">
+            <fileset dir="${src.dir}">
+                <include name="**/*.ttf" />
+            </fileset>
+        </copy>
+        <replace file="${dist.dir}/WEB-INF/classes/log4j.xml"
+                 token="{log.dir}"
+                 value="${log4j.log.dir}" />
+        <replace file="${dist.dir}/WEB-INF/classes/log4j.xml"
+                 token="{app.name}"
+                 value="${webapp.name}" />
+    </target>
+    <target name="clean">
+        <delete dir="${build.dir}" />
+        <delete dir="${deploy.dir}/${webapp.name}" />
+        <delete dir="${log4j.log.dir}" />
+    </target>
+    <target name="deploy-dev"
+            depends="compile, build-dist">
+        <!--
+                <echo message="restarting ${webapp.name}" />
+                <echo message="Stopping ${webapp.name}" />
+                <stop url="${tomcat.manager.url}"
+                      username="${tomcat.username}"
+                      password="${tomcat.password}"
+                      path="/${webapp.name}" />
+        -->
+        <delete file="${deploy.dir}/${webapp.name}.war" />
+        <copy todir="${deploy.dir}/${webapp.name}">
+            <fileset dir="${dist.dir}">
+                <include name="**/*.*" />
+            </fileset>
+        </copy>
+        <copy todir="${deploy.dir}/${webapp.name}">
+            <fileset dir="${dist.dir}">
+                <include name="**/Esrimap_prop" />
+            </fileset>
+        </copy>
+        <!--
+                <copy todir="${deploy.dir}/portal">
+                    <fileset dir="${build.dir}/portal">
+                        <include name="**/*.*" />
+                    </fileset>
+                </copy>
+        -->
+        <!--
+                <echo message="Starting ${webapp.name}" />
+                <start url="${tomcat.manager.url}"
+                       username="${tomcat.username}"
+                       password="${tomcat.password}"
+                       path="/${webapp.name}" />
+        -->
+    </target>
+
+</project>

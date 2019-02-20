@@ -1,0 +1,32 @@
+<?xml version="1.0"?><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.sehinc.common.db.report.CapReportAccess"
+           table="CAP_REPORT_ACCESS">
+        <id name="id"
+            type="integer">
+            <column name="ID" />
+            <generator class="identity" />
+        </id>
+        <property name="reportId"
+                  type="integer"
+                  column="REPORT_ID" />
+        <property name="clientId"
+                  type="integer"
+                  column="CLIENT_ID" />
+        <property name="enabled"
+                  type="boolean"
+                  column="ENABLED" />
+    </class>
+    <query name="com.sehinc.common.db.report.CapReportAccess.findByReportAndClient">
+        from com.sehinc.common.db.report.CapReportAccess as rObject
+        where rObject.clientId = :clientId
+        and rObject.reportId = :reportId
+        order by rObject.reportId
+    </query>
+    <query name="com.sehinc.common.db.report.CapReportAccess.findByClientId">
+        from com.sehinc.common.db.report.CapReportAccess as rObject
+        where rObject.clientId = :clientId
+        order by rObject.clientId
+    </query>
+</hibernate-mapping>

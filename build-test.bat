@@ -1,0 +1,1 @@
+call ant -file build.xml -propertyfile build-test.properties stage

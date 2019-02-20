@@ -1,0 +1,425 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="NE_Air_Form_0" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="788"/>
+	<reportFont name="Arial_Normal" isDefault="true" fontName="Arial" size="12" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Bold" isDefault="false" fontName="Arial" size="12" isBold="true" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Italic" isDefault="false" fontName="Arial" size="12" isItalic="true" pdfFontName="Helvetica-Oblique" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Bold_Italic" isDefault="false" fontName="Arial" size="12" isBold="true" isItalic="true" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Small" isDefault="true" fontName="Arial" size="10" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Small_Bold" isDefault="false" fontName="Arial" size="10" isBold="true" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Small_Italic" isDefault="false" fontName="Arial" size="10" isItalic="true" pdfFontName="Helvetica-Oblique" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Small_Bold_Italic" isDefault="false" fontName="Arial" size="10" isBold="true" isItalic="true" pdfFontName="Helvetica-Oblique" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<parameter name="year" class="java.lang.Integer"/>
+	<parameter name="clientId" class="java.lang.Integer"/>
+	<parameter name="ClientName" class="java.lang.String"/>
+	<parameter name="PermitId" class="java.lang.Integer"/>
+	<parameter name="NE_Air_Form_0_0_Facility_Info_File" class="java.io.File"/>
+	<parameter name="NE_Air_Form_1_0_File" class="java.io.File"/>
+	<parameter name="NE_Air_Form_1_0_Subreport_File" class="java.io.File"/>
+	<parameter name="NE_Air_Form_1_1_File" class="java.io.File"/>
+	<parameter name="NE_Air_Form_1_1_Process_File" class="java.io.File"/>
+	<parameter name="NE_Air_Form_2_0_File" class="java.io.File"/>
+	<parameter name="NE_Air_Form_2_0_Air_Pollution_File" class="java.io.File"/>
+	<parameter name="NE_Air_Form_2_0_Facility_Op_File" class="java.io.File"/>
+	<parameter name="NE_Air_Form_2_0_Operating_File" class="java.io.File"/>
+	<parameter name="NE_Air_Form_2_0_Stack_File" class="java.io.File"/>
+	<parameter name="NE_Air_Form_2_1_File" class="java.io.File"/>
+	<parameter name="NE_Air_Form_2_1_Emissions_File" class="java.io.File"/>
+	<parameter name="NE_Air_Form_3_0_File" class="java.io.File"/>
+	<parameter name="NE_Air_Form_3_0_Subreport_File" class="java.io.File"/>
+	<parameter name="NE_Air_Form_4_0_File" class="java.io.File"/>
+	<parameter name="NE_Air_Form_4_0_Other_Haps_File" class="java.io.File"/>
+	<parameter name="NE_Air_Form_4_0_Greatest_Hap_File" class="java.io.File"/>
+	<parameter name="NE_Air_Form_4_0_Haps_List_File" class="java.io.File"/>
+	<parameter name="NE_Air_Form_10_0_File" class="java.io.File"/>
+	<parameter name="NE_Air_Form_10_0_Subreport_File" class="java.io.File"/>
+	<parameter name="NE_Air_Form_10_1_File" class="java.io.File"/>
+	<parameter name="NE_Air_Form_10_1_Subreport_File" class="java.io.File"/>
+	<parameter name="NE_Air_Form_10_1_Totals_File" class="java.io.File"/>
+	<parameter name="NE_Air_Form_12_0_File" class="java.io.File"/>
+	<parameter name="NE_Air_Form_12_0_Subreport_File" class="java.io.File"/>
+	<parameter name="NE_Air_Form_12_0_Totals_File" class="java.io.File"/>
+	<parameter name="NE_Air_Form_2_2_File" class="java.io.File"/>
+	<parameter name="NE_Air_Form_2_3_File" class="java.io.File"/>
+	<parameter name="NE_Air_Form_2_2_Emissions_File" class="java.io.File"/>
+	<parameter name="NE_Air_Form_2_3_Emissions_File" class="java.io.File"/>
+	<parameter name="NE_Air_Form_5_0_File" class="java.io.File"/>
+	<parameter name="NE_Air_Form_5_0_Vocs_List_File" class="java.io.File"/>
+	<parameter name="NE_Air_Form_5_0_Vocs_Total_File" class="java.io.File"/>
+	<queryString>
+		<![CDATA[SELECT	F.ID AS FacilityId, F.NAME AS FacilityName, F.NUMBER AS FacilityNumber
+                 FROM ENV_PERMIT AS P,
+                      ENV_PERMIT_FACILITY AS PF,
+                      ENV_FACILITY AS F
+                 WHERE P.ID = $P{PermitId}
+                       AND P.STATUS_CD = 1
+                       AND PF.PERMIT_ID = P.ID
+                       AND F.ID = PF.FACILITY_ID]]>
+	</queryString>
+	<field name="FacilityId" class="java.lang.Integer"/>
+	<field name="FacilityNumber" class="java.lang.String"/>
+	<field name="FacilityName" class="java.lang.String"/>
+	<group name="Form1" isStartNewPage="true">
+		<groupExpression><![CDATA[$F{FacilityId}]]></groupExpression>
+		<groupHeader>
+			<band height="124" splitType="Stretch">
+				<subreport isUsingCache="true">
+					<reportElement x="0" y="0" width="555" height="121"/>
+					<subreportParameter name="year">
+						<subreportParameterExpression><![CDATA[$P{year}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="clientId">
+						<subreportParameterExpression><![CDATA[$P{clientId}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="FacilityId">
+						<subreportParameterExpression><![CDATA[$F{FacilityId}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="NE_Air_Form_1_0_Subreport_File">
+						<subreportParameterExpression><![CDATA[$P{NE_Air_Form_1_0_Subreport_File}]]></subreportParameterExpression>
+					</subreportParameter>
+					<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					<subreportExpression class="java.io.File"><![CDATA[$P{NE_Air_Form_1_0_File}]]></subreportExpression>
+				</subreport>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="Form1_1" isStartNewPage="true">
+		<groupExpression><![CDATA[$F{FacilityId}]]></groupExpression>
+		<groupHeader>
+			<band height="124" splitType="Stretch">
+				<subreport isUsingCache="true">
+					<reportElement x="0" y="0" width="555" height="121"/>
+					<subreportParameter name="year">
+						<subreportParameterExpression><![CDATA[$P{year}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="FacilityId">
+						<subreportParameterExpression><![CDATA[$F{FacilityId}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="NE_Air_Form_0_0_Facility_Info_File">
+						<subreportParameterExpression><![CDATA[$P{NE_Air_Form_0_0_Facility_Info_File}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="NE_Air_Form_1_1_Process_File">
+						<subreportParameterExpression><![CDATA[$P{NE_Air_Form_1_1_Process_File}]]></subreportParameterExpression>
+					</subreportParameter>
+					<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					<subreportExpression class="java.io.File"><![CDATA[$P{NE_Air_Form_1_1_File}]]></subreportExpression>
+				</subreport>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="Form2" isStartNewPage="true">
+		<groupExpression><![CDATA[$F{FacilityId}]]></groupExpression>
+		<groupHeader>
+			<band height="125" splitType="Stretch">
+				<subreport isUsingCache="true">
+					<reportElement x="0" y="0" width="555" height="121"/>
+					<subreportParameter name="year">
+						<subreportParameterExpression><![CDATA[$P{year}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="FacilityId">
+						<subreportParameterExpression><![CDATA[$F{FacilityId}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="NE_Air_Form_0_0_Facility_Info_File">
+						<subreportParameterExpression><![CDATA[$P{NE_Air_Form_0_0_Facility_Info_File}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="NE_Air_Form_2_0_Air_Pollution_File">
+						<subreportParameterExpression><![CDATA[$P{NE_Air_Form_2_0_Air_Pollution_File}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="NE_Air_Form_2_0_Facility_Op_File">
+						<subreportParameterExpression><![CDATA[$P{NE_Air_Form_2_0_Facility_Op_File}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="NE_Air_Form_2_0_Operating_File">
+						<subreportParameterExpression><![CDATA[$P{NE_Air_Form_2_0_Operating_File}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="NE_Air_Form_2_0_Stack_File">
+						<subreportParameterExpression><![CDATA[$P{NE_Air_Form_2_0_Stack_File}]]></subreportParameterExpression>
+					</subreportParameter>
+					<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					<subreportExpression class="java.io.File"><![CDATA[$P{NE_Air_Form_2_0_File}]]></subreportExpression>
+				</subreport>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="Form2_1" isStartNewPage="true">
+		<groupExpression><![CDATA[$F{FacilityId}]]></groupExpression>
+		<groupHeader>
+			<band height="123" splitType="Stretch">
+				<subreport isUsingCache="true">
+					<reportElement x="0" y="0" width="555" height="121"/>
+					<subreportParameter name="year">
+						<subreportParameterExpression><![CDATA[$P{year}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="FacilityId">
+						<subreportParameterExpression><![CDATA[$F{FacilityId}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="NE_Air_Form_0_0_Facility_Info_File">
+						<subreportParameterExpression><![CDATA[$P{NE_Air_Form_0_0_Facility_Info_File}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="NE_Air_Form_2_1_Emissions_File">
+						<subreportParameterExpression><![CDATA[$P{NE_Air_Form_2_1_Emissions_File}]]></subreportParameterExpression>
+					</subreportParameter>
+					<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					<subreportExpression class="java.io.File"><![CDATA[$P{NE_Air_Form_2_1_File}]]></subreportExpression>
+				</subreport>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="Form2_2" isStartNewPage="true">
+		<groupExpression><![CDATA[$F{FacilityId}]]></groupExpression>
+		<groupHeader>
+			<band height="126" splitType="Stretch">
+				<subreport isUsingCache="true">
+					<reportElement x="0" y="0" width="555" height="121"/>
+					<subreportParameter name="NE_Air_Form_0_0_Facility_Info_File">
+						<subreportParameterExpression><![CDATA[$P{NE_Air_Form_0_0_Facility_Info_File}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="year">
+						<subreportParameterExpression><![CDATA[$P{year}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="FacilityId">
+						<subreportParameterExpression><![CDATA[$F{FacilityId}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="NE_Air_Form_2_2_Emissions_File">
+						<subreportParameterExpression><![CDATA[$P{NE_Air_Form_2_2_Emissions_File}]]></subreportParameterExpression>
+					</subreportParameter>
+					<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					<subreportExpression class="java.io.File"><![CDATA[$P{NE_Air_Form_2_2_File}]]></subreportExpression>
+				</subreport>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="Report2_3" isStartNewPage="true">
+		<groupExpression><![CDATA[$F{FacilityId}]]></groupExpression>
+		<groupHeader>
+			<band height="126" splitType="Stretch">
+				<subreport isUsingCache="true">
+					<reportElement x="0" y="0" width="555" height="121"/>
+					<subreportParameter name="NE_Air_Form_0_0_Facility_Info_File">
+						<subreportParameterExpression><![CDATA[$P{NE_Air_Form_0_0_Facility_Info_File}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="NE_Air_Form_2_3_Emissions_File">
+						<subreportParameterExpression><![CDATA[$P{NE_Air_Form_2_3_Emissions_File}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="year">
+						<subreportParameterExpression><![CDATA[$P{year}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="FacilityId">
+						<subreportParameterExpression><![CDATA[$F{FacilityId}]]></subreportParameterExpression>
+					</subreportParameter>
+					<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					<subreportExpression class="java.io.File"><![CDATA[$P{NE_Air_Form_2_3_File}]]></subreportExpression>
+				</subreport>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="Form3_0" isStartNewPage="true">
+		<groupExpression><![CDATA[$F{FacilityId}]]></groupExpression>
+		<groupHeader>
+			<band height="124" splitType="Stretch">
+				<subreport isUsingCache="true">
+					<reportElement x="0" y="0" width="555" height="121"/>
+					<subreportParameter name="year">
+						<subreportParameterExpression><![CDATA[$P{year}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="FacilityId">
+						<subreportParameterExpression><![CDATA[$F{FacilityId}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="NE_Air_Form_0_0_Facility_Info_File">
+						<subreportParameterExpression><![CDATA[$P{NE_Air_Form_0_0_Facility_Info_File}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="NE_Air_Form_3_0_Subreport_File">
+						<subreportParameterExpression><![CDATA[$P{NE_Air_Form_3_0_Subreport_File}]]></subreportParameterExpression>
+					</subreportParameter>
+					<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					<subreportExpression class="java.io.File"><![CDATA[$P{NE_Air_Form_3_0_File}]]></subreportExpression>
+				</subreport>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="Form4" isStartNewPage="true">
+		<groupExpression><![CDATA[$F{FacilityId}]]></groupExpression>
+		<groupHeader>
+			<band height="126" splitType="Stretch">
+				<subreport isUsingCache="true">
+					<reportElement x="0" y="0" width="555" height="121"/>
+					<subreportParameter name="year">
+						<subreportParameterExpression><![CDATA[$P{year}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="FacilityId">
+						<subreportParameterExpression><![CDATA[$F{FacilityId}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="NE_Air_Form_0_0_Facility_Info_File">
+						<subreportParameterExpression><![CDATA[$P{NE_Air_Form_0_0_Facility_Info_File}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="NE_Air_Form_4_0_Other_Haps_File">
+						<subreportParameterExpression><![CDATA[$P{NE_Air_Form_4_0_Other_Haps_File}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="NE_Air_Form_4_0_Greatest_Hap_File">
+						<subreportParameterExpression><![CDATA[$P{NE_Air_Form_4_0_Greatest_Hap_File}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="NE_Air_Form_4_0_Haps_List_File">
+						<subreportParameterExpression><![CDATA[$P{NE_Air_Form_4_0_Haps_List_File}]]></subreportParameterExpression>
+					</subreportParameter>
+					<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					<subreportExpression class="java.io.File"><![CDATA[$P{NE_Air_Form_4_0_File}]]></subreportExpression>
+				</subreport>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="Form5_0" isStartNewPage="true" minHeightToStartNewPage="1">
+		<groupExpression><![CDATA[$F{FacilityId}]]></groupExpression>
+		<groupHeader>
+			<band height="126" splitType="Stretch">
+				<subreport isUsingCache="true">
+					<reportElement x="0" y="2" width="555" height="121"/>
+					<subreportParameter name="NE_Air_Form_5_0_Vocs_List_File">
+						<subreportParameterExpression><![CDATA[$P{NE_Air_Form_5_0_Vocs_List_File}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="NE_Air_Form_0_0_Facility_Info_File">
+						<subreportParameterExpression><![CDATA[$P{NE_Air_Form_0_0_Facility_Info_File}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="NE_Air_Form_5_0_Vocs_Total_File">
+						<subreportParameterExpression><![CDATA[$P{NE_Air_Form_5_0_Vocs_Total_File}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="year">
+						<subreportParameterExpression><![CDATA[$P{year}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="FacilityId">
+						<subreportParameterExpression><![CDATA[$F{FacilityId}]]></subreportParameterExpression>
+					</subreportParameter>
+					<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					<subreportExpression class="java.io.File"><![CDATA[$P{NE_Air_Form_5_0_File}]]></subreportExpression>
+				</subreport>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="Form10_0" isStartNewPage="true">
+		<groupExpression><![CDATA[$F{FacilityId}]]></groupExpression>
+		<groupHeader>
+			<band height="124" splitType="Stretch">
+				<subreport isUsingCache="true">
+					<reportElement x="0" y="0" width="555" height="121"/>
+					<subreportParameter name="year">
+						<subreportParameterExpression><![CDATA[$P{year}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="FacilityId">
+						<subreportParameterExpression><![CDATA[$F{FacilityId}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="NE_Air_Form_0_0_Facility_Info_File">
+						<subreportParameterExpression><![CDATA[$P{NE_Air_Form_0_0_Facility_Info_File}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="NE_Air_Form_10_0_Subreport_File">
+						<subreportParameterExpression><![CDATA[$P{NE_Air_Form_10_0_Subreport_File}]]></subreportParameterExpression>
+					</subreportParameter>
+					<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					<subreportExpression class="java.io.File"><![CDATA[$P{NE_Air_Form_10_0_File}]]></subreportExpression>
+				</subreport>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="Form10_1" isStartNewPage="true">
+		<groupExpression><![CDATA[$F{FacilityId}]]></groupExpression>
+		<groupHeader>
+			<band height="124" splitType="Stretch">
+				<subreport isUsingCache="true">
+					<reportElement x="0" y="0" width="555" height="121"/>
+					<subreportParameter name="year">
+						<subreportParameterExpression><![CDATA[$P{year}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="FacilityId">
+						<subreportParameterExpression><![CDATA[$F{FacilityId}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="clientId">
+						<subreportParameterExpression><![CDATA[$P{clientId}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="NE_Air_Form_0_0_Facility_Info_File">
+						<subreportParameterExpression><![CDATA[$P{NE_Air_Form_0_0_Facility_Info_File}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="NE_Air_Form_10_1_Subreport_File">
+						<subreportParameterExpression><![CDATA[$P{NE_Air_Form_10_1_Subreport_File}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="NE_Air_Form_10_1_Totals_File">
+						<subreportParameterExpression><![CDATA[$P{NE_Air_Form_10_1_Totals_File}]]></subreportParameterExpression>
+					</subreportParameter>
+					<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					<subreportExpression class="java.io.File"><![CDATA[$P{NE_Air_Form_10_1_File}]]></subreportExpression>
+				</subreport>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="Form12_0" isStartNewPage="true">
+		<groupExpression><![CDATA[$F{FacilityId}]]></groupExpression>
+		<groupHeader>
+			<band height="124" splitType="Stretch">
+				<subreport isUsingCache="true">
+					<reportElement x="0" y="0" width="555" height="121"/>
+					<subreportParameter name="NE_Air_Form_12_0_Subreport_File">
+						<subreportParameterExpression><![CDATA[$P{NE_Air_Form_12_0_Subreport_File}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="NE_Air_Form_0_0_Facility_Info_File">
+						<subreportParameterExpression><![CDATA[$P{NE_Air_Form_0_0_Facility_Info_File}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="year">
+						<subreportParameterExpression><![CDATA[$P{year}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="NE_Air_Form_12_0_Totals_File">
+						<subreportParameterExpression><![CDATA[$P{NE_Air_Form_12_0_Totals_File}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="FacilityId">
+						<subreportParameterExpression><![CDATA[$F{FacilityId}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="clientId">
+						<subreportParameterExpression><![CDATA[$P{clientId}]]></subreportParameterExpression>
+					</subreportParameter>
+					<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					<subreportExpression class="java.io.File"><![CDATA[$P{NE_Air_Form_12_0_File}]]></subreportExpression>
+				</subreport>
+			</band>
+		</groupHeader>
+	</group>
+	<title>
+		<band height="45" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="30" width="555" height="15"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font reportFont="Arial_Bold" size="12"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{year} + " AIR EMISSIONS INVENTORY"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="0" width="555" height="15"/>
+				<textElement textAlignment="Center">
+					<font reportFont="Arial_Bold" size="12"/>
+				</textElement>
+				<text><![CDATA[State of Nebraska]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="15" width="555" height="15"/>
+				<textElement textAlignment="Center">
+					<font reportFont="Arial_Bold" size="12"/>
+				</textElement>
+				<text><![CDATA[Department of Environmental Quality]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageFooter>
+		<band height="15" splitType="Stretch">
+			<textField isStretchWithOverflow="true">
+				<reportElement x="216" y="0" width="80" height="15"/>
+				<textElement textAlignment="Right">
+					<font reportFont="Arial_Normal" size="10"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="296" y="0" width="40" height="15"/>
+				<textElement>
+					<font reportFont="Arial_Normal" size="10"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

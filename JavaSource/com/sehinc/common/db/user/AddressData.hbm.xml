@@ -1,0 +1,77 @@
+<?xml version="1.0"?><!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping>
+    <class name="com.sehinc.common.db.user.AddressData"
+           table="Address">
+        <id name="id"
+            type="integer"
+            column="id">
+            <generator class="identity" />
+        </id>
+        <property name="name1"
+                  type="string"
+                  column="name1" />
+        <property name="name2"
+                  type="string"
+                  column="name2" />
+        <property name="name3"
+                  type="string"
+                  column="name3" />
+        <property name="line1"
+                  type="string"
+                  column="line1" />
+        <property name="line2"
+                  type="java.lang.String"
+                  column="line2" />
+        <property name="line3"
+                  type="java.lang.String"
+                  column="line3" />
+        <property name="city"
+                  type="java.lang.String"
+                  column="city" />
+        <property name="state"
+                  type="java.lang.String"
+                  column="state" />
+        <property name="postalCode"
+                  type="java.lang.String"
+                  column="postal_code" />
+        <property name="country"
+                  type="java.lang.String"
+                  column="country" />
+        <property name="createTimestamp"
+                  type="timestamp"
+                  column="create_ts" />
+        <property name="updateTimestamp"
+                  type="timestamp"
+                  column="update_ts" />
+        <property name="updateUserId"
+                  type="integer"
+                  column="update_user_id" />
+    </class>
+    <class name="com.sehinc.common.value.user.AddressShortValue"
+           table="Address">
+        <id name="id"
+            type="integer"
+            column="id">
+            <generator class="identity" />
+        </id>
+        <property name="line1"
+                  type="string"
+                  column="line1" />
+        <property name="line2"
+                  type="java.lang.String"
+                  column="line2" />
+        <property name="city"
+                  type="java.lang.String"
+                  column="city" />
+        <property name="state"
+                  type="java.lang.String"
+                  column="state" />
+        <property name="postalCode"
+                  type="java.lang.String"
+                  column="postal_code" />
+        <!-- associations -->
+    </class>
+</hibernate-mapping>
+

@@ -1,0 +1,112 @@
+<?xml version="1.0"?>
+<!DOCTYPE jasperReport PUBLIC "-//JasperReports//DTD Report Design//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
+
+<jasperReport name="NE_Air_Form_10_1" pageWidth="550" pageHeight="842" columnWidth="550" leftMargin="0" rightMargin="0" topMargin="10" bottomMargin="10">
+	<reportFont name="Arial_Normal" isDefault="true" fontName="Arial" size="12" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Bold" isDefault="false" fontName="Arial" size="12" isBold="true" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Italic" isDefault="false" fontName="Arial" size="12" isItalic="true" pdfFontName="Helvetica-Oblique" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Bold_Italic" isDefault="false" fontName="Arial" size="12" isBold="true" isItalic="true" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Small" isDefault="true" fontName="Arial" size="10" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Small_Bold" isDefault="false" fontName="Arial" size="10" isBold="true" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Small_Italic" isDefault="false" fontName="Arial" size="10" isItalic="true" pdfFontName="Helvetica-Oblique" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Small_Bold_Italic" isDefault="false" fontName="Arial" size="10" isBold="true" isItalic="true" pdfFontName="Helvetica-Oblique" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<parameter name="FacilityId" class="java.lang.Integer"/>
+	<parameter name="year" class="java.lang.Integer"/>
+	<parameter name="NE_Air_Form_0_0_Facility_Info_File" class="java.io.File"/>
+	<parameter name="NE_Air_Form_10_1_Subreport_File" class="java.io.File"/>
+	<parameter name="NE_Air_Form_10_1_Totals_File" class="java.io.File"/>
+	<parameter name="clientId" class="java.lang.Integer"/>
+	<queryString>
+		<![CDATA[DECLARE
+        @yearChar varchar(4),
+        @StartDate varchar(10),
+        @EndDate varchar(10)
+
+        -- Create dates for use in query
+        SET @yearChar = $P{year}
+        SET @StartDate 	= '01-01-' + @yearChar
+        SET @EndDate 	= '12-31-' + @yearChar
+
+        SELECT asset.id as ASSET_ID
+        FROM ENV_FACILITY_ASSET as fac
+         INNER JOIN ENV_ASSET as asset
+          ON asset.ID = fac.asset_id
+          AND asset.STATUS_CD = 1
+         INNER JOIN ENV_ASSET_SOURCE as aSo
+          ON aso.ASSET_ID = asset.ID
+         INNER JOIN ENV_SOURCE_USAGE as usage
+          ON usage.ASSET_SOURCE_ID = aSo.ID
+          AND usage.PERIOD_START_TS >= @StartDate
+          AND usage.PERIOD_END_TS <= @EndDate
+         INNER JOIN ENV_SOURCE as source
+          ON aSo.SOURCE_ID = source.ID
+          AND source.source_type_cd = 3 -- bulk liquid
+        INNER JOIN ENV_ASSET_TYPE as assetType
+          ON assetType.ASSET_ID = asset.id
+          AND assetType.ASSET_TYPE_CD = 3 -- bulk liquid
+        WHERE fac.FACILITY_ID = $P{FacilityId}
+	GROUP BY asset.ID, asset.number
+	ORDER BY asset.number
+]]>
+	</queryString>
+	<field name="ASSET_ID" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<group name="RepeatingForm">
+		<groupExpression><![CDATA[$F{ASSET_ID}]]></groupExpression>
+		<groupHeader>
+			<band height="489">
+				<staticText>
+					<reportElement x="0" y="0" width="550" height="19"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font reportFont="Arial_Bold" size="12"/>
+					</textElement>
+					<text><![CDATA[FORM 10.1 PETROLEUM OR CHEMICAL STORAGE]]></text>
+				</staticText>
+				<subreport>
+					<reportElement x="0" y="19" width="550" height="60"/>
+					<subreportParameter name="year">
+						<subreportParameterExpression><![CDATA[$P{year}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="FacilityId">
+						<subreportParameterExpression><![CDATA[$P{FacilityId}]]></subreportParameterExpression>
+					</subreportParameter>
+					<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					<subreportExpression class="java.io.File"><![CDATA[$P{NE_Air_Form_0_0_Facility_Info_File}]]></subreportExpression>
+				</subreport>
+				<subreport>
+					<reportElement x="0" y="89" width="550" height="400"/>
+					<subreportParameter name="year">
+						<subreportParameterExpression><![CDATA[$P{year}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="clientId">
+						<subreportParameterExpression><![CDATA[$P{clientId}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="ASSET_ID">
+						<subreportParameterExpression><![CDATA[$F{ASSET_ID}]]></subreportParameterExpression>
+					</subreportParameter>
+					<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					<subreportExpression class="java.io.File"><![CDATA[$P{NE_Air_Form_10_1_Subreport_File}]]></subreportExpression>
+				</subreport>
+			</band>
+		</groupHeader>
+	</group>
+	<summary>
+		<band height="119">
+			<subreport>
+				<reportElement x="0" y="10" width="550" height="109"/>
+				<subreportParameter name="year">
+					<subreportParameterExpression><![CDATA[$P{year}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="FacilityId">
+					<subreportParameterExpression><![CDATA[$P{FacilityId}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="clientId">
+					<subreportParameterExpression><![CDATA[$P{clientId}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.io.File"><![CDATA[$P{NE_Air_Form_10_1_Totals_File}]]></subreportExpression>
+			</subreport>
+		</band>
+	</summary>
+</jasperReport>

@@ -1,0 +1,547 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="InspectionReport" pageWidth="595" pageHeight="842" columnWidth="515" leftMargin="40" rightMargin="40" topMargin="50" bottomMargin="50" scriptletClass="com.sehinc.erosioncontrol.action.report.ECInspectionReportScriptlet">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="152"/>
+	<reportFont name="Arial_Normal" isDefault="true" fontName="Arial" size="12" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Bold" isDefault="false" fontName="Arial" size="12" isBold="true" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Italic" isDefault="false" fontName="Arial" size="12" isItalic="true" pdfFontName="Helvetica-Oblique" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Bold_Italic" isDefault="false" fontName="Arial" size="12" isBold="true" isItalic="true" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Small" isDefault="true" fontName="Arial" size="10" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Small_Bold" isDefault="false" fontName="Arial" size="10" isBold="true" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Small_Italic" isDefault="false" fontName="Arial" size="10" isItalic="true" pdfFontName="Helvetica-Oblique" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Small_Bold_Italic" isDefault="false" fontName="Arial" size="10" isBold="true" isItalic="true" pdfFontName="Helvetica-Oblique" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<parameter name="ReportTitle" class="java.lang.String"/>
+	<parameter name="ClientWebSite" class="java.lang.String"/>
+	<parameter name="ClientName" class="java.lang.String"/>
+	<parameter name="DraftWatermarkFile" class="java.io.File"/>
+	<parameter name="LogoLocation" class="java.lang.String"/>
+	<parameter name="ProjectId" class="java.lang.Integer"/>
+	<parameter name="InspectionId" class="java.lang.Integer"/>
+	<parameter name="CertificationEnabled" class="java.lang.Boolean"/>
+	<parameter name="CertificationMsg" class="java.lang.String"/>
+	<parameter name="BaseURL" class="java.lang.String"/>
+	<parameter name="PublishURI" class="java.lang.String"/>
+	<parameter name="ProjectURL" class="java.lang.String"/>
+	<parameter name="InspectionURL" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT EC_INSPECTION.ID INSPECTION_ID, EC_INSPECTION.PROJECT_ID PROJECT_ID, EC_INSPECTION.INSPECTION_DATE,
+                EC_INSPECTION.ENTERED_DATE ENTERED_DATE, EC_INSPECTION.WEATHER_TRENDS WEATHER_TRENDS, EC_INSPECTION.TEMPERATURE TEMPERATURE,
+                EC_INSPECTION.TIME_HOUR TIME_HOUR, EC_INSPECTION.TIME_MINUTE TIME_MINUTE, EC_INSPECTION.TIME_PERIOD TIME_PERIOD,
+                EC_INSPECTION.COMMENT INSPECTION_COMMENT, EC_INSPECTION.PRECIP_END_DATE PRECIP_END_DATE, EC_INSPECTION.PRECIP_AMOUNT PRECIP_AMOUNT,
+                EC_INSPECTION.PRECIP_SOURCE PRECIP_SOURCE, EC_INSPECTION.INSPECTION_ACTION_COMMENT INSPECTION_ACTION_COMMENT,
+                EC_INSPECTION.INSPECTION_ACTION_ID INSPECTION_ACTION_ID, EC_INSPECTION.INSPECTION_REASON_ID INSPECTION_REASON_ID,
+                EC_INSPECTION.UPDATE_USER_ID UPDATE_USER_ID, EC_INSPECTION.STATUS_CD STATUS_CODE, EC_INSPECTION_BMP.ID INSPECTION_BMP_ID
+                FROM EC_INSPECTION LEFT OUTER JOIN EC_INSPECTION_BMP ON EC_INSPECTION.ID = EC_INSPECTION_BMP.INSPECTION_ID
+                WHERE EC_INSPECTION.ID = $P{InspectionId}]]>
+	</queryString>
+	<field name="INSPECTION_ID" class="java.lang.Integer"/>
+	<field name="PROJECT_ID" class="java.lang.Integer"/>
+	<field name="INSPECTION_DATE" class="java.util.Date"/>
+	<field name="ENTERED_DATE" class="java.util.Date"/>
+	<field name="WEATHER_TRENDS" class="java.lang.String"/>
+	<field name="TEMPERATURE" class="java.lang.String"/>
+	<field name="TIME_HOUR" class="java.lang.Integer"/>
+	<field name="TIME_MINUTE" class="java.lang.Integer"/>
+	<field name="TIME_PERIOD" class="java.lang.String"/>
+	<field name="INSPECTION_COMMENT" class="java.lang.String"/>
+	<field name="PRECIP_END_DATE" class="java.util.Date"/>
+	<field name="PRECIP_AMOUNT" class="java.lang.String"/>
+	<field name="PRECIP_SOURCE" class="java.lang.String"/>
+	<field name="INSPECTION_ACTION_COMMENT" class="java.lang.String"/>
+	<field name="INSPECTION_ACTION_ID" class="java.lang.Integer"/>
+	<field name="INSPECTION_REASON_ID" class="java.lang.Integer"/>
+	<field name="UPDATE_USER_ID" class="java.lang.Integer"/>
+	<field name="STATUS_CODE" class="java.lang.Integer"/>
+	<field name="INSPECTION_BMP_ID" class="java.lang.Integer"/>
+	<variable name="ProjectValue" class="com.sehinc.erosioncontrol.value.project.ProjectValue">
+		<initialValueExpression><![CDATA[((com.sehinc.erosioncontrol.action.report.ECInspectionReportScriptlet)$P{REPORT_SCRIPTLET}).getProject($F{PROJECT_ID})]]></initialValueExpression>
+	</variable>
+	<variable name="InspectionBmpValue" class="com.sehinc.erosioncontrol.value.inspection.InspectionBmpValue"/>
+	<variable name="InspectionBmpDocument" class="java.io.File"/>
+	<group name="ProjectGroup">
+		<groupExpression><![CDATA[$F{PROJECT_ID}]]></groupExpression>
+		<groupHeader>
+			<band height="75" splitType="Stretch">
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="0" y="0" width="515" height="20"/>
+					<textElement>
+						<font reportFont="Arial_Bold" size="14"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[com.sehinc.erosioncontrol.action.report.ECInspectionReportScriptlet.filterHTML($V{ProjectValue}.getName())]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="10" y="21" width="245" height="15"/>
+					<textElement>
+						<font reportFont="Arial_Bold"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA["Address"]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="10" y="37" width="245" height="15"/>
+					<textElement>
+						<font reportFont="Arial_Normal"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[com.sehinc.erosioncontrol.action.report.ECInspectionReportScriptlet.filterHTML($V{ProjectValue}.getAddress())]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="10" y="53" width="245" height="15"/>
+					<textElement>
+						<font reportFont="Arial_Normal"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[com.sehinc.erosioncontrol.action.report.ECInspectionReportScriptlet.filterHTML($V{ProjectValue}.getCity()) + " " +
+						com.sehinc.erosioncontrol.action.report.ECInspectionReportScriptlet.filterHTML($V{ProjectValue}.getStateCode()) + " " +
+						com.sehinc.erosioncontrol.action.report.ECInspectionReportScriptlet.filterHTML($V{ProjectValue}.getZip())]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="360" splitType="Stretch">
+				<printWhenExpression><![CDATA[(new java.lang.Boolean($P{CertificationEnabled}.booleanValue() == true))]]></printWhenExpression>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="10" y="10" width="505" height="290"/>
+					<textElement>
+						<font reportFont="Arial_Normal"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[com.sehinc.erosioncontrol.action.report.ECInspectionReportScriptlet.filterHTML($P{CertificationMsg})]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="10" y="300" width="75" height="30"/>
+					<textElement>
+						<font reportFont="Arial_Bold"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA["Signature"]]></textFieldExpression>
+				</textField>
+				<line>
+					<reportElement x="10" y="300" width="250" height="1"/>
+				</line>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="10" y="330" width="75" height="30"/>
+					<textElement>
+						<font reportFont="Arial_Bold"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA["Date"]]></textFieldExpression>
+				</textField>
+				<line>
+					<reportElement x="10" y="330" width="250" height="1"/>
+				</line>
+			</band>
+		</groupFooter>
+	</group>
+	<group name="InspectorGroup">
+		<groupExpression><![CDATA[$F{INSPECTION_ID}]]></groupExpression>
+		<groupHeader>
+			<band height="16" splitType="Stretch">
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="10" y="0" width="140" height="15"/>
+					<textElement>
+						<font reportFont="Arial_Bold"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA["Inspector: "]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="151" y="0" width="364" height="15">
+						<printWhenExpression><![CDATA[new java.lang.Boolean(((com.sehinc.erosioncontrol.action.report.ECInspectionReportScriptlet)$P{REPORT_SCRIPTLET}).getInspectorByInspection($F{INSPECTION_ID}) != null)]]></printWhenExpression>
+					</reportElement>
+					<textElement>
+						<font reportFont="Arial_Normal"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[((com.sehinc.erosioncontrol.action.report.ECInspectionReportScriptlet)$P{REPORT_SCRIPTLET}).getInspectorByInspection($F{INSPECTION_ID})]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="InspectionGroup">
+		<groupExpression><![CDATA[$F{INSPECTION_ID}]]></groupExpression>
+		<groupHeader>
+			<band height="209" splitType="Stretch">
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="10" y="0" width="140" height="15"/>
+					<textElement>
+						<font reportFont="Arial_Bold"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA["Inspection Date: "]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="151" y="0" width="364" height="15"/>
+					<textElement>
+						<font reportFont="Arial_Normal"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[com.sehinc.common.util.DateUtil.mdyDate($F{INSPECTION_DATE})]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="10" y="30" width="140" height="15"/>
+					<textElement>
+						<font reportFont="Arial_Bold"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA["Weather Trends: "]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="151" y="30" width="364" height="15"/>
+					<textElement>
+						<font reportFont="Arial_Normal"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[com.sehinc.erosioncontrol.action.report.ECInspectionReportScriptlet.filterHTML($F{WEATHER_TRENDS})]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="10" y="46" width="140" height="15"/>
+					<textElement>
+						<font reportFont="Arial_Bold"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA["Temperature: "]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="151" y="46" width="364" height="15">
+						<printWhenExpression><![CDATA[new java.lang.Boolean($F{TEMPERATURE} != null)]]></printWhenExpression>
+					</reportElement>
+					<textElement>
+						<font reportFont="Arial_Normal"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{TEMPERATURE} + " F"]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="10" y="62" width="140" height="15"/>
+					<textElement>
+						<font reportFont="Arial_Bold"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA["Last Precip. Date: "]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="151" y="62" width="364" height="15"/>
+					<textElement>
+						<font reportFont="Arial_Normal"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[com.sehinc.common.util.DateUtil.mdyDate($F{PRECIP_END_DATE})]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="10" y="78" width="140" height="15"/>
+					<textElement>
+						<font reportFont="Arial_Bold"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA["Last Precip. Amount: "]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="151" y="78" width="364" height="15">
+						<printWhenExpression><![CDATA[new java.lang.Boolean($F{PRECIP_AMOUNT} != null)]]></printWhenExpression>
+					</reportElement>
+					<textElement>
+						<font reportFont="Arial_Normal"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[com.sehinc.erosioncontrol.action.report.ECInspectionReportScriptlet.filterHTML($F{PRECIP_AMOUNT}) + " in"]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="10" y="94" width="140" height="15"/>
+					<textElement>
+						<font reportFont="Arial_Bold"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA["Last Precip. Source: "]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="151" y="94" width="364" height="15"/>
+					<textElement>
+						<font reportFont="Arial_Normal"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[com.sehinc.erosioncontrol.action.report.ECInspectionReportScriptlet.filterHTML($F{PRECIP_SOURCE})]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="10" y="110" width="140" height="15"/>
+					<textElement>
+						<font reportFont="Arial_Bold"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA["Reason for Inspection: "]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="151" y="110" width="364" height="15"/>
+					<textElement>
+						<font reportFont="Arial_Normal"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[((com.sehinc.erosioncontrol.action.report.ECInspectionReportScriptlet)$P{REPORT_SCRIPTLET}).getInspectionReason($F{INSPECTION_REASON_ID})]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="10" y="126" width="140" height="15"/>
+					<textElement>
+						<font reportFont="Arial_Bold"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA["Comments: "]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="151" y="126" width="364" height="15"/>
+					<textElement>
+						<font reportFont="Arial_Normal"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[com.sehinc.erosioncontrol.action.report.ECInspectionReportScriptlet.filterHTML($F{INSPECTION_COMMENT})]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="10" y="142" width="140" height="15">
+						<printWhenExpression><![CDATA[new java.lang.Boolean(($F{INSPECTION_ACTION_ID} != null) && ($F{INSPECTION_ACTION_ID}.intValue() != 1))]]></printWhenExpression>
+					</reportElement>
+					<textElement>
+						<font reportFont="Arial_Bold"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA["Follow-up Action: "]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="151" y="142" width="364" height="15">
+						<printWhenExpression><![CDATA[new java.lang.Boolean(($F{INSPECTION_ACTION_ID} != null) && ($F{INSPECTION_ACTION_ID}.intValue() != 1))]]></printWhenExpression>
+					</reportElement>
+					<textElement>
+						<font reportFont="Arial_Normal"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[((com.sehinc.erosioncontrol.action.report.ECInspectionReportScriptlet)$P{REPORT_SCRIPTLET}).getInspectionAction($F{INSPECTION_ACTION_ID})]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="151" y="158" width="364" height="15">
+						<printWhenExpression><![CDATA[new java.lang.Boolean(($F{INSPECTION_ACTION_ID} != null) && ($F{INSPECTION_ACTION_ID}.intValue() != 1))]]></printWhenExpression>
+					</reportElement>
+					<textElement>
+						<font reportFont="Arial_Normal"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[com.sehinc.erosioncontrol.action.report.ECInspectionReportScriptlet.filterHTML($F{INSPECTION_ACTION_COMMENT})]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="11" y="15" width="140" height="15"/>
+					<textElement>
+						<font reportFont="Arial_Bold"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA["Inspection Time: "]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" pattern="00" isBlankWhenNull="true">
+					<reportElement x="151" y="15" width="15" height="15"/>
+					<textElement textAlignment="Right"/>
+					<textFieldExpression class="java.lang.Integer"><![CDATA[$F{TIME_HOUR}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" pattern="00" isBlankWhenNull="true">
+					<reportElement x="171" y="15" width="15" height="15"/>
+					<textElement/>
+					<textFieldExpression class="java.lang.Integer"><![CDATA[$F{TIME_MINUTE}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="186" y="15" width="43" height="15"/>
+					<textElement/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{TIME_PERIOD}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="166" y="15" width="5" height="15"/>
+					<textElement textAlignment="Center"/>
+					<text><![CDATA[:]]></text>
+				</staticText>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="InspectionBmpHeaderGroup">
+		<groupExpression><![CDATA[$F{INSPECTION_ID}]]></groupExpression>
+		<groupHeader>
+			<band height="29" splitType="Stretch">
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="10" y="0" width="505" height="24"/>
+					<textElement verticalAlignment="Bottom">
+						<font reportFont="Arial_Bold" size="14"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA["Inspection Items"]]></textFieldExpression>
+				</textField>
+				<line>
+					<reportElement x="10" y="25" width="505" height="1"/>
+				</line>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="29" splitType="Stretch">
+				<printWhenExpression><![CDATA[new java.lang.Boolean(($F{INSPECTION_BMP_ID} == null))]]></printWhenExpression>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="10" y="0" width="505" height="20"/>
+					<textElement>
+						<font reportFont="Arial_Normal"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA["No Inspection Items Defined"]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	<group name="InspectionBmpGroup">
+		<groupExpression><![CDATA[$F{INSPECTION_BMP_ID}]]></groupExpression>
+		<groupHeader>
+			<band height="83" splitType="Stretch">
+				<printWhenExpression><![CDATA[new java.lang.Boolean(($F{INSPECTION_BMP_ID} != null) && ((com.sehinc.erosioncontrol.action.report.ECInspectionReportScriptlet)$P{REPORT_SCRIPTLET}).getInspectionBmpValue($F{INSPECTION_BMP_ID}) != null)]]></printWhenExpression>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="10" y="0" width="40" height="20"/>
+					<textElement>
+						<font reportFont="Arial_Bold"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA["Name: "]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="50" y="0" width="344" height="20"/>
+					<textElement>
+						<font reportFont="Arial_Normal"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[com.sehinc.erosioncontrol.action.report.ECInspectionReportScriptlet.filterHTML($V{InspectionBmpValue}.getBmpCategoryName()) + " -- " + com.sehinc.erosioncontrol.action.report.ECInspectionReportScriptlet.filterHTML($V{InspectionBmpValue}.getName())]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="10" y="21" width="192" height="20"/>
+					<textElement markup="styled">
+						<font reportFont="Arial_Normal"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA["<style size=\"12\" isBold=\"true\" forecolor=\"black\" pdfFontName=\"Helvetica-Bold\">Required:</style>" + " " + $V{InspectionBmpValue}.getIsRequiredYesNoText()]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="203" y="21" width="192" height="20"/>
+					<textElement markup="styled">
+						<font reportFont="Arial_Normal"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA["<style size=\"12\" isBold=\"true\" forecolor=\"black\" pdfFontName=\"Helvetica-Bold\">Inspected:</style>" + " " + $V{InspectionBmpValue}.getIsInspectedYesNoText()]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="10" y="42" width="192" height="20">
+						<printWhenExpression><![CDATA[new java.lang.Boolean(($V{InspectionBmpValue}.getBmpStatus() != null) &&
+																	($V{InspectionBmpValue}.getBmpStatus().getName() != null))]]></printWhenExpression>
+					</reportElement>
+					<textElement markup="styled">
+						<font reportFont="Arial_Normal"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA["<style size=\"12\" isBold=\"true\" forecolor=\"black\" pdfFontName=\"Helvetica-Bold\">Status:</style>" + " " + $V{InspectionBmpValue}.getBmpStatus().getName()]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="203" y="42" width="192" height="20">
+						<printWhenExpression><![CDATA[new java.lang.Boolean(($V{InspectionBmpValue}.getBmpCondition() != null) &&
+																	($V{InspectionBmpValue}.getBmpCondition().getName() != null))]]></printWhenExpression>
+					</reportElement>
+					<textElement markup="styled">
+						<font reportFont="Arial_Normal"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA["<style size=\"12\" isBold=\"true\" forecolor=\"black\" pdfFontName=\"Helvetica-Bold\">Condition:</style>" + " " + $V{InspectionBmpValue}.getBmpCondition().getName()]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="203" y="42" width="192" height="20">
+						<printWhenExpression><![CDATA[new java.lang.Boolean(($V{InspectionBmpValue}.getBmpCondition() == null) ||
+																	($V{InspectionBmpValue}.getBmpCondition().getName() == null))]]></printWhenExpression>
+					</reportElement>
+					<textElement markup="styled">
+						<font reportFont="Arial_Normal"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA["<style size=\"12\" isBold=\"true\" forecolor=\"black\" pdfFontName=\"Helvetica-Bold\">Condition:</style>" + " N/A"]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="10" y="63" width="80" height="20"/>
+					<textElement>
+						<font reportFont="Arial_Bold"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA["Description: "]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="91" y="63" width="304" height="20"/>
+					<textElement>
+						<font reportFont="Arial_Normal"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[com.sehinc.erosioncontrol.action.report.ECInspectionReportScriptlet.filterHTML($V{InspectionBmpValue}.getDescription())]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="InspectionBmpCommentGroup">
+		<groupExpression><![CDATA[$F{INSPECTION_BMP_ID}]]></groupExpression>
+		<groupHeader>
+			<band height="110" splitType="Stretch">
+				<printWhenExpression><![CDATA[new java.lang.Boolean(($F{INSPECTION_BMP_ID} != null) && ((com.sehinc.erosioncontrol.action.report.ECInspectionReportScriptlet)$P{REPORT_SCRIPTLET}).getInspectionBmpValue($F{INSPECTION_BMP_ID}) != null)]]></printWhenExpression>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="10" y="0" width="80" height="20"/>
+					<textElement>
+						<font reportFont="Arial_Bold"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA["Comment: "]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="91" y="0" width="304" height="20"/>
+					<textElement>
+						<font reportFont="Arial_Normal"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[com.sehinc.erosioncontrol.action.report.ECInspectionReportScriptlet.filterHTML($V{InspectionBmpValue}.getComment())]]></textFieldExpression>
+				</textField>
+				<image scaleImage="RealSize">
+					<reportElement positionType="Float" x="10" y="25" width="384" height="80" isRemoveLineWhenBlank="true">
+						<printWhenExpression><![CDATA[new java.lang.Boolean(($V{InspectionBmpValue} != null) && ($V{InspectionBmpValue}.getBmpDocument() != null) && ($V{InspectionBmpValue}.getBmpDocument().getId() != null) &&
+						(((com.sehinc.erosioncontrol.action.report.ECInspectionReportScriptlet)$P{REPORT_SCRIPTLET}).getInspectionBmpDocument($V{InspectionBmpValue}.getBmpDocument().getId())))]]></printWhenExpression>
+					</reportElement>
+					<imageExpression class="java.io.File"><![CDATA[$V{InspectionBmpDocument}]]></imageExpression>
+				</image>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="InspectionBmpGroup2">
+		<groupExpression><![CDATA[$F{INSPECTION_BMP_ID}]]></groupExpression>
+		<groupHeader>
+			<band height="5" splitType="Stretch">
+				<printWhenExpression><![CDATA[new java.lang.Boolean((($V{InspectionBmpValue}) != null))]]></printWhenExpression>
+				<line>
+					<reportElement x="10" y="0" width="505" height="1"/>
+				</line>
+			</band>
+		</groupHeader>
+	</group>
+	<background>
+		<band height="742" splitType="Stretch">
+			<printWhenExpression><![CDATA[new java.lang.Boolean($F{STATUS_CODE}.intValue() == 4 && $P{DraftWatermarkFile}.exists())]]></printWhenExpression>
+			<image scaleImage="FillFrame" hAlign="Left" vAlign="Top">
+				<reportElement x="0" y="0" width="515" height="742"/>
+				<imageExpression class="java.io.File"><![CDATA[$P{DraftWatermarkFile}]]></imageExpression>
+			</image>
+		</band>
+	</background>
+	<title>
+		<band height="115" splitType="Stretch">
+			<image scaleImage="RetainShape" hyperlinkType="Reference">
+				<reportElement x="0" y="0" width="515" height="50">
+					<printWhenExpression><![CDATA[new Boolean($P{LogoLocation} != null)]]></printWhenExpression>
+				</reportElement>
+				<imageExpression class="java.lang.String"><![CDATA[$P{LogoLocation}]]></imageExpression>
+				<hyperlinkReferenceExpression><![CDATA[$P{ClientWebSite}]]></hyperlinkReferenceExpression>
+			</image>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="0" y="51" width="515" height="20"/>
+				<textElement>
+					<font reportFont="Arial_Normal" size="14"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[com.sehinc.erosioncontrol.action.report.ECInspectionReportScriptlet.filterHTML($P{ClientName})]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="72" width="515" height="1"/>
+			</line>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="0" y="75" width="294" height="35"/>
+				<textElement>
+					<font reportFont="Arial_Bold" size="20"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{ReportTitle}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true" hyperlinkType="Reference">
+				<reportElement x="308" y="81" width="95" height="19" forecolor="#0033FF"/>
+				<textElement>
+					<font reportFont="Arial_Bold" size="14" isBold="false" isUnderline="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["View Project"]]></textFieldExpression>
+				<hyperlinkReferenceExpression><![CDATA[$P{ProjectURL}]]></hyperlinkReferenceExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true" hyperlinkType="Reference">
+				<reportElement x="407" y="81" width="108" height="19" forecolor="#0033FF"/>
+				<textElement>
+					<font reportFont="Arial_Bold" size="14" isBold="false" isUnderline="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["View Inspection"]]></textFieldExpression>
+				<hyperlinkReferenceExpression><![CDATA[$P{InspectionURL}]]></hyperlinkReferenceExpression>
+			</textField>
+		</band>
+	</title>
+	<pageFooter>
+		<band height="40" splitType="Stretch">
+			<textField>
+				<reportElement x="200" y="20" width="80" height="15"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.lang.String"><![CDATA["Page " + String.valueOf(($V{PAGE_NUMBER} == null)?new Integer(1):$V{PAGE_NUMBER}) + " of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="280" y="20" width="75" height="15"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[" " + String.valueOf($V{PAGE_NUMBER})]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

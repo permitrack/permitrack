@@ -1,0 +1,33 @@
+<?xml version="1.0"?><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.sehinc.common.db.client.EcClientInformation"
+           table="EC_CLIENT_INFORMATION">
+        <id name="id"
+            type="integer">
+            <column name="ID" />
+            <generator class="identity" />
+        </id>
+        <property name="clientId"
+                  type="integer"
+                  column="CLIENT_ID" />
+        <property name="eventContactId"
+                  type="integer"
+                  column="EVENT_CONTACT_ID" />
+        <property name="eventEMail"
+                  type="string"
+                  column="EVENT_EMAIL" />
+        <property name="eventFromEMail"
+                  type="string"
+                  column="EVENT_FROM_EMAIL" />
+        <property name="publicCommentEMail"
+                  type="string"
+                  column="PUBLIC_COMMENT_EMAIL" />
+        <property name="clientTypeId"
+                  type="integer"
+                  column="CLIENT_TYPE_ID" />
+        <property name="generalReplyToEMail"
+                  type="string"
+                  column="GENERAL_REPLY_TO_EMAIL" />
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,43 @@
+// dot 2.28.0 on Windows 7 6.1
+// SchemaSpy rev 590
+digraph "ELEMENT" {
+  graph [
+    rankdir="RL"
+    bgcolor="#f7f7f7"
+    nodesep="0.18"
+    ranksep="0.46"
+    fontname="Helvetica"
+    fontsize="11"
+  ];
+  node [
+    fontname="Helvetica"
+    fontsize="11"
+    shape="plaintext"
+  ];
+  edge [
+    arrowsize="0.8"
+  ];
+  "ELEMENT" [
+    label=<
+    <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" BGCOLOR="#ffffff">
+      <TR><TD COLSPAN="3" BGCOLOR="#9bab96" ALIGN="CENTER">ELEMENT</TD></TR>
+      <TR><TD PORT="ELEMENT_ID" COLSPAN="3" ALIGN="LEFT">ELEMENT_ID</TD></TR>
+      <TR><TD PORT="TITLE" COLSPAN="3" ALIGN="LEFT">TITLE</TD></TR>
+      <TR><TD PORT="ELEMENT_TYPE_ID" COLSPAN="3" ALIGN="LEFT">ELEMENT_TYPE_ID</TD></TR>
+      <TR><TD PORT="CHILD_ELEMENT_ID" COLSPAN="3" ALIGN="LEFT">CHILD_ELEMENT_ID</TD></TR>
+      <TR><TD PORT="NAME" COLSPAN="3" ALIGN="LEFT">NAME</TD></TR>
+      <TR><TD PORT="DATA_TYPE" COLSPAN="3" ALIGN="LEFT">DATA_TYPE</TD></TR>
+      <TR><TD PORT="SUB_SECTION_ID" COLSPAN="3" ALIGN="LEFT">SUB_SECTION_ID</TD></TR>
+      <TR><TD PORT="ORDER_NUM" COLSPAN="3" ALIGN="LEFT">ORDER_NUM</TD></TR>
+      <TR><TD PORT="REQUIRED" COLSPAN="3" ALIGN="LEFT">REQUIRED</TD></TR>
+      <TR><TD PORT="ALLOW_OTHER" COLSPAN="3" ALIGN="LEFT">ALLOW_OTHER</TD></TR>
+      <TR><TD PORT="IS_CHILD" COLSPAN="3" ALIGN="LEFT">IS_CHILD</TD></TR>
+      <TR><TD PORT="DISPLAY_TITLE" COLSPAN="3" ALIGN="LEFT">DISPLAY_TITLE</TD></TR>
+      <TR><TD PORT="SIZE" COLSPAN="3" ALIGN="LEFT">SIZE</TD></TR>
+      <TR><TD PORT="MAX_LENGTH" COLSPAN="3" ALIGN="LEFT">MAX_LENGTH</TD></TR>
+      <TR><TD ALIGN="LEFT" BGCOLOR="#f7f7f7">  </TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">294 rows</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">  </TD></TR>
+    </TABLE>>
+    URL="tables/ELEMENT.html"
+    tooltip="ELEMENT"
+  ];
+}

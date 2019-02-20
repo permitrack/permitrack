@@ -1,0 +1,44 @@
+<?xml version="1.0"?><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <!--
+            Auto-generated mapping file from
+            the hibernate.org cfg2hbm engine
+    -->
+    <class name="com.sehinc.environment.db.sourcescc.EnvSourceSccInfo"
+           table="ENV_SOURCE_SCC_INFO">
+        <id name="id"
+            type="integer">
+            <column name="ID" />
+            <generator class="identity" />
+        </id>
+        <property name="sourceId"
+                  type="integer"
+                  column="SOURCE_ID" />
+        <property name="sccInfoId"
+                  type="integer"
+                  column="SCC_INFO_ID" />
+        <property name="createTimestamp"
+                  type="timestamp"
+                  column="CREATE_TS" />
+        <property name="updateTimestamp"
+                  type="timestamp"
+                  column="UPDATE_TS" />
+        <property name="updateUserId"
+                  type="integer"
+                  column="UPDATE_USER_ID" />
+    </class>
+    <query name="EnvSourceSccInfo.findBySourceId">
+        from com.sehinc.environment.db.sourcescc.EnvSourceSccInfo as ssi
+        where ssi.sourceId = :sourceId
+    </query>
+    <query name="EnvSourceSccInfo.findBySccInfoId">
+        from com.sehinc.environment.db.sourcescc.EnvSourceSccInfo as ssi
+        where ssi.sccInfoId = :sccInfoId
+    </query>
+    <query name="EnvSourceSccInfo.findBySourceIdAndSccInfoId">
+        from com.sehinc.environment.db.sourcescc.EnvSourceSccInfo as ssi
+        where ssi.sourceId = :sourceId
+        and ssi.sccInfoId = :sccInfoId
+    </query>
+</hibernate-mapping>

@@ -1,0 +1,114 @@
+<!DOCTYPE tiles-definitions PUBLIC
+    "-//Apache Software Foundation//DTD Tiles Configuration 1.3//EN"
+    "http://struts.apache.org/dtds/tiles-config_1_3.dtd">
+<tiles-definitions>
+    <definition name="plan.template.baseLayout"
+                extends="html.baseLayout">
+        <put name="primaryMenu"
+             value="/html/ms4/primarynavigation.jsp" />
+        <put name="secondaryMenu"
+             value="/html/ms4/secondarynavigation.jsp" />
+    </definition>
+    <definition name="plan.template.baseSplitPanelLayout"
+                extends="html.baseSplitPanelLayout">
+        <put name="primaryMenu"
+             value="/html/ms4/primarynavigation.jsp" />
+        <put name="secondaryMenu"
+             value="/html/ms4/secondarynavigation.jsp" />
+        <put name="leftPanel"
+             value="/html/ms4/template/plantemplatehierarchy.jsp" />
+        <put name="tertiaryMenu"
+             value="/html/ms4/tertiarynavigation.jsp" />
+    </definition>
+    <definition name="plan.template.list.page"
+                extends="plan.template.baseLayout">
+        <put name="title"
+             value="Plan Template List" />
+        <put name="content"
+             value="/html/ms4/plan/planlist.jsp" />
+    </definition>
+    <definition name="plan.template.view.page"
+                extends="plan.template.baseSplitPanelLayout">
+        <put name="title"
+             value="Plan Template View" />
+        <put name="content"
+             value="/html/ms4/plan/planedit.jsp" />
+    </definition>
+    <definition name="plan.template.edit.page"
+                extends="plan.template.baseSplitPanelLayout">
+        <put name="title"
+             value="Edit Plan Template" />
+        <put name="content"
+             value="/html/ms4/plan/planedit.jsp" />
+    </definition>
+    <definition name="mcm.template.new.page"
+                extends="plan.template.baseSplitPanelLayout">
+        <put name="title"
+             value="Plan Template Add MCM" />
+        <put name="content"
+             value="/html/ms4/plan/mcmedit.jsp" />
+    </definition>
+    <definition name="mcm.template.view.page"
+                extends="plan.template.baseSplitPanelLayout">
+        <put name="title"
+             value="MCM View" />
+        <put name="content"
+             value="/html/ms4/plan/mcmedit.jsp" />
+    </definition>
+    <definition name="mcm.template.edit.page"
+                extends="plan.template.baseSplitPanelLayout">
+        <put name="title"
+             value="Edit MCM" />
+        <put name="content"
+             value="/html/ms4/plan/mcmedit.jsp" />
+    </definition>
+    <definition name="mcm.template.select.bmp.db.page"
+                extends="plan.template.baseSplitPanelLayout">
+        <put name="title"
+             value="Select BMP from DB" />
+        <put name="content"
+             value="/html/ms4/plan/mcmselectbmpdb.jsp" />
+    </definition>
+    <definition name="bmp.template.new.page"
+                extends="plan.template.baseSplitPanelLayout">
+        <put name="title"
+             value="Add BMP" />
+        <put name="content"
+             value="/html/ms4/plan/bmpedit.jsp" />
+    </definition>
+    <definition name="bmp.template.view.page"
+                extends="plan.template.baseSplitPanelLayout">
+        <put name="title"
+             value="BMP View" />
+        <put name="content"
+             value="/html/ms4/plan/bmpedit.jsp" />
+    </definition>
+    <definition name="bmp.template.edit.page"
+                extends="plan.template.baseSplitPanelLayout">
+        <put name="title"
+             value="Edit BMP" />
+        <put name="content"
+             value="/html/ms4/plan/bmpedit.jsp" />
+    </definition>
+    <definition name="goal.template.new.page"
+                extends="plan.template.baseSplitPanelLayout">
+        <put name="title"
+             value="Add Goal" />
+        <put name="content"
+             value="/html/ms4/plan/goaledit.jsp" />
+    </definition>
+    <definition name="goal.template.view.page"
+                extends="plan.template.baseSplitPanelLayout">
+        <put name="title"
+             value="Goal View" />
+        <put name="content"
+             value="/html/ms4/plan/goaledit.jsp" />
+    </definition>
+    <definition name="goal.template.edit.page"
+                extends="plan.template.baseSplitPanelLayout">
+        <put name="title"
+             value="Edit Goal" />
+        <put name="content"
+             value="/html/ms4/plan/goaledit.jsp" />
+    </definition>
+</tiles-definitions>

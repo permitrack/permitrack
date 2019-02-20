@@ -1,0 +1,55 @@
+<?xml version="1.0"?><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.sehinc.common.db.client.DvClientInformation"
+           table="DV_CLIENT_INFORMATION">
+        <id name="id"
+            type="integer"
+            column="id"/>
+        <property name="clientId"
+                  type="integer"
+                  column="CLIENT_ID" />
+        <property name="clientFullName"
+                  type="string"
+                  column="CLIENT_FULL_NAME" />
+        <property name="clientName"
+                  type="string"
+                  column="CLIENT_NAME" />
+        <property name="imsService"
+                  type="string"
+                  column="IMS_SERVICE" />
+        <property name="imsOvService"
+                  type="string"
+                  column="IMS_OV_SERVICE" />
+        <property name="downLoads"
+                  type="string"
+                  column="DOWNLOADS" />
+        <property name="attachmentLayers"
+                  type="string"
+                  column="ATTACHMENT_LAYERS" />
+        <property name="startLeft"
+                  type="big_decimal"
+                  column="START_LEFT" />
+        <property name="startRight"
+                  type="big_decimal"
+                  column="START_RIGHT" />
+        <property name="startTop"
+                  type="big_decimal"
+                  column="START_TOP" />
+        <property name="startBottom"
+                  type="big_decimal"
+                  column="START_BOTTOM" />
+        <property name="limitLeft"
+                  type="big_decimal"
+                  column="LIMIT_LEFT" />
+        <property name="limitRight"
+                  type="big_decimal"
+                  column="LIMIT_RIGHT" />
+        <property name="limitTop"
+                  type="big_decimal"
+                  column="LIMIT_TOP" />
+        <property name="limitBottom"
+                  type="big_decimal"
+                  column="LIMIT_BOTTOM" />
+    </class>
+</hibernate-mapping>

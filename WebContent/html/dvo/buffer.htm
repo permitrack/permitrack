@@ -1,0 +1,126 @@
+<META HTTP-EQUIV="Pragma"
+      CONTENT="no-cache">
+<meta http-equiv="Content-Type"
+      content="text/html; charset=ISO-8859-1">
+<html>
+    <HEAD>
+        <link rel="stylesheet"
+              type="text/css"
+              href="gis.css">
+        <STYLE TYPE="text/css">
+            A
+            {
+                text-decoration: none
+            }
+
+            A:hover
+            {
+                text-decoration: underline
+            }
+        </STYLE>
+        <script language="javascript">
+            var t;
+            var t2 = "";
+            if (opener)
+            {
+                t =
+                opener.parent.MapFrame;
+                t2 =
+                "opener.parent.MapFrame";
+            }
+            else
+            {
+                t =
+                parent.MapFrame;
+                t2 =
+                "parent.MapFrame";
+            }
+            function doBuffer()
+            {
+                var f = document.forms[0];
+                //t.bufferDistance = (f.theDistance.value * 373134); //Temp Fix for testing
+                t.bufferDistance =
+                f.theDistance.value;
+                theIndex =
+                f.theTarget.selectedIndex;
+                t.bufferTargetLayer =
+                f.theTarget.options[theIndex].text;
+                t.bufferTargetLayerIndex =
+                parseInt(f.theTarget.options[theIndex].value);
+                t.getBufferedData =
+                true;
+                t.drawTargetLayer =
+                true;
+                if (parseFloat(f.theDistance.value)
+                    >= 0)
+                {
+                    t.bufferIt();
+                }
+                else
+                {
+                    alert(t.t.msgList[81]);
+                }
+            }
+            document.writeln('</head>');
+            document.writeln('<body leftmargin=0 topmargin=0 onload="window.focus()">');
+            document.writeln('<div align="left"><form onsubmit="doBuffer(); return false;">');
+            document.writeln('<table cellspacing="2" cellpadding="0" width=100%>');
+            document.writeln('<tr><td class="bodytitle" align="LEFT">Buffer</td></tr>');    // /*
+            document.writeln('<tr><td align="LEFT" class="body">Highlight features from:<br><br>');
+            document.writeln('<SELECT  name=theTarget>');    //document.writeln('<option value=-1>' + t.msgList[87]);    //document.writeln('<option value=0 SELECTED>parcel');
+            for (var i = 0; i
+                < t.layerCount; i++)
+            {
+                if (t.LayerName[i]
+                    == "parcel")
+                {
+                    document.writeln('<option value='
+                                         + (i)
+                                         + ' SELECTED>'
+                                         + t.LayerName[i]);
+                }
+            }
+            for (var i = 0; i
+                < t.layerCount; i++)
+            {
+                if (t.LayerType[i]
+                    != "image")
+                {
+                    if (t.LayerName[i]
+                        == "parcel")
+                    {
+                    }
+                    else
+                    {
+                        document.writeln('<option value='
+                                             + (i)
+                                             + '>'
+                                             + t.LayerName[i]);
+                    }
+                }
+            }
+            document.writeln('</SELECT><br><br>');
+            document.writeln('Within a Distance of:&nbsp;<input type="Text" name="theDistance" value="350" size="2">');
+            var j = 1;
+            for (var i = 0; i
+                < t.sUnitList.length; i++)
+            {
+                if (t.ScaleBarUnits
+                    == t.sUnitList[i])
+                {
+                    j =
+                    i;
+                }
+            }
+            document.writeln(t.sUnitList[j].toLowerCase()
+                                 + '<br>');    // */
+            document.writeln('around the selected features');
+            document.writeln('</td></tr>');
+            document.writeln('<tr><td align="CENTER" class="bodytitle"><br><b>');
+            document.writeln('<input type="Button" name="theButton" value="'
+                                 + t.buttonList[9]
+                                 + '" onclick="doBuffer()">');    //}    // Currently disabled     //document.write(' DISABLED');    //document.writeln('><font face="Arial" size="-2">' + t.msgList[85] + '</font>');
+            document.writeln('</td></tr></b>');
+            document.writeln('</table></form></div></body>');
+        </script>
+</html>

@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?><!DOCTYPE struts-config PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 1.3//EN"
+    "http://struts.apache.org/dtds/struts-config_1_3.dtd">
+<struts-config>
+    <form-beans>
+        <form-bean name="eventCreateForm"
+                   type="com.sehinc.erosioncontrol.action.event.EventCreateForm" />
+    </form-beans>
+    <global-forwards>
+        <forward name="event.list.page"
+                 path="/eventListPageAction.do"
+                 redirect="true" />
+    </global-forwards>
+    <action-mappings>
+        <action path="/eventListPageAction"
+                type="com.sehinc.erosioncontrol.action.event.EventListPageAction">
+            <forward name="continue"
+                     path="event.list.tile" />
+        </action>
+        <action path="/eventListAction"
+                type="com.sehinc.erosioncontrol.action.event.EventListAction">
+            <forward name="continue"
+                     path="event.list.tile" />
+        </action>
+        <action path="/eventCreatePageAction"
+                validate="false"
+                type="com.sehinc.erosioncontrol.action.event.EventCreatePageAction"
+                name="eventCreateForm"
+                scope="session">
+            <forward name="continue"
+                     path="event.create.tile" />
+        </action>
+        <action path="/eventCreateAction"
+                validate="false"
+                type="com.sehinc.erosioncontrol.action.event.EventCreateAction"
+                name="eventCreateForm"
+                input="event.create.tile"
+                scope="session">
+            <forward name="continue"
+                     path="/eventCreateProjectSearchPageAction.do" />
+            <forward name="cancel"
+                     path="/eventListPageAction.do"
+                     redirect="true" />
+            <forward name="error"
+                     path="/eventListPageAction.do"
+                     redirect="true" />
+        </action>
+        <action path="/eventCreateProjectSearchPageAction"
+                validate="false"
+                type="com.sehinc.erosioncontrol.action.event.EventCreateProjectSearchPageAction"
+                name="eventCreateForm"
+                scope="session">
+            <forward name="continue"
+                     path="event.create.project.search.tile" />
+        </action>
+        <action path="/eventCreateProjectSearchAction"
+                validate="false"
+                type="com.sehinc.erosioncontrol.action.event.EventCreateProjectSearchAction"
+                name="eventCreateForm"
+                scope="session">
+            <forward name="continue"
+                     path="event.create.project.search.results.tile" />
+            <forward name="back"
+                     path="/eventCreatePageAction.do" />
+            <forward name="cancel"
+                     path="/eventListPageAction.do" />
+            <forward name="error"
+                     path="/eventListPageAction.do" />
+        </action>
+        <action path="/eventCreateProjectSearchResultsAction"
+                validate="false"
+                type="com.sehinc.erosioncontrol.action.event.EventCreateProjectSearchResultsAction"
+                name="eventCreateForm"
+                input="event.create.project.search.results.tile"
+                scope="session">
+            <forward name="continue"
+                     path="/eventListPageAction.do" />
+            <forward name="back"
+                     path="/eventCreateProjectSearchPageAction.do" />
+            <forward name="cancel"
+                     path="/eventListPageAction.do" />
+            <forward name="error"
+                     path="/eventListPageAction.do" />
+        </action>
+        <action path="/eventComplianceReportPageAction"
+                validate="false"
+                type="com.sehinc.erosioncontrol.action.event.EventComplianceReportPageAction"
+                name="eventCreateForm"
+                scope="session">
+            <forward name="continue"
+                     path="event.compliance.report.tile" />
+        </action>
+    </action-mappings>
+    <controller processorClass="org.apache.struts.action.RequestProcessor"
+                contentType="text/html" />
+    <plug-in className="org.apache.struts.tiles.TilesPlugin">
+        <set-property property="definitions-config"
+                      value="/WEB-INF/html/tiles-defs.xml, /WEB-INF/html/esc/tiles-event-defs.xml" />
+        <set-property property="definitions-debug"
+                      value="2" />
+        <set-property property="definitions-parser-details"
+                      value="2" />
+        <set-property property="definitions-parser-validate"
+                      value="true" />
+        <set-property property="moduleAware"
+                      value="true" />
+    </plug-in>
+    <plug-in className="org.apache.struts.validator.ValidatorPlugIn">
+        <set-property property="pathnames"
+                      value="/org/apache/struts/validator/validator-rules.xml, /WEB-INF/html/esc/validation-event.xml" />
+    </plug-in>
+</struts-config>

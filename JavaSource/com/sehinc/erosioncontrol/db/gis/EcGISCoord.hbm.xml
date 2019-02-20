@@ -1,0 +1,28 @@
+<?xml version="1.0"?><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <!--
+            Auto-generated mapping file from
+            the hibernate.org cfg2hbm engine
+    -->
+    <class name="com.sehinc.erosioncontrol.db.gis.EcGISCoord"
+           table="EC_GIS_COORD">
+        <id name="id"
+            type="integer">
+            <column name="ID" />
+            <generator class="identity" />
+        </id>
+        <property name="clientId"
+                  type="integer"
+                  column="CLIENT_ID" />
+        <property name="parcelNumber"
+                  type="string"
+                  column="PARCEL_NUMBER" />
+        <property name="gisX"
+                  type="string"
+                  column="GIS_X" />
+        <property name="gisY"
+                  type="string"
+                  column="GIS_Y" />
+    </class>
+</hibernate-mapping>

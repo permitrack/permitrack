@@ -1,0 +1,79 @@
+<!DOCTYPE tiles-definitions PUBLIC
+    "-//Apache Software Foundation//DTD Tiles Configuration 1.3//EN"
+    "http://struts.apache.org/dtds/tiles-config_1_3.dtd">
+<tiles-definitions>
+    <definition name="asset.baseTitledLayout"
+                extends="ev.baseTitledLayout"></definition>
+    <definition name="asset.list.page"
+                extends="asset.baseTitledLayout">
+        <put name="title"
+             value="Asset List Structure" />
+        <put name="description"
+             value="Listing of all Assets." />
+        <put name="content"
+             value="/html/env/asset/assetlist.jsp" />
+    </definition>
+    <definition name="asset.full.list.page"
+                extends="asset.baseTitledLayout">
+        <put name="title"
+             value="Asset List" />
+        <put name="description"
+             value="Listing of all Assets." />
+        <put name="content"
+             value="/html/env/asset/assetfulllist.jsp" />
+    </definition>
+    <definition name="asset.view.page"
+                extends="asset.baseTitledLayout">
+        <put name="title"
+             value="Asset" />
+        <put name="description"
+             value="View Asset information." />
+        <put name="content"
+             value="/html/env/asset/assetview.jsp" />
+    </definition>
+    <definition name="asset.edit.page"
+                extends="asset.baseTitledLayout">
+        <put name="title"
+             value="Asset" />
+        <put name="description"
+             value="Edit an Asset." />
+        <put name="content"
+             value="/html/env/asset/assetedit.jsp" />
+    </definition>
+    <definition name="asset.create.page"
+                extends="asset.baseTitledLayout">
+        <put name="title"
+             value="Asset" />
+        <put name="description"
+             value="Create an Asset." />
+        <put name="content"
+             value="/html/env/asset/assetcreate.jsp" />
+    </definition>
+    <definition name="asset.delete.page"
+                extends="asset.baseTitledLayout">
+        <put name="title"
+             value="Asset" />
+        <put name="description"
+             value="Delete an Asset." />
+        <put name="content"
+             value="/html/env/asset/assetdelete.jsp" />
+    </definition>
+    <definition name="asset.source.create.page"
+                extends="asset.baseTitledLayout">
+        <put name="title"
+             value="Asset Sources" />
+        <put name="description"
+             value="Connect an Asset to a Source." />
+        <put name="content"
+             value="/html/env/asset/assetsourcecreate.jsp" />
+    </definition>
+    <definition name="asset.substance.create.page"
+                extends="asset.baseTitledLayout">
+        <put name="title"
+             value="Asset Substance Efficiency Control" />
+        <put name="description"
+             value="Add an efficiency factor on an emitted substance." />
+        <put name="content"
+             value="/html/env/asset/assetsubstancecreate.jsp" />
+    </definition>
+</tiles-definitions>

@@ -1,0 +1,49 @@
+<?xml version="1.0"?><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <!-- Auto-generated mapping file from the hibernate.org cfg2hbm engine -->
+    <class name="com.sehinc.erosioncontrol.db.event.EcEvent"
+           table="EC_EVENT">
+        <id name="id"
+            type="integer">
+            <column name="ID" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="client"
+                     class="com.sehinc.common.db.client.ClientData"
+                     column="CLIENT_ID"
+                     lazy="false" />
+        <many-to-one name="eventType"
+                     class="com.sehinc.erosioncontrol.db.event.EcEventType"
+                     column="EVENT_TYPE"
+                     lazy="false" />
+        <property name="eventDate"
+                  type="timestamp"
+                  column="EVENT_DATE" />
+        <property name="description"
+                  type="string"
+                  column="DESCRIPTION" />
+        <property name="notice"
+                  type="string"
+                  column="NOTICE" />
+        <property name="complianceDate"
+                  type="timestamp"
+                  column="COMPLIANCE_DATE" />
+        <property name="complianceHours"
+                  type="integer"
+                  column="COMPLIANCE_HOURS" />
+        <many-to-one name="status"
+                     class="com.sehinc.erosioncontrol.db.code.StatusCodeData"
+                     column="STATUS_CD"
+                     lazy="false" />
+        <property name="createTimestamp"
+                  type="timestamp"
+                  column="CREATE_TS" />
+        <property name="updateTimestamp"
+                  type="timestamp"
+                  column="UPDATE_TS" />
+        <property name="updateUserId"
+                  type="integer"
+                  column="UPDATE_USER_ID" />
+    </class>
+</hibernate-mapping>

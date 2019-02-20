@@ -1,0 +1,40 @@
+<?xml version="1.0"?><!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping>
+    <class name="com.sehinc.common.db.forms.SectionData"
+           table="SECTION">
+        <id name="id"
+            type="integer"
+            column="SECTION_ID">
+            <generator class="identity" />
+        </id>
+        <property name="description"
+                  type="string"
+                  column="DESCRIPTION" />
+        <property name="formId"
+                  type="integer"
+                  column="FORM_ID" />
+        <property name="title"
+                  type="string"
+                  column="TITLE" />
+        <property name="orderNum"
+                  type="integer"
+                  column="ORDER_NUM" />
+        <property name="columns"
+                  type="integer"
+                  column="COLUMNS" />
+        <set name="subSections"
+             table="SUB_SECTION"
+             cascade="all-delete-orphan"
+             sort="natural">
+            <key column="SUB_SECTION_ID" />
+            <one-to-many class="com.sehinc.common.db.forms.SubSectionData" />
+        </set>
+    </class>
+    <query name="com.sehinc.common.db.forms.SectionData.byFormId">
+        from com.sehinc.common.db.forms.SectionData as section
+        where section.formId = :formId
+        order by section.orderNum
+    </query>
+</hibernate-mapping>

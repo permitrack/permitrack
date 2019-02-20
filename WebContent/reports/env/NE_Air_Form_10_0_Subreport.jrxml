@@ -1,0 +1,358 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="NE_Air_Form_10_0_Subreport" pageWidth="540" pageHeight="400" columnWidth="540" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<reportFont name="Arial_Normal" isDefault="true" fontName="Arial" size="12" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Bold" isDefault="false" fontName="Arial" size="12" isBold="true" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Italic" isDefault="false" fontName="Arial" size="12" isItalic="true" pdfFontName="Helvetica-Oblique" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Bold_Italic" isDefault="false" fontName="Arial" size="12" isBold="true" isItalic="true" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Small" isDefault="true" fontName="Arial" size="10" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Small_Bold" isDefault="false" fontName="Arial" size="10" isBold="true" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Small_Italic" isDefault="false" fontName="Arial" size="10" isItalic="true" pdfFontName="Helvetica-Oblique" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Small_Bold_Italic" isDefault="false" fontName="Arial" size="10" isBold="true" isItalic="true" pdfFontName="Helvetica-Oblique" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<parameter name="year" class="java.lang.Integer"/>
+	<parameter name="ASSET_ID" class="java.lang.Integer"/>
+	<queryString>
+		<![CDATA[DECLARE
+        @yearChar varchar(4),
+        @StartDate varchar(10),
+        @EndDate varchar(10)
+
+        -- Create dates for use in query
+        SET @yearChar = $P{year}
+        SET @StartDate 	= '01-01-' + @yearChar
+        SET @EndDate 	= '12-31-' + @yearChar
+
+        SELECT	A.id as ASSET_ID,
+            A.name as ASSET_NAME,
+            A.number as ASSET_NUMBER,
+            datename(month, A.active_ts) as MONTH_CONSTR,
+            year(A.active_ts) as YEAR_CONSTR,
+            AA.tank_type_desc as TANK_TYPE,
+            AA.tank_contents_desc as CONTENTS,
+            AA.tank_diameter as DIAMETER,
+            AA.tank_height as HEIGHT,
+            AA.tank_capacity as CAPACITY,
+            AA.tank_loading_method as LOADING_METHOD,
+            AA.tank_carrier as CARRIER,
+            AA.tank_vapor_recovery as V_RECOVERY
+         FROM (
+            SELECT asset.id, asset.name, asset.number, asset.active_ts
+            FROM ENV_ASSET as asset
+             INNER JOIN ENV_ASSET_SOURCE as aSo
+              ON aso.ASSET_ID = asset.ID
+             INNER JOIN ENV_SOURCE_USAGE as usage
+              ON usage.ASSET_SOURCE_ID = aSo.ID
+              AND usage.PERIOD_START_TS >= @StartDate
+              AND usage.PERIOD_END_TS <= @EndDate
+             INNER JOIN ENV_SOURCE as source
+              ON aSo.SOURCE_ID = source.ID
+              AND source.source_type_cd = 3 -- bulk liquid
+            INNER JOIN ENV_ASSET_TYPE as assetType
+              ON assetType.ASSET_ID = asset.id
+              AND assetType.ASSET_TYPE_CD = 3 -- bulk liquid
+            WHERE asset.ID = $P{ASSET_ID}
+            GROUP BY asset.ID, asset.name, asset.number, asset.active_ts
+           ) AS A
+        LEFT JOIN ENV_ASSET_ATTR AS AA ON AA.ASSET_ID = A.ID]]>
+	</queryString>
+	<field name="ASSET_ID" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="ASSET_NAME" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="ASSET_NUMBER" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="MONTH_CONSTR" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="YEAR_CONSTR" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="TANK_TYPE" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="CONTENTS" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="DIAMETER" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="HEIGHT" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="CAPACITY" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="LOADING_METHOD" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="CARRIER" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="V_RECOVERY" class="java.lang.Boolean">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<variable name="StartDate" class="java.lang.String">
+		<initialValueExpression><![CDATA["01-01-" + $P{year}]]></initialValueExpression>
+	</variable>
+	<variable name="EndDate" class="java.lang.String">
+		<initialValueExpression><![CDATA["12-31-" + $P{year}]]></initialValueExpression>
+	</variable>
+	<group name="ASSET">
+		<groupExpression><![CDATA[$F{ASSET_ID}]]></groupExpression>
+	</group>
+	<title>
+		<band height="400" splitType="Stretch">
+			<rectangle>
+				<reportElement mode="Transparent" x="0" y="197" width="75" height="30"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="75" y="197" width="160" height="30"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="197" width="75" height="30"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font reportFont="Arial_Small_Bold"/>
+				</textElement>
+				<text><![CDATA[Tank I.D.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="75" y="197" width="160" height="30"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font reportFont="Arial_Small_Bold"/>
+				</textElement>
+				<text><![CDATA[Type of Carrier]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement mode="Transparent" x="235" y="197" width="165" height="30"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="235" y="197" width="165" height="30"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font reportFont="Arial_Small_Bold"/>
+				</textElement>
+				<text><![CDATA[Loading Method]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement mode="Transparent" x="0" y="227" width="75" height="25"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="400" y="227" width="70" height="25"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="75" y="227" width="160" height="25" isRemoveLineWhenBlank="true"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="75" y="52" width="104" height="25" isRemoveLineWhenBlank="true"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="235" y="227" width="165" height="25" isRemoveLineWhenBlank="true"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="400" y="197" width="70" height="30"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font reportFont="Arial_Small_Bold"/>
+				</textElement>
+				<text><![CDATA[Vapor Recovery]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement mode="Transparent" x="470" y="197" width="70" height="30" isRemoveLineWhenBlank="true"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="334" y="116" width="206" height="25"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="470" y="227" width="70" height="25"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="400" y="197" width="70" height="30"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="470" y="197" width="70" height="30"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font reportFont="Arial_Small_Bold"/>
+				</textElement>
+				<text><![CDATA[% Efficiency of Recovery]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="470" y="227" width="70" height="25" isRemoveLineWhenBlank="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font reportFont="Arial_Small"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["NA"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="227" width="75" height="25"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{ASSET_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="75" y="227" width="160" height="25"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{CARRIER}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="235" y="227" width="165" height="25"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{LOADING_METHOD}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="400" y="227" width="70" height="25"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.Boolean"><![CDATA[$F{V_RECOVERY}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="334" y="116" width="206" height="25"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{CAPACITY}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="264" y="116" width="70" height="25"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{DIAMETER}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="194" y="116" width="70" height="25"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{HEIGHT}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="116" width="194" height="25"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{CONTENTS}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="179" y="52" width="361" height="25"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{TANK_TYPE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="52" width="75" height="25"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{ASSET_NUMBER}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="177" width="540" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font reportFont="Arial_Bold"/>
+				</textElement>
+				<text><![CDATA[Loading Information]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="334" y="86" width="206" height="30"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font reportFont="Arial_Small_Bold"/>
+				</textElement>
+				<text><![CDATA[Capacity (gallons)]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement mode="Transparent" x="0" y="86" width="194" height="30"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="179" y="22" width="361" height="15"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font reportFont="Arial_Small_Bold"/>
+				</textElement>
+				<text><![CDATA[Tank Type]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="264" y="86" width="70" height="30"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font reportFont="Arial_Small_Bold"/>
+				</textElement>
+				<text><![CDATA[Diameter (ft)]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement mode="Transparent" x="75" y="22" width="104" height="30"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="334" y="86" width="206" height="30"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="194" y="86" width="70" height="30"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font reportFont="Arial_Small_Bold"/>
+				</textElement>
+				<text><![CDATA[Height (ft)]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement mode="Transparent" x="264" y="86" width="70" height="30" isRemoveLineWhenBlank="true"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="179" y="22" width="361" height="30"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="194" y="86" width="70" height="30"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="75" y="22" width="104" height="30"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font reportFont="Arial_Small_Bold"/>
+				</textElement>
+				<text><![CDATA[Date Constructed]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement mode="Transparent" x="194" y="116" width="70" height="25"/>
+			</rectangle>
+			<textField>
+				<reportElement x="179" y="37" width="361" height="15"/>
+				<textElement textAlignment="Center">
+					<font reportFont="Arial_Small_Bold"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["(fixed roof, floating roof, underground, etc...)"]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement mode="Transparent" x="0" y="116" width="194" height="25" isRemoveLineWhenBlank="true"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="86" width="194" height="15"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font reportFont="Arial_Small_Bold"/>
+				</textElement>
+				<text><![CDATA[Contents]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="0" y="101" width="194" height="15"/>
+				<textElement textAlignment="Center">
+					<font reportFont="Arial_Small_Bold"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["(diesel, etc...)"]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement mode="Transparent" x="0" y="52" width="75" height="25"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="0" y="22" width="75" height="30"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="22" width="75" height="30"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font reportFont="Arial_Small_Bold"/>
+				</textElement>
+				<text><![CDATA[Tank I.D.]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement mode="Transparent" x="179" y="52" width="361" height="25" isRemoveLineWhenBlank="true"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="264" y="116" width="70" height="25"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="0" width="540" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font reportFont="Arial_Bold"/>
+				</textElement>
+				<text><![CDATA[General Information]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="75" y="52" width="104" height="25"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{MONTH_CONSTR} + " " + $F{YEAR_CONSTR}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+</jasperReport>

@@ -1,0 +1,60 @@
+<?xml version="1.0"?><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <!--
+            Auto-generated mapping file from
+            the hibernate.org cfg2hbm engine
+    -->
+    <class name="com.sehinc.environment.db.assetsource.EnvAssetSource"
+           table="ENV_ASSET_SOURCE">
+        <id name="id"
+            type="integer">
+            <column name="ID" />
+            <generator class="identity" />
+        </id>
+        <property name="assetId"
+                  type="integer"
+                  column="ASSET_ID" />
+        <property name="sourceId"
+                  type="integer"
+                  column="SOURCE_ID" />
+        <property name="activeTs"
+                  type="timestamp"
+                  column="ACTIVE_TS" />
+        <property name="inactiveTs"
+                  type="timestamp"
+                  column="INACTIVE_TS" />
+        <many-to-one name="status"
+                     class="com.sehinc.environment.db.code.EnvStatusCodeData"
+                     column="STATUS_CD"
+                     lazy="false" />
+        <property name="createTimestamp"
+                  type="timestamp"
+                  column="CREATE_TS" />
+        <property name="updateTimestamp"
+                  type="timestamp"
+                  column="UPDATE_TS" />
+        <property name="updateUserId"
+                  type="integer"
+                  column="UPDATE_USER_ID" />
+    </class>
+    <query name="EnvAssetSource.findByAssetId">
+        from com.sehinc.environment.db.assetsource.EnvAssetSource as asset
+        where asset.assetId = :assetId
+        and asset.status.code = :statusCode
+        order by asset.assetId ASC
+    </query>
+    <query name="EnvAssetSource.findBySourceId">
+        from com.sehinc.environment.db.assetsource.EnvAssetSource as asset
+        where asset.sourceId = :sourceId
+        and asset.status.code = :statusCode
+        order by asset.sourceId ASC
+    </query>
+    <query name="EnvAssetSource.findByAssetIdAndSourceId">
+        from com.sehinc.environment.db.assetsource.EnvAssetSource as asset
+        where asset.sourceId = :sourceId
+        and asset.assetId = :assetId
+        and asset.status.code = :statusCode
+        order by asset.assetId ASC
+    </query>
+</hibernate-mapping>

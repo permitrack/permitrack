@@ -1,0 +1,14 @@
+ALTER TABLE [dbo].[EC_EVENT] 
+ADD [DOCUMENT_NAME] [varchar] (255) COLLATE SQL_Latin1_General_CP1_CI_AS ;
+
+ALTER TABLE [dbo].[EC_EVENT] 
+ADD [LOCATION] [varchar] (500) COLLATE SQL_Latin1_General_CP1_CI_AS;
+
+
+///remove the columns
+
+ALTER TABLE [dbo].[EC_EVENT] 
+DROP COLUMN [DOCUMENT_NAME];
+
+ALTER TABLE [dbo].[EC_EVENT] 
+DROP COLUMN [LOCATION];

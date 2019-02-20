@@ -1,0 +1,112 @@
+<!DOCTYPE tiles-definitions PUBLIC
+    "-//Apache Software Foundation//DTD Tiles Configuration 1.3//EN"
+    "http://struts.apache.org/dtds/tiles-config_1_3.dtd">
+<tiles-definitions>
+    <definition name="permit.baseTitledLayout"
+                extends="ev.baseTitledLayout"></definition>
+    <definition name="permit.list.page"
+                extends="permit.baseTitledLayout">
+        <put name="title"
+             value="Permit List" />
+        <put name="description"
+             value="Listing of all Permits" />
+        <put name="content"
+             value="/html/env/permit/permitlist.jsp" />
+    </definition>
+    <definition name="permit.view.page"
+                extends="permit.baseTitledLayout">
+        <put name="title"
+             value="Permit" />
+        <put name="description"
+             value="View Permit information" />
+        <put name="content"
+             value="/html/env/permit/permitview.jsp" />
+    </definition>
+    <definition name="permit.edit.page"
+                extends="permit.baseTitledLayout">
+        <put name="title"
+             value="Permit" />
+        <put name="description"
+             value="Edit a Permit" />
+        <put name="content"
+             value="/html/env/permit/permitedit.jsp" />
+    </definition>
+    <definition name="permit.create.page"
+                extends="permit.baseTitledLayout">
+        <put name="title"
+             value="Permit" />
+        <put name="description"
+             value="Create a Permit" />
+        <put name="content"
+             value="/html/env/permit/permitcreate.jsp" />
+    </definition>
+    <definition name="permit.delete.page"
+                extends="permit.baseTitledLayout">
+        <put name="title"
+             value="Permit" />
+        <put name="description"
+             value="Delete a Permit" />
+        <put name="content"
+             value="/html/env/permit/permitdelete.jsp" />
+    </definition>
+    <definition name="permit.facility.create.page"
+                extends="permit.baseTitledLayout">
+        <put name="title"
+             value="Permitted Facility" />
+        <put name="description"
+             value="Connect a Facility to a Permit" />
+        <put name="content"
+             value="/html/env/permit/permitfacilitycreate.jsp" />
+    </definition>
+    <definition name="permit.substance.create.page"
+                extends="permit.baseTitledLayout">
+        <put name="title"
+             value="Permitted Substance" />
+        <put name="description"
+             value="Connect a Substance to a Permit" />
+        <put name="content"
+             value="/html/env/permit/permitsubstancecreate.jsp" />
+    </definition>
+    <definition name="permit.detail.baseTitledLayout"
+                extends="permit.baseTitledLayout">
+        <put name="title"
+             value="Permit Detail" />
+    </definition>
+    <definition name="permit.detail.view.page"
+                extends="permit.detail.baseTitledLayout">
+        <put name="description"
+             value="View Permit Detail information" />
+        <put name="content"
+             value="/html/env/permit/permitdetailview.jsp" />
+    </definition>
+    <definition name="permit.detail.edit.page"
+                extends="permit.detail.baseTitledLayout">
+        <put name="description"
+             value="Edit Permit Detail" />
+        <put name="content"
+             value="/html/env/permit/permitdetailedit.jsp" />
+    </definition>
+    <definition name="permit.detail.create.page"
+                extends="permit.detail.baseTitledLayout">
+        <put name="description"
+             value="Create a Permit Detail" />
+        <put name="content"
+             value="/html/env/permit/permitdetailcreate.jsp" />
+    </definition>
+    <definition name="permit.detail.delete.page"
+                extends="permit.detail.baseTitledLayout">
+        <put name="description"
+             value="Delete Permit Detail" />
+        <put name="content"
+             value="/html/env/permit/permitdetaildelete.jsp" />
+    </definition>
+    <definition name="permit.asset.create.page"
+                extends="permit.detail.baseTitledLayout">
+        <put name="title"
+             value="Permitted Asset" />
+        <put name="description"
+             value="Connect an Asset to a Permit Detail" />
+        <put name="content"
+             value="/html/env/permit/permitassetcreate.jsp" />
+    </definition>
+</tiles-definitions>

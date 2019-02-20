@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?><!DOCTYPE struts-config PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 1.3//EN"
+    "http://struts.apache.org/dtds/struts-config_1_3.dtd">
+<struts-config>
+    <form-beans>
+        <form-bean name="permitPeriodForm"
+                   type="com.sehinc.stormwater.action.permitperiod.PermitPeriodForm" />
+    </form-beans>
+    <action-mappings>
+        <action path="/permitperiodnewaction"
+                type="com.sehinc.stormwater.action.permitperiod.PermitPeriodAction"
+                name="permitPeriodForm"
+                parameter="secondaryMenuItem=create"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="permitperiod.new.page" />
+        </action>
+        <action path="/permitperiodviewaction"
+                type="com.sehinc.stormwater.action.permitperiod.PermitPeriodAction"
+                name="permitPeriodForm"
+                parameter="secondaryMenuItem=view"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="permitperiod.view.page" />
+        </action>
+        <action path="/permitperiodeditaction"
+                type="com.sehinc.stormwater.action.permitperiod.PermitPeriodAction"
+                name="permitPeriodForm"
+                parameter="secondaryMenuItem=edit"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="permitperiod.edit.page" />
+        </action>
+        <action path="/permitperiodedit"
+                type="com.sehinc.stormwater.action.permitperiod.PermitPeriodEditAction"
+                name="permitPeriodForm"
+                parameter="secondaryMenuItem=edit"
+                input="permitperiod.edit.page"
+                scope="request"
+                validate="true"
+                cancellable="true">
+<!--
+            <forward name="new"
+                     path="/permitperiodnewaction.do"
+                     redirect="true" />
+            <forward name="continue"
+                     path="/permitperiodeditaction.do"
+                     redirect="true" />
+-->
+            <forward name="continue"
+                     path="/permitperiodviewaction.do"
+                     redirect="true" />
+        </action>
+        <action path="/timeperioddelete"
+                type="com.sehinc.stormwater.action.permitperiod.PermitPeriodEditAction"
+                name="permitPeriodForm"
+                parameter="secondaryMenuItem=edit"
+                input="permitperiod.edit.page"
+                scope="request"
+                validate="false"
+                cancellable="false">
+            <forward name="continue"
+                     path="/permitperiodviewaction.do"
+                     redirect="true" />
+        </action>
+        <action path="/permitperioddelete"
+                type="com.sehinc.stormwater.action.permitperiod.PermitPeriodDeleteAction"
+                name="permitPeriodForm"
+                input="permitperiod.edit.page"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="/permitperiodviewaction.do"
+                     redirect="true" />
+            <forward name="fail"
+                     path="/permitperiodviewaction.do"
+                     redirect="true" />
+        </action>
+    </action-mappings>
+    <controller processorClass="org.apache.struts.action.RequestProcessor"
+                contentType="text/html" />
+    <plug-in className="org.apache.struts.tiles.TilesPlugin">
+        <set-property property="definitions-config"
+                      value="/WEB-INF/html/tiles-defs.xml, /WEB-INF/html/ms4/tiles-permitperiod-defs.xml" />
+        <set-property property="definitions-debug"
+                      value="2" />
+        <set-property property="definitions-parser-details"
+                      value="2" />
+        <set-property property="definitions-parser-validate"
+                      value="true" />
+        <set-property property="moduleAware"
+                      value="true" />
+    </plug-in>
+    <plug-in className="org.apache.struts.validator.ValidatorPlugIn">
+        <set-property property="pathnames"
+                      value="/org/apache/struts/validator/validator-rules.xml, /WEB-INF/html/ms4/validation-permitperiod.xml" />
+    </plug-in>
+</struts-config>

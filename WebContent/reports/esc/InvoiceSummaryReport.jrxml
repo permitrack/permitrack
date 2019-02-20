@@ -1,0 +1,342 @@
+<?xml version="1.0"?>
+<!DOCTYPE jasperReport PUBLIC "-//JasperReports//DTD Report Design//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
+
+<jasperReport 
+		name="ProjectReport"
+		printOrder="Horizontal"
+		pageWidth="842" 
+		pageHeight="595" 
+		orientation="Landscape"
+		columnWidth="762" 
+		columnSpacing="0" 
+		leftMargin="40" 
+		rightMargin="40" 
+		topMargin="50" 
+		bottomMargin="50">
+	<reportFont name="Arial_Normal" isDefault="true" fontName="Arial" size="12" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Bold" isDefault="false" fontName="Arial" size="12" isBold="true" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Italic" isDefault="false" fontName="Arial" size="12" isItalic="true" pdfFontName="Helvetica-Oblique" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Bold_Italic" isDefault="false" fontName="Arial" size="12" isItalic="true" isBold="true" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Small" isDefault="true" fontName="Arial" size="10" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Small_Bold" isDefault="false" fontName="Arial" size="10" isBold="true" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Small_Italic" isDefault="false" fontName="Arial" size="10" isItalic="true" pdfFontName="Helvetica-Oblique" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Small_Bold_Italic" isDefault="false" fontName="Arial" size="10" isItalic="true" isBold="true" pdfFontName="Helvetica-Oblique" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<parameter name="ReportTitle" class="java.lang.String"/>
+	<parameter name="ClientWebSite" class="java.lang.String"/>
+	<parameter name="ClientName" class="java.lang.String"/>
+	<parameter name="ReportQuery" class="java.lang.String"/>	
+	<parameter name="LogoLocation" class="java.lang.String"/>
+	<parameter name="TimeFrame" class="java.lang.String"/>
+	<parameter name="IsSystemAdminReport" class="java.lang.Boolean"/>
+	<queryString><![CDATA[$P!{ReportQuery}]]></queryString>	
+	<field name="PROJECT_ID" class="java.lang.Integer"/>
+	<field name="PROJECT_NAME" class="java.lang.String"/>
+	<field name="CLIENT_ID" class="java.lang.Integer"/>
+	<field name="CLIENT_NAME" class="java.lang.String"/>
+	<field name="CREATE_TIMESTAMP" class="java.util.Date"/>
+	<field name="PROJECT_TYPE_NAME" class="java.lang.String"/>
+	<field name="PROJECT_TYPE_SWMP" class="java.lang.Integer"/>
+	<field name="EXTENDED_ON_LINE_ACCESS_MONTHS" class="java.lang.String"/>
+	<field name="END_POINT_TYPE_NAME" class="java.lang.String"/>
+	<field name="PROJECT_GROUP_NUMBER" class="java.lang.Integer"/>
+	<field name="PROJECT_GROUP_TEXT" class="java.lang.String"/>
+	<field name="PROJECT_STATUS" class="java.lang.String"/>
+
+	<variable name="ProjectCountClientGroup" class="java.lang.Integer" resetType="Group" resetGroup="ClientGroup1" calculation="Count">
+		<variableExpression><![CDATA[$F{PROJECT_ID}]]></variableExpression>
+	</variable>
+	<variable name="NewProjectCountProjectGroup" class="java.lang.Integer" resetType="Group" resetGroup="ProjectGroup" calculation="Count">
+		<variableExpression><![CDATA[$F{PROJECT_ID}]]></variableExpression>
+	</variable>
+
+	<group name="ClientGroup1" isStartNewPage="true">
+		<groupExpression>
+			<![CDATA[$F{CLIENT_ID}]]>
+		</groupExpression>
+		<groupHeader>
+			<band height="20">
+				<printWhenExpression>(new java.lang.Boolean($P{IsSystemAdminReport}.booleanValue() == true))</printWhenExpression>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="0" y="0" width="762" height="20"/>
+					<textElement verticalAlignment="Bottom">
+						<font reportFont="Arial_Bold_Italic" size="18"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String">
+						<![CDATA[$F{CLIENT_NAME}]]>
+					</textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="20">
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="0" y="0" width="762" height="20"/>
+					<textElement verticalAlignment="Top">
+						<font reportFont="Arial_Bold_Italic"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String">
+						<![CDATA["Total Projects:  " + $V{ProjectCountClientGroup}]]>
+					</textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+
+	<group name="ClientGroup2" isReprintHeaderOnEachPage="true">
+		<groupExpression>
+			<![CDATA[$F{CLIENT_ID}]]>
+		</groupExpression>
+		<groupHeader>
+			<band height="30">
+				<textField isStretchWithOverflow="true">
+					<reportElement x="0" y="0" width="60" height="28"/>
+					<textElement verticalAlignment="Bottom">
+						<font reportFont="Arial_Small_Bold"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String">
+						<![CDATA["Create Date"]]>
+					</textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement x="60" y="0" width="60" height="28"/>
+					<textElement verticalAlignment="Bottom">
+						<font reportFont="Arial_Small_Bold"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String">
+						<![CDATA["Status"]]>
+					</textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement x="120" y="0" width="250" height="28"/>
+					<textElement  verticalAlignment="Bottom">
+						<font reportFont="Arial_Small_Bold"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String">
+						<![CDATA["Project Name"]]>
+					</textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement x="370" y="0" width="120" height="28"/>
+					<textElement  verticalAlignment="Bottom">
+						<font reportFont="Arial_Small_Bold"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String">
+						<![CDATA["Project Type"]]>
+					</textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement x="490" y="0" width="100" height="28"/>
+					<textElement  verticalAlignment="Bottom">
+						<font reportFont="Arial_Small_Bold"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String">
+						<![CDATA["End Point Type"]]>
+					</textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement x="590" y="0" width="50" height="28"/>
+					<textElement  verticalAlignment="Bottom">
+						<font reportFont="Arial_Small_Bold"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String">
+						<![CDATA["SWMP?"]]>
+					</textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement x="640" y="0" width="100" height="28"/>
+					<textElement  verticalAlignment="Bottom">
+						<font reportFont="Arial_Small_Bold"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String">
+						<![CDATA["Ext. Access Months"]]>
+					</textFieldExpression>
+				</textField>
+				<line>
+					<reportElement x="0" y="29" width="762" height="0"/>
+					<graphicElement stretchType="NoStretch"/>
+				</line>			
+			</band>
+		</groupHeader>
+	</group>
+
+	<group name="ProjectGroup">
+		<groupExpression>
+			<![CDATA[$F{PROJECT_GROUP_NUMBER}]]>
+		</groupExpression>
+		<groupHeader>
+			<band height="20">
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="0" y="0" width="762" height="20"/>
+					<textElement verticalAlignment="Middle">
+						<font reportFont="Arial_Small_Bold_Italic"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String">
+						<![CDATA[$F{PROJECT_GROUP_TEXT}]]>
+					</textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="20">
+			<printWhenExpression>(new java.lang.Boolean($F{PROJECT_GROUP_NUMBER}.intValue() == 1))</printWhenExpression>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="0" y="0" width="762" height="20"/>
+					<textElement verticalAlignment="Top">
+						<font reportFont="Arial_Bold_Italic"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String">
+						<![CDATA["New Projects:  " + $V{NewProjectCountProjectGroup}]]>
+					</textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>		
+	</group>
+
+	<title>
+		<band height="134">
+			<image hyperlinkType="Reference" scaleImage="RetainShape">
+				<reportElement x="0" y="0" width="762" height="50">
+					<printWhenExpression><![CDATA[new Boolean($P{LogoLocation} != null)]]></printWhenExpression>
+				</reportElement>				
+				<imageExpression><![CDATA[$P{LogoLocation}]]></imageExpression>
+				<hyperlinkReferenceExpression>
+					<![CDATA[$P{ClientWebSite}]]>
+				</hyperlinkReferenceExpression>				
+			</image>		
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="0" y="51" width="762" height="20"/>
+				<textElement>
+					<font reportFont="Arial_Normal" size="14"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{ClientName}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="72" width="762" height="0"/>
+				<graphicElement/>
+			</line>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="0" y="73" width="762" height="30" />
+				<textElement>
+					<font reportFont="Arial_Bold" size="20"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{ReportTitle}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="0" y="104" width="762" height="30">
+					<printWhenExpression><![CDATA[new Boolean($P{TimeFrame} != null)]]></printWhenExpression>
+				</reportElement>				
+				<textElement>
+					<font reportFont="Arial_Bold" size="14"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{TimeFrame}]]></textFieldExpression>
+			</textField>			
+		</band>
+	</title>
+
+	<detail>
+		<band height="15">
+			<textField pattern="MM/dd/yyyy" isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="0" y="0" width="60" height="15"/>
+				<textElement verticalAlignment="Top">
+					<font reportFont="Arial_Small"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String">
+					<![CDATA[com.sehinc.common.util.DateUtil.mdyDate($F{CREATE_TIMESTAMP})]]>
+				</textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="60" y="0" width="60" height="15"/>
+				<textElement verticalAlignment="Top">
+					<font reportFont="Arial_Small"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String">
+					<![CDATA[$F{PROJECT_STATUS}]]>
+				</textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="120" y="0" width="250" height="15"/>
+				<textElement verticalAlignment="Top">
+					<font reportFont="Arial_Small"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String">
+					<![CDATA[$F{PROJECT_NAME}]]>
+				</textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="370" y="0" width="120" height="15"/>
+				<textElement verticalAlignment="Top">
+					<font reportFont="Arial_Small"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String">
+					<![CDATA[$F{PROJECT_TYPE_NAME}]]>
+				</textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="490" y="0" width="100" height="15"/>
+				<textElement verticalAlignment="Top">
+					<font reportFont="Arial_Small"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String">
+					<![CDATA[$F{END_POINT_TYPE_NAME}]]>
+				</textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="590" y="0" width="50" height="15">
+					<printWhenExpression><![CDATA[new java.lang.Boolean($F{PROJECT_TYPE_SWMP}.intValue() == 0)]]></printWhenExpression>
+				</reportElement>
+				<textElement verticalAlignment="Top">
+					<font reportFont="Arial_Small"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String">
+					<![CDATA["No"]]>
+				</textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="590" y="0" width="50" height="15">
+					<printWhenExpression><![CDATA[new java.lang.Boolean($F{PROJECT_TYPE_SWMP}.intValue() != 0)]]></printWhenExpression>
+				</reportElement>
+				<textElement verticalAlignment="Top">
+					<font reportFont="Arial_Small"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String">
+					<![CDATA["Yes"]]>
+				</textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="640" y="0" width="100" height="15"/>
+				<textElement verticalAlignment="Top">
+					<font reportFont="Arial_Small"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String">
+					<![CDATA[$F{EXTENDED_ON_LINE_ACCESS_MONTHS}]]>
+				</textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	
+	<pageFooter>
+		<band height="20">
+			<textField>
+				<reportElement x="300" y="0" width="70" height="20"/>
+				<textElement verticalAlignment="Bottom" textAlignment="Right"/>
+				<textFieldExpression class="java.lang.String">
+					<![CDATA["Page " + String.valueOf(($V{PAGE_NUMBER} == null)?new Integer(1):$V{PAGE_NUMBER}) + " "]]>
+				</textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="370" y="0" width="20" height="20"/>
+				<textElement verticalAlignment="Bottom" textAlignment="Center"/>
+				<textFieldExpression class="java.lang.String">
+					<![CDATA["of"]]>
+				</textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="390" y="0" width="70" height="20"/>
+				<textElement verticalAlignment="Bottom"/>
+				<textFieldExpression class="java.lang.String">
+					<![CDATA[java.lang.String.valueOf($V{PAGE_NUMBER})]]>
+				</textFieldExpression>
+			</textField>	
+		</band>
+	</pageFooter>
+</jasperReport>

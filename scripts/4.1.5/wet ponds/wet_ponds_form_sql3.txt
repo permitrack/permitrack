@@ -1,0 +1,312 @@
+
+-- sub sections banks, outlets, recommendations
+
+insert into sub_section
+(sub_section_id, section_id, title, description, order_num)
+values
+(44, 30, 'Indications of any of the following?', 'Evidence of the following?', 1)
+
+insert into sub_section
+(sub_section_id, section_id, title, description, order_num)
+values
+(45, 31, 'Is the outlet structure clogged?', 'Outlet clogged?', 1)
+
+insert into sub_section
+(sub_section_id, section_id, title, description, order_num)
+values
+(46, 31, 'If yes, what with?', 'Outlet clogged with', 2)
+
+insert into sub_section
+(sub_section_id, section_id, title, description, order_num)
+values
+(47, 31, 'Is the outlet askew or misaligned?', 'Outlet misaligned?', 3)
+
+insert into sub_section
+(sub_section_id, section_id, title, description, order_num)
+values
+(48, 31, 'Evidence of any of the following downstream?', 'Downstream', 4)
+
+insert into sub_section
+(sub_section_id, section_id, title, description, order_num)
+values
+(49, 31, null, 'Other observations', 5)
+
+insert into sub_section
+(sub_section_id, section_id, title, description, order_num)
+values
+(50, 32, null, 'Recommendations', 1)
+
+-- elements
+
+insert into element
+(element_id, title, element_type_id, child_element_id, name, 
+data_type, sub_section_id, order_num, 
+required, allow_other, is_child, display_title, size, max_length)
+values
+(273, 'Erosion or channelization', 3, null, 'bank_erosion', 'string', 44, 1, 'N', 'N', 'N', 'Y', null, null)
+
+insert into element
+(element_id, title, element_type_id, child_element_id, name, 
+data_type, sub_section_id, order_num, 
+required, allow_other, is_child, display_title, size, max_length)
+values
+(274, 'Other', 1, null, 'bank_other', 'string', 44, 2, 'N', 'N', 'N', 'Y', 40, 40)
+
+insert into element
+(element_id, title, element_type_id, child_element_id, name, 
+data_type, sub_section_id, order_num, 
+required, allow_other, is_child, display_title, size, max_length)
+values
+(275, 'Clogged?', 3, null, 'outlet_clogged', 'string', 45, 1, 'N', 'N', 'N', 'N', null, null)
+
+insert into element
+(element_id, title, element_type_id, child_element_id, name, 
+data_type, sub_section_id, order_num, 
+required, allow_other, is_child, display_title, size, max_length)
+values
+(276, 'Debris', 3, null, 'outlet_clogged_debris', 'string', 46, 1, 'N', 'N', 'N', 'Y', null, null)
+
+insert into element
+(element_id, title, element_type_id, child_element_id, name, 
+data_type, sub_section_id, order_num, 
+required, allow_other, is_child, display_title, size, max_length)
+values
+(277, 'Sediment', 3, null, 'outlet_clogged_sediment', 'string', 46, 2, 'N', 'N', 'N', 'Y', null, null)
+
+insert into element
+(element_id, title, element_type_id, child_element_id, name, 
+data_type, sub_section_id, order_num, 
+required, allow_other, is_child, display_title, size, max_length)
+values
+(278, 'Vegitation', 3, null, 'outlet_clogged_veg', 'string', 46, 3, 'N', 'N', 'N', 'Y', null, null)
+
+insert into element
+(element_id, title, element_type_id, child_element_id, name, 
+data_type, sub_section_id, order_num, 
+required, allow_other, is_child, display_title, size, max_length)
+values
+(279, 'Other', 1, null, 'outlet_clogged_other', 'string', 46, 4, 'N', 'N', 'N', 'Y', 40, 40)
+
+insert into element
+(element_id, title, element_type_id, child_element_id, name, 
+data_type, sub_section_id, order_num, 
+required, allow_other, is_child, display_title, size, max_length)
+values
+(280, 'Askew', 3, null, 'outlet_askew', 'string', 47, 1, 'N', 'N', 'N', 'N', null, null)
+
+insert into element
+(element_id, title, element_type_id, child_element_id, name, 
+data_type, sub_section_id, order_num, 
+required, allow_other, is_child, display_title, size, max_length)
+values
+(281, 'If yes, why?', 3, 282, 'outlet_askew_why', 'string', 47, 2, 'N', 'Y', 'N', 'Y', null, null)
+
+insert into element
+(element_id, title, element_type_id, child_element_id, name, 
+data_type, sub_section_id, order_num, 
+required, allow_other, is_child, display_title, size, max_length)
+values
+(282, 'Other', 1, null, 'outlet_askew_why_other', 'string', 47, 3, 'N', 'N', 'Y', 'Y', 20, 20)
+
+insert into element
+(element_id, title, element_type_id, child_element_id, name, 
+data_type, sub_section_id, order_num, 
+required, allow_other, is_child, display_title, size, max_length)
+values
+(283, 'Sediment deposition', 3, null, 'downstream_sediment', 'string', 48, 1, 'N', 'N', 'N', 'Y', null, null)
+
+insert into element
+(element_id, title, element_type_id, child_element_id, name, 
+data_type, sub_section_id, order_num, 
+required, allow_other, is_child, display_title, size, max_length)
+values
+(284, 'Erosion or channelization', 3, null, 'downstream_erosion', 'string', 48, 2, 'N', 'N', 'N', 'Y', null, null)
+
+insert into element
+(element_id, title, element_type_id, child_element_id, name, 
+data_type, sub_section_id, order_num, 
+required, allow_other, is_child, display_title, size, max_length)
+values
+(285, 'Other', 1, null, 'downstream_other', 'string', 48, 3, 'N', 'N', 'N', 'Y', 40, 40)
+
+insert into element
+(element_id, title, element_type_id, child_element_id, name, 
+data_type, sub_section_id, order_num, 
+required, allow_other, is_child, display_title, size, max_length)
+values
+(286, 'Source of sediment deposition, if evident', 3, 287, 'sediment_source2', 'string', 48, 4, 'N', 'Y', 'N', 'Y', null, null)
+
+insert into element
+(element_id, title, element_type_id, child_element_id, name, 
+data_type, sub_section_id, order_num, 
+required, allow_other, is_child, display_title, size, max_length)
+values
+(287, 'Other', 1, null, 'sediment_source_other2', 'string', 48, 5, 'N', 'N', 'Y', 'Y', 20, 20)
+
+insert into element
+(element_id, title, element_type_id, child_element_id, name, 
+data_type, sub_section_id, order_num, 
+required, allow_other, is_child, display_title, size, max_length)
+values
+(288, 'Other observations', 2, null, 'other_obsv', 'string', 49, 1, 'N', 'N', 'N', 'Y', null, null)
+
+insert into element
+(element_id, title, element_type_id, child_element_id, name, 
+data_type, sub_section_id, order_num, 
+required, allow_other, is_child, display_title, size, max_length)
+values
+(289, 'When is maintenance needed?', 3, null, 'maintenance', 'string', 50, 1, 'N', 'N', 'N', 'Y', null, null)
+
+insert into element
+(element_id, title, element_type_id, child_element_id, name, 
+data_type, sub_section_id, order_num, 
+required, allow_other, is_child, display_title, size, max_length)
+values
+(290, 'Additional Comments', 2, null, 'comments', 'string', 50, 2, 'N', 'N', 'N', 'Y', null, null)
+
+insert into element
+(element_id, title, element_type_id, child_element_id, name, 
+data_type, sub_section_id, order_num, 
+required, allow_other, is_child, display_title, size, max_length)
+values
+(291, 'Maintenance Recommendations', 2, null, 'recommend', 'string', 50, 3, 'N', 'N', 'N', 'Y', null, null)
+
+insert into element
+(element_id, title, element_type_id, child_element_id, name, 
+data_type, sub_section_id, order_num, 
+required, allow_other, is_child, display_title, size, max_length)
+values
+(292, 'Name', 1, null, 'STATIC_activity_name', 'string', 31, 1, 'Y', 'N', 'N', 'Y', 30, 50)
+
+
+
+-- domains and element domains
+
+
+
+insert into domain
+(domain_id, name)
+values
+(37, 'Sediment Deposition Sources')
+
+insert into domain_value
+(domain_value_id, domain_value, order_num, domain_id)
+values
+(127, 'Erosion or channelization inside the practice', 1, 37)
+
+insert into domain_value
+(domain_value_id, domain_value, order_num, domain_id)
+values
+(128, 'Erosion or channelization outside the practice', 2, 37)
+
+insert into domain_value
+(domain_value_id, domain_value, order_num, domain_id)
+values
+(129, 'Construction site erosion', 3, 37)
+
+insert into domain_value
+(domain_value_id, domain_value, order_num, domain_id)
+values
+(130, 'I dont know', 4, 37)
+
+
+
+insert into domain
+(domain_id, name)
+values
+(38, 'Recommendations')
+
+insert into domain_value
+(domain_value_id, domain_value, order_num, domain_id)
+values
+(131, '5 - Before the next rainfall', 1, 38)
+
+insert into domain_value
+(domain_value_id, domain_value, order_num, domain_id)
+values
+(132, '4 - Before the next rainy season', 2, 38)
+
+insert into domain_value
+(domain_value_id, domain_value, order_num, domain_id)
+values
+(133, '3 - Possibly after the next season', 3, 38)
+
+insert into domain_value
+(domain_value_id, domain_value, order_num, domain_id)
+values
+(134, '2 - Within a year or two', 4, 38)
+
+insert into domain_value
+(domain_value_id, domain_value, order_num, domain_id)
+values
+(135, '1 - No sign that any will be required', 5, 38)
+
+
+
+-- element domains
+
+
+insert into element_domain  -- 'Source of sediment deposition, if evident'
+(element_domain_id, element_id, domain_id, default_domain_value_id, allow_select)
+values
+(129, 271, 37, null, 'Y')
+
+
+insert into element_domain  -- 'bank erosion'
+(element_domain_id, element_id, domain_id, default_domain_value_id, allow_select)
+values
+(130, 273, 35, null, 'N')
+
+
+insert into element_domain  -- 'clogged?'
+(element_domain_id, element_id, domain_id, default_domain_value_id, allow_select)
+values
+(131, 275, 32, null, 'N')
+
+
+insert into element_domain  -- ''
+(element_domain_id, element_id, domain_id, default_domain_value_id, allow_select)
+values
+(132, 276, 35, null, 'N')
+
+insert into element_domain  -- ''
+(element_domain_id, element_id, domain_id, default_domain_value_id, allow_select)
+values
+(133, 277, 35, null, 'N')
+
+insert into element_domain  -- ''
+(element_domain_id, element_id, domain_id, default_domain_value_id, allow_select)
+values
+(134, 278, 35, null, 'N')
+
+insert into element_domain  -- ''
+(element_domain_id, element_id, domain_id, default_domain_value_id, allow_select)
+values
+(135, 280, 35, null, 'N')
+
+
+insert into element_domain  -- ''
+(element_domain_id, element_id, domain_id, default_domain_value_id, allow_select)
+values
+(136, 281, 34, null, 'Y')
+
+insert into element_domain  -- ''
+(element_domain_id, element_id, domain_id, default_domain_value_id, allow_select)
+values
+(137, 283, 35, null, 'N')
+
+insert into element_domain  -- ''
+(element_domain_id, element_id, domain_id, default_domain_value_id, allow_select)
+values
+(138, 284, 35, null, 'N')
+
+insert into element_domain  -- ''
+(element_domain_id, element_id, domain_id, default_domain_value_id, allow_select)
+values
+(139, 286, 37, null, 'Y')
+
+
+insert into element_domain  -- ''
+(element_domain_id, element_id, domain_id, default_domain_value_id, allow_select)
+values
+(140, 289, 38, null, 'Y')

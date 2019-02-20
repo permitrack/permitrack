@@ -1,0 +1,1 @@
+drop table env_asset_scc_info;

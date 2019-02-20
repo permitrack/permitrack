@@ -1,0 +1,175 @@
+<META HTTP-EQUIV="Pragma"
+      CONTENT="no-cache">
+<META HTTP-EQUIV="CACHE-CONTROL"
+      CONTENT="NO-CACHE">
+<META HTTP-EQUIV="PRAGMAS"
+      CONTENT="NO-CACHE">
+<HTML>
+    <HEAD>
+        <META HTTP-EQUIV="Content-Type"
+              CONTENT="text/html;CHARSET=iso-8859-1">
+        <META NAME="GENERATOR"
+              Content="Mozilla/4.77 [en] (WinNT; U) [Netscape]">
+        <TITLE>Untitled</TITLE>
+        <SCRIPT TYPE="text/javascript"
+                LANGUAGE="JavaScript"
+                SRC="./javascript/dataViewVariables.jsp"></SCRIPT>
+        <script language="javascript">
+            function go(loc)
+            {
+                window.location.href =
+                loc;
+            }
+            function checkvalue()
+            {
+                var name1 = document.namefinder.Lastname.value.toUpperCase();
+                //var name2 = document.namefinder.Firstname.value.toUpperCase();
+                var namesearch = "";
+                var namesearch2 = "";
+                parent.MapFrame.setActiveLayerByName(parent.MapFrame.theParcelLayerName);
+                if ((name1
+                    != "")
+                    && (theOwnerName1Field
+                    != ""))
+                {
+                    namesearch =
+                    "UPPER("
+                        + theOwnerName1Field
+                        + ') LIKE "%'
+                        + name1
+                        + '%"';
+                }
+                if ((name1
+                    != "")
+                    && (theOwnerName2Field
+                    != ""))
+                {
+                    namesearch2 =
+                    "UPPER("
+                        + theOwnerName2Field
+                        + ') LIKE "%'
+                        + name1
+                        + '%"';
+                }
+                if (namesearch
+                    != "")
+                {
+                    namesearch =
+                    namesearch
+                        + " OR "
+                        + namesearch2;
+                    //      alert(namesearch);
+                    parent.MapFrame.zoomTomySelection(namesearch);
+                }
+                else
+                {
+                    parent.MapFrame.zoomTomySelection(namesearch);
+                }
+            }
+            function loader()
+            {
+                document.namefinder.Lastname.focus();
+            }
+            function SetInitialFocus()
+            {
+                document.namefinder.Lastname.focus();
+            }
+            window.onload =
+            SetInitialFocus;
+        </script>
+        <link rel="stylesheet"
+              type="text/css"
+              href="./gis.css">
+        <STYLE TYPE="text/css">
+            A
+            {
+                text-decoration: none
+            }
+
+            A:hover
+            {
+                text-decoration: underline
+            }
+        </STYLE>
+    </HEAD>
+    <BODY bgColor=#ffffff>
+        <TABLE cellSpacing=0
+               cellPadding=0
+               bgColor=#CCCC99
+               width="102%"
+               border=0>
+            <TBODY>
+                <TR height="1"></TR>
+                <TR>
+                    <TD width="150">
+                        <TABLE bgColor=#CCCC99
+                               width="100"
+                               border=0
+                               cellSpacing=0
+                               cellPadding=0>
+                            <TR>
+                                <A href="./addresssearch.htm"
+                                   target=SearchFrame
+                                   border=0>
+                                    <IMG height=22
+                                         src="./images/taboff_add.gif"
+                                         width=100
+                                         border=0
+                                         name=tabaddress>
+                                </A>
+                                <br>
+                                <A href="./namesearch.htm"
+                                   target=SearchFrame
+                                   border=0>
+                                    <IMG height=22
+                                         src="./images/tabon_name.gif"
+                                         width=100
+                                         border=0
+                                         name=tabname>
+                                </A>
+                                <br>
+                                <A href="./pinsearch.htm"
+                                   target=SearchFrame
+                                   border=0>
+                                    <IMG height=22
+                                         src="./images/taboff_pin.gif"
+                                         width=100
+                                         border=0
+                                         name=tabpin>
+                                </A>
+                            </TR>
+                        </TABLE>
+                    </TD>
+                    <td width="2"></td>
+                    <TD width="600"
+                        class=nav>
+                        <b>Owner Name Search</b>
+                        <br>
+                        <br>
+                        Enter last name to search for. You can search on a partial name (e.g. "ande" for Anderson).
+                        A list of potential matches will be displayed.
+                    </TD>
+                    <td width="2"></td>
+                    <TD width="300"
+                        Align="Center"
+                        class=nav>
+                        <FORM name="namefinder"
+                              onsubmit="checkvalue()">
+                            Search Name:
+                            <INPUT TYPE="text"
+                                   NAME="Lastname"
+                                   SIZE=40
+                                   MAXLENGTH=80
+                                   VALUE="">
+                            <br>
+                            <INPUT TYPE="submit"
+                                   VALUE="Search">
+                        </FORM>
+                    </TD>
+                    <TD width="10"></TD>
+                </TR>
+                <TR height="1"></TR>
+            </TBODY>
+        </TABLE>
+    </BODY>
+</HTML>

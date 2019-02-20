@@ -1,0 +1,397 @@
+<?xml version="1.0"?>
+<!DOCTYPE jasperReport PUBLIC "-//JasperReports//DTD Report Design//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
+
+<jasperReport 
+		name="CustomFormReport" 
+		pageWidth="612"
+		pageHeight="792"
+		columnWidth="532"
+		columnSpacing="0" 
+		leftMargin="40" 
+		rightMargin="40" 
+		topMargin="50" 
+		bottomMargin="50"
+		scriptletClass="com.sehinc.stormwater.action.report.CustomFormReportScriptlet">
+
+	<reportFont name="Arial_Normal" isDefault="true" fontName="Arial" size="11" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Bold" isDefault="false" fontName="Arial" size="11" isBold="true" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Italic" isDefault="false" fontName="Arial" size="11" isItalic="true" pdfFontName="Helvetica-Oblique" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Bold_Italic" isDefault="false" fontName="Arial" size="11" isItalic="true" isBold="true" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Small" isDefault="true" fontName="Arial" size="10" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Small_Bold" isDefault="false" fontName="Arial" size="10" isBold="true" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Small_Italic" isDefault="false" fontName="Arial" size="10" isItalic="true" pdfFontName="Helvetica-Oblique" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Small_Bold_Italic" isDefault="false" fontName="Arial" size="10" isItalic="true" isBold="true" pdfFontName="Helvetica-Oblique" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+
+	<parameter name="ClientName" class="java.lang.String"/>
+	<parameter name="ClientWebSite" class="java.lang.String"/>
+	<parameter name="LogoLocation" class="java.lang.String"/>
+	<parameter name="FormInstanceId" class="java.lang.Integer"/>	
+	  
+	<queryString><![CDATA[SELECT GOAL_ACTIVITY.ID GOAL_ACTIVITY_ID, GOAL_ACTIVITY.NAME GOAL_ACTIVITY_NAME,
+	GOAL_ACTIVITY.DESCRIPTION GOAL_ACTIVITY_DESCRIPTION, GOAL_ACTIVITY.ACTIVITY_DATE GOAL_ACTIVITY_DATE,
+	FORM_INSTANCE.FORM_INSTANCE_ID FORM_INSTANCE_ID, [FORM].TITLE FORM_TITLE, [SECTION].SECTION_ID SECTION_ID,
+	[SECTION].TITLE SECTION_TITLE, [SECTION].ORDER_NUM SECTION_ORDER_NUM, [SUB_SECTION].SUB_SECTION_ID SUB_SECTION_ID,
+	[SUB_SECTION].TITLE SUB_SECTION_TITLE, [SUB_SECTION].ORDER_NUM SUB_SECTION_ORDER_NUM, [ELEMENT].ELEMENT_ID ELEMENT_ID,
+	[ELEMENT].TITLE ELEMENT_TITLE, [ELEMENT].ORDER_NUM ELEMENT_ORDER_NUM, [ELEMENT].IS_CHILD ELEMENT_IS_CHILD,
+	[ELEMENT].CHILD_ELEMENT_ID CHILD_ELEMENT_ID, [ELEMENT].DISPLAY_TITLE ELEMENT_DISPLAY_TITLE, [ELEMENT].ALLOW_OTHER ELEMENT_ALLOW_OTHER,
+	ELEMENT_TYPE.HTML_TYPE ELEMENT_HTML_TYPE, ELEMENT_VALUE.ELEMENT_VALUE_ID ELEMENT_VALUE_ID, ELEMENT_VALUE.ELEMENT_VALUE ELEMENT_VALUE,
+	ELEMENT_2.TITLE CHILD_ELEMENT_TITLE, ELEMENT_2.DISPLAY_TITLE CHILD_ELEMENT_DISPLAY_TITLE, ELEMENT_VALUE_2.ELEMENT_VALUE CHILD_ELEMENT_VALUE
+	FROM GOAL_ACTIVITY_FORM_INSTANCE INNER JOIN GOAL_ACTIVITY ON GOAL_ACTIVITY_FORM_INSTANCE.GOAL_ACTIVITY_ID = GOAL_ACTIVITY.ID
+	INNER JOIN FORM_INSTANCE ON GOAL_ACTIVITY_FORM_INSTANCE.FORM_INSTANCE_ID = FORM_INSTANCE.FORM_INSTANCE_ID
+	INNER JOIN [FORM] ON FORM_INSTANCE.FORM_ID = [FORM].FORM_ID
+	INNER JOIN [SECTION] ON [FORM].FORM_ID = [SECTION].FORM_ID
+	INNER JOIN [SUB_SECTION] ON [SECTION].SECTION_ID = [SUB_SECTION].SECTION_ID
+	LEFT OUTER JOIN [ELEMENT] ON [SUB_SECTION].SUB_SECTION_ID = [ELEMENT].SUB_SECTION_ID AND [ELEMENT].IS_CHILD = 'N' AND [ELEMENT].NAME NOT LIKE '%STATIC%'
+	LEFT OUTER JOIN [ELEMENT] AS ELEMENT_2 ON [ELEMENT].CHILD_ELEMENT_ID = ELEMENT_2.ELEMENT_ID
+	LEFT OUTER JOIN ELEMENT_VALUE AS ELEMENT_VALUE_2 ON ELEMENT_2.ELEMENT_ID = ELEMENT_VALUE_2.ELEMENT_ID AND FORM_INSTANCE.FORM_INSTANCE_ID = ELEMENT_VALUE_2.FORM_INSTANCE_ID
+	LEFT OUTER JOIN ELEMENT_TYPE ON [ELEMENT].ELEMENT_TYPE_ID = ELEMENT_TYPE.ELEMENT_TYPE_ID
+	LEFT OUTER JOIN ELEMENT_VALUE ON [ELEMENT].ELEMENT_ID = ELEMENT_VALUE.ELEMENT_ID AND FORM_INSTANCE.FORM_INSTANCE_ID = ELEMENT_VALUE.FORM_INSTANCE_ID
+	WHERE FORM_INSTANCE.FORM_INSTANCE_ID = $P{FormInstanceId}
+	ORDER BY [SECTION].ORDER_NUM ASC, [SUB_SECTION].ORDER_NUM ASC, [ELEMENT].ORDER_NUM ASC]]></queryString>
+	
+	<field name="GOAL_ACTIVITY_ID" class="java.lang.Integer"/>
+	<field name="GOAL_ACTIVITY_NAME" class="java.lang.String"/>
+	<field name="GOAL_ACTIVITY_DESCRIPTION" class="java.lang.String"/>
+	<field name="GOAL_ACTIVITY_DATE" class="java.util.Date"/>
+	<field name="FORM_INSTANCE_ID" class="java.lang.Integer"/>
+	<field name="FORM_TITLE" class="java.lang.String"/>
+	<field name="SECTION_ID" class="java.lang.Integer"/>
+	<field name="SECTION_TITLE" class="java.lang.String"/>
+	<field name="SECTION_ORDER_NUM" class="java.lang.Integer"/>
+	<field name="SUB_SECTION_ID" class="java.lang.Integer"/>
+	<field name="SUB_SECTION_TITLE" class="java.lang.String"/>
+	<field name="SUB_SECTION_ORDER_NUM" class="java.lang.Integer"/>	
+	<field name="ELEMENT_ID" class="java.lang.Integer"/>
+	<field name="ELEMENT_TITLE" class="java.lang.String"/>
+	<field name="ELEMENT_ORDER_NUM" class="java.lang.Integer"/>
+	<field name="ELEMENT_IS_CHILD" class="java.lang.String"/>
+	<field name="CHILD_ELEMENT_ID" class="java.lang.Integer"/>
+	<field name="ELEMENT_DISPLAY_TITLE" class="java.lang.String"/>
+	<field name="ELEMENT_ALLOW_OTHER" class="java.lang.String"/>	
+	<field name="ELEMENT_HTML_TYPE" class="java.lang.String"/>
+	<field name="ELEMENT_VALUE_ID" class="java.lang.Integer"/>
+	<field name="ELEMENT_VALUE" class="java.lang.String"/>
+	<field name="CHILD_ELEMENT_TITLE" class="java.lang.String"/>
+	<field name="CHILD_ELEMENT_DISPLAY_TITLE" class="java.lang.String"/>
+	<field name="CHILD_ELEMENT_VALUE" class="java.lang.String"/>
+
+	<variable name="vDigitalPhotoFile" class="java.io.File"></variable>
+
+	<group name="GoalActivityTitle">
+		<groupExpression>
+			$F{GOAL_ACTIVITY_ID}
+		</groupExpression>
+		<groupHeader>	
+		  <band height="21">
+			<textField>
+				<reportElement x="0" y="2" width="532" height="18"/>
+				<textElement verticalAlignment="Middle">
+					<font reportFont="Arial_Bold"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String">
+					<![CDATA["Measurable Goal Activity Information"]]>
+				</textFieldExpression>
+			</textField>
+
+			<line>
+				<reportElement x="0" y="20" width="532" height="1"/>
+				<graphicElement/>
+			</line>
+		</band>
+	  </groupHeader>
+	</group>
+	
+	<group name="GoalActivitySection">
+		<groupExpression>
+			$F{GOAL_ACTIVITY_ID}
+		</groupExpression>
+		<groupHeader>	
+		  <band height="61">
+			<image hAlign="Center" vAlign="Middle" scaleImage="RetainShape">
+				<reportElement x="412" y="1" width="120" height="60">
+					<printWhenExpression>new java.lang.Boolean(((com.sehinc.stormwater.action.report.CustomFormReportScriptlet)$P{REPORT_SCRIPTLET}).getDigitalPhotoFile($F{FORM_INSTANCE_ID}))</printWhenExpression>
+				</reportElement>				
+				<imageExpression class="java.io.File">($V{vDigitalPhotoFile})</imageExpression>
+			</image>				
+			<textField evaluationTime="Group" evaluationGroup="GoalActivitySection">
+				<reportElement x="10" y="0" width="80" height="25"/>
+				<textElement>
+					<font reportFont="Arial_Normal"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String">
+					<![CDATA["Name:"]]>
+				</textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="100" y="0" width="307" height="25"/>
+				<textElement>
+					<font reportFont="Arial_Normal"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String">
+					<![CDATA[$F{GOAL_ACTIVITY_NAME}]]>
+				</textFieldExpression>
+			</textField>
+
+			<textField>
+				<reportElement x="10" y="26" width="80" height="16"/>
+				<textElement>
+					<font reportFont="Arial_Normal"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String">
+					<![CDATA["Date:"]]>
+				</textFieldExpression>
+			</textField>
+			<textField pattern="MM/dd/yyyy" isBlankWhenNull="true">
+				<reportElement x="100" y="26" width="307" height="16"/>
+				<textElement>
+					<font reportFont="Arial_Normal"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date">
+					<![CDATA[$F{GOAL_ACTIVITY_DATE}]]>
+				</textFieldExpression>
+			</textField>
+
+			<textField>
+				<reportElement x="10" y="43" width="80" height="16"/>
+				<textElement>
+					<font reportFont="Arial_Normal"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String">
+					<![CDATA["Description:"]]>
+				</textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="100" y="43" width="307" height="16"/>
+				<textElement markup="html">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String">
+					<![CDATA[$F{GOAL_ACTIVITY_DESCRIPTION}]]>
+				</textFieldExpression>
+			</textField>
+			
+		</band>
+	  </groupHeader>
+	</group>
+
+	<group name="SectionTitle">
+		<groupExpression>
+			$F{SECTION_ID}
+		</groupExpression>
+		<groupHeader>	
+		  <band height="20">
+		    <printWhenExpression>new java.lang.Boolean(!com.sehinc.common.util.StringUtil.isEmpty($F{SECTION_TITLE}) &amp;&amp; $F{ELEMENT_ID} != null)</printWhenExpression>
+			<textField>
+				<reportElement x="0" y="0" width="532" height="18"/>
+				<textElement verticalAlignment="Middle">
+					<font reportFont="Arial_Bold"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String">
+					<![CDATA[$F{SECTION_TITLE}]]>
+				</textFieldExpression>
+			</textField>
+
+			<line>
+				<reportElement x="0" y="18" width="532" height="0"/>
+				<graphicElement/>
+			</line>
+		</band>
+	  </groupHeader>
+	</group>
+
+	<group name="SubSectionTitle">
+		<groupExpression>
+			$F{SUB_SECTION_ID}
+		</groupExpression>
+		<groupHeader>	
+		  <band height="20">
+		    <printWhenExpression>new java.lang.Boolean(!com.sehinc.common.util.StringUtil.isEmpty($F{SUB_SECTION_TITLE}) &amp;&amp; $F{ELEMENT_ID} != null)</printWhenExpression>
+			<textField>
+				<reportElement x="10" y="0" width="522" height="18"/>
+				<textElement verticalAlignment="Middle">
+					<font reportFont="Arial_Bold_Italic"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String">
+					<![CDATA[$F{SUB_SECTION_TITLE}]]>
+				</textFieldExpression>
+			</textField>
+		</band>
+	  </groupHeader>
+	</group>
+
+	<group name="SectionElementWithChildAndTitle">
+		<groupExpression>
+			$F{ELEMENT_ID}
+		</groupExpression>
+		<groupHeader>	
+		  <band height="20">
+		    <printWhenExpression>new java.lang.Boolean($F{ELEMENT_ID} != null &amp;&amp; $F{CHILD_ELEMENT_ID} != null &amp;&amp; !$F{ELEMENT_ALLOW_OTHER}.equalsIgnoreCase("Y") &amp;&amp; $F{ELEMENT_HTML_TYPE} != null &amp;&amp; !$F{ELEMENT_HTML_TYPE}.equalsIgnoreCase("file") &amp;&amp; $F{CHILD_ELEMENT_DISPLAY_TITLE} != null &amp;&amp; $F{CHILD_ELEMENT_DISPLAY_TITLE}.equalsIgnoreCase("Y"))</printWhenExpression>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="10" y="1" width="175" height="16">
+					<printWhenExpression>new java.lang.Boolean(!com.sehinc.common.util.StringUtil.isEmpty($F{ELEMENT_TITLE}) &amp;&amp; $F{ELEMENT_DISPLAY_TITLE}.equalsIgnoreCase("Y"))</printWhenExpression>
+				</reportElement>
+				<textElement>
+					<font reportFont="Arial_Normal"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String">
+					<![CDATA[$F{ELEMENT_TITLE} + ":"]]>
+				</textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="195" y="1" width="100" height="16">
+					<printWhenExpression>new java.lang.Boolean(!com.sehinc.common.util.StringUtil.isEmpty($F{ELEMENT_VALUE}))</printWhenExpression>
+				</reportElement>
+				<textElement>
+					<font reportFont="Arial_Normal"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String">
+					<![CDATA[$F{ELEMENT_VALUE}]]>
+				</textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="305" y="1" width="227" height="16">
+					<printWhenExpression>new java.lang.Boolean(!com.sehinc.common.util.StringUtil.isEmpty($F{CHILD_ELEMENT_TITLE}) &amp;&amp; !com.sehinc.common.util.StringUtil.isEmpty($F{CHILD_ELEMENT_VALUE}))</printWhenExpression>
+				</reportElement>
+				<textElement>
+					<font reportFont="Arial_Normal"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String">
+					<![CDATA[$F{CHILD_ELEMENT_TITLE} + ":  " + $F{CHILD_ELEMENT_VALUE}]]>
+				</textFieldExpression>
+			</textField>
+		</band>
+	  </groupHeader>
+	</group>
+
+	<group name="SectionElementWithChildOther">
+		<groupExpression>
+			$F{ELEMENT_ID}
+		</groupExpression>
+		<groupHeader>	
+		  <band height="20">
+		    <printWhenExpression>new java.lang.Boolean($F{ELEMENT_ID} != null &amp;&amp; $F{CHILD_ELEMENT_ID} != null &amp;&amp; $F{ELEMENT_ALLOW_OTHER}.equalsIgnoreCase("Y") &amp;&amp; $F{ELEMENT_HTML_TYPE} != null &amp;&amp; !$F{ELEMENT_HTML_TYPE}.equalsIgnoreCase("file") &amp;&amp; $F{CHILD_ELEMENT_DISPLAY_TITLE} != null &amp;&amp; $F{CHILD_ELEMENT_DISPLAY_TITLE}.equalsIgnoreCase("Y"))</printWhenExpression>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="10" y="1" width="175" height="16">
+					<printWhenExpression>new java.lang.Boolean(!com.sehinc.common.util.StringUtil.isEmpty($F{ELEMENT_TITLE}) &amp;&amp; $F{ELEMENT_DISPLAY_TITLE}.equalsIgnoreCase("Y"))</printWhenExpression>
+				</reportElement>
+				<textElement>
+					<font reportFont="Arial_Normal"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String">
+					<![CDATA[$F{ELEMENT_TITLE} + ":"]]>
+				</textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="195" y="1" width="337" height="16">
+					<printWhenExpression>new java.lang.Boolean(!com.sehinc.common.util.StringUtil.isEmpty($F{ELEMENT_VALUE}))</printWhenExpression>
+				</reportElement>
+				<textElement>
+					<font reportFont="Arial_Normal"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String">
+					<![CDATA[$F{ELEMENT_VALUE}]]>
+				</textFieldExpression>
+			</textField>
+		</band>
+	  </groupHeader>
+	</group>
+
+	<group name="SectionElementWithChildNoTitle">
+		<groupExpression>
+			$F{ELEMENT_ID}
+		</groupExpression>
+		<groupHeader>	
+		  <band height="20">
+		    <printWhenExpression>new java.lang.Boolean($F{ELEMENT_ID} != null &amp;&amp; $F{CHILD_ELEMENT_ID} != null &amp;&amp; !$F{ELEMENT_ALLOW_OTHER}.equalsIgnoreCase("Y") &amp;&amp; $F{ELEMENT_HTML_TYPE} != null &amp;&amp; !$F{ELEMENT_HTML_TYPE}.equalsIgnoreCase("file") &amp;&amp; $F{CHILD_ELEMENT_DISPLAY_TITLE} != null &amp;&amp; !$F{CHILD_ELEMENT_DISPLAY_TITLE}.equalsIgnoreCase("Y"))</printWhenExpression>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="10" y="1" width="175" height="16">
+					<printWhenExpression>new java.lang.Boolean(!com.sehinc.common.util.StringUtil.isEmpty($F{ELEMENT_TITLE}) &amp;&amp; $F{ELEMENT_DISPLAY_TITLE}.equalsIgnoreCase("Y"))</printWhenExpression>
+				</reportElement>
+				<textElement>
+					<font reportFont="Arial_Normal"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String">
+					<![CDATA[$F{ELEMENT_TITLE} + ":"]]>
+				</textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="195" y="1" width="337" height="16"/>
+				<textElement>
+					<font reportFont="Arial_Normal"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String">
+					<![CDATA[((!com.sehinc.common.util.StringUtil.isEmpty($F{ELEMENT_VALUE}))?$F{ELEMENT_VALUE} + ((!com.sehinc.common.util.StringUtil.isEmpty($F{CHILD_ELEMENT_VALUE}))?"  " + $F{CHILD_ELEMENT_VALUE}:""):"")]]>
+				</textFieldExpression>
+			</textField>
+		</band>
+	  </groupHeader>
+	</group>
+
+	<group name="SectionElementNoChild">
+		<groupExpression>
+			$F{ELEMENT_ID}
+		</groupExpression>
+		<groupHeader>	
+		  <band height="20">
+		    <printWhenExpression>new java.lang.Boolean($F{ELEMENT_ID} != null &amp;&amp; $F{CHILD_ELEMENT_ID} == null &amp;&amp; !$F{ELEMENT_ALLOW_OTHER}.equalsIgnoreCase("Y") &amp;&amp; $F{ELEMENT_HTML_TYPE} != null &amp;&amp; !$F{ELEMENT_HTML_TYPE}.equalsIgnoreCase("file"))</printWhenExpression>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="10" y="1" width="175" height="16">
+					<printWhenExpression>new java.lang.Boolean(!com.sehinc.common.util.StringUtil.isEmpty($F{ELEMENT_TITLE}) &amp;&amp; $F{ELEMENT_DISPLAY_TITLE}.equalsIgnoreCase("Y"))</printWhenExpression>
+				</reportElement>
+				<textElement>
+					<font reportFont="Arial_Normal"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String">
+					<![CDATA[$F{ELEMENT_TITLE} + ":"]]>
+				</textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="195" y="1" width="337" height="16">
+					<printWhenExpression>new java.lang.Boolean(!com.sehinc.common.util.StringUtil.isEmpty($F{ELEMENT_VALUE}))</printWhenExpression>
+				</reportElement>
+				<textElement markup="html">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String">
+					<![CDATA[$F{ELEMENT_VALUE}]]>
+				</textFieldExpression>
+			</textField>
+		</band>
+	  </groupHeader>
+	</group>
+
+	<title>
+		<band height="75">
+			<image hyperlinkType="Reference" scaleImage="RetainShape">
+				<reportElement x="0" y="0" width="532" height="35">
+					<printWhenExpression>new Boolean($P{LogoLocation} != null)</printWhenExpression>
+				</reportElement>				
+				<imageExpression>$P{LogoLocation}</imageExpression>
+				<hyperlinkReferenceExpression>
+					$P{ClientWebSite}
+				</hyperlinkReferenceExpression>
+			</image>		
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="0" y="36" width="532" height="16"/>
+				<textElement>
+					<font reportFont="Arial_Normal" size="14"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String">
+					<![CDATA[$P{ClientName}]]>
+				</textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="53" width="532" height="0"/>
+				<graphicElement/>
+			</line>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="0" y="54" width="532" height="20" />
+				<textElement>
+					<font reportFont="Arial_Bold" size="18"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String">$F{FORM_TITLE}</textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	
+</jasperReport>

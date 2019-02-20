@@ -1,0 +1,31 @@
+<?xml version="1.0"?><!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping>
+    <class name="com.sehinc.environment.db.lookup.EnvUnitOfMeasureData"
+           table="LOOKUP_ENV_UNIT_OF_MEASURE">
+        <id name="code"
+            type="integer"
+            column="CODE">
+            <generator class="identity" />
+        </id>
+        <property name="clientId"
+                  column="CLIENT_ID"
+                  type="integer" />
+        <property name="description"
+                  column="DESCRIPTION"
+                  type="string" />
+        <property name="displayOrder"
+                  column="ORDER_NUM"
+                  type="integer" />
+    </class>
+    <query name="EnvUnitOfMeasureData.findAllByClientId">
+        from com.sehinc.environment.db.lookup.EnvUnitOfMeasureData as measure
+        where measure.clientId in (:clientId, 0)
+        order by measure.displayOrder ASC
+    </query>
+    <query name="EnvUnitOfMeasureData.findByCode">
+        from com.sehinc.environment.db.lookup.EnvUnitOfMeasureData as measure
+        where measure.code = :code
+    </query>
+</hibernate-mapping>

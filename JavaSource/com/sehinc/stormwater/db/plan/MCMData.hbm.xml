@@ -1,0 +1,76 @@
+<?xml version="1.0"?><!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping>
+    <!-- -->
+    <class name="com.sehinc.stormwater.db.plan.MCMData"
+           table="MCM">
+        <id name="id"
+            type="integer"
+            column="id">
+            <generator class="identity" />
+        </id>
+        <property name="planId"
+                  type="integer"
+                  column="PLAN_ID" />
+        <property name="name"
+                  type="string"
+                  column="NAME" />
+        <property name="requiredDescription"
+                  type="string">
+            <column name="REQUIRED_DESCRIPTION"
+                    sql-type="text" />
+        </property>
+        <property name="necessaryDescription"
+                  type="string"
+                  column="NECESSARY_DESCRIPTION" />
+        <property name="number"
+                  type="integer"
+                  column="NUMBER" />
+        <property name="ownerId"
+                  type="integer"
+                  column="OWNER_ID" />
+        <many-to-one name="status"
+                     class="com.sehinc.erosioncontrol.db.code.StatusCodeData"
+                     column="STATUS_CD"
+                     lazy="false" />
+        <property name="createTimestamp"
+                  type="timestamp"
+                  column="create_ts" />
+        <property name="updateTimestamp"
+                  type="timestamp"
+                  column="update_ts" />
+        <property name="updateUserId"
+                  type="integer"
+                  column="update_user_id" />
+    </class>
+    <class name="com.sehinc.stormwater.value.plan.MCMValue"
+           table="MCM">
+        <id name="id"
+            type="integer"
+            column="id">
+            <generator class="identity" />
+        </id>
+        <property name="planId"
+                  type="integer"
+                  column="PLAN_ID" />
+        <property name="name"
+                  type="string"
+                  column="NAME" />
+        <property name="number"
+                  type="integer"
+                  column="NUMBER" />
+    </class>
+    <query name="com.sehinc.stormwater.db.plan.MCMValue.byPlanId">
+        from com.sehinc.stormwater.value.plan.MCMValue value
+        where value.id in
+        ( select data.id from MCMData data where data.planId = :planId and data.status.code = :statusCode )
+        order by value.number asc, value.name asc
+    </query>
+    <query name="com.sehinc.stormwater.db.plan.MCMValue.byPlanIdWithMCMExclusion">
+        from com.sehinc.stormwater.value.plan.MCMValue value
+        where value.id in
+        ( select data.id from MCMData data where data.planId = :planId and data.id &lt;&gt; :mcmId and data.status.code = :statusCode )
+        order by value.number asc, value.name asc
+    </query>
+</hibernate-mapping>

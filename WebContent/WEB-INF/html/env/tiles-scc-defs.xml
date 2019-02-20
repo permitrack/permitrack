@@ -1,0 +1,61 @@
+<!DOCTYPE tiles-definitions PUBLIC
+    "-//Apache Software Foundation//DTD Tiles Configuration 1.3//EN"
+    "http://struts.apache.org/dtds/tiles-config_1_3.dtd">
+<tiles-definitions>
+    <definition name="scc.baseTitledLayout"
+                extends="ev.baseTitledLayout"></definition>
+    <definition name="scc.list.page"
+                extends="scc.baseTitledLayout">
+        <put name="title"
+             value="SCC Info List" />
+        <put name="description"
+             value="Listing of all SCC Info." />
+        <put name="content"
+             value="/html/env/scc/scclist.jsp" />
+    </definition>
+    <definition name="scc.view.page"
+                extends="scc.baseTitledLayout">
+        <put name="title"
+             value="SCC Info" />
+        <put name="description"
+             value="View SCC information." />
+        <put name="content"
+             value="/html/env/scc/sccview.jsp" />
+    </definition>
+    <definition name="scc.edit.page"
+                extends="scc.baseTitledLayout">
+        <put name="title"
+             value="SCC Info" />
+        <put name="description"
+             value="Edit SCC Info." />
+        <put name="content"
+             value="/html/env/scc/sccedit.jsp" />
+    </definition>
+    <definition name="scc.create.page"
+                extends="scc.baseTitledLayout">
+        <put name="title"
+             value="SCC Info" />
+        <put name="description"
+             value="Create SCC Info." />
+        <put name="content"
+             value="/html/env/scc/scccreate.jsp" />
+    </definition>
+    <definition name="scc.delete.page"
+                extends="scc.baseTitledLayout">
+        <put name="title"
+             value="SCC Info" />
+        <put name="description"
+             value="Delete SCC Info." />
+        <put name="content"
+             value="/html/env/scc/sccdelete.jsp" />
+    </definition>
+    <definition name="scc.import.page"
+                extends="scc.baseTitledLayout">
+        <put name="title"
+             value="SCC Import" />
+        <put name="description"
+             value="Import an SCC from the Library of SCCs." />
+        <put name="content"
+             value="/html/env/scc/sccimport.jsp" />
+    </definition>
+</tiles-definitions>

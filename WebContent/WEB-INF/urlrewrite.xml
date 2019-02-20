@@ -1,0 +1,720 @@
+<?xml version="1.0" encoding="utf-8"?><!DOCTYPE urlrewrite PUBLIC "-//tuckey.org//DTD UrlRewrite 4.0//EN"
+    "http://www.tuckey.org/res/dtds/urlrewrite4.0.dtd"><!--
+
+    Configuration file for UrlRewriteFilter
+    http://www.tuckey.org/urlrewrite/
+
+-->
+<urlrewrite use-query-string="true">
+    <!--
+    NEW LINKS TO OLD
+    -->
+    <rule>
+        <from>^/$</from>
+        <to last="true">/home.do</to>
+    </rule>
+    <rule>
+        <from>^/products$</from>
+        <to last="true">/products.do</to>
+    </rule>
+    <rule>
+        <from>^/products/pm$</from>
+        <to last="true">/projectmanagement.do</to>
+    </rule>
+    <rule>
+        <from>^/products/inspections$</from>
+        <to last="true">/inspection.do</to>
+    </rule>
+    <rule>
+        <from>^/products/emissions$</from>
+        <to last="true">/emission.do</to>
+    </rule>
+    <rule>
+        <from>^/contact$</from>
+        <to last="true">/contact.do</to>
+    </rule>
+    <rule>
+        <from>^/login$</from>
+        <to last="true">/loginPageAction.do</to>
+    </rule>
+    <rule>
+        <from>^/logout$</from>
+        <to last="true">/logoutAction.do</to>
+    </rule>
+    <rule>
+        <from>^/pt$</from>
+        <to last="true">/defaultaction.do</to>
+    </rule>
+    <rule>
+        <from>^/pt/ms4$</from>
+        <to last="true">/html/ms4/defaultaction.do</to>
+    </rule>
+    <rule>
+        <from>^/pt/ms4/clients$</from>
+        <to last="true">/html/ms4/admin/adminclientlistaction.do</to>
+    </rule>
+    <rule>
+        <from>^/pt/ms4/clients/([0-9]+)$</from>
+        <to last="true">/html/ms4/admin/adminclientselect.do?id=$1</to>
+    </rule>
+    <rule>
+        <from>^/pt/ms4/clients/([0-9]+)/plans$</from>
+        <to last="true">/html/ms4/plan/planlistaction.do?id=$1</to>
+    </rule>
+    <rule>
+        <from>^/pt/ms4/clients/([0-9]+)/plans\?new$</from>
+        <to last="true">/html/ms4/plan/plannewaction.do?id=$1</to>
+    </rule>
+    <rule>
+        <from>^/pt/ms4/plan/(.*)\?root$</from>
+        <to last="true">/html/ms4/plan/subnodeviewaction.do?node_id=$1&amp;root</to>
+    </rule>
+    <rule>
+        <from>^/pt/ms4/plan/a(.*)\?delete$</from>
+        <to last="true">/html/ms4/plan/goalactivitydeleteaction.do?id=$1</to>
+    </rule>
+    <rule>
+        <from>^/pt/ms4/plan/file/([0-9]+)\?delete$</from>
+        <to last="true">/html/ms4/plan/goalactivitydeletefilelocation.do?fileId=$1</to>
+    </rule>
+    <rule>
+        <from>^/pt/ms4/plan/g(.*)\?delete$</from>
+        <to last="true">/html/ms4/plan/goaldeleteaction.do?id=$1</to>
+    </rule>
+    <rule>
+        <from>^/pt/ms4/plan/b(.*)\?delete$</from>
+        <to last="true">/html/ms4/plan/bmpdeleteaction.do?id=$1</to>
+    </rule>
+    <rule>
+        <from>^/pt/ms4/plan/m(.*)\?delete$</from>
+        <to last="true">/html/ms4/plan/mcmdeleteaction.do?id=$1</to>
+    </rule>
+    <rule>
+        <from>^/pt/ms4/plan/p(.*)\?delete$</from>
+        <to last="true">/html/ms4/plan/plandeleteaction.do?id=$1</to>
+    </rule>
+    <rule>
+        <from>^/pt/ms4/plan/g(.*)\?new$</from>
+        <to last="true">/html/ms4/plan/goalactivitycreateaction.do?id=$1</to>
+    </rule>
+    <rule>
+        <from>^/pt/ms4/plan/b(.*)\?new$</from>
+        <to last="true">/html/ms4/plan/goalcreateaction.do?id=$1</to>
+    </rule>
+    <rule>
+        <from>^/pt/ms4/plan/m(.*)\?new&amp;type=0$</from>
+        <to last="true">/html/ms4/plan/bmp0createaction.do?id=$1</to>
+    </rule>
+    <rule>
+        <from>^/pt/ms4/plan/m(.*)\?new&amp;type=1$</from>
+        <to last="true">/html/ms4/plan/bmp1createaction.do?id=$1</to>
+    </rule>
+    <rule>
+        <from>^/pt/ms4/plan/m(.*)\?new&amp;type=2$</from>
+        <to last="true">/html/ms4/plan/bmp2createaction.do?id=$1</to>
+    </rule>
+    <rule>
+        <from>^/pt/ms4/plan/m(.*)\?new&amp;type=db$</from>
+        <to last="true">/html/ms4/plan/bmpdbcreateaction.do?id=$1</to>
+    </rule>
+    <rule>
+        <from>^/pt/ms4/plan/b(.*)\?move$</from>
+        <to last="true">/html/ms4/plan/bmpmoveaction.do?id=$1</to>
+    </rule>
+    <rule>
+        <from>^/pt/ms4/plan/b(.*)\?copy$</from>
+        <to last="true">/html/ms4/plan/bmpcopyaction.do?id=$1</to>
+    </rule>
+    <rule>
+        <from>^/pt/ms4/plan/([0-9]+)/reports$</from>
+        <to last="true">/html/ms4/report/reportoptionsaction.do?id=$1</to>
+    </rule>
+    <rule>
+        <from>^/pt/ms4/plan/([0-9]+)/publish\?published&amp;(.*)$</from>
+        <to last="true">/html/ms4/plan/planpublish.do?$2</to>
+    </rule>
+    <rule>
+        <from>^/pt/ms4/plan/([0-9]+)/publish$</from>
+        <to last="true">/html/ms4/plan/planpublishaction.do?id=$1</to>
+    </rule>
+    <rule>
+        <from>^/pt/ms4/plan/p(.*)\?new$</from>
+        <to last="true">/html/ms4/plan/mcmcreateaction.do?id=$1</to>
+    </rule>
+    <rule>
+        <from>^/pt/ms4/plan/a(.*)\?attach$</from>
+        <to last="true">/html/ms4/plan/goalactivityfileuploadaction.do?node_id=a$1</to>
+    </rule>
+    <rule>
+        <from>^/pt/ms4/plan/(.*)$</from>
+        <to last="true">/html/ms4/plan/subnodeviewaction.do?node_id=$1</to>
+    </rule>
+    <rule>
+        <from>^/pt/ms4/clients/([0-9]+)\?exit$</from>
+        <to last="true">/html/ms4/admin/remoteadminreturn.do</to>
+    </rule>
+    <rule>
+        <from>^/pt/ms4/periods/([0-9]+)$</from>
+        <to last="true">/html/ms4/permitperiod/permitperiodviewaction.do?permit_period_id=$1</to>
+    </rule>
+    <rule>
+        <from>^/pt/ms4/periods/\?list$</from>
+        <to last="true">/html/ms4/permitperiod/permitperiodviewaction.do</to>
+    </rule>
+    <rule>
+        <from>^/pt/ms4/periods/\?new$</from>
+        <to last="true">/html/ms4/permitperiod/permitperiodnewaction.do</to>
+    </rule>
+    <rule>
+        <from>^/pt/ms4/templates/p(.*)\?template$</from>
+        <to last="true">/html/ms4/plan/plantemplatecreate.do?id=$1</to>
+    </rule>
+    <rule>
+        <from>^/pt/ms4/templates/p(.*)\?delete$</from>
+        <to last="true">/html/ms4/template/plantemplatedelete.do?id=$1</to>
+    </rule>
+    <rule>
+        <from>^/pt/ms4/templates/m(.*)\?delete$</from>
+        <to last="true">/html/ms4/template/mcmtemplatedelete.do?id=$1</to>
+    </rule>
+    <rule>
+        <from>^/pt/ms4/templates/b(.*)\?delete$</from>
+        <to last="true">/html/ms4/template/bmptemplatedelete.do?id=$1</to>
+    </rule>
+    <rule>
+        <from>^/pt/ms4/templates/g(.*)\?delete$</from>
+        <to last="true">/html/ms4/template/goaltemplatedelete.do?id=$1</to>
+    </rule>
+    <rule>
+        <from>^/pt/ms4/templates/p(.*)\?new$</from>
+        <to last="true">/html/ms4/template/mcmtemplatecreateaction.do?id=$1</to>
+    </rule>
+    <rule>
+        <from>^/pt/ms4/templates/m(.*)\?new&amp;type=0$</from>
+        <to last="true">/html/ms4/template/bmp0templatecreateaction.do?id=$1</to>
+    </rule>
+    <rule>
+        <from>^/pt/ms4/templates/m(.*)\?new&amp;type=1$</from>
+        <to last="true">/html/ms4/template/bmp1templatecreateaction.do?id=$1</to>
+    </rule>
+    <rule>
+        <from>^/pt/ms4/templates/m(.*)\?new&amp;type=2$</from>
+        <to last="true">/html/ms4/template/bmp2templatecreateaction.do?id=$1</to>
+    </rule>
+    <rule>
+        <from>^/pt/ms4/templates/m(.*)\?new&amp;type=db$</from>
+        <to last="true">/html/ms4/template/bmpdbtemplatecreateaction.do?id=$1</to>
+    </rule>
+    <rule>
+        <from>^/pt/ms4/templates/b(.*)\?new$</from>
+        <to last="true">/html/ms4/template/goaltemplatecreateaction.do?id=$1</to>
+    </rule>
+    <!--http://localhost/sehsvc/html/ms4/template/plantemplateviewaction.do?id=122-->
+    <rule>
+        <from>^/pt/ms4/templates/p(.*)$</from>
+        <to last="true">/html/ms4/template/plantemplateviewaction.do?id=$1</to>
+    </rule>
+    <rule>
+        <from>^/pt/ms4/templates/m(.*)$</from>
+        <to last="true">/html/ms4/template/mcmtemplateviewaction.do?mcm_id=$1</to>
+    </rule>
+    <rule>
+        <from>^/pt/ms4/templates/b(.*)$</from>
+        <to last="true">/html/ms4/template/bmptemplateviewaction.do?bmp_id=$1</to>
+    </rule>
+    <rule>
+        <from>^/pt/ms4/templates/g(.*)$</from>
+        <to last="true">/html/ms4/template/goaltemplateviewaction.do?goal_id=$1</to>
+    </rule>
+    <rule>
+        <from>^/pt/ms4/templates$</from>
+        <to last="true">/html/ms4/template/plantemplatelistaction.do</to>
+    </rule>
+    <rule>
+        <from>^/pt/ms4/bmp/\?new$</from>
+        <to last="true">/html/ms4/bmpdb/bmpdbnewaction.do</to>
+    </rule>
+    <rule>
+        <from>^/pt/ms4/bmp/b(.*)\?delete$</from>
+        <to last="true">/html/ms4/bmpdb/bmpdbdelete.do?id=$1</to>
+    </rule>
+    <rule>
+        <from>^/pt/ms4/bmp/g(.*)\?delete$</from>
+        <to last="true">/html/ms4/bmpdb/bmpdbgoaldelete.do?id=$1</to>
+    </rule>
+    <rule>
+        <from>^/pt/ms4/bmp/\?new&amp;step2&amp;formType=([0-9]+)$</from>
+        <to last="true">/html/ms4/bmpdb/bmpdbnewstep2action.do?formType=$1&amp;submit=Continue</to>
+    </rule>
+    <rule>
+        <from>^/pt/ms4/bmp/b(.*)$</from>
+        <to last="true">/html/ms4/bmpdb/bmpdbviewaction.do?bmp_db_id=$1</to>
+    </rule>
+    <rule>
+        <from>^/pt/ms4/bmp/g(.*)$</from>
+        <to last="true">/html/ms4/bmpdb/goallibraryviewaction.do?bmp_db_goal_id=$1</to>
+    </rule>
+    <rule>
+        <from>^/pt/ms4/bmp$</from>
+        <to last="true">/html/ms4/bmpdb/bmpdblistpageaction.do</to>
+    </rule>
+
+
+    <!--GLOBAL-->
+    <rule>
+        <from>^/pt/(.*)\?(.+)$</from>
+        <to last="true">/html/$1.do?$2</to>
+    </rule>
+    <rule>
+        <from>^/pt/(.*)$</from>
+        <to last="true">/html/$1.do</to>
+    </rule>
+<!--
+    <rule>
+        <from>^/sehsvc/pt/(.*)\?(.*)$</from>
+        <to last="true">/sehsvc/html/$1.do?$2</to>
+    </rule>
+    <rule>
+        <from>^/sehsvc/pt/(.*)\?$</from>
+        <to last="true">/sehsvc/html/$1.do</to>
+    </rule>
+-->
+
+
+    <!--
+    OLD LINKS TO NEW
+    -->
+    <rule>
+        <from>^/defaultaction.do$</from>
+        <to type="permanent-redirect">/sehsvc/pt</to>
+    </rule>
+    <rule>
+        <from>^/loginPageAction.do$</from>
+        <to type="permanent-redirect">/sehsvc/login</to>
+    </rule>
+    <rule>
+        <from>^/html/ms4/admin/adminclientlistaction.do$</from>
+        <to type="permanent-redirect">/sehsvc/pt/ms4/clients</to>
+    </rule>
+    <rule>
+        <from>^/html/ms4/plan/planlistaction.do\?id=([0-9]+)$</from>
+        <to type="permanent-redirect">/sehsvc/pt/ms4/clients/$1/plans</to>
+    </rule>
+    <rule>
+        <from>^/html/ms4/plan/subnodeviewaction.do\?node_id=a(.*)$</from>
+        <to type="permanent-redirect">/sehsvc/pt/ms4/plan/a$1</to>
+    </rule>
+    <rule>
+        <from>^/html/ms4/plan/subnodeviewaction.do\?node_id=(.*)$</from>
+        <to type="permanent-redirect">/sehsvc/pt/ms4/plan/$1</to>
+    </rule>
+    <rule>
+        <from>^/html/ms4/permitperiod/permitperiodviewaction.do\?permit_period_id=(.*)$</from>
+        <to type="permanent-redirect">/sehsvc/pt/ms4/periods/$1</to>
+    </rule>
+    <rule>
+        <from>^/html/ms4/permitperiod/permitperiodviewaction.do$</from>
+        <to type="permanent-redirect">/sehsvc/pt/ms4/periods/?list</to>
+    </rule>
+    <rule>
+        <from>^/html/ms4/template/plantemplateviewaction\?id=(.*)$</from>
+        <to type="permanent-redirect">/sehsvc/pt/ms4/templates/$1</to>
+    </rule>
+    <rule>
+        <from>^/html/ms4/template/mcmtemplateviewaction\?id=(.*)$</from>
+        <to type="permanent-redirect">/sehsvc/pt/ms4/templates/$1</to>
+    </rule>
+    <rule>
+        <from>^/html/ms4/template/bmptemplateviewaction\?id=(.*)$</from>
+        <to type="permanent-redirect">/sehsvc/pt/ms4/templates/$1</to>
+    </rule>
+    <rule>
+        <from>^/html/ms4/template/goaltemplateviewaction\?id=(.*)$</from>
+        <to type="permanent-redirect">/sehsvc/pt/ms4/templates/$1</to>
+    </rule>
+    <rule>
+        <from>^/html/ms4/template/plantemplatelistaction.do$</from>
+        <to type="permanent-redirect">/sehsvc/pt/ms4/templates</to>
+    </rule>
+    <rule>
+        <from>^/html/ms4/bmpdb/bmpdblistpageaction.do$</from>
+        <to type="permanent-redirect">/sehsvc/pt/ms4/bmp</to>
+    </rule>
+    <rule>
+        <from>^/html/ms4/bmpdb/bmpdbnewstep2action.do\?formType=([0-9]+)&amp;submit=Continue$</from>
+        <to type="permanent-redirect">/sehsvc/pt/ms4/bmp/?new&amp;step2&amp;formType=0</to>
+    </rule>
+    <rule>
+        <from>^/html/ms4/plan/planpublish.do\?(.*)$</from>
+        <to type="permanent-redirect">/sehsvc/pt/ms4/plan/0/publish?published&amp;$1</to>
+    </rule>
+
+    <!--GLOBAL-->
+    <rule>
+        <condition type="method">GET</condition>
+        <from>^/html/(.*)\.do\?(.+)$</from>
+        <to type="permanent-redirect">/sehsvc/pt/$1?$2</to>
+    </rule>
+    <rule>
+        <condition type="method">GET</condition>
+        <from>^/html/(.*)\.do$</from>
+        <to type="permanent-redirect">/sehsvc/pt/$1?</to>
+    </rule>
+
+    <rule>
+        <from>^.*\.(js|css|gif|png|jpg|jpeg)$</from>
+        <set type="expires">1 year</set>
+        <set type="response-header" name="ETag">v460</set>
+    </rule>
+
+    <rule>
+        <from>^.*\.(gif|png|jpg|jpeg)$</from>
+        <set type="response-header" name="Cache-Control">public</set>
+    </rule>
+
+    <!--
+    <outbound-rule>
+        <from>^/html/(.*)\.do\?(.*)$</from>
+        <to>/pt/$1?$2</to>
+    </outbound-rule>
+    <outbound-rule>
+        <from>^/html/(.*)\.do$</from>
+        <to>/pt/$1?</to>
+    </outbound-rule>
+    -->
+
+    <!--
+    OLD LINKS TO NEW, OUTBOUND
+    -->
+    <!--
+        <outbound-rule>
+            <from>^/home.do$</from>
+            <to>/</to>
+        </outbound-rule>
+
+        <outbound-rule>
+            <from>^/product.do$</from>
+            <to>/products</to>
+        </outbound-rule>
+
+    -->
+    <outbound-rule>
+        <from>^/loginPageAction.do$</from>
+        <to>/login</to>
+    </outbound-rule>
+    <outbound-rule>
+        <from>^/sehsvc/loginPageAction.do$</from>
+        <to>/sehsvc/login</to>
+    </outbound-rule>
+    <outbound-rule>
+        <from>^/sehsvc/logoutAction.do$</from>
+        <to>/sehsvc/logout</to>
+    </outbound-rule>
+    <outbound-rule>
+        <from>^/defaultaction.do$</from>
+        <to>/pt</to>
+    </outbound-rule>
+    <outbound-rule>
+        <from>^/html/ms4/defaultaction.do$</from>
+        <to>/pt/ms4</to>
+    </outbound-rule>
+    <outbound-rule>
+        <from>^/html/ms4/admin/adminclientlistaction.do$</from>
+        <to>/pt/ms4/clients</to>
+    </outbound-rule>
+    <outbound-rule>
+        <from>^/sehsvc/html/ms4/admin/adminclientselect.do\?id=([0-9]+)$</from>
+        <to>/sehsvc/pt/ms4/clients/$1</to>
+    </outbound-rule>
+    <outbound-rule>
+        <from>^/sehsvc/html/ms4/plan/planviewaction.do\?id=([0-9]+)$</from>
+        <to>/sehsvc/pt/ms4/plan/p$1</to>
+    </outbound-rule>
+    <outbound-rule>
+        <from>^/html/ms4/plan/planviewaction.do\?id=([0-9]+)$</from>
+        <to>/pt/ms4/plan/p$1</to>
+    </outbound-rule>
+    <outbound-rule>
+        <from>^/html/ms4/plan/planlistaction.do\?id=([0-9]+)$</from>
+        <to>/pt/ms4/clients/$1/plans</to>
+    </outbound-rule>
+    <outbound-rule>
+        <from>^/html/ms4/plan/subnodeviewaction.do\?node_id=(.*)$</from>
+        <to>/pt/ms4/plan/$1</to>
+    </outbound-rule>
+    <outbound-rule>
+        <from>^/html/ms4/plan/plannewaction.do\?id=([0-9]+)$</from>
+        <to>/pt/ms4/clients/$1/plans?new</to>
+    </outbound-rule>
+    <outbound-rule>
+        <from>^/html/ms4/admin/remoteadminreturn.do\?id=([0-9]+)$</from>
+        <to>/pt/ms4/clients/$1?exit</to>
+    </outbound-rule>
+    <outbound-rule>
+        <from>^/html/ms4/report/reportoptionsaction.do\?id=([0-9]+)$</from>
+        <to>/pt/ms4/plan/$1/reports</to>
+    </outbound-rule>
+    <outbound-rule>
+        <from>^/html/ms4/plan/planpublishaction.do\?id=([0-9]+)$</from>
+        <to>/pt/ms4/plan/$1/publish</to>
+    </outbound-rule>
+    <outbound-rule>
+        <from>^/html/ms4/plan/goalactivitydeleteaction.do\?id=([0-9]+)$</from>
+        <to>/pt/ms4/plan/a$1?delete</to>
+    </outbound-rule>
+    <outbound-rule>
+        <from>^/sehsvc/html/ms4/plan/goalactivitydeletefilelocation.do\?fileId=([0-9]+)$</from>
+        <to>/sehsvc/pt/ms4/plan/file/$1?delete</to>
+    </outbound-rule>
+    <outbound-rule>
+        <from>^/html/ms4/plan/goaldeleteaction.do\?id=([0-9]+)$</from>
+        <to>/pt/ms4/plan/g$1?delete</to>
+    </outbound-rule>
+    <outbound-rule>
+        <from>^/html/ms4/plan/bmpdeleteaction.do\?id=([0-9]+)$</from>
+        <to>/pt/ms4/plan/b$1?delete</to>
+    </outbound-rule>
+    <outbound-rule>
+        <from>^/html/ms4/plan/mcmdeleteaction.do\?id=([0-9]+)$</from>
+        <to>/pt/ms4/plan/m$1?delete</to>
+    </outbound-rule>
+    <outbound-rule>
+        <from>^/html/ms4/plan/plandeleteaction.do\?id=([0-9]+)$</from>
+        <to>/pt/ms4/plan/p$1?delete</to>
+    </outbound-rule>
+    <outbound-rule>
+        <from>^/sehsvc/html/ms4/plan/goalactivitycreateaction.do\?id=([0-9]+)$</from>
+        <to>/sehsvc/pt/ms4/plan/g$1?new</to>
+    </outbound-rule>
+    <outbound-rule>
+        <from>^/sehsvc/html/ms4/plan/goalcreateaction.do\?id=([0-9]+)$</from>
+        <to>/sehsvc/pt/ms4/plan/b$1?new</to>
+    </outbound-rule>
+    <outbound-rule>
+        <from>^/sehsvc/html/ms4/plan/bmp0createaction.do\?id=([0-9]+)$</from>
+        <to>/sehsvc/pt/ms4/plan/m$1?new&amp;type=0</to>
+    </outbound-rule>
+    <outbound-rule>
+        <from>^/sehsvc/html/ms4/plan/bmp1createaction.do\?id=([0-9]+)$</from>
+        <to>/sehsvc/pt/ms4/plan/m$1?new&amp;type=1</to>
+    </outbound-rule>
+    <outbound-rule>
+        <from>^/sehsvc/html/ms4/plan/bmp2createaction.do\?id=([0-9]+)$</from>
+        <to>/sehsvc/pt/ms4/plan/m$1?new&amp;type=2</to>
+    </outbound-rule>
+    <outbound-rule>
+        <from>^/sehsvc/html/ms4/plan/bmpdbcreateaction.do\?id=([0-9]+)$</from>
+        <to>/sehsvc/pt/ms4/plan/m$1?new&amp;type=db</to>
+    </outbound-rule>
+    <outbound-rule>
+        <from>^/html/ms4/plan/bmpmoveaction.do\?id=([0-9]+)$</from>
+        <to>/pt/ms4/plan/b$1?move</to>
+    </outbound-rule>
+    <outbound-rule>
+        <from>^/html/ms4/plan/bmpcopyaction.do\?id=([0-9]+)$</from>
+        <to>/pt/ms4/plan/b$1?copy</to>
+    </outbound-rule>
+    <outbound-rule>
+        <from>^/sehsvc/html/ms4/plan/mcmcreateaction.do\?id=([0-9]+)$</from>
+        <to>/sehsvc/pt/ms4/plan/p$1?new</to>
+    </outbound-rule>
+    <outbound-rule>
+        <from>^/html/ms4/permitperiod/permitperiodviewaction.do$</from>
+        <to>/pt/ms4/periods/?list</to>
+    </outbound-rule>
+    <outbound-rule>
+        <from>^/html/ms4/permitperiod/permitperiodviewaction.do\?permit_period_id=([0-9]+)$</from>
+        <to>/pt/ms4/periods/$1</to>
+    </outbound-rule>
+    <outbound-rule>
+        <from>^/html/ms4/permitperiod/permitperiodnewaction.do$</from>
+        <to>/pt/ms4/periods/?new</to>
+    </outbound-rule>
+    <outbound-rule>
+        <from>^/sehsvc/html/ms4/permitperiod/permitperiodnewaction.do$</from>
+        <to>/sehsvc/pt/ms4/periods/?new</to>
+    </outbound-rule>
+    <outbound-rule>
+        <from>^/html/ms4/template/plantemplatelistaction.do$</from>
+        <to>/pt/ms4/templates</to>
+    </outbound-rule>
+    <outbound-rule>
+        <from>^/sehsvc/html/ms4/template/plantemplateviewaction.do\?node_id=(.*)$</from>
+        <to>/sehsvc/pt/ms4/templates/p$1</to>
+    </outbound-rule>
+    <outbound-rule>
+        <from>^/sehsvc/html/ms4/template/plantemplateviewaction.do\?id=(.*)$</from>
+        <to>/sehsvc/pt/ms4/templates/p$1</to>
+    </outbound-rule>
+    <outbound-rule>
+        <from>^/html/ms4/template/plantemplateviewaction.do\?id=(.*)$</from>
+        <to>/pt/ms4/templates/p$1</to>
+    </outbound-rule>
+    <outbound-rule>
+        <from>^/html/ms4/template/mcmtemplateviewaction.do\?mcm_id=(.*)$</from>
+        <to>/pt/ms4/templates/m$1</to>
+    </outbound-rule>
+    <outbound-rule>
+        <from>^/html/ms4/template/bmptemplateviewaction.do\?bmp_id=(.*)$</from>
+        <to>/pt/ms4/templates/b$1</to>
+    </outbound-rule>
+    <outbound-rule>
+        <from>^/html/ms4/template/goaltemplateviewaction.do\?goal_id=(.*)$</from>
+        <to>/pt/ms4/templates/g$1</to>
+    </outbound-rule>
+    <outbound-rule>
+        <from>^/sehsvc/html/ms4/template/mcmtemplatecreateaction.do\?id=(.*)$</from>
+        <to>/sehsvc/pt/ms4/templates/p$1?new</to>
+    </outbound-rule>
+    <outbound-rule>
+        <from>^/sehsvc/html/ms4/template/bmp0templatecreateaction.do\?id=(.*)$</from>
+        <to>/sehsvc/pt/ms4/templates/m$1?new&amp;type=0</to>
+    </outbound-rule>
+    <outbound-rule>
+        <from>^/sehsvc/html/ms4/template/bmp1templatecreateaction.do\?id=(.*)$</from>
+        <to>/sehsvc/pt/ms4/templates/m$1?new&amp;type=1</to>
+    </outbound-rule>
+    <outbound-rule>
+        <from>^/sehsvc/html/ms4/template/bmp2templatecreateaction.do\?id=(.*)$</from>
+        <to>/sehsvc/pt/ms4/templates/m$1?new&amp;type=2</to>
+    </outbound-rule>
+    <outbound-rule>
+        <from>^/sehsvc/html/ms4/template/bmpdbtemplatecreateaction.do\?id=(.*)$</from>
+        <to>/sehsvc/pt/ms4/templates/m$1?new&amp;type=db</to>
+    </outbound-rule>
+    <outbound-rule>
+        <from>^/sehsvc/html/ms4/template/goaltemplatecreateaction.do\?id=(.*)$</from>
+        <to>/sehsvc/pt/ms4/templates/b$1?new</to>
+    </outbound-rule>
+    <outbound-rule>
+        <from>^/html/ms4/plan/plantemplatecreate.do\?id=(.*)$</from>
+        <to>/pt/ms4/templates/p$1?template</to>
+    </outbound-rule>
+    <outbound-rule>
+        <from>^/html/ms4/template/plantemplatedelete.do\?id=(.*)$</from>
+        <to>/pt/ms4/templates/p$1?delete</to>
+    </outbound-rule>
+    <outbound-rule>
+        <from>^/html/ms4/template/mcmtemplatedelete.do\?id=(.*)$</from>
+        <to>/pt/ms4/templates/m$1?delete</to>
+    </outbound-rule>
+    <outbound-rule>
+        <from>^/html/ms4/template/bmptemplatedelete.do\?id=(.*)$</from>
+        <to>/pt/ms4/templates/b$1?delete</to>
+    </outbound-rule>
+    <outbound-rule>
+        <from>^/html/ms4/template/goaltemplatedelete.do\?id=(.*)$</from>
+        <to>/pt/ms4/templates/g$1?delete</to>
+    </outbound-rule>
+    <outbound-rule>
+        <from>^/html/ms4/bmpdb/bmpdblistpageaction.do$</from>
+        <to>/pt/ms4/bmp</to>
+    </outbound-rule>
+    <outbound-rule>
+        <from>^/html/ms4/bmpdb/bmpdbviewaction.do\?bmp_db_id=([0-9]+)$</from>
+        <to>/pt/ms4/bmp/b$1</to>
+    </outbound-rule>
+    <outbound-rule>
+        <from>^/sehsvc/html/ms4/bmpdb/bmpdbviewaction.do\?bmp_db_id=([0-9]+)$</from>
+        <to>/sehsvc/pt/ms4/bmp/b$1</to>
+    </outbound-rule>
+    <outbound-rule>
+        <from>^/html/ms4/bmpdb/goallibraryviewaction.do\?bmp_db_goal_id=([0-9]+)$</from>
+        <to>/pt/ms4/bmp/g$1</to>
+    </outbound-rule>
+    <outbound-rule>
+        <from>^/html/ms4/bmpdb/bmpdbnewaction.do$</from>
+        <to>/pt/ms4/bmp/?new</to>
+    </outbound-rule>
+    <outbound-rule>
+        <from>^/html/ms4/bmpdb/bmpdbdelete.do\?id=(.*)$</from>
+        <to>/pt/ms4/bmp/b$1?delete</to>
+    </outbound-rule>
+    <outbound-rule>
+        <from>^/html/ms4/bmpdb/bmpdbgoaldelete.do\?id=(.*)$</from>
+        <to>/pt/ms4/bmp/g$1?delete</to>
+    </outbound-rule>
+
+    <outbound-rule>
+        <from>^/html/(.*)\.do\?(.+)$</from>
+        <to>/pt/$1?$2</to>
+    </outbound-rule>
+    <outbound-rule>
+        <from>^/html/(.*)\.do$</from>
+        <to>/pt/$1?</to>
+    </outbound-rule>
+
+
+    <!--
+        <outbound-rule>
+            <note>
+                The outbound-rule specifies that when response.encodeURL is called (if you are using JSTL c:url)
+                the url /rewrite-status will be rewritten to /test/status/.
+                The above rule and this outbound-rule means that end users should never see the
+                url /rewrite-status only /test/status/ both in thier location bar and in hyperlinks
+                in your pages.
+            </note>
+            <from>/rewrite-status</from>
+            <to>/test/status/</to>
+        </outbound-rule>
+    -->
+    <!--
+
+    INSTALLATION
+
+        in your web.xml add...
+
+        <filter>
+            <filter-name>UrlRewriteFilter</filter-name>
+            <filter-class>org.tuckey.web.filters.urlrewrite.UrlRewriteFilter</filter-class>
+            <init-param>
+                <param-name>logLevel</param-name>
+                <param-value>WARN</param-value>
+            </init-param>
+        </filter>
+        <filter-mapping>
+            <filter-name>UrlRewriteFilter</filter-name>
+            <url-pattern>/*</url-pattern>
+        </filter-mapping>
+
+     EXAMPLES
+
+     Redirect one url
+        <rule>
+            <from>/some/old/page.html</from>
+            <to type="redirect">/very/new/page.html</to>
+        </rule>
+
+    Redirect a directory
+        <rule>
+            <from>/some/olddir/(.*)</from>
+            <to type="redirect">/very/newdir/$1</to>
+        </rule>
+
+    Clean a url
+        <rule>
+            <from>/products/([0-9]+)</from>
+            <to>/products/index.jsp?product_id=$1</to>
+        </rule>
+    eg, /products/1234 will be passed on to /products/index.jsp?product_id=1234 without the user noticing.
+
+    Browser detection
+        <rule>
+            <condition name="user-agent">Mozilla/[1-4]</condition>
+            <from>/some/page.html</from>
+            <to>/some/page-for-old-browsers.html</to>
+        </rule>
+    eg, will pass the request for /some/page.html on to /some/page-for-old-browsers.html only for older
+    browsers whose user agent srtings match Mozilla/1, Mozilla/2, Mozilla/3 or Mozilla/4.
+
+    Centralised browser detection
+        <rule>
+            <condition name="user-agent">Mozilla/[1-4]</condition>
+            <set type="request" name="browser">moz</set>
+        </rule>
+    eg, all requests will be checked against the condition and if matched
+    request.setAttribute("browser", "moz") will be called.
+
+    -->
+</urlrewrite>
+

@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="NE_Air_Form_12_0" pageWidth="550" pageHeight="842" columnWidth="550" leftMargin="0" rightMargin="0" topMargin="10" bottomMargin="10">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<reportFont name="Arial_Normal" isDefault="true" fontName="Arial" size="12" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Bold" isDefault="false" fontName="Arial" size="12" isBold="true" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Italic" isDefault="false" fontName="Arial" size="12" isItalic="true" pdfFontName="Helvetica-Oblique" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Bold_Italic" isDefault="false" fontName="Arial" size="12" isBold="true" isItalic="true" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Small" isDefault="true" fontName="Arial" size="10" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Small_Bold" isDefault="false" fontName="Arial" size="10" isBold="true" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Small_Italic" isDefault="false" fontName="Arial" size="10" isItalic="true" pdfFontName="Helvetica-Oblique" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Small_Bold_Italic" isDefault="false" fontName="Arial" size="10" isBold="true" isItalic="true" pdfFontName="Helvetica-Oblique" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<parameter name="FacilityId" class="java.lang.Integer"/>
+	<parameter name="year" class="java.lang.Integer"/>
+	<parameter name="clientId" class="java.lang.Integer"/>
+	<parameter name="NE_Air_Form_0_0_Facility_Info_File" class="java.io.File"/>
+	<parameter name="NE_Air_Form_12_0_Subreport_File" class="java.io.File"/>
+	<parameter name="NE_Air_Form_12_0_Totals_File" class="java.io.File"/>
+	<queryString>
+		<![CDATA[EXEC sp_assets_and_sccs_for_facility_year @yearInt=$P{year}, @facilityId=$P{FacilityId}]]>
+	</queryString>
+	<field name="ASSET_ID" class="java.lang.Integer"/>
+	<field name="ASSET_NUMBER" class="java.lang.String"/>
+	<field name="ASSET_NAME" class="java.lang.String"/>
+	<field name="PROC_NUM" class="java.lang.String"/>
+	<field name="SCC_ID" class="java.lang.Integer"/>
+	<field name="SCC_NUMBER" class="java.lang.String"/>
+	<field name="SCC_DESCRIPTION" class="java.lang.String"/>
+	<field name="SCC_RAW_MATERIAL" class="java.lang.String"/>
+	<field name="SCC_EMITTING_PROCESS" class="java.lang.String"/>
+	<title>
+		<band height="269" splitType="Stretch">
+			<subreport>
+				<reportElement x="0" y="19" width="550" height="60"/>
+				<subreportParameter name="year">
+					<subreportParameterExpression><![CDATA[$P{year}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="FacilityId">
+					<subreportParameterExpression><![CDATA[$P{FacilityId}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.io.File"><![CDATA[$P{NE_Air_Form_0_0_Facility_Info_File}]]></subreportExpression>
+			</subreport>
+			<staticText>
+				<reportElement x="0" y="0" width="550" height="19"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font reportFont="Arial_Bold"/>
+				</textElement>
+				<text><![CDATA[FORM 12.0 EMISSIONS FEE CALCULATION WORKSHEET]]></text>
+			</staticText>
+			<subreport>
+				<reportElement x="0" y="144" width="550" height="125"/>
+				<subreportParameter name="year">
+					<subreportParameterExpression><![CDATA[$P{year}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="FacilityId">
+					<subreportParameterExpression><![CDATA[$P{FacilityId}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="clientId">
+					<subreportParameterExpression><![CDATA[$P{clientId}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.io.File"><![CDATA[$P{NE_Air_Form_12_0_Subreport_File}]]></subreportExpression>
+			</subreport>
+			<staticText>
+				<reportElement x="10" y="87" width="530" height="57"/>
+				<textElement verticalAlignment="Middle">
+					<font reportFont="Arial_Small_Bold"/>
+				</textElement>
+				<text><![CDATA[Use one row to list the emissions from one emission  point.  Sum the emissions in the page total box at the bottom of the column.  If more than one page is needed, use the first row of the duplicated page to list the page totals from this page.  Emissions MUST be expressed in tons per year and rounded to two decimal places (XX.XX).]]></text>
+			</staticText>
+		</band>
+	</title>
+	<lastPageFooter>
+		<band height="341" splitType="Stretch">
+			<staticText>
+				<reportElement x="10" y="10" width="530" height="55"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font reportFont="Arial_Small_Bold" size="10"/>
+				</textElement>
+				<text><![CDATA[NOTE:  FILL OUT THE LOWER PORTION OF THIS FORM ONE TIME ONLY.
+Total Plant Emissions:  (Make sure to use the sum of ALL page totals for each pollutant for the actual emissions below.  Transfer the totals below to the front page under Total Plant Emissions under the “Emissions Statement”.)]]></text>
+			</staticText>
+			<subreport>
+				<reportElement x="0" y="71" width="550" height="270"/>
+				<subreportParameter name="year">
+					<subreportParameterExpression><![CDATA[$P{year}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="clientId">
+					<subreportParameterExpression><![CDATA[$P{clientId}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="FacilityId">
+					<subreportParameterExpression><![CDATA[$P{FacilityId}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.io.File"><![CDATA[$P{NE_Air_Form_12_0_Totals_File}]]></subreportExpression>
+			</subreport>
+		</band>
+	</lastPageFooter>
+</jasperReport>

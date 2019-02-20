@@ -1,0 +1,2 @@
+ALTER TABLE ENV_ASSET
+ADD [VERSION] [bigint] NOT NULL default 0;

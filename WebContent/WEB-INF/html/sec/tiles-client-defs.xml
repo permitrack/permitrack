@@ -1,0 +1,129 @@
+<!DOCTYPE tiles-definitions PUBLIC
+    "-//Apache Software Foundation//DTD Tiles Configuration 1.3//EN"
+    "http://struts.apache.org/dtds/tiles-config_1_3.dtd">
+<tiles-definitions>
+    <definition name="sec.client.baseTitledLayout"
+                extends="html.baseTitledLayout">
+        <put name="primaryMenu"
+             value="/html/sec/primarynavigation.jsp" />
+        <put name="secondaryMenu"
+             value="/html/sec/secondarynavigation.jsp" />
+    </definition>
+    <definition name="sec.client.baseSplitPanelLayout"
+                extends="html.baseSplitPanelLayout">
+        <put name="primaryMenu"
+             value="/html/sec/primarynavigation.jsp" />
+        <put name="secondaryMenu"
+             value="/html/sec/secondarynavigation.jsp" />
+        <put name="leftPanel"
+             value="/html/sec/client/clienthierarchy.jsp" />
+    </definition>
+    <definition name="client.list.page.tiles"
+                extends="sec.client.baseSplitPanelLayout">
+        <put name="title"
+             value="Client List" />
+        <put name="description"
+             value="Select a client to administer or select New Client to add a new client." />
+        <put name="content"
+             value="/html/sec/client/clientlist.jsp" />
+    </definition>
+    <definition name="client.list.page.tiles.b"
+                extends="sec.client.baseTitledLayout">
+        <put name="title"
+             value="Client List" />
+        <put name="description"
+             value="Select a client to administer or select New Client to add a new client." />
+        <put name="content"
+             value="/html/sec/client/clientlist.jsp" />
+    </definition>
+    <definition name="client.view.page.tiles"
+                extends="sec.client.baseTitledLayout">
+        <put name="title"
+             value="View Client" />
+        <put name="description"
+             value="View client specific information.  Select commands from above to edit, delete or create a new client." />
+        <put name="content"
+             value="/html/sec/client/clientview.jsp" />
+    </definition>
+    <definition name="client.create.page.tiles"
+                extends="sec.client.baseTitledLayout">
+        <put name="title"
+             value="Create Client" />
+        <put name="description"
+             value="Provide new client information then select the Create Client command to add the new client.  Required fields are marked with an asterisk." />
+        <put name="content"
+             value="/html/sec/client/clientcreate.jsp" />
+    </definition>
+    <definition name="client.edit.page.tiles"
+                extends="sec.client.baseTitledLayout">
+        <put name="title"
+             value="Edit Client" />
+        <put name="description"
+             value="Provide updated client information then select the Update Client command to update the client.  Required fields are marked with an asterisk." />
+        <put name="content"
+             value="/html/sec/client/clientedit.jsp" />
+    </definition>
+    <definition name="client.delete.page.tiles"
+                extends="sec.client.baseTitledLayout">
+        <put name="title"
+             value="Delete Client" />
+        <put name="description"
+             value="Delete the client from all applications" />
+        <put name="content"
+             value="/html/sec/client/clientdelete.jsp" />
+    </definition>
+    <definition name="client.dv.view.page.tiles"
+                extends="sec.client.baseTitledLayout">
+        <put name="title"
+             value="Client - DataView Online" />
+        <put name="description"
+             value="View DataView Online application setup information." />
+        <put name="content"
+             value="/html/sec/client/clientdvview.jsp" />
+    </definition>
+    <definition name="client.dv.edit.page.tiles"
+                extends="sec.client.baseTitledLayout">
+        <put name="title"
+             value="Client - DataView Online" />
+        <put name="description"
+             value="Edit DataView Online application setup information." />
+        <put name="content"
+             value="/html/sec/client/clientdvedit.jsp" />
+    </definition>
+    <definition name="client.ec.view.page.tiles"
+                extends="sec.client.baseTitledLayout">
+        <put name="title"
+             value="Client - Erosion Control (ESC)" />
+        <put name="description"
+             value="View Erosion Control (ESC) application setup information." />
+        <put name="content"
+             value="/html/sec/client/clientecview.jsp" />
+    </definition>
+    <definition name="client.ec.edit.page.tiles"
+                extends="sec.client.baseTitledLayout">
+        <put name="title"
+             value="Client - Erosion Control (ESC)" />
+        <put name="description"
+             value="Edit Erosion Control (ESC) application setup information." />
+        <put name="content"
+             value="/html/sec/client/clientecedit.jsp" />
+    </definition>
+    <definition name="client.logo.select.page"
+                extends="sec.client.baseTitledLayout">
+        <put name="title"
+             value="Client Logo" />
+        <put name="description"
+             value="Upload a logo for this client.  Logo files must be in .JPG, .GIF, or .PNG format." />
+        <put name="content"
+             value="/html/sec/client/clientlogoselect.jsp" />
+    </definition>
+    <definition name="client.activity.page"
+                extends="sec.client.baseTitledLayout">
+        <put name="title"
+             value="Client Activity" />
+        <put name="description"
+             value="Recent client activity." />
+        <put name="content"
+             value="/html/sec/client/clientactivity.jsp" />
+    </definition>
+</tiles-definitions>

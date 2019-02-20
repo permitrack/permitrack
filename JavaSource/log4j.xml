@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+    <appender name="ConsoleAppender"
+              class="org.apache.log4j.ConsoleAppender">
+        <param name="MaxFileSize"
+               value="1000KB" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern"
+                   value="%d [%t] %-5p %c - %m%n" />
+        </layout>
+    </appender>
+    <appender name="SEHPortalApplicationAppender"
+              class="org.apache.log4j.RollingFileAppender">
+        <param name="File"
+               value="@log4j.log.dir@/SEHPortal.log" />
+        <param name="Append"
+               value="true" />
+        <param name="MaxFileSize"
+               value="1000KB" />
+        <param name="MaxBackupIndex"
+               value="2" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern"
+                   value="%d %-5p %30.30c %x - %m\n" />
+        </layout>
+    </appender>
+    <appender name="SEHStormwaterApplicationAppender"
+              class="org.apache.log4j.RollingFileAppender">
+        <param name="File"
+               value="@log4j.log.dir@/SEHStormwater.log" />
+        <param name="Append"
+               value="true" />
+        <param name="MaxFileSize"
+               value="1000KB" />
+        <param name="MaxBackupIndex"
+               value="2" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern"
+                   value="%d %-5p %30.30c %x - %m\n" />
+        </layout>
+    </appender>
+    <appender name="SEHErosionControlApplicationAppender"
+              class="org.apache.log4j.RollingFileAppender">
+        <param name="File"
+               value="@log4j.log.dir@/SEHErosionControl.log" />
+        <param name="Append"
+               value="true" />
+        <param name="MaxFileSize"
+               value="1000KB" />
+        <param name="MaxBackupIndex"
+               value="2" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern"
+                   value="%d %-5p %30.30c %x - %m\n" />
+        </layout>
+    </appender>
+    <appender name="SEHSecurityApplicationAppender"
+              class="org.apache.log4j.RollingFileAppender">
+        <param name="File"
+               value="@log4j.log.dir@/SEHSecurity.log" />
+        <param name="Append"
+               value="true" />
+        <param name="MaxFileSize"
+               value="1000KB" />
+        <param name="MaxBackupIndex"
+               value="2" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern"
+                   value="%d %-5p %30.30c %x - %m\n" />
+        </layout>
+    </appender>
+    <appender name="SEHDataViewApplicationAppender"
+              class="org.apache.log4j.RollingFileAppender">
+        <param name="File"
+               value="@log4j.log.dir@/SEHDataView.log" />
+        <param name="Append"
+               value="true" />
+        <param name="MaxFileSize"
+               value="1000KB" />
+        <param name="MaxBackupIndex"
+               value="2" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern"
+                   value="%d %-5p %30.30c %x - %m\n" />
+        </layout>
+    </appender>
+    <appender name="SEHEnvironmentApplicationAppender"
+              class="org.apache.log4j.RollingFileAppender">
+        <param name="File"
+               value="@log4j.log.dir@/SEHEnvironment.log" />
+        <param name="Append"
+               value="true" />
+        <param name="MaxFileSize"
+               value="1000KB" />
+        <param name="MaxBackupIndex"
+               value="2" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern"
+                   value="%d %-5p %30.30c %x - %m\n" />
+        </layout>
+    </appender>
+    <appender name="C3P0Appender"
+              class="org.apache.log4j.RollingFileAppender">
+        <param name="File"
+               value="@log4j.log.dir@/c3p0.log" />
+        <param name="Append"
+               value="true" />
+        <param name="MaxFileSize"
+               value="1000KB" />
+        <param name="MaxBackupIndex"
+               value="2" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern"
+                   value="%d %-5p %30.30c %x - %m\n" />
+        </layout>
+    </appender>
+    <appender name="HibernateAppender"
+              class="org.apache.log4j.RollingFileAppender">
+        <param name="File"
+               value="@log4j.log.dir@/hibernate.log" />
+        <param name="Append"
+               value="true" />
+        <param name="MaxFileSize"
+               value="1000KB" />
+        <param name="MaxBackupIndex"
+               value="2" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern"
+                   value="%d %-5p %30.30c %x - %m\n" />
+        </layout>
+    </appender>
+    <appender name="SpringAppender"
+              class="org.apache.log4j.RollingFileAppender">
+        <param name="File"
+               value="@log4j.log.dir@/spring.log" />
+        <param name="Append"
+               value="true" />
+        <param name="MaxFileSize"
+               value="1000KB" />
+        <param name="MaxBackupIndex"
+               value="2" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern"
+                   value="%d %-5p %30.30c %x - %m\n" />
+        </layout>
+    </appender>
+    <!--
+        Installation and configuration
+
+        The slf4j-api.jar must be available in the class path of the webserver.
+        Just deploy the .war file to JBoss ( e.g. copy it to /jboss/server/default/deploy).
+        jboss-log4j.xml (or jboss-logging-xml) must contain an appender with XMLLayout
+
+        Example:
+    -->
+    <appender name="XMLFILE"
+              class="org.apache.log4j.RollingFileAppender">
+        <!--<errorHandler class="org.jboss.logging.util.OnlyOnceErrorHandler"/>-->
+        <param name="File"
+               value="@log4j.log.dir@/server.xml" />
+        <param name="Append"
+               value="true" />
+        <param name="MaxFileSize"
+               value="3000KB" />
+        <param name="MaxBackupIndex"
+               value="5" />
+        <layout class="org.apache.log4j.xml.XMLLayout" />
+    </appender>
+    <!--
+    If you want to use live tracing you must have a free port and the log configuration must contain an appender like this
+    -->
+    <appender name="WEBVIEWERAPPENDER"
+              class="org.apache.log4j.net.SocketAppender">
+        <param name="remoteHost"
+               value="localhost" />
+        <param name="port"
+               value="8989" />
+        <param name="reconnectionDelay"
+               value="2000" />
+        <param name="threshold"
+               value="INFO" />
+    </appender>
+    <logger name="com.sehinc.common"
+            additivity="false">
+        <level value="@log4j.log.level@" />
+        <appender-ref ref="SEHPortalApplicationAppender" />
+        <appender-ref ref="WEBVIEWERAPPENDER" />
+    </logger>
+    <logger name="com.sehinc.service"
+            additivity="false">
+        <level value="@log4j.log.level@" />
+        <appender-ref ref="SEHPortalApplicationAppender" />
+        <appender-ref ref="WEBVIEWERAPPENDER" />
+    </logger>
+    <logger name="com.sehinc.stormwater"
+            additivity="false">
+        <level value="@log4j.log.level@" />
+        <appender-ref ref="SEHStormwaterApplicationAppender" />
+        <appender-ref ref="WEBVIEWERAPPENDER" />
+    </logger>
+    <logger name="com.sehinc.erosioncontrol"
+            additivity="false">
+        <level value="@log4j.log.level@" />
+        <appender-ref ref="SEHErosionControlApplicationAppender" />
+        <appender-ref ref="WEBVIEWERAPPENDER" />
+    </logger>
+    <logger name="com.sehinc.security"
+            additivity="false">
+        <level value="@log4j.log.level@" />
+        <appender-ref ref="SEHSecurityApplicationAppender" />
+        <appender-ref ref="WEBVIEWERAPPENDER" />
+    </logger>
+    <logger name="com.sehinc.dataview"
+            additivity="false">
+        <level value="@log4j.log.level@" />
+        <appender-ref ref="SEHDataViewApplicationAppender" />
+        <appender-ref ref="WEBVIEWERAPPENDER" />
+    </logger>
+    <logger name="com.sehinc.environment"
+            additivity="false">
+        <level value="@log4j.log.level@" />
+        <appender-ref ref="SEHEnvironmentApplicationAppender" />
+        <appender-ref ref="WEBVIEWERAPPENDER" />
+    </logger>
+    <logger name="com.mchange.v2.c3p0"
+            additivity="false">
+        <level value="error" />
+        <appender-ref ref="C3P0Appender" />
+    </logger>
+    <logger name="org.hibernate"
+            additivity="false">
+        <level value="error" />
+        <appender-ref ref="HibernateAppender" />
+    </logger>
+    <logger name="org.hibernate.transaction"
+            additivity="false">
+        <level value="error" />
+        <appender-ref ref="HibernateAppender" />
+    </logger>
+    <logger name="org.hibernate.jdbc"
+            additivity="false">
+        <level value="error" />
+        <appender-ref ref="HibernateAppender" />
+    </logger>
+    <logger name="org.springframework"
+            additivity="false">
+        <level value="error" />
+        <appender-ref ref="SpringAppender" />
+    </logger>
+    <root>
+        <level value="@log4j.root.log.level@" />
+        <appender-ref ref="SEHPortalApplicationAppender" />
+        <appender-ref ref="XMLFILE" />
+        <appender-ref ref="WEBVIEWERAPPENDER" />
+    </root>
+</log4j:configuration>

@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?><!DOCTYPE struts-config PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 1.3//EN"
+    "http://struts.apache.org/dtds/struts-config_1_3.dtd">
+<struts-config>
+    <form-beans>
+        <form-bean name="SubstanceForm"
+                   type="com.sehinc.environment.action.substance.SubstanceForm" />
+        <form-bean name="SubstanceSccForm"
+                   type="com.sehinc.environment.action.substancescc.SubstanceSccForm" />
+    </form-beans>
+    <global-forwards>
+        <forward name="substance.list.page"
+                 path="/substancelistpage.do"
+                 redirect="true" />
+        <forward name="substance.view.page"
+                 path="/substanceviewpage.do"
+                 redirect="true" />
+    </global-forwards>
+    <action-mappings>
+        <action path="/substancelistpage"
+                type="com.sehinc.environment.action.substance.SubstanceListPageAction"
+                name="SubstanceForm"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="substance.list.page" />
+        </action>
+        <action path="/substanceviewpage"
+                type="com.sehinc.environment.action.substance.SubstanceViewPageAction"
+                name="SubstanceForm"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="substance.view.page" />
+        </action>
+        <action path="/substancecreatepage"
+                type="com.sehinc.environment.action.substance.SubstanceCreatePageAction"
+                name="SubstanceForm"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="substance.create.page" />
+        </action>
+        <action path="/substancecreateaction"
+                type="com.sehinc.environment.action.substance.SubstanceCreateAction"
+                input="substance.create.page"
+                name="SubstanceForm"
+                scope="request"
+                validate="true"
+                cancellable="true">
+            <forward name="continue"
+                     path="/substanceviewpage.do"
+                     redirect="true" />
+        </action>
+        <action path="/substanceeditpage"
+                type="com.sehinc.environment.action.substance.SubstanceEditPageAction"
+                name="SubstanceForm"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="substance.edit.page" />
+        </action>
+        <action path="/substanceeditaction"
+                type="com.sehinc.environment.action.substance.SubstanceEditAction"
+                input="substance.edit.page"
+                name="SubstanceForm"
+                scope="request"
+                validate="true"
+                cancellable="true">
+            <forward name="continue"
+                     path="/substanceviewpage.do"
+                     redirect="true" />
+        </action>
+        <action path="/substancedeleteaction"
+                type="com.sehinc.environment.action.substance.SubstanceDeleteAction"
+                name="SubstanceForm"
+                input="substance.delete.page"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="/substancelistpage.do"
+                     redirect="true" />
+        </action>
+        <action path="/substancescccreatepage"
+                type="com.sehinc.environment.action.substancescc.SubstanceSccCreatePageAction"
+                name="SubstanceSccForm"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="substance.scc.create.page" />
+        </action>
+        <action path="/substancescccreateaction"
+                type="com.sehinc.environment.action.substancescc.SubstanceSccCreateAction"
+                input="substance.scc.create.page"
+                name="SubstanceSccForm"
+                scope="request"
+                validate="true"
+                cancellable="true">
+            <forward name="continue"
+                     path="/substanceviewpage.do"
+                     redirect="true" />
+        </action>
+        <action path="/substancesccdeleteaction"
+                type="com.sehinc.environment.action.substancescc.SubstanceSccDeleteAction"
+                name="SubstanceSccForm"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="/substanceviewpage.do"
+                     redirect="true" />
+        </action>
+    </action-mappings>
+    <controller processorClass="org.apache.struts.action.RequestProcessor"
+                contentType="text/html" />
+    <plug-in className="org.apache.struts.tiles.TilesPlugin">
+        <set-property property="definitions-config"
+                      value="/WEB-INF/html/tiles-defs.xml, /WEB-INF/html/env/tiles-defs.xml, /WEB-INF/html/env/tiles-substance-defs.xml" />
+        <set-property property="definitions-debug"
+                      value="2" />
+        <set-property property="definitions-parser-details"
+                      value="2" />
+        <set-property property="definitions-parser-validate"
+                      value="true" />
+        <set-property property="moduleAware"
+                      value="true" />
+    </plug-in>
+    <plug-in className="org.apache.struts.validator.ValidatorPlugIn">
+        <set-property property="pathnames"
+                      value="/org/apache/struts/validator/validator-rules.xml, /WEB-INF/html/env/validation-substance.xml" />
+    </plug-in>
+</struts-config>

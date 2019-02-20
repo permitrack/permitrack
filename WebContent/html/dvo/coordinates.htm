@@ -1,0 +1,61 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+    <HEAD>
+        <TITLE>Scale</TITLE>
+        <META http-equiv=Content-Type
+              content="text/html; charset=ISO-8859-1">
+        <LINK href="./gis.css"
+              type=text/css
+              rel=stylesheet>
+        <META content="MSHTML 6.00.2800.1226"
+              name=GENERATOR>
+    </HEAD>
+    <BODY bgColor=#ffffff>
+        <SCRIPT language=JavaScript
+                type=text/javascript>
+            function updateScale(scaleFactorDisplay)
+            {
+                var updatedScale = Math.round(scaleFactorDisplay);
+                document.forms['zoomscale'].elements[0].value =
+                updatedScale;
+            }
+            function zoom()
+            {
+                var mscale = document.zoomscale.scaletext.value;
+                parent.MapFrame.zoomToScale(mscale)
+                parent.MapFrame.beforeMapRefresh();
+            }
+        </SCRIPT>
+        <TABLE cellSpacing=0
+               cellPadding=0
+               align=left
+               border=0
+               valign="bottom">
+            <TBODY>
+                <TR>
+                    <TD noWrap>
+                        <FORM name=mapcoords>&nbsp;&nbsp;
+                            <INPUT style="BORDER-RIGHT: medium none; BORDER-TOP: medium none; BORDER-LEFT: medium none; BORDER-BOTTOM: medium none"
+                                   readOnly
+                                   size=10
+                                   name=mapx>
+                            <IMG height=8
+                                 src="./images/lon.gif"
+                                 width=15>
+                                             &nbsp;&nbsp;
+                            <INPUT style="BORDER-RIGHT: medium none; BORDER-TOP: medium none; BORDER-LEFT: medium none; BORDER-BOTTOM: medium none"
+                                   readOnly
+                                   size=10
+                                   name=mapy>
+                            <IMG height=13
+                                 src="./images/lat.gif"
+                                 width=8>
+                        </FORM>
+                    </TD>
+                    <TD noWrap
+                        width=0></TD>
+                </TR>
+            </TBODY>
+        </TABLE>
+    </BODY>
+</HTML>

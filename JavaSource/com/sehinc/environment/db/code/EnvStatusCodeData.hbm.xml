@@ -1,0 +1,19 @@
+<?xml version="1.0"?><!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping>
+    <class name="com.sehinc.environment.db.code.EnvStatusCodeData"
+           table="LOOKUP_ENV_STATUS_CODE">
+        <id name="code"
+            type="string"
+            column="CODE">
+            <generator class="identity" />
+        </id>
+        <property name="description"
+                  column="DESCRIPTION"
+                  type="string" />
+        <property name="displayOrder"
+                  column="ORDER_NUM"
+                  type="integer" />
+    </class>
+</hibernate-mapping>

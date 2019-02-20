@@ -1,0 +1,24 @@
+<?xml version="1.0"?><!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping>
+    <class name="com.sehinc.common.db.forms.DomainData"
+           table="DOMAIN">
+        <id name="id"
+            type="integer"
+            column="DOMAIN_ID">
+            <generator class="identity" />
+        </id>
+        <property name="name"
+                  type="string"
+                  column="NAME" />
+        <set name="domainValues"
+             table="DOMAIN_VALUES"
+             cascade="all-delete-orphan"
+             sort="natural">
+            <key column="DOMAIN_ID" />
+            <one-to-many class="com.sehinc.common.db.forms.DomainValueData" />
+        </set>
+    </class>
+</hibernate-mapping>
+

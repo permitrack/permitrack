@@ -1,0 +1,584 @@
+html {
+    /*
+    http://maxvoltar.com/archive/-webkit-font-smoothing
+    */
+    /*-webkit-font-smoothing: antialiased;*/
+    /*
+    Sometimes, pages can be shorter than the browser view-port, and when you load a page on the same site that has longer
+    content and uses a scrollbar, content can jump side to side. By forcing a scrollbar no matter the height of our
+    content, we stop this small, but annoying issue.
+    */
+    overflow-y: scroll;
+}
+
+#emails {
+    min-height: 50px;
+}
+
+.wrapTextVerySmall {
+    max-width: 150px;
+    white-space: normal;
+    word-wrap: break-word;
+}
+
+.wrapTextSmall {
+    max-width: 200px;
+    white-space: normal;
+    word-wrap: break-word;
+}
+
+.wrapTextMedium {
+    max-width: 400px;
+    white-space: normal;
+    word-wrap: break-word;
+}
+
+.noWrap
+{
+    white-space: nowrap !important;
+}
+
+.noWrap > * {
+    white-space: normal;
+}
+
+/* TREEVIEW customizations */
+
+#treeView {
+    position: relative;
+    font-size: 85%;
+}
+
+#treeView {
+    visibility: hidden;
+}
+
+.jstree li > ins {
+    vertical-align: top;
+}
+
+.jstree li {
+    overflow-x: hidden;
+    line-height: inherit;
+}
+
+.jstree .jstree-hovered, .jstree .jstree-clicked {
+    border: 0;
+    padding: 0;
+}
+
+.jstree li > a {
+    position: relative;
+    line-height: inherit;
+    white-space: normal !important;
+    height: auto !important;
+    padding: 1px 2px;
+}
+
+.jstree li > a > ins {
+    position: absolute;
+}
+
+.jstree li > a > span {
+    display: inline-block;
+    margin-left: 18px;
+    padding-right: 18px;
+}
+
+a.jstree-search {
+    color: rgb(0, 0, 0) !important;
+    font-weight: bold !important;
+    font-style: normal !important;
+}
+
+.jstree-default .jstree-open > ins {
+    background-image: url("../img/glyphicons-halflings.png") !important;
+    background-position: -433px -96px !important;
+}
+
+.jstree-default .jstree-closed > ins {
+    background-image: url("../img/glyphicons-halflings.png") !important;
+    background-position: -408px -96px !important;
+}
+
+/* BOOTSTRAP customizations */
+
+.thumbnails img {
+    max-width: 144px;
+    max-height: 144px;
+}
+
+.navbar-fixed-top .alert {
+    margin-top: 5px;
+}
+
+.form-horizontal .controls > a {
+    line-height: 30px;
+}
+
+.form-horizontal .controls > input[type=submit] {
+    margin-top: 5px;
+}
+
+.table > caption {
+    display: table-caption;
+}
+
+.table > tr > th {
+    white-space: nowrap;
+}
+
+table tr td > a {
+    max-width: 450px;
+    /*min-width: 200px;*/
+    white-space: normal;
+    word-wrap: break-word;
+    display: inline-block;
+}
+
+.dl-horizontal dt, .dl-horizontal dd {
+    padding-top: 6px;
+}
+
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+.dl-horizontal > dd:after {
+    display: table;
+    content: "";
+    clear: both;
+}
+
+.nav-pills.light > .active > a, .nav-pills.light > .active > a:hover {
+    background-color: rgb(72, 132, 184);
+}
+
+.nav>li>a.btn-success:hover {
+    background-color: #51a351;
+    *background-color: #499249;
+}
+
+.nav>li>a.btn-danger:hover {
+    background-color: #bd362f;
+    *background-color: #a9302a;
+}
+
+.nav>li>a.btn-mini {
+    margin-top: 6px;
+    margin-bottom: 4px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+}
+
+.nav>li>a.btn {
+    margin-left: 14px;
+    margin-right: 8px;
+}
+
+.editable-empty, .editable-empty:hover {
+    border-bottom: dashed 1px rgb(0, 136, 204);
+}
+
+.small-labels .well-small {
+    display: inline-block;
+}
+
+.small-labels .well-small .control-label, .small-labels .well-small .controls {
+    font-size: 70%;
+}
+
+.form-horizontal .small-labels .well-small .control-label, .form-horizontal.small-labels .well-small .control-label {
+    width: 80px;
+}
+
+.form-horizontal .small-labels .well-small .controls, .form-horizontal.small-labels .well-small .controls {
+    margin-left: 100px;
+}
+
+.control-group .well {
+    margin-bottom: 0;
+}
+
+.small-labels .control-group {
+    margin-bottom: 5px;
+}
+
+.well.collapse {
+    min-height: 0;
+}
+
+#applyFilter.collapse {
+    visibility: hidden;
+}
+
+#applyFilter.collapse.in {
+    visibility: visible;
+}
+
+#searchFormDiv .well-small {
+    height: 100px;
+    overflow-y: auto;
+}
+
+.select2-container-multi .select2-choices .select2-search-field input {
+    padding: 4px 6px !important;
+    margin: 0 !important;
+}
+
+/* Make it look like Bootstrap ... TODO better way? */
+.select2-choices {
+    border: 1px solid #cccccc !important;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075) !important;
+    -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075) !important;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075) !important;
+    -webkit-transition: border linear 0.2s, box-shadow linear 0.2s !important;
+    -moz-transition: border linear 0.2s, box-shadow linear 0.2s !important;
+    -o-transition: border linear 0.2s, box-shadow linear 0.2s !important;
+    transition: border linear 0.2s, box-shadow linear 0.2s !important;
+}
+
+.scrollBar {
+    position: absolute;
+
+    padding-left: 0;
+    padding-right: 0;
+    width: 15px;
+    left: -15px;
+    text-align: center;
+    z-index: 5;
+}
+
+.handle {
+    margin-left: 0;
+    margin-right: 0;
+    height: 35px;
+    width: 15px;
+    text-align: center
+}
+
+.scrollBar .handle {
+    border-radius: 4px;
+    background: #f3f3f3;
+    cursor: pointer;
+    line-height: 0;
+}
+
+#frame {
+    padding-left: 0;
+    padding-right: 0;
+
+    width: 100%;
+
+    overflow: hidden;
+}
+
+#frame, .scrollBar {
+    height: 420px;
+}
+
+/* TODO
+#frameH {
+    padding-left: 0;
+    padding-right: 0;
+
+    height: 50px;
+    width: 100%;
+
+    overflow: hidden;
+}
+*/
+
+.slidee {
+
+    margin: 0;
+    padding: 0;
+    position: relative;
+}
+
+table.action-first.action-small tr > td:first-child {
+    max-width: 55px;
+    *width: auto;
+}
+
+table.action-first tr > td:first-child {
+    max-width: 100px;
+    *width: auto;
+}
+
+table.action-first.action-large tr > td:first-child {
+    max-width: 140px;
+    *width: auto;
+}
+
+table.action-first.action-x-large tr > td:first-child {
+    max-width: 170px;
+    *width: auto;
+}
+
+table.action-samesize > tbody > tr > td > a.action-samesize
+{
+    width: 40px;
+    padding: 0;
+}
+
+[data-spy=affix] {
+    max-width: 332px;
+}
+
+.navbar-fixed-bottom .row-fluid div:first-child .btn,
+.navbar-fixed-bottom .row div:first-child .btn {
+    margin-right: 10px;
+}
+
+.navbar-fixed-top label,
+.navbar-fixed-bottom label,
+.navbar-static-top label {
+    display: inline-block;
+    margin-bottom: 0;
+}
+
+/*
+TODO get this to work for bullets
+*/
+/*
+[data-wysihtml5-command="Outdent"] {
+    display: none;
+}
+
+[data-wysihtml5-command="Indent"] {
+    display: none;
+}
+*/
+
+[data-wysihtml5-command="insertImage"] {
+    display: none;
+}
+
+/*TODO not sure about this next one...*/
+.uneditable-input {
+    white-space: nowrap;
+}
+
+.pagination {
+    margin: 5px 0;
+}
+
+button.gsc-search-button {
+	line-height: normal !important;
+}
+
+@media (max-width: 1079px) {
+
+    .editableform .control-group {
+        white-space: normal; /* prevent wrapping buttons on new line */
+    }
+
+    /* un-set exact width of textarea to fit buttons toolbar */
+    .editable-wysihtml5 {
+        width: 420px !important;
+    }
+
+    .editable-buttons {
+        margin-left: 0;
+        margin-top: 5px;
+    }
+
+    #frame, .scrollBar {
+        height: 370px;
+    }
+}
+
+@media (max-width: 979px) {
+
+    .navbar-fixed-top,
+    .navbar-fixed-bottom {
+        position: fixed;
+    }
+
+    .navbar-fixed-top {
+        margin-bottom: 0;
+    }
+
+    .navbar-fixed-bottom {
+        margin-top: 0;
+    }
+
+    .navbar-fixed-top .navbar-inner,
+    .navbar-fixed-bottom .navbar-inner {
+        padding: 0;
+    }
+
+    .affix {
+        position: relative !important;
+    }
+
+}
+
+@media (max-width: 767px) {
+
+    .navbar-fixed-top,
+    .navbar-fixed-bottom,
+    .navbar-static-top {
+        margin-right: 0;
+        margin-left: 0;
+    }
+
+    #frame, .scrollBar {
+        height: 220px;
+    }
+
+    .navbar-static-top .container,
+    .navbar-fixed-top .container,
+    .navbar-fixed-bottom .container {
+        width: auto;
+    }
+
+    .btn {
+        font-size: 10.5px;
+        -webkit-border-radius: 3px;
+        -moz-border-radius: 3px;
+        border-radius: 3px;
+    }
+
+    button.btn,
+    input[type="submit"].btn {
+        *padding-top: 1px;
+        *padding-bottom: 1px;
+    }
+
+    .btn-group > .btn {
+        font-size: 10.5px;
+    }
+
+    .btn-group > .btn + .dropdown-toggle {
+        *padding-top: 2px;
+        padding-right: 5px;
+        *padding-bottom: 2px;
+        padding-left: 5px;
+    }
+
+    .btn .caret {
+        border-top-width: 0;
+        border-right-width: 0;
+        border-left-width: 5px;
+    }
+
+    .dropup .btn .caret {
+        border-bottom-width: 0;
+    }
+
+    .btn .label,
+    .btn .badge {
+        top: 0;
+    }
+
+    .btn-group-vertical > .btn-large:first-child {
+        -webkit-border-radius: 4px 4px 0 0;
+        -moz-border-radius: 4px 4px 0 0;
+        border-radius: 4px 4px 0 0;
+    }
+
+    .btn-group-vertical > .btn-large:last-child {
+        -webkit-border-radius: 0 0 4px 4px;
+        -moz-border-radius: 0 0 4px 4px;
+        border-radius: 0 0 4px 4px;
+    }
+
+    .navbar-fixed-bottom [class*="span"],
+    .navbar-fixed-bottom .uneditable-input[class*="span"],
+    .navbar-fixed-bottom .row-fluid [class*="span"] {
+        display: inline;
+        width: auto;
+    }
+
+    [class*="span"],
+    .uneditable-input[class*="span"],
+    .row-fluid [class*="span"] {
+        width: auto;
+        margin-bottom: 15px;
+    }
+
+    .pagination {
+        margin: 1px 0;
+    }
+
+    .input-medium {
+        width: 90px;
+    }
+
+    /* Force table to not be like tables anymore */
+    table.table,
+    .table thead,
+    .table tbody,
+    .table th,
+    .table td,
+    .table tr {
+        display: block;
+    }
+
+    /* Hide table headers (but not display: none;, for accessibility) */
+    .table thead tr {
+        display: none;
+    }
+
+    .table tr {
+        border: 1px solid #ccc;
+    }
+
+    .table td {
+        /* Behave  like a "row" */
+        border: none;
+        border-bottom: 1px solid #eee;
+        position: relative;
+        white-space: normal;
+        text-align: left;
+    }
+
+    table.action-first tr > td:first-child {
+        max-width: 100% !important;
+    }
+
+    table.action-samesize > tbody > tr > td.action-samesize
+    {
+        display: inline-block;
+        border-bottom: 2px;
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    #searchFormDiv .well-small {
+        height: auto;
+    }
+}
+
+@media (max-width: 480px) {
+    .form-horizontal .well-small .control-label {
+        float: left;
+    }
+
+    .form-horizontal .controls,
+    .form-horizontal .well .controls,
+    .small-labels .controls {
+        margin-left: 0;
+        clear: both;
+    }
+}
+
+.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default {
+    color: #2C3E50;
+}
+
+.ui-state-default a, .ui-state-default a:link, .ui-state-default a:visited {
+    color: #2C3E50;
+}
+
+.ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active {
+    background-color: #2C3E50;
+    background-image: none;
+    color: #ECF0F1;
+}
+
+.ui-state-active a, .ui-state-active a:link, .ui-state-active a:visited {
+    color: #ECF0F1;
+}

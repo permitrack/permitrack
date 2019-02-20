@@ -1,0 +1,34 @@
+JAVA
+
+1. weird comments, do this first
+//\*\*(\**)\n
+
+
+2. then this for blocks
+(?s)/\*.*?\*/
+
+3. then this for lines
+([ \t]*//.*)
+
+
+HTML
+
+
+
+============
+
+remove javascript comments
+http://stackoverflow.com/questions/2613432/remove-source-file-comments-using-intellij
+(/\*([^*]|[\r\n]|(\*+([^*/]|[\r\n])))*\*+/|[ \t]*//.*)
+
+
+remove xml/html comments
+http://stackoverflow.com/questions/6804951/regex-to-remove-comments-in-xml-file-in-eclipse-java
+e.g.
+(?s)<!--.*?-->
+
+
+
+
+
+

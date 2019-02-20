@@ -1,0 +1,754 @@
+--form
+
+insert into form
+(form_id, description, title)
+values
+(7, 'U of M Stormwater Management Wet Ponds Form', 'Wet Pond Inspection Form')
+
+
+-- goal activity form insert
+insert into goal_activity_form
+(id, name, description, custom_form_id, client_id, download_location)
+values
+(9, 'Wet Pond Inspection', 'U of M form for Wet Pond Inspections', 7, 4, null)
+
+
+-- sections
+
+insert into [section]
+(section_id, description, title, form_id, order_num, columns)
+values
+(26, 'Wet Ponds Introductory Section', 'Overview', 7, 1, null)
+
+insert into [section]
+(section_id, description, title, form_id, order_num, columns)
+values
+(27, 'Wet Ponds General', 'General Visual Assessment', 7, 3, null)
+
+insert into [section]
+(section_id, description, title, form_id, order_num, columns)
+values
+(28, 'Wet Ponds Inlet Structures', 'Inlet Structures', 7, 2, null)
+
+insert into [section]
+(section_id, description, title, form_id, order_num, columns)
+values
+(29, 'Wet Ponds Bottom', 'Bottom', 7, 4, null)
+
+insert into [section]
+(section_id, description, title, form_id, order_num, columns)
+values
+(30, 'Wet Ponds Banks', 'Banks', 7, 5, null)
+
+insert into [section]
+(section_id, description, title, form_id, order_num, columns)
+values
+(31, 'Wet Ponds Outlets', 'Outlet Structures', 7, 6, null)
+
+
+insert into [section]
+(section_id, description, title, form_id, order_num, columns)
+values
+(32, 'Wet Ponds Recommendations', 'Inspector Recommendations', 7, 7, null)
+
+
+
+-- sub sections
+
+
+insert into sub_section
+(sub_section_id, section_id, title, description, order_num)
+values
+(31, 26, null, 'Wet Ponds Intro section', 1)
+
+insert into sub_section
+(sub_section_id, section_id, title, description, order_num)
+values
+(32, 26, 'Has visual inspection been conducted on this location before?', 'Visual inspection on this location?', 1)
+
+insert into sub_section
+(sub_section_id, section_id, title, description, order_num)
+values
+(33, 26, 'Has it rained within the last 48 hours at this location?', 'Rained in 48 hours?', 2)
+
+insert into sub_section
+(sub_section_id, section_id, title, description, order_num)
+values
+(34, 28, 'Are there multiple inlet structures?', 'Multiple inlet structures?', 3)
+
+insert into sub_section
+(sub_section_id, section_id, title, description, order_num)
+values
+(35, 28, 'Are any of the inlet structures clogged?', 'Inlets Clogged?', 4)
+
+insert into sub_section
+(sub_section_id, section_id, title, description, order_num)
+values
+(36, 28, 'If yes, what with?', 'Inlets Clogged? Detail', 5)
+
+insert into sub_section
+(sub_section_id, section_id, title, description, order_num)
+values
+(37, 28, 'Are any of the inlet structures askew or misaligned?', 'Inlets Misaligned?', 6)
+
+insert into sub_section
+(sub_section_id, section_id, title, description, order_num)
+values
+(38, 28, 'If yes, why?', 'Inlets Misaligned? Why', 7)
+
+
+-- elements. elements for subsection 31 'wet ponds intro'
+
+insert into element
+(element_id, title, element_type_id, child_element_id, name, 
+data_type, sub_section_id, order_num, 
+required, allow_other, is_child, display_title, size, max_length)
+values
+(209, 'Inspectors Name(s)', 1, null, 'insp_name', 'string', 31, 2, 'Y', 'N', 'N', 'Y', 40, 50)
+
+insert into element
+(element_id, title, element_type_id, child_element_id, name, 
+data_type, sub_section_id, order_num, 
+required, allow_other, is_child, display_title, size, max_length)
+values
+(210, 'Date of Inspection', 4, null, 'STATIC_activity_date', 'date', 31, 3, 'Y', 'N', 'N', 'Y', null, null)
+
+insert into element
+(element_id, title, element_type_id, child_element_id, name, 
+data_type, sub_section_id, order_num, 
+required, allow_other, is_child, display_title, size, max_length)
+values
+(211, 'Location of the Pond - Address', 1, null, 'pond_loc', 'string', 31, 4, 'N', 'N', 'N', 'Y', 40, 50)
+
+insert into element
+(element_id, title, element_type_id, child_element_id, name, 
+data_type, sub_section_id, order_num, 
+required, allow_other, is_child, display_title, size, max_length)
+values
+(212, 'Location of the Pond - Latitude/Longitude', 1, null, 'pond_latlong', 'string', 31, 5, 'N', 'N', 'N', 'Y', 20, 50)
+
+insert into element
+(element_id, title, element_type_id, child_element_id, name, 
+data_type, sub_section_id, order_num, 
+required, allow_other, is_child, display_title, size, max_length)
+values
+(213, 'Date the wet pond began operation', 4, null, 'pond_begin_date', 'date', 31, 6, 'N', 'N', 'N', 'Y', null, null)
+
+insert into element
+(element_id, title, element_type_id, child_element_id, name, 
+data_type, sub_section_id, order_num, 
+required, allow_other, is_child, display_title, size, max_length)
+values
+(214, 'Size of the wet pond (ft x ft x ft)', 1, null, 'pond_size', 'string', 31, 7, 'N', 'N', 'N', 'Y', 20, 20)
+
+insert into element
+(element_id, title, element_type_id, child_element_id, name, 
+data_type, sub_section_id, order_num, 
+required, allow_other, is_child, display_title, size, max_length)
+values
+(215, 'Time since last rainfall (hr)', 1, null, 'time_since_rain', 'int', 31, 8, 'N', 'N', 'N', 'Y', 10, 10)
+
+insert into element
+(element_id, title, element_type_id, child_element_id, name, 
+data_type, sub_section_id, order_num, 
+required, allow_other, is_child, display_title, size, max_length)
+values
+(216, 'Quantity of last rainfall (in)', 1, null, 'rain_quantity', 'int', 31, 9, 'N', 'N', 'N', 'Y', 10, 10)
+
+insert into element
+(element_id, title, element_type_id, child_element_id, name, 
+data_type, sub_section_id, order_num, 
+required, allow_other, is_child, display_title, size, max_length)
+values
+(217, 'Rainfall Measurement Location', 1, null, 'measure_loc', 'string', 31, 10, 'N', 'N', 'N', 'Y', 20, 50)
+
+insert into element
+(element_id, title, element_type_id, child_element_id, name, 
+data_type, sub_section_id, order_num, 
+required, allow_other, is_child, display_title, size, max_length)
+values
+(218, 'Water Surface Elevation', 1, null, 'surface_elev', 'string', 31, 11, 'N', 'N', 'N', 'Y', 10, 10)
+
+insert into element
+(element_id, title, element_type_id, child_element_id, name, 
+data_type, sub_section_id, order_num, 
+required, allow_other, is_child, display_title, size, max_length)
+values
+(219, 'Attach Site Sketch', 7, null, 'site_sketch', 'file', 31, 12, 'N', 'N', 'N', 'Y', null, null)
+
+
+-- elements. elements for subsection 32 'visual inspection on location'
+
+insert into element
+(element_id, title, element_type_id, child_element_id, name, 
+data_type, sub_section_id, order_num, 
+required, allow_other, is_child, display_title, size, max_length)
+values
+(223, 'Has an inspection been conducted here previously?', 3, null, 'vis_insp', 'string', 32, 1, 'N', 'N', 'N', 'N', null, null)
+
+insert into element
+(element_id, title, element_type_id, child_element_id, name, 
+data_type, sub_section_id, order_num, 
+required, allow_other, is_child, display_title, size, max_length)
+values
+(220, 'If yes, when?', 1, null, 'vis_insp_when', 'string', 32, 2, 'N', 'N', 'N', 'Y', 20, 50)
+
+insert into element
+(element_id, title, element_type_id, child_element_id, name, 
+data_type, sub_section_id, order_num, 
+required, allow_other, is_child, display_title, size, max_length)
+values
+(221, 'Have any corrective actions been taken?', 3, null, 'vis_insp_ca_taken', 'string', 32, 3, 'N', 'N', 'N', 'Y', null, null)
+
+insert into element
+(element_id, title, element_type_id, child_element_id, name, 
+data_type, sub_section_id, order_num, 
+required, allow_other, is_child, display_title, size, max_length)
+values
+(222, 'If yes, describe action(s) taken and date(s)', 2, null, 'ca_taken_dates', 'string', 32, 4, 'N', 'N', 'N', 'Y', null, 500)
+
+
+-- elements. elements for subsection 33 'rain in last 48 hours'
+
+insert into element
+(element_id, title, element_type_id, child_element_id, name, 
+data_type, sub_section_id, order_num, 
+required, allow_other, is_child, display_title, size, max_length)
+values
+(224, 'Has it rained in the last 48 hours?', 3, null, 'rain_in_last_48', 'string', 33, 1, 'N', 'N', 'N', 'N', null, null)
+
+
+-- elements. elements for subsection 34 'multiple inlets?'
+
+insert into element
+(element_id, title, element_type_id, child_element_id, name, 
+data_type, sub_section_id, order_num, 
+required, allow_other, is_child, display_title, size, max_length)
+values
+(225, 'Are there multiple inlet structures?', 3, null, 'multiple_inlet', 'string', 34, 1, 'N', 'N', 'N', 'N', null, null)
+
+insert into element
+(element_id, title, element_type_id, child_element_id, name, 
+data_type, sub_section_id, order_num, 
+required, allow_other, is_child, display_title, size, max_length)
+values
+(226, 'If yes, how many inlets are present?', 3, null, 'multiple_inlet_num', 'string', 34, 2, 'N', 'N', 'N', 'Y', null, null)
+
+
+-- elements. elements for subsection 35 'clogged? grid 1'
+
+insert into element
+(element_id, title, element_type_id, child_element_id, name, 
+data_type, sub_section_id, order_num, 
+required, allow_other, is_child, display_title, size, max_length)
+values
+(227, 'Inlet 1', 3, null, 'clogged_inlet_1', 'string', 35, 1, 'N', 'N', 'N', 'Y', null, null)
+
+insert into element
+(element_id, title, element_type_id, child_element_id, name, 
+data_type, sub_section_id, order_num, 
+required, allow_other, is_child, display_title, size, max_length)
+values
+(228, 'Inlet 2', 3, null, 'clogged_inlet_2', 'string', 35, 2, 'N', 'N', 'N', 'Y', null, null)
+
+insert into element
+(element_id, title, element_type_id, child_element_id, name, 
+data_type, sub_section_id, order_num, 
+required, allow_other, is_child, display_title, size, max_length)
+values
+(229, 'Inlet 3', 3, null, 'clogged_inlet_3', 'string', 35, 3, 'N', 'N', 'N', 'Y', null, null)
+
+insert into element
+(element_id, title, element_type_id, child_element_id, name, 
+data_type, sub_section_id, order_num, 
+required, allow_other, is_child, display_title, size, max_length)
+values
+(230, 'Inlet 4', 3, null, 'clogged_inlet_4', 'string', 35, 4, 'N', 'N', 'N', 'Y', null, null)
+
+insert into element
+(element_id, title, element_type_id, child_element_id, name, 
+data_type, sub_section_id, order_num, 
+required, allow_other, is_child, display_title, size, max_length)
+values
+(231, 'Inlet 5', 3, null, 'clogged_inlet_5', 'string', 35, 5, 'N', 'N', 'N', 'Y', null, null)
+
+
+
+-- elements. elements for subsection 36 "clogged what with"
+
+insert into element
+(element_id, title, element_type_id, child_element_id, name, 
+data_type, sub_section_id, order_num, 
+required, allow_other, is_child, display_title, size, max_length)
+values
+(232, 'Inlet 1', 3, 233, 'clogged_inlet_1_with', 'string', 36, 1, 'N', 'Y', 'N', 'Y', null, null)
+
+insert into element
+(element_id, title, element_type_id, child_element_id, name, 
+data_type, sub_section_id, order_num, 
+required, allow_other, is_child, display_title, size, max_length)
+values
+(233, 'Other', 1, null, 'clogged_inlet_1_with_other', 'string', 36, 2, 'N', 'N', 'Y', 'Y', 20, 20)
+
+
+insert into element
+(element_id, title, element_type_id, child_element_id, name, 
+data_type, sub_section_id, order_num, 
+required, allow_other, is_child, display_title, size, max_length)
+values
+(234, 'Inlet 2', 3, 235, 'clogged_inlet_2_with', 'string', 36, 3, 'N', 'Y', 'N', 'Y', null, null)
+
+insert into element
+(element_id, title, element_type_id, child_element_id, name, 
+data_type, sub_section_id, order_num, 
+required, allow_other, is_child, display_title, size, max_length)
+values
+(235, 'Other', 1, null, 'clogged_inlet_2_with_other', 'string', 36, 4, 'N', 'N', 'Y', 'Y', 20, 20)
+
+
+insert into element
+(element_id, title, element_type_id, child_element_id, name, 
+data_type, sub_section_id, order_num, 
+required, allow_other, is_child, display_title, size, max_length)
+values
+(236, 'Inlet 3', 3, 237, 'clogged_inlet_3_with', 'string', 36, 5, 'N', 'Y', 'N', 'Y', null, null)
+
+insert into element
+(element_id, title, element_type_id, child_element_id, name, 
+data_type, sub_section_id, order_num, 
+required, allow_other, is_child, display_title, size, max_length)
+values
+(237, 'Other', 1, null, 'clogged_inlet_3_with_other', 'string', 36, 6, 'N', 'N', 'Y', 'Y', 20, 20)
+
+
+insert into element
+(element_id, title, element_type_id, child_element_id, name, 
+data_type, sub_section_id, order_num, 
+required, allow_other, is_child, display_title, size, max_length)
+values
+(238, 'Inlet 4', 3, 239, 'clogged_inlet_4_with', 'string', 36, 7, 'N', 'Y', 'N', 'Y', null, null)
+
+insert into element
+(element_id, title, element_type_id, child_element_id, name, 
+data_type, sub_section_id, order_num, 
+required, allow_other, is_child, display_title, size, max_length)
+values
+(239, 'Other', 1, null, 'clogged_inlet_4_with_other', 'string', 36, 8, 'N', 'N', 'Y', 'Y', 20, 20)
+
+
+insert into element
+(element_id, title, element_type_id, child_element_id, name, 
+data_type, sub_section_id, order_num, 
+required, allow_other, is_child, display_title, size, max_length)
+values
+(240, 'Inlet 5', 3, 241, 'clogged_inlet_5_with', 'string', 36, 9, 'N', 'Y', 'N', 'Y', null, null)
+
+insert into element
+(element_id, title, element_type_id, child_element_id, name, 
+data_type, sub_section_id, order_num, 
+required, allow_other, is_child, display_title, size, max_length)
+values
+(241, 'Other', 1, null, 'clogged_inlet_5_with_other', 'string', 36, 10, 'N', 'N', 'Y', 'Y', 20, 20)
+
+
+
+-- elements. elements for subsection 37 'askew? grid 1'
+
+insert into element
+(element_id, title, element_type_id, child_element_id, name, 
+data_type, sub_section_id, order_num, 
+required, allow_other, is_child, display_title, size, max_length)
+values
+(242, 'Inlet 1', 3, null, 'askew_inlet_1', 'string', 37, 1, 'N', 'N', 'N', 'Y', null, null)
+
+insert into element
+(element_id, title, element_type_id, child_element_id, name, 
+data_type, sub_section_id, order_num, 
+required, allow_other, is_child, display_title, size, max_length)
+values
+(243, 'Inlet 2', 3, null, 'askew_inlet_2', 'string', 37, 2, 'N', 'N', 'N', 'Y', null, null)
+
+insert into element
+(element_id, title, element_type_id, child_element_id, name, 
+data_type, sub_section_id, order_num, 
+required, allow_other, is_child, display_title, size, max_length)
+values
+(244, 'Inlet 3', 3, null, 'askew_inlet_3', 'string', 37, 3, 'N', 'N', 'N', 'Y', null, null)
+
+insert into element
+(element_id, title, element_type_id, child_element_id, name, 
+data_type, sub_section_id, order_num, 
+required, allow_other, is_child, display_title, size, max_length)
+values
+(245, 'Inlet 4', 3, null, 'askew_inlet_4', 'string', 37, 4, 'N', 'N', 'N', 'Y', null, null)
+
+insert into element
+(element_id, title, element_type_id, child_element_id, name, 
+data_type, sub_section_id, order_num, 
+required, allow_other, is_child, display_title, size, max_length)
+values
+(246, 'Inlet 5', 3, null, 'askew_inlet_5', 'string', 37, 5, 'N', 'N', 'N', 'Y', null, null)
+
+
+
+-- elements. elements for subsection 38 "inlets askew? why"
+
+insert into element
+(element_id, title, element_type_id, child_element_id, name, 
+data_type, sub_section_id, order_num, 
+required, allow_other, is_child, display_title, size, max_length)
+values
+(247, 'Inlet 1', 3, 248, 'askew_inlet_1_with', 'string', 38, 1, 'N', 'Y', 'N', 'Y', null, null)
+
+insert into element
+(element_id, title, element_type_id, child_element_id, name, 
+data_type, sub_section_id, order_num, 
+required, allow_other, is_child, display_title, size, max_length)
+values
+(248, 'Other', 1, null, 'askew_inlet_1_with_other', 'string', 38, 2, 'N', 'N', 'Y', 'Y', 20, 20)
+
+
+insert into element
+(element_id, title, element_type_id, child_element_id, name, 
+data_type, sub_section_id, order_num, 
+required, allow_other, is_child, display_title, size, max_length)
+values
+(249, 'Inlet 2', 3, 250, 'askew_inlet_2_with', 'string', 38, 3, 'N', 'Y', 'N', 'Y', null, null)
+
+insert into element
+(element_id, title, element_type_id, child_element_id, name, 
+data_type, sub_section_id, order_num, 
+required, allow_other, is_child, display_title, size, max_length)
+values
+(250, 'Other', 1, null, 'askew_inlet_2_with_other', 'string', 38, 4, 'N', 'N', 'Y', 'Y', 20, 20)
+
+
+insert into element
+(element_id, title, element_type_id, child_element_id, name, 
+data_type, sub_section_id, order_num, 
+required, allow_other, is_child, display_title, size, max_length)
+values
+(251, 'Inlet 3', 3, 252, 'askew_inlet_3_with', 'string', 38, 5, 'N', 'Y', 'N', 'Y', null, null)
+
+insert into element
+(element_id, title, element_type_id, child_element_id, name, 
+data_type, sub_section_id, order_num, 
+required, allow_other, is_child, display_title, size, max_length)
+values
+(252, 'Other', 1, null, 'askew_inlet_3_with_other', 'string', 38, 6, 'N', 'N', 'Y', 'Y', 20, 20)
+
+
+insert into element
+(element_id, title, element_type_id, child_element_id, name, 
+data_type, sub_section_id, order_num, 
+required, allow_other, is_child, display_title, size, max_length)
+values
+(253, 'Inlet 4', 3, 254, 'askew_inlet_4_with', 'string', 38, 7, 'N', 'Y', 'N', 'Y', null, null)
+
+insert into element
+(element_id, title, element_type_id, child_element_id, name, 
+data_type, sub_section_id, order_num, 
+required, allow_other, is_child, display_title, size, max_length)
+values
+(254, 'Other', 1, null, 'askew_inlet_4_with_other', 'string', 38, 8, 'N', 'N', 'Y', 'Y', 20, 20)
+
+
+insert into element
+(element_id, title, element_type_id, child_element_id, name, 
+data_type, sub_section_id, order_num, 
+required, allow_other, is_child, display_title, size, max_length)
+values
+(255, 'Inlet 5', 3, 256, 'askew_inlet_5_with', 'string', 38, 9, 'N', 'Y', 'N', 'Y', null, null)
+
+insert into element
+(element_id, title, element_type_id, child_element_id, name, 
+data_type, sub_section_id, order_num, 
+required, allow_other, is_child, display_title, size, max_length)
+values
+(256, 'Other', 1, null, 'askew_inlet_5_with_other', 'string', 38, 10, 'N', 'N', 'Y', 'Y', 20, 20)
+
+
+
+-- domain insertion.  yes/no/don't know
+
+insert into domain
+(domain_id, name)
+values
+(30, 'Yes/No/DontKnow')
+
+
+insert into domain_value
+(domain_value_id, domain_value, order_num, domain_id)
+values
+(105, 'Yes', 1, 30)
+
+insert into domain_value
+(domain_value_id, domain_value, order_num, domain_id)
+values
+(106, 'No', 2, 30)
+
+insert into domain_value
+(domain_value_id, domain_value, order_num, domain_id)
+values
+(107, 'I dont know', 3, 30)
+
+
+
+-- domain insertion.  2,3,4,5,6 or more
+
+insert into domain
+(domain_id, name)
+values
+(31, '2,3,4,5,6+')
+
+
+insert into domain_value
+(domain_value_id, domain_value, order_num, domain_id)
+values
+(108, '2', 1, 31)
+
+insert into domain_value
+(domain_value_id, domain_value, order_num, domain_id)
+values
+(109, '3', 2, 31)
+
+insert into domain_value
+(domain_value_id, domain_value, order_num, domain_id)
+values
+(110, '4', 3, 31)
+
+insert into domain_value
+(domain_value_id, domain_value, order_num, domain_id)
+values
+(111, '5', 4, 31)
+
+insert into domain_value
+(domain_value_id, domain_value, order_num, domain_id)
+values
+(112, '6 or more', 5, 31)
+
+
+
+-- domain insertion.  no/partially/completely/na
+
+insert into domain
+(domain_id, name)
+values
+(32, 'No/Partially/Completely/NA')
+
+
+insert into domain_value
+(domain_value_id, domain_value, order_num, domain_id)
+values
+(113, 'No', 1, 32)
+
+insert into domain_value
+(domain_value_id, domain_value, order_num, domain_id)
+values
+(114, 'Partially', 2, 32)
+
+insert into domain_value
+(domain_value_id, domain_value, order_num, domain_id)
+values
+(115, 'Completely', 3, 32)
+
+insert into domain_value
+(domain_value_id, domain_value, order_num, domain_id)
+values
+(116, 'Not Applicable', 4, 32)
+
+
+
+-- domain insertion.  debris/sediment/veg
+
+insert into domain
+(domain_id, name)
+values
+(33, 'Debris/Sediment/Veg')
+
+
+insert into domain_value
+(domain_value_id, domain_value, order_num, domain_id)
+values
+(117, 'Debris', 1, 33)
+
+insert into domain_value
+(domain_value_id, domain_value, order_num, domain_id)
+values
+(118, 'Sediment', 2, 33)
+
+insert into domain_value
+(domain_value_id, domain_value, order_num, domain_id)
+values
+(119, 'Vegetation', 3, 33)
+
+
+-- domain insertion.  ice/frost heave/ dont know
+
+insert into domain
+(domain_id, name)
+values
+(34, 'Ice/DontKnow')
+
+insert into domain_value
+(domain_value_id, domain_value, order_num, domain_id)
+values
+(120, 'Ice/Frost Heave', 1, 34)
+
+insert into domain_value
+(domain_value_id, domain_value, order_num, domain_id)
+values
+(121, 'I dont know', 2, 34)
+
+
+
+-- domain insertion.  yes/no/don't know
+
+insert into domain
+(domain_id, name)
+values
+(35, 'Yes/No')
+
+
+insert into domain_value
+(domain_value_id, domain_value, order_num, domain_id)
+values
+(122, 'Yes', 1, 35)
+
+insert into domain_value
+(domain_value_id, domain_value, order_num, domain_id)
+values
+(123, 'No', 2, 35)
+
+
+-- element domain value insertion
+
+
+insert into element_domain  -- 'Has an inspection been conducted here previously?'
+(element_domain_id, element_id, domain_id, default_domain_value_id, allow_select)
+values
+(93, 223, 30, null, 'N')
+
+insert into element_domain  -- 'Have any corrective actions been taken?'
+(element_domain_id, element_id, domain_id, default_domain_value_id, allow_select)
+values
+(94, 221, 30, null, 'N')
+
+insert into element_domain  -- 'Has it rained in the last 48 hours?'
+(element_domain_id, element_id, domain_id, default_domain_value_id, allow_select)
+values
+(95, 224, 30, null, 'N')
+
+insert into element_domain  -- 'Are there multiple inlet structures?'
+(element_domain_id, element_id, domain_id, default_domain_value_id, allow_select)
+values
+(96, 225, 35, null, 'N')
+
+insert into element_domain  -- 'If yes, how many inlets are present?'
+(element_domain_id, element_id, domain_id, default_domain_value_id, allow_select)
+values
+(97, 226, 31, null, 'Y')
+
+insert into element_domain  -- 'clogged grid'
+(element_domain_id, element_id, domain_id, default_domain_value_id, allow_select)
+values
+(98, 227, 32, null, 'N')
+
+insert into element_domain  -- 'clogged grid'
+(element_domain_id, element_id, domain_id, default_domain_value_id, allow_select)
+values
+(99, 228, 32, null, 'N')
+
+insert into element_domain  -- 'clogged grid'
+(element_domain_id, element_id, domain_id, default_domain_value_id, allow_select)
+values
+(100, 229, 32, null, 'N')
+
+insert into element_domain  -- 'clogged grid'
+(element_domain_id, element_id, domain_id, default_domain_value_id, allow_select)
+values
+(101, 230, 32, null, 'N')
+
+insert into element_domain  -- 'clogged grid'
+(element_domain_id, element_id, domain_id, default_domain_value_id, allow_select)
+values
+(102, 231, 32, null, 'N')
+
+insert into element_domain  -- 'clogged_inlet_1_with'
+(element_domain_id, element_id, domain_id, default_domain_value_id, allow_select)
+values
+(103, 232, 33, null, 'Y')
+
+insert into element_domain  -- 'clogged_inlet_2_with'
+(element_domain_id, element_id, domain_id, default_domain_value_id, allow_select)
+values
+(104, 234, 33, null, 'Y')
+
+insert into element_domain  -- 'clogged_inlet_3_with'
+(element_domain_id, element_id, domain_id, default_domain_value_id, allow_select)
+values
+(105, 236, 33, null, 'Y')
+
+insert into element_domain  -- 'clogged_inlet_4_with'
+(element_domain_id, element_id, domain_id, default_domain_value_id, allow_select)
+values
+(106, 238, 33, null, 'Y')
+
+insert into element_domain  -- 'clogged_inlet_5_with'
+(element_domain_id, element_id, domain_id, default_domain_value_id, allow_select)
+values
+(107, 240, 33, null, 'Y')
+
+insert into element_domain  -- 'askew_inlet_1'
+(element_domain_id, element_id, domain_id, default_domain_value_id, allow_select)
+values
+(108, 242, 35, null, 'N')
+
+insert into element_domain  -- 'askew_inlet_2'
+(element_domain_id, element_id, domain_id, default_domain_value_id, allow_select)
+values
+(109, 243, 35, null, 'N')
+
+insert into element_domain  -- 'askew_inlet_3'
+(element_domain_id, element_id, domain_id, default_domain_value_id, allow_select)
+values
+(110, 244, 35, null, 'N')
+
+insert into element_domain  -- 'askew_inlet_4'
+(element_domain_id, element_id, domain_id, default_domain_value_id, allow_select)
+values
+(111, 245, 35, null, 'N')
+
+insert into element_domain  -- 'askew_inlet_5'
+(element_domain_id, element_id, domain_id, default_domain_value_id, allow_select)
+values
+(112, 246, 35, null, 'N')
+
+insert into element_domain  -- 'askew_inlet_1_with'
+(element_domain_id, element_id, domain_id, default_domain_value_id, allow_select)
+values
+(113, 247, 34, null, 'Y')
+
+insert into element_domain  -- 'askew_inlet_2_with'
+(element_domain_id, element_id, domain_id, default_domain_value_id, allow_select)
+values
+(114, 249, 34, null, 'Y')
+
+insert into element_domain  -- 'askew_inlet_3_with'
+(element_domain_id, element_id, domain_id, default_domain_value_id, allow_select)
+values
+(115, 251, 34, null, 'Y')
+
+insert into element_domain  -- 'askew_inlet_4_with'
+(element_domain_id, element_id, domain_id, default_domain_value_id, allow_select)
+values
+(116, 253, 34, null, 'Y')
+
+insert into element_domain  -- 'askew_inlet_5_with'
+(element_domain_id, element_id, domain_id, default_domain_value_id, allow_select)
+values
+(117, 255, 34, null, 'Y')
+
+
+
+

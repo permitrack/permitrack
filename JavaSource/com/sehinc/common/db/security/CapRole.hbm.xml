@@ -1,0 +1,126 @@
+<?xml version="1.0"?><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <!--
+            Auto-generated mapping file from
+            the hibernate.org cfg2hbm engine
+    -->
+    <class name="com.sehinc.common.db.security.CapRole"
+           table="CAP_ROLE">
+        <id name="id"
+            type="integer">
+            <column name="ID" />
+            <generator class="identity" />
+        </id>
+        <property name="clientId"
+                  type="integer"
+                  column="CLIENT_ID" />
+        <property name="code"
+                  type="string"
+                  column="CODE" />
+        <property name="name"
+                  type="string"
+                  column="NAME" />
+        <property name="description"
+                  type="string"
+                  column="DESCRIPTION" />
+        <many-to-one name="status"
+                     class="com.sehinc.erosioncontrol.db.code.StatusCodeData"
+                     column="STATUS_CD"
+                     lazy="false" />
+        <property name="moduleId"
+                  type="integer"
+                  column="MODULE_ID" />
+        <property name="createTimestamp"
+                  type="timestamp"
+                  column="CREATE_TS" />
+        <property name="updateTimestamp"
+                  type="timestamp"
+                  column="UPDATE_TS" />
+        <property name="updateUserId"
+                  type="integer"
+                  column="UPDATE_USER_ID" />
+    </class>
+    <query name="com.sehinc.common.db.security.CapRole.byClientId">
+        select role
+        from com.sehinc.common.db.security.CapRole as role
+        where role.clientId = :clientId
+    </query>
+    <query name="com.sehinc.common.db.security.CapRole.byCode">
+        select role
+        from com.sehinc.common.db.security.CapRole as role
+        where role.code = :code and
+        role.clientId = :clientId and
+        role.status.code = :statusCode
+    </query>
+    <query name="com.sehinc.common.db.security.CapRole.byCodeAndModule">
+        select role
+        from com.sehinc.common.db.security.CapRole as role
+        where role.code = :code and
+        role.moduleId = :moduleId and
+        role.clientId = :clientId and
+        role.status.code = :statusCode
+    </query>
+    <query name="com.sehinc.common.db.security.CapRole.byModule">
+        select role
+        from com.sehinc.common.db.security.CapRole as role
+        where role.moduleId = :moduleId and
+        role.clientId = :clientId and
+        role.status.code = :statusCode
+        order by role.name
+    </query>
+    <query name="com.sehinc.common.db.security.CapRole.byModuleAndName">
+        select role
+        from com.sehinc.common.db.security.CapRole as role
+        where role.moduleId = :moduleId and
+        role.name = :name and
+        role.clientId = :clientId and
+        role.status.code = :statusCode
+        order by role.name
+    </query>
+    <query name="com.sehinc.common.db.security.CapRole.byClientIdAndSEH">
+        select role
+        from com.sehinc.common.db.security.CapRole as role
+        where (role.clientId = :clientId or
+        role.clientId = :SEHClientId) and
+        role.status.code = :statusCode
+        order by role.name
+    </query>
+    <query name="com.sehinc.common.db.security.CapRole.byClientIdAndStatus">
+        select role
+        from com.sehinc.common.db.security.CapRole as role
+        where role.clientId = :clientId and
+        role.status.code = :statusCode
+        order by role.moduleId asc, role.name asc
+    </query>
+    <query name="com.sehinc.common.db.security.CapRole.byUserId">
+        select role
+        from com.sehinc.common.db.security.CapRole as role,
+        com.sehinc.common.db.user.CapUserRole as userRole
+        where userRole.userId = :userId and
+        userRole.roleId = role.id and
+        role.status.code = :statusCode
+        order by role.name asc
+    </query>
+    <query name="com.sehinc.common.db.security.CapRole.byUserIdAndModule">
+        select role
+        from com.sehinc.common.db.security.CapRole as role,
+        com.sehinc.common.db.user.CapUserRole as userRole,
+        com.sehinc.common.db.security.CapModule as module
+        where userRole.userId = :userId and
+        userRole.roleId = role.id and
+        role.moduleId = module.id and
+        module.code = :moduleCode and
+        role.status.code = :statusCode
+        order by role.name asc
+    </query>
+    <query name="com.sehinc.common.db.security.CapRole.byModuleCode">
+        select role
+        from com.sehinc.common.db.security.CapRole as role,
+        com.sehinc.common.db.security.CapModule as module
+        where role.clientId = :clientId and
+        role.moduleId = module.id and
+        module.code = :moduleCode and
+        role.status.code = :statusCode
+    </query>
+</hibernate-mapping>

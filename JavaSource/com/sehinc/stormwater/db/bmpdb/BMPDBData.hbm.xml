@@ -1,0 +1,133 @@
+<?xml version="1.0"?><!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping>
+    <!-- -->
+    <class name="com.sehinc.stormwater.db.bmpdb.BMPDBData"
+           table="BMP_DB">
+        <id name="id"
+            type="integer"
+            column="id">
+            <generator class="identity" />
+        </id>
+        <property name="clientId"
+                  type="integer"
+                  column="CLIENT_ID" />
+        <property name="bmpDBCategoryId"
+                  type="integer"
+                  column="BMP_DB_CATEGORY_ID" />
+        <property name="name"
+                  type="string"
+                  column="NAME" />
+        <property name="required"
+                  type="boolean"
+                  column="IS_REQUIRED" />
+        <property name="number"
+                  type="integer"
+                  column="NUMBER" />
+        <property name="section"
+                  type="string"
+                  column="SECTION" />
+        <property name="formType"
+                  type="integer"
+                  column="FORM_TYPE" />
+        <property name="fieldValue1"
+                  type="string">
+            <column name="FIELD_VALUE1"
+                    sql-type="text" />
+        </property>
+        <property name="fieldType1"
+                  type="integer"
+                  column="FIELD_TYPE1" />
+        <property name="fieldValue2"
+                  type="string">
+            <column name="FIELD_VALUE2"
+                    sql-type="text" />
+        </property>
+        <property name="fieldType2"
+                  type="integer"
+                  column="FIELD_TYPE2" />
+        <property name="fieldValue3"
+                  type="string">
+            <column name="FIELD_VALUE3"
+                    sql-type="text" />
+        </property>
+        <property name="fieldType3"
+                  type="integer"
+                  column="FIELD_TYPE3" />
+        <property name="fieldValue4"
+                  type="string">
+            <column name="FIELD_VALUE4"
+                    sql-type="text" />
+        </property>
+        <property name="fieldType4"
+                  type="integer"
+                  column="FIELD_TYPE4" />
+        <property name="fieldValue5"
+                  type="string">
+            <column name="FIELD_VALUE5"
+                    sql-type="text" />
+        </property>
+        <property name="fieldType5"
+                  type="integer"
+                  column="FIELD_TYPE5" />
+        <property name="createTimestamp"
+                  type="timestamp"
+                  column="CREATE_TS" />
+        <property name="updateTimestamp"
+                  type="timestamp"
+                  column="UPDATE_TS" />
+        <property name="updateUserId"
+                  type="integer"
+                  column="UPDATE_USER_ID" />
+    </class>
+    <class name="com.sehinc.stormwater.value.bmpdb.BMPDBValue"
+           table="BMP_DB">
+        <id name="id"
+            type="integer"
+            column="id">
+            <generator class="identity" />
+        </id>
+        <property name="name"
+                  type="string"
+                  column="NAME" />
+        <property name="bmpDBCategoryId"
+                  type="integer"
+                  column="BMP_DB_CATEGORY_ID" />
+        <property name="formType"
+                  type="integer"
+                  column="FORM_TYPE" />
+    </class>
+    <query name="com.sehinc.stormwater.db.bmpdb.BMPDBValue.byCategoryId">
+        from BMPDBValue as value
+        where value.bmpDBCategoryId = :categoryId
+        order by value.name asc
+    </query>
+    <query name="com.sehinc.stormwater.db.bmpdb.BMPDBValue.byCategoryId.MPCA">
+        from BMPDBValue as value
+        where value.bmpDBCategoryId = :categoryId and
+        value.formType in (1,2)
+        order by value.name asc
+    </query>
+    <query name="com.sehinc.stormwater.db.bmpdb.BMPDBValue.byCategoryId.Default">
+        from BMPDBValue as value
+        where value.bmpDBCategoryId = :categoryId and
+        (value.formType is null or
+        value.formType = 0)
+        order by value.name asc
+    </query>
+    <query name="com.sehinc.stormwater.db.bmpdb.BMPDBValue.all">
+        from BMPDBValue as value order by value.name asc
+    </query>
+    <query name="com.sehinc.stormwater.db.bmpdb.BMPDBValue.all.MPCA">
+        from BMPDBValue as value
+        where value.formType in (1,2)
+        order by value.name asc
+    </query>
+    <query name="com.sehinc.stormwater.db.bmpdb.BMPDBValue.all.Default">
+        from BMPDBValue as value
+        where (value.formType is null or
+        value.formType = 0)
+        order by value.name asc
+    </query>
+</hibernate-mapping>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+    <bean name="springServiceLocator"
+          class="com.sehinc.common.service.spring.SpringServiceLocator"
+          factory-method="getInstance">
+        <property name="lookupService"
+                  ref="lookupService" />
+        <property name="envLookupService"
+                  ref="envLookupService" />
+        <property name="genericDaoService"
+                  ref="genericDaoService" />
+        <property name="inspectorService"
+                  ref="inspectorService" />
+        <property name="emailService"
+                  ref="emailService" />
+    </bean>
+    <bean id="lookupService"
+          class="com.sehinc.common.service.spring.LookupService" />
+    <bean id="envLookupService"
+          class="com.sehinc.common.service.spring.EnvLookupService" />
+    <bean id="genericDaoService"
+          class="com.sehinc.common.service.spring.impl.GenericDaoServiceImpl" />
+    <bean id="emailService"
+          class="com.sehinc.common.service.spring.impl.EmailServiceImpl" />
+    <bean id="inspectorService"
+          class="com.sehinc.erosioncontrol.service.impl.InspectorServiceImpl" />
+</beans>

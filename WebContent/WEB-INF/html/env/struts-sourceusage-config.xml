@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?><!DOCTYPE struts-config PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 1.3//EN"
+    "http://struts.apache.org/dtds/struts-config_1_3.dtd">
+<struts-config>
+    <form-beans>
+        <form-bean name="SourceUsageForm"
+                   type="com.sehinc.environment.action.sourceusage.SourceUsageForm" />
+        <form-bean name="SourceUsageMultiForm"
+                   type="com.sehinc.environment.action.sourceusage.SourceUsageMultiForm" />
+    </form-beans>
+    <global-forwards>
+        <forward name="source.usage.list.page"
+                 path="/sourceusagelistpage.do"
+                 redirect="true" />
+        <forward name="control.usage.list.page"
+                 path="/controlusagelistpage.do"
+                 redirect="true" />
+    </global-forwards>
+    <action-mappings>
+        <action path="/sourceusagereadingspage"
+                type="com.sehinc.environment.action.sourceusage.SourceUsageReadingsPageAction"
+                parameter="type=source">
+            <forward name="continue"
+                     path="source.usage.readings.page" />
+        </action>
+        <action path="/controlusagereadingspage"
+                type="com.sehinc.environment.action.sourceusage.SourceUsageReadingsPageAction"
+                parameter="type=control">
+            <forward name="continue"
+                     path="control.usage.readings.page" />
+        </action>
+        <action path="/sourceusagelistpage"
+                type="com.sehinc.environment.action.sourceusage.SourceUsageListPageAction"
+                name="SourceUsageForm"
+                scope="request"
+                validate="false"
+                parameter="type=source">
+            <forward name="continue"
+                     path="source.usage.list.page" />
+        </action>
+        <action path="/controlusagelistpage"
+                type="com.sehinc.environment.action.sourceusage.SourceUsageListPageAction"
+                name="SourceUsageForm"
+                scope="request"
+                validate="false"
+                parameter="type=control">
+            <forward name="continue"
+                     path="control.usage.list.page" />
+        </action>
+        <action path="/sourceusageviewpage"
+                type="com.sehinc.environment.action.sourceusage.SourceUsageViewPageAction"
+                name="SourceUsageForm"
+                scope="request"
+                validate="false"
+                parameter="type=source">
+            <forward name="continue"
+                     path="source.usage.view.page" />
+            <forward name="error"
+                     path="/sourceusagelistpage.do" />
+        </action>
+        <action path="/controlusageviewpage"
+                type="com.sehinc.environment.action.sourceusage.ControlUsageViewPageAction"
+                name="SourceUsageForm"
+                scope="request"
+                validate="false"
+                parameter="type=control">
+            <forward name="continue"
+                     path="control.usage.view.page" />
+        </action>
+        <action path="/sourceusageeditpage"
+                type="com.sehinc.environment.action.sourceusage.SourceUsageEditPageAction"
+                name="SourceUsageForm"
+                scope="request"
+                validate="false"
+                parameter="type=source">
+            <forward name="continue"
+                     path="source.usage.edit.page" />
+        </action>
+        <action path="/controlusageeditpage"
+                type="com.sehinc.environment.action.sourceusage.ControlUsageEditPageAction"
+                name="SourceUsageForm"
+                scope="request"
+                validate="false"
+                parameter="type=control;mode=edit">
+            <forward name="continue"
+                     path="control.usage.edit.page" />
+        </action>
+        <action path="/sourceusageeditaction"
+                type="com.sehinc.environment.action.sourceusage.SourceUsageEditAction"
+                input="source.usage.edit.page"
+                name="SourceUsageForm"
+                scope="request"
+                validate="true"
+                cancellable="true">
+            <forward name="continue"
+                     path="/sourceusagelistpage.do"
+                     redirect="true" />
+        </action>
+        <action path="/controlusageeditaction"
+                type="com.sehinc.environment.action.sourceusage.ControlUsageEditAction"
+                input="control.usage.edit.page"
+                name="SourceUsageForm"
+                scope="request"
+                validate="true"
+                cancellable="true">
+            <forward name="continue"
+                     path="/controlusagelistpage.do"
+                     redirect="true" />
+        </action>
+        <action path="/sourceusagecreatepage"
+                type="com.sehinc.environment.action.sourceusage.SourceUsageCreatePageAction"
+                name="SourceUsageForm"
+                scope="request"
+                validate="false"
+                parameter="type=source">
+            <forward name="continue"
+                     path="source.usage.create.page" />
+        </action>
+        <action path="/controlusagecreatepage"
+                type="com.sehinc.environment.action.sourceusage.ControlUsageCreatePageAction"
+                name="SourceUsageForm"
+                scope="request"
+                validate="false"
+                parameter="type=control;mode=create">
+            <forward name="continue"
+                     path="control.usage.create.page" />
+        </action>
+        <action path="/sourceusagecreateaction"
+                type="com.sehinc.environment.action.sourceusage.SourceUsageCreateAction"
+                input="source.usage.create.page"
+                name="SourceUsageForm"
+                scope="request"
+                validate="true"
+                cancellable="true">
+            <forward name="continue"
+                     path="/sourceusagelistpage.do"
+                     redirect="true" />
+        </action>
+        <action path="/controlusagecreateaction"
+                type="com.sehinc.environment.action.sourceusage.ControlUsageCreateAction"
+                input="control.usage.create.page"
+                name="SourceUsageForm"
+                scope="request"
+                validate="true"
+                cancellable="true">
+            <forward name="continue"
+                     path="/controlusagelistpage.do"
+                     redirect="true" />
+        </action>
+        <action path="/sourceusagemulticreatedateselectpage"
+                type="com.sehinc.environment.action.sourceusage.SourceUsageMultiCreateDateSelectPageAction"
+                name="SourceUsageMultiForm"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="source.usage.multi.create.date.select.page" />
+        </action>
+        <action path="/sourceusagemulticreatepage"
+                type="com.sehinc.environment.action.sourceusage.SourceUsageMultiCreatePageAction"
+                name="SourceUsageMultiForm"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="source.usage.multi.create.page" />
+        </action>
+        <action path="/sourceusagemulticreateaction"
+                type="com.sehinc.environment.action.sourceusage.SourceUsageMultiCreateAction"
+                input="source.usage.multi.create.page"
+                name="SourceUsageMultiForm"
+                scope="request"
+                validate="false"
+                cancellable="true">
+            <forward name="continue"
+                     path="/sourceusagelistpage.do"
+                     redirect="true" />
+        </action>
+        <action path="/sourceusagedeleteaction"
+                type="com.sehinc.environment.action.sourceusage.SourceUsageDeleteAction"
+                name="SourceUsageForm"
+                scope="request"
+                validate="false"
+                cancellable="true">
+            <forward name="continue"
+                     path="/sourceusagelistpage.do"
+                     redirect="true" />
+        </action>
+        <action path="/controlusagedeleteaction"
+                type="com.sehinc.environment.action.sourceusage.ControlUsageDeleteAction"
+                name="SourceUsageForm"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="/controlusagelistpage.do"
+                     redirect="true" />
+        </action>
+    </action-mappings>
+    <controller processorClass="org.apache.struts.action.RequestProcessor"
+                contentType="text/html" />
+    <plug-in className="org.apache.struts.tiles.TilesPlugin">
+        <set-property property="definitions-config"
+                      value="/WEB-INF/html/tiles-defs.xml, /WEB-INF/html/env/tiles-defs.xml, /WEB-INF/html/env/tiles-sourceusage-defs.xml" />
+        <set-property property="definitions-debug"
+                      value="2" />
+        <set-property property="definitions-parser-details"
+                      value="2" />
+        <set-property property="definitions-parser-validate"
+                      value="true" />
+        <set-property property="moduleAware"
+                      value="true" />
+    </plug-in>
+    <plug-in className="org.apache.struts.validator.ValidatorPlugIn">
+        <set-property property="pathnames"
+                      value="/org/apache/struts/validator/validator-rules.xml, /WEB-INF/html/env/validation-sourceusage.xml" />
+    </plug-in>
+</struts-config>

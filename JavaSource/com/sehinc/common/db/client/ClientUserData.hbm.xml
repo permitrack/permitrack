@@ -1,0 +1,30 @@
+<?xml version="1.0"?><!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping>
+    <!-- -->
+    <class name="com.sehinc.common.db.client.ClientUserData"
+           table="CLIENT_USER">
+        <id name="id"
+            type="integer"
+            column="id">
+            <generator class="identity" />
+        </id>
+        <property name="clientId"
+                  type="integer"
+                  column="CLIENT_ID" />
+        <property name="userId"
+                  type="integer"
+                  column="USER_ID" />
+    </class>
+    <query name="com.sehinc.common.db.client.ClientUserData.byClientIdAndStatus">
+        select cu
+        from com.sehinc.common.db.client.ClientUserData as cu,
+        com.sehinc.common.db.user.UserData as u
+        where cu.clientId = :clientId
+        and u.id = cu.userId
+        and u.status.code = :statusCode
+        and u.username != 'wpsadmin'
+        order by u.lastName, u.firstName
+    </query>
+</hibernate-mapping>

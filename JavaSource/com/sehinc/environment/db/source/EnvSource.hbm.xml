@@ -1,0 +1,116 @@
+<?xml version="1.0"?><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <!--
+            Auto-generated mapping file from
+            the hibernate.org cfg2hbm engine
+    -->
+    <class name="com.sehinc.environment.db.source.EnvSource"
+           table="ENV_SOURCE">
+        <id name="id"
+            type="integer">
+            <column name="ID" />
+            <generator class="identity" />
+        </id>
+        <version name="version"
+                 column="version"
+                 insert="false"
+                 type="long" />
+        <property name="displayName"
+                  type="string"
+                  column="DISPLAY_NAME" />
+        <property name="clientId"
+                  type="integer"
+                  column="CLIENT_ID" />
+        <property name="partNumber"
+                  type="string"
+                  column="PART_NUMBER" />
+        <property name="batchNumber"
+                  type="string"
+                  column="BATCH_NUMBER" />
+        <property name="description"
+                  type="string"
+                  column="DESCRIPTION" />
+        <property name="lbsVoc"
+                  type="big_decimal"
+                  column="LBS_VOC" />
+        <many-to-one name="lbsVocUm"
+                     class="com.sehinc.environment.db.lookup.EnvUnitOfMeasureData"
+                     column="LBS_VOC_UM"
+                     lazy="false" />
+        <property name="density"
+                  type="big_decimal"
+                  column="DENSITY" />
+        <many-to-one name="densityUm"
+                     class="com.sehinc.environment.db.lookup.EnvUnitOfMeasureData"
+                     column="DENSITY_UM"
+                     lazy="false" />
+        <property name="lbsHaps"
+                  type="big_decimal"
+                  column="LBS_HAPS" />
+        <many-to-one name="lbsHapsUm"
+                     class="com.sehinc.environment.db.lookup.EnvUnitOfMeasureData"
+                     column="LBS_HAPS_UM"
+                     lazy="false" />
+        <property name="pctSolidsWeight"
+                  type="big_decimal"
+                  column="PCT_SOLIDS_WEIGHT" />
+        <property name="pctSolidsVolume"
+                  type="big_decimal"
+                  column="PCT_SOLIDS_VOLUME" />
+        <property name="infoOrigin"
+                  type="string"
+                  column="INFO_ORIGIN" />
+        <many-to-one name="sourceType"
+                     class="com.sehinc.environment.db.lookup.EnvSourceTypeData"
+                     column="SOURCE_TYPE_CD"
+                     lazy="false" />
+        <many-to-one name="status"
+                     class="com.sehinc.environment.db.code.EnvStatusCodeData"
+                     column="STATUS_CD"
+                     lazy="false" />
+        <property name="createTimestamp"
+                  type="timestamp"
+                  column="CREATE_TS" />
+        <property name="updateTimestamp"
+                  type="timestamp"
+                  column="UPDATE_TS" />
+        <property name="updateUserId"
+                  type="integer"
+                  column="UPDATE_USER_ID" />
+        <many-to-one name="displayColor"
+                     class="com.sehinc.environment.db.lookup.EnvDisplayColorData"
+                     column="DISPLAY_COLOR_CD"
+                     lazy="false" />
+        <property name="hcFuel"
+                  type="integer"
+                  column="HC_FUEL" />
+    </class>
+    <query name="EnvSource.sourceListByClientId">
+        from com.sehinc.environment.db.source.EnvSource as source
+        where source.clientId = :clientId
+        and source.status.code = :statusCode
+        order by sourceType.code ASC, source.displayName ASC
+    </query>
+    <query name="EnvSource.sourceListByClientIdAndSourceId">
+        from com.sehinc.environment.db.source.EnvSource as source
+        where source.clientId = :clientId
+        and source.id = :id
+        and source.status.code = :statusCode
+        order by source.displayName ASC
+    </query>
+    <query name="EnvSource.sourceListbyClientIdAndNumber">
+        from com.sehinc.environment.db.source.EnvSource as source
+        where source.clientId = :clientId
+        and source.partNumber = :partNumber
+        and source.status.code = :statusCode
+        order by source.partNumber ASC
+    </query>
+    <query name="EnvSource.findDuplicate">
+        from com.sehinc.environment.db.source.EnvSource as source
+        where source.clientId = :clientId
+        and source.description = :description
+        and source.partNumber = :partNumber
+        and source.status.code = :statusCode
+    </query>
+</hibernate-mapping>

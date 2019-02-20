@@ -1,0 +1,427 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="NE_Air_Form_1_0" pageWidth="550" pageHeight="820" columnWidth="550" leftMargin="0" rightMargin="0" topMargin="20" bottomMargin="20" isIgnorePagination="true">
+	<property name="ireport.zoom" value="1.2722928551174544"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="141"/>
+	<reportFont name="Arial_Normal" isDefault="true" fontName="Arial" size="12" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Bold" isDefault="false" fontName="Arial" size="12" isBold="true" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Italic" isDefault="false" fontName="Arial" size="12" isItalic="true" pdfFontName="Helvetica-Oblique" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Bold_Italic" isDefault="false" fontName="Arial" size="12" isBold="true" isItalic="true" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Small" isDefault="true" fontName="Arial" size="10" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Small_Bold" isDefault="false" fontName="Arial" size="10" isBold="true" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Small_Italic" isDefault="false" fontName="Arial" size="10" isItalic="true" pdfFontName="Helvetica-Oblique" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Small_Bold_Italic" isDefault="false" fontName="Arial" size="10" isBold="true" isItalic="true" pdfFontName="Helvetica-Oblique" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<parameter name="year" class="java.lang.Integer"/>
+	<parameter name="clientId" class="java.lang.Integer"/>
+	<parameter name="FacilityId" class="java.lang.Integer"/>
+	<parameter name="NE_Air_Form_1_0_Subreport_File" class="java.io.File"/>
+	<queryString>
+		<![CDATA[SELECT	F.ID, F.NAME, F.NUMBER, F.DESCRIPTION, F.COUNTY_NAME, F.SIC_CODE, F.CLASS,
+                F.DAILY_HRS_OP, F.DAYS_OP_WEEK, F.WEEKS_OP_YEAR, F.BUSINESS_HRS,
+                F.PHONE_NUMBER, F.FAX_NUMBER,
+                PA.LINE1 AS PA_LINE1, PA.LINE2 AS PA_LINE2, PA.LINE3 AS PA_LINE3,
+                PA.CITY AS PA_CITY, PA.STATE AS PA_STATE, PA.POSTAL_CODE AS PA_ZIP,
+                MA.LINE1 AS MA_LINE1, MA.LINE2 AS MA_LINE2, MA.LINE3 AS MA_LINE3,
+                MA.CITY AS MA_CITY, MA.STATE AS MA_STATE, MA.POSTAL_CODE AS MA_ZIP,
+                C.FIRST_NAME, C.LAST_NAME, C.EMAIL
+                FROM ENV_FACILITY AS F
+                LEFT JOIN ADDRESS AS PA ON PA.ID = F.PHYSICAL_ADDRESS_ID
+                LEFT JOIN ADDRESS AS MA ON MA.ID = F.MAILING_ADDRESS_ID
+                LEFT JOIN ENV_FACILITY_CONTACT AS FC ON FC.FACILITY_ID = F.ID AND FC.ROLE_CD = 1
+                LEFT JOIN CAP_CONTACT AS C ON C.ID = FC.CAP_CONTACT_ID
+                WHERE F.ID = $P{FacilityId}]]>
+	</queryString>
+	<field name="ID" class="java.lang.Integer"/>
+	<field name="NAME" class="java.lang.String"/>
+	<field name="NUMBER" class="java.lang.String"/>
+	<field name="DESCRIPTION" class="java.lang.String"/>
+	<field name="COUNTY_NAME" class="java.lang.String"/>
+	<field name="SIC_CODE" class="java.lang.String"/>
+	<field name="CLASS" class="java.lang.String"/>
+	<field name="DAILY_HRS_OP" class="java.lang.Integer"/>
+	<field name="DAYS_OP_WEEK" class="java.lang.Integer"/>
+	<field name="WEEKS_OP_YEAR" class="java.lang.Integer"/>
+	<field name="BUSINESS_HRS" class="java.lang.String"/>
+	<field name="PHONE_NUMBER" class="java.lang.String"/>
+	<field name="FAX_NUMBER" class="java.lang.String"/>
+	<field name="PA_LINE1" class="java.lang.String"/>
+	<field name="PA_LINE2" class="java.lang.String"/>
+	<field name="PA_LINE3" class="java.lang.String"/>
+	<field name="PA_CITY" class="java.lang.String"/>
+	<field name="PA_STATE" class="java.lang.String"/>
+	<field name="PA_ZIP" class="java.lang.String"/>
+	<field name="MA_LINE1" class="java.lang.String"/>
+	<field name="MA_LINE2" class="java.lang.String"/>
+	<field name="MA_LINE3" class="java.lang.String"/>
+	<field name="MA_CITY" class="java.lang.String"/>
+	<field name="MA_STATE" class="java.lang.String"/>
+	<field name="MA_ZIP" class="java.lang.String"/>
+	<field name="FIRST_NAME" class="java.lang.String"/>
+	<field name="LAST_NAME" class="java.lang.String"/>
+	<field name="EMAIL" class="java.lang.String"/>
+	<group name="FACILITY" keepTogether="true">
+		<groupExpression><![CDATA[$P{FacilityId}]]></groupExpression>
+		<groupHeader>
+			<band height="199" splitType="Stretch">
+				<rectangle>
+					<reportElement mode="Transparent" x="0" y="0" width="550" height="199"/>
+				</rectangle>
+				<rectangle>
+					<reportElement mode="Transparent" x="0" y="0" width="269" height="32"/>
+				</rectangle>
+				<rectangle>
+					<reportElement mode="Transparent" x="0" y="32" width="269" height="58"/>
+				</rectangle>
+				<rectangle>
+					<reportElement mode="Transparent" x="0" y="90" width="269" height="45"/>
+				</rectangle>
+				<rectangle>
+					<reportElement mode="Transparent" x="0" y="135" width="129" height="64"/>
+				</rectangle>
+				<rectangle>
+					<reportElement mode="Transparent" x="129" y="135" width="140" height="64"/>
+				</rectangle>
+				<rectangle>
+					<reportElement mode="Transparent" x="269" y="0" width="136" height="32"/>
+				</rectangle>
+				<rectangle>
+					<reportElement mode="Transparent" x="269" y="32" width="136" height="58"/>
+				</rectangle>
+				<rectangle>
+					<reportElement mode="Transparent" x="405" y="0" width="145" height="32"/>
+				</rectangle>
+				<rectangle>
+					<reportElement mode="Transparent" x="405" y="32" width="145" height="58"/>
+				</rectangle>
+				<rectangle>
+					<reportElement mode="Transparent" x="269" y="90" width="136" height="45"/>
+				</rectangle>
+				<rectangle>
+					<reportElement mode="Transparent" x="405" y="90" width="145" height="45"/>
+				</rectangle>
+				<rectangle>
+					<reportElement mode="Transparent" x="269" y="135" width="136" height="32"/>
+				</rectangle>
+				<rectangle>
+					<reportElement mode="Transparent" x="405" y="135" width="145" height="32"/>
+				</rectangle>
+				<rectangle>
+					<reportElement mode="Transparent" x="269" y="167" width="136" height="32"/>
+				</rectangle>
+				<rectangle>
+					<reportElement mode="Transparent" x="405" y="167" width="145" height="32"/>
+				</rectangle>
+				<textField>
+					<reportElement x="270" y="17" width="134" height="15"/>
+					<textElement verticalAlignment="Bottom">
+						<font reportFont="Arial_Small"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA["  " + $F{NUMBER}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="406" y="17" width="140" height="15"/>
+					<textElement verticalAlignment="Bottom">
+						<font reportFont="Arial_Small"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA["  " + $F{SIC_CODE}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="2" y="2" width="267" height="15"/>
+					<textElement verticalAlignment="Bottom">
+						<font reportFont="Arial_Bold"/>
+					</textElement>
+					<text><![CDATA[Facility Name]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="2" y="17" width="267" height="15"/>
+					<textElement verticalAlignment="Bottom">
+						<font reportFont="Arial_Small"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA["  " + $F{NAME}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="270" y="2" width="134" height="15"/>
+					<textElement verticalAlignment="Bottom">
+						<font reportFont="Arial_Bold"/>
+					</textElement>
+					<text><![CDATA[Facility ID #]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="406" y="2" width="140" height="15"/>
+					<textElement verticalAlignment="Bottom">
+						<font reportFont="Arial_Bold"/>
+					</textElement>
+					<text><![CDATA[SIC Code(s)]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="2" y="48" width="267" height="41"/>
+					<textElement verticalAlignment="Bottom">
+						<font reportFont="Arial_Small"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA["  " + $F{PA_LINE1} + " " + $F{PA_LINE2} + "\n  " + $F{PA_LINE3}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="406" y="48" width="140" height="41"/>
+					<textElement verticalAlignment="Bottom">
+						<font reportFont="Arial_Small"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA["  " + $F{PA_ZIP}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="406" y="33" width="140" height="15"/>
+					<textElement>
+						<font reportFont="Arial_Bold"/>
+					</textElement>
+					<text><![CDATA[Zip Code]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="2" y="33" width="267" height="15"/>
+					<textElement>
+						<font reportFont="Arial_Bold"/>
+					</textElement>
+					<text><![CDATA[Facility Location (Address or Directions)]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="270" y="64" width="134" height="24"/>
+					<textElement verticalAlignment="Bottom">
+						<font reportFont="Arial_Small"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA["  " + $F{PA_CITY}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="270" y="33" width="134" height="31"/>
+					<textElement>
+						<font reportFont="Arial_Bold"/>
+					</textElement>
+					<text><![CDATA[City or Nearest Community]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="2" y="105" width="267" height="29"/>
+					<textElement verticalAlignment="Bottom">
+						<font reportFont="Arial_Small"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA["  " + $F{MA_LINE1} + " " + $F{MA_LINE2}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="406" y="90" width="140" height="15"/>
+					<textElement>
+						<font reportFont="Arial_Bold"/>
+					</textElement>
+					<text><![CDATA[Zip Code]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="270" y="105" width="134" height="30"/>
+					<textElement verticalAlignment="Bottom">
+						<font reportFont="Arial_Small"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA["  " + $F{MA_CITY} + ", " + $F{MA_STATE}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="406" y="105" width="140" height="30"/>
+					<textElement verticalAlignment="Bottom">
+						<font reportFont="Arial_Small"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA["  " + $F{MA_ZIP}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="270" y="90" width="134" height="15"/>
+					<textElement>
+						<font reportFont="Arial_Bold"/>
+					</textElement>
+					<text><![CDATA[City, State]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="2" y="90" width="267" height="15"/>
+					<textElement>
+						<font reportFont="Arial_Bold"/>
+					</textElement>
+					<text><![CDATA[Facility Mailing Address]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="2" y="151" width="127" height="46"/>
+					<textElement verticalAlignment="Bottom">
+						<font reportFont="Arial_Small"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA["  " + $F{COUNTY_NAME}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="2" y="136" width="127" height="15"/>
+					<textElement>
+						<font reportFont="Arial_Bold"/>
+					</textElement>
+					<text><![CDATA[County Name]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="130" y="151" width="139" height="46"/>
+					<textElement verticalAlignment="Bottom">
+						<font reportFont="Arial_Small"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA["  " + $F{CLASS}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="130" y="136" width="139" height="15"/>
+					<textElement>
+						<font reportFont="Arial_Bold"/>
+					</textElement>
+					<text><![CDATA[Classification]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="270" y="151" width="134" height="15"/>
+					<textElement verticalAlignment="Bottom">
+						<font reportFont="Arial_Small"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA["  " + $F{PHONE_NUMBER}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="270" y="136" width="134" height="15"/>
+					<textElement>
+						<font reportFont="Arial_Bold"/>
+					</textElement>
+					<text><![CDATA[Facility Phone Number]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="406" y="136" width="143" height="15"/>
+					<textElement>
+						<font reportFont="Arial_Bold"/>
+					</textElement>
+					<text><![CDATA[Facility Contact]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="406" y="151" width="143" height="15"/>
+					<textElement verticalAlignment="Bottom">
+						<font reportFont="Arial_Small"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA["  " + $F{FIRST_NAME} + " " + $F{LAST_NAME}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="270" y="168" width="134" height="15"/>
+					<textElement>
+						<font reportFont="Arial_Bold"/>
+					</textElement>
+					<text><![CDATA[Facility Fax Number]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="270" y="183" width="134" height="15"/>
+					<textElement verticalAlignment="Bottom">
+						<font reportFont="Arial_Small"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA["  " + $F{FAX_NUMBER}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="406" y="168" width="143" height="15"/>
+					<textElement>
+						<font reportFont="Arial_Bold"/>
+					</textElement>
+					<text><![CDATA[Email Address]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="406" y="183" width="143" height="15"/>
+					<textElement verticalAlignment="Bottom">
+						<font reportFont="Arial_Small"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA["  " + $F{EMAIL}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="161" splitType="Prevent">
+				<rectangle>
+					<reportElement mode="Transparent" x="37" y="85" width="201" height="47"/>
+				</rectangle>
+				<rectangle>
+					<reportElement mode="Transparent" x="238" y="85" width="150" height="47"/>
+				</rectangle>
+				<rectangle>
+					<reportElement mode="Transparent" x="388" y="85" width="122" height="47"/>
+				</rectangle>
+				<staticText>
+					<reportElement x="0" y="2" width="550" height="20"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font reportFont="Arial_Bold" size="12"/>
+					</textElement>
+					<text><![CDATA[CERTIFICATION OF TRUTH, ACCURACY, AND COMPLETENESS]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="37" y="22" width="473" height="61"/>
+					<textElement>
+						<font reportFont="Arial_Small"/>
+					</textElement>
+					<text><![CDATA[Note:  This certification must be signed by a responsible official as defined in Title 129.  Unsigned inventories will be considered incomplete and may be subject to penalties.
+
+I certify under penalty of law that, based on information and belief formed after reasonable inquiry, the statements and information contained in this inventory are true, accurate, and complete.]]></text>
+				</staticText>
+				<staticText>
+					<reportElement mode="Transparent" x="37" y="85" width="201" height="20"/>
+					<textElement verticalAlignment="Bottom">
+						<font reportFont="Arial_Bold"/>
+					</textElement>
+					<text><![CDATA[ Signature of Responsible Official]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="238" y="85" width="150" height="20"/>
+					<textElement verticalAlignment="Bottom">
+						<font reportFont="Arial_Bold"/>
+					</textElement>
+					<text><![CDATA[ Name & Title (printed)]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="388" y="85" width="122" height="20"/>
+					<textElement verticalAlignment="Bottom">
+						<font reportFont="Arial_Bold"/>
+					</textElement>
+					<text><![CDATA[ Date]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="37" y="132" width="473" height="27"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font reportFont="Arial_Small_Bold" size="9"/>
+					</textElement>
+					<text><![CDATA[REMEMBER TO SIGN THIS REPORT.   ALL INVENTORIES MUST BE COMPLETED IN A PERMANENT TYPE MARKER.]]></text>
+				</staticText>
+			</band>
+		</groupFooter>
+	</group>
+	<title>
+		<band height="25" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="550" height="20"/>
+				<textElement textAlignment="Center">
+					<font reportFont="Arial_Bold" size="14"/>
+				</textElement>
+				<text><![CDATA[FORM 1.0 GENERAL INFORMATION]]></text>
+			</staticText>
+		</band>
+	</title>
+	<detail>
+		<band height="280" splitType="Prevent">
+			<staticText>
+				<reportElement x="0" y="4" width="550" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font reportFont="Arial_Bold" size="12"/>
+				</textElement>
+				<text><![CDATA[Fill out the information below after completing all applicable forms.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-4" y="24" width="554" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font reportFont="Arial_Bold" size="12"/>
+				</textElement>
+				<text><![CDATA[EMISSIONS STATEMENT]]></text>
+			</staticText>
+			<subreport>
+				<reportElement x="2" y="44" width="547" height="236"/>
+				<subreportParameter name="FacilityId">
+					<subreportParameterExpression><![CDATA[$P{FacilityId}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="clientId">
+					<subreportParameterExpression><![CDATA[$P{clientId}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="year">
+					<subreportParameterExpression><![CDATA[$P{year}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.io.File"><![CDATA[$P{NE_Air_Form_1_0_Subreport_File}]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+</jasperReport>

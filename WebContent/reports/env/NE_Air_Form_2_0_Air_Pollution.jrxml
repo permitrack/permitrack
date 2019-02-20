@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="NE_Air_Form_2_0_Air_Pollution" pageWidth="540" pageHeight="69" columnWidth="540" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<reportFont name="Arial_Normal" isDefault="true" fontName="Arial" size="12" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Bold" isDefault="false" fontName="Arial" size="12" isBold="true" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Italic" isDefault="false" fontName="Arial" size="12" isItalic="true" pdfFontName="Helvetica-Oblique" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Bold_Italic" isDefault="false" fontName="Arial" size="12" isBold="true" isItalic="true" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Small" isDefault="true" fontName="Arial" size="10" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Small_Bold" isDefault="false" fontName="Arial" size="10" isBold="true" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Small_Italic" isDefault="false" fontName="Arial" size="10" isItalic="true" pdfFontName="Helvetica-Oblique" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Small_Bold_Italic" isDefault="false" fontName="Arial" size="10" isBold="true" isItalic="true" pdfFontName="Helvetica-Oblique" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<parameter name="ASSET_ID" class="java.lang.Integer"/>
+	<queryString>
+		<![CDATA[select zz.*,
+                    lest.description sub_desc
+            from (
+                select z.*,
+                       east.substance_type_cd,
+                       east.efficiency_factor,
+                       east.addl_info
+                from (
+                    select a.id asset_id,
+                    a.number a_number,
+                           a.name a_name,
+                           YEAR(a.active_ts) active_ts
+                    from env_asset a
+                    WHERE a.id = $P{ASSET_ID}
+                     ) z
+                LEFT JOIN env_asset_emitted_substance_type east
+                ON east.asset_id = z.asset_id
+                GROUP BY z.asset_id,
+                     z.a_number,
+                     z.a_name,
+                             z.active_ts,
+                     east.substance_type_cd,
+                         east.efficiency_factor,
+                         east.addl_info
+                  ) zz
+            LEFT JOIN lookup_env_substance_type lest
+            ON lest.code = zz.substance_type_cd]]>
+	</queryString>
+	<field name="asset_id" class="java.lang.Integer"/>
+	<field name="a_number" class="java.lang.String"/>
+	<field name="a_name" class="java.lang.String"/>
+	<field name="active_ts" class="java.lang.Integer"/>
+	<field name="substance_type_cd" class="java.lang.Integer"/>
+	<field name="efficiency_factor" class="java.lang.Integer"/>
+	<field name="addl_info" class="java.lang.String"/>
+	<field name="sub_desc" class="java.lang.String"/>
+	<title>
+		<band height="45" splitType="Stretch">
+			<staticText>
+				<reportElement x="2" y="0" width="538" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font reportFont="Arial_Bold" size="12"/>
+				</textElement>
+				<text><![CDATA[Air Pollution Control Equipment Information]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement mode="Transparent" x="2" y="20" width="59" height="25"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="61" y="20" width="63" height="25"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="124" y="20" width="145" height="25"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="269" y="20" width="166" height="25"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="435" y="20" width="104" height="25"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="3" y="21" width="57" height="23"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font reportFont="Arial_Bold" size="9"/>
+				</textElement>
+				<text><![CDATA[Process Number]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="62" y="21" width="61" height="23"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font reportFont="Arial_Bold" size="9"/>
+				</textElement>
+				<text><![CDATA[Date Installed]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="125" y="21" width="143" height="23"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font reportFont="Arial_Bold" size="9"/>
+				</textElement>
+				<text><![CDATA[Description of Control Device]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="270" y="21" width="164" height="23"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font reportFont="Arial_Bold" size="9"/>
+				</textElement>
+				<text><![CDATA[Pollutant(s) Removed]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="436" y="21" width="102" height="23"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font reportFont="Arial_Bold" size="9"/>
+				</textElement>
+				<text><![CDATA[Control Efficiency]]></text>
+			</staticText>
+		</band>
+	</title>
+	<detail>
+		<band height="23" splitType="Stretch">
+			<printWhenExpression><![CDATA[$F{addl_info} != null ? Boolean.TRUE : Boolean.FALSE]]></printWhenExpression>
+			<rectangle>
+				<reportElement mode="Transparent" x="2" y="1" width="59" height="22" isRemoveLineWhenBlank="true">
+					<printWhenExpression><![CDATA[$F{addl_info} != null ? Boolean.TRUE : Boolean.FALSE]]></printWhenExpression>
+				</reportElement>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="61" y="1" width="63" height="22" isRemoveLineWhenBlank="true">
+					<printWhenExpression><![CDATA[$F{addl_info} != null ? Boolean.TRUE : Boolean.FALSE]]></printWhenExpression>
+				</reportElement>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="124" y="1" width="145" height="22" isRemoveLineWhenBlank="true">
+					<printWhenExpression><![CDATA[$F{addl_info} != null ? Boolean.TRUE : Boolean.FALSE]]></printWhenExpression>
+				</reportElement>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="269" y="1" width="166" height="22" isRemoveLineWhenBlank="true">
+					<printWhenExpression><![CDATA[$F{addl_info} != null ? Boolean.TRUE : Boolean.FALSE]]></printWhenExpression>
+				</reportElement>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="435" y="1" width="104" height="22" isRemoveLineWhenBlank="true">
+					<printWhenExpression><![CDATA[$F{addl_info} != null ? Boolean.TRUE : Boolean.FALSE]]></printWhenExpression>
+				</reportElement>
+			</rectangle>
+			<textField>
+				<reportElement x="3" y="2" width="57" height="20">
+					<printWhenExpression><![CDATA[$F{addl_info} != null ? Boolean.TRUE : Boolean.FALSE]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font reportFont="Arial_Normal" size="10"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{a_number}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="125" y="2" width="143" height="20">
+					<printWhenExpression><![CDATA[$F{addl_info} != null ? Boolean.TRUE : Boolean.FALSE]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font reportFont="Arial_Normal" size="10"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{addl_info}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="270" y="2" width="164" height="20">
+					<printWhenExpression><![CDATA[$F{addl_info} != null ? Boolean.TRUE : Boolean.FALSE]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font reportFont="Arial_Normal" size="10"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{sub_desc}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="436" y="2" width="102" height="20">
+					<printWhenExpression><![CDATA[$F{addl_info} != null ? Boolean.TRUE : Boolean.FALSE]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font reportFont="Arial_Normal" size="10"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{efficiency_factor} + "%"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="62" y="2" width="61" height="20">
+					<printWhenExpression><![CDATA[$F{addl_info} != null ? Boolean.TRUE : Boolean.FALSE]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font reportFont="Arial_Normal" size="10"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{active_ts}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="23" splitType="Stretch">
+			<printWhenExpression><![CDATA[$F{addl_info} != null ? Boolean.FALSE : Boolean.TRUE]]></printWhenExpression>
+			<rectangle>
+				<reportElement mode="Transparent" x="2" y="1" width="59" height="22" isRemoveLineWhenBlank="true">
+					<printWhenExpression><![CDATA[$F{addl_info} != null ? Boolean.FALSE : Boolean.TRUE]]></printWhenExpression>
+				</reportElement>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="61" y="1" width="63" height="22" isRemoveLineWhenBlank="true">
+					<printWhenExpression><![CDATA[$F{addl_info} != null ? Boolean.FALSE : Boolean.TRUE]]></printWhenExpression>
+				</reportElement>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="124" y="1" width="145" height="22" isRemoveLineWhenBlank="true">
+					<printWhenExpression><![CDATA[$F{addl_info} != null ? Boolean.FALSE : Boolean.TRUE]]></printWhenExpression>
+				</reportElement>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="435" y="1" width="104" height="22" isRemoveLineWhenBlank="true">
+					<printWhenExpression><![CDATA[$F{addl_info} != null ? Boolean.FALSE : Boolean.TRUE]]></printWhenExpression>
+				</reportElement>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="269" y="1" width="166" height="22" isRemoveLineWhenBlank="true">
+					<printWhenExpression><![CDATA[$F{addl_info} != null ? Boolean.FALSE : Boolean.TRUE]]></printWhenExpression>
+				</reportElement>
+			</rectangle>
+		</band>
+	</detail>
+</jasperReport>

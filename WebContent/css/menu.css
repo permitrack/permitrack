@@ -1,0 +1,46 @@
+#google-search .gsc-control-cse {
+    padding: 0;
+    background-color: transparent;
+    border-color: transparent;
+}
+
+#google-search .gsib_a {
+    padding: 4px;
+}
+
+#google-search .gsc-input-box {
+    background-color: transparent;
+    border-width: 0;
+    height: auto;
+}
+
+#google-search .gsc-search-box-tools .gsc-search-box .gsc-input {
+    padding-right: 2px;
+}
+
+#google-search .gsst_a {
+    padding-top: 8px;
+    padding-left: 0;
+}
+
+#google-search input.gsc-input {
+    font-size: 12px;
+    height: 20px;
+}
+
+.navbar-inverse .nav .active, .navbar-inverse .nav .active:hover, .navbar-inverse .nav .active:focus {
+    color: #ffffff;
+    background-color: #111111;
+}
+
+@media (max-width: 979px) {
+    .navbar-inverse .nav .active, .navbar-inverse .nav .active:hover, .navbar-inverse .nav .active:focus, .navbar-inverse .nav li:hover {
+        color: #ffffff;
+        background-color: #111111;
+    }
+}
+
+.nav .dropdown-toggle .caret {
+    border-top-color: #ffffff;
+    border-bottom-color: #ffffff;
+}

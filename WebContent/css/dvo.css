@@ -1,0 +1,356 @@
+TD.footer
+{
+    color: #ffffff;
+}
+
+A.footerTerms
+{
+    color: #ffff00;
+    text-decoration: none;
+}
+
+TD.tabSelected
+{
+    background-color: #0A5A8B;
+    color: #ffffff;
+    font-weight: bold;
+}
+
+TD.tabUnselected
+{
+    background-color: #0A5A8B;
+    color: #ffffff;
+}
+
+A.tabUnselected
+{
+    color: white;
+}
+
+A:link.tabUnselected
+{
+    color: white;
+
+}
+
+A:hover.tabUnselected
+{
+    color: yellow;
+}
+
+A:active.tabUnselected
+{
+    color: white;
+}
+
+TD.leftNavBorder
+{
+    color: #ffffff;
+    font-weight: bold;
+    background-color: #0A5A8B;
+}
+
+TD.leftNavContent
+{
+
+}
+
+TD.leftNavSpacer
+{
+    background-color: #0A5A8B;
+}
+
+A.day
+{
+    color: black;
+    text-decoration: none;
+}
+
+A.selectedDay
+{
+    color: black;
+    background-color: #ccddff;
+    text-decoration: none;
+}
+
+.leftNavContent
+{
+    font-weight: bold;
+}
+
+A.leftNavContent
+{
+    color: #0A5A8B;
+    font-weight: bold;
+}
+
+A.pageNavContent
+{
+    color: #0A5A8B;
+    font-weight: normal;
+}
+
+DIV.crmTitle
+{
+    font-weight: bold;
+    font-size: 125%;
+}
+
+.sectionHead
+{
+    font-weight: bold;
+}
+
+TH.list
+{
+    color: #ffffff;
+    background-color: #0A5A8B;
+    text-align: left;
+}
+
+TD.list
+{
+    color: #000000;
+    background-color: #ccddff;
+}
+
+TH.listTotal
+{
+    color: #ffffff;
+    background-color: #0A5A8B;
+    text-align: left;
+}
+
+TD.listTotal
+{
+    color: #000000;
+    background-color: #ccddff;
+    font-weight: bold;
+}
+
+TH.smallList
+{
+    color: #ffffff;
+    background-color: #0A5A8B;
+    text-align: left;
+    font-size: 8pt;
+}
+
+TD.smallList
+{
+    color: #000000;
+    background-color: #ccddff;
+    font-size: 8pt;
+}
+
+.currentAlert
+{
+    color: black;
+}
+
+.delinquentAlert
+{
+    color: #cc0000;
+}
+
+.question
+{
+    color: #0A5A8B;
+}
+
+.paStatusRE
+{
+    color: darkorange;
+}
+
+A.paStatusRE:hover
+{
+    color: red;
+}
+
+A.paStatusRE:link
+{
+    color: darkorange;
+}
+
+.paStatusPI
+{
+    color: green;
+}
+
+A.paStatusPI:hover
+{
+    color: red;
+}
+
+A.paStatusPI:link
+{
+    color: green;
+}
+
+A.paStatusCU:link
+{
+    color: blue;
+}
+
+A.paStatusCU:hover
+{
+    color: red;
+}
+
+.paStatusCU
+{
+    color: blue;
+}
+
+.paSegment01
+{
+    color: red;
+}
+
+A.paSegment01:hover
+{
+    color: red;
+    font-weight: bold;
+}
+
+A.paSegment01:link
+{
+    color: red;
+}
+
+A.paSegment01:active
+{
+    color: red;
+    font-weight: bold;
+}
+
+.paSegment02
+{
+    color: blue;
+}
+
+A.paSegment02:hover
+{
+    color: blue;
+    font-weight: bold;
+}
+
+A.paSegment02:link
+{
+    color: blue;
+}
+
+A.paSegment02:active
+{
+    color: blue;
+    font-weight: bold;
+}
+
+.paSegment03
+{
+    color: black;
+}
+
+A.paSegment03:hover
+{
+    color: black;
+    font-weight: bold;
+}
+
+A.paSegment03:link
+{
+    color: black;
+}
+
+A.paSegment03:active
+{
+    color: black;
+    font-weight: bold;
+}
+
+.warning
+{
+    color: #aa0000;
+    font-weight: bold;
+}
+
+.message
+{
+    color: #0A5A8B;
+    font-weight: bold;
+}
+
+.footnote
+{
+    font-weight: normal;
+    font-size: 11px;
+    color: #000000;
+}
+
+.redFootnote
+{
+    font-weight: normal;
+    font-size: 11px;
+    color: RED;
+}
+
+.redNote
+{
+    font-weight: normal;
+    font-size: 14px;
+    color: RED;
+}
+
+.reportSectionHeader
+{
+    font-weight: bold;
+}
+
+table.report
+{
+    padding: 0 0 0 0;
+    border-width: 0 0 0 0;
+    margin: 0 0 0 0;
+}
+
+tr.report
+{
+    padding: 0 0 0 0;
+    border-width: 0 0 0 0;
+    margin: 0 0 0 0;
+}
+
+td.report
+{
+    text-align: right;
+    vertical-align: top;
+    background-color: #eeeeee;
+    padding: 2px 2px 2px 4px;
+}
+
+th.report
+{
+    font-weight: normal;
+    text-align: left;
+    vertical-align: top;
+    background-color: #eeeeee;
+    padding: 2px 4px 2px 2px;
+}
+
+hr.report
+{
+    height: 1px;
+    line-height: 0px;
+    color: Black;
+    border: 0;
+    width: 100%;
+    padding: 0 0 0 0;
+    margin: 0 0 0 0;
+}
+
+.smallFont
+{
+    font-size: 8pt;
+}
+

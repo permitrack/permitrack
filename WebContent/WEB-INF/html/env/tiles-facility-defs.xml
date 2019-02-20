@@ -1,0 +1,61 @@
+<!DOCTYPE tiles-definitions PUBLIC
+    "-//Apache Software Foundation//DTD Tiles Configuration 1.3//EN"
+    "http://struts.apache.org/dtds/tiles-config_1_3.dtd">
+<tiles-definitions>
+    <definition name="facility.baseTitledLayout"
+                extends="ev.baseTitledLayout"></definition>
+    <definition name="facility.list.page"
+                extends="facility.baseTitledLayout">
+        <put name="title"
+             value="Facility List" />
+        <put name="description"
+             value="Listing of all Facilities." />
+        <put name="content"
+             value="/html/env/facility/facilitylist.jsp" />
+    </definition>
+    <definition name="facility.view.page"
+                extends="facility.baseTitledLayout">
+        <put name="title"
+             value="Facility" />
+        <put name="description"
+             value="View Facility information." />
+        <put name="content"
+             value="/html/env/facility/facilityview.jsp" />
+    </definition>
+    <definition name="facility.edit.page"
+                extends="facility.baseTitledLayout">
+        <put name="title"
+             value="Facility" />
+        <put name="description"
+             value="Edit a Facility." />
+        <put name="content"
+             value="/html/env/facility/facilityedit.jsp" />
+    </definition>
+    <definition name="facility.create.page"
+                extends="facility.baseTitledLayout">
+        <put name="title"
+             value="Facility" />
+        <put name="description"
+             value="Create a Facility." />
+        <put name="content"
+             value="/html/env/facility/facilitycreate.jsp" />
+    </definition>
+    <definition name="facility.delete.page"
+                extends="facility.baseTitledLayout">
+        <put name="title"
+             value="Facility" />
+        <put name="description"
+             value="Delete a Facility." />
+        <put name="content"
+             value="/html/env/facility/facilitydelete.jsp" />
+    </definition>
+    <definition name="facility.contact.create.page"
+                extends="facility.baseTitledLayout">
+        <put name="title"
+             value="Facility Contact" />
+        <put name="description"
+             value="Connect a Contact to a Facility." />
+        <put name="content"
+             value="/html/env/facility/facilitycontactcreate.jsp" />
+    </definition>
+</tiles-definitions>

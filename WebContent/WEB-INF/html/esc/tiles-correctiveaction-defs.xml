@@ -1,0 +1,28 @@
+<!DOCTYPE tiles-definitions PUBLIC
+    "-//Apache Software Foundation//DTD Tiles Configuration 1.3//EN"
+    "http://struts.apache.org/dtds/tiles-config_1_3.dtd">
+<tiles-definitions>
+    <definition name="correctiveaction.baseLayout"
+                extends="html.baseLayout">
+        <put name="primaryMenu"
+             value="/html/esc/primarynavigation.jsp" />
+        <put name="secondaryMenu"
+             value="/html/esc/secondarynavigation.jsp" />
+    </definition>
+    <definition name="correctiveaction.baseTitledLayout"
+                extends="html.baseTitledLayout">
+        <put name="primaryMenu"
+             value="/html/esc/primarynavigation.jsp" />
+        <put name="secondaryMenu"
+             value="/html/esc/secondarynavigation.jsp" />
+    </definition>
+    <definition name="correctiveaction.list.page"
+                extends="correctiveaction.baseTitledLayout">
+        <put name="title"
+             value="Corrective Action List" />
+        <put name="description"
+             value="View projects due for corrective actions in the list below." />
+        <put name="content"
+             value="/html/esc/correctiveaction/correctiveactionlist.jsp" />
+    </definition>
+</tiles-definitions>

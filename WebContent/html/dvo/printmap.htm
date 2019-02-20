@@ -1,0 +1,177 @@
+<META HTTP-EQUIV="Pragma"
+      CONTENT="no-cache">
+<META HTTP-EQUIV="CACHE-CONTROL"
+      CONTENT="NO-CACHE">
+<META HTTP-EQUIV="PRAGMAS"
+      CONTENT="NO-CACHE">
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+<html>
+    <head>
+        <title>Print Map</title>
+        <script language="javascript">
+            var hostName = document.location.host;
+            function initPage()
+            {
+                document.printInformation.title.value =
+                parent.MapFrame.theMapTitle;
+                document.printInformation.comments.value =
+                parent.MapFrame.theMapComments;
+            }
+            function submitthis()
+            {
+                theMapTitle =
+                document.printInformation.title.value;
+                parent.MapFrame.theMapTitle =
+                document.printInformation.title.value;
+                parent.MapFrame.theMapComments =
+                document.printInformation.comments.value;
+                parent.MapFrame.getPrintMap(theMapTitle);
+            }
+            function setPrintOrientation(theVal)
+            {
+                theValue =
+                theVal.value;
+                parent.MapFrame.setPrintOrientationValue(theValue);
+            }
+            function setPageSize(theVal)
+            {
+                theValue =
+                theVal.value;
+                parent.MapFrame.setPageSize(theValue);
+            }
+            function setPrintLegend(theVal)
+            {
+                theValue =
+                theVal.value;
+                parent.MapFrame.setPrintLegendValue(theValue);
+            }
+            function reloadLegend()
+            {
+                parent.TOCFrame.document.location =
+                "toc.htm";
+            }
+        </script>
+        <link rel="stylesheet"
+              type="text/css"
+              href="gis.css">
+    </head>
+    <body bgcolor="#FFFFFF"
+          TEXT="#0B4657"
+          link="#D47816"
+          vlink="#D47816"
+          alink="#D47816"
+          class="nav"
+          onload="initPage()">
+        &nbsp;
+        <table border="0"
+               WIDTH="100%">
+            <FORM name="printInformation">
+                <tr>
+                    <td class="bodytitle">Output orientation?</td>
+                </tr>
+                <tr>
+                    <td class="table">
+                        <script language="javascript">
+                            if (parent.MapFrame.isPortraitSet())
+                            {
+                                document.write('<INPUT TYPE="radio" NAME="PrintoutOrientation" VALUE="portrait" onClick="setPrintOrientation(this)" CHECKED> Portrait');
+                                document.write('&nbsp;&nbsp;<INPUT TYPE="radio" NAME="PrintoutOrientation" VALUE="landscape" onClick="setPrintOrientation(this)"> Landscape');
+                            }
+                            else
+                            {
+                                document.write('<INPUT TYPE="radio" NAME="PrintoutOrientation" VALUE="portrait" onClick="setPrintOrientation(this)"> Portrait');
+                                document.write('&nbsp;&nbsp;<INPUT TYPE="radio" NAME="PrintoutOrientation" VALUE="landscape" onClick="setPrintOrientation(this)" CHECKED> Landscape');
+                            }
+                        </script>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="bodytitle">Page size?</td>
+                </tr>
+                <tr>
+                    <td class="table">
+                        <INPUT TYPE="radio"
+                               NAME="pageSize"
+                               VALUE="letter"
+                               onClick="setPageSize(this)"
+                               CHECKED>
+                        Letter Size (8.5 x 11)
+                        <br>
+                        <INPUT TYPE="radio"
+                               NAME="pageSize"
+                               VALUE="bsize"
+                               onClick="setPageSize(this)">
+                        B Size (11 x 17)
+                    </td>
+                </tr>
+                <tr>
+                    <td class="bodytitle">Would you like a legend?</td>
+                </tr>
+                <tr>
+                    <td class="table">
+                        <script language="javascript">
+                            theType =
+                            parent.MapFrame.returnPrintLegend();
+                            document.write('<INPUT TYPE="radio" NAME="PrintoutLegend" VALUE="NoLegend" onClick="setPrintLegend(this)"');
+                            if (theType
+                                == "NoLegend")
+                            {
+                                document.write(' CHECKED');
+                            }
+                            document.writeln('> None');
+                            document.write('<BR><INPUT TYPE="radio" NAME="PrintoutLegend" VALUE="ActiveLegend" onClick="setPrintLegend(this)"')
+                            if (theType
+                                == "ActiveLegend")
+                            {
+                                document.write(' CHECKED');
+                            }
+                            document.writeln('> Include Active Legend');
+                        </script>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="bodytitle">
+                        <BR>
+                        Enter a title for your map
+                        <BR>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="table">
+                        Title:&nbsp;&nbsp;
+                        <INPUT TYPE="text"
+                               NAME="title"
+                               SIZE=20
+                               MAXLENGTH=120
+                               VALUE="">
+                        <BR>
+                        <small>
+                            <i>120 character maximum</i>
+                        </small>
+                        <BR>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="table">
+                        Comments:
+                        <small>
+                            <i>enter comments for your map</i>
+                        </small>
+                        <br>
+                        <textarea rows="5"
+                                  cols="25"
+                                  name="comments"></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <button onclick="submitthis()">Make Map</button>
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        <INPUT TYPE="reset"
+                               VALUE="Reset">
+                    </td>
+                </tr>
+            </FORM>
+        </table>
+    </body>
+</html>

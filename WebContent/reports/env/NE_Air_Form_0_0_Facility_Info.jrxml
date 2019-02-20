@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="NE_Air_Form_0_0_Facility_Info" pageWidth="540" pageHeight="60" columnWidth="540" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<reportFont name="Arial_Normal" isDefault="true" fontName="Arial" size="12" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Bold" isDefault="false" fontName="Arial" size="12" isBold="true" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Italic" isDefault="false" fontName="Arial" size="12" isItalic="true" pdfFontName="Helvetica-Oblique" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Bold_Italic" isDefault="false" fontName="Arial" size="12" isBold="true" isItalic="true" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Small" isDefault="true" fontName="Arial" size="10" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Small_Bold" isDefault="false" fontName="Arial" size="10" isBold="true" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Small_Italic" isDefault="false" fontName="Arial" size="10" isItalic="true" pdfFontName="Helvetica-Oblique" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Small_Bold_Italic" isDefault="false" fontName="Arial" size="10" isBold="true" isItalic="true" pdfFontName="Helvetica-Oblique" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<parameter name="FacilityId" class="java.lang.Integer"/>
+	<parameter name="year" class="java.lang.Integer"/>
+	<queryString>
+		<![CDATA[select f.id as f_id,
+                   f.name as f_name,
+                   f.number as f_number
+            from env_facility f
+            WHERE f.id = $P{FacilityId}]]>
+	</queryString>
+	<field name="f_id" class="java.lang.Integer"/>
+	<field name="f_name" class="java.lang.String"/>
+	<field name="f_number" class="java.lang.String"/>
+	<title>
+		<band height="56" splitType="Stretch">
+			<rectangle>
+				<reportElement mode="Transparent" x="0" y="4" width="216" height="50"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="216" y="4" width="143" height="50"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="359" y="4" width="181" height="50"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="3" y="4" width="213" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font reportFont="Arial_Bold"/>
+				</textElement>
+				<text><![CDATA[ Facility Name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="216" y="4" width="143" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font reportFont="Arial_Bold"/>
+				</textElement>
+				<text><![CDATA[ Facility ID#]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="359" y="4" width="181" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font reportFont="Arial_Bold"/>
+				</textElement>
+				<text><![CDATA[ Year of Inventory]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="216" y="24" width="143" height="30"/>
+				<textElement verticalAlignment="Middle">
+					<font reportFont="Arial_Normal"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[" " + $F{f_number}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="3" y="24" width="213" height="30"/>
+				<textElement verticalAlignment="Middle">
+					<font reportFont="Arial_Normal"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[" " + $F{f_name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="359" y="24" width="181" height="30"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font reportFont="Arial_Bold" size="16"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$P{year}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+</jasperReport>

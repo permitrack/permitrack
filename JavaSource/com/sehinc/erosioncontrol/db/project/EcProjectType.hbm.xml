@@ -1,0 +1,42 @@
+<?xml version="1.0"?><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <!--
+            Auto-generated mapping file from
+            the hibernate.org cfg2hbm engine
+    -->
+    <class name="com.sehinc.erosioncontrol.db.project.EcProjectType"
+           table="EC_PROJECT_TYPE">
+        <id name="id"
+            type="integer">
+            <column name="ID" />
+            <generator class="identity" />
+        </id>
+        <property name="clientId"
+                  type="integer"
+                  column="CLIENT_ID" />
+        <property name="name"
+                  type="string"
+                  column="NAME" />
+        <property name="description"
+                  type="string"
+                  column="DESCRIPTION" />
+        <many-to-one name="endPointType"
+                     class="com.sehinc.erosioncontrol.db.project.EcEndPointType"
+                     column="END_POINT_TYPE_ID"
+                     lazy="false" />
+        <property name="swmp"
+                  type="boolean"
+                  column="SWMP" />
+        <property name="extendedOnlineAccessMonths"
+                  type="integer"
+                  column="EXTENDED_ON_LINE_ACCESS_MONTHS" />
+        <property name="monthsFromStart"
+                  type="integer"
+                  column="MONTHS_FROM_START" />
+        <many-to-one name="status"
+                     class="com.sehinc.erosioncontrol.db.code.StatusCodeData"
+                     column="STATUS_CD"
+                     lazy="false" />
+    </class>
+</hibernate-mapping>

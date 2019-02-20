@@ -1,0 +1,23 @@
+<?xml version="1.0"?><!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping>
+    <class name="com.sehinc.common.db.client.CapClientType"
+           table="CAP_CLIENT_TYPE">
+        <id name="id"
+            type="integer"
+            column="id">
+            <generator class="identity" />
+        </id>
+        <property name="clientId"
+                  type="integer"
+                  column="CLIENT_ID" />
+        <property name="clientTypeId"
+                  type="integer"
+                  column="CLIENT_TYPE_ID" />
+    </class>
+    <query name="com.sehinc.common.db.client.CapClientType.byClientId">
+        from com.sehinc.common.db.client.CapClientType as capClientType
+        where capClientType.clientId = :clientId
+    </query>
+</hibernate-mapping>

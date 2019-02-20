@@ -1,0 +1,41 @@
+<?xml version="1.0"?><!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping>
+    <!-- -->
+    <class name="com.sehinc.stormwater.db.bmpdb.BMPDBGoalData"
+           table="BMP_DB_GOAL">
+        <id name="id"
+            type="integer"
+            column="id">
+            <generator class="identity" />
+        </id>
+        <property name="bmpDBId"
+                  type="integer"
+                  column="BMP_DB_ID" />
+        <property name="name"
+                  type="string"
+                  column="NAME" />
+        <property name="description"
+                  type="string"
+                  column="DESCRIPTION" />
+        <property name="goalActivityFormId"
+                  type="integer"
+                  column="GOAL_ACTIVITY_FORM_ID" />
+        <property name="goalActivityFrequencyId"
+                  type="integer"
+                  column="GOAL_ACTIVITY_FREQUENCY_ID" />
+        <property name="number"
+                  type="integer"
+                  column="NUMBER" />
+        <property name="createTimestamp"
+                  type="timestamp"
+                  column="create_ts" />
+        <property name="updateTimestamp"
+                  type="timestamp"
+                  column="update_ts" />
+        <property name="updateUserId"
+                  type="integer"
+                  column="update_user_id" />
+    </class>
+</hibernate-mapping>

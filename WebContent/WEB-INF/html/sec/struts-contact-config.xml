@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?><!DOCTYPE struts-config PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 1.3//EN"
+    "http://struts.apache.org/dtds/struts-config_1_3.dtd">
+<struts-config>
+    <form-beans>
+        <form-bean name="ContactForm"
+                   type="com.sehinc.security.action.contact.ContactForm" />
+        <form-bean name="ContactListForm"
+                   type="com.sehinc.security.action.contact.ContactListForm" />
+    </form-beans>
+    <global-forwards>
+        <forward name="contact.list.page"
+                 path="/contactlistpageaction.do"
+                 redirect="true" />
+        <forward name="contact.view.page"
+                 path="/contactviewpageaction.do"
+                 redirect="true" />
+    </global-forwards>
+    <action-mappings>
+        <action path="/contactlistpageaction"
+                type="com.sehinc.security.action.contact.ContactListPageAction"
+                name="ContactListForm"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="contact.list.page.tiles" />
+        </action>
+        <action path="/contactviewpageaction"
+                type="com.sehinc.security.action.contact.ContactViewPageAction"
+                name="ContactForm"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="contact.view.page.tiles" />
+        </action>
+        <action path="/contactcreatepageaction"
+                type="com.sehinc.security.action.contact.ContactCreatePageAction"
+                name="ContactForm"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="contact.create.page.tiles" />
+        </action>
+        <action path="/contactcreateaction"
+                type="com.sehinc.security.action.contact.ContactCreateAction"
+                name="ContactForm"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="/contactviewpageaction.do"
+                     redirect="true" />
+        </action>
+        <action path="/contacteditpageaction"
+                type="com.sehinc.security.action.contact.ContactEditPageAction"
+                name="ContactForm"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="contact.edit.page.tiles" />
+        </action>
+        <action path="/contacteditaction"
+                type="com.sehinc.security.action.contact.ContactEditAction"
+                name="ContactForm"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="/contactviewpageaction.do"
+                     redirect="true" />
+        </action>
+        <action path="/contactdeleteaction"
+                type="com.sehinc.security.action.contact.ContactDeleteAction"
+                name="ContactForm"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="/contactlistpageaction.do"
+                     redirect="true" />
+        </action>
+    </action-mappings>
+    <controller processorClass="org.apache.struts.action.RequestProcessor"
+                contentType="text/html" />
+    <plug-in className="org.apache.struts.tiles.TilesPlugin">
+        <set-property property="definitions-config"
+                      value="/WEB-INF/html/tiles-defs.xml, /WEB-INF/html/sec/tiles-contact-defs.xml" />
+        <set-property property="definitions-debug"
+                      value="2" />
+        <set-property property="definitions-parser-details"
+                      value="2" />
+        <set-property property="definitions-parser-validate"
+                      value="true" />
+        <set-property property="moduleAware"
+                      value="true" />
+    </plug-in>
+    <plug-in className="org.apache.struts.validator.ValidatorPlugIn">
+        <set-property property="pathnames"
+                      value="/org/apache/struts/validator/validator-rules.xml" />
+    </plug-in>
+</struts-config>

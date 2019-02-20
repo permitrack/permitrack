@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?><!DOCTYPE struts-config PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 1.3//EN"
+    "http://struts.apache.org/dtds/struts-config_1_3.dtd">
+<struts-config>
+    <form-beans>
+        <form-bean name="SourceForm"
+                   type="com.sehinc.environment.action.source.SourceForm" />
+        <form-bean name="SourceSubstanceForm"
+                   type="com.sehinc.environment.action.sourcesubstance.SourceSubstanceForm" />
+        <form-bean name="MultiSourceSubstanceForm"
+                   type="com.sehinc.environment.action.sourcesubstance.SourceSubstanceMultiForm" />
+        <form-bean name="SourceSccForm"
+                   type="com.sehinc.environment.action.sourcescc.SourceSccForm" />
+    </form-beans>
+    <global-forwards>
+        <forward name="source.list.page"
+                 path="/sourcelistpage.do"
+                 redirect="true" />
+        <forward name="source.view.page"
+                 path="/sourceviewpage.do"
+                 redirect="true" />
+    </global-forwards>
+    <action-mappings>
+        <action path="/sourcelistpage"
+                type="com.sehinc.environment.action.source.SourceListPageAction"
+                name="SourceForm"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="source.list.page" />
+        </action>
+        <action path="/sourceviewpage"
+                type="com.sehinc.environment.action.source.SourceViewPageAction"
+                name="SourceForm"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="source.view.page" />
+        </action>
+        <action path="/sourcecreatepage"
+                type="com.sehinc.environment.action.source.SourceCreatePageAction"
+                name="SourceForm"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="source.create.page" />
+        </action>
+        <action path="/sourcecreateaction"
+                type="com.sehinc.environment.action.source.SourceCreateAction"
+                input="source.create.page"
+                name="SourceForm"
+                scope="request"
+                validate="true"
+                cancellable="true">
+            <forward name="continue"
+                     path="/sourcesubstancemulticreatepage.do"
+                     redirect="true" />
+        </action>
+        <action path="/sourceeditpage"
+                type="com.sehinc.environment.action.source.SourceEditPageAction"
+                name="SourceForm"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="source.edit.page" />
+        </action>
+        <action path="/sourceeditaction"
+                type="com.sehinc.environment.action.source.SourceEditAction"
+                input="source.edit.page"
+                name="SourceForm"
+                scope="request"
+                validate="true"
+                cancellable="true">
+            <forward name="continue"
+                     path="/sourceviewpage.do"
+                     redirect="true" />
+        </action>
+        <action path="/sourcedeleteaction"
+                type="com.sehinc.environment.action.source.SourceDeleteAction"
+                input="source.delete.page"
+                name="SourceForm"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="/sourcelistpage.do"
+                     redirect="true" />
+        </action>
+        <action path="/sourcesubstancecreatepage"
+                type="com.sehinc.environment.action.sourcesubstance.SourceSubstanceCreatePageAction"
+                name="SourceSubstanceForm"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="source.substance.create.page" />
+        </action>
+        <action path="/sourcesubstancecreateaction"
+                type="com.sehinc.environment.action.sourcesubstance.SourceSubstanceCreateAction"
+                input="source.substance.create.page"
+                name="SourceSubstanceForm"
+                scope="request"
+                validate="true"
+                cancellable="true">
+            <forward name="continue"
+                     path="/sourceviewpage.do"
+                     redirect="true" />
+        </action>
+        <action path="/sourcesubstancemulticreatepage"
+                type="com.sehinc.environment.action.sourcesubstance.SourceSubstanceMultiCreatePageAction"
+                name="MultiSourceSubstanceForm"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="source.substance.multi.create.page" />
+        </action>
+        <action path="/sourcesubstancemulticreateaction"
+                type="com.sehinc.environment.action.sourcesubstance.SourceSubstanceMultiCreateAction"
+                input="source.substance.multi.create.page"
+                name="MultiSourceSubstanceForm"
+                scope="request"
+                validate="false"
+                cancellable="true">
+            <forward name="continue"
+                     path="/sourceviewpage.do"
+                     redirect="true" />
+        </action>
+        <action path="/sourcesubstancedeleteaction"
+                type="com.sehinc.environment.action.sourcesubstance.SourceSubstanceDeleteAction"
+                name="SourceSubstanceForm"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="/sourceviewpage.do"
+                     redirect="true" />
+        </action>
+        <action path="/sourcescccreatepage"
+                type="com.sehinc.environment.action.sourcescc.SourceSccCreatePageAction"
+                name="SourceSccForm"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="source.scc.create.page" />
+        </action>
+        <action path="/sourcescccreateaction"
+                type="com.sehinc.environment.action.sourcescc.SourceSccCreateAction"
+                input="source.scc.create.page"
+                name="SourceSccForm"
+                scope="request"
+                validate="true"
+                cancellable="true">
+            <forward name="continue"
+                     path="/sourceviewpage.do"
+                     redirect="true" />
+        </action>
+        <action path="/sourcesccdeleteaction"
+                type="com.sehinc.environment.action.sourcescc.SourceSccDeleteAction"
+                name="SourceSccForm"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="/sourceviewpage.do"
+                     redirect="true" />
+        </action>
+    </action-mappings>
+    <controller processorClass="org.apache.struts.action.RequestProcessor"
+                contentType="text/html" />
+    <plug-in className="org.apache.struts.tiles.TilesPlugin">
+        <set-property property="definitions-config"
+                      value="/WEB-INF/html/tiles-defs.xml, /WEB-INF/html/env/tiles-defs.xml, /WEB-INF/html/env/tiles-source-defs.xml" />
+        <set-property property="definitions-debug"
+                      value="2" />
+        <set-property property="definitions-parser-details"
+                      value="2" />
+        <set-property property="definitions-parser-validate"
+                      value="true" />
+        <set-property property="moduleAware"
+                      value="true" />
+    </plug-in>
+    <plug-in className="org.apache.struts.validator.ValidatorPlugIn">
+        <set-property property="pathnames"
+                      value="/org/apache/struts/validator/validator-rules.xml, /WEB-INF/html/env/validation-source.xml" />
+    </plug-in>
+</struts-config>

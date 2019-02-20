@@ -1,0 +1,59 @@
+<?xml version="1.0"?><!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping>
+    <class name="com.sehinc.common.db.forms.ElementData"
+           table="ELEMENT">
+        <id name="id"
+            type="integer"
+            column="ELEMENT_ID">
+            <generator class="identity" />
+        </id>
+        <property name="title"
+                  type="string"
+                  column="TITLE" />
+        <many-to-one name="elementType"
+                     class="com.sehinc.common.db.forms.ElementTypeData"
+                     column="ELEMENT_TYPE_ID"
+                     lazy="false" />
+        <property name="childElementId"
+                  type="integer"
+                  column="CHILD_ELEMENT_ID" />
+        <property name="name"
+                  type="string"
+                  column="NAME" />
+        <property name="dataType"
+                  type="string"
+                  column="DATA_TYPE" />
+        <property name="subSectionId"
+                  type="integer"
+                  column="SUB_SECTION_ID" />
+        <property name="orderNum"
+                  type="integer"
+                  column="ORDER_NUM" />
+        <property name="required"
+                  type="string"
+                  column="REQUIRED" />
+        <property name="allowOther"
+                  type="string"
+                  column="ALLOW_OTHER" />
+        <property name="isChild"
+                  type="string"
+                  column="IS_CHILD" />
+        <property name="displayTitle"
+                  type="string"
+                  column="DISPLAY_TITLE" />
+        <property name="size"
+                  type="integer"
+                  column="SIZE" />
+        <property name="maxLength"
+                  type="integer"
+                  column="MAX_LENGTH" />
+    </class>
+    <query name="com.sehinc.common.db.forms.ElementData.bySubSectionId">
+        from com.sehinc.common.db.forms.ElementData as element
+        where element.subSectionId = :subSectionId
+        order by element.orderNum
+    </query>
+</hibernate-mapping>
+

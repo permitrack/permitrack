@@ -1,0 +1,778 @@
+<?xml version="1.0"?>
+<!DOCTYPE jasperReport PUBLIC "-//JasperReports//DTD Report Design//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
+
+<jasperReport 
+		name="ECProjectReport" 
+		pageWidth="595" 
+		pageHeight="842" 
+		columnWidth="515" 
+		columnSpacing="0" 
+		leftMargin="40" 
+		rightMargin="40" 
+		topMargin="50" 
+		bottomMargin="50"
+		scriptletClass="com.sehinc.erosioncontrol.action.report.ECProjectReportScriptlet">
+
+	<reportFont name="Arial_Normal" isDefault="true" fontName="Arial" size="12" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Bold" isDefault="false" fontName="Arial" size="12" isBold="true" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Italic" isDefault="false" fontName="Arial" size="12" isItalic="true" pdfFontName="Helvetica-Oblique" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Bold_Italic" isDefault="false" fontName="Arial" size="12" isItalic="true" isBold="true" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Small" isDefault="true" fontName="Arial" size="10" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Small_Bold" isDefault="false" fontName="Arial" size="10" isBold="true" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Small_Italic" isDefault="false" fontName="Arial" size="10" isItalic="true" pdfFontName="Helvetica-Oblique" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Small_Bold_Italic" isDefault="false" fontName="Arial" size="10" isItalic="true" isBold="true" pdfFontName="Helvetica-Oblique" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+
+	<parameter name="ReportTitle" class="java.lang.String"/>
+	<parameter name="ClientWebSite" class="java.lang.String"/>
+	<parameter name="ClientName" class="java.lang.String"/>
+	<parameter name="LogoLocation" class="java.lang.String"/>
+	<parameter name="ProjectId" class="java.lang.Integer"/>
+	<parameter name="ECProjectContactSubreport" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="ECProjectDocumentSubreport" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="ECProjectBMPSubreport" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="ECProjectInspectionSubreport" class="net.sf.jasperreports.engine.JasperReport"/>
+	
+<queryString><![CDATA[SELECT P.ID PROJECT_ID,
+CASE P.PROJECT_STATUS_CD WHEN 1 THEN 'Active'
+WHEN 2 THEN 'Inactive' WHEN 3 THEN 'Deleted'
+WHEN 4 THEN 'Incomplete' WHEN 5 THEN 'Archived'
+WHEN 6 THEN 'Closed' WHEN 7 THEN 'Auto Activate'
+WHEN 8 THEN 'Complete' ELSE 'Unknown' END PROJECT_STATUS_CODE,
+P.OWNER_CLIENT_ID OWNER_CLIENT_ID, CO.NAME OWNER_CLIENT_NAME,
+P.PERMIT_AUTHORITY_CLIENT_ID PERMIT_AUTHORITY_CLIENT_ID, CPA.NAME PERMIT_AUTHORITY_CLIENT_NAME,
+P.PERMITTED_CLIENT_ID PERMITTED_CLIENT_ID, CP.[NAME] PERMITTED_CLIENT_NAME,
+P.AUTHORIZED_INSPECTOR_CLIENT_ID AUTHORIZED_INSPECTOR_CLIENT_ID, CAI.NAME AUTHORIZED_INSPECTOR_CLIENT_NAME,
+P.NAME PROJECT_NAME, P.DESCRIPTION PROJECT_DESCRIPTION, P.PARCEL_NUMBER, PARCEL_NUMBER, P.PERMIT_NUMBER PERMIT_NUMBER,
+P.GIS_X GIS_X, P.GIS_Y GIS_Y, P.ADDRESS PROJECT_ADDRESS, P.CITY PROJECT_CITY, P.STATE PROJECT_STATE, P.ZIP PROJECT_ZIP, P.AREA_SIZE AREA_SIZE,
+P.ZONE_ID ZONE_ID, Z.NAME ZONE_NAME, P.PROJECT_TYPE_ID PROJECT_TYPE_ID, PT.[NAME] PROJECT_TYPE_NAME, P.EFFECTIVE_DATE EFFECTIVE_DATE,
+P.START_DATE START_DATE, P.SEED_DATE SEED_DATE, P.TOTAL_SITE_AREA TOTAL_SITE_AREA, P.TOTAL_SITE_AREA_UNITS TOTAL_SITE_AREA_UNITS,
+P.DISTURBED_AREA DISTURBED_AREA, P.DISTURBED_AREA_UNITS DISTURBED_AREA_UNITS, P.NEW_IMPERVIOUS_AREA NEW_IMPERVIOUS_AREA, P.NEW_IMPERVIOUS_AREA_UNITS NEW_IMPERVIOUS_AREA_UNITS
+FROM EC_PROJECT P LEFT OUTER JOIN EC_PROJECT_TYPE PT ON P.PROJECT_TYPE_ID = PT.ID
+LEFT OUTER JOIN EC_ZONE Z ON P.ZONE_ID = Z.ID
+LEFT OUTER JOIN CLIENT CO ON P.OWNER_CLIENT_ID = CO.ID
+LEFT OUTER JOIN CLIENT CPA ON P.PERMIT_AUTHORITY_CLIENT_ID = CPA.ID
+LEFT OUTER JOIN CLIENT CP ON P.PERMITTED_CLIENT_ID = CP.ID
+LEFT OUTER JOIN CLIENT CAI ON P.AUTHORIZED_INSPECTOR_CLIENT_ID = CAI.ID
+WHERE P.ID = $P{ProjectId}]]></queryString>
+
+	<field name="PROJECT_ID" class="java.lang.Integer"/>
+	<field name="PROJECT_STATUS_CODE" class="java.lang.String"/>
+	<field name="OWNER_CLIENT_ID" class="java.lang.Integer"/>
+	<field name="OWNER_CLIENT_NAME" class="java.lang.String"/>
+	<field name="PERMIT_AUTHORITY_CLIENT_ID" class="java.lang.Integer"/>
+	<field name="PERMIT_AUTHORITY_CLIENT_NAME" class="java.lang.String"/>
+	<field name="PERMITTED_CLIENT_ID" class="java.lang.Integer"/>
+	<field name="PERMITTED_CLIENT_NAME" class="java.lang.String"/>
+	<field name="AUTHORIZED_INSPECTOR_CLIENT_ID" class="java.lang.Integer"/>
+	<field name="AUTHORIZED_INSPECTOR_CLIENT_NAME" class="java.lang.String"/>
+	<field name="PROJECT_NAME" class="java.lang.String"/>
+	<field name="PROJECT_DESCRIPTION" class="java.lang.String"/>
+	<field name="PARCEL_NUMBER" class="java.lang.String"/>
+	<field name="PERMIT_NUMBER" class="java.lang.String"/>
+	<field name="GIS_X" class="java.lang.String"/>
+	<field name="GIS_Y" class="java.lang.String"/>
+	<field name="PROJECT_ADDRESS" class="java.lang.String"/>
+	<field name="PROJECT_CITY" class="java.lang.String"/>
+	<field name="PROJECT_STATE" class="java.lang.String"/>
+	<field name="PROJECT_ZIP" class="java.lang.String"/>
+	<field name="AREA_SIZE" class="java.lang.String"/>
+	<field name="ZONE_ID" class="java.lang.Integer"/>
+	<field name="ZONE_NAME" class="java.lang.String"/>
+	<field name="PROJECT_TYPE_ID" class="java.lang.Integer"/>
+	<field name="PROJECT_TYPE_NAME" class="java.lang.String"/>
+	<field name="EFFECTIVE_DATE" class="java.util.Date"/>
+	<field name="START_DATE" class="java.util.Date"/>
+	<field name="SEED_DATE" class="java.util.Date"/>
+	<field name="TOTAL_SITE_AREA" class="java.lang.Float"/>
+	<field name="TOTAL_SITE_AREA_UNITS" class="java.lang.String"/>
+	<field name="DISTURBED_AREA" class="java.lang.Float"/>
+	<field name="DISTURBED_AREA_UNITS" class="java.lang.String"/>
+	<field name="NEW_IMPERVIOUS_AREA" class="java.lang.Float"/>
+	<field name="NEW_IMPERVIOUS_AREA_UNITS" class="java.lang.String"/>
+
+	<variable name="PermitAuthorityProjectContactValue" class="com.sehinc.erosioncontrol.value.project.ProjectContactValue">
+		<initialValueExpression>((com.sehinc.erosioncontrol.action.report.ECProjectReportScriptlet)$P{REPORT_SCRIPTLET}).getPermitAuthorityProjectContactValue($F{PROJECT_ID})</initialValueExpression>
+	</variable>
+	<variable name="PermittedProjectContactValue" class="com.sehinc.erosioncontrol.value.project.ProjectContactValue">
+		<initialValueExpression>((com.sehinc.erosioncontrol.action.report.ECProjectReportScriptlet)$P{REPORT_SCRIPTLET}).getPermittedProjectContactValue($F{PROJECT_ID})</initialValueExpression>
+	</variable>
+	<variable name="AuthorizedInspectorProjectContactValue" class="com.sehinc.erosioncontrol.value.project.ProjectContactValue">
+		<initialValueExpression>((com.sehinc.erosioncontrol.action.report.ECProjectReportScriptlet)$P{REPORT_SCRIPTLET}).getAuthorizedInspectorProjectContactValue($F{PROJECT_ID})</initialValueExpression>
+	</variable>
+
+	<group name="ProjectNameGroup">
+		<groupExpression>
+			$F{PROJECT_ID}
+		</groupExpression>
+		<groupHeader>
+			<band height="45">
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="0" y="0" width="515" height="20"/>
+					<textElement>
+						<font reportFont="Arial_Bold" size="14"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String">
+						<![CDATA[com.sehinc.erosioncontrol.action.report.ECProjectReportScriptlet.filterHTML($F{PROJECT_NAME})]]>
+					</textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="10" y="25" width="505" height="15">
+						<printWhenExpression>new java.lang.Boolean(!com.sehinc.common.util.StringUtil.isEmpty($F{PROJECT_DESCRIPTION}))</printWhenExpression>
+					</reportElement>
+					<textElement>
+						<font reportFont="Arial_Normal"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String">
+						<![CDATA[com.sehinc.erosioncontrol.action.report.ECProjectReportScriptlet.filterHTML($F{PROJECT_DESCRIPTION})]]>
+					</textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+		</groupFooter>
+	</group>
+
+	<group name="ProjectInfoGroup">
+		<groupExpression>
+			$F{PROJECT_ID}
+		</groupExpression>
+		<groupHeader>
+			<band height="117">
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="10" y="0" width="505" height="20"/>
+					<textElement verticalAlignment="Bottom">
+						<font reportFont="Arial_Bold" size="14"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String">
+						<![CDATA["Project Information"]]>
+					</textFieldExpression>
+				</textField>
+				<line>
+					<reportElement x="10" y="21" width="505" height="0"/>
+					<graphicElement pen="Thin"/>
+				</line>			
+
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="10" y="22" width="120" height="15"/>
+					<textElement>
+						<font reportFont="Arial_Bold"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String">
+						<![CDATA["Status: "]]>
+					</textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="130" y="22" width="385" height="15"/>
+					<textElement>
+						<font reportFont="Arial_Normal"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String">
+						<![CDATA[com.sehinc.erosioncontrol.action.report.ECProjectReportScriptlet.filterHTML($F{PROJECT_STATUS_CODE})]]>
+					</textFieldExpression>
+				</textField>
+
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="10" y="38" width="120" height="15"/>
+					<textElement>
+						<font reportFont="Arial_Bold"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String">
+						<![CDATA["Project Type: "]]>
+					</textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="130" y="38" width="385" height="15"/>
+					<textElement>
+						<font reportFont="Arial_Normal"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String">
+						<![CDATA[com.sehinc.erosioncontrol.action.report.ECProjectReportScriptlet.filterHTML($F{PROJECT_TYPE_NAME})]]>
+					</textFieldExpression>
+				</textField>
+
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="10" y="54" width="120" height="15"/>
+					<textElement>
+						<font reportFont="Arial_Bold"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String">
+						<![CDATA["Group: "]]>
+					</textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="130" y="54" width="385" height="15"/>
+					<textElement>
+						<font reportFont="Arial_Normal"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String">
+						<![CDATA[com.sehinc.erosioncontrol.action.report.ECProjectReportScriptlet.filterHTML($F{ZONE_NAME})]]>
+					</textFieldExpression>
+				</textField>
+
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="10" y="70" width="120" height="15"/>
+					<textElement>
+						<font reportFont="Arial_Bold"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String">
+						<![CDATA["Effective Date: "]]>
+					</textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="130" y="70" width="385" height="15"/>
+					<textElement>
+						<font reportFont="Arial_Normal"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String">
+						<![CDATA[com.sehinc.common.util.DateUtil.mdyDate($F{EFFECTIVE_DATE})]]>
+					</textFieldExpression>
+				</textField>
+
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="10" y="86" width="120" height="15"/>
+					<textElement>
+						<font reportFont="Arial_Bold"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String">
+						<![CDATA["Start Date: "]]>
+					</textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="130" y="86" width="385" height="15"/>
+					<textElement>
+						<font reportFont="Arial_Normal"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String">
+						<![CDATA[com.sehinc.common.util.DateUtil.mdyDate($F{START_DATE})]]>
+					</textFieldExpression>
+				</textField>
+
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="10" y="102" width="120" height="15"/>
+					<textElement>
+						<font reportFont="Arial_Bold"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String">
+						<![CDATA["Seed Date: "]]>
+					</textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="130" y="102" width="385" height="15"/>
+					<textElement>
+						<font reportFont="Arial_Normal"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String">
+						<![CDATA[com.sehinc.common.util.DateUtil.mdyDate($F{SEED_DATE})]]>
+					</textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+		</groupFooter>
+	</group>
+
+	<group name="SiteInfoGroup">
+		<groupExpression>
+			$F{PROJECT_ID}
+		</groupExpression>
+		<groupHeader>
+			<band height="165">
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="10" y="0" width="505" height="20"/>
+					<textElement verticalAlignment="Bottom">
+						<font reportFont="Arial_Bold" size="14"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String">
+						<![CDATA["Site Information"]]>
+					</textFieldExpression>
+				</textField>
+				<line>
+					<reportElement x="10" y="21" width="505" height="0"/>
+					<graphicElement pen="Thin"/>
+				</line>			
+
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="10" y="22" width="120" height="15"/>
+					<textElement>
+						<font reportFont="Arial_Bold"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String">
+						<![CDATA["Address: "]]>
+					</textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="130" y="38" width="385" height="15"/>
+					<textElement>
+						<font reportFont="Arial_Normal"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String">
+						<![CDATA[com.sehinc.erosioncontrol.action.report.ECProjectReportScriptlet.filterHTML($F{PROJECT_ADDRESS})]]>
+					</textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="130" y="54" width="385" height="15"/>
+					<textElement>
+						<font reportFont="Arial_Normal"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String">
+						<![CDATA[com.sehinc.erosioncontrol.action.report.ECProjectReportScriptlet.filterHTML($F{PROJECT_CITY}) + " " +
+						com.sehinc.erosioncontrol.action.report.ECProjectReportScriptlet.filterHTML($F{PROJECT_STATE}) + " " + 
+						com.sehinc.erosioncontrol.action.report.ECProjectReportScriptlet.filterHTML($F{PROJECT_ZIP})]]>
+					</textFieldExpression>
+				</textField>
+
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="10" y="70" width="120" height="15"/>
+					<textElement>
+						<font reportFont="Arial_Bold"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String">
+						<![CDATA["Parcel #: "]]>
+					</textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="130" y="70" width="385" height="15"/>
+					<textElement>
+						<font reportFont="Arial_Normal"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String">
+						<![CDATA[com.sehinc.erosioncontrol.action.report.ECProjectReportScriptlet.filterHTML($F{PARCEL_NUMBER})]]>
+					</textFieldExpression>
+				</textField>
+
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="10" y="86" width="120" height="15"/>
+					<textElement>
+						<font reportFont="Arial_Bold"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String">
+						<![CDATA["Latitude: "]]>
+					</textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="130" y="86" width="385" height="15"/>
+					<textElement>
+						<font reportFont="Arial_Normal"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String">
+						<![CDATA[com.sehinc.erosioncontrol.action.report.ECProjectReportScriptlet.filterHTML($F{GIS_Y})]]>
+					</textFieldExpression>
+				</textField>
+
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="10" y="102" width="120" height="15"/>
+					<textElement>
+						<font reportFont="Arial_Bold"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String">
+						<![CDATA["Longitude: "]]>
+					</textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="130" y="102" width="385" height="15"/>
+					<textElement>
+						<font reportFont="Arial_Normal"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String">
+						<![CDATA[com.sehinc.erosioncontrol.action.report.ECProjectReportScriptlet.filterHTML($F{GIS_X})]]>
+					</textFieldExpression>
+				</textField>
+
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="10" y="118" width="120" height="15"/>
+					<textElement>
+						<font reportFont="Arial_Bold"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String">
+						<![CDATA["Total Site Area: "]]>
+					</textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="130" y="118" width="385" height="15">
+                    	<printWhenExpression>new java.lang.Boolean($F{TOTAL_SITE_AREA} != null || $F{TOTAL_SITE_AREA}.floatValue() != 0F)</printWhenExpression>
+                    </reportElement>
+					<textElement>
+						<font reportFont="Arial_Normal"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String">
+						<![CDATA[com.sehinc.common.util.NumberUtil.formatFloatToString($F{TOTAL_SITE_AREA}) + " " + $F{TOTAL_SITE_AREA_UNITS}]]>
+					</textFieldExpression>
+				</textField>
+
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="10" y="134" width="120" height="15"/>
+					<textElement>
+						<font reportFont="Arial_Bold"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String">
+						<![CDATA["Disturbed Area: "]]>
+					</textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="130" y="134" width="385" height="15">
+                    	<printWhenExpression>new java.lang.Boolean($F{DISTURBED_AREA} != null || $F{DISTURBED_AREA}.floatValue() != 0F)</printWhenExpression>
+                    </reportElement>
+					<textElement>
+						<font reportFont="Arial_Normal"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String">
+						<![CDATA[com.sehinc.common.util.NumberUtil.formatFloatToString($F{DISTURBED_AREA}) + " " + $F{DISTURBED_AREA_UNITS}]]>
+					</textFieldExpression>
+				</textField>
+				
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="10" y="150" width="120" height="15"/>
+					<textElement>
+						<font reportFont="Arial_Bold"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String">
+						<![CDATA["New Impervious Area: "]]>
+					</textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="130" y="150" width="385" height="15">
+                    	<printWhenExpression>new java.lang.Boolean($F{NEW_IMPERVIOUS_AREA} != null || $F{DISTURBED_AREA}.floatValue() != 0F)</printWhenExpression>
+                    </reportElement>
+					<textElement>
+						<font reportFont="Arial_Normal"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String">
+						<![CDATA[com.sehinc.common.util.NumberUtil.formatFloatToString($F{NEW_IMPERVIOUS_AREA}) + " " + $F{NEW_IMPERVIOUS_AREA_UNITS}]]>
+					</textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+		</groupFooter>
+	</group>
+
+	<group name="PermitGroup1">
+		<groupExpression>
+			$F{PROJECT_ID}
+		</groupExpression>
+		<groupHeader>
+			<band height="37">
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="10" y="0" width="505" height="20"/>
+					<textElement verticalAlignment="Bottom">
+						<font reportFont="Arial_Bold" size="14"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String">
+						<![CDATA["Permit Information"]]>
+					</textFieldExpression>
+				</textField>
+				<line>
+					<reportElement x="10" y="21" width="505" height="0"/>
+					<graphicElement pen="Thin"/>
+				</line>			
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="10" y="22" width="120" height="15"/>
+					<textElement>
+						<font reportFont="Arial_Bold"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String">
+						<![CDATA["Permit #: "]]>
+					</textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="130" y="22" width="385" height="15"/>
+					<textElement>
+						<font reportFont="Arial_Normal"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String">
+						<![CDATA[com.sehinc.erosioncontrol.action.report.ECProjectReportScriptlet.filterHTML($F{PERMIT_NUMBER})]]>
+					</textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+		</groupFooter>
+	</group>
+
+	<group name="PermitGroup2">
+		<groupExpression>
+			$F{PROJECT_ID}
+		</groupExpression>
+		<groupHeader>
+			<band height="31">
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="10" y="0" width="120" height="15"/>
+					<textElement verticalAlignment="Bottom">
+						<font reportFont="Arial_Bold"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String">
+						<![CDATA["Permit Authority: "]]>
+					</textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="130" y="0" width="385" height="15"/>
+					<textElement verticalAlignment="Bottom">
+						<font reportFont="Arial_Normal"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String">
+						<![CDATA[com.sehinc.erosioncontrol.action.report.ECProjectReportScriptlet.filterHTML($F{PERMIT_AUTHORITY_CLIENT_NAME})]]>
+					</textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="130" y="16" width="385" height="15">
+                      <printWhenExpression>new java.lang.Boolean($V{PermitAuthorityProjectContactValue} != null)</printWhenExpression>
+                    </reportElement>					
+					<textElement verticalAlignment="Bottom">
+						<font reportFont="Arial_Normal"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String">
+						<![CDATA[com.sehinc.erosioncontrol.action.report.ECProjectReportScriptlet.filterHTML($V{PermitAuthorityProjectContactValue}.getFirstName()) + " " + com.sehinc.erosioncontrol.action.report.ECProjectReportScriptlet.filterHTML($V{PermitAuthorityProjectContactValue}.getLastName()) + "\n" +
+						         com.sehinc.erosioncontrol.action.report.ECProjectReportScriptlet.filterHTML($V{PermitAuthorityProjectContactValue}.getViewAddress()) + "\n" +
+						         com.sehinc.erosioncontrol.action.report.ECProjectReportScriptlet.filterHTML($V{PermitAuthorityProjectContactValue}.getPrimaryPhone()) + "\n" +
+						         com.sehinc.erosioncontrol.action.report.ECProjectReportScriptlet.filterHTML($V{PermitAuthorityProjectContactValue}.getEmail())]]>
+					</textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+		</groupFooter>
+	</group>
+
+	<group name="PermitGroup3">
+		<groupExpression>
+			$F{PROJECT_ID}
+		</groupExpression>
+		<groupHeader>
+			<band height="31">
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="10" y="0" width="120" height="15"/>
+					<textElement verticalAlignment="Bottom">
+						<font reportFont="Arial_Bold"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String">
+						<![CDATA["Permittee: "]]>
+					</textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="130" y="0" width="385" height="15"/>
+					<textElement verticalAlignment="Bottom">
+						<font reportFont="Arial_Normal"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String">
+						<![CDATA[com.sehinc.erosioncontrol.action.report.ECProjectReportScriptlet.filterHTML($F{PERMITTED_CLIENT_NAME})]]>
+					</textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="130" y="16" width="385" height="15">
+                      <printWhenExpression>new java.lang.Boolean($V{PermittedProjectContactValue} != null)</printWhenExpression>
+                    </reportElement>					
+					<textElement verticalAlignment="Bottom">
+						<font reportFont="Arial_Normal"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String">
+						<![CDATA[com.sehinc.erosioncontrol.action.report.ECProjectReportScriptlet.filterHTML($V{PermittedProjectContactValue}.getFirstName()) + " " + com.sehinc.erosioncontrol.action.report.ECProjectReportScriptlet.filterHTML($V{PermittedProjectContactValue}.getLastName()) + "\n" +
+						         com.sehinc.erosioncontrol.action.report.ECProjectReportScriptlet.filterHTML($V{PermittedProjectContactValue}.getViewAddress()) + "\n" +
+						         com.sehinc.erosioncontrol.action.report.ECProjectReportScriptlet.filterHTML($V{PermittedProjectContactValue}.getPrimaryPhone()) + "\n" +
+						         com.sehinc.erosioncontrol.action.report.ECProjectReportScriptlet.filterHTML($V{PermittedProjectContactValue}.getEmail())]]>
+					</textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+		</groupFooter>
+	</group>
+
+	<group name="PermitGroup4">
+		<groupExpression>
+			$F{PROJECT_ID}
+		</groupExpression>
+		<groupHeader>
+			<band height="31">
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="10" y="0" width="120" height="15"/>
+					<textElement verticalAlignment="Bottom">
+						<font reportFont="Arial_Bold"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String">
+						<![CDATA["Authorized Inspector: "]]>
+					</textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="130" y="0" width="385" height="15"/>
+					<textElement verticalAlignment="Bottom">
+						<font reportFont="Arial_Normal"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String">
+						<![CDATA[com.sehinc.erosioncontrol.action.report.ECProjectReportScriptlet.filterHTML($F{AUTHORIZED_INSPECTOR_CLIENT_NAME})]]>
+					</textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="130" y="16" width="385" height="15">
+                      <printWhenExpression>new java.lang.Boolean($V{AuthorizedInspectorProjectContactValue} != null)</printWhenExpression>
+                    </reportElement>					
+					<textElement verticalAlignment="Bottom">
+						<font reportFont="Arial_Normal"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String">
+						<![CDATA[com.sehinc.erosioncontrol.action.report.ECProjectReportScriptlet.filterHTML($V{AuthorizedInspectorProjectContactValue}.getFirstName()) + " " + com.sehinc.erosioncontrol.action.report.ECProjectReportScriptlet.filterHTML($V{AuthorizedInspectorProjectContactValue}.getLastName()) + "\n" +
+						         com.sehinc.erosioncontrol.action.report.ECProjectReportScriptlet.filterHTML($V{AuthorizedInspectorProjectContactValue}.getViewAddress()) + "\n" +
+						         com.sehinc.erosioncontrol.action.report.ECProjectReportScriptlet.filterHTML($V{AuthorizedInspectorProjectContactValue}.getPrimaryPhone()) + "\n" +
+						         com.sehinc.erosioncontrol.action.report.ECProjectReportScriptlet.filterHTML($V{AuthorizedInspectorProjectContactValue}.getEmail())]]>
+					</textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+		</groupFooter>
+	</group>
+
+
+	<group name="ProjectContactGroup">
+		<groupExpression>
+			$F{PROJECT_ID}
+		</groupExpression>
+		<groupHeader>
+			<band height="44">
+			<subreport isUsingCache="true">
+				<reportElement x="0" y="0" width="515" height="44"/>
+				<subreportParameter name="ProjectId">
+					<subreportParameterExpression>
+						$F{PROJECT_ID}
+					</subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression>
+					$P{REPORT_CONNECTION}
+				</connectionExpression>				
+				<subreportExpression class="net.sf.jasperreports.engine.JasperReport">
+					$P{ECProjectContactSubreport}
+				</subreportExpression>
+			</subreport>
+			</band>
+		</groupHeader>
+		<groupFooter>
+		</groupFooter>
+	</group>
+
+	<group name="ProjectDocumentGroup">
+		<groupExpression>
+			$F{PROJECT_ID}
+		</groupExpression>
+		<groupHeader>
+			<band height="44">
+			<subreport isUsingCache="true">
+				<reportElement x="0" y="0" width="515" height="44"/>
+				<subreportParameter name="ProjectId">
+					<subreportParameterExpression>
+						$F{PROJECT_ID}
+					</subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression>
+					$P{REPORT_CONNECTION}
+				</connectionExpression>				
+				<subreportExpression class="net.sf.jasperreports.engine.JasperReport">
+					$P{ECProjectDocumentSubreport}
+				</subreportExpression>
+			</subreport>
+			</band>
+		</groupHeader>
+		<groupFooter>
+		</groupFooter>
+	</group>
+
+	<group name="ProjectBMPGroup">
+		<groupExpression>
+			$F{PROJECT_ID}
+		</groupExpression>
+		<groupHeader>
+			<band height="44">
+			<subreport isUsingCache="true">
+				<reportElement x="0" y="0" width="515" height="44"/>
+				<subreportParameter name="ProjectId">
+					<subreportParameterExpression>
+						$F{PROJECT_ID}
+					</subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression>
+					$P{REPORT_CONNECTION}
+				</connectionExpression>				
+				<subreportExpression class="net.sf.jasperreports.engine.JasperReport">
+					$P{ECProjectBMPSubreport}
+				</subreportExpression>
+			</subreport>
+			</band>
+		</groupHeader>
+		<groupFooter>
+		</groupFooter>
+	</group>
+
+	<group name="ProjectInspectionGroup">
+		<groupExpression>
+			$F{PROJECT_ID}
+		</groupExpression>
+		<groupHeader>
+			<band height="44">
+			<subreport isUsingCache="true">
+				<reportElement x="0" y="0" width="515" height="44"/>
+				<subreportParameter name="ProjectId">
+					<subreportParameterExpression>
+						$F{PROJECT_ID}
+					</subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression>
+					$P{REPORT_CONNECTION}
+				</connectionExpression>				
+				<subreportExpression class="net.sf.jasperreports.engine.JasperReport">
+					$P{ECProjectInspectionSubreport}
+				</subreportExpression>
+			</subreport>
+			</band>
+		</groupHeader>
+		<groupFooter>
+		</groupFooter>
+	</group>
+
+	<title>
+		<band height="115">
+			<image hyperlinkType="Reference" scaleImage="RetainShape">
+				<reportElement x="0" y="0" width="515" height="50">
+					<printWhenExpression>new Boolean($P{LogoLocation} != null)</printWhenExpression>
+				</reportElement>				
+				<imageExpression>$P{LogoLocation}</imageExpression>
+				<hyperlinkReferenceExpression>
+					$P{ClientWebSite}
+				</hyperlinkReferenceExpression>				
+			</image>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="0" y="51" width="515" height="20"/>
+				<textElement>
+					<font reportFont="Arial_Normal" size="14"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String">com.sehinc.erosioncontrol.action.report.ECProjectReportScriptlet.filterHTML($P{ClientName})</textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="72" width="515" height="0"/>
+				<graphicElement/>
+			</line>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="0" y="75" width="515" height="35" />
+				<textElement>
+					<font reportFont="Arial_Bold" size="20"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String">$P{ReportTitle}</textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageFooter>
+		<band height="40">
+			<textField>
+				<reportElement x="200" y="20" width="80" height="15"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.lang.String">
+					"Page " + String.valueOf(($V{PAGE_NUMBER} == null)?new Integer(1):$V{PAGE_NUMBER}) + " of"
+				</textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="280" y="20" width="75" height="15"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String">
+					" " + String.valueOf($V{PAGE_NUMBER})
+				</textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

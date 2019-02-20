@@ -1,0 +1,128 @@
+<?xml version="1.0"?><!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping>
+    <!-- -->
+    <class name="com.sehinc.stormwater.db.plan.BMPData"
+           table="BMP">
+        <id name="id"
+            type="integer"
+            column="id">
+            <generator class="identity" />
+        </id>
+        <property name="mcmId"
+                  type="integer"
+                  column="MCM_ID" />
+        <property name="name"
+                  type="string"
+                  column="NAME" />
+        <property name="ownerId"
+                  type="integer"
+                  column="OWNER_ID" />
+        <property name="required"
+                  type="boolean"
+                  column="IS_REQUIRED" />
+        <many-to-one name="status"
+                     class="com.sehinc.erosioncontrol.db.code.StatusCodeData"
+                     column="STATUS_CD"
+                     lazy="false" />
+        <property name="number"
+                  type="integer"
+                  column="NUMBER" />
+        <property name="section"
+                  type="string"
+                  column="SECTION" />
+        <property name="identifier"
+                  type="string"
+                  column="IDENTIFIER" />
+        <property name="nameLocked"
+                  type="boolean"
+                  column="IS_NAME_LOCKED" />
+        <property name="formType"
+                  type="integer"
+                  column="FORM_TYPE" />
+        <property name="field_value1"
+                  type="string">
+            <column name="field_value1"
+                    sql-type="text" />
+        </property>
+        <property name="field_type1"
+                  type="integer"
+                  column="field_type1" />
+        <property name="field_value2"
+                  type="string">
+            <column name="field_value2"
+                    sql-type="text" />
+        </property>
+        <property name="field_type2"
+                  type="integer"
+                  column="field_type2" />
+        <property name="field_value3"
+                  type="string">
+            <column name="field_value3"
+                    sql-type="text" />
+        </property>
+        <property name="field_type3"
+                  type="integer"
+                  column="field_type3" />
+        <property name="field_value4"
+                  type="string">
+            <column name="field_value4"
+                    sql-type="text" />
+        </property>
+        <property name="field_type4"
+                  type="integer"
+                  column="field_type4" />
+        <property name="field_value5"
+                  type="string">
+            <column name="field_value5"
+                    sql-type="text" />
+        </property>
+        <property name="field_type5"
+                  type="integer"
+                  column="field_type5" />
+        <property name="createTimestamp"
+                  type="timestamp"
+                  column="create_ts" />
+        <property name="updateTimestamp"
+                  type="timestamp"
+                  column="update_ts" />
+        <property name="updateUserId"
+                  type="integer"
+                  column="update_user_id" />
+    </class>
+    <class name="com.sehinc.stormwater.value.plan.BMPValue"
+           table="BMP">
+        <id name="id"
+            type="integer"
+            column="id">
+            <generator class="assigned" />
+        </id>
+        <property name="name"
+                  type="string"
+                  column="NAME" />
+        <property name="number"
+                  type="integer"
+                  column="NUMBER" />
+        <property name="mcmId"
+                  type="integer"
+                  column="MCM_ID" />
+        <property name="section"
+                  type="string"
+                  column="SECTION" />
+    </class>
+    <query name="com.sehinc.stormwater.db.plan.BMPValue.byMCMId">
+        from com.sehinc.stormwater.value.plan.BMPValue value
+        where value.id in
+        (select bmp.id from BMPData bmp where bmp.status.code = :statusCode and bmp.mcmId = :mcmId)
+        order by case when value.section is null or value.section is empty then '' else value.section end asc, value.number asc
+    </query>
+    <query name="com.sehinc.stormwater.db.plan.BMPValue.byPlanId">
+        from com.sehinc.stormwater.value.plan.BMPValue value
+        where value.id in
+        (select bmp.id from BMPData bmp where bmp.status.code = :statusCode and bmp.mcmId in
+        (select mcm.id from MCMData mcm where mcm.planId = :planId and mcm.status.code = :statusCode )
+        )
+        order by case when value.section is null or value.section is empty then '' else value.section end asc, value.number asc
+    </query>
+</hibernate-mapping>

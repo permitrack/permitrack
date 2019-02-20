@@ -1,0 +1,2 @@
+
+java -jar schemaSpy_5.0.0.jar -t mssql-jtds -host localhost -port 1433 -db cap2 -u sehdbadm -p passone -o library -dp "C:\tomcat5\common\lib\jtds-1.2.2.jar" -s dbo

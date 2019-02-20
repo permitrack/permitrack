@@ -1,0 +1,157 @@
+<meta http-equiv="Content-Type"
+      content="text/html; charset=ISO-8859-1">
+<HTML>
+    <HEAD>
+        <TITLE>test2</TITLE>
+        <SCRIPT LANGUAGE="JavaScript"
+                SRC="sendArcXMLparam.jsp"
+                TYPE="text/javascript"></SCRIPT>
+        <SCRIPT LANGUAGE="JavaScript"
+                SRC="sendArcXML.jsp"
+                TYPE="text/javascript"></SCRIPT>
+        <SCRIPT LANGUAGE="JavaScript"
+                TYPE="text/javascript">
+            var isIE = true;
+            var is5up = false;
+            if (navigator.appName.indexOf("Netscape")
+                == -1)
+            {
+                isIE =
+                false;
+                if (parseFloat(navigator.appVersion)
+                    >= 5)
+                {
+                    is5up =
+                    true;
+                }
+            }
+            else
+            {
+                if (navigator.appVersion.indexOf("MSIE 5")
+                    > 0)
+                {
+                    is5up =
+                    true;
+                }
+            }
+            var scrWidth = screen.width;
+            var scrHeight = screen.height;
+            var winWidth = 900;
+            var winHeight = 700;
+        </SCRIPT>
+    </HEAD>
+    <body BGCOLOR="#0000c0"
+          TEXT="White"
+          BGPROPERTIES="FIXED"
+          BACKGROUND="images/Background.png"
+          leftmargin=0
+          rightmargin=0
+          topmargin=0>
+        <div align="center">
+            <table>
+                <tr>
+                    <td>
+                        <FORM onsubmit="sendXML();return false;">
+                            <FONT FACE="Arial,sans-serif">
+                                <B>sendArcXML
+                                </B>
+                            </FONT>
+                    </td>
+                    <td>
+                        <FONT FACE="Arial,sans-serif"
+                              SIZE="-1">
+                            <B>
+                                Host:
+                                <INPUT TYPE="text"
+                                       NAME="Host"
+                                       SIZE="12">
+                                &nbsp;&nbsp;
+                                MapService:
+                                <INPUT TYPE="text"
+                                       NAME="Service"
+                                       VALUE="World"
+                                       SIZE="12">
+                            </B>
+                        </FONT>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <FONT FACE="Arial,sans-serif"
+                              SIZE="-1">
+                            <B>
+                                Request:
+                                <BR>
+                                <TEXTAREA COLS=75
+                                          ROWS=5
+                                          NAME="request"
+                                          WRAP="soft">
+                                    <ARCXML version="1.1">
+                                        <REQUEST>
+                                            <GET_SERVICE_INFO renderer="false"
+                                                              extensions="false"
+                                                              fields="false"
+                                                              envelope="false" />
+                                        </REQUEST>
+                                    </ARCXML>
+                                </TEXTAREA>
+                            </B>
+                        </FONT>
+                    </td>
+                </tr>
+                <tr>
+                    <td align="center"
+                        colspan="2">
+                        <FONT FACE="Arial,sans-serif"
+                              SIZE="-1">
+                            <B>
+                                <INPUT TYPE="hidden"
+                                       NAME="codePage"
+                                       VALUE="UTF-8">
+                                <!-- <BR> -->
+                                CustomService:
+                                <INPUT TYPE="Checkbox"
+                                       NAME="useQuery"
+                                       VALUE="yes">
+                                Query
+                                <INPUT TYPE="Checkbox"
+                                       NAME="useGeocode"
+                                       VALUE="yes">
+                                Geocode
+                                <INPUT TYPE="Checkbox"
+                                       NAME="useExtract"
+                                       VALUE="yes">
+                                Extract
+                                <!-- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <INPUT TYPE="Checkbox" NAME="useURLencode" VALUE="yes">Escape Response -->
+                            </B>
+                        </FONT>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <FONT FACE="Arial,sans-serif"
+                              SIZE="-1">
+                            <B>
+                                Response:
+                                <BR>
+                                <TEXTAREA COLS=75
+                                          ROWS=8
+                                          NAME="response"
+                                          WRAP="soft"></TEXTAREA>
+                            </B>
+                        </FONT>
+                    </td>
+                </tr>
+                </FORM>
+            </table>
+        </div>
+        <SCRIPT LANGUAGE="JavaScript"
+                TYPE="text/javascript">
+            document.forms[0].Host.value =
+            hostName;
+            document.forms[0].Service.value =
+            serviceVar;    //document.serviceVar = document.forms[0].Service.value;
+        </SCRIPT>
+    </BODY>
+</HTML>

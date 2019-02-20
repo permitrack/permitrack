@@ -1,0 +1,71 @@
+<?xml version="1.0"?><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <!--
+            Auto-generated mapping file from
+            the hibernate.org cfg2hbm engine
+    -->
+    <class name="com.sehinc.environment.db.process.EnvProcess"
+           table="ENV_PROCESS">
+        <id name="id"
+            type="integer">
+            <column name="ID" />
+            <generator class="identity" />
+        </id>
+        <property name="parentProcessId"
+                  type="integer"
+                  column="PARENT_PROCESS_ID" />
+        <property name="clientId"
+                  type="integer"
+                  column="CLIENT_ID" />
+        <property name="processNumber"
+                  type="string"
+                  column="PROCESS_NUMBER" />
+        <property name="name"
+                  type="string"
+                  column="NAME" />
+        <property name="description"
+                  type="string"
+                  column="DESCRIPTION" />
+        <property name="orderNum"
+                  type="integer"
+                  column="ORDER_NUM" />
+        <property name="createTimestamp"
+                  type="timestamp"
+                  column="CREATE_TS" />
+        <property name="updateTimestamp"
+                  type="timestamp"
+                  column="UPDATE_TS" />
+        <property name="updateUserId"
+                  type="integer"
+                  column="UPDATE_USER_ID" />
+        <property name="facilityId"
+                  type="integer"
+                  column="FACILITY_ID" />
+        <set name="subProcesses"
+             table="ENV_PROCESS"
+             cascade="all-delete-orphan"
+             lazy="false">
+            <key column="PARENT_PROCESS_ID" />
+            <one-to-many class="com.sehinc.environment.db.process.EnvProcess" />
+        </set>
+    </class>
+    <query name="EnvProcess.processListByClientId">
+        from com.sehinc.environment.db.process.EnvProcess as process
+        where process.clientId = :clientId
+        and process.facilityId = :facilityId
+        order by process.processNumber ASC
+    </query>
+    <query name="EnvProcess.findProcessByClientIdAndNumber">
+        from com.sehinc.environment.db.process.EnvProcess as process
+        where process.clientId = :clientId
+        and process.facilityId = :facilityId
+        and process.processNumber = :processNumber
+        order by process.processNumber ASC
+    </query>
+    <query name="EnvProcess.findProcessByParentId">
+        from com.sehinc.environment.db.process.EnvProcess as process
+        where process.parentProcessId = :parentProcessId
+        order by process.processNumber ASC
+    </query>
+</hibernate-mapping>

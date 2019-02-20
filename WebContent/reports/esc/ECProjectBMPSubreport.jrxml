@@ -1,0 +1,165 @@
+<?xml version="1.0"?>
+<!DOCTYPE jasperReport PUBLIC "-//JasperReports//DTD Report Design//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
+
+<jasperReport 
+		name="ECProjectBMPSubreport" 
+		pageWidth="595" 
+		pageHeight="842" 
+		columnWidth="515" 
+		columnSpacing="0" 
+		leftMargin="0" 
+		rightMargin="0" 
+		topMargin="0" 
+		bottomMargin="0">
+
+	<reportFont name="Arial_Normal" isDefault="true" fontName="Arial" size="12" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Bold" isDefault="false" fontName="Arial" size="12" isBold="true" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Italic" isDefault="false" fontName="Arial" size="12" isItalic="true" pdfFontName="Helvetica-Oblique" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Bold_Italic" isDefault="false" fontName="Arial" size="12" isItalic="true" isBold="true" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Small" isDefault="true" fontName="Arial" size="10" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Small_Bold" isDefault="false" fontName="Arial" size="10" isBold="true" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Small_Italic" isDefault="false" fontName="Arial" size="10" isItalic="true" pdfFontName="Helvetica-Oblique" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Small_Bold_Italic" isDefault="false" fontName="Arial" size="10" isItalic="true" isBold="true" pdfFontName="Helvetica-Oblique" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+
+	<parameter name="ProjectId" class="java.lang.Integer"/>
+
+<queryString><![CDATA[SELECT P.ID PROJECT_ID, PB.ID PROJECT_BMP_ID, PB.BMP_NAME BMP_NAME, PB.DESCRIPTION BMP_DESCRIPTION, PB.CATEGORY_NAME BMP_CATEGORY_NAME,
+CASE PB.IS_REQUIRED WHEN 0 THEN 'No' ELSE 'Yes' END BMP_IS_REQUIRED
+FROM EC_PROJECT P LEFT OUTER JOIN EC_PROJECT_BMP PB ON P.ID = PB.PROJECT_ID
+WHERE P.ID = $P{ProjectId}]]></queryString>
+
+	<field name="PROJECT_ID" class="java.lang.Integer"/>
+	<field name="PROJECT_BMP_ID" class="java.lang.Integer"/>
+	<field name="BMP_NAME" class="java.lang.String"/>
+	<field name="BMP_DESCRIPTION" class="java.lang.String"/>
+	<field name="BMP_CATEGORY_NAME" class="java.lang.String"/>	
+	<field name="BMP_IS_REQUIRED" class="java.lang.String"/>
+
+	<group name="ProjectBMPTitle">
+		<groupExpression>
+			$F{PROJECT_ID}
+		</groupExpression>
+		<groupHeader>
+			<band height="22">
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="10" y="0" width="505" height="20"/>
+					<textElement verticalAlignment="Bottom">
+						<font reportFont="Arial_Bold" size="14"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String">
+						<![CDATA["Best Management Practices"]]>
+					</textFieldExpression>
+				</textField>
+				<line>
+					<reportElement x="10" y="21" width="505" height="0"/>
+					<graphicElement pen="Thin"/>
+				</line>
+			</band>
+		</groupHeader>
+		<groupFooter>
+		</groupFooter>
+	</group>
+
+	<group name="ProjectNoBMP">
+		<groupExpression>
+			$F{PROJECT_ID}
+		</groupExpression>
+		<groupHeader>
+			<band height="20">
+				<printWhenExpression>new java.lang.Boolean($F{PROJECT_BMP_ID} == null)</printWhenExpression>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="10" y="0" width="505" height="15"/>
+					<textElement>
+						<font reportFont="Arial_Normal"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String">
+						<![CDATA["No BMPs Assigned"]]>
+					</textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+		</groupFooter>
+	</group>
+
+	<group name="ProjectBMPHeader">
+		<groupExpression>
+			$F{PROJECT_ID}
+		</groupExpression>
+		<groupHeader>
+			<band height="16">
+				<printWhenExpression>new java.lang.Boolean($F{PROJECT_BMP_ID} != null)</printWhenExpression>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="10" y="0" width="60" height="15"/>
+					<textElement>
+						<font reportFont="Arial_Bold"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String">
+						<![CDATA["Required?"]]>
+					</textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="75" y="0" width="160" height="15"/>
+					<textElement>
+						<font reportFont="Arial_Bold"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String">
+						<![CDATA["Name"]]>
+					</textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="240" y="0" width="275" height="15"/>
+					<textElement>
+						<font reportFont="Arial_Bold"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String">
+						<![CDATA["Description"]]>
+					</textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+		</groupFooter>
+	</group>
+
+	<group name="ProjectBMPDetail">
+		<groupExpression>
+			$F{PROJECT_BMP_ID}
+		</groupExpression>
+		<groupHeader>
+			<band height="18">
+				<printWhenExpression>new java.lang.Boolean($F{PROJECT_BMP_ID} != null)</printWhenExpression>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="10" y="0" width="60" height="15"/>
+					<textElement>
+						<font reportFont="Arial_Normal"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String">
+						<![CDATA[$F{BMP_IS_REQUIRED}]]>
+					</textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="75" y="0" width="160" height="15"/>
+					<textElement>
+						<font reportFont="Arial_Normal"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String">
+						<![CDATA[com.sehinc.erosioncontrol.action.report.ECProjectReportScriptlet.filterHTML($F{BMP_CATEGORY_NAME}) + ":  " + com.sehinc.erosioncontrol.action.report.ECProjectReportScriptlet.filterHTML($F{BMP_NAME})]]>
+					</textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="240" y="0" width="275" height="15"/>
+					<textElement>
+						<font reportFont="Arial_Normal"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String">
+						<![CDATA[com.sehinc.erosioncontrol.action.report.ECProjectReportScriptlet.filterHTML($F{BMP_DESCRIPTION})]]>
+					</textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+		</groupFooter>
+	</group>
+
+</jasperReport>

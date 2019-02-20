@@ -1,0 +1,1 @@
+call ant -file build.xml -propertyfile build-prod.properties stage

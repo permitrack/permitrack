@@ -1,0 +1,17 @@
+select * from BMP where owner_id = 342
+
+select * from client where name like '%Southlake%'
+
+select * from [plan] where client_id = 342 --181
+
+select * from mcm where plan_id = 181 -- 1220, 1221, 1222, 1223, 1224, 1225
+
+select id, name, mcm_id, number, field_type1, field_type2, field_type3, field_type4, field_type5
+ from bmp where mcm_id in (1220, 1221, 1222, 1223, 1224, 1225)
+
+
+
+
+-- insert ASSESSMENT field
+update bmp set field_type5 = '14'
+where mcm_id in (1220, 1221, 1222, 1223, 1224, 1225)

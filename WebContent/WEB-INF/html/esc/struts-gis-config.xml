@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?><!DOCTYPE struts-config PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 1.3//EN"
+    "http://struts.apache.org/dtds/struts-config_1_3.dtd">
+<struts-config>
+    <form-beans>
+        <form-bean name="gisForm"
+                   type="com.sehinc.erosioncontrol.action.gis.GISForm" />
+        <form-bean name="gisSearchForm"
+                   type="com.sehinc.erosioncontrol.action.gis.GISSearchForm" />
+    </form-beans>
+    <action-mappings>
+        <action path="/gisimportpage"
+                type="com.sehinc.erosioncontrol.action.gis.GISImportPageAction"
+                name="gisForm"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="gis.import.page" />
+        </action>
+        <action path="/gisimportaction"
+                type="com.sehinc.erosioncontrol.action.gis.GISImportAction"
+                name="gisForm"
+                input="gis.import.page"
+                scope="request"
+                validate="true"
+                cancellable="true">
+            <forward name="continue"
+                     path="gis.import.ack.page" />
+        </action>
+        <action path="/gisimportsuccessaction"
+                type="com.sehinc.erosioncontrol.action.base.DispatchAction"
+                name="gisForm">
+            <forward name="continue"
+                     module="/html/esc/project"
+                     path="/projectlistpage.do" />
+        </action>
+        <action path="/gissearchpage"
+                type="com.sehinc.erosioncontrol.action.gis.GISSearchPageAction"
+                name="gisSearchForm"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="gis.search.page" />
+        </action>
+        <action path="/gissearchaction"
+                type="com.sehinc.erosioncontrol.action.gis.GISSearchAction"
+                name="gisSearchForm"
+                input="gis.search.page"
+                scope="request"
+                validate="true"
+                cancellable="true">
+            <forward name="continue"
+                     path="gis.search.results.page" />
+        </action>
+        <action path="/giseditaction"
+                type="com.sehinc.erosioncontrol.action.gis.GISEditAction"
+                name="gisSearchForm"
+                input="gis.search.results.page"
+                scope="request"
+                validate="true"
+                cancellable="true">
+            <forward name="continue"
+                     path="/gissearchpage.do"
+                     redirect="true" />
+        </action>
+    </action-mappings>
+    <controller processorClass="org.apache.struts.action.RequestProcessor"
+                contentType="text/html" />
+    <plug-in className="org.apache.struts.tiles.TilesPlugin">
+        <set-property property="definitions-config"
+                      value="/WEB-INF/html/tiles-defs.xml, /WEB-INF/html/esc/tiles-gis-defs.xml" />
+        <set-property property="definitions-debug"
+                      value="2" />
+        <set-property property="definitions-parser-details"
+                      value="2" />
+        <set-property property="definitions-parser-validate"
+                      value="true" />
+        <set-property property="moduleAware"
+                      value="true" />
+    </plug-in>
+    <plug-in className="org.apache.struts.validator.ValidatorPlugIn">
+        <set-property property="pathnames"
+                      value="/org/apache/struts/validator/validator-rules.xml" />
+    </plug-in>
+</struts-config>

@@ -1,0 +1,80 @@
+<?xml version="1.0"?><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <!--
+            Auto-generated mapping file from
+            the hibernate.asset cfg2hbm engine
+    -->
+    <class name="com.sehinc.environment.db.asset.EnvAssetAttr"
+           table="ENV_ASSET_ATTR">
+        <id name="id"
+            type="integer">
+            <column name="ID" />
+            <generator class="identity" />
+        </id>
+        <property name="assetId"
+                  type="integer"
+                  column="ASSET_ID" />
+        <property name="tankCarrier"
+                  type="string"
+                  column="TANK_CARRIER" />
+        <property name="tankLoadingMethod"
+                  type="string"
+                  column="TANK_LOADING_METHOD" />
+        <property name="tankVaporRecovery"
+                  type="boolean"
+                  column="TANK_VAPOR_RECOVERY" />
+        <property name="tankTypeDesc"
+                  type="string"
+                  column="TANK_TYPE_DESC" />
+        <property name="tankContentsDesc"
+                  type="string"
+                  column="TANK_CONTENTS_DESC" />
+        <property name="tankDiameter"
+                  type="string"
+                  column="TANK_DIAMETER" />
+        <property name="tankHeight"
+                  type="string"
+                  column="TANK_HEIGHT" />
+        <property name="tankCapacity"
+                  type="big_decimal"
+                  column="TANK_CAPACITY" />
+        <property name="stackLatitude"
+                  type="string"
+                  column="STK_LATITUDE" />
+        <property name="stackLongitude"
+                  type="string"
+                  column="STK_LONGITUDE" />
+        <property name="stackHeight"
+                  type="string"
+                  column="STK_HEIGHT" />
+        <property name="stackDiameter"
+                  type="string"
+                  column="STK_DIAMETER" />
+        <property name="stackExitTemp"
+                  type="string"
+                  column="STK_EXIT_TEMP" />
+        <property name="stackExitVelocity"
+                  type="string"
+                  column="STK_EXIT_VELOCITY" />
+        <property name="stackExitFlowRate"
+                  type="string"
+                  column="STK_EXIT_FLOW_RATE" />
+        <property name="stackDesc"
+                  type="string"
+                  column="STK_DESCRIPTION" />
+        <property name="epRatedMmbtu"
+                  type="big_decimal"
+                  column="EP_RATED_MMBTU" />
+        <property name="epCapacityMmbtu"
+                  type="big_decimal"
+                  column="EP_CAPACITY_MMBTU" />
+        <property name="transferRate"
+                  type="big_decimal"
+                  column="TRANSFER_RATE" />
+    </class>
+    <query name="EnvAssetAttr.findByAssetId">
+        from com.sehinc.environment.db.asset.EnvAssetAttr as attr
+        where attr.assetId = :assetId
+    </query>
+</hibernate-mapping>

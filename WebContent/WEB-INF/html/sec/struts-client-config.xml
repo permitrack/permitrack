@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?><!DOCTYPE struts-config PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 1.3//EN"
+    "http://struts.apache.org/dtds/struts-config_1_3.dtd">
+<struts-config>
+    <form-beans>
+        <form-bean name="clientForm"
+                   type="com.sehinc.security.action.client.ClientForm" />
+        <form-bean name="clientDvForm"
+                   type="com.sehinc.security.action.client.ClientDVForm" />
+        <form-bean name="clientEcForm"
+                   type="com.sehinc.security.action.client.ClientECForm" />
+        <form-bean name="clientLogoForm"
+                   type="com.sehinc.security.action.client.ClientForm" />
+    </form-beans>
+    <global-forwards>
+        <forward name="user.view.page"
+                 module="/html/sec/user"
+                 path="/userviewpageaction.do"
+                 redirect="true" />
+<!--
+        <forward name="client.list.page"
+                 path="/clientlistpageaction.do"
+                 redirect="true" />
+-->
+        <forward name="client.view.page"
+                 path="/clientviewpageaction.do"
+                 redirect="true" />
+        <forward name="client.create.page"
+                 path="/clientcreatepageaction.do"
+                 redirect="true" />
+        <forward name="client.edit.page"
+                 path="/clienteditpageaction.do"
+                 redirect="true" />
+        <forward name="client.ec.view.page"
+                 path="/clientecviewpageaction.do"
+                 redirect="true" />
+        <forward name="client.dv.view.page"
+                 path="/clientdvviewpageaction.do" />
+    </global-forwards>
+    <action-mappings>
+        <action path="/clientlistpageaction"
+                type="com.sehinc.security.action.client.ClientListPageAction">
+            <forward name="continue"
+                     path="client.list.page.tiles" />
+            <forward name="nonAdmin"
+                     path="client.list.page.tiles.b" />
+        </action>
+        <action path="/clientviewpageaction"
+                type="com.sehinc.security.action.client.ClientViewPageAction"
+                name="clientForm"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="client.view.page.tiles" />
+        </action>
+        <action path="/clientcreatepageaction"
+                type="com.sehinc.security.action.client.ClientCreatePageAction"
+                name="clientForm"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="client.create.page.tiles" />
+        </action>
+        <action path="/clientcreateaction"
+                type="com.sehinc.security.action.client.ClientCreateAction"
+                name="clientForm"
+                input="client.create.page.tiles"
+                scope="request"
+                validate="false"
+                cancellable="true">
+            <forward name="continue"
+                     path="/clientviewpageaction.do"
+                     redirect="true" />
+        </action>
+        <action path="/clienteditpageaction"
+                type="com.sehinc.security.action.client.ClientEditPageAction"
+                name="clientForm"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="client.edit.page.tiles" />
+        </action>
+        <action path="/clienteditaction"
+                type="com.sehinc.security.action.client.ClientEditAction"
+                name="clientForm"
+                input="client.edit.page.tiles"
+                scope="request"
+                validate="false"
+                cancellable="true">
+            <forward name="continue"
+                     path="/clientviewpageaction.do"
+                     redirect="true" />
+        </action>
+        <action path="/clientdeleteaction"
+                type="com.sehinc.security.action.client.ClientDeleteAction"
+                name="clientForm"
+                scope="request"
+                validate="false"
+                cancellable="true">
+            <forward name="continue"
+                     path="/clientlistpageaction.do"
+                     redirect="true" />
+        </action>
+        <action path="/clientdvviewpageaction"
+                type="com.sehinc.security.action.client.ClientDVViewPageAction"
+                name="clientDvForm"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="client.dv.view.page.tiles" />
+        </action>
+        <action path="/clientdveditpageaction"
+                type="com.sehinc.security.action.client.ClientDVEditPageAction"
+                name="clientDvForm"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="client.dv.edit.page.tiles" />
+        </action>
+        <action path="/clientdveditaction"
+                type="com.sehinc.security.action.client.ClientDVEditAction"
+                name="clientDvForm"
+                scope="request"
+                validate="false"
+                cancellable="true">
+            <forward name="continue"
+                     path="/clientdvviewpageaction.do"
+                     redirect="true" />
+        </action>
+        <action path="/clientecviewpageaction"
+                type="com.sehinc.security.action.client.ClientECViewPageAction"
+                name="clientEcForm"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="client.ec.view.page.tiles" />
+        </action>
+        <action path="/clienteceditpageaction"
+                type="com.sehinc.security.action.client.ClientECEditPageAction"
+                name="clientEcForm"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="client.ec.edit.page.tiles" />
+        </action>
+        <action path="/clienteceditaction"
+                type="com.sehinc.security.action.client.ClientECEditAction"
+                name="clientEcForm"
+                scope="request"
+                validate="false"
+                cancellable="true">
+            <forward name="continue"
+                     path="/clientecviewpageaction.do"
+                     redirect="true" />
+        </action>
+        <action path="/clientlogoselectaction"
+                type="com.sehinc.security.action.client.ClientLogoSelectAction"
+                name="clientLogoForm"
+                parameter="secondaryMenuItem=logo"
+                scope="request"
+                validate="false"
+                cancellable="true">
+            <forward name="continue"
+                     path="client.logo.select.page" />
+        </action>
+        <action path="/clientlogocreate"
+                type="com.sehinc.security.action.client.ClientLogoCreateAction"
+                name="clientLogoForm"
+                input="client.logo.select.page"
+                scope="request"
+                validate="true"
+                cancellable="true">
+            <forward name="continue"
+                     path="/clientviewpageaction.do"
+                     redirect="true" />
+        </action>
+        <action path="/clientactivitypageaction"
+                type="com.sehinc.security.action.client.ClientActivityPageAction">
+            <forward name="continue"
+                     path="client.activity.page" />
+        </action>
+    </action-mappings>
+    <controller processorClass="org.apache.struts.action.RequestProcessor"
+                contentType="text/html" />
+    <plug-in className="org.apache.struts.tiles.TilesPlugin">
+        <set-property property="definitions-config"
+                      value="/WEB-INF/html/tiles-defs.xml, /WEB-INF/html/sec/tiles-client-defs.xml" />
+        <set-property property="definitions-debug"
+                      value="2" />
+        <set-property property="definitions-parser-details"
+                      value="2" />
+        <set-property property="definitions-parser-validate"
+                      value="true" />
+        <set-property property="moduleAware"
+                      value="true" />
+    </plug-in>
+    <plug-in className="org.apache.struts.validator.ValidatorPlugIn">
+        <set-property property="pathnames"
+                      value="/org/apache/struts/validator/validator-rules.xml, /WEB-INF/html/sec/validation-client.xml" />
+    </plug-in>
+</struts-config>

@@ -1,0 +1,44 @@
+<!DOCTYPE tiles-definitions PUBLIC
+    "-//Apache Software Foundation//DTD Tiles Configuration 1.3//EN"
+    "http://struts.apache.org/dtds/tiles-config_1_3.dtd">
+<tiles-definitions>
+    <definition name="permitperiod.baseLayout"
+                extends="html.baseLayout">
+        <put name="primaryMenu"
+             value="/html/ms4/primarynavigation.jsp" />
+        <put name="secondaryMenu"
+             value="/html/ms4/secondarynavigation.jsp" />
+    </definition>
+    <definition name="permitperiod.baseSplitPanelLayout"
+                extends="html.baseSplitPanelLayout">
+        <put name="primaryMenu"
+             value="/html/ms4/primarynavigation.jsp" />
+        <put name="secondaryMenu"
+             value="/html/ms4/secondarynavigation.jsp" />
+        <put name="leftPanel"
+             value="/html/ms4/permitperiod/permitperiodhierarchy.jsp" />
+        <put name="tertiaryMenu"
+             value="/html/ms4/tertiarynavigation.jsp" />
+    </definition>
+    <definition name="permitperiod.new.page"
+                extends="permitperiod.baseLayout">
+        <put name="title"
+             value="Create New Permit Period" />
+        <put name="content"
+             value="/html/ms4/permitperiod/permitperiodedit.jsp" />
+    </definition>
+    <definition name="permitperiod.view.page"
+                extends="permitperiod.baseSplitPanelLayout">
+        <put name="title"
+             value="Permit Period View" />
+        <put name="content"
+             value="/html/ms4/permitperiod/permitperiodedit.jsp" />
+    </definition>
+    <definition name="permitperiod.edit.page"
+                extends="permitperiod.baseSplitPanelLayout">
+        <put name="title"
+             value="Permit Period Edit" />
+        <put name="content"
+             value="/html/ms4/permitperiod/permitperiodedit.jsp" />
+    </definition>
+</tiles-definitions>

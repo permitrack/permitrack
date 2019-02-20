@@ -1,0 +1,178 @@
+<!DOCTYPE tiles-definitions PUBLIC
+    "-//Apache Software Foundation//DTD Tiles Configuration 1.3//EN"
+    "http://struts.apache.org/dtds/tiles-config_1_3.dtd">
+<tiles-definitions>
+    <definition name="html.baseLayoutUnsecure"
+                path="/html/baseLayoutUnsecure.jsp">
+        <put name="title"
+             value="" />
+        <put name="portal-bar"
+             value="" />
+        <put name="portalMenu"
+             value="" />
+        <put name="content"
+             value="" />
+        <put name="footer"
+             value="/html/footer.jsp" />
+    </definition>
+    <definition name="html.baseLayout"
+                extends="html.baseLayoutUnsecure"
+                path="/html/baseLayout.jsp">
+        <put name="portal-bar"
+             value="/html/portal-bar.jsp" />
+        <put name="portalMenu"
+             value="/html/portalnavigation.jsp" />
+        <put name="primaryMenu"
+             value="" />
+        <put name="secondaryMenu"
+             value="" />
+        <put name="tertiaryMenu"
+             value="" />
+    </definition>
+    <definition name="html.baseTitledLayout"
+                extends="html.baseLayout"
+                path="/html/baseTitledLayout.jsp">
+        <put name="description"
+             value="" />
+    </definition>
+    <definition name="html.baseSplitPanelLayout"
+                extends="html.baseLayout"
+                path="/html/baseSplitPanelFrameLayout.jsp">
+        <put name="leftPanel"
+             value="" />
+    </definition>
+    <definition name="html.auth.page"
+                extends="html.baseLayoutUnsecure">
+        <put name="title"
+             value="Sign In | PermiTrack" />
+        <put name="content"
+             value="/html/login.jsp" />
+        <put name="portal-bar"
+             value="/html/portal-bar.jsp" />
+    </definition>
+    <definition name="html.module.page"
+                extends="html.baseLayout">
+        <put name="title"
+             value="My Modules | PermiTrack" />
+        <put name="content"
+             value="/html/portalsplash.jsp" />
+    </definition>
+    <definition name="error.page"
+                extends="html.baseLayoutUnsecure">
+        <put name="title"
+             value="PermiTrack" />
+        <put name="content"
+             value="/html/error.jsp" />
+        <put name="portal-bar"
+             value="/html/portal-bar.jsp" />
+    </definition>
+    <definition name="html.home.page"
+                extends="html.baseLayoutUnsecure">
+        <put name="title"
+             value="PermiTrack" />
+        <put name="content"
+             value="/web/home.jsp" />
+        <put name="portal-bar"
+             value="/html/portal-bar.jsp" />
+        <put name="portalMenu"
+             value="/web/menu.jsp" />
+    </definition>
+    <definition name="html.home.products.page"
+                extends="html.home.page">
+        <put name="title"
+             value="PermiTrack Products" />
+        <put name="content"
+             value="/web/products/product.jsp" />
+    </definition>
+    <definition name="html.home.products.projectmanagement.page"
+                extends="html.home.products.page">
+        <put name="title"
+             value="PermiTrack Products for Project Management (MS4)" />
+        <put name="content"
+             value="/web/products/projectmanagement.jsp" />
+    </definition>
+    <definition name="html.home.products.inspection.page"
+                extends="html.home.products.page">
+        <put name="title"
+             value="PermiTrack Products for Inspections (ESC)" />
+        <put name="content"
+             value="/web/products/inspection.jsp" />
+    </definition>
+    <definition name="html.home.products.emissions.page"
+                extends="html.home.products.page">
+        <put name="title"
+             value="PermiTrack Products for Air Quality and Emissions (ENV)" />
+        <put name="content"
+             value="/web/products/emissions.jsp" />
+    </definition>
+    <definition name="html.home.products.gis.page"
+                extends="html.home.products.page">
+        <put name="title"
+             value="PermiTrack DVO for GIS" />
+        <put name="content"
+             value="/web/products/gis.jsp" />
+    </definition>
+    <definition name="html.home.products.demo.page"
+                extends="html.home.products.page">
+        <put name="title"
+             value="PermiTrack Demos" />
+        <put name="content"
+             value="/web/products/demo.jsp" />
+    </definition>
+    <definition name="html.home.contact.page"
+                extends="html.home.page">
+        <put name="title"
+             value="PermiTrack Contact Us" />
+        <put name="content"
+             value="/web/contact.jsp" />
+    </definition>
+    <definition name="html.home.partner.page"
+                extends="html.home.page">
+        <put name="title"
+             value="PermiTrack Contact Us" />
+        <put name="content"
+             value="/web/partner.jsp" />
+    </definition>
+    <definition name="html.home.contact.help.page"
+                extends="html.home.page">
+        <put name="title"
+             value="PermiTrack Help" />
+        <put name="content"
+             value="/web/contact/help.jsp" />
+    </definition>
+    <definition name="html.home.contact.help.manual.esc.user.page"
+                extends="html.home.page">
+        <put name="title"
+             value="PermiTrack Manuals ESC User Manual" />
+        <put name="content"
+             value="/web/manual/manual-esc.jsp" />
+    </definition>
+    <definition name="html.home.contact.help.manual.esc.admin.page"
+                extends="html.home.page">
+        <put name="title"
+             value="PermiTrack Manuals ESC User Manual" />
+        <put name="content"
+             value="/web/manual/manual-esc-admin.jsp" />
+    </definition>
+    <definition name="html.home.contact.help.manual.settings.page"
+                extends="html.home.page">
+        <put name="title"
+             value="PermiTrack Manuals ESC User Manual" />
+        <put name="content"
+             value="/web/manual/manual-settings.jsp" />
+    </definition>
+    <definition name="html.home.contact.about.page"
+                extends="html.home.page">
+        <put name="title"
+             value="PermiTrack Help" />
+        <put name="content"
+             value="/web/contact/about.jsp" />
+    </definition>
+    <definition name="html.home.subscribe.page"
+                extends="html.home.page">
+        <put name="title"
+             value="PermiTrack Subscriptions" />
+        <put name="content"
+             value="/web/contact/sales.jsp" />
+    </definition>
+</tiles-definitions>

@@ -1,0 +1,621 @@
+<META HTTP-EQUIV="Pragma"
+      CONTENT="no-cache">
+<META HTTP-EQUIV="CACHE-CONTROL"
+      CONTENT="NO-CACHE">
+<META HTTP-EQUIV="PRAGMAS"
+      CONTENT="NO-CACHE">
+<meta http-equiv="Content-Type"
+      content="text/html; charset=ISO-8859-1">
+<html>
+    <HEAD>
+        <title>Mailing Labels</title>
+        <LINK rel="stylesheet"
+              type="text/css"
+              href="gis.css" />
+        <script type="text/javascript"
+                language="javascript1.2">
+            var t;
+            var t2 = "";
+            if (opener)
+            {
+                t =
+                opener.parent.MapFrame;
+                t2 =
+                "opener.parent.MapFrame";
+            }
+            else
+            {
+                t =
+                parent.MapFrame;
+                t2 =
+                "parent.MapFrame";
+            }
+            var theReply = t.myLastParcelSelected;
+            var fList = "";
+            var lpos1 = 1;
+            var lpos2 = 1;
+            var epos = 1;
+            var spos = 1;
+            var morePoints = true;
+            var moreFeatures = true;
+            var featureCount = t.justGetFeatureCount(theReply);
+            var pos = 0;
+            var startpos = 0;
+            var endpos = t.xmlEndPos;
+            var stillMore = false
+            pos =
+            theReply.indexOf('hasmore="true"',
+                             endpos);
+            if (pos
+                != -1)
+            {
+                stillMore =
+                true;
+            }
+            pos =
+            0;
+            var tempCount = 0;
+            var xStr = "";
+            var yStr = "";
+            var tempString = "";
+            var theFrame = t2;
+            endpos =
+            1;
+            t.LoadParcelFields();
+            var mailingLabels = new Array();
+            var ownerMailingLabelFields = {
+                pin:"PIN",
+                line1:"SEH_OWNA1",
+                line2:"SEH_OWNA2",
+                line3:"SEH_OWNA3",
+                line4:"SEH_OWNA4"
+            };
+            var occupantMailingLabelFields = {
+                pin:"PIN",
+                line1:"SEH_OCCA1",
+                line2:"SEH_OCCA2",
+                line3:"SEH_OCCA3",
+                line4:"SEH_OCCA4"
+            };
+            var map = opener.parent.MapFrame;
+            function isDisplayOwners()
+            {
+                return document.getElementById('displayOwners').checked;
+            }
+            function isDisplayOccupants()
+            {
+                return document.getElementById('displayOccupants').checked;
+            }
+            function isDisplayPins()
+            {
+                return document.getElementById('displayPins').checked;
+            }
+            function skipLabel(label)
+            {
+                if (label.isOwner
+                    && isDisplayOwners())
+                {
+                    return false;
+                }
+                if (label.isOccupant
+                    && isDisplayOccupants())
+                {
+                    return false;
+                }
+                return !label.isCustomLabel;
+            }
+            function AddressLabel(isOccupant, isOwner, isCustom)
+            {
+                this.isOccupant =
+                isOccupant;
+                this.isOwner =
+                isOwner;
+                this.isCustomLabel =
+                isCustom;
+            }
+            function createOwnerLabel()
+            {
+                return new AddressLabel(false,
+                                        true,
+                                        false);
+            }
+            function createOccupantLabel()
+            {
+                return new AddressLabel(true,
+                                        false,
+                                        false);
+            }
+            function createCustomLabel()
+            {
+                return new AddressLabel(false,
+                                        false,
+                                        true);
+            }
+            function getLineCell(value)
+            {
+                return '&#09;'
+                    + value;
+            }
+            function addCell(parent, cellType, cellText)
+            {
+                element =
+                document.createElement(cellType);
+                element.innerHTML =
+                cellText;
+                parent.appendChild(element);
+            }
+            function displayAddressTable()
+            {
+                var addressTableDiv = document.getElementById('addressTableDiv');
+                var addressTable = addressTableDiv.getElementsByTagName("table");
+                addressTableDiv.innerHTML =
+                "";
+                addressTable =
+                document.createElement('table');
+                addressBody =
+                document.createElement('tbody');
+                var headingRow = document.createElement('tr');
+                addCell(headingRow,
+                        'th',
+                        'Remove');
+                addCell(headingRow,
+                        'th',
+                        'Parcel ID');
+                addCell(headingRow,
+                        'th',
+                        'Line 1');
+                addCell(headingRow,
+                        'th',
+                        'Line 2');
+                addCell(headingRow,
+                        'th',
+                        'Line 3');
+                addCell(headingRow,
+                        'th',
+                        'Line 4');
+                addressBody.appendChild(headingRow);
+                for (i =
+                     0; i
+                    < mailingLabels.length; i++)
+                {
+                    label =
+                    mailingLabels[i];
+                    if (skipLabel(label))
+                    {
+                        continue;
+                    }
+                    else
+                    {
+                        var labelRow = document.createElement('tr');
+                        addCell(labelRow,
+                                'td',
+                                '<input type="checkbox" id="remove'
+                                    + i
+                                    + '"/>');
+                        addCell(labelRow,
+                                'td',
+                                getLineCell(label.pin));
+                        addCell(labelRow,
+                                'td',
+                                getLineCell(label.line1));
+                        addCell(labelRow,
+                                'td',
+                                getLineCell(label.line2));
+                        addCell(labelRow,
+                                'td',
+                                getLineCell(label.line3));
+                        addCell(labelRow,
+                                'td',
+                                getLineCell(label.line4));
+                        addressBody.appendChild(labelRow);
+                    }
+                }
+                addressTable.width =
+                "100%";
+                addressTable.appendChild(addressBody);
+                addressTableDiv.appendChild(addressTable);
+            }
+            function initMailingLabels()
+            {
+                //myCreateLayer();
+                document.getElementById('displayOwners').checked =
+                true;
+                var startDate = new Date();
+                for (var i = 0; i
+                    < featureCount; i++)
+                {
+                    var selectedData = t.parseRecordString(theReply,
+                                                           endpos);
+                    endpos =
+                    t.xmlEndPos;
+                    //selectedData = clearLeadingSpace(selectedData);
+                    epos =
+                    theReply.indexOf("</FEATURE",
+                                     endpos);
+                    var fName1 = t.getFieldNames(selectedData);
+                    var fValue1 = t.getFieldValues(selectedData);
+                    var ownerLabel = createOwnerLabel();
+                    var occupantLabel = createOccupantLabel()
+                    var fields = "";
+                    for (var f = 0; f
+                        < fName1.length; f++)
+                    {
+                        //Fill In Required Fields
+                        fields =
+                        fields
+                            + ", "
+                            + fName1[f];
+                        for (attribute in ownerMailingLabelFields)
+                        {
+                            if (fName1[f]
+                                == ownerMailingLabelFields[attribute])
+                            {
+                                ownerLabel[attribute] =
+                                fValue1[f];
+                            }
+                        }
+                        for (attribute in occupantMailingLabelFields)
+                        {
+                            if (fName1[f]
+                                == occupantMailingLabelFields[attribute])
+                            {
+                                occupantLabel[attribute] =
+                                fValue1[f];
+                            }
+                        }
+                    }
+                    //alert("Fields: " + fields);
+                    mailingLabels.push(ownerLabel);
+                    mailingLabels.push(occupantLabel);
+                    fName1 =
+                    null;
+                    fValue1 =
+                    null;
+                }
+                var endDate = new Date();
+                //alert("init mailing labels took " + (endDate.getMilliseconds() - startDate.getMilliseconds())  );
+                displayAddressTable()
+            }
+            function removeLabelClick()
+            {
+                oldList =
+                mailingLabels;
+                mailingLabels =
+                new Array();
+                for (i =
+                     0; i
+                    < oldList.length; i++)
+                {
+                    checkbox =
+                    document.getElementById('remove'
+                                                + i);
+                    if (checkbox
+                            != null
+                        && checkbox.checked
+                        == true)
+                    {
+                        //"remove" label by not adding it to the new list
+                    }
+                    else
+                    {
+                        mailingLabels.push(oldList[i]);
+                    }
+                }
+                displayAddressTable();
+            }
+            function toggleAddForm()
+            {
+                var addForm = document.getElementById('addForm');
+                if (addForm.style.visibility
+                    == 'hidden')
+                {
+                    addForm.style.visibility =
+                    'visible';
+                }
+                else
+                {
+                    addForm.style.visibility =
+                    'hidden';
+                }
+            }
+            function deleteDuplicateLine1()
+            {
+                oldList =
+                mailingLabels;
+                mailingLabels =
+                new Array();
+                existingLines =
+                { };
+                for (i =
+                     0; i
+                    < oldList.length; i++)
+                {
+                    label =
+                    oldList[i];
+                    if (existingLines[label.line1]
+                        == true)
+                    {
+                        continue;
+                    }
+                    else
+                    {
+                        mailingLabels.push(oldList[i]);
+                        existingLines[label.line1] =
+                        true;
+                    }
+                }
+                displayAddressTable();
+            }
+            function deleteDuplicateLine234()
+            {
+                oldList =
+                mailingLabels;
+                mailingLabels =
+                new Array();
+                existingLines =
+                { };
+                for (i =
+                     0; i
+                    < oldList.length; i++)
+                {
+                    label =
+                    oldList[i];
+                    if (existingLines[label.line2
+                                          + label.line3
+                        + label.line4 ]
+                        == true)
+                    {
+                        continue;
+                    }
+                    else
+                    {
+                        mailingLabels.push(oldList[i]);
+                        existingLines[label.line2
+                                          + label.line3
+                            + label.line4] =
+                        true;
+                    }
+                }
+                displayAddressTable();
+            }
+            function addLabel()
+            {
+                label =
+                createCustomLabel();
+                label.pin =
+                document.getElementById('newPin').value;
+                label.line1 =
+                document.getElementById('newLine1').value;
+                label.line2 =
+                document.getElementById('newLine2').value;
+                label.line3 =
+                document.getElementById('newLine3').value;
+                label.line4 =
+                document.getElementById('newLine4').value;
+                if (/\w+/.test(label.line1
+                                   + label.line2
+                                   + label.line3
+                                   + label.line4))
+                {
+                    mailingLabels.push(label);
+                    displayAddressTable();
+                    toggleAddForm();
+                }
+                else
+                {
+                    alert("You cannot add a label with blank address lines. Please enter information or choose cancel.");
+                }
+            }
+            function downloadLabels(type)
+            {
+                var labelForm = document.createElement("form");
+                labelForm.method =
+                "POST";
+                labelForm.action =
+                "/sehsvc/dvomailing";
+                addFormField(labelForm,
+                             "type",
+                             type);
+                var labelCount = 0;
+                for (n =
+                     0; n
+                    < mailingLabels.length; n++)
+                {
+                    var label = mailingLabels[n];
+                    if (skipLabel(label))
+                    {
+                        continue;
+                    }
+                    else
+                    {
+                        if (isDisplayPins())
+                        {
+                            addFormField(labelForm,
+                                         "label:"
+                                             + labelCount
+                                             + ":0",
+                                         label.pin);
+                        }
+                        addFormField(labelForm,
+                                     "label:"
+                                         + labelCount
+                                         + ":1",
+                                     label.line1);
+                        addFormField(labelForm,
+                                     "label:"
+                                         + labelCount
+                                         + ":2",
+                                     label.line2);
+                        addFormField(labelForm,
+                                     "label:"
+                                         + labelCount
+                                         + ":3",
+                                     label.line3);
+                        addFormField(labelForm,
+                                     "label:"
+                                         + labelCount
+                                         + ":4",
+                                     label.line4);
+                        labelCount =
+                        labelCount
+                            + 1;
+                    }
+                }
+                addFormField(labelForm,
+                             "count",
+                             ""
+                                 + labelCount);
+                document.body.appendChild(labelForm);
+                labelForm.submit();
+            }
+            function unescapeHTML(text)
+            {
+                var div = document.createElement('div');
+                div.innerHTML =
+                text.replace(/<\/?[^>]+>/gi,
+                             '');
+                return div.childNodes[0]
+                    ? div.childNodes[0].nodeValue
+                    : '';
+            }
+            function addFormField(form, name, value)
+            {
+                var field = document.createElement("INPUT");
+                field.type =
+                "HIDDEN";
+                field.name =
+                name;
+                field.value =
+                unescapeHTML(value);
+                form.appendChild(field);
+            }
+            function myCreateLayer()
+            {
+                var content = '<img name="LoadingData" src="./images/loadData.gif" width=97 height=50 HSPACE=0 VSPACE=0 BORDER=0 ALT="Retrieving Labels">';
+                createLayer("LoadData",
+                            t.loadBannerLeft,
+                            t.loadBannerTop,
+                            97,
+                            50,
+                            false,
+                            content);
+            }
+        </script>
+    </head>
+    <body bgcolor="#FFFFFF"
+          TEXT="#0B4657"
+          link="#D47816"
+          vlink="#D47816"
+          alink="#D47816"
+          onload="javascript:t.showRetrieveData();initMailingLabels();t.hideRetrieveData();window.focus()">
+        <div id="main">
+            <div style="position:relative"
+                 id="topButtons">
+                <center>
+                    <P class=bodytitle>
+                        <b>Mailing Label Data:</b>
+                        <br>
+                    <p>
+                        <button onClick="javascript:toggleAddForm()">Add Label</button>
+                        <button onClick="javascript:removeLabelClick()">Remove Label</button>
+                        <button onClick="javascript:deleteDuplicateLine1()">Delete Duplicate Line 1</button>
+                        <button onClick="javascript:deleteDuplicateLine234()">Delete Duplicate Line 2, 3, and 4</button>
+                        <button onClick="javascript:downloadLabels('text')">Export Labels</button>
+                        <button onClick="javascript:downloadLabels('pdf')">Print Labels</button>
+                    </p>
+                    <p>
+                        <input type="checkbox"
+                               onclick="javascript:displayAddressTable()"
+                               id="displayPins" />
+                        Include PIN Numbers
+                        <input type="checkbox"
+                               onclick="javascript:displayAddressTable()"
+                               id="displayOwners" />
+                        Include Owner Labels
+                        <input type="checkbox"
+                               onclick="javascript:displayAddressTable()"
+                               id="displayOccupants" />
+                        Include Occupant Labels
+                    </p>
+                    <p></p>
+                </center>
+            </div>
+            <div style="position:absolute;left:10px;top:20px;height:300;width:350;visibility:hidden; background-color:#CCCC99"
+                 id="addForm">
+                <table width="100%">
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td>Example</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <b>Enter PIN:</b>
+                            <br>
+                            <input id="newPin"
+                                   type="text"
+                                   size="30" />
+                        </td>
+                        <td style="vertical-align:bottom">999999999</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <b>Enter Line 1:</b>
+                            <br>
+                            <input id="newLine1"
+                                   type="text"
+                                   size="30" />
+                        </td>
+                        <td style="vertical-align:bottom">John Smith</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <b>Enter Line 2:</b>
+                            <br>
+                            <input id="newLine2"
+                                   type="text"
+                                   size="30" />
+                        </td>
+                        <td style="vertical-align:bottom">PO Box 999</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <b>Enter Line 3:</b>
+                            <br>
+                            <input id="newLine3"
+                                   type="text"
+                                   size="30" />
+                        </td>
+                        <td style="vertical-align:bottom">Main St</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <b>Enter Line 4:</b>
+                            <br>
+                            <input id="newLine4"
+                                   type="text"
+                                   size="30" />
+                        </td>
+                        <td style="vertical-align:bottom">Your City, ST 11111</td>
+                    </tr>
+                </table>
+                <br>
+                <center>
+                    <button onClick="addLabel()">Add Label</button>
+                    <button onClick="toggleAddForm()">Cancel</button>
+                </center>
+            </div>
+            <div id="addressTableDiv">
+                <br>
+                <table border=0
+                       cellspacing="0"
+                       cellpadding="2"
+                       width="100%"
+                       id="addressTable">
+                    <tr>
+                        <td>Please enable Javascript to see Mailing Label Data</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </body>
+</html>

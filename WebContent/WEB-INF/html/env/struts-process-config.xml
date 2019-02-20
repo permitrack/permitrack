@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?><!DOCTYPE struts-config PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 1.3//EN"
+    "http://struts.apache.org/dtds/struts-config_1_3.dtd">
+<struts-config>
+    <form-beans>
+        <form-bean name="ProcessForm"
+                   type="com.sehinc.environment.action.process.ProcessForm" />
+        <form-bean name="ProcessAssetForm"
+                   type="com.sehinc.environment.action.processasset.ProcessAssetForm" />
+    </form-beans>
+    <global-forwards>
+        <forward name="process.list.page"
+                 path="/processlistpage.do"
+                 redirect="true" />
+        <forward name="process.view.page"
+                 path="/processviewpage.do"
+                 redirect="true" />
+    </global-forwards>
+    <action-mappings>
+        <action path="/processlistpage"
+                type="com.sehinc.environment.action.process.ProcessListPageAction"
+                name="ProcessForm"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="process.list.page" />
+        </action>
+        <action path="/processviewpage"
+                type="com.sehinc.environment.action.process.ProcessViewPageAction"
+                name="ProcessForm"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="process.view.page" />
+        </action>
+        <action path="/processcreatepage"
+                type="com.sehinc.environment.action.process.ProcessCreatePageAction"
+                name="ProcessForm"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="process.create.page" />
+        </action>
+        <action path="/processcreateaction"
+                type="com.sehinc.environment.action.process.ProcessCreateAction"
+                input="process.create.page"
+                name="ProcessForm"
+                scope="request"
+                validate="true"
+                cancellable="true">
+            <forward name="continue"
+                     path="/processviewpage.do"
+                     redirect="true" />
+        </action>
+        <action path="/processeditpage"
+                type="com.sehinc.environment.action.process.ProcessEditPageAction"
+                name="ProcessForm"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="process.edit.page" />
+        </action>
+        <action path="/processeditaction"
+                type="com.sehinc.environment.action.process.ProcessEditAction"
+                input="process.edit.page"
+                name="ProcessForm"
+                scope="request"
+                validate="true"
+                cancellable="true">
+            <forward name="continue"
+                     path="/processviewpage.do"
+                     redirect="true" />
+        </action>
+        <action path="/processdeleteaction"
+                type="com.sehinc.environment.action.process.ProcessDeleteAction"
+                input="process.delete.page"
+                name="ProcessForm"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="/processlistpage.do"
+                     redirect="true" />
+        </action>
+        <action path="/processassetcreatepage"
+                type="com.sehinc.environment.action.processasset.ProcessAssetCreatePageAction"
+                name="ProcessAssetForm"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="process.asset.create.page" />
+        </action>
+        <action path="/processassetcreateaction"
+                type="com.sehinc.environment.action.processasset.ProcessAssetCreateAction"
+                input="process.asset.create.page"
+                name="ProcessAssetForm"
+                scope="request"
+                validate="true"
+                cancellable="true">
+            <forward name="continue"
+                     path="/processviewpage.do"
+                     redirect="true" />
+        </action>
+        <action path="/processassetdeleteaction"
+                type="com.sehinc.environment.action.processasset.ProcessAssetDeleteAction"
+                name="ProcessForm"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="/processviewpage.do"
+                     redirect="true" />
+        </action>
+    </action-mappings>
+    <controller processorClass="org.apache.struts.action.RequestProcessor"
+                contentType="text/html" />
+    <plug-in className="org.apache.struts.tiles.TilesPlugin">
+        <set-property property="definitions-config"
+                      value="/WEB-INF/html/tiles-defs.xml, /WEB-INF/html/env/tiles-defs.xml, /WEB-INF/html/env/tiles-process-defs.xml" />
+        <set-property property="definitions-debug"
+                      value="2" />
+        <set-property property="definitions-parser-details"
+                      value="2" />
+        <set-property property="definitions-parser-validate"
+                      value="true" />
+        <set-property property="moduleAware"
+                      value="true" />
+    </plug-in>
+    <plug-in className="org.apache.struts.validator.ValidatorPlugIn">
+        <set-property property="pathnames"
+                      value="/org/apache/struts/validator/validator-rules.xml, /WEB-INF/html/env/validation-process.xml" />
+    </plug-in>
+</struts-config>

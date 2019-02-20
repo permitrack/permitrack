@@ -1,0 +1,646 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="SemiAnnualReport_Details1" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="842" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="10">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<reportFont name="Arial_Normal" isDefault="true" fontName="Arial" size="12" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Bold" isDefault="false" fontName="Arial" size="12" isBold="true" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Italic" isDefault="false" fontName="Arial" size="12" isItalic="true" pdfFontName="Helvetica-Oblique" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Bold_Italic" isDefault="false" fontName="Arial" size="12" isBold="true" isItalic="true" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Small" isDefault="true" fontName="Arial" size="10" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Small_Bold" isDefault="false" fontName="Arial" size="10" isBold="true" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Small_Italic" isDefault="false" fontName="Arial" size="10" isItalic="true" pdfFontName="Helvetica-Oblique" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Small_Bold_Italic" isDefault="false" fontName="Arial" size="10" isBold="true" isItalic="true" pdfFontName="Helvetica-Oblique" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<parameter name="year" class="java.lang.Integer"/>
+	<parameter name="PermitDetailId" class="java.lang.Integer"/>
+	<parameter name="PermitName" class="java.lang.String"/>
+	<parameter name="PermitDetailName" class="java.lang.String"/>
+	<parameter name="ClientName" class="java.lang.String"/>
+	<parameter name="SemiAnnualHeaderFile" class="java.io.File"/>
+	<queryString>
+		<![CDATA[EXEC sp_rolling_haps_solids_by_permit_detail @yearInt = $P{year}, @permitDetailId = $P{PermitDetailId}]]>
+	</queryString>
+	<field name="JAN_HAPS" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="JAN_SOLIDS" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="JAN_HAPS_SOLIDS" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="JAN_ROLLING_HAPS" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="JAN_ROLLING_SOLIDS" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="JAN_ROLLING_HAPS_SOLIDS" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="FEB_HAPS" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="FEB_SOLIDS" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="FEB_HAPS_SOLIDS" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="FEB_ROLLING_HAPS" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="FEB_ROLLING_SOLIDS" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="FEB_ROLLING_HAPS_SOLIDS" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="MAR_HAPS" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="MAR_SOLIDS" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="MAR_HAPS_SOLIDS" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="MAR_ROLLING_HAPS" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="MAR_ROLLING_SOLIDS" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="MAR_ROLLING_HAPS_SOLIDS" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="APR_HAPS" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="APR_SOLIDS" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="APR_HAPS_SOLIDS" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="APR_ROLLING_HAPS" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="APR_ROLLING_SOLIDS" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="APR_ROLLING_HAPS_SOLIDS" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="MAY_HAPS" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="MAY_SOLIDS" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="MAY_HAPS_SOLIDS" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="MAY_ROLLING_HAPS" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="MAY_ROLLING_SOLIDS" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="MAY_ROLLING_HAPS_SOLIDS" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="JUN_HAPS" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="JUN_SOLIDS" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="JUN_HAPS_SOLIDS" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="JUN_ROLLING_HAPS" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="JUN_ROLLING_SOLIDS" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="JUN_ROLLING_HAPS_SOLIDS" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="JUL_HAPS" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="JUL_SOLIDS" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="JUL_HAPS_SOLIDS" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="JUL_ROLLING_HAPS" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="JUL_ROLLING_SOLIDS" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="JUL_ROLLING_HAPS_SOLIDS" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="AUG_HAPS" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="AUG_SOLIDS" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="AUG_HAPS_SOLIDS" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="AUG_ROLLING_HAPS" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="AUG_ROLLING_SOLIDS" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="AUG_ROLLING_HAPS_SOLIDS" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="SEP_HAPS" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="SEP_SOLIDS" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="SEP_HAPS_SOLIDS" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="SEP_ROLLING_HAPS" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="SEP_ROLLING_SOLIDS" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="SEP_ROLLING_HAPS_SOLIDS" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="OCT_HAPS" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="OCT_SOLIDS" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="OCT_HAPS_SOLIDS" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="OCT_ROLLING_HAPS" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="OCT_ROLLING_SOLIDS" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="OCT_ROLLING_HAPS_SOLIDS" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="NOV_HAPS" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="NOV_SOLIDS" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="NOV_HAPS_SOLIDS" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="NOV_ROLLING_HAPS" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="NOV_ROLLING_SOLIDS" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="NOV_ROLLING_HAPS_SOLIDS" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="DCM_HAPS" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="DCM_SOLIDS" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="DCM_HAPS_SOLIDS" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="DCM_ROLLING_HAPS" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="DCM_ROLLING_SOLIDS" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="DCM_ROLLING_HAPS_SOLIDS" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<pageHeader>
+		<band height="101" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="77" width="802" height="24"/>
+				<textElement verticalAlignment="Bottom">
+					<font reportFont="Arial_Bold" size="14"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{PermitDetailName}]]></textFieldExpression>
+			</textField>
+			<subreport>
+				<reportElement x="0" y="0" width="842" height="57"/>
+				<subreportParameter name="PermitDetailId">
+					<subreportParameterExpression><![CDATA[$P{PermitDetailId}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="PermitName">
+					<subreportParameterExpression><![CDATA[$P{PermitName}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="ClientName">
+					<subreportParameterExpression><![CDATA[$P{ClientName}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="PermitDetailName">
+					<subreportParameterExpression><![CDATA[$P{PermitDetailName}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.io.File"><![CDATA[$P{SemiAnnualHeaderFile}]]></subreportExpression>
+			</subreport>
+			<staticText>
+				<reportElement x="0" y="57" width="802" height="20"/>
+				<textElement verticalAlignment="Bottom">
+					<font reportFont="Arial_Normal" size="12"/>
+				</textElement>
+				<text><![CDATA[The calculation results for the 12-month organic HAP emission rate:]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="60" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="13" width="69" height="46"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font reportFont="Arial_Bold" size="12"/>
+				</textElement>
+				<text><![CDATA[Month]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="148" y="13" width="79" height="47"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font reportFont="Arial_Bold" size="12"/>
+				</textElement>
+				<text><![CDATA[Gallons of Solids]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="59" width="696" height="1"/>
+			</line>
+			<staticText>
+				<reportElement x="237" y="14" width="79" height="46"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font reportFont="Arial_Bold" size="12"/>
+				</textElement>
+				<text><![CDATA[Lbs HAP / Gallon Solids]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="425" y="0" width="88" height="60"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font reportFont="Arial_Bold" size="12"/>
+				</textElement>
+				<text><![CDATA[12 Month Rolling Total Gallons Solids]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="69" y="14" width="79" height="46"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font reportFont="Arial_Bold" size="12"/>
+				</textElement>
+				<text><![CDATA[Pounds of HAPs]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="518" y="0" width="105" height="60"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font reportFont="Arial_Bold" size="12"/>
+				</textElement>
+				<text><![CDATA[12 Month Rolling Total Lb HAP / Gallon Solids]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="345" y="0" width="80" height="59"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font reportFont="Arial_Bold" size="12"/>
+				</textElement>
+				<text><![CDATA[12 Month Rolling Total Lbs HAPs]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="120" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="69" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font reportFont="Arial_Bold" size="12"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["JAN " + $P{year}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="20" width="69" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font reportFont="Arial_Bold" size="12"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["FEB " + $P{year}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="60" width="69" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font reportFont="Arial_Bold" size="12"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["APR " + $P{year}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="40" width="69" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font reportFont="Arial_Bold" size="12"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["MAR " + $P{year}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="80" width="69" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font reportFont="Arial_Bold" size="12"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["MAY " + $P{year}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="100" width="69" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font reportFont="Arial_Bold" size="12"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["JUN " + $P{year}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00">
+				<reportElement x="69" y="0" width="79" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font reportFont="Arial_Small"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Float"><![CDATA[$F{JAN_HAPS}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00">
+				<reportElement x="148" y="0" width="79" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font reportFont="Arial_Small"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Float"><![CDATA[$F{JAN_SOLIDS}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00">
+				<reportElement x="237" y="0" width="79" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font reportFont="Arial_Small"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Float"><![CDATA[$F{JAN_HAPS_SOLIDS}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00">
+				<reportElement x="345" y="0" width="79" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font reportFont="Arial_Small"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Float"><![CDATA[$F{JAN_ROLLING_HAPS}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00">
+				<reportElement x="434" y="0" width="79" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font reportFont="Arial_Small"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Float"><![CDATA[$F{JAN_ROLLING_SOLIDS}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00">
+				<reportElement x="544" y="0" width="79" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font reportFont="Arial_Small"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Float"><![CDATA[$F{JAN_ROLLING_HAPS_SOLIDS}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00">
+				<reportElement x="69" y="20" width="79" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font reportFont="Arial_Small"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Float"><![CDATA[$F{FEB_HAPS}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00">
+				<reportElement x="237" y="20" width="79" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font reportFont="Arial_Small"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Float"><![CDATA[$F{FEB_HAPS_SOLIDS}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00">
+				<reportElement x="148" y="20" width="79" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font reportFont="Arial_Small"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Float"><![CDATA[$F{FEB_SOLIDS}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00">
+				<reportElement x="434" y="20" width="79" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font reportFont="Arial_Small"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Float"><![CDATA[$F{FEB_ROLLING_SOLIDS}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00">
+				<reportElement x="544" y="20" width="79" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font reportFont="Arial_Small"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Float"><![CDATA[$F{FEB_ROLLING_HAPS_SOLIDS}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00">
+				<reportElement x="345" y="20" width="79" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font reportFont="Arial_Small"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Float"><![CDATA[$F{FEB_ROLLING_HAPS}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00">
+				<reportElement x="69" y="40" width="79" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font reportFont="Arial_Small"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Float"><![CDATA[$F{MAR_HAPS}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00">
+				<reportElement x="237" y="40" width="79" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font reportFont="Arial_Small"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Float"><![CDATA[$F{MAR_HAPS_SOLIDS}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00">
+				<reportElement x="148" y="40" width="79" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font reportFont="Arial_Small"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Float"><![CDATA[$F{MAR_SOLIDS}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00">
+				<reportElement x="434" y="40" width="79" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font reportFont="Arial_Small"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Float"><![CDATA[$F{MAR_ROLLING_SOLIDS}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00">
+				<reportElement x="544" y="40" width="79" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font reportFont="Arial_Small"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Float"><![CDATA[$F{MAR_ROLLING_HAPS_SOLIDS}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00">
+				<reportElement x="345" y="40" width="79" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font reportFont="Arial_Small"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Float"><![CDATA[$F{MAR_ROLLING_HAPS}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00">
+				<reportElement x="69" y="60" width="79" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font reportFont="Arial_Small"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Float"><![CDATA[$F{APR_HAPS}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00">
+				<reportElement x="237" y="60" width="79" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font reportFont="Arial_Small"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Float"><![CDATA[$F{APR_HAPS_SOLIDS}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00">
+				<reportElement x="148" y="60" width="79" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font reportFont="Arial_Small"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Float"><![CDATA[$F{APR_SOLIDS}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00">
+				<reportElement x="434" y="60" width="79" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font reportFont="Arial_Small"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Float"><![CDATA[$F{APR_ROLLING_SOLIDS}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00">
+				<reportElement x="544" y="60" width="79" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font reportFont="Arial_Small"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Float"><![CDATA[$F{APR_ROLLING_HAPS_SOLIDS}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00">
+				<reportElement x="345" y="60" width="79" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font reportFont="Arial_Small"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Float"><![CDATA[$F{APR_ROLLING_HAPS}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00">
+				<reportElement x="69" y="80" width="79" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font reportFont="Arial_Small"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Float"><![CDATA[$F{MAY_HAPS}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00">
+				<reportElement x="237" y="80" width="79" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font reportFont="Arial_Small"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Float"><![CDATA[$F{MAY_HAPS_SOLIDS}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00">
+				<reportElement x="148" y="80" width="79" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font reportFont="Arial_Small"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Float"><![CDATA[$F{MAY_SOLIDS}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00">
+				<reportElement x="434" y="80" width="79" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font reportFont="Arial_Small"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Float"><![CDATA[$F{MAY_ROLLING_SOLIDS}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00">
+				<reportElement x="544" y="80" width="79" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font reportFont="Arial_Small"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Float"><![CDATA[$F{MAY_ROLLING_HAPS_SOLIDS}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00">
+				<reportElement x="345" y="80" width="79" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font reportFont="Arial_Small"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Float"><![CDATA[$F{MAY_ROLLING_HAPS}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00">
+				<reportElement x="69" y="100" width="79" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font reportFont="Arial_Small"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Float"><![CDATA[$F{JUN_HAPS}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00">
+				<reportElement x="237" y="100" width="79" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font reportFont="Arial_Small"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Float"><![CDATA[$F{JUN_HAPS_SOLIDS}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00">
+				<reportElement x="148" y="100" width="79" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font reportFont="Arial_Small"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Float"><![CDATA[$F{JUN_SOLIDS}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00">
+				<reportElement x="434" y="100" width="79" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font reportFont="Arial_Small"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Float"><![CDATA[$F{JUN_ROLLING_SOLIDS}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00">
+				<reportElement x="544" y="100" width="79" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font reportFont="Arial_Small"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Float"><![CDATA[$F{JUN_ROLLING_HAPS_SOLIDS}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00">
+				<reportElement x="345" y="100" width="79" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font reportFont="Arial_Small"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Float"><![CDATA[$F{JUN_ROLLING_HAPS}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="20" width="696" height="1"/>
+			</line>
+			<line>
+				<reportElement x="0" y="39" width="696" height="1"/>
+			</line>
+			<line>
+				<reportElement x="0" y="78" width="696" height="1"/>
+			</line>
+			<line>
+				<reportElement x="0" y="59" width="696" height="1"/>
+			</line>
+			<line>
+				<reportElement x="0" y="119" width="696" height="1"/>
+			</line>
+			<line>
+				<reportElement x="0" y="100" width="696" height="1"/>
+			</line>
+		</band>
+	</detail>
+</jasperReport>

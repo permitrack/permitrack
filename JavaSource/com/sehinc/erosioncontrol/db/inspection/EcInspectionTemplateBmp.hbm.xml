@@ -1,0 +1,29 @@
+<?xml version="1.0"?><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <!--
+            Auto-generated mapping file from
+            the hibernate.org cfg2hbm engine
+    -->
+    <class name="com.sehinc.erosioncontrol.db.inspection.EcInspectionTemplateBmp"
+           table="EC_INSPECTION_TEMPLATE_BMP">
+        <id name="id"
+            type="integer">
+            <column name="ID" />
+            <generator class="identity" />
+        </id>
+        <property name="inspectionTemplateId"
+                  type="integer"
+                  column="INSPECTION_TEMPLATE_ID" />
+        <property name="description"
+                  type="string"
+                  column="DESCRIPTION" />
+        <property name="isRequired"
+                  type="boolean"
+                  column="IS_REQUIRED" />
+        <many-to-one name="bmp"
+                     class="com.sehinc.erosioncontrol.db.bmp.EcBmp"
+                     column="BMP_ID"
+                     lazy="false" />
+    </class>
+</hibernate-mapping>

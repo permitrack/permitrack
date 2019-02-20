@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="NE_Air_Form_2_0_Facility_Op" pageWidth="540" pageHeight="93" columnWidth="540" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="56"/>
+	<property name="ireport.y" value="0"/>
+	<reportFont name="Arial_Normal" isDefault="true" fontName="Arial" size="12" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Bold" isDefault="false" fontName="Arial" size="12" isBold="true" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Italic" isDefault="false" fontName="Arial" size="12" isItalic="true" pdfFontName="Helvetica-Oblique" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Bold_Italic" isDefault="false" fontName="Arial" size="12" isBold="true" isItalic="true" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Small" isDefault="true" fontName="Arial" size="10" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Small_Bold" isDefault="false" fontName="Arial" size="10" isBold="true" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Small_Italic" isDefault="false" fontName="Arial" size="10" isItalic="true" pdfFontName="Helvetica-Oblique" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Small_Bold_Italic" isDefault="false" fontName="Arial" size="10" isBold="true" isItalic="true" pdfFontName="Helvetica-Oblique" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<parameter name="FacilityId" class="java.lang.Integer"/>
+	<queryString>
+		<![CDATA[SELECT	F.DAILY_HRS_OP, F.DAYS_OP_WEEK, F.WEEKS_OP_YEAR, F.BUSINESS_HRS, (F.DAILY_HRS_OP * F.DAYS_OP_WEEK * F.WEEKS_OP_YEAR) as HRS_OP_PER_YEAR
+                FROM ENV_FACILITY AS F
+                WHERE F.ID = $P{FacilityId}]]>
+	</queryString>
+	<field name="DAILY_HRS_OP" class="java.lang.Integer"/>
+	<field name="DAYS_OP_WEEK" class="java.lang.Integer"/>
+	<field name="WEEKS_OP_YEAR" class="java.lang.Integer"/>
+	<field name="BUSINESS_HRS" class="java.lang.String"/>
+	<field name="HRS_OP_PER_YEAR" class="java.lang.Integer"/>
+	<title>
+		<band height="93" splitType="Stretch">
+			<rectangle>
+				<reportElement mode="Transparent" x="0" y="20" width="138" height="19"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="138" y="20" width="135" height="19"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="273" y="20" width="135" height="19"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="408" y="20" width="131" height="19"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="0" y="39" width="138" height="30"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="138" y="39" width="135" height="30"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="273" y="39" width="135" height="30"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="408" y="39" width="131" height="30"/>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="0" y="69" width="539" height="23"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="1" y="1" width="538" height="18"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font reportFont="Arial_Bold"/>
+				</textElement>
+				<text><![CDATA[Facility Operating Schedule]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="20" width="136" height="18"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font reportFont="Arial_Small_Bold"/>
+				</textElement>
+				<text><![CDATA[Hours of Operation/Day]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="139" y="20" width="133" height="18"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font reportFont="Arial_Small_Bold"/>
+				</textElement>
+				<text><![CDATA[Days of Operation/Week]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="273" y="20" width="135" height="18"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font reportFont="Arial_Small_Bold"/>
+				</textElement>
+				<text><![CDATA[Weeks of Operation/Year]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="408" y="20" width="130" height="18"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font reportFont="Arial_Small_Bold"/>
+				</textElement>
+				<text><![CDATA[Hours of Operation/Year]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="69" width="136" height="22"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font reportFont="Arial_Small_Bold"/>
+				</textElement>
+				<text><![CDATA[Normal Business Hours:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="1" y="39" width="136" height="29"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font reportFont="Arial_Normal"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{DAILY_HRS_OP}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="139" y="39" width="133" height="29"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font reportFont="Arial_Normal"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{DAYS_OP_WEEK}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="273" y="39" width="135" height="29"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font reportFont="Arial_Normal"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{WEEKS_OP_YEAR}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="139" y="69" width="400" height="22"/>
+				<textElement verticalAlignment="Bottom">
+					<font reportFont="Arial_Normal"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[" " + $F{BUSINESS_HRS}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="408" y="39" width="130" height="29"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font reportFont="Arial_Normal"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{HRS_OP_PER_YEAR}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+</jasperReport>

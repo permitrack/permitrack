@@ -1,0 +1,45 @@
+<meta http-equiv="Content-Type"
+      content="text/html; charset=ISO-8859-1">
+<HTML>
+    <HEAD>
+        <TITLE>Default Form</TITLE>
+        <!-- Title must match header.htm's title -->
+        <SCRIPT TYPE="text/javascript"
+                LANGUAGE="JavaScript">
+            function passXML()
+            {
+                //var XMLResponse = 'Whatever the connector writes here';
+                // parent.MapFrame.processXML(XMLResponse); //connector replaces function name
+            }
+        </SCRIPT>
+    </HEAD>
+    <BODY BGCOLOR="#404040"
+          onload="passXML()">
+        <FORM ACTION=""
+              METHOD="POST"
+              name="theForm">
+            <INPUT TYPE="Hidden"
+                   NAME="ArcXMLRequest"
+                   VALUE="">
+            <INPUT TYPE="Hidden"
+                   NAME="JavaScriptFunction"
+                   VALUE="parent.MapFrame.processXML">
+            <INPUT TYPE="Hidden"
+                   NAME="RedirectURL"
+                   VALUE="">
+            <INPUT TYPE="Hidden"
+                   NAME="BgColor"
+                   VALUE="#404040">
+            <INPUT TYPE="Hidden"
+                   NAME="FormCharset"
+                   VALUE="UTF-8">
+            <!-- next two lines for compatibility with 3.0 clients -->
+            <INPUT TYPE="Hidden"
+                   NAME="HeaderFile"
+                   VALUE="">
+            <INPUT TYPE="Hidden"
+                   NAME="FooterFile"
+                   VALUE="">
+        </FORM>
+    </BODY>
+</HTML>

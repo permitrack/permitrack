@@ -1,0 +1,61 @@
+<!DOCTYPE tiles-definitions PUBLIC
+    "-//Apache Software Foundation//DTD Tiles Configuration 1.3//EN"
+    "http://struts.apache.org/dtds/tiles-config_1_3.dtd">
+<tiles-definitions>
+    <definition name="substance.baseTitledLayout"
+                extends="ev.baseTitledLayout"></definition>
+    <definition name="substance.list.page"
+                extends="substance.baseTitledLayout">
+        <put name="title"
+             value="Substance List" />
+        <put name="description"
+             value="Listing of all Substances." />
+        <put name="content"
+             value="/html/env/substance/substancelist.jsp" />
+    </definition>
+    <definition name="substance.view.page"
+                extends="substance.baseTitledLayout">
+        <put name="title"
+             value="Substance" />
+        <put name="description"
+             value="View Substance information." />
+        <put name="content"
+             value="/html/env/substance/substanceview.jsp" />
+    </definition>
+    <definition name="substance.edit.page"
+                extends="substance.baseTitledLayout">
+        <put name="title"
+             value="Substance" />
+        <put name="description"
+             value="Edit a Substance." />
+        <put name="content"
+             value="/html/env/substance/substanceedit.jsp" />
+    </definition>
+    <definition name="substance.create.page"
+                extends="substance.baseTitledLayout">
+        <put name="title"
+             value="Substance" />
+        <put name="description"
+             value="Create a Substance." />
+        <put name="content"
+             value="/html/env/substance/substancecreate.jsp" />
+    </definition>
+    <definition name="substance.delete.page"
+                extends="substance.baseTitledLayout">
+        <put name="title"
+             value="Substance" />
+        <put name="description"
+             value="Delete a Substance." />
+        <put name="content"
+             value="/html/env/substance/substancedelete.jsp" />
+    </definition>
+    <definition name="substance.scc.create.page"
+                extends="substance.baseTitledLayout">
+        <put name="title"
+             value="Substance SCC Info" />
+        <put name="description"
+             value="Connect SCC Info to a Substance." />
+        <put name="content"
+             value="/html/env/substance/substancescccreate.jsp" />
+    </definition>
+</tiles-definitions>

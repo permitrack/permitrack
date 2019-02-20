@@ -1,0 +1,486 @@
+<?xml version="1.0"?><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <!--
+            Auto-generated mapping file from
+            the hibernate.org cfg2hbm engine
+    -->
+    <class name="com.sehinc.erosioncontrol.db.project.EcProject"
+           table="EC_PROJECT">
+        <id name="id"
+            type="integer">
+            <column name="ID" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="ownerClient"
+                     class="com.sehinc.common.db.client.ClientData"
+                     column="OWNER_CLIENT_ID"
+                     lazy="false" />
+        <many-to-one name="permitAuthorityClient"
+                     class="com.sehinc.common.db.client.ClientData"
+                     column="PERMIT_AUTHORITY_CLIENT_ID"
+                     lazy="false" />
+        <many-to-one name="permittedClient"
+                     class="com.sehinc.common.db.client.ClientData"
+                     column="PERMITTED_CLIENT_ID"
+                     lazy="false" />
+        <many-to-one name="authorizedInspectorClient"
+                     class="com.sehinc.common.db.client.ClientData"
+                     column="AUTHORIZED_INSPECTOR_CLIENT_ID"
+                     not-null="false"
+                     not-found="ignore"
+                     lazy="false" />
+        <property name="name"
+                  type="string"
+                  column="NAME" />
+        <property name="description"
+                  type="string"
+                  column="DESCRIPTION" />
+        <property name="parcelNumber"
+                  type="string"
+                  column="PARCEL_NUMBER" />
+        <property name="permitNumber"
+                  type="string"
+                  column="PERMIT_NUMBER" />
+        <property name="gisX"
+                  type="string"
+                  column="GIS_X" />
+        <property name="gisY"
+                  type="string"
+                  column="GIS_Y" />
+        <property name="address"
+                  type="string"
+                  column="ADDRESS" />
+        <property name="city"
+                  type="string"
+                  column="CITY" />
+        <property name="state"
+                  type="string"
+                  column="STATE" />
+        <property name="zip"
+                  type="string"
+                  column="ZIP" />
+        <property name="areaSize"
+                  type="string"
+                  column="AREA_SIZE" />
+        <many-to-one name="zone"
+                     class="com.sehinc.erosioncontrol.db.project.EcZone"
+                     column="ZONE_ID"
+                     lazy="false" />
+        <property name="lastInspectionDate"
+                  type="timestamp"
+                  column="LAST_INSPECTION_DATE" />
+        <property name="effectiveDate"
+                  type="timestamp"
+                  column="EFFECTIVE_DATE" />
+        <property name="startDate"
+                  type="timestamp"
+                  column="START_DATE" />
+        <property name="completedDate"
+                  type="timestamp"
+                  column="COMPLETED_DATE" />
+        <property name="seedDate"
+                  type="timestamp"
+                  column="SEED_DATE" />
+        <property name="totalSiteArea"
+                  type="float"
+                  column="TOTAL_SITE_AREA" />
+        <property name="totalSiteAreaUnits"
+                  type="string"
+                  column="TOTAL_SITE_AREA_UNITS" />
+        <property name="disturbedArea"
+                  type="float"
+                  column="DISTURBED_AREA" />
+        <property name="disturbedAreaUnits"
+                  type="string"
+                  column="DISTURBED_AREA_UNITS" />
+        <property name="newImperviousArea"
+                  type="float"
+                  column="NEW_IMPERVIOUS_AREA" />
+        <property name="newImperviousAreaUnits"
+                  type="string"
+                  column="NEW_IMPERVIOUS_AREA_UNITS" />
+        <many-to-one name="projectType"
+                     class="com.sehinc.erosioncontrol.db.project.EcProjectType"
+                     column="PROJECT_TYPE_ID"
+                     lazy="false" />
+        <property name="rfaNumber"
+                  type="string"
+                  column="RFA_NUMBER" />
+        <property name="blockNumber"
+                  type="string"
+                  column="BLOCK_NUMBER" />
+        <property name="lotNumber"
+                  type="string"
+                  column="LOT_NUMBER" />
+        <property name="inspectionFrequency"
+                  type="string"
+                  column="INSPECTION_FREQUENCY" />
+        <property name="inspectionOverdueNotificationEnabled"
+                  type="boolean"
+                  column="INSP_OVERDUE_NOTIF_ENABLED" />
+        <property name="inspectionOverdueInitialThreshold"
+                  type="integer"
+                  column="INSP_OVERDUE_INIT_THRESHOLD" />
+        <property name="inspectionOverdueInitialMessage"
+                  type="string"
+                  column="INSP_OVERDUE_INIT_MSG" />
+        <property name="secondInspectionOverdueNotificationEnabled"
+                  type="boolean"
+                  column="SECOND_INSP_OVERDUE_NOTIF_ENABLED" />
+        <property name="inspectionOverdueSecondThreshold"
+                  type="integer"
+                  column="INSP_OVERDUE_SEC_THRESHOLD" />
+        <property name="inspectionOverdueSecondMessage"
+                  type="string"
+                  column="INSP_OVERDUE_SEC_MSG" />
+        <set name="inspections"
+             table="EC_INSPECTION"
+             cascade="all-delete-orphan"
+             lazy="false">
+            <key column="PROJECT_ID" />
+            <one-to-many class="com.sehinc.erosioncontrol.db.inspection.EcInspection" />
+        </set>
+        <property name="createTimestamp"
+                  type="timestamp"
+                  column="CREATE_TS" />
+        <property name="updateTimestamp"
+                  type="timestamp"
+                  column="UPDATE_TS" />
+        <property name="updateUserId"
+                  type="integer"
+                  column="UPDATE_USER_ID" />
+        <many-to-one name="projectStatus"
+                     class="com.sehinc.erosioncontrol.db.project.ProjectStatusCodeData"
+                     column="PROJECT_STATUS_CD"
+                     lazy="false" />
+        <many-to-one name="status"
+                     class="com.sehinc.erosioncontrol.db.code.StatusCodeData"
+                     column="STATUS_CD"
+                     lazy="false" />
+        <set name="overdueLogEntries"
+             table="EC_INSPECTION_OVERDUE_EMAIL_LOG"
+             lazy="false">
+            <key column="PROJECT_ID" />
+            <composite-element class="com.sehinc.erosioncontrol.db.inspection.EcInspectionOverdueEmailLogEntry">
+                <property name="sendDate"
+                          column="SEND_DATE"
+                          type="date" />
+                <property name="thresholdLevel"
+                          column="THRESHOLD_LEVEL"
+                          type="integer" />
+            </composite-element>
+        </set>
+    </class>
+    <class name="com.sehinc.erosioncontrol.value.project.ProjectValue"
+           table="EC_PROJECT">
+        <id name="id"
+            type="integer"
+            column="id">
+            <generator class="identity" />
+        </id>
+        <property name="name"
+                  type="string"
+                  column="NAME" />
+        <property name="statusCode"
+                  type="string"
+                  column="STATUS_CD" />
+        <property name="ownerClientId"
+                  type="integer"
+                  column="OWNER_CLIENT_ID" />
+        <property name="permitAuthorityClientId"
+                  type="integer"
+                  column="PERMIT_AUTHORITY_CLIENT_ID" />
+        <property name="permittedClientId"
+                  type="integer"
+                  column="PERMITTED_CLIENT_ID" />
+        <property name="authorizedInspectorClientId"
+                  type="integer"
+                  column="AUTHORIZED_INSPECTOR_CLIENT_ID" />
+    </class>
+    <query name="com.sehinc.erosioncontrol.value.project.ProjectValue.byOwnerClientId">
+        from com.sehinc.erosioncontrol.value.project.ProjectValue as value
+        where value.statusCode = :statusCode and value.ownerClientId = :ownerClientId
+    </query>
+    <query name="com.sehinc.erosioncontrol.db.project.EcProject.allAuthorizedProjectsByClient">
+        from com.sehinc.erosioncontrol.db.project.EcProject as project
+        where (project.ownerClient.id = :clientId or project.permitAuthorityClient.id = :clientId or
+        project.permittedClient.id = :clientId or project.authorizedInspectorClient.id = :clientId) and
+        project.status.code in (1, 2, 7)
+    </query>
+    <query name="com.sehinc.erosioncontrol.db.project.EcProject.projectListByProjectNameAsc">
+        from com.sehinc.erosioncontrol.db.project.EcProject as project
+        where (project.ownerClient.id = :clientId or project.permitAuthorityClient.id = :clientId or
+        project.permittedClient.id = :clientId or project.authorizedInspectorClient.id = :clientId) and
+        project.status.code in (1, 2, 7)
+        order by project.name ASC
+    </query>
+    <query name="com.sehinc.erosioncontrol.db.project.EcProject.projectListByProjectNameDesc">
+        from com.sehinc.erosioncontrol.db.project.EcProject as project
+        where (project.ownerClient.id = :clientId or project.permitAuthorityClient.id = :clientId or
+        project.permittedClient.id = :clientId or project.authorizedInspectorClient.id = :clientId) and
+        project.status.code in (1, 2, 7)
+        order by project.name DESC
+    </query>
+    <query name="com.sehinc.erosioncontrol.db.project.EcProject.projectListByProjectTypeAsc">
+        from com.sehinc.erosioncontrol.db.project.EcProject as project
+        where (project.ownerClient.id = :clientId or project.permitAuthorityClient.id = :clientId or
+        project.permittedClient.id = :clientId or project.authorizedInspectorClient.id = :clientId) and
+        project.status.code in (1, 2, 7)
+        order by project.projectType.name ASC, project.name ASC
+    </query>
+    <query name="com.sehinc.erosioncontrol.db.project.EcProject.projectListByProjectTypeDesc">
+        from com.sehinc.erosioncontrol.db.project.EcProject as project
+        where (project.ownerClient.id = :clientId or project.permitAuthorityClient.id = :clientId or
+        project.permittedClient.id = :clientId or project.authorizedInspectorClient.id = :clientId) and
+        project.status.code in (1, 2, 7)
+        order by project.projectType.name DESC, project.name ASC
+    </query>
+    <query name="com.sehinc.erosioncontrol.db.project.EcProject.projectListByZoneAsc">
+        from com.sehinc.erosioncontrol.db.project.EcProject as project
+        where (project.ownerClient.id = :clientId or project.permitAuthorityClient.id = :clientId or
+        project.permittedClient.id = :clientId or project.authorizedInspectorClient.id = :clientId) and
+        project.status.code in (1, 2, 7)
+        order by project.zone.name ASC, project.name ASC
+    </query>
+    <query name="com.sehinc.erosioncontrol.db.project.EcProject.projectListByZoneDesc">
+        from com.sehinc.erosioncontrol.db.project.EcProject as project
+        where (project.ownerClient.id = :clientId or project.permitAuthorityClient.id = :clientId or
+        project.permittedClient.id = :clientId or project.authorizedInspectorClient.id = :clientId) and
+        project.status.code in (1, 2, 7)
+        order by project.zone.name DESC, project.name ASC
+    </query>
+    <query name="com.sehinc.erosioncontrol.db.project.EcProject.projectListByPermitNumberAsc">
+        from com.sehinc.erosioncontrol.db.project.EcProject as project
+        where (project.ownerClient.id = :clientId or project.permitAuthorityClient.id = :clientId or
+        project.permittedClient.id = :clientId or project.authorizedInspectorClient.id = :clientId) and
+        project.status.code in (1, 2, 7)
+        order by project.permitNumber ASC, project.name ASC
+    </query>
+    <query name="com.sehinc.erosioncontrol.db.project.EcProject.projectListByPermitNumberDesc">
+        from com.sehinc.erosioncontrol.db.project.EcProject as project
+        where (project.ownerClient.id = :clientId or project.permitAuthorityClient.id = :clientId or
+        project.permittedClient.id = :clientId or project.authorizedInspectorClient.id = :clientId) and
+        project.status.code in (1, 2, 7)
+        order by project.permitNumber DESC, project.name ASC
+    </query>
+    <query name="com.sehinc.erosioncontrol.db.project.EcProject.projectListByPermitAuthorityAsc">
+        from com.sehinc.erosioncontrol.db.project.EcProject as project
+        where (project.ownerClient.id = :clientId or project.permitAuthorityClient.id = :clientId or
+        project.permittedClient.id = :clientId or project.authorizedInspectorClient.id = :clientId) and
+        project.status.code in (1, 2, 7)
+        order by project.permitAuthorityClient.name ASC, project.name ASC
+    </query>
+    <query name="com.sehinc.erosioncontrol.db.project.EcProject.projectListByPermitAuthorityDesc">
+        from com.sehinc.erosioncontrol.db.project.EcProject as project
+        where (project.ownerClient.id = :clientId or project.permitAuthorityClient.id = :clientId or
+        project.permittedClient.id = :clientId or project.authorizedInspectorClient.id = :clientId) and
+        project.status.code in (1, 2, 7)
+        order by project.permitAuthorityClient.name DESC, project.name ASC
+    </query>
+    <query name="com.sehinc.erosioncontrol.db.project.EcProject.projectListByPermittedAsc">
+        from com.sehinc.erosioncontrol.db.project.EcProject as project
+        where (project.ownerClient.id = :clientId or project.permitAuthorityClient.id = :clientId or
+        project.permittedClient.id = :clientId or project.authorizedInspectorClient.id = :clientId) and
+        project.status.code in (1, 2, 7)
+        order by project.permittedClient.name ASC, project.name ASC
+    </query>
+    <query name="com.sehinc.erosioncontrol.db.project.EcProject.projectListByPermittedDesc">
+        from com.sehinc.erosioncontrol.db.project.EcProject as project
+        where (project.ownerClient.id = :clientId or project.permitAuthorityClient.id = :clientId or
+        project.permittedClient.id = :clientId or project.authorizedInspectorClient.id = :clientId) and
+        project.status.code in (1, 2, 7)
+        order by project.permittedClient.name DESC, project.name ASC
+    </query>
+    <query name="com.sehinc.erosioncontrol.db.project.EcProject.projectListByAuthorizedInspectorAsc">
+        select project
+        from com.sehinc.erosioncontrol.db.project.EcProject as project left outer join project.authorizedInspectorClient as client
+        where (project.ownerClient.id = :clientId or project.permitAuthorityClient.id = :clientId or
+        project.permittedClient.id = :clientId or project.authorizedInspectorClient.id = :clientId) and
+        project.status.code in (1, 2, 7)
+        order by client.name ASC, project.name ASC
+    </query>
+    <query name="com.sehinc.erosioncontrol.db.project.EcProject.projectListByAuthorizedInspectorDesc">
+        select project
+        from com.sehinc.erosioncontrol.db.project.EcProject as project left outer join project.authorizedInspectorClient as client
+        where (project.ownerClient.id = :clientId or project.permitAuthorityClient.id = :clientId or
+        project.permittedClient.id = :clientId or project.authorizedInspectorClient.id = :clientId) and
+        project.status.code in (1, 2, 7)
+        order by client.name DESC, project.name ASC
+    </query>
+    <query name="com.sehinc.erosioncontrol.db.project.EcProject.projectListByStatusAsc">
+        from com.sehinc.erosioncontrol.db.project.EcProject as project
+        where (project.ownerClient.id = :clientId or project.permitAuthorityClient.id = :clientId or
+        project.permittedClient.id = :clientId or project.authorizedInspectorClient.id = :clientId) and
+        project.status.code in (1, 2, 7)
+        order by project.status.code ASC, project.name ASC
+    </query>
+    <query name="com.sehinc.erosioncontrol.db.project.EcProject.projectListByStatusDesc">
+        from com.sehinc.erosioncontrol.db.project.EcProject as project
+        where (project.ownerClient.id = :clientId or project.permitAuthorityClient.id = :clientId or
+        project.permittedClient.id = :clientId or project.authorizedInspectorClient.id = :clientId) and
+        project.status.code in (1, 2, 7)
+        order by project.status.code DESC, project.name ASC
+    </query>
+    <query name="com.sehinc.erosioncontrol.db.project.EcProject.projectListByAddressAsc">
+        from com.sehinc.erosioncontrol.db.project.EcProject as project
+        where (project.ownerClient.id = :clientId or project.permitAuthorityClient.id = :clientId or
+        project.permittedClient.id = :clientId or project.authorizedInspectorClient.id = :clientId) and
+        project.status.code in (1, 2, 7)
+        order by project.address ASC, project.name ASC
+    </query>
+    <query name="com.sehinc.erosioncontrol.db.project.EcProject.projectListByAddressDesc">
+        from com.sehinc.erosioncontrol.db.project.EcProject as project
+        where (project.ownerClient.id = :clientId or project.permitAuthorityClient.id = :clientId or
+        project.permittedClient.id = :clientId or project.authorizedInspectorClient.id = :clientId) and
+        project.status.code in (1, 2, 7)
+        order by project.address DESC, project.name ASC
+    </query>
+    <query name="com.sehinc.erosioncontrol.db.project.EcProject.projectListByLastInspectionDateAsc">
+        from com.sehinc.erosioncontrol.db.project.EcProject as project
+        where (project.ownerClient.id = :clientId or project.permitAuthorityClient.id = :clientId or
+        project.permittedClient.id = :clientId or project.authorizedInspectorClient.id = :clientId) and
+        project.status.code in (1, 2, 7)
+        order by project.lastInspectionDate ASC, project.name ASC
+    </query>
+    <query name="com.sehinc.erosioncontrol.db.project.EcProject.projectListByLastInspectionDateDesc">
+        from com.sehinc.erosioncontrol.db.project.EcProject as project
+        where (project.ownerClient.id = :clientId or project.permitAuthorityClient.id = :clientId or
+        project.permittedClient.id = :clientId or project.authorizedInspectorClient.id = :clientId) and
+        project.status.code in (1, 2, 7)
+        order by project.lastInspectionDate DESC, project.name ASC
+    </query>
+    <query name="com.sehinc.erosioncontrol.db.project.EcProject.projectListByStartDateAsc">
+        from com.sehinc.erosioncontrol.db.project.EcProject as project
+        where (project.ownerClient.id = :clientId or project.permitAuthorityClient.id = :clientId or
+        project.permittedClient.id = :clientId or project.authorizedInspectorClient.id = :clientId) and
+        project.status.code in (1, 2, 7)
+        order by project.startDate ASC, project.name ASC
+    </query>
+    <query name="com.sehinc.erosioncontrol.db.project.EcProject.projectListByStartDateDesc">
+        from com.sehinc.erosioncontrol.db.project.EcProject as project
+        where (project.ownerClient.id = :clientId or project.permitAuthorityClient.id = :clientId or
+        project.permittedClient.id = :clientId or project.authorizedInspectorClient.id = :clientId) and
+        project.status.code in (1, 2, 7)
+        order by project.startDate DESC, project.name ASC
+    </query>
+    <query name="com.sehinc.erosioncontrol.db.project.EcProject.projectListByEffectiveDateAsc">
+        from com.sehinc.erosioncontrol.db.project.EcProject as project
+        where (project.ownerClient.id = :clientId or project.permitAuthorityClient.id = :clientId or
+        project.permittedClient.id = :clientId or project.authorizedInspectorClient.id = :clientId) and
+        project.status.code in (1, 2, 7)
+        order by project.effectiveDate ASC, project.name ASC
+    </query>
+    <query name="com.sehinc.erosioncontrol.db.project.EcProject.projectListByEffectiveDateDesc">
+        from com.sehinc.erosioncontrol.db.project.EcProject as project
+        where (project.ownerClient.id = :clientId or project.permitAuthorityClient.id = :clientId or
+        project.permittedClient.id = :clientId or project.authorizedInspectorClient.id = :clientId) and
+        project.status.code in (1, 2, 7)
+        order by project.effectiveDate DESC, project.name ASC
+    </query>
+    <query name="com.sehinc.erosioncontrol.db.project.EcProject.projectListBySeedDateAsc">
+        from com.sehinc.erosioncontrol.db.project.EcProject as project
+        where (project.ownerClient.id = :clientId or project.permitAuthorityClient.id = :clientId or
+        project.permittedClient.id = :clientId or project.authorizedInspectorClient.id = :clientId) and
+        project.status.code in (1, 2, 7)
+        order by project.seedDate ASC, project.name ASC
+    </query>
+    <query name="com.sehinc.erosioncontrol.db.project.EcProject.projectListBySeedDateDesc">
+        from com.sehinc.erosioncontrol.db.project.EcProject as project
+        where (project.ownerClient.id = :clientId or project.permitAuthorityClient.id = :clientId or
+        project.permittedClient.id = :clientId or project.authorizedInspectorClient.id = :clientId) and
+        project.status.code in (1, 2, 7)
+        order by project.seedDate DESC, project.name ASC
+    </query>
+    <query name="com.sehinc.erosioncontrol.db.project.EcProject.projectListByTotalSiteAreaAsc">
+        from com.sehinc.erosioncontrol.db.project.EcProject as project
+        where (project.ownerClient.id = :clientId or project.permitAuthorityClient.id = :clientId or
+        project.permittedClient.id = :clientId or project.authorizedInspectorClient.id = :clientId) and
+        project.status.code in (1, 2, 7)
+        order by project.totalSiteArea ASC, project.name ASC
+    </query>
+    <query name="com.sehinc.erosioncontrol.db.project.EcProject.projectListByTotalSiteAreaDesc">
+        from com.sehinc.erosioncontrol.db.project.EcProject as project
+        where (project.ownerClient.id = :clientId or project.permitAuthorityClient.id = :clientId or
+        project.permittedClient.id = :clientId or project.authorizedInspectorClient.id = :clientId) and
+        project.status.code in (1, 2, 7)
+        order by project.totalSiteArea DESC, project.name ASC
+    </query>
+    <query name="com.sehinc.erosioncontrol.db.project.EcProject.projectListByDisturbedAreaAsc">
+        from com.sehinc.erosioncontrol.db.project.EcProject as project
+        where (project.ownerClient.id = :clientId or project.permitAuthorityClient.id = :clientId or
+        project.permittedClient.id = :clientId or project.authorizedInspectorClient.id = :clientId) and
+        project.status.code in (1, 2, 7)
+        order by project.disturbedArea ASC, project.name ASC
+    </query>
+    <query name="com.sehinc.erosioncontrol.db.project.EcProject.projectListByDisturbedAreaDesc">
+        from com.sehinc.erosioncontrol.db.project.EcProject as project
+        where (project.ownerClient.id = :clientId or project.permitAuthorityClient.id = :clientId or
+        project.permittedClient.id = :clientId or project.authorizedInspectorClient.id = :clientId) and
+        project.status.code in (1, 2, 7)
+        order by project.disturbedArea DESC, project.name ASC
+    </query>
+    <query name="com.sehinc.erosioncontrol.db.project.EcProject.projectListByNewImperviousAreaAsc">
+        from com.sehinc.erosioncontrol.db.project.EcProject as project
+        where (project.ownerClient.id = :clientId or project.permitAuthorityClient.id = :clientId or
+        project.permittedClient.id = :clientId or project.authorizedInspectorClient.id = :clientId) and
+        project.status.code in (1, 2, 7)
+        order by project.newImperviousArea ASC, project.name ASC
+    </query>
+    <query name="com.sehinc.erosioncontrol.db.project.EcProject.projectListByNewImperviousAreaDesc">
+        from com.sehinc.erosioncontrol.db.project.EcProject as project
+        where (project.ownerClient.id = :clientId or project.permitAuthorityClient.id = :clientId or
+        project.permittedClient.id = :clientId or project.authorizedInspectorClient.id = :clientId) and
+        project.status.code in (1, 2, 7)
+        order by project.newImperviousArea DESC, project.name ASC
+    </query>
+    <query name="com.sehinc.erosioncontrol.db.project.EcProject.projectMapListByOwner">
+        from com.sehinc.erosioncontrol.db.project.EcProject as project
+        where (project.ownerClient.id = :clientId or project.permitAuthorityClient.id = :clientId)
+        and project.projectStatus.code = 1 and project.status.code = 1
+        and (project.gisX is not null and len(ltrim(rtrim(project.gisX))) > 0) and (project.gisY is not null and len(ltrim(rtrim(project.gisY))) > 0)
+        order by project.name ASC
+    </query>
+    <query name="com.sehinc.erosioncontrol.db.project.EcProject.projectListByRfaAsc">
+        from com.sehinc.erosioncontrol.db.project.EcProject as project
+        where (project.ownerClient.id = :clientId or project.permitAuthorityClient.id = :clientId or
+        project.permittedClient.id = :clientId or project.authorizedInspectorClient.id = :clientId) and
+        project.status.code in (1, 2, 7)
+        order by project.rfaNumber ASC, project.name ASC
+    </query>
+    <query name="com.sehinc.erosioncontrol.db.project.EcProject.projectListByRfaDesc">
+        from com.sehinc.erosioncontrol.db.project.EcProject as project
+        where (project.ownerClient.id = :clientId or project.permitAuthorityClient.id = :clientId or
+        project.permittedClient.id = :clientId or project.authorizedInspectorClient.id = :clientId) and
+        project.status.code in (1, 2, 7)
+        order by project.rfaNumber DESC, project.name ASC
+    </query>
+    <query name="com.sehinc.erosioncontrol.db.project.EcProject.projectListByBlockAsc">
+        from com.sehinc.erosioncontrol.db.project.EcProject as project
+        where (project.ownerClient.id = :clientId or project.permitAuthorityClient.id = :clientId or
+        project.permittedClient.id = :clientId or project.authorizedInspectorClient.id = :clientId) and
+        project.status.code in (1, 2, 7)
+        order by project.blockNumber ASC, project.name ASC
+    </query>
+    <query name="com.sehinc.erosioncontrol.db.project.EcProject.projectListByBlockDesc">
+        from com.sehinc.erosioncontrol.db.project.EcProject as project
+        where (project.ownerClient.id = :clientId or project.permitAuthorityClient.id = :clientId or
+        project.permittedClient.id = :clientId or project.authorizedInspectorClient.id = :clientId) and
+        project.status.code in (1, 2, 7)
+        order by project.blockNumber DESC, project.name ASC
+    </query>
+    <query name="com.sehinc.erosioncontrol.db.project.EcProject.projectListByLotAsc">
+        from com.sehinc.erosioncontrol.db.project.EcProject as project
+        where (project.ownerClient.id = :clientId or project.permitAuthorityClient.id = :clientId or
+        project.permittedClient.id = :clientId or project.authorizedInspectorClient.id = :clientId) and
+        project.status.code in (1, 2, 7)
+        order by project.lotNumber ASC, project.name ASC
+    </query>
+    <query name="com.sehinc.erosioncontrol.db.project.EcProject.projectListByLotDesc">
+        from com.sehinc.erosioncontrol.db.project.EcProject as project
+        where (project.ownerClient.id = :clientId or project.permitAuthorityClient.id = :clientId or
+        project.permittedClient.id = :clientId or project.authorizedInspectorClient.id = :clientId) and
+        project.status.code in (1, 2, 7)
+        order by project.lotNumber DESC, project.name ASC
+    </query>
+</hibernate-mapping>

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?><!DOCTYPE form-validation PUBLIC
+    "-//Apache Software Foundation//DTD Commons Validator Rules Configuration 1.0//EN"
+    "http://jakarta.apache.org/commons/dtds/validator_1_0.dtd">
+<form-validation>
+    <global>
+        <constant>
+            <constant-name>phone</constant-name>
+            <constant-value>^\(?(\d{3})\)?[-|.| ]?(\d{3})[-|.| ]?(\d{4})$</constant-value>
+        </constant>
+        <constant>
+            <constant-name>zip</constant-name>
+            <constant-value>^\d{5}\d*$</constant-value>
+        </constant>
+    </global>
+    <formset>
+        <form name="clientForm">
+            <field property="postalCode"
+                   depends="maxlength,mask">
+                <arg0 key="client.postal.code" />
+                <arg1 name="maxlength"
+                      key="${var:maxlength}"
+                      resource="false" />
+                <var>
+                    <var-name>maxlength</var-name>
+                    <var-value>10</var-value>
+                </var>
+                <var>
+                    <var-name>mask</var-name>
+                    <var-value>${zip}</var-value>
+                </var>
+            </field>
+            <field property="phone"
+                   depends="required,maxlength,mask">
+                <arg0 key="client.phone" />
+                <arg1 name="maxlength"
+                      key="${var:maxlength}"
+                      resource="false" />
+                <var>
+                    <var-name>maxlength</var-name>
+                    <var-value>50</var-value>
+                </var>
+                <var>
+                    <var-name>mask</var-name>
+                    <var-value>${phone}</var-value>
+                </var>
+            </field>
+        </form>
+        <form name="clientDvForm">
+            <field property="startTop"
+                   depends="float">
+                <arg0 key="dv.startTop" />
+            </field>
+            <field property="startBottom"
+                   depends="float">
+                <arg0 key="dv.startBottom" />
+            </field>
+            <field property="startLeft"
+                   depends="float">
+                <arg0 key="dv.startLeft" />
+            </field>
+            <field property="startRight"
+                   depends="float">
+                <arg0 key="dv.startRight" />
+            </field>
+            <field property="limitTop"
+                   depends="float">
+                <arg0 key="dv.limitTop" />
+            </field>
+            <field property="limitBottom"
+                   depends="float">
+                <arg0 key="dv.limitBottom" />
+            </field>
+            <field property="limitLeft"
+                   depends="float">
+                <arg0 key="dv.limitLeft" />
+            </field>
+            <field property="limitRight"
+                   depends="float">
+                <arg0 key="dv.limitRight" />
+            </field>
+        </form>
+    </formset>
+</form-validation>

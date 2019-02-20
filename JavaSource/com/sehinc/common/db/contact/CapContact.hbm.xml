@@ -1,0 +1,149 @@
+<?xml version="1.0"?><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <!--
+            Auto-generated mapping file from
+            the hibernate.org cfg2hbm engine
+    -->
+    <class name="com.sehinc.common.db.contact.CapContact"
+           table="CAP_CONTACT">
+        <id name="id"
+            type="integer">
+            <column name="ID" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="organization"
+                     class="com.sehinc.common.db.contact.CapContactOrganization"
+                     column="ORGANIZATION_ID"
+                     lazy="false" />
+        <property name="organizationName"
+                  type="string"
+                  column="ORGANIZATION_NAME" />
+        <property name="firstName"
+                  type="string"
+                  column="FIRST_NAME" />
+        <property name="lastName"
+                  type="string"
+                  column="LAST_NAME" />
+        <property name="mi"
+                  type="character"
+                  column="MI" />
+        <property name="title"
+                  type="string"
+                  column="TITLE" />
+        <many-to-one name="addressData"
+                     class="com.sehinc.common.db.user.AddressData"
+                     column="ADDRESS_ID"
+                     lazy="false" />
+        <property name="address"
+                  type="string"
+                  column="ADDRESS" />
+        <property name="address2"
+                  type="string"
+                  column="ADDRESS2" />
+        <property name="city"
+                  type="string"
+                  column="CITY" />
+        <property name="stateCode"
+                  type="string"
+                  column="STATE_CODE" />
+        <property name="zip"
+                  type="string"
+                  column="ZIP" />
+        <property name="primaryPhone"
+                  type="string"
+                  column="PRIMARY_PHONE" />
+        <property name="secondaryPhone"
+                  type="string"
+                  column="SECONDARY_PHONE" />
+        <property name="faxPhone"
+                  type="string"
+                  column="FAX_PHONE" />
+        <property name="email"
+                  type="string"
+                  column="EMAIL" />
+        <many-to-one name="status"
+                     class="com.sehinc.erosioncontrol.db.code.StatusCodeData"
+                     column="STATUS_CD"
+                     lazy="false" />
+        <property name="createTimestamp"
+                  type="timestamp"
+                  column="CREATE_TS" />
+        <property name="updateTimestamp"
+                  type="timestamp"
+                  column="UPDATE_TS" />
+        <property name="updateUserId"
+                  type="integer"
+                  column="UPDATE_USER_ID" />
+        <set name="contactTypes"
+             table="CAP_CONTACT_CONTACT_TYPE"
+             lazy="false">
+            <key column="CAP_CONTACT_ID" />
+            <many-to-many column="CONTACT_TYPE_CD"
+                          class="com.sehinc.common.db.code.ContactTypeData" />
+        </set>
+    </class>
+    <query name="com.sehinc.common.db.contact.getAllUserContactsByClientId">
+        select contact
+        from com.sehinc.common.db.user.UserData as user,
+        com.sehinc.common.db.client.ClientUserData as clientUser,
+        com.sehinc.common.db.contact.CapContact as contact
+        where clientUser.clientId = :clientId and
+        clientUser.userId = user.id and
+        user.contactId = contact.id and
+        user.status.code = :statusCode
+        order by contact.lastName asc
+    </query>
+    <query name="com.sehinc.common.db.contact.getAllClientContacts">
+        select contact
+        from com.sehinc.common.db.contact.CapContact as contact
+        where contact.id in ( select clientContact.contact.id from com.sehinc.common.db.client.CapClientContact as clientContact
+        where clientContact.client.id = :clientId ) and
+        contact.status.code = :statusCode
+        order by contact.lastName, contact.firstName asc
+    </query>
+    <query name="com.sehinc.common.db.contact.getAllAdminsByClientId">
+        select contact
+        from com.sehinc.common.db.user.UserData as user,
+        com.sehinc.common.db.client.ClientUserData as clientUser,
+        com.sehinc.common.db.contact.CapContact as contact
+        where clientUser.clientId = :clientId and
+        clientUser.userId = user.id and
+        user.contactId = contact.id and
+        user.status.code = :statusCode
+        and user.groupId in (2)
+        order by contact.lastName asc
+    </query>
+    <query name="com.sehinc.common.db.contact.getAllByNameAsc">
+        select contact
+        from com.sehinc.common.db.contact.CapContact as contact
+        where contact.id in ( select clientContact.contact.id from com.sehinc.common.db.client.CapClientContact as clientContact
+        where clientContact.client.id = :clientId ) and
+        contact.status.code = :statusCode
+        order by contact.lastName asc
+    </query>
+    <query name="com.sehinc.common.db.contact.getAllByNameDesc">
+        select contact
+        from com.sehinc.common.db.contact.CapContact as contact
+        where contact.id in ( select clientContact.contact.id from com.sehinc.common.db.client.CapClientContact as clientContact
+        where clientContact.client.id = :clientId ) and
+        contact.status.code = :statusCode
+        order by contact.lastName desc
+    </query>
+    <query name="com.sehinc.common.db.contact.getAllByOrgAsc">
+        select contact
+        from com.sehinc.common.db.contact.CapContact as contact
+        where contact.id in ( select clientContact.contact.id from com.sehinc.common.db.client.CapClientContact as clientContact
+        where clientContact.client.id = :clientId ) and
+        contact.status.code = :statusCode
+        order by contact.organizationName asc
+    </query>
+    <query name="com.sehinc.common.db.contact.getAllByOrgDesc">
+        select contact
+        from com.sehinc.common.db.contact.CapContact as contact
+        where contact.id in ( select clientContact.contact.id from com.sehinc.common.db.client.CapClientContact as clientContact
+        where clientContact.client.id = :clientId ) and
+        contact.status.code = :statusCode
+        order by contact.organizationName desc
+    </query>
+</hibernate-mapping>

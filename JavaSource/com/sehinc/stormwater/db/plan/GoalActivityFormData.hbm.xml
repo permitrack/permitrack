@@ -1,0 +1,39 @@
+<?xml version="1.0"?><!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping>
+    <!-- -->
+    <class name="com.sehinc.stormwater.db.plan.GoalActivityFormData"
+           table="GOAL_ACTIVITY_FORM">
+        <id name="id"
+            type="integer"
+            column="id">
+            <generator class="identity" />
+        </id>
+        <property name="name"
+                  type="string"
+                  column="NAME" />
+        <property name="description"
+                  type="string"
+                  column="DESCRIPTION" />
+        <property name="customFormId"
+                  type="integer"
+                  column="CUSTOM_FORM_ID" />
+        <property name="clientId"
+                  type="integer"
+                  column="CLIENT_ID" />
+        <property name="downloadLocation"
+                  type="string"
+                  column="DOWNLOAD_LOCATION" />
+    </class>
+    <query name="com.sehinc.stormwater.db.plan.GoalActivityFormData.byClientId">
+        from com.sehinc.stormwater.db.plan.GoalActivityFormData as goalActivityForm
+        where goalActivityForm.clientId = '1'
+        or goalActivityForm.clientId =:clientId
+    </query>
+    <query name="com.sehinc.common.db.forms.GoalActivityFormData.byClientIdAndFormId">
+        from com.sehinc.stormwater.db.plan.GoalActivityFormData as goalActivityForm
+        where goalActivityForm.clientId =:clientId
+        or goalActivityForm.customFormId =:formId
+    </query>
+</hibernate-mapping>

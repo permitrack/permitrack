@@ -1,0 +1,82 @@
+<?xml version="1.0"?><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <!--
+            Auto-generated mapping file from
+            the hibernate.org cfg2hbm engine
+    -->
+    <class name="com.sehinc.common.db.security.CapModule"
+           table="CAP_MODULE">
+        <id name="id"
+            type="integer">
+            <column name="ID" />
+            <generator class="identity" />
+        </id>
+        <property name="code"
+                  type="string"
+                  column="CODE" />
+        <property name="name"
+                  type="string"
+                  column="NAME" />
+        <property name="description"
+                  type="string"
+                  column="DESCRIPTION" />
+        <property name="path"
+                  type="string"
+                  column="PATH" />
+        <property name="modulePath"
+                  type="string"
+                  column="MODULE_PATH" />
+        <many-to-one name="status"
+                     class="com.sehinc.erosioncontrol.db.code.StatusCodeData"
+                     column="STATUS_CD"
+                     lazy="false" />
+        <property name="createTimestamp"
+                  type="timestamp"
+                  column="CREATE_TS" />
+        <property name="updateTimestamp"
+                  type="timestamp"
+                  column="UPDATE_TS" />
+        <property name="updateUserId"
+                  type="integer"
+                  column="UPDATE_USER_ID" />
+        <property name="orderNum"
+                  type="integer"
+                  column="ORDER_NUM" />
+    </class>
+    <query name="com.sehinc.common.db.security.CapModule.byCode">
+        select module
+        from com.sehinc.common.db.security.CapModule as module
+        where module.code = :code
+    </query>
+    <query name="com.sehinc.common.db.security.CapModule.allModulesByUserAndMarkup">
+        select distinct module
+        from com.sehinc.common.db.user.CapUserModule as userModule,
+        com.sehinc.common.db.security.CapModule as module,
+        com.sehinc.common.db.user.CapModuleMarkup as moduleMarkup,
+        com.sehinc.common.db.user.CapMarkup as markup
+        where userModule.userId = :userId and
+        userModule.isActive = 1 and
+        userModule.moduleId = module.id and
+        module.id = moduleMarkup.moduleId and
+        moduleMarkup.markupId = markup.id and
+        markup.markup = :markup and
+        module.status = 1
+        order by module.orderNum
+    </query>
+    <query name="com.sehinc.common.db.security.CapModule.allModulesByUser">
+        select distinct module
+        from com.sehinc.common.db.user.CapUserModule as userModule,
+        com.sehinc.common.db.security.CapModule as module
+        where userModule.userId = :userId and
+        userModule.isActive = 1 and
+        userModule.moduleId = module.id
+        order by module.orderNum
+    </query>
+    <query name="com.sehinc.common.db.security.CapModule.allModules">
+        select module
+        from com.sehinc.common.db.security.CapModule as module
+        where module.status.code = 1
+        order by module.orderNum
+    </query>
+</hibernate-mapping>

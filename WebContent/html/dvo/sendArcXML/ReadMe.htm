@@ -1,0 +1,212 @@
+<html>
+    <head>
+        <title>Using the sendArcXML Utility</title>
+    </head>
+    <body BGCOLOR="White"
+          TEXT="Black">
+        <div align="center">
+            <FONT face=Arial
+                  size="+2">
+                <STRONG>sendArcXML</STRONG>
+            </FONT>
+            <P>
+            <TABLE WIDTH="85%">
+                <TR>
+                    <TD>
+                        <FONT FACE="Arial,sans-serif">
+                            <FONT FACE="Arial,sans-serif"
+                                  SIZE="+1">
+                                <B>What is it?</B>
+                            </FONT>
+                            <P>
+                                <font face="Arial,sans-serif">
+                                    This ArcIMS utility will send an ArcXML request through the
+                                    Servlet Connector and display the Spatial Server's response. It is good for testing
+                                    ArcXML requests.
+                                    <P>
+                                        <FONT FACE="Arial,sans-serif"
+                                              SIZE="+1">
+                                            <B>How is it configured?</B>
+                                        </FONT>
+                                    <P>
+                                        Copy the whole sendArcXML directory to a location
+                                        within a virtual web path of your web server. For example, you can place it in
+                                        your ArcIMS website director, or in your web root directory.
+                                    <P>
+                                        Default values for the sample can be set up in the
+                                        JavaScript file, sendArcXMLparam.js, as shown below:
+                                    <blockquote>
+                                        <pre>
+                                            /*****************************************************
+                                            * sendArcXMLparam.js
+                                            *
+                                            * parameter file for sendArcXML utility
+                                            *
+                                            *****************************************************/
+                                            // default MapService name
+                                            var serviceVar = "sanfrancisco";
+                                            // default extent used in Envelopes
+                                            var minx="-122.524464";
+                                            var miny="37.690002";
+                                            var maxx="-122.349621";
+                                            var maxy="37.834193";
+                                            // default layer id used in queries
+                                            var layerId = "museums";
+                                            // default where used in queries
+                                            var defaultWhere = "NAME = 'Cartoon Art Museum'";
+                                            // default subfields value in queries
+                                            var subfields = "#ALL#";
+                                            // escape the response?
+                                            var doURLencode = false;
+                                        </pre>
+                                        <P>
+                                            The variable
+                                            <b>serviceVar</b>
+                                            represents the default MapService name.
+                                        <P>
+                                            The variables
+                                            <b>minx, miny, maxx,</b>
+                                            and
+                                            <b>maxy</b>
+                                            are the default
+                                            values for the coordinates used in the ENVELOPE tag in the requests.
+                                        <P>
+                                            The variable
+                                            <b>layerId</b>
+                                            represents the default layer ID used in
+                                            query requrests.
+                                        <P>
+                                            The variable
+                                            <b>defaultWhere</b>
+                                            represents the default expression
+                                            used in the 'where' attribute in query requests.
+                                        <P>
+                                            The variable
+                                            <b>subfields</b>
+                                            represents the default value used in the
+                                            'subfields' attribute used in query requests.
+                                        <P>
+                                            The variable
+                                            <b>doURLencode</b>
+                                            indicates if the response should be
+                                            URL-encoded by the Servlet Connector. The default value is false.
+                                            For most languages this should not be changed. URL-encoding produces
+                                            a larger stream of data and slows down performance.
+                                    </blockquote>
+                                    <P>
+                                        Access to remote hosts is available if
+                                        redirection has been set up in the Servlet Connector's Esrimap_prop
+                                        file (See below for instructions on configuring redirection).
+                                    <P>
+                                        <FONT FACE="Arial,sans-serif"
+                                              SIZE="+1">
+                                            <B>How is it started?</B>
+                                        </FONT>
+                                    <P>
+                                        To start the viewer, call it using a URL in the format:
+                                    <BLOCKQUOTE>
+                                        <B>http://yourServer.yourDomain.com/webPath/sendArcXML?parameter</B>
+                                        <p>
+                                            where:
+                                        <P>
+                                            <STRONG>yourServer.yourDomain.com/webPath/sendArcXML</STRONG>
+                                            is the web path to the directory where the sample is located.
+                                    </BLOCKQUOTE>
+                                    <P>
+                                        Three sizes of Form boxes have been
+                                        preset: Regular, Small, or Big. To use the smaller size (on 800x600 or smaller screens),
+                                        add "?Small" to the URL. For bigger Form boxes, add "?Big" to the URL (Example: http://yourhost/sendArcXML/?Big)
+                                    <P>
+                                        <FONT FACE="Arial,sans-serif"
+                                              SIZE="+1">
+                                            <B>Sending a Request</B>
+                                        </FONT>
+                                    <P>
+                                        Change the
+                                        <b>Host</b>
+                                        and/or
+                                        <b>MapService</b>
+                                        names, if necessary. A Host other than the
+                                        webpage's URL host requires redirection (See below for instructions on configuring redirection).
+                                    <P>
+                                        Select a sample request from the
+                                        <b>Sample Requests</b>
+                                        pulldown menu and it
+                                        will be displayed in the Request Box. Modify this request as required.
+                                    <P>
+                                    <P>
+                                        Or, enter a valid ArcXML request in the
+                                        <b>Request Box</b>
+                                        . If the request is a Query,
+                                        Extract, or Geocode request, click the matching
+                                        <b>CustomService</b>
+                                        checkbox, so
+                                        that it can be directed to the appropriate Spatial Server.
+                                        Click the
+                                        <b>Send Request</b>
+                                        button and the request will be sent on to the Spatial Server.
+                                        The response will be displayed in the
+                                        <b>Response Box.</b>
+                                    <P>
+                                        The actual returned page can be viewed by right-clicking in the black strip at the bottom of the
+                                        page and selecting View Frame Source.
+                                    <P>
+                                        <FONT FACE="Arial,sans-serif"
+                                              SIZE="+1">
+                                            <B>The Other Buttons</B>
+                                        </FONT>
+                                    <P>
+                                        Clicking the
+                                        <b>Clear</b>
+                                        button will clear the Response Box.
+                                    <P>
+                                        Clicking the
+                                        <b>Show URL</b>
+                                        will link to any URL found in the text in the Response Box.
+                                        This will usually be a link to a map image, a legend image, or a zip file containing extracted shapefiles.
+                                    <P>
+                                        <FONT FACE="Arial,sans-serif"
+                                              SIZE="+1">
+                                            <B>Configuring Redirection</B>
+                                        </FONT>
+                                    <P>
+                                        This sample communicates with the Spatial Servers through the Servlet Connector. Communication is
+                                        through submission of an HTML form containing the ArcXML request, with the Servlet Connector dynamically
+                                        writing a new form page containing the response. Remote hosts cannot be accessed directly this way because
+                                        of a JavaScript security limitation. To work around this, redirection can be done through the Servet Connector.
+                                    <P>
+                                        To configure redirection:
+                                    <P>
+                                        Search for the file Esrimap_prop (it's location depends on your web server).
+                                        Open the file and add the following lines, replacing &lt;hostname#&gt; with the names of the hosts you
+                                        want to allow access to through the Servlet Connector.
+                                    <blockquote>
+                                        <b>redirect=true
+                                            <BR>
+                                           redirectableHosts=&lt;hostname1&gt;,&lt;hostname2&gt;,&lt;hostname3&gt;,&lt;hostname4&gt;, . . .
+                                        </b>
+                                    </blockquote>
+                                    <P>
+                                        The first line tells the Servlet Connector that redirection is allowed. The second line lists the hosts that
+                                        redirection is allowed to.
+                                    <P>
+                                        An error occurs if redirection is requested to a host other than those listed under redirectableHosts. To allow
+                                        the Servlet Connector to redirect to any host, use
+                                        <b>redirectableHosts=*</b>
+                                        .
+                                    <P>
+                                        Redirection does not work with MapServices that require
+                                        password authentication, in other words, those that are restricted.
+                                    <P>
+                                    <HR>
+                                    <P>
+                                        Enjoy,
+                                        <BR>
+                                        The ArcIMS Team
+                                </font>
+                    </TD>
+                </TR>
+            </TABLE>
+        </div>
+    </body>
+</html>

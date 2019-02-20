@@ -1,0 +1,198 @@
+<?xml version="1.0"?><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <!--
+            Auto-generated mapping file from
+            the hibernate.asset cfg2hbm engine
+    -->
+    <class name="com.sehinc.environment.db.asset.EnvAsset"
+           table="ENV_ASSET">
+        <id name="id"
+            type="integer">
+            <column name="ID" />
+            <generator class="identity" />
+        </id>
+        <version name="version"
+                 column="version"
+                 insert="false"
+                 type="long" />
+        <property name="parentAssetId"
+                  type="integer"
+                  column="PARENT_ASSET_ID" />
+        <property name="name"
+                  type="string"
+                  column="NAME" />
+        <property name="number"
+                  type="string"
+                  column="NUMBER" />
+        <property name="description"
+                  type="string"
+                  column="DESCRIPTION" />
+        <property name="clientId"
+                  type="integer"
+                  column="CLIENT_ID" />
+        <property name="activeTs"
+                  type="timestamp"
+                  column="ACTIVE_TS" />
+        <property name="inactiveTs"
+                  type="timestamp"
+                  column="INACTIVE_TS" />
+        <property name="location"
+                  type="string"
+                  column="LOCATION" />
+        <property name="storageTank"
+                  type="boolean"
+                  column="STORAGE_TANK" />
+        <property name="point"
+                  type="boolean"
+                  column="POINT" />
+        <property name="buildingHeat"
+                  type="boolean"
+                  column="BUILDING_HEAT" />
+        <property name="process"
+                  type="boolean"
+                  column="PROCESS" />
+        <property name="meter"
+                  type="boolean"
+                  column="METER" />
+        <property name="belongsToMeter"
+                  type="integer"
+                  column="BELONGS_TO_METER" />
+        <set name="assetTypes"
+             table="ENV_ASSET_TYPE"
+             lazy="false">
+            <key column="ASSET_ID" />
+            <many-to-many column="ASSET_TYPE_CD"
+                          class="com.sehinc.environment.db.lookup.EnvAssetTypeData" />
+        </set>
+        <set name="assetAttributes"
+             table="ENV_ASSET_ATTR"
+             cascade="all-delete-orphan"
+             lazy="false">
+            <key column="ASSET_ID" />
+            <one-to-many class="com.sehinc.environment.db.asset.EnvAssetAttr" />
+        </set>
+        <many-to-one name="status"
+                     class="com.sehinc.environment.db.code.EnvStatusCodeData"
+                     column="STATUS_CD"
+                     lazy="false" />
+        <set name="assetSubstances"
+             table="ENV_ASSET_EMITTED_SUBSTANCE_TYPE"
+             cascade="all-delete-orphan"
+             lazy="false">
+            <key column="ASSET_ID" />
+            <one-to-many class="com.sehinc.environment.db.assetsubstance.EnvAssetSubstance" />
+        </set>
+        <property name="createTimestamp"
+                  type="timestamp"
+                  column="CREATE_TS" />
+        <property name="updateTimestamp"
+                  type="timestamp"
+                  column="UPDATE_TS" />
+        <property name="updateUserId"
+                  type="integer"
+                  column="UPDATE_USER_ID" />
+        <!--
+                <property name="usageCount"
+                          type="integer"
+                          formula="0" />
+        -->
+    </class>
+    <query name="EnvAsset.assetListByClientId">
+        from com.sehinc.environment.db.asset.EnvAsset as asset
+        where asset.clientId = :clientId and asset.status.code = :statusCode
+        order by asset.number ASC
+    </query>
+    <query name="EnvAsset.assetListByClientIdSortByNumber">
+        from com.sehinc.environment.db.asset.EnvAsset as asset
+        where asset.clientId = :clientId and asset.status.code = :statusCode
+        order by asset.number ASC
+    </query>
+    <query name="EnvAsset.assetParentListByClientId">
+        from com.sehinc.environment.db.asset.EnvAsset as asset
+        where asset.clientId = :clientId
+        and asset.parentAssetId = null
+        and asset.status.code = :statusCode
+        order by asset.number ASC
+    </query>
+    <query name="EnvAsset.assetListByNameAndNumber">
+        from com.sehinc.environment.db.asset.EnvAsset as asset
+        where asset.clientId = :clientId
+        and asset.name = :name
+        and asset.number = :number
+        and asset.status.code = :statusCode
+        order by asset.name ASC
+    </query>
+    <query name="EnvAsset.meterListByClientIdSortByNumber">
+        select asset,
+        (select count(assetSourceUsage.id) as usageCount
+        from com.sehinc.environment.db.assetsource.EnvAssetSource as assetSources
+        , com.sehinc.environment.db.sourceusage.EnvSourceUsage as assetSourceUsage
+        where assetSources.id = assetSourceUsage.assetSourceId
+        and assetSources.assetId = asset.id) as usageCount
+        from com.sehinc.environment.db.asset.EnvAsset as asset
+        where asset.clientId = :clientId
+        and asset.status.code = :statusCode
+        and asset.meter = true
+        order by asset.number ASC
+    </query>
+    <query name="EnvAsset.findAllByParentId">
+        from com.sehinc.environment.db.asset.EnvAsset as asset
+        where asset.parentAssetId = :parentId and asset.status.code = :statusCode
+        order by asset.number ASC
+    </query>
+    <query name="EnvAsset.findAllByMeterId">
+        from com.sehinc.environment.db.asset.EnvAsset as asset
+        where asset.belongsToMeter = :belongsToMeter and asset.status.code = :statusCode
+        order by asset.number ASC
+    </query>
+    <query name="EnvAsset.buildingHeatAssetListByClientId">
+        from com.sehinc.environment.db.asset.EnvAsset as asset
+        where asset.clientId = :clientId
+        and asset.status.code = :statusCode
+        and asset.buildingHeat = true
+        order by asset.number ASC
+    </query>
+    <query name="EnvAsset.assetsNotBuildingHeatByClientId">
+        from com.sehinc.environment.db.asset.EnvAsset as asset
+        where asset.clientId = :clientId
+        and asset.status.code = :statusCode
+        and (asset.buildingHeat = false or asset.buildingHeat IS null)
+        order by asset.number ASC
+    </query>
+    <query name="EnvAsset.processAssetListByClientId">
+        select asset,
+        (select count(assetSourceUsage.id) as usageCount
+        from com.sehinc.environment.db.assetsource.EnvAssetSource as assetSources
+        , com.sehinc.environment.db.sourceusage.EnvSourceUsage as assetSourceUsage
+        where assetSources.id = assetSourceUsage.assetSourceId
+        and assetSources.assetId = asset.id) as usageCount
+        from com.sehinc.environment.db.asset.EnvAsset as asset
+        where asset.clientId = :clientId
+        and asset.status.code = :statusCode
+        and asset.process = true
+        and (asset.meter is null or asset.meter = false)
+        order by asset.number ASC
+    </query>
+    <query name="EnvAsset.OtherAssetListByClientId">
+        select asset,
+        (select count(assetSourceUsage.id) as usageCount
+        from com.sehinc.environment.db.assetsource.EnvAssetSource as assetSources
+        , com.sehinc.environment.db.sourceusage.EnvSourceUsage as assetSourceUsage
+        where assetSources.id = assetSourceUsage.assetSourceId
+        and assetSources.assetId = asset.id) as usageCount
+        from com.sehinc.environment.db.asset.EnvAsset as asset
+        where asset.clientId = :clientId
+        and asset.status.code = :statusCode
+        and asset.process = false or asset.process is null
+        and (asset.meter is null or asset.meter = false)
+        order by asset.number ASC
+    </query>
+    <query name="EnvAsset.AssetsWithControlsListByClientId">
+        select asset
+        from com.sehinc.environment.db.asset.EnvAsset as asset
+        inner join asset.assetSubstances as assetSubstances
+        where asset.clientId = :clientId and asset.status.code = :statusCode
+        order by asset.number ASC
+    </query>
+</hibernate-mapping>

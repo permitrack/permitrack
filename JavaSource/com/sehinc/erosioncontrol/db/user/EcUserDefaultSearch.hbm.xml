@@ -1,0 +1,22 @@
+<?xml version="1.0"?><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <!--
+            Auto-generated mapping file from
+            the hibernate.org cfg2hbm engine
+    -->
+    <class name="com.sehinc.erosioncontrol.db.user.EcUserDefaultSearch"
+           table="EC_USER_DEFAULT_SEARCH">
+        <id name="id"
+            type="integer">
+            <column name="ID" />
+            <generator class="identity" />
+        </id>
+        <property name="userId"
+                  type="integer"
+                  column="USER_ID" />
+        <property name="defaultSearchId"
+                  type="integer"
+                  column="DEFAULT_SEARCH_ID" />
+    </class>
+</hibernate-mapping>

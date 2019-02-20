@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="NE_Air_Form_4_0" pageWidth="550" pageHeight="842" columnWidth="550" leftMargin="0" rightMargin="0" topMargin="10" bottomMargin="10">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<reportFont name="Arial_Normal" isDefault="true" fontName="Arial" size="12" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Bold" isDefault="false" fontName="Arial" size="12" isBold="true" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Italic" isDefault="false" fontName="Arial" size="12" isItalic="true" pdfFontName="Helvetica-Oblique" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Bold_Italic" isDefault="false" fontName="Arial" size="12" isBold="true" isItalic="true" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Small" isDefault="true" fontName="Arial" size="10" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Small_Bold" isDefault="false" fontName="Arial" size="10" isBold="true" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Small_Italic" isDefault="false" fontName="Arial" size="10" isItalic="true" pdfFontName="Helvetica-Oblique" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Small_Bold_Italic" isDefault="false" fontName="Arial" size="10" isBold="true" isItalic="true" pdfFontName="Helvetica-Oblique" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<parameter name="FacilityId" class="java.lang.Integer"/>
+	<parameter name="year" class="java.lang.Integer"/>
+	<parameter name="NE_Air_Form_0_0_Facility_Info_File" class="java.io.File"/>
+	<parameter name="NE_Air_Form_4_0_Other_Haps_File" class="java.io.File"/>
+	<parameter name="NE_Air_Form_4_0_Greatest_Hap_File" class="java.io.File"/>
+	<parameter name="NE_Air_Form_4_0_Haps_List_File" class="java.io.File"/>
+	<queryString>
+		<![CDATA[SELECT 1 AS TEST_QUERY]]>
+	</queryString>
+	<group name="substances">
+		<groupExpression><![CDATA[$P{FacilityId}]]></groupExpression>
+		<groupHeader>
+			<band height="71" splitType="Stretch">
+				<subreport>
+					<reportElement x="0" y="0" width="550" height="70"/>
+					<subreportParameter name="year">
+						<subreportParameterExpression><![CDATA[$P{year}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="FacilityId">
+						<subreportParameterExpression><![CDATA[$P{FacilityId}]]></subreportParameterExpression>
+					</subreportParameter>
+					<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					<subreportExpression class="java.io.File"><![CDATA[$P{NE_Air_Form_4_0_Haps_List_File}]]></subreportExpression>
+				</subreport>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="30" splitType="Stretch">
+				<staticText>
+					<reportElement x="0" y="5" width="550" height="25"/>
+					<textElement>
+						<font reportFont="Arial_Small_Bold" size="9"/>
+					</textElement>
+					<text><![CDATA[*Transfer these tonnages to Form 12.0 Emissions Fee Calculation Worksheet to aid in determination of total plant emissions and any chargeable emissions. Be sure emissions are only counted once.]]></text>
+				</staticText>
+			</band>
+		</groupFooter>
+	</group>
+	<group name="greatestHap">
+		<groupExpression><![CDATA[$P{FacilityId}]]></groupExpression>
+		<groupHeader>
+			<band height="63" splitType="Stretch">
+				<subreport>
+					<reportElement x="0" y="33" width="550" height="30"/>
+					<subreportParameter name="year">
+						<subreportParameterExpression><![CDATA[$P{year}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="FacilityId">
+						<subreportParameterExpression><![CDATA[$P{FacilityId}]]></subreportParameterExpression>
+					</subreportParameter>
+					<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					<subreportExpression class="java.io.File"><![CDATA[$P{NE_Air_Form_4_0_Greatest_Hap_File}]]></subreportExpression>
+				</subreport>
+				<staticText>
+					<reportElement x="0" y="3" width="550" height="25"/>
+					<textElement verticalAlignment="Middle">
+						<font reportFont="Arial_Small_Bold" size="9"/>
+					</textElement>
+					<text><![CDATA[Using the inforamtion above, indicate below the single HAP which was emitted in the greatest quantity (Greatest Single HAP):]]></text>
+				</staticText>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="otherHaps">
+		<groupExpression><![CDATA[$P{FacilityId}]]></groupExpression>
+		<groupHeader>
+			<band height="94" splitType="Stretch">
+				<staticText>
+					<reportElement x="0" y="5" width="550" height="25"/>
+					<textElement>
+						<font reportFont="Arial_Small_Bold" size="9"/>
+					</textElement>
+					<text><![CDATA[Total all other HAPs. In order to avoid double counting emissions, DO NOT include the Greatest Single HAP in the totals below. The totals below will be referred to as the Other HAPs.]]></text>
+				</staticText>
+				<subreport>
+					<reportElement x="0" y="34" width="550" height="60"/>
+					<subreportParameter name="year">
+						<subreportParameterExpression><![CDATA[$P{year}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="FacilityId">
+						<subreportParameterExpression><![CDATA[$P{FacilityId}]]></subreportParameterExpression>
+					</subreportParameter>
+					<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					<subreportExpression class="java.io.File"><![CDATA[$P{NE_Air_Form_4_0_Other_Haps_File}]]></subreportExpression>
+				</subreport>
+			</band>
+		</groupHeader>
+	</group>
+	<title>
+		<band height="19" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="550" height="19"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font reportFont="Arial_Bold"/>
+				</textElement>
+				<text><![CDATA[FORM 4.0 HAZARDOUS AIR POLLUTANTS WORKSHEET]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="152" splitType="Stretch">
+			<subreport>
+				<reportElement x="0" y="0" width="550" height="70"/>
+				<subreportParameter name="year">
+					<subreportParameterExpression><![CDATA[$P{year}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="FacilityId">
+					<subreportParameterExpression><![CDATA[$P{FacilityId}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.io.File"><![CDATA[$P{NE_Air_Form_0_0_Facility_Info_File}]]></subreportExpression>
+			</subreport>
+			<staticText>
+				<reportElement x="0" y="75" width="550" height="77"/>
+				<textElement>
+					<font reportFont="Arial_Small_Bold" size="9"/>
+				</textElement>
+				<text><![CDATA[List any chemicals manufactured or used which appear on the enclosed list of 188 hazardous air pollutants covered by the Clean Air Act Amendment. NOTE: If a chemical is considered to be both a hazardous air pollutant (HAP) and a volatile organic compound (VOC), then report if only as a HAP on Form 4.0.
+
+The reporting levels of hazardous air pollutants for emissions inventory purposes can be found on the enclosed list. This inventory report should include any single regulated hazardous air pollutant in a quantity greater than the reporting level noted. Also, any combination of hazardous air pollutants in a quantity greater than 2.5 tons must be reported as well.]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+</jasperReport>

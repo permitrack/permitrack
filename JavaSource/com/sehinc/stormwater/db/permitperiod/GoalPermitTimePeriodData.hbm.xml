@@ -1,0 +1,32 @@
+<?xml version="1.0"?><!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping>
+    <!-- -->
+    <class name="com.sehinc.stormwater.db.permitperiod.GoalPermitTimePeriodData"
+           table="goal_permit_time_period">
+        <id name="id"
+            type="integer"
+            column="id">
+            <generator class="identity" />
+        </id>
+        <property name="goalId"
+                  type="integer"
+                  column="GOAL_ID" />
+        <property name="permitTimePeriodId"
+                  type="integer"
+                  column="PERMIT_TIME_PERIOD_ID" />
+        <property name="complete"
+                  type="boolean"
+                  column="IS_COMPLETE" />
+        <property name="createTimestamp"
+                  type="timestamp"
+                  column="create_ts" />
+        <property name="updateTimestamp"
+                  type="timestamp"
+                  column="update_ts" />
+        <property name="updateUserId"
+                  type="integer"
+                  column="update_user_id" />
+    </class>
+</hibernate-mapping>

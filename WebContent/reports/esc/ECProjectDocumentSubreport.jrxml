@@ -1,0 +1,143 @@
+<?xml version="1.0"?>
+<!DOCTYPE jasperReport PUBLIC "-//JasperReports//DTD Report Design//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
+
+<jasperReport 
+		name="ECProjectDocumentSubreport" 
+		pageWidth="595" 
+		pageHeight="842" 
+		columnWidth="515" 
+		columnSpacing="0" 
+		leftMargin="0" 
+		rightMargin="0" 
+		topMargin="0" 
+		bottomMargin="0">
+
+	<reportFont name="Arial_Normal" isDefault="true" fontName="Arial" size="12" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Bold" isDefault="false" fontName="Arial" size="12" isBold="true" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Italic" isDefault="false" fontName="Arial" size="12" isItalic="true" pdfFontName="Helvetica-Oblique" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Bold_Italic" isDefault="false" fontName="Arial" size="12" isItalic="true" isBold="true" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Small" isDefault="true" fontName="Arial" size="10" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Small_Bold" isDefault="false" fontName="Arial" size="10" isBold="true" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Small_Italic" isDefault="false" fontName="Arial" size="10" isItalic="true" pdfFontName="Helvetica-Oblique" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Small_Bold_Italic" isDefault="false" fontName="Arial" size="10" isItalic="true" isBold="true" pdfFontName="Helvetica-Oblique" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+
+	<parameter name="ProjectId" class="java.lang.Integer"/>
+
+<queryString><![CDATA[SELECT P.ID PROJECT_ID, PD.ID DOCUMENT_ID, PD.NAME DOCUMENT_NAME, PD.COMMENT DOCUMENT_COMMENT
+FROM EC_PROJECT P LEFT OUTER JOIN EC_PROJECT_DOCUMENT PD ON P.ID = PD.PROJECT_ID
+WHERE P.ID = $P{ProjectId}]]></queryString>
+
+	<field name="PROJECT_ID" class="java.lang.Integer"/>
+	<field name="DOCUMENT_ID" class="java.lang.Integer"/>
+	<field name="DOCUMENT_NAME" class="java.lang.String"/>
+	<field name="DOCUMENT_COMMENT" class="java.lang.String"/>
+	
+	<group name="ProjectDocumentsTitle">
+		<groupExpression>
+			$F{PROJECT_ID}
+		</groupExpression>
+		<groupHeader>
+			<band height="22">
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="10" y="0" width="100" height="16"/>
+					<textElement verticalAlignment="Bottom">
+						<font reportFont="Arial_Bold" size="14"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String">
+						<![CDATA["Documents"]]>
+					</textFieldExpression>
+				</textField>
+				<line>
+					<reportElement x="10" y="17" width="505" height="0"/>
+					<graphicElement pen="Thin"/>
+				</line>
+			</band>
+		</groupHeader>
+		<groupFooter>
+		</groupFooter>
+	</group>
+
+	<group name="ProjectNoDocuments">
+		<groupExpression>
+			$F{PROJECT_ID}
+		</groupExpression>
+		<groupHeader>
+			<band height="20">
+				<printWhenExpression>new java.lang.Boolean($F{DOCUMENT_ID} == null)</printWhenExpression>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="10" y="0" width="505" height="15"/>
+					<textElement>
+						<font reportFont="Arial_Normal"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String">
+						<![CDATA["No Documents Attached"]]>
+					</textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+		</groupFooter>
+	</group>
+
+	<group name="ProjectDocumentsHeader">
+		<groupExpression>
+			$F{PROJECT_ID}
+		</groupExpression>
+		<groupHeader>
+			<band height="16">
+				<printWhenExpression>new java.lang.Boolean($F{DOCUMENT_ID} != null)</printWhenExpression>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="10" y="0" width="85" height="15"/>
+					<textElement>
+						<font reportFont="Arial_Bold"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String">
+						<![CDATA["Name"]]>
+					</textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="255" y="0" width="85" height="15"/>
+					<textElement>
+						<font reportFont="Arial_Bold"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String">
+						<![CDATA["Comment"]]>
+					</textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+		</groupFooter>
+	</group>
+
+	<group name="ProjectDocumentDetail">
+		<groupExpression>
+			$F{DOCUMENT_ID}
+		</groupExpression>
+		<groupHeader>
+			<band height="18">
+				<printWhenExpression>new java.lang.Boolean($F{DOCUMENT_ID} != null)</printWhenExpression>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="10" y="0" width="240" height="15"/>
+					<textElement>
+						<font reportFont="Arial_Normal"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String">
+						<![CDATA[$F{DOCUMENT_NAME}]]>
+					</textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="255" y="0" width="260" height="15"/>
+					<textElement>
+						<font reportFont="Arial_Normal"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String">
+						<![CDATA[$F{DOCUMENT_COMMENT}]]>
+					</textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+		</groupFooter>
+	</group>
+</jasperReport>

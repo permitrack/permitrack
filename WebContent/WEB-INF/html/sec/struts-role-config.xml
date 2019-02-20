@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?><!DOCTYPE struts-config PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 1.3//EN"
+    "http://struts.apache.org/dtds/struts-config_1_3.dtd">
+<struts-config>
+    <form-beans>
+        <form-bean name="RoleEVForm"
+                   type="com.sehinc.security.action.role.RoleEVForm" />
+        <form-bean name="RoleECForm"
+                   type="com.sehinc.security.action.role.RoleECForm" />
+        <form-bean name="RoleForm"
+                   type="org.apache.struts.validator.DynaValidatorForm">
+            <form-property name="name"
+                           type="java.lang.String" />
+            <form-property name="id"
+                           type="java.lang.Integer" />
+            <form-property name="clientId"
+                           type="java.lang.Integer" />
+            <form-property name="code"
+                           type="java.lang.Integer" />
+        </form-bean>
+    </form-beans>
+    <global-forwards>
+        <forward name="role.list.page"
+                 path="/rolelistpageaction.do"
+                 redirect="true" />
+    </global-forwards>
+    <action-mappings>
+        <action path="/rolelistpageaction"
+                type="com.sehinc.security.action.role.RoleListPageAction"
+                name="RoleForm"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="role.list.page.tiles" />
+        </action>
+        <action path="/roleecviewpageaction"
+                type="com.sehinc.security.action.role.RoleECViewPageAction"
+                name="RoleECForm"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="role.ec.view.page.tiles" />
+        </action>
+        <action path="/roleeccreatepageaction"
+                type="com.sehinc.security.action.role.RoleECCreatePageAction"
+                name="RoleECForm"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="role.ec.create.page.tiles" />
+        </action>
+        <action path="/roleeccreateaction"
+                type="com.sehinc.security.action.role.RoleECCreateAction"
+                name="RoleECForm"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="/rolelistpageaction.do"
+                     redirect="true" />
+        </action>
+        <action path="/roleeceditpageaction"
+                type="com.sehinc.security.action.role.RoleECEditPageAction"
+                name="RoleECForm"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="role.ec.edit.page.tiles" />
+        </action>
+        <action path="/roleeceditaction"
+                type="com.sehinc.security.action.role.RoleECEditAction"
+                name="RoleECForm"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="/rolelistpageaction.do"
+                     redirect="true" />
+        </action>
+        <action path="/roleecdeleteaction"
+                type="com.sehinc.security.action.role.RoleECDeleteAction"
+                name="RoleECForm"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="/rolelistpageaction.do"
+                     redirect="true" />
+        </action>
+        <action path="/roleevviewpageaction"
+                type="com.sehinc.security.action.role.RoleEVViewPageAction"
+                name="RoleEVForm"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="role.ev.view.page.tiles" />
+        </action>
+        <action path="/roleevcreatepageaction"
+                type="com.sehinc.security.action.role.RoleEVCreatePageAction"
+                name="RoleEVForm"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="role.ev.create.page.tiles" />
+        </action>
+        <action path="/roleevcreateaction"
+                type="com.sehinc.security.action.role.RoleEVCreateAction"
+                name="RoleEVForm"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="/rolelistpageaction.do"
+                     redirect="true" />
+        </action>
+        <action path="/roleeveditpageaction"
+                type="com.sehinc.security.action.role.RoleEVEditPageAction"
+                name="RoleEVForm"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="role.ev.edit.page.tiles" />
+        </action>
+        <action path="/roleeveditaction"
+                type="com.sehinc.security.action.role.RoleEVEditAction"
+                name="RoleEVForm"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="/rolelistpageaction.do"
+                     redirect="true" />
+        </action>
+        <action path="/roleevdeleteaction"
+                type="com.sehinc.security.action.role.RoleEVDeleteAction"
+                name="RoleEVForm"
+                scope="request"
+                validate="false">
+            <forward name="continue"
+                     path="/rolelistpageaction.do"
+                     redirect="true" />
+        </action>
+    </action-mappings>
+    <controller processorClass="org.apache.struts.action.RequestProcessor"
+                contentType="text/html" />
+    <plug-in className="org.apache.struts.tiles.TilesPlugin">
+        <set-property property="definitions-config"
+                      value="/WEB-INF/html/tiles-defs.xml, /WEB-INF/html/sec/tiles-role-defs.xml" />
+        <set-property property="definitions-debug"
+                      value="2" />
+        <set-property property="definitions-parser-details"
+                      value="2" />
+        <set-property property="definitions-parser-validate"
+                      value="true" />
+        <set-property property="moduleAware"
+                      value="true" />
+    </plug-in>
+    <plug-in className="org.apache.struts.validator.ValidatorPlugIn">
+        <set-property property="pathnames"
+                      value="/org/apache/struts/validator/validator-rules.xml" />
+    </plug-in>
+</struts-config>

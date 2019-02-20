@@ -1,0 +1,38 @@
+<meta http-equiv="Content-Type"
+      content="text/html; charset=ISO-8859-1">
+<HTML>
+    <HEAD>
+        <TITLE>Default Form</TITLE>
+        <SCRIPT TYPE="text/javascript"
+                LANGUAGE="JavaScript">
+            function passXML()
+            {
+                //var theResponse = 'whatever the connector writes here';
+                // parent.MapFrame.processXML(theResponse); //connector replaces function name
+            }
+        </SCRIPT>
+    </HEAD>
+    <BODY BGCOLOR="White"
+          onload="passXML()">
+        <P>
+        <FORM ACTION=""
+              METHOD="POST"
+              name="theForm">
+            <INPUT TYPE="Hidden"
+                   NAME="ArcXMLRequest"
+                   SIZE="40">
+            <INPUT TYPE="Hidden"
+                   NAME="JavaScriptFunction"
+                   VALUE="parent.MapFrame.processXML">
+            <INPUT TYPE="Hidden"
+                   NAME="RedirectURL"
+                   VALUE="">
+            <INPUT TYPE="Hidden"
+                   NAME="BgColor"
+                   VALUE="#000000">
+            <INPUT TYPE="Hidden"
+                   NAME="FormCharset"
+                   VALUE="UTF-8">
+        </FORM>
+    </BODY>
+</HTML>

@@ -1,0 +1,40 @@
+<?xml version="1.0"?><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <!--
+            Auto-generated mapping file from
+            the hibernate.org cfg2hbm engine
+    -->
+    <class name="com.sehinc.portal.db.info.InfoEnhancements"
+           table="INFO_ENHANCEMENTS">
+        <id name="id"
+            type="integer">
+            <column name="ID" />
+            <generator class="identity" />
+        </id>
+        <property name="infoVersionId"
+                  type="string"
+                  column="INFO_VERSION_ID" />
+        <property name="message"
+                  type="string"
+                  column="MESSAGE" />
+        <many-to-one name="status"
+                     class="com.sehinc.erosioncontrol.db.code.StatusCodeData"
+                     column="STATUS_CD"
+                     lazy="false" />
+        <property name="createTimestamp"
+                  type="timestamp"
+                  column="CREATE_TS" />
+        <property name="updateTimestamp"
+                  type="timestamp"
+                  column="UPDATE_TS" />
+        <property name="updateUserId"
+                  type="integer"
+                  column="UPDATE_USER_ID" />
+    </class>
+    <query name="com.sehinc.portal.db.info.InfoEnhancements.byVersionId">
+        from com.sehinc.portal.db.info.InfoEnhancements as infoEnhancements
+        where infoVersionId.status.code = :statusCode
+        and infoVersionId = :versionId
+    </query>
+</hibernate-mapping>

@@ -1,0 +1,221 @@
+<?xml version="1.0"?>
+<!DOCTYPE jasperReport PUBLIC "-//JasperReports//DTD Report Design//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
+
+<jasperReport name="SourcesByAsset_Report" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<parameter name="clientId" class="java.lang.Integer"/>
+	<queryString>
+		<![CDATA[select s.*,
+			       source.description src_desc,
+                               source.part_number src_num,
+                               source.batch_number src_batch
+			from (
+				select t.*,
+				       a_source.source_id,
+				       convert(VARCHAR, a_source.active_ts,1) active_date,
+				       convert(VARCHAR, a_source.inactive_ts,1) inactive_date
+				from (
+					select 	asset.id a_id,
+						asset.number a_number,
+						asset.name a_name,
+						asset.description a_desc
+					from env_asset asset
+					where asset.CLIENT_ID = $P{clientId}
+
+					and   asset.status_cd = 1
+					GROUP BY asset.id,
+						asset.number,
+						asset.name,
+						asset.description
+				      ) as t
+				LEFT JOIN env_asset_source a_source
+				ON a_source.asset_id = t.a_id
+				GROUP BY t.a_id,
+					 t.a_number,
+					 t.a_name,
+					 t.a_desc,
+				         a_source.source_id,
+					 a_source.active_ts,
+					 a_source.inactive_ts) as s
+			LEFT JOIN env_source source
+			ON source.id = s.source_id
+			GROUP BY s.a_id,
+				 s.a_number,
+				 s.a_name,
+				 s.a_desc,
+				 s.source_id,
+				 s.active_date,
+				 s.inactive_date,
+                                 source.description,
+                                 source.part_number,
+                                 source.batch_number]]>
+	</queryString>
+	<field name="a_id" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="a_number" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="a_name" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="a_desc" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="source_id" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="active_date" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="inactive_date" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="src_desc" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="src_num" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="src_batch" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<group name="assets">
+		<groupExpression><![CDATA[$F{a_id}]]></groupExpression>
+		<groupHeader>
+			<band height="94">
+				<staticText>
+					<reportElement x="12" y="12" width="75" height="20"/>
+					<textElement>
+						<font fontName="Arial" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Asset number:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="12" y="32" width="75" height="20"/>
+					<textElement>
+						<font fontName="Arial" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Name:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="12" y="52" width="75" height="20"/>
+					<textElement>
+						<font fontName="Arial" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Description:]]></text>
+				</staticText>
+				<textField isBlankWhenNull="true">
+					<reportElement x="87" y="32" width="158" height="20"/>
+					<textElement>
+						<font fontName="Arial"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{a_name}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="87" y="12" width="158" height="20"/>
+					<textElement>
+						<font fontName="Arial"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{a_number}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="87" y="52" width="158" height="20"/>
+					<textElement>
+						<font fontName="Arial"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{a_desc}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="50" y="72" width="120" height="20" isRemoveLineWhenBlank="true">
+						<printWhenExpression><![CDATA[($F{src_desc} != null)? Boolean.TRUE : Boolean.FALSE]]></printWhenExpression>
+					</reportElement>
+					<textElement verticalAlignment="Bottom">
+						<font fontName="Arial" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Source description]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="170" y="72" width="120" height="20" isRemoveLineWhenBlank="true">
+						<printWhenExpression><![CDATA[($F{src_desc} != null) ? Boolean.TRUE : Boolean.FALSE]]></printWhenExpression>
+					</reportElement>
+					<textElement verticalAlignment="Bottom">
+						<font fontName="Arial" isBold="true"/>
+					</textElement>
+					<text><![CDATA[ Part Number]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="290" y="72" width="120" height="20" isRemoveLineWhenBlank="true">
+						<printWhenExpression><![CDATA[($F{src_desc} != null) ? Boolean.TRUE : Boolean.FALSE]]></printWhenExpression>
+					</reportElement>
+					<textElement verticalAlignment="Bottom">
+						<font fontName="Arial" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Batch Number]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="410" y="72" width="66" height="20" isRemoveLineWhenBlank="true">
+						<printWhenExpression><![CDATA[($F{src_desc} != null) ? Boolean.TRUE : Boolean.FALSE]]></printWhenExpression>
+					</reportElement>
+					<textElement verticalAlignment="Bottom">
+						<font fontName="Arial" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Active Date]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="477" y="72" width="71" height="20" isRemoveLineWhenBlank="true">
+						<printWhenExpression><![CDATA[($F{src_desc} != null) ? Boolean.TRUE : Boolean.FALSE]]></printWhenExpression>
+					</reportElement>
+					<textElement verticalAlignment="Bottom">
+						<font fontName="Arial" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Inactive Date]]></text>
+				</staticText>
+				<line>
+					<reportElement x="48" y="92" width="500" height="2" isRemoveLineWhenBlank="true">
+						<printWhenExpression><![CDATA[($F{src_desc} != null) ? Boolean.TRUE : Boolean.FALSE]]></printWhenExpression>
+					</reportElement>
+				</line>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="sources">
+		<groupExpression><![CDATA[$F{source_id}]]></groupExpression>
+		<groupHeader>
+			<band height="20">
+				<textField isBlankWhenNull="true">
+					<reportElement x="51" y="0" width="120" height="20" isRemoveLineWhenBlank="true"/>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{src_desc}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="171" y="0" width="120" height="20" isRemoveLineWhenBlank="true"/>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{src_num}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="291" y="0" width="120" height="20" isRemoveLineWhenBlank="true"/>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{src_batch}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="411" y="0" width="66" height="20" isRemoveLineWhenBlank="true"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{active_date}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="478" y="0" width="71" height="20" isRemoveLineWhenBlank="true"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{inactive_date}]]></textFieldExpression>
+				</textField>
+				<line>
+					<reportElement x="49" y="18" width="500" height="2" isRemoveLineWhenBlank="true">
+						<printWhenExpression><![CDATA[($F{src_desc} != null) ? Boolean.TRUE : Boolean.FALSE]]></printWhenExpression>
+					</reportElement>
+				</line>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="7"/>
+		</groupFooter>
+	</group>
+</jasperReport>

@@ -1,0 +1,40 @@
+<?xml version="1.0"?><!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping>
+    <!-- -->
+    <class name="com.sehinc.common.db.option.DataElement"
+           table="DATA_ELEMENT">
+        <id name="id"
+            type="integer"
+            column="id">
+            <generator class="identity" />
+        </id>
+        <property name="name"
+                  type="string"
+                  column="NAME" />
+        <property name="description"
+                  type="string"
+                  column="DESCRIPTION" />
+        <property name="type"
+                  type="string"
+                  column="[TYPE]" />
+        <many-to-one name="capModule"
+                     class="com.sehinc.common.db.security.CapModule"
+                     column="CAP_MODULE_ID"
+                     lazy="false" />
+        <set name="dataElementOptionValueList"
+             table="DATA_ELEMENT_OPTION_VALUE"
+             inverse="true"
+             cascade="all-delete-orphan"
+             sort="com.sehinc.common.db.option.DataElementOptionValueComparator">
+            <key column="DATA_ELEMENT_ID" />
+            <one-to-many class="com.sehinc.common.db.option.DataElementOptionValue" />
+        </set>
+    </class>
+    <query name="com.sehinc.common.db.option.DataElement.optionValueByCapModuleId">
+        select dataElement.dataElementOptionValueList
+        from com.sehinc.common.db.option.DataElement as dataElement
+        where dataElement.name = :name and dataElement.capModule.id = :capModuleId
+    </query>
+</hibernate-mapping>

@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE jasperReport PUBLIC "-//JasperReports//DTD Report Design//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
+
+<jasperReport name="SemiAnnualReport_Header" pageWidth="820" pageHeight="595"
+orientation="Landscape" columnWidth="800" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="10">
+	<parameter name="PermitDetailId" class="java.lang.Integer"/>
+	<parameter name="PermitName" class="java.lang.String"/>
+	<parameter name="PermitDetailName" class="java.lang.String"/>
+	<parameter name="ClientName" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[EXEC sp_asset_names_by_permit_detail @permitDetailId = $P{PermitDetailId}]]>
+	</queryString>
+	<field name="ASSET_LIST" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<detail>
+		<band height="57">
+			<textField>
+				<reportElement x="0" y="0" width="800" height="57"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["The " + $P{ClientName} + " facility met the applicable requirements of " + $P{PermitName} + " for the " + $P{PermitDetailName} + " affected sources (" + $F{ASSET_LIST} + ")"]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

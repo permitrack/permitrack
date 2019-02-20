@@ -1,0 +1,30 @@
+<?xml version="1.0"?><!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping>
+    <class name="com.sehinc.common.db.forms.ElementDomainData"
+           table="ELEMENT_DOMAIN">
+        <id name="id"
+            type="integer"
+            column="ELEMENT_DOMAIN_ID">
+            <generator class="identity" />
+        </id>
+        <property name="elementId"
+                  type="integer"
+                  column="ELEMENT_ID" />
+        <property name="domainId"
+                  type="integer"
+                  column="DOMAIN_ID" />
+        <property name="defaultDomainValueId"
+                  type="integer"
+                  column="DEFAULT_DOMAIN_VALUE_ID" />
+        <property name="allowSelect"
+                  type="string"
+                  column="ALLOW_SELECT" />
+    </class>
+    <query name="com.sehinc.common.db.forms.ElementDomainData.byElementId">
+        from com.sehinc.common.db.forms.ElementDomainData as elementDomain
+        where elementDomain.elementId = :elementId
+    </query>
+</hibernate-mapping>
+

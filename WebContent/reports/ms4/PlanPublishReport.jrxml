@@ -1,0 +1,636 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="PlanPublishReport" pageWidth="595" pageHeight="842" columnWidth="515" leftMargin="40" rightMargin="40" topMargin="50" bottomMargin="50" isTitleNewPage="true" scriptletClass="com.sehinc.stormwater.action.report.PlanReportScriptlet">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="1558"/>
+	<reportFont name="Arial_Normal" isDefault="true" fontName="Arial" size="12" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="true"/>
+	<reportFont name="Arial_Bold" isDefault="false" fontName="Arial" size="12" isBold="true" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="true"/>
+	<reportFont name="Arial_Italic" isDefault="false" fontName="Arial" size="12" isItalic="true" pdfFontName="Helvetica-Oblique" pdfEncoding="Cp1252" isPdfEmbedded="true"/>
+	<reportFont name="Arial_Small" isDefault="true" fontName="Arial" size="10" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="true"/>
+	<reportFont name="Arial_Small_Bold" isDefault="false" fontName="Arial" size="10" isBold="true" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="true"/>
+	<reportFont name="Arial_Small_Italic" isDefault="false" fontName="Arial" size="10" isItalic="true" pdfFontName="Helvetica-Oblique" pdfEncoding="Cp1252" isPdfEmbedded="true"/>
+	<reportFont name="Arial_Hyperlink" isDefault="false" fontName="Arial" size="10" isItalic="true" isUnderline="true" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="true"/>
+	<parameter name="ReportTitle" class="java.lang.String"/>
+	<parameter name="TimeFrameDescription" class="java.lang.String"/>
+	<parameter name="ClientName" class="java.lang.String"/>
+	<parameter name="ClientWebSite" class="java.lang.String"/>
+	<parameter name="PlanName" class="java.lang.String"/>
+	<parameter name="PlanId" class="java.lang.Integer"/>
+	<parameter name="ShowActivity" class="java.lang.Boolean"/>
+	<parameter name="ReportQuery" class="java.lang.String"/>
+	<parameter name="PlanHeaderSubreport" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="BaseURL" class="java.lang.String"/>
+	<parameter name="PublishURI" class="java.lang.String"/>
+	<parameter name="LogoLocation" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[$P!{ReportQuery}]]>
+	</queryString>
+	<field name="PLAN_ID" class="java.lang.Integer"/>
+	<field name="MCM_ID" class="java.lang.Integer"/>
+	<field name="MCM_NAME" class="java.lang.String"/>
+	<field name="MCM_NUMBER" class="java.lang.Integer"/>
+	<field name="MCM_REQUIRED_DESCRIPTION" class="java.lang.String"/>
+	<field name="MCM_NECESSARY_DESCRIPTION" class="java.lang.String"/>
+	<field name="MCM_OWNER_ID" class="java.lang.Integer"/>
+	<field name="BMP_ID" class="java.lang.Integer"/>
+	<field name="BMP_NAME" class="java.lang.String"/>
+	<field name="BMP_SECTION" class="java.lang.String"/>
+	<field name="BMP_NUMBER" class="java.lang.Integer"/>
+	<field name="BMP_FIELD_VALUE1" class="java.lang.String"/>
+	<field name="BMP_FIELD_TYPE1" class="java.lang.Integer"/>
+	<field name="BMP_FIELD_VALUE2" class="java.lang.String"/>
+	<field name="BMP_FIELD_TYPE2" class="java.lang.Integer"/>
+	<field name="BMP_FIELD_VALUE3" class="java.lang.String"/>
+	<field name="BMP_FIELD_TYPE3" class="java.lang.Integer"/>
+	<field name="BMP_FIELD_VALUE4" class="java.lang.String"/>
+	<field name="BMP_FIELD_TYPE4" class="java.lang.Integer"/>
+	<field name="BMP_FIELD_VALUE5" class="java.lang.String"/>
+	<field name="BMP_FIELD_TYPE5" class="java.lang.Integer"/>
+	<field name="BMP_REQUIRED" class="java.lang.Integer"/>
+	<field name="BMP_OWNER_ID" class="java.lang.Integer"/>
+	<field name="GOAL_ID" class="java.lang.Integer"/>
+	<field name="GOAL_NAME" class="java.lang.String"/>
+	<field name="GOAL_NUMBER" class="java.lang.Integer"/>
+	<field name="GOAL_DESCRIPTION" class="java.lang.String"/>
+	<field name="GOAL_OWNER_ID" class="java.lang.Integer"/>
+	<field name="GOAL_ACTIVITY_ID" class="java.lang.Integer"/>
+	<field name="GOAL_ACTIVITY_DESCRIPTION" class="java.lang.String"/>
+	<field name="GOAL_ACTIVITY_NAME" class="java.lang.String"/>
+	<field name="GOAL_ACTIVITY_OWNER_ID" class="java.lang.Integer"/>
+	<field name="GOAL_ACTIVITY_DATE" class="java.util.Date"/>
+	<field name="GOAL_ACTIVITY_FILE_LOCATION_ID" class="java.lang.Integer"/>
+	<field name="GOAL_ACTIVITY_FILE_LOCATION_NAME" class="java.lang.String"/>
+	<field name="GOAL_ACTIVITY_FILE_LOCATION_LOCATION" class="java.lang.String"/>
+	<variable name="MCMNumber" class="java.lang.Integer" resetType="Group" resetGroup="MCMNameGroup" calculation="System">
+		<initialValueExpression><![CDATA[($V{MCMNumber} != null)?(new Integer($V{MCMNumber}.intValue() + 1)):(new Integer(1))]]></initialValueExpression>
+	</variable>
+	<variable name="BMPNumber" class="java.lang.Integer" resetType="Group" resetGroup="BMPNameGroup" calculation="System">
+		<initialValueExpression><![CDATA[($V{BMPNumber} != null)?(new Integer($V{BMPNumber}.intValue() + 1)):(new Integer(1))]]></initialValueExpression>
+	</variable>
+	<variable name="GoalNumber" class="java.lang.Integer" resetType="Group" resetGroup="GoalNameGroup" calculation="System">
+		<initialValueExpression><![CDATA[($V{GoalNumber} != null)?(new Integer($V{GoalNumber}.intValue() + 1)):(new Integer(1))]]></initialValueExpression>
+	</variable>
+	<variable name="GoalPermitTimePeriodActiveList" class="java.lang.String"/>
+	<variable name="GoalPermitTimePeriodCompleteList" class="java.lang.String"/>
+	<group name="MCMNameGroup" isStartNewPage="true">
+		<groupExpression><![CDATA[$F{MCM_ID}]]></groupExpression>
+		<groupHeader>
+			<band height="20" splitType="Stretch">
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="0" y="0" width="515" height="20"/>
+					<textElement>
+						<font reportFont="Arial_Bold" size="14"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{MCM_NUMBER} + "  " + $F{MCM_NAME}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="MCMRequiredGroup">
+		<groupExpression><![CDATA[$F{MCM_ID}]]></groupExpression>
+		<groupHeader>
+			<band height="250" splitType="Stretch">
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="0" y="0" width="180" height="40"/>
+					<textElement verticalAlignment="Top">
+						<font reportFont="Arial_Bold"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[new String("Responsible Staff / Position:")]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="182" y="0" width="333" height="40">
+						<printWhenExpression><![CDATA[new Boolean($F{MCM_OWNER_ID}.intValue() > 0)]]></printWhenExpression>
+					</reportElement>
+					<textElement verticalAlignment="Top">
+						<font reportFont="Arial_Normal"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[((com.sehinc.stormwater.action.report.PlanReportScriptlet)$P{REPORT_SCRIPTLET}).getOwnerContactInfo($F{MCM_OWNER_ID})]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="0" y="40" width="100" height="20"/>
+					<textElement verticalAlignment="Bottom">
+						<font reportFont="Arial_Bold"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[new String("Description")]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="0" y="60" width="405" height="190"/>
+					<textElement markup="html">
+						<font fontName="Arial"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{MCM_REQUIRED_DESCRIPTION}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="PageBreak" minHeightToStartNewPage="700">
+		<groupExpression><![CDATA[$F{BMP_ID}]]></groupExpression>
+		<groupHeader>
+			<band height="1" splitType="Stretch">
+				<textField>
+					<reportElement x="0" y="0" width="1" height="1"/>
+					<textElement/>
+				</textField>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="BMPNameGroup">
+		<groupExpression><![CDATA[$F{BMP_ID}]]></groupExpression>
+		<groupHeader>
+			<band height="100" splitType="Stretch">
+				<printWhenExpression><![CDATA[new java.lang.Boolean(($F{BMP_ID} != null))]]></printWhenExpression>
+				<textField isBlankWhenNull="true">
+					<reportElement x="0" y="0" width="515" height="20">
+						<printWhenExpression><![CDATA[new Boolean($V{BMPNumber}.intValue() == 1)]]></printWhenExpression>
+					</reportElement>
+					<textElement verticalAlignment="Bottom">
+						<font reportFont="Arial_Bold"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA["Best Management Practices"]]></textFieldExpression>
+				</textField>
+				<line>
+					<reportElement x="0" y="20" width="515" height="1">
+						<printWhenExpression><![CDATA[new Boolean($V{BMPNumber}.intValue() == 1)]]></printWhenExpression>
+					</reportElement>
+				</line>
+				<textField isBlankWhenNull="true">
+					<reportElement x="0" y="21" width="515" height="20"/>
+					<textElement verticalAlignment="Middle">
+						<font reportFont="Arial_Bold"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[((com.sehinc.stormwater.action.report.PlanReportScriptlet)$P{REPORT_SCRIPTLET}).formatBMPIdentifier($F{PLAN_ID}, $F{MCM_NUMBER}, $F{BMP_NUMBER}, $F{BMP_SECTION}) + "  " + $F{BMP_NAME}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="0" y="41" width="180" height="40"/>
+					<textElement verticalAlignment="Top">
+						<font reportFont="Arial_Bold"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[new String("Responsible Staff / Position:")]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="182" y="41" width="323" height="40">
+						<printWhenExpression><![CDATA[new Boolean($F{BMP_OWNER_ID}.intValue() > 0)]]></printWhenExpression>
+					</reportElement>
+					<textElement verticalAlignment="Top">
+						<font reportFont="Arial_Normal"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[((com.sehinc.stormwater.action.report.PlanReportScriptlet)$P{REPORT_SCRIPTLET}).getOwnerContactInfo($F{BMP_OWNER_ID})]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="0" y="80" width="55" height="15"/>
+					<textElement>
+						<font reportFont="Arial_Bold"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA["Required:"]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="57" y="80" width="100" height="15"/>
+					<textElement>
+						<font reportFont="Arial_Normal"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[($F{BMP_REQUIRED}.intValue() > 0)?("Yes"):("No")]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="NoBMPGroup">
+		<groupExpression><![CDATA[$F{BMP_ID}]]></groupExpression>
+		<groupHeader>
+			<band height="41" splitType="Stretch">
+				<printWhenExpression><![CDATA[new java.lang.Boolean(($F{BMP_ID} == null))]]></printWhenExpression>
+				<textField isBlankWhenNull="true">
+					<reportElement x="0" y="0" width="515" height="25"/>
+					<textElement verticalAlignment="Bottom">
+						<font reportFont="Arial_Bold"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA["Best Management Practices"]]></textFieldExpression>
+				</textField>
+				<line>
+					<reportElement x="0" y="25" width="515" height="1"/>
+				</line>
+				<textField isBlankWhenNull="true">
+					<reportElement x="0" y="26" width="515" height="15"/>
+					<textElement>
+						<font reportFont="Arial_Normal"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA["None"]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="BMPGroupType1">
+		<groupExpression><![CDATA[$F{BMP_ID}]]></groupExpression>
+		<groupHeader>
+			<band height="50" splitType="Stretch">
+				<printWhenExpression><![CDATA[new java.lang.Boolean(($F{BMP_ID} != null && com.sehinc.common.util.StringUtil.hasContent($F{BMP_FIELD_VALUE1})))]]></printWhenExpression>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="0" y="0" width="505" height="20"/>
+					<textElement verticalAlignment="Bottom">
+						<font reportFont="Arial_Bold"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[com.sehinc.stormwater.db.plan.BMPFieldType.getNameById($F{BMP_FIELD_TYPE1})]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="0" y="20" width="505" height="30"/>
+					<textElement textAlignment="Left" verticalAlignment="Top" markup="html">
+						<font fontName="Arial"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{BMP_FIELD_VALUE1}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="BMPGroupType2">
+		<groupExpression><![CDATA[$F{BMP_ID}]]></groupExpression>
+		<groupHeader>
+			<band height="50" splitType="Stretch">
+				<printWhenExpression><![CDATA[new java.lang.Boolean(($F{BMP_ID} != null && com.sehinc.common.util.StringUtil.hasContent($F{BMP_FIELD_VALUE2})))]]></printWhenExpression>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="0" y="0" width="505" height="20"/>
+					<textElement verticalAlignment="Bottom">
+						<font reportFont="Arial_Bold"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[com.sehinc.stormwater.db.plan.BMPFieldType.getNameById($F{BMP_FIELD_TYPE2})]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="0" y="20" width="505" height="30"/>
+					<textElement markup="html">
+						<font fontName="Arial"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{BMP_FIELD_VALUE2}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="BMPGroupType3">
+		<groupExpression><![CDATA[$F{BMP_ID}]]></groupExpression>
+		<groupHeader>
+			<band height="50" splitType="Stretch">
+				<printWhenExpression><![CDATA[new java.lang.Boolean(($F{BMP_ID} != null && com.sehinc.common.util.StringUtil.hasContent($F{BMP_FIELD_VALUE3})))]]></printWhenExpression>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="0" y="0" width="505" height="20"/>
+					<textElement verticalAlignment="Bottom">
+						<font reportFont="Arial_Bold"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[com.sehinc.stormwater.db.plan.BMPFieldType.getNameById($F{BMP_FIELD_TYPE3})]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="0" y="20" width="505" height="30"/>
+					<textElement verticalAlignment="Top" markup="html">
+						<font fontName="Arial"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{BMP_FIELD_VALUE3}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="BMPGroupType4">
+		<groupExpression><![CDATA[$F{BMP_ID}]]></groupExpression>
+		<groupHeader>
+			<band height="50" splitType="Stretch">
+				<printWhenExpression><![CDATA[new java.lang.Boolean(($F{BMP_ID} != null && com.sehinc.common.util.StringUtil.hasContent($F{BMP_FIELD_VALUE4})))]]></printWhenExpression>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="0" y="0" width="505" height="20"/>
+					<textElement verticalAlignment="Bottom">
+						<font reportFont="Arial_Bold"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[com.sehinc.stormwater.db.plan.BMPFieldType.getNameById($F{BMP_FIELD_TYPE4})]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="0" y="20" width="505" height="30"/>
+					<textElement verticalAlignment="Top" markup="html">
+						<font fontName="Arial"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{BMP_FIELD_VALUE4}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="BMPGroupType5">
+		<groupExpression><![CDATA[$F{BMP_ID}]]></groupExpression>
+		<groupHeader>
+			<band height="50" splitType="Stretch">
+				<printWhenExpression><![CDATA[new java.lang.Boolean(($F{BMP_ID} != null && com.sehinc.common.util.StringUtil.hasContent($F{BMP_FIELD_VALUE5})))]]></printWhenExpression>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="0" y="0" width="505" height="20"/>
+					<textElement verticalAlignment="Bottom">
+						<font reportFont="Arial_Bold"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[com.sehinc.stormwater.db.plan.BMPFieldType.getNameById($F{BMP_FIELD_TYPE5})]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="0" y="20" width="505" height="30"/>
+					<textElement verticalAlignment="Top" markup="html">
+						<font fontName="Arial"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{BMP_FIELD_VALUE5}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="GoalHeaderGroup" minHeightToStartNewPage="100">
+		<groupExpression><![CDATA[$F{GOAL_ID}]]></groupExpression>
+		<groupHeader>
+			<band height="21" splitType="Stretch">
+				<printWhenExpression><![CDATA[new Boolean($V{GoalNumber}.intValue() == 1)]]></printWhenExpression>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="0" y="0" width="505" height="20"/>
+					<textElement verticalAlignment="Bottom">
+						<font reportFont="Arial_Small_Bold"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[new String("Goals")]]></textFieldExpression>
+				</textField>
+				<line>
+					<reportElement x="0" y="20" width="505" height="1"/>
+				</line>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="NoGoalsGroup" minHeightToStartNewPage="15">
+		<groupExpression><![CDATA[$F{GOAL_ID}]]></groupExpression>
+		<groupHeader>
+			<band height="15" splitType="Stretch">
+				<printWhenExpression><![CDATA[new java.lang.Boolean(($F{GOAL_ID} == null))]]></printWhenExpression>
+				<textField isBlankWhenNull="true">
+					<reportElement x="0" y="0" width="505" height="15"/>
+					<textElement verticalAlignment="Middle">
+						<font reportFont="Arial_Small"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA["None"]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="GoalNameGroup">
+		<groupExpression><![CDATA[$F{GOAL_ID}]]></groupExpression>
+		<groupHeader>
+			<band height="120" splitType="Stretch">
+				<printWhenExpression><![CDATA[new java.lang.Boolean(($F{GOAL_ID} != null))]]></printWhenExpression>
+				<textField isBlankWhenNull="true">
+					<reportElement x="0" y="0" width="495" height="20"/>
+					<textElement verticalAlignment="Bottom">
+						<font reportFont="Arial_Small_Bold"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[((com.sehinc.stormwater.action.report.PlanReportScriptlet)$P{REPORT_SCRIPTLET}).formatGoalIdentifier($F{PLAN_ID}, $F{MCM_NUMBER}, $F{BMP_NUMBER}, $F{BMP_SECTION}, $F{GOAL_NUMBER}) + "  " + $F{GOAL_NAME}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="0" y="20" width="180" height="40"/>
+					<textElement verticalAlignment="Top">
+						<font reportFont="Arial_Small_Bold"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[new String("Responsible Staff / Position:")]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="182" y="20" width="343" height="40">
+						<printWhenExpression><![CDATA[new Boolean($F{GOAL_OWNER_ID}.intValue() > 0)]]></printWhenExpression>
+					</reportElement>
+					<textElement>
+						<font reportFont="Arial_Small"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[((com.sehinc.stormwater.action.report.PlanReportScriptlet)$P{REPORT_SCRIPTLET}).getOwnerContactInfo($F{GOAL_OWNER_ID})]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="0" y="65" width="485" height="15"/>
+					<textElement verticalAlignment="Bottom">
+						<font reportFont="Arial_Small_Bold"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[new String("Description")]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="0" y="80" width="485" height="20"/>
+					<textElement markup="html">
+						<font fontName="Arial"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{GOAL_DESCRIPTION}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="GoalStatusGroup">
+		<groupExpression><![CDATA[$F{GOAL_ID}]]></groupExpression>
+		<groupHeader>
+			<band height="45" splitType="Stretch">
+				<printWhenExpression><![CDATA[new java.lang.Boolean(((com.sehinc.stormwater.action.report.PlanReportScriptlet)$P{REPORT_SCRIPTLET}).setPermitTimePeriod($F{PLAN_ID}, $F{GOAL_ID}).intValue() > 0)]]></printWhenExpression>
+				<textField isBlankWhenNull="true">
+					<reportElement x="0" y="13" width="65" height="12"/>
+					<textElement>
+						<font reportFont="Arial_Small_Bold"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA["Planned:"]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="0" y="29" width="65" height="12"/>
+					<textElement>
+						<font reportFont="Arial_Small_Bold"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA["Complete:"]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="65" y="13" width="400" height="12"/>
+					<textElement>
+						<font reportFont="Arial_Small"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$V{GoalPermitTimePeriodActiveList}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="65" y="29" width="400" height="12"/>
+					<textElement>
+						<font reportFont="Arial_Small"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$V{GoalPermitTimePeriodCompleteList}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="NoActivityGroup" minHeightToStartNewPage="32">
+		<groupExpression><![CDATA[$F{GOAL_ID}]]></groupExpression>
+		<groupHeader>
+			<band height="32" splitType="Stretch">
+				<printWhenExpression><![CDATA[new java.lang.Boolean(($F{GOAL_ACTIVITY_ID} == null) && ($P{ShowActivity}.booleanValue()))]]></printWhenExpression>
+				<textField isBlankWhenNull="true">
+					<reportElement x="0" y="0" width="80" height="15"/>
+					<textElement>
+						<font reportFont="Arial_Small_Bold"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA["Activity Date"]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="90" y="0" width="170" height="15"/>
+					<textElement>
+						<font reportFont="Arial_Small_Bold"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA["Name"]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="280" y="0" width="235" height="15"/>
+					<textElement>
+						<font reportFont="Arial_Small_Bold"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA["Description"]]></textFieldExpression>
+				</textField>
+				<line>
+					<reportElement x="0" y="15" width="485" height="1"/>
+				</line>
+				<textField isBlankWhenNull="true">
+					<reportElement x="0" y="16" width="485" height="15"/>
+					<textElement verticalAlignment="Middle">
+						<font reportFont="Arial_Small"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA["None"]]></textFieldExpression>
+				</textField>
+				<line>
+					<reportElement x="0" y="31" width="485" height="1"/>
+				</line>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="ActivityGroup" minHeightToStartNewPage="32">
+		<groupExpression><![CDATA[$F{GOAL_ID}]]></groupExpression>
+		<groupHeader>
+			<band height="16" splitType="Stretch">
+				<printWhenExpression><![CDATA[new java.lang.Boolean(($F{GOAL_ACTIVITY_ID} != null) && ($P{ShowActivity}.booleanValue()))]]></printWhenExpression>
+				<textField isBlankWhenNull="true">
+					<reportElement x="0" y="0" width="80" height="15"/>
+					<textElement>
+						<font reportFont="Arial_Small_Bold"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA["Activity Date"]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="110" y="0" width="170" height="15"/>
+					<textElement>
+						<font reportFont="Arial_Small_Bold"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA["Name"]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="GoalActivityGroup" minHeightToStartNewPage="32">
+		<groupExpression><![CDATA[$F{GOAL_ACTIVITY_ID}]]></groupExpression>
+		<groupHeader>
+			<band height="16" splitType="Stretch">
+				<printWhenExpression><![CDATA[new java.lang.Boolean(($F{GOAL_ACTIVITY_ID} != null) && ($P{ShowActivity}.booleanValue()))]]></printWhenExpression>
+				<textField isStretchWithOverflow="true" pattern="MM/dd/yyyy" isBlankWhenNull="true">
+					<reportElement x="0" y="0" width="80" height="15"/>
+					<textElement>
+						<font reportFont="Arial_Small"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[com.sehinc.common.util.DateUtil.mdyDate($F{GOAL_ACTIVITY_DATE})]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="110" y="0" width="405" height="15"/>
+					<textElement>
+						<font reportFont="Arial_Small"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{GOAL_ACTIVITY_NAME}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="ActivityGroup1" minHeightToStartNewPage="32">
+		<groupExpression><![CDATA[$F{GOAL_ID}]]></groupExpression>
+		<groupHeader>
+			<band height="16" splitType="Stretch">
+				<printWhenExpression><![CDATA[new java.lang.Boolean(($F{GOAL_ACTIVITY_ID} != null) && ($P{ShowActivity}.booleanValue()))]]></printWhenExpression>
+				<textField isBlankWhenNull="true">
+					<reportElement x="1" y="0" width="235" height="15"/>
+					<textElement>
+						<font reportFont="Arial_Small_Bold"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA["Description"]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="GoalActivityGroup1" minHeightToStartNewPage="32">
+		<groupExpression><![CDATA[$F{GOAL_ACTIVITY_ID}]]></groupExpression>
+		<groupHeader>
+			<band height="16" splitType="Stretch">
+				<printWhenExpression><![CDATA[new java.lang.Boolean(($F{GOAL_ACTIVITY_ID} != null) && ($P{ShowActivity}.booleanValue()))]]></printWhenExpression>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="1" y="0" width="514" height="15"/>
+					<textElement markup="html">
+						<font fontName="Arial"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{GOAL_ACTIVITY_DESCRIPTION}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="5" splitType="Stretch">
+				<printWhenExpression><![CDATA[new java.lang.Boolean(($F{GOAL_ACTIVITY_ID} != null) && ($P{ShowActivity}.booleanValue()))]]></printWhenExpression>
+				<line>
+					<reportElement x="0" y="4" width="485" height="1"/>
+				</line>
+			</band>
+		</groupFooter>
+	</group>
+	<title>
+		<band height="300" splitType="Stretch">
+			<subreport isUsingCache="true">
+				<reportElement x="0" y="0" width="515" height="250"/>
+				<subreportParameter name="PlanName">
+					<subreportParameterExpression><![CDATA[$P{PlanName}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="LogoLocation">
+					<subreportParameterExpression><![CDATA[$P{LogoLocation}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="PlanId">
+					<subreportParameterExpression><![CDATA[$P{PlanId}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="ClientWebSite">
+					<subreportParameterExpression><![CDATA[$P{ClientWebSite}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="ClientName">
+					<subreportParameterExpression><![CDATA[$P{ClientName}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="TimeFrameDescription">
+					<subreportParameterExpression><![CDATA[$P{TimeFrameDescription}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="ReportTitle">
+					<subreportParameterExpression><![CDATA[$P{ReportTitle}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{PlanHeaderSubreport}]]></subreportExpression>
+			</subreport>
+		</band>
+	</title>
+	<detail>
+		<band height="16" splitType="Stretch">
+			<printWhenExpression><![CDATA[new java.lang.Boolean(($F{GOAL_ACTIVITY_FILE_LOCATION_ID} != null) && ($P{ShowActivity}.booleanValue()))]]></printWhenExpression>
+			<textField isBlankWhenNull="true">
+				<reportElement x="110" y="0" width="160" height="15"/>
+				<textElement textAlignment="Right">
+					<font reportFont="Arial_Small"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["File Attachment"]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true" hyperlinkType="Reference">
+				<reportElement positionType="Float" x="280" y="0" width="235" height="15" isRemoveLineWhenBlank="true"/>
+				<textElement lineSpacing="Single">
+					<font reportFont="Arial_Hyperlink"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{GOAL_ACTIVITY_FILE_LOCATION_NAME}]]></textFieldExpression>
+				<hyperlinkReferenceExpression><![CDATA[$P{BaseURL} + $P{PublishURI} + "activity" + $F{GOAL_ACTIVITY_ID} + "/" +$F{GOAL_ACTIVITY_FILE_LOCATION_NAME}]]></hyperlinkReferenceExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="40" splitType="Stretch">
+			<line>
+				<reportElement x="0" y="5" width="515" height="1"/>
+			</line>
+			<textField>
+				<reportElement x="200" y="20" width="80" height="15"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.lang.String"><![CDATA["Page " + String.valueOf(($V{PAGE_NUMBER} == null)?new Integer(1):$V{PAGE_NUMBER}) + " of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="280" y="20" width="75" height="15"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[" " + String.valueOf($V{PAGE_NUMBER})]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

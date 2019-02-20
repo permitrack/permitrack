@@ -1,0 +1,187 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+    <HEAD>
+        <TITLE>Untitled</TITLE>
+        <META http-equiv=Pragma
+              content=NO-CACHE>
+        <META http-equiv=CACHE-CONTROL
+              content=NO-CACHE>
+        <META http-equiv=PRAGMAS
+              content=NO-CACHE>
+        <META http-equiv=Content-Type
+              content=text/html;CHARSET=iso-8859-1>
+        <META content="MSHTML 6.00.2800.1226"
+              name=GENERATOR>
+        <SCRIPT TYPE="text/javascript"
+                LANGUAGE="JavaScript"
+                SRC="./javascript/dataViewVariables.jsp"></SCRIPT>
+        <SCRIPT language=javascript>
+            function checkvalue()
+            {
+                var StreetNum = document.addressfinder.housenumber.value;
+                var StreetName = document.addressfinder.streetname.value.toUpperCase();
+                parent.MapFrame.setActiveLayerByName(parent.MapFrame.theParcelLayerName);
+                addressSearch =
+                "";
+                streetNumberSelect =
+                "";
+                streetNameSelect =
+                "";
+                if ((StreetNum
+                    != "")
+                    && (theStreetNumField
+                    != ""))
+                {
+                    streetNumberSelect =
+                    theStreetNumField
+                        + ' = "'
+                        + StreetNum
+                        + '"';
+                }
+                if ((StreetName
+                    != "")
+                    && (theStreetNameField
+                    != ""))
+                {
+                    streetNameSelect =
+                    "UPPER("
+                        + theStreetNameField
+                        + ') LIKE "%'
+                        + StreetName
+                        + '%"';
+                }
+                if (streetNumberSelect
+                        != ""
+                    && streetNameSelect
+                    != "")
+                {
+                    addressSearch =
+                    streetNumberSelect
+                        + " AND "
+                        + streetNameSelect;
+                } else if (streetNameSelect
+                    != "")
+                {
+                    addressSearch =
+                    streetNameSelect;
+                } else if (streetNumberSelect
+                    != "")
+                {
+                    addressSearch =
+                    streetNumberSelect;
+                }
+                //alert(addressSearch);
+                parent.MapFrame.zoomTomySelection(addressSearch);
+            }
+            function SetInitialFocus()
+            {
+                document.addressfinder.housenumber.focus();
+            }
+            window.onload =
+            SetInitialFocus;
+        </SCRIPT>
+        <LINK href="gis.css"
+              type=text/css
+              rel=stylesheet>
+        <STYLE type=text/css>A
+        {
+            TEXT-DECORATION: none
+        }
+
+        A:hover
+        {
+            TEXT-DECORATION: underline
+        }</STYLE>
+    </HEAD>
+    <BODY bgColor=#ffffff>
+        <TABLE cellSpacing=0
+               cellPadding=0
+               bgColor=#CCCC99
+               width="102%"
+               border=0>
+            <TBODY>
+                <TR height="1"></TR>
+                <TR>
+                    <TD width="150">
+                        <TABLE bgColor=#CCCC99
+                               width="100"
+                               border=0
+                               cellSpacing=0
+                               cellPadding=0>
+                            <TR>
+                                <A href="./addresssearch.htm"
+                                   target=SearchFrame
+                                   border=0>
+                                    <IMG height=22
+                                         src="./images/tabon_add.gif"
+                                         width=100
+                                         border=0
+                                         name=tabaddress>
+                                </A>
+                                <br>
+                                <A href="./namesearch.htm"
+                                   target=SearchFrame
+                                   border=0>
+                                    <IMG height=22
+                                         src="./images/taboff_name.gif"
+                                         width=100
+                                         border=0
+                                         name=tabname>
+                                </A>
+                                <br>
+                                <A href="./pinsearch.htm"
+                                   target=SearchFrame
+                                   border=0>
+                                    <IMG height=22
+                                         src="./images/taboff_pin.gif"
+                                         width=100
+                                         border=0
+                                         name=tabpin>
+                                </A>
+                            </TR>
+                        </TABLE>
+                    </TD>
+                    <td width="2"></td>
+                    <TD width="600"
+                        class=nav>
+                        <B>Find By Address:</B>
+                        <BR>
+                        <BR>
+                        <B>Do not enter street direction</B>
+                        (E,W,N,S)
+                        <B>or street suffix</B>
+                        (st, ave, blvd, etc.). A
+                        list of potential matches will be displayed.
+                    </TD>
+                    <td width="2"></td>
+                    <TD width="300"
+                        Align="Right"
+                        class=nav>
+                        <FORM name="addressfinder"
+                              onsubmit="checkvalue()">House Number:
+                            <INPUT type=integer
+                                   maxLength=15
+                                   size=15
+                                   name=housenumber>
+                            <BR>
+                                                      Street Name:
+                            <INPUT maxLength=40
+                                   size=15
+                                   name=streetname>
+                            <BR>
+                            <INPUT type=submit
+                                   value=Search>
+                        </FORM>
+                    </TD>
+                    <TD width="15"></TD>
+                </TR>
+                <TR height="1"></TR>
+            </TBODY>
+        </TABLE>
+    </BODY>
+</HTML>
+
+
+
+
+

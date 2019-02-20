@@ -1,0 +1,314 @@
+<html>
+    <head>
+        <title>JavaScript: Ctrl, Alt, Shift keys</title>
+        <script language="JavaScript">
+            <!--
+            function mouseDown(e)
+            {
+                var ctrlPressed = 0;
+                var altPressed = 0;
+                var shiftPressed = 0;
+                if (parseInt(navigator.appVersion)
+                    > 3)
+                {
+                    alert(" :"
+                              + navigator.appName
+                              + ": ")
+                    if (navigator.appName
+                        == "Netscape")
+                    {
+                        alert("netscape")
+                        alert("modifiers = "
+                                  + e.modifiers)
+                        var mString = (e.modifiers
+                            + 32).toString(2).substring(3,
+                                                        6);
+                        alert("mString = "
+                                  + mString)
+                        shiftPressed =
+                        (mString.charAt(0)
+                            == "1");
+                        ctrlPressed =
+                        (mString.charAt(1)
+                            == "1");
+                        altPressed =
+                        (mString.charAt(2)
+                            == "1");
+                        self.status =
+                        "modifiers="
+                            + e.modifiers
+                            + " ("
+                            + mString
+                            + ")"
+                    }
+                    else
+                    {
+                        shiftPressed =
+                        event.shiftKey;
+                        altPressed =
+                        event.altKey;
+                        ctrlPressed =
+                        event.ctrlKey;
+                        self.status =
+                        ""
+                            + "shiftKey="
+                            + event.shiftKey
+                            + ", altKey="
+                            + event.altKey
+                            + ", ctrlKey="
+                            + event.ctrlKey
+                    }
+                    if (shiftPressed
+                            || altPressed
+                        || ctrlPressed)
+                    {
+                        alert("Mouse clicked with the following keys:\n"
+                                  + (shiftPressed
+                            ? "Shift "
+                            : "")
+                                  + (altPressed
+                            ? "Alt "
+                            : "")
+                                  + (ctrlPressed
+                            ? "Ctrl "
+                            : ""))
+                    }
+                    else
+                    {
+                        alert("Mouse clicked with the following keys:\n")
+                    }
+                }
+                return true;
+            }
+            if (parseInt(navigator.appVersion)
+                > 3)
+            {
+                document.onmousedown =
+                mouseDown;
+                if (navigator.appName
+                    == "Netscape")
+                {
+                    document.captureEvents(Event.MOUSEDOWN);
+                }
+            }//-->
+        </script>
+    </head>
+    <body onload="if(top.changeAD){top.changeAD()
+}"
+          bgcolor="#ffffff"
+          link="#0000ff"
+          text="#000000"
+          vlink="#660099">
+        <a name="top"></a>
+        <h3>
+            <font color="#000099"
+                  face="Verdana,Arial,Helvetica,sans-serif">
+                Ctrl, Alt, Shift Keys
+            </font>
+        </h3>
+        <script language="JavaScript">
+            <!--
+            if (parent.location
+                    == self.location
+                    && (""
+                + self.location).toLowerCase().indexOf(".chm")
+                == -1
+                && (""
+                + self.location).toLowerCase().indexOf("~hh")
+                == -1)
+            {
+                document.writeln('<small><a href="index.htm"><img border=0 alt="Table of Contents" width=17 height=15 src="../hi-icons/82.gif">Table of Contents</a></small>');
+            }//-->
+        </script>
+        <small>
+            <a href="http://www.javascripter.net/faq/index.htm">
+                <img alt="Table of Contents"
+                     src="ctrl_alt_files/82.gif"
+                     border="0"
+                     height="15"
+                     width="17">
+                Table of Contents
+            </a>
+        </small>
+        <p>
+            <b>Question:</b>
+            How do I detect mouse events with Ctrl, Alt, and Shift keys?
+        </p>
+        <p>
+            <b>Answer:</b>
+            In both Netscape Navigator and Internet Explorer
+            (versions 4.0 and newer)
+            your script can check whether a mouse event occurred while the user was
+            pressing any of the Ctrl, Alt, Shift keys.
+            Such a script will work
+            <i>in both browsers</i>
+            for the
+            <code>
+                <font face="Courier New,Courier">MouseDown</font>
+            </code>
+            and
+            <code>
+                <font face="Courier New,Courier">MouseUp</font>
+            </code>
+            events.
+            For other mouse events, it may or may not work, depending on the browser.
+        </p>
+        <p>
+            To implement the Ctrl / Alt / Shift detection, you can use the
+            <a href="#properties">Explorer-specific properties</a>
+            <code>
+                <font face="Courier New,Courier">event.ctrlKey</font>
+            </code>
+            ,
+            <code>
+                <font face="Courier New,Courier">event.altKey</font>
+            </code>
+            ,
+            <code>
+                <font face="Courier New,Courier">event.shiftKey</font>
+            </code>
+            and the
+            <a href="#properties">Navigator-specific property</a>
+            <code>
+                <font face="Courier New,Courier">event.modifiers</font>
+            </code>
+            .
+            Click anywhere on this page while pressing
+            any combination of Ctrl, Alt, and Shift keys,
+            and the key combination will be detected by the following script
+            (that resides in the
+            <code>&lt;HEAD&gt;</code>
+            section of the page).
+            Every time you click the mouse, you'll see the
+            <code>
+                <font face="Courier New,Courier">event.ctrlKey</font>
+            </code>
+            ,
+            <code>
+                <font face="Courier New,Courier">event.altKey</font>
+            </code>
+            ,
+            <code>
+                <font face="Courier New,Courier">event.shiftKey</font>
+            </code>
+            or
+            <code>
+                <font face="Courier New,Courier">event.modifiers</font>
+            </code>
+            properties on the browser's status bar.
+        </p>
+        <pre>&lt;script language="JavaScript"&gt;
+             &lt;!--
+             function mouseDown(e) {
+             var ctrlPressed=0;
+             var altPressed=0;
+             var shiftPressed=0;
+             if (parseInt(navigator.appVersion)&gt;3) {
+             if (navigator.appName=="Netscape") {
+             var mString =(e.modifiers+32).toString(2).substring(3,6);
+             shiftPressed=(mString.charAt(0)=="1");
+             ctrlPressed =(mString.charAt(1)=="1");
+             altPressed =(mString.charAt(2)=="1");
+             self.status="modifiers="+e.modifiers+" ("+mString+")"
+             }
+             else {
+             shiftPressed=event.shiftKey;
+             altPressed =event.altKey;
+             ctrlPressed =event.ctrlKey;
+             self.status=""
+             + "shiftKey="+event.shiftKey
+             +", altKey=" +event.altKey
+             +", ctrlKey=" +event.ctrlKey
+             }
+             if (shiftPressed || altPressed || ctrlPressed)
+             alert ("Mouse clicked with the following keys:\n"
+             + (shiftPressed ? "Shift ":"")
+             + (altPressed ? "Alt " :"")
+             + (ctrlPressed ? "Ctrl " :"")
+             )
+             }
+             return true;
+             }
+             if (parseInt(navigator.appVersion)&gt;3) {
+             document.onmousedown = mouseDown;
+             if (navigator.appName=="Netscape")
+             document.captureEvents(Event.MOUSEDOWN);
+             }
+             //--&gt;
+             &lt;/script&gt;
+        </pre>
+        <a name="properties"></a>
+        The Explorer-specific properties
+        <code>
+            <font face="Courier New,Courier">event.ctrlKey</font>
+        </code>
+        ,
+        <code>
+            <font face="Courier New,Courier">event.altKey</font>
+        </code>
+        ,
+        <code>
+            <font face="Courier New,Courier">event.shiftKey</font>
+        </code>
+        are self-explanatory. Their values are
+        <code>
+            <font face="Courier New,Courier">true</font>
+        </code>
+        if the corresponding keys are pressed, and
+        <code>
+            <font face="Courier New,Courier">false</font>
+        </code>
+        otherwise.
+        The Navigator-specific
+        <code>
+            <font face="Courier New,Courier">event.modifiers</font>
+        </code>
+        property is more tricky.
+        Depending on the actual key combination, this property has the following values:
+        <pre>Alt only modifiers=1 (001)
+             Ctrl only modifiers=2 (010)
+             Ctrl+Alt modifiers=3 (011)
+             Shift only modifiers=4 (100)
+             Shift+Alt modifiers=5 (101)
+             Shift+Ctrl modifiers=6 (110)
+             Shift+Alt+Ctrl modifiers=7 (111)
+             None of these keys modifiers=0 (000)
+        </pre>
+        Thus, in the binary representation of the
+        <code>
+            <font face="Courier New,Courier">event.modifiers</font>
+        </code>
+        value:
+        <li>the least significant (right) bit is 1 if Alt is pressed
+        </li>
+        <li>the second bit is 1 if Ctrl is pressed
+        </li>
+        <li>the third bit is 1 if Shift is pressed
+            <!--
+            Note that <i>the right Alt key</i> may behave as Ctrl+Alt
+            (that is, the corresponding
+            <code><font face="Courier New,Courier">event.modifiers</font></code>
+            value may be 3 instead of 1).
+            -->
+            <p>
+                <small>
+                    <a href="javascript:history.back()">
+                        <img src="ctrl_alt_files/shortcut.gif"
+                             alt="Back"
+                             border="0">
+                        Back
+                    </a>
+                </small>
+                <!--Page content ends here; don't delete this comment.-->
+            </p>
+            <p>
+                <font face="Arial,Helvetica,sans-serif"
+                      size="2">
+                    JavaScripter.net.
+                    <a href="http://www.javascripter.net/faq/legal.htm">Copyright</a>
+                    © 1999-2000, Alexei Kourbatov
+                </font>
+            </p>
+        </li>
+    </body>
+</html>

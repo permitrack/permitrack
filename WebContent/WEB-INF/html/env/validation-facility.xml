@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?><!DOCTYPE form-validation PUBLIC
+    "-//Apache Software Foundation//DTD Commons Validator Rules Configuration 1.0//EN"
+    "http://jakarta.apache.org/commons/dtds/validator_1_0.dtd">
+<form-validation>
+    <global>
+        <constant>
+            <constant-name>zip</constant-name>
+            <constant-value>^\d{5}(-\d{4})?$</constant-value>
+        </constant>
+    </global>
+    <formset>
+        <form name="FacilityForm">
+            <field property="name"
+                   depends="required, maxlength">
+                <arg0 key="facility.name" />
+                <arg1 name="maxlength"
+                      key="${var:maxlength}"
+                      resource="false" />
+                <var>
+                    <var-name>maxlength</var-name>
+                    <var-value>50</var-value>
+                </var>
+            </field>
+            <field property="description"
+                   depends="maxlength">
+                <arg0 key="facility.desc" />
+                <arg1 name="maxlength"
+                      key="${var:maxlength}"
+                      resource="false" />
+                <var>
+                    <var-name>maxlength</var-name>
+                    <var-value>200</var-value>
+                </var>
+            </field>
+            <field property="activeTsText"
+                   depends="date">
+                <arg0 key="facility.active.date" />
+                <var>
+                    <var-name>datePatternStrict</var-name>
+                    <var-value>MM/dd/yyyy</var-value>
+                </var>
+            </field>
+            <field property="inactiveTsText"
+                   depends="date">
+                <arg0 key="facility.inactive.date" />
+                <var>
+                    <var-name>datePatternStrict</var-name>
+                    <var-value>MM/dd/yyyy</var-value>
+                </var>
+            </field>
+            <field property="dailyHrsOp"
+                   depends="required,integer,intRange">
+                <arg0 key="facility.daily.hrs.op" />
+                <arg1 name="intRange"
+                      key="${var:min}"
+                      resource="false" />
+                <arg2 name="intRange"
+                      key="${var:max}"
+                      resource="false" />
+                <var>
+                    <var-name>min</var-name>
+                    <var-value>0</var-value>
+                </var>
+                <var>
+                    <var-name>max</var-name>
+                    <var-value>24</var-value>
+                </var>
+            </field>
+            <field property="daysOpWeek"
+                   depends="required,integer,intRange">
+                <arg0 key="facility.days.op.week" />
+                <arg1 name="intRange"
+                      key="${var:min}"
+                      resource="false" />
+                <arg2 name="intRange"
+                      key="${var:max}"
+                      resource="false" />
+                <var>
+                    <var-name>min</var-name>
+                    <var-value>0</var-value>
+                </var>
+                <var>
+                    <var-name>max</var-name>
+                    <var-value>7</var-value>
+                </var>
+            </field>
+            <field property="weeksOpYear"
+                   depends="required,integer,intRange">
+                <arg0 key="facility.weeks.op.year" />
+                <arg1 name="intRange"
+                      key="${var:min}"
+                      resource="false" />
+                <arg2 name="intRange"
+                      key="${var:max}"
+                      resource="false" />
+                <var>
+                    <var-name>min</var-name>
+                    <var-value>0</var-value>
+                </var>
+                <var>
+                    <var-name>max</var-name>
+                    <var-value>53</var-value>
+                </var>
+            </field>
+            <field property="physAddrZip"
+                   depends="maxlength,mask">
+                <arg0 key="facility.address.zip" />
+                <arg1 name="maxlength"
+                      key="${var:maxlength}"
+                      resource="false" />
+                <var>
+                    <var-name>maxlength</var-name>
+                    <var-value>10</var-value>
+                </var>
+                <var>
+                    <var-name>mask</var-name>
+                    <var-value>${zip}</var-value>
+                </var>
+            </field>
+            <field property="mailAddrZip"
+                   depends="maxlength,mask">
+                <arg0 key="facility.address.zip" />
+                <arg1 name="maxlength"
+                      key="${var:maxlength}"
+                      resource="false" />
+                <var>
+                    <var-name>maxlength</var-name>
+                    <var-value>10</var-value>
+                </var>
+                <var>
+                    <var-name>mask</var-name>
+                    <var-value>${zip}</var-value>
+                </var>
+            </field>
+        </form>
+    </formset>
+</form-validation>

@@ -1,0 +1,15 @@
+1. files in . (this folder)
+2. files in .\functions
+3. files in .\functions\2
+4. files in .\2
+
+
+
+
+use
+
+for %f in (*.sql) do sqlcmd /dsehtechdb /E /i"%f"
+
+within command prompt
+
+* didn't work within bat file

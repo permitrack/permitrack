@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="NE_Air_Form_2_0" pageWidth="550" pageHeight="842" columnWidth="550" leftMargin="0" rightMargin="0" topMargin="10" bottomMargin="10">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<reportFont name="Arial_Normal" isDefault="true" fontName="Arial" size="12" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Bold" isDefault="false" fontName="Arial" size="12" isBold="true" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Italic" isDefault="false" fontName="Arial" size="12" isItalic="true" pdfFontName="Helvetica-Oblique" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Bold_Italic" isDefault="false" fontName="Arial" size="12" isBold="true" isItalic="true" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Small" isDefault="true" fontName="Arial" size="10" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Small_Bold" isDefault="false" fontName="Arial" size="10" isBold="true" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Small_Italic" isDefault="false" fontName="Arial" size="10" isItalic="true" pdfFontName="Helvetica-Oblique" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Small_Bold_Italic" isDefault="false" fontName="Arial" size="10" isBold="true" isItalic="true" pdfFontName="Helvetica-Oblique" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<parameter name="FacilityId" class="java.lang.Integer"/>
+	<parameter name="year" class="java.lang.Integer"/>
+	<parameter name="NE_Air_Form_0_0_Facility_Info_File" class="java.io.File"/>
+	<parameter name="NE_Air_Form_2_0_Air_Pollution_File" class="java.io.File"/>
+	<parameter name="NE_Air_Form_2_0_Facility_Op_File" class="java.io.File"/>
+	<parameter name="NE_Air_Form_2_0_Operating_File" class="java.io.File"/>
+	<parameter name="NE_Air_Form_2_0_Stack_File" class="java.io.File"/>
+	<queryString>
+		<![CDATA[exec sp_assets_for_facility_throughputs @yearInt = $P{year}, @facilityId = $P{FacilityId}]]>
+	</queryString>
+	<field name="ASSET_ID" class="java.lang.Integer"/>
+	<field name="GAS" class="java.lang.Integer"/>
+	<field name="PAINT" class="java.lang.Integer"/>
+	<field name="ASSET_NUMBER" class="java.lang.String"/>
+	<field name="ASSET_NAME" class="java.lang.String"/>
+	<field name="ASSET_RATING" class="java.math.BigDecimal"/>
+	<field name="ASSET_PCT_OF_TOTAL" class="java.math.BigDecimal"/>
+	<field name="ASSET_ACTUAL_MMCF" class="java.math.BigDecimal"/>
+	<field name="ASSET_ACTUAL_MMBTU" class="java.math.BigDecimal"/>
+	<field name="ASSET_ACTUAL_PAINT" class="java.math.BigDecimal"/>
+	<group name="RepeatingForm" isStartNewPage="true">
+		<groupExpression><![CDATA[$F{ASSET_ID}]]></groupExpression>
+		<groupHeader>
+			<band height="502" splitType="Stretch">
+				<staticText>
+					<reportElement x="0" y="0" width="550" height="19"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font reportFont="Arial_Bold" size="12"/>
+					</textElement>
+					<text><![CDATA[FORM 2.0 PROCESS INFORMATION]]></text>
+				</staticText>
+				<subreport>
+					<reportElement x="0" y="19" width="550" height="60"/>
+					<subreportParameter name="year">
+						<subreportParameterExpression><![CDATA[$P{year}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="FacilityId">
+						<subreportParameterExpression><![CDATA[$P{FacilityId}]]></subreportParameterExpression>
+					</subreportParameter>
+					<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					<subreportExpression class="java.io.File"><![CDATA[$P{NE_Air_Form_0_0_Facility_Info_File}]]></subreportExpression>
+				</subreport>
+				<subreport>
+					<reportElement x="0" y="89" width="550" height="93"/>
+					<subreportParameter name="FacilityId">
+						<subreportParameterExpression><![CDATA[$P{FacilityId}]]></subreportParameterExpression>
+					</subreportParameter>
+					<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					<subreportExpression class="java.io.File"><![CDATA[$P{NE_Air_Form_2_0_Facility_Op_File}]]></subreportExpression>
+				</subreport>
+				<subreport>
+					<reportElement x="0" y="192" width="550" height="113"/>
+					<subreportParameter name="ASSET_ACTUAL_MMBTU">
+						<subreportParameterExpression><![CDATA[$F{ASSET_ACTUAL_MMBTU}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="ASSET_PCT_OF_TOTAL">
+						<subreportParameterExpression><![CDATA[$F{ASSET_PCT_OF_TOTAL}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="PAINT">
+						<subreportParameterExpression><![CDATA[$F{PAINT}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="GAS">
+						<subreportParameterExpression><![CDATA[$F{GAS}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="ASSET_ACTUAL_MMCF">
+						<subreportParameterExpression><![CDATA[$F{ASSET_ACTUAL_MMCF}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="ASSET_NUMBER">
+						<subreportParameterExpression><![CDATA[$F{ASSET_NUMBER}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="ASSET_RATING">
+						<subreportParameterExpression><![CDATA[$F{ASSET_RATING}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="ASSET_NAME">
+						<subreportParameterExpression><![CDATA[$F{ASSET_NAME}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="ASSET_ACTUAL_PAINT">
+						<subreportParameterExpression><![CDATA[$F{ASSET_ACTUAL_PAINT}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="ASSET_ID">
+						<subreportParameterExpression><![CDATA[$F{ASSET_ID}]]></subreportParameterExpression>
+					</subreportParameter>
+					<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					<subreportExpression class="java.io.File"><![CDATA[$P{NE_Air_Form_2_0_Operating_File}]]></subreportExpression>
+				</subreport>
+				<subreport>
+					<reportElement x="0" y="315" width="550" height="69"/>
+					<subreportParameter name="ASSET_ID">
+						<subreportParameterExpression><![CDATA[$F{ASSET_ID}]]></subreportParameterExpression>
+					</subreportParameter>
+					<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					<subreportExpression class="java.io.File"><![CDATA[$P{NE_Air_Form_2_0_Air_Pollution_File}]]></subreportExpression>
+				</subreport>
+				<subreport>
+					<reportElement x="0" y="394" width="550" height="108"/>
+					<subreportParameter name="ASSET_ID">
+						<subreportParameterExpression><![CDATA[$F{ASSET_ID}]]></subreportParameterExpression>
+					</subreportParameter>
+					<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					<subreportExpression class="java.io.File"><![CDATA[$P{NE_Air_Form_2_0_Stack_File}]]></subreportExpression>
+				</subreport>
+			</band>
+		</groupHeader>
+	</group>
+</jasperReport>

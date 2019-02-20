@@ -1,0 +1,52 @@
+<?xml version="1.0"?><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <!--
+            Auto-generated mapping file from
+            the hibernate.org cfg2hbm engine
+    -->
+    <class name="com.sehinc.erosioncontrol.db.project.EcProjectContactType"
+           table="EC_PROJECT_CONTACT_TYPE">
+        <id name="id"
+            type="integer">
+            <column name="ID" />
+            <generator class="identity" />
+        </id>
+        <property name="code"
+                  type="string"
+                  column="CODE" />
+        <property name="name"
+                  type="string"
+                  column="NAME" />
+        <property name="description"
+                  type="string"
+                  column="DESCRIPTION" />
+        <property name="sequence"
+                  type="integer"
+                  column="SEQUENCE" />
+        <property name="clientId"
+                  type="integer"
+                  column="CLIENT_ID" />
+        <property name="isInternal"
+                  type="boolean"
+                  column="IS_INTERNAL" />
+    </class>
+    <query name="com.sehinc.erosioncontrol.db.project.EcProjectContactType.byClientId">
+        from com.sehinc.erosioncontrol.db.project.EcProjectContactType as projectContactType
+        where projectContactType.clientId = :clientId and
+        projectContactType.isInternal = 0
+        order by projectContactType.sequence ASC
+    </query>
+    <query name="com.sehinc.erosioncontrol.db.project.EcProjectContactType.internalByCode">
+        from com.sehinc.erosioncontrol.db.project.EcProjectContactType as projectContactType
+        where projectContactType.clientId = 0 and
+        projectContactType.isInternal = 1 and
+        projectContactType.code = :code
+    </query>
+    <query name="com.sehinc.erosioncontrol.db.project.EcProjectContact.byCode">
+        from com.sehinc.erosioncontrol.db.project.EcProjectContactType as projectContactType
+        where projectContactType.clientId = :clientId and
+        projectContactType.isInternal = 0 and
+        projectContactType.code = :code
+    </query>
+</hibernate-mapping>

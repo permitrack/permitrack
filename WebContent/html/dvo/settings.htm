@@ -1,0 +1,515 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+    <head>
+        <title>Settings</title>
+        <SCRIPT LANGUAGE="JavaScript"
+                TYPE="text/javascript">
+            var docString = document.location.search;
+            var t;
+            var ScaleBarUnits = "FEET";
+            var MapUnits = "FEET";
+            if (opener)
+            {
+                if (opener.name
+                    == "MapFrame")
+                {
+                    t =
+                    opener.parent.MapFrame;
+                }
+                else
+                {
+                    t =
+                    opener;
+                }
+            }
+            else
+            {
+                if (parent.MapFrame)
+                {
+                    t =
+                    parent.MapFrame;
+                }
+                else
+                {
+                    t =
+                    document;
+                }
+            }
+            function zoomlegend(zoomto)
+            {
+                parent.MapFrame.zoomToScale(zoomto);
+            }
+            function setUnits()
+            {
+                ScaleBarUnits =
+                t.ScaleBarUnits;
+                var f = document.forms[0];
+                var i = f.newMUnits.selectedIndex;
+                var k = f.newMUnits.options[i].value;
+                var m = "FEET";
+                t.ScaleBarUnits =
+                k;
+                if (t.drawScaleBar2)
+                {
+                    switch (k)
+                    {
+                        case "MILES":
+                            t.ScaleBar2Units =
+                            "KILOMETERS";
+                            break;
+                        case "KILOMETERS":
+                            t.ScaleBar2Units =
+                            "MILES";
+                            break;
+                        case "FEET":
+                            t.ScaleBar2Units =
+                            "METERS";
+                            break;
+                        case "METERS":
+                            t.ScaleBar2Units =
+                            "FEET";
+                            break;
+                    }
+                }
+                if (t.setMapUnits)
+                {
+                    i =
+                    f.newMUnits.selectedIndex;
+                    m =
+                    f.newMUnits.options[i].value;
+                    t.MapUnits =
+                    m;
+                }
+                if (t.toolMode
+                    == 20)
+                {
+                    var tDist = convertUnits(t.totalMeasure,
+                                             ScaleBarUnits,
+                                             k);
+                    t.totalMeasure =
+                    tDist;
+                    tDist =
+                    convertUnits(t.currentMeasure,
+                                 ScaleBarUnits,
+                                 k);
+                    t.currentMeasure =
+                    tDist;
+                    t.updateMeasureBox();
+                    if (t.drawScaleBar)
+                    {
+                        t.sendMapXML();
+                    }
+                }
+                else
+                {
+                    if (t.drawScaleBar)
+                    {
+                        t.sendMapXML();
+                    }
+                }
+            }
+            function convertUnits(oldTotal, oldUnits, newUnits)
+            {
+                //alert("In convertunits");
+                var newTotal = 0;
+                if (oldUnits
+                    == "FEET")
+                {
+                    if (newUnits
+                        == "MILES")
+                    {
+                        newTotal =
+                        oldTotal
+                            / 5280;
+                    } else if (newUnits
+                        == "METERS")
+                    {
+                        newTotal =
+                        oldTotal
+                            * (3048
+                            / 10000);
+                    } else if (newUnits
+                        == "KILOMETERS")
+                    {
+                        newTotal =
+                        oldTotal
+                            * (3048
+                            / 10000000);
+                    }
+                } else if (oldUnits
+                    == "MILES")
+                {
+                    if (newUnits
+                        == "FEET")
+                    {
+                        newTotal =
+                        oldTotal
+                            * 5280;
+                    } else if (newUnits
+                        == "METERS")
+                    {
+                        newTotal =
+                        oldTotal
+                            * (1609344
+                            / 1000);
+                    } else if (newUnits
+                        == "KILOMETERS")
+                    {
+                        newTotal =
+                        oldTotal
+                            * (1609344
+                            / 1000000);
+                    }
+                } else if (oldUnits
+                    == "METERS")
+                {
+                    if (newUnits
+                        == "FEET")
+                    {
+                        newTotal =
+                        oldTotal
+                            * (3280839895
+                            / 1000000000);
+                    } else if (newUnits
+                        == "MILES")
+                    {
+                        newTotal =
+                        oldTotal
+                            * (6213711922
+                            / 10000000000000);
+                    } else if (newUnits
+                        == "KILOMETERS")
+                    {
+                        newTotal =
+                        oldTotal
+                            / 1000;
+                    }
+                }
+                else
+                {
+                    if (newUnits
+                        == "FEET")
+                    {
+                        newTotal =
+                        oldTotal
+                            * (3280839885
+                            / 1000000);
+                    } else if (newUnits
+                        == "METERS")
+                    {
+                        newTotal =
+                        oldTotal
+                            * 1000;
+                    } else if (newUnits
+                        == "MILES")
+                    {
+                        newTotal =
+                        oldTotal
+                            * (6213711922
+                            / 10000000000);
+                    }
+                }
+                var u = Math.pow(10,
+                                 t.numDecimals);
+                newTotal =
+                parseInt(newTotal
+                             * u
+                             + (5
+                    / 10))
+                    / u;
+                return newTotal;
+            }
+            function setValues()
+            {
+                var f = document.Measure;
+            }
+        </SCRIPT>
+        <link rel="stylesheet"
+              type="text/css"
+              href="./gis.css">
+    </head>
+    <body language="Javascript1.2"
+          onload="window.focus(); setValues();">
+        <table cellspacing="1"
+               border="0"
+               width="133"
+               style="border-collapse: collapse"
+               bordercolor="#111111">
+            <tr height="20">
+                <td class="help"
+                    width="148"
+                    align="center"
+                    colspan="2">
+                    <p class="bodytitle">Set Zoom Scale:
+                </td>
+            </tr>
+            <tr height="20">
+                <td class="help"
+                    width="148"
+                    align="center"
+                    colspan="2">&nbsp;</td>
+            </tr>
+            <tr height="20">
+                <td class="help"
+                    width="63"
+                    align="center">
+                    <img border="0"
+                         src="./images/zoomin.gif"
+                         width="30"
+                         height="27">
+                </td>
+                <td class="help"
+                    width="85"
+                    align="center">Zoom In
+                </td>
+            </tr>
+            <tr height="20">
+                <td class="help"
+                    width="63"
+                    align="center">
+                    <a href=JavaScript:zoomlegend(2500);
+                       onmouseover="document['fpAnimswapImgFP1'].imgRolln=document['fpAnimswapImgFP1'].src;document['fpAnimswapImgFP1'].src=document['fpAnimswapImgFP1'].lowsrc;"
+                       onmouseout="document['fpAnimswapImgFP1'].src=document['fpAnimswapImgFP1'].imgRolln">
+                        <img border="0"
+                             src="./images/zoombar_off.gif"
+                             id="fpAnimswapImgFP1"
+                             name="fpAnimswapImgFP1"
+                             dynamicanimation="fpAnimswapImgFP1"
+                             lowsrc="./images/zoombar_on.gif"
+                             width="16"
+                             height="10">
+                    </a>
+                </td>
+                <td class="help"
+                    width="85"
+                    align="center">
+                    <a href=JavaScript:zoomlegend(2500);>1:2,500</a>
+                    <br>
+                </td>
+            </tr>
+            <tr height="20">
+                <td class="help"
+                    width="63"
+                    align="center">
+                    <a href=JavaScript:zoomlegend(5000);
+                       onmouseover="document['fpAnimswapImgFP2'].imgRolln=document['fpAnimswapImgFP2'].src;document['fpAnimswapImgFP2'].src=document['fpAnimswapImgFP2'].lowsrc;"
+                       onmouseout="document['fpAnimswapImgFP2'].src=document['fpAnimswapImgFP2'].imgRolln">
+                        <img border="0"
+                             src="./images/zoombar_off.gif"
+                             id="fpAnimswapImgFP2"
+                             name="fpAnimswapImgFP2"
+                             dynamicanimation="fpAnimswapImgFP2"
+                             lowsrc="./images/zoombar_on.gif"
+                             width="16"
+                             height="10">
+                    </a>
+                </td>
+                <td class="help"
+                    width="85"
+                    align="center">
+                    <a href=JavaScript:zoomlegend(5000);>1:5,000</a>
+                    <br>
+                </td>
+            </tr>
+            <tr height="20">
+                <td class="help"
+                    width="63"
+                    align="center">
+                    <a href=JavaScript:zoomlegend(12000);
+                       onmouseover="document['fpAnimswapImgFP3'].imgRolln=document['fpAnimswapImgFP3'].src;document['fpAnimswapImgFP3'].src=document['fpAnimswapImgFP3'].lowsrc;"
+                       onmouseout="document['fpAnimswapImgFP3'].src=document['fpAnimswapImgFP3'].imgRolln">
+                        <img border="0"
+                             src="./images/zoombar_off.gif"
+                             id="fpAnimswapImgFP3"
+                             name="fpAnimswapImgFP3"
+                             dynamicanimation="fpAnimswapImgFP3"
+                             lowsrc="./images/zoombar_on.gif"
+                             width="16"
+                             height="10">
+                    </a>
+                </td>
+                <td class="help"
+                    width="85"
+                    align="center">
+                    <a href=JavaScript:zoomlegend(12000);>1:12,000</a>
+                    <br>
+                </td>
+            </tr>
+            <tr height="20">
+                <td class="help"
+                    width="63"
+                    align="center">
+                    <a href=JavaScript:zoomlegend(24000);
+                       onmouseover="document['fpAnimswapImgFP4'].imgRolln=document['fpAnimswapImgFP4'].src;document['fpAnimswapImgFP4'].src=document['fpAnimswapImgFP4'].lowsrc;"
+                       onmouseout="document['fpAnimswapImgFP4'].src=document['fpAnimswapImgFP4'].imgRolln">
+                        <img border="0"
+                             src="./images/zoombar_off.gif"
+                             id="fpAnimswapImgFP4"
+                             name="fpAnimswapImgFP4"
+                             dynamicanimation="fpAnimswapImgFP4"
+                             lowsrc="./images/zoombar_on.gif"
+                             width="16"
+                             height="10">
+                    </a>
+                </td>
+                <td class="help"
+                    width="85"
+                    align="center">
+                    <a href=JavaScript:zoomlegend(24000);>1:24,000</a>
+                    <br>
+                </td>
+            </tr>
+            <tr height="20">
+                <td class="help"
+                    width="63"
+                    align="center">
+                    <a href=JavaScript:zoomlegend(50000);
+                       onmouseover="document['fpAnimswapImgFP5'].imgRolln=document['fpAnimswapImgFP5'].src;document['fpAnimswapImgFP5'].src=document['fpAnimswapImgFP5'].lowsrc;"
+                       onmouseout="document['fpAnimswapImgFP5'].src=document['fpAnimswapImgFP5'].imgRolln">
+                        <img border="0"
+                             src="./images/zoombar_off.gif"
+                             id="fpAnimswapImgFP5"
+                             name="fpAnimswapImgFP5"
+                             dynamicanimation="fpAnimswapImgFP5"
+                             lowsrc="./images/zoombar_on.gif"
+                             width="16"
+                             height="10">
+                    </a>
+                </td>
+                <td class="help"
+                    width="85"
+                    align="center">
+                    <a href=JavaScript:zoomlegend(50000);> 1:50,000</a>
+                    <br>
+                </td>
+            </tr>
+            <tr height="20">
+                <td class="help"
+                    width="63"
+                    align="center">
+                    <a href=JavaScript:zoomlegend(100000);
+                       onmouseover="document['fpAnimswapImgFP6'].imgRolln=document['fpAnimswapImgFP6'].src;document['fpAnimswapImgFP6'].src=document['fpAnimswapImgFP6'].lowsrc;"
+                       onmouseout="document['fpAnimswapImgFP6'].src=document['fpAnimswapImgFP6'].imgRolln">
+                        <img border="0"
+                             src="./images/zoombar_off.gif"
+                             id="fpAnimswapImgFP6"
+                             name="fpAnimswapImgFP6"
+                             dynamicanimation="fpAnimswapImgFP6"
+                             lowsrc="./images/zoombar_on.gif"
+                             width="16"
+                             height="10">
+                    </a>
+                </td>
+                <td class="help"
+                    width="85"
+                    align="center">
+                    <a href=JavaScript:zoomlegend(100000);>1:100,000</a>
+                    <br>
+                </td>
+            </tr>
+            <tr height="20">
+                <td class="help"
+                    width="63"
+                    align="center">
+                    <a href=JavaScript:zoomlegend(250000);
+                       onmouseover="document['fpAnimswapImgFP7'].imgRolln=document['fpAnimswapImgFP7'].src;document['fpAnimswapImgFP7'].src=document['fpAnimswapImgFP7'].lowsrc;"
+                       onmouseout="document['fpAnimswapImgFP7'].src=document['fpAnimswapImgFP7'].imgRolln">
+                        <img border="0"
+                             src="./images/zoombar_off.gif"
+                             id="fpAnimswapImgFP7"
+                             name="fpAnimswapImgFP7"
+                             dynamicanimation="fpAnimswapImgFP7"
+                             lowsrc="./images/zoombar_on.gif"
+                             width="16"
+                             height="10">
+                </td>
+                <td class="help"
+                    width="85"
+                    align="center">
+                    <a href=JavaScript:zoomlegend(250000);>1:250,000</a>
+                    <br>
+                </td>
+            </tr>
+            <tr height="20">
+                <td class="help"
+                    width="63"
+                    align="center">
+                    <a href=JavaScript:zoomlegend(325293);
+                       onmouseover="document['fpAnimswapImgFP8'].imgRolln=document['fpAnimswapImgFP8'].src;document['fpAnimswapImgFP8'].src=document['fpAnimswapImgFP8'].lowsrc;"
+                       onmouseout="document['fpAnimswapImgFP8'].src=document['fpAnimswapImgFP8'].imgRolln">
+                        <img border="0"
+                             src="./images/zoombar_off.gif"
+                             id="fpAnimswapImgFP8"
+                             name="fpAnimswapImgFP8"
+                             dynamicanimation="fpAnimswapImgFP8"
+                             lowsrc="./images/zoombar_on.gif"
+                             width="16"
+                             height="10">
+                    </a>
+                </td>
+                <td class="help"
+                    width="85"
+                    align="center">
+                    <a href=JavaScript:zoomlegend(325293);>Full Extent</a>
+                    <br>
+                </td>
+            </tr>
+            <tr height="20">
+                <td class="help"
+                    width="63"
+                    align="center">
+                    <img border="0"
+                         src="./images/zoomout.gif"
+                         width="30"
+                         height="28">
+                </td>
+                <td class="help"
+                    width="85"
+                    align="center">Zoom Out
+                </td>
+            </tr>
+        </table>
+        <table cellspacing="1"
+               border="0"
+               width="133"
+               style="border-collapse: collapse"
+               bordercolor="#111111">
+            <tr height="20">
+                <td class="help"
+                    width="148"
+                    align="center"
+                    colspan="2">&nbsp;</td>
+            </tr>
+            <!--
+             <tr height="40">
+               <TD class=nav noWrap>Scale 1:<INPUT maxLength=10 size=10 name=scaletext></TD>
+             </tr>
+            -->
+            <tr height="20">
+                <td class="help"
+                    width="148"
+                    align="left"
+                    colspan="2">
+                    <p class="bodytitle">Display Units:
+                </td>
+            </tr>
+            <tr height="20">
+                <td noWrap>
+                    <FORM ACTION=""
+                          NAME="Measure">
+                        <select name="newMUnits">
+                            <option value="FEET">Feet</option>
+                            <option value="MILES">Miles</option>
+                            <option value="METERS">Meters</option>
+                            <option value="KILOMETERS">Kilometers</option>
+                        </select>
+                        <INPUT TYPE="Button"
+                               NAME="setDU"
+                               VALUE="Set Units"
+                               onclick="setUnits()">
+                    </FORM>
+                </td>
+            </tr>
+        </table>
+    </body>
+</html>

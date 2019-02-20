@@ -1,0 +1,79 @@
+<!DOCTYPE tiles-definitions PUBLIC
+    "-//Apache Software Foundation//DTD Tiles Configuration 1.3//EN"
+    "http://struts.apache.org/dtds/tiles-config_1_3.dtd">
+<tiles-definitions>
+    <definition name="bmpdb.baseLayout"
+                extends="html.baseLayout">
+        <put name="primaryMenu"
+             value="/html/ms4/primarynavigation.jsp" />
+        <put name="secondaryMenu"
+             value="/html/ms4/secondarynavigation.jsp" />
+    </definition>
+    <definition name="bmpdb.baseSplitPanelLayout"
+                extends="html.baseSplitPanelLayout">
+        <put name="primaryMenu"
+             value="/html/ms4/primarynavigation.jsp" />
+        <put name="secondaryMenu"
+             value="/html/ms4/secondarynavigation.jsp" />
+        <put name="leftPanel"
+             value="/html/ms4/bmpdb/bmpdbhierarchy.jsp" />
+        <put name="tertiaryMenu"
+             value="/html/ms4/tertiarynavigation.jsp" />
+    </definition>
+    <definition name="bmpdb.list.page"
+                extends="bmpdb.baseLayout">
+        <put name="title"
+             value="BMP Library List" />
+        <put name="content"
+             value="/html/ms4/bmpdb/bmpdblist.jsp" />
+    </definition>
+    <definition name="bmpdb.new.page1"
+                extends="bmpdb.baseLayout">
+        <put name="title"
+             value="Create New Library BMP" />
+        <put name="content"
+             value="/html/ms4/bmpdb/bmpdbnewstep1.jsp" />
+    </definition>
+    <definition name="bmpdb.new.page2"
+                extends="bmpdb.baseLayout">
+        <put name="title"
+             value="Create New Library BMP" />
+        <put name="content"
+             value="/html/ms4/plan/bmpedit.jsp" />
+    </definition>
+    <definition name="bmpdb.view.page"
+                extends="bmpdb.baseSplitPanelLayout">
+        <put name="title"
+             value="BMP View" />
+        <put name="content"
+             value="/html/ms4/plan/bmpedit.jsp" />
+    </definition>
+    <definition name="bmpdb.edit.page"
+                extends="bmpdb.baseSplitPanelLayout">
+        <put name="title"
+             value="Edit Library BMP" />
+        <put name="content"
+             value="/html/ms4/plan/bmpedit.jsp" />
+    </definition>
+    <definition name="bmpdb.new.goal.page"
+                extends="bmpdb.baseSplitPanelLayout">
+        <put name="title"
+             value="BMP Add Goal" />
+        <put name="content"
+             value="/html/ms4/plan/goaledit.jsp" />
+    </definition>
+    <definition name="bmpdb.goal.view.page"
+                extends="bmpdb.baseSplitPanelLayout">
+        <put name="title"
+             value="Goal View" />
+        <put name="content"
+             value="/html/ms4/plan/goaledit.jsp" />
+    </definition>
+    <definition name="bmpdb.goal.edit.page"
+                extends="bmpdb.baseSplitPanelLayout">
+        <put name="title"
+             value="Edit Goal" />
+        <put name="content"
+             value="/html/ms4/plan/goaledit.jsp" />
+    </definition>
+</tiles-definitions>

@@ -1,0 +1,32 @@
+<?xml version="1.0"?><!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping>
+    <class name="com.sehinc.environment.db.lookup.EnvUnitOfMeasureMap"
+           table="ENV_UNIT_OF_MEASURE_MAP">
+        <id name="id"
+            type="integer"
+            column="ID">
+            <generator class="identity" />
+        </id>
+        <property name="clientId"
+                  column="CLIENT_ID"
+                  type="integer" />
+        <property name="tableName"
+                  column="TABLE_NAME"
+                  type="string" />
+        <property name="columnName"
+                  column="COLUMN_NAME"
+                  type="string" />
+        <many-to-one name="unitOfMeasureCd"
+                     class="com.sehinc.environment.db.lookup.EnvUnitOfMeasureData"
+                     column="UM_CD"
+                     lazy="false" />
+    </class>
+    <query name="EnvUnitOfMeasureMap.findByClientIdTableColumn">
+        from com.sehinc.environment.db.lookup.EnvUnitOfMeasureMap as mapp
+        where mapp.clientId in (:clientId, 0)
+        and mapp.tableName = :tableName
+        and mapp.columnName = :columnName
+    </query>
+</hibernate-mapping>

@@ -1,0 +1,56 @@
+<?xml version="1.0"?><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <!--
+            Auto-generated mapping file from
+            the hibernate.org cfg2hbm engine
+    -->
+    <class name="com.sehinc.erosioncontrol.db.project.EcProjectContact"
+           table="EC_PROJECT_CONTACT">
+        <id name="id"
+            type="integer">
+            <column name="ID" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="contactType"
+                     class="com.sehinc.erosioncontrol.db.project.EcProjectContactType"
+                     column="CONTACT_TYPE_ID"
+                     lazy="false" />
+        <property name="projectId"
+                  type="integer"
+                  column="PROJECT_ID" />
+        <many-to-one name="contact"
+                     class="com.sehinc.common.db.contact.CapContact"
+                     column="CONTACT_ID"
+                     lazy="false" />
+    </class>
+    <query name="com.sehinc.erosioncontrol.db.project.EcProjectContact.byInternalProjectContactTypeCode_OLD">
+        select projectContact
+        from com.sehinc.erosioncontrol.db.project.EcProjectContact as projectContact inner join projectContact.contactType as contactType
+        where projectContact.projectId = :projectId and
+        contactType.isInternal = 1 and
+        contactType.code = :code and
+        projectContact.contact.status.code = :statusCode
+    </query>
+    <query name="com.sehinc.erosioncontrol.db.project.EcProjectContact.byInternalProjectContactTypeCode">
+        select projectContact
+        from com.sehinc.erosioncontrol.db.project.EcProjectContact as projectContact
+        where projectContact.projectId = :projectId and
+        projectContact.contactType.isInternal = 1 and
+        projectContact.contactType.code = :code and
+        projectContact.contact.status.code = :statusCode
+    </query>
+    <query name="com.sehinc.erosioncontrol.db.project.EcProjectContact.byProjectId">
+        select projectContact
+        from com.sehinc.erosioncontrol.db.project.EcProjectContact as projectContact inner join projectContact.contactType as contactType
+        where projectContact.projectId = :projectId and
+        contactType.isInternal = :isInternal and
+        projectContact.contact.status.code = :statusCode
+    </query>
+    <query name="com.sehinc.erosioncontrol.db.project.EcProjectContact.allByProjectId">
+        select projectContact
+        from com.sehinc.erosioncontrol.db.project.EcProjectContact as projectContact inner join projectContact.contactType as contactType
+        where projectContact.projectId = :projectId and
+        projectContact.contact.status.code = :statusCode
+    </query>
+</hibernate-mapping>

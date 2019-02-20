@@ -1,0 +1,78 @@
+<?xml version="1.0"?><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <!--
+            Auto-generated mapping file from
+            the hibernate.org cfg2hbm engine
+    -->
+    <class name="com.sehinc.environment.db.substance.EnvSubstance"
+           table="ENV_SUBSTANCE">
+        <id name="id"
+            type="integer">
+            <column name="ID" />
+            <generator class="identity" />
+        </id>
+        <version name="version"
+                 column="version"
+                 insert="false"
+                 type="long" />
+        <property name="name"
+                  type="string"
+                  column="NAME" />
+        <property name="partNum"
+                  type="string"
+                  column="PART_NUM" />
+        <property name="clientId"
+                  type="integer"
+                  column="CLIENT_ID" />
+        <many-to-one name="substanceType"
+                     class="com.sehinc.environment.db.lookup.EnvSubstanceTypeData"
+                     column="SUBSTANCE_TYPE_CD"
+                     lazy="false" />
+        <many-to-one name="status"
+                     class="com.sehinc.environment.db.code.EnvStatusCodeData"
+                     column="STATUS_CD"
+                     lazy="false" />
+        <property name="createTimestamp"
+                  type="timestamp"
+                  column="CREATE_TS" />
+        <property name="updateTimestamp"
+                  type="timestamp"
+                  column="UPDATE_TS" />
+        <property name="updateUserId"
+                  type="integer"
+                  column="UPDATE_USER_ID" />
+    </class>
+    <query name="EnvSubstance.substanceListByClientId">
+        from com.sehinc.environment.db.substance.EnvSubstance as substance
+        where substance.clientId = :clientId
+        and substance.status.code = :statusCode
+        order by substanceType.code ASC, substance.name ASC
+    </query>
+    <query name="EnvSubstance.substanceListByClientIdAndSubstanceId">
+        from com.sehinc.environment.db.substance.EnvSubstance as substance
+        where substance.clientId = :clientId
+        and substance.id = :id
+        order by substance.name ASC
+    </query>
+    <query name="EnvSubstance.substanceByNameAndNumber">
+        from com.sehinc.environment.db.substance.EnvSubstance as substance
+        where substance.clientId = :clientId
+        and substance.name = :name
+        and substance.partNum = :number
+        and substance.status.code = :statusCode
+        order by substance.name ASC
+    </query>
+    <query name="EnvSubstance.substanceListBySubstanceType">
+        from com.sehinc.environment.db.substance.EnvSubstance as substance
+        where substance.substanceType.code = :substanceType and substance.status.code = :statusCode
+        order by substance.name ASC
+    </query>
+    <query name="EnvSubstance.bySubstanceTypeAndClientId">
+        from com.sehinc.environment.db.substance.EnvSubstance as substance
+        where substance.substanceType.code = :substanceType
+        and substance.clientId = :clientId
+        and substance.status.code = :statusCode
+        order by substance.name ASC
+    </query>
+</hibernate-mapping>

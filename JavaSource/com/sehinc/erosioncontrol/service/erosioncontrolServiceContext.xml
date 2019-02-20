@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+    <!--<bean name="inspectorService" class="com.sehinc.erosioncontrol.service.impl.InspectorServiceImpl"/>-->
+    <!--<bean name="genericDaoService" class="com.sehinc.common.service.spring.impl.GenericDaoServiceImpl"/>-->
+    <!--<bean name="emailService" class="com.sehinc.common.service.spring.impl.EmailServiceImpl"/>-->
+    <bean id="inspectionOverdueQuartzJob"
+          class="org.springframework.scheduling.quartz.JobDetailBean">
+        <property name="jobClass"
+                  value="com.sehinc.erosioncontrol.batch.InspectionOverdueQuartzJob" />
+        <property name="jobDataAsMap">
+            <map>
+                <entry key="emailService"
+                       value-ref="emailService" />
+                <entry key="genericDaoService"
+                       value-ref="genericDaoService" />
+            </map>
+        </property>
+    </bean>
+    <bean id="inspectionOverdueCronTrigger"
+          class="org.springframework.scheduling.quartz.CronTriggerBean">
+        <property name="jobDetail"
+                  ref="inspectionOverdueQuartzJob" />
+        <!-- Cron Job that will run every day at Midnight -->
+        <property name="cronExpression"
+                  value="0 0 0 * * ? *" />
+    </bean>
+    <!--<bean id="quartzTaskExecutor" class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">-->
+    <!--<property name="corePoolSize" value="3"/>-->
+    <!--<property name="maxPoolSize" value="5"/>-->
+    <!--<property name="queueCapacity" value="1000"/>-->
+    <!--</bean>-->
+    <bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+        <property name="triggers">
+            <list>
+                <ref bean="inspectionOverdueCronTrigger" />
+            </list>
+        </property>
+        <property name="taskExecutor"
+                  ref="quartzTaskExecutor" />
+    </bean>
+</beans>

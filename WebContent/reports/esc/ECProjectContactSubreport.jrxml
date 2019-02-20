@@ -1,0 +1,212 @@
+<?xml version="1.0"?>
+<!DOCTYPE jasperReport PUBLIC "-//JasperReports//DTD Report Design//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
+
+<jasperReport 
+		name="ECProjectContactSubreport" 
+		pageWidth="595" 
+		pageHeight="842" 
+		columnWidth="515" 
+		columnSpacing="0" 
+		leftMargin="0" 
+		rightMargin="0" 
+		topMargin="0" 
+		bottomMargin="0">
+
+	<reportFont name="Arial_Normal" isDefault="true" fontName="Arial" size="12" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Bold" isDefault="false" fontName="Arial" size="12" isBold="true" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Italic" isDefault="false" fontName="Arial" size="12" isItalic="true" pdfFontName="Helvetica-Oblique" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Bold_Italic" isDefault="false" fontName="Arial" size="12" isItalic="true" isBold="true" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Small" isDefault="true" fontName="Arial" size="10" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Small_Bold" isDefault="false" fontName="Arial" size="10" isBold="true" pdfFontName="Helvetica-Bold" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Small_Italic" isDefault="false" fontName="Arial" size="10" isItalic="true" pdfFontName="Helvetica-Oblique" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+	<reportFont name="Arial_Small_Bold_Italic" isDefault="false" fontName="Arial" size="10" isItalic="true" isBold="true" pdfFontName="Helvetica-Oblique" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+
+	<parameter name="ProjectId" class="java.lang.Integer"/>
+
+<queryString><![CDATA[SELECT P.ID PROJECT_ID, PC.ID PROJECT_CONTACT_ID, PC.CONTACT_ID CONTACT_ID, PC.CONTACT_TYPE_ID CONTACT_TYPE_ID,
+C.ORGANIZATION_NAME CONTACT_ORG_NAME, C.FIRST_NAME CONTACT_FIRST_NAME, C.LAST_NAME CONTACT_LAST_NAME, C.TITLE CONTACT_TITLE, C.ADDRESS CONTACT_ADDRESS,
+C.ADDRESS2 CONATCT_ADDRESS2, C.CITY CONTACT_CITY, C.STATE_CODE CONTACT_STATE_CODE, C.ZIP CONTACT_ZIP, C.PRIMARY_PHONE CONTACT_PRIMARY_PHONE,
+C.EMAIL CONTACT_EMAIL, PCT.IS_INTERNAL PROJECT_CONTACT_TYPE_IS_INTERNAL
+FROM EC_PROJECT P LEFT OUTER JOIN EC_PROJECT_CONTACT PC ON P.ID = PC.PROJECT_ID
+LEFT OUTER JOIN CAP_CONTACT C ON (PC.CONTACT_ID = C.ID AND C.STATUS_CD = 1)
+LEFT OUTER JOIN EC_PROJECT_CONTACT_TYPE PCT ON PC.CONTACT_TYPE_ID = PCT.ID
+WHERE P.ID = $P{ProjectId}
+ORDER BY PCT.SEQUENCE ASC]]></queryString>
+
+	<field name="PROJECT_ID" class="java.lang.Integer"/>
+	<field name="PROJECT_CONTACT_ID" class="java.lang.Integer"/>
+	<field name="CONTACT_ID" class="java.lang.Integer"/>
+	<field name="CONTACT_TYPE_ID" class="java.lang.Integer"/>
+	<field name="CONTACT_ORG_NAME" class="java.lang.String"/>
+	<field name="CONTACT_FIRST_NAME" class="java.lang.String"/>
+	<field name="CONTACT_LAST_NAME" class="java.lang.String"/>
+	<field name="CONTACT_TITLE" class="java.lang.String"/>
+	<field name="CONTACT_ADDRESS" class="java.lang.String"/>
+	<field name="CONATCT_ADDRESS2" class="java.lang.String"/>
+	<field name="CONTACT_CITY" class="java.lang.String"/>
+	<field name="CONTACT_STATE_CODE" class="java.lang.String"/>
+	<field name="CONTACT_ZIP" class="java.lang.String"/>
+	<field name="CONTACT_PRIMARY_PHONE" class="java.lang.String"/>
+	<field name="CONTACT_EMAIL" class="java.lang.String"/>
+	<field name="PROJECT_CONTACT_TYPE_IS_INTERNAL" class="java.lang.Integer"/>
+
+	<variable name="FoundContact" class="java.lang.Integer" calculation="Sum">
+		<variableExpression>($F{PROJECT_CONTACT_TYPE_IS_INTERNAL}.intValue() == 1)?new Integer(0):new Integer(1)</variableExpression>
+		<initialValueExpression>new Integer(0)</initialValueExpression>
+	</variable>
+
+	<group name="ProjectContactTitle">
+		<groupExpression>
+			$F{PROJECT_ID}
+		</groupExpression>
+		<groupHeader>
+			<band height="22">
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="10" y="0" width="100" height="20"/>
+					<textElement verticalAlignment="Bottom">
+						<font reportFont="Arial_Bold" size="14"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String">
+						<![CDATA["Contacts"]]>
+					</textFieldExpression>
+				</textField>
+				<line>
+					<reportElement x="10" y="21" width="505" height="0"/>
+					<graphicElement pen="Thin"/>
+				</line>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="20">
+				<printWhenExpression>new java.lang.Boolean($V{FoundContact}.intValue() == 0)</printWhenExpression>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="10" y="0" width="505" height="15"/>
+					<textElement>
+						<font reportFont="Arial_Normal"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String">
+						<![CDATA["No Contacts Assigned"]]>
+					</textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+
+	<group name="ProjectContactGroup1">
+		<groupExpression>
+			$F{PROJECT_CONTACT_ID}
+		</groupExpression>
+		<groupHeader>
+			<band height="14">
+				<printWhenExpression>new java.lang.Boolean($F{PROJECT_CONTACT_ID} != null &amp;&amp; $F{PROJECT_CONTACT_TYPE_IS_INTERNAL}.intValue() == 0)</printWhenExpression>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="10" y="0" width="120" height="14"/>
+					<textElement>
+						<font reportFont="Arial_Normal"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String">
+						<![CDATA[com.sehinc.erosioncontrol.action.report.ECProjectReportScriptlet.getContactTypeName($F{CONTACT_TYPE_ID})]]>
+					</textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="130" y="0" width="385" height="14"/>
+					<textElement>
+						<font reportFont="Arial_Normal"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String">
+						<![CDATA[com.sehinc.erosioncontrol.action.report.ECProjectReportScriptlet.filterHTML($F{CONTACT_ORG_NAME})]]>
+					</textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+		</groupFooter>
+	</group>
+
+	<group name="ProjectContactGroup2">
+		<groupExpression>
+			$F{PROJECT_CONTACT_ID}
+		</groupExpression>
+		<groupHeader>
+			<band height="14">
+				<printWhenExpression>new java.lang.Boolean($F{PROJECT_CONTACT_ID} != null &amp;&amp; $F{PROJECT_CONTACT_TYPE_IS_INTERNAL}.intValue() == 0)</printWhenExpression>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="130" y="0" width="385" height="14"/>
+					<textElement>
+						<font reportFont="Arial_Normal"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String">
+						<![CDATA[$F{CONTACT_FIRST_NAME} + " " + $F{CONTACT_LAST_NAME}]]>
+					</textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+		</groupFooter>
+	</group>
+
+	<group name="ProjectContactGroup3">
+		<groupExpression>
+			$F{PROJECT_CONTACT_ID}
+		</groupExpression>
+		<groupHeader>
+			<band height="14">
+				<printWhenExpression>new java.lang.Boolean($F{PROJECT_CONTACT_ID} != null &amp;&amp; $F{CONTACT_TITLE} != null &amp;&amp; $F{PROJECT_CONTACT_TYPE_IS_INTERNAL}.intValue() == 0)</printWhenExpression>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="130" y="0" width="385" height="14"/>
+					<textElement>
+						<font reportFont="Arial_Normal"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String">
+						<![CDATA[com.sehinc.erosioncontrol.action.report.ECProjectReportScriptlet.filterHTML($F{CONTACT_TITLE})]]>
+					</textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+		</groupFooter>
+	</group>
+
+	<group name="ProjectContactGroup4">
+		<groupExpression>
+			$F{PROJECT_CONTACT_ID}
+		</groupExpression>
+		<groupHeader>
+			<band height="49">
+				<printWhenExpression>new java.lang.Boolean($F{PROJECT_CONTACT_ID} != null &amp;&amp; $F{PROJECT_CONTACT_TYPE_IS_INTERNAL}.intValue() == 0)</printWhenExpression>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="130" y="0" width="385" height="14"/>
+					<textElement>
+						<font reportFont="Arial_Normal"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String">
+						<![CDATA[com.sehinc.erosioncontrol.action.report.ECProjectReportScriptlet.formatAddress($F{CONTACT_ADDRESS}, $F{CONTACT_CITY}, $F{CONTACT_STATE_CODE}, $F{CONTACT_ZIP})]]>
+					</textFieldExpression>
+				</textField>
+
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="130" y="15" width="385" height="14"/>
+					<textElement>
+						<font reportFont="Arial_Normal"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String">
+						<![CDATA[com.sehinc.erosioncontrol.action.report.ECProjectReportScriptlet.filterHTML($F{CONTACT_PRIMARY_PHONE})]]>
+					</textFieldExpression>
+				</textField>
+
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="130" y="30" width="385" height="14"/>
+					<textElement>
+						<font reportFont="Arial_Normal"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String">
+						<![CDATA[com.sehinc.erosioncontrol.action.report.ECProjectReportScriptlet.filterHTML($F{CONTACT_EMAIL})]]>
+					</textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+		</groupFooter>
+	</group>
+
+</jasperReport>

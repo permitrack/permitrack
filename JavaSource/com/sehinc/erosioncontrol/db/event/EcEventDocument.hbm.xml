@@ -1,0 +1,29 @@
+<?xml version="1.0"?><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <!--
+            Auto-generated mapping file from
+            the hibernate.org cfg2hbm engine
+    -->
+    <class name="com.sehinc.erosioncontrol.db.event.EcEventDocument"
+           table="EC_EVENT_DOCUMENT">
+        <id name="id"
+            type="integer">
+            <column name="ID" />
+            <generator class="identity" />
+        </id>
+        <property name="eventId"
+                  type="integer"
+                  column="EVENT_ID" />
+        <property name="name"
+                  type="string"
+                  column="NAME" />
+        <property name="location"
+                  type="string"
+                  column="LOCATION" />
+    </class>
+    <query name="com.sehinc.erosioncontrol.db.event.EcEventDocument.byEventId">
+        from com.sehinc.erosioncontrol.db.event.EcEventDocument as eventD
+        where eventD.eventId = :eventId
+    </query>
+</hibernate-mapping>

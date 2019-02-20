@@ -1,0 +1,57 @@
+// dot 2.28.0 on Windows 7 6.1
+// SchemaSpy rev 590
+digraph "BMP_032907" {
+  graph [
+    rankdir="RL"
+    bgcolor="#f7f7f7"
+    nodesep="0.18"
+    ranksep="0.46"
+    fontname="Helvetica"
+    fontsize="11"
+  ];
+  node [
+    fontname="Helvetica"
+    fontsize="11"
+    shape="plaintext"
+  ];
+  edge [
+    arrowsize="0.8"
+  ];
+  "BMP_032907" [
+    label=<
+    <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" BGCOLOR="#ffffff">
+      <TR><TD COLSPAN="3" BGCOLOR="#9bab96" ALIGN="CENTER">BMP_032907</TD></TR>
+      <TR><TD PORT="ID" COLSPAN="3" BGCOLOR="#bed1b8" ALIGN="LEFT">ID</TD></TR>
+      <TR><TD PORT="MCM_ID" COLSPAN="3" ALIGN="LEFT">MCM_ID</TD></TR>
+      <TR><TD PORT="NAME" COLSPAN="3" ALIGN="LEFT">NAME</TD></TR>
+      <TR><TD PORT="DESCRIPTION" COLSPAN="3" ALIGN="LEFT">DESCRIPTION</TD></TR>
+      <TR><TD PORT="JUSTIFICATION" COLSPAN="3" ALIGN="LEFT">JUSTIFICATION</TD></TR>
+      <TR><TD PORT="PUBLIC_EDUCATION" COLSPAN="3" ALIGN="LEFT">PUBLIC_EDUCATION</TD></TR>
+      <TR><TD PORT="REPORTING_ITEMS" COLSPAN="3" ALIGN="LEFT">REPORTING_ITEMS</TD></TR>
+      <TR><TD PORT="OWNER_ID" COLSPAN="3" ALIGN="LEFT">OWNER_ID</TD></TR>
+      <TR><TD PORT="IS_REQUIRED" COLSPAN="3" ALIGN="LEFT">IS_REQUIRED</TD></TR>
+      <TR><TD PORT="STATUS_CODE" COLSPAN="3" ALIGN="LEFT">STATUS_CODE</TD></TR>
+      <TR><TD PORT="CREATE_TS" COLSPAN="3" ALIGN="LEFT">CREATE_TS</TD></TR>
+      <TR><TD PORT="UPDATE_TS" COLSPAN="3" ALIGN="LEFT">UPDATE_TS</TD></TR>
+      <TR><TD PORT="UPDATE_USER_ID" COLSPAN="3" ALIGN="LEFT">UPDATE_USER_ID</TD></TR>
+      <TR><TD PORT="NUMBER" COLSPAN="3" ALIGN="LEFT">NUMBER</TD></TR>
+      <TR><TD PORT="field_value1" COLSPAN="3" ALIGN="LEFT">field_value1</TD></TR>
+      <TR><TD PORT="field_type1" COLSPAN="3" ALIGN="LEFT">field_type1</TD></TR>
+      <TR><TD PORT="field_value2" COLSPAN="3" ALIGN="LEFT">field_value2</TD></TR>
+      <TR><TD PORT="field_type2" COLSPAN="3" ALIGN="LEFT">field_type2</TD></TR>
+      <TR><TD PORT="field_value3" COLSPAN="3" ALIGN="LEFT">field_value3</TD></TR>
+      <TR><TD PORT="field_type3" COLSPAN="3" ALIGN="LEFT">field_type3</TD></TR>
+      <TR><TD PORT="field_value4" COLSPAN="3" ALIGN="LEFT">field_value4</TD></TR>
+      <TR><TD PORT="field_type4" COLSPAN="3" ALIGN="LEFT">field_type4</TD></TR>
+      <TR><TD PORT="field_value5" COLSPAN="3" ALIGN="LEFT">field_value5</TD></TR>
+      <TR><TD PORT="field_type5" COLSPAN="3" ALIGN="LEFT">field_type5</TD></TR>
+      <TR><TD PORT="SECTION" COLSPAN="3" ALIGN="LEFT">SECTION</TD></TR>
+      <TR><TD PORT="IDENTIFIER" COLSPAN="3" ALIGN="LEFT">IDENTIFIER</TD></TR>
+      <TR><TD PORT="IS_NAME_LOCKED" COLSPAN="3" ALIGN="LEFT">IS_NAME_LOCKED</TD></TR>
+      <TR><TD PORT="FORM_TYPE" COLSPAN="3" ALIGN="LEFT">FORM_TYPE</TD></TR>
+      <TR><TD ALIGN="LEFT" BGCOLOR="#f7f7f7">  </TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">3,738 rows</TD><TD ALIGN="RIGHT" BGCOLOR="#f7f7f7">  </TD></TR>
+    </TABLE>>
+    URL="tables/BMP_032907.html"
+    tooltip="BMP_032907"
+  ];
+}

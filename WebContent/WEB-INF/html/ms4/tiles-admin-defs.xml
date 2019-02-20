@@ -1,0 +1,19 @@
+<!DOCTYPE tiles-definitions PUBLIC
+    "-//Apache Software Foundation//DTD Tiles Configuration 1.3//EN"
+    "http://struts.apache.org/dtds/tiles-config_1_3.dtd">
+<tiles-definitions>
+    <definition name="admin.baseLayout"
+                extends="html.baseLayout">
+        <put name="primaryMenu"
+             value="/html/ms4/primarynavigation.jsp" />
+        <put name="secondaryMenu"
+             value="/html/ms4/secondarynavigation.jsp" />
+    </definition>
+    <definition name="admin.client.list.page"
+                extends="admin.baseLayout">
+        <put name="title"
+             value="Select Client" />
+        <put name="content"
+             value="/html/ms4/admin/adminclientlist.jsp" />
+    </definition>
+</tiles-definitions>
