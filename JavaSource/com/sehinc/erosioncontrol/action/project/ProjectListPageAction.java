@@ -308,7 +308,7 @@ public class ProjectListPageAction
         projectList =
             context.getResults();
         form.setTotalPages(context.getTotalPages());
-        int
+        /*int
             totalPages =
             form.getTotalPages();
         Object[]
@@ -322,7 +322,7 @@ public class ProjectListPageAction
                     : projectList.size()};
         addMessage(new ActionMessage("project.search.list.returned",
                                      parameters),
-                   request);
+                   request);*/
         return projectList;
     }
 
@@ -379,8 +379,8 @@ public class ProjectListPageAction
             context =
                 createContextFromSearch(context,
                                         form,
-                                        form.getSavedSearchId(),
-                                        request);
+                                        form.getSavedSearchId()/*,
+                                        request*/);
         }
         else
         {
@@ -426,14 +426,14 @@ public class ProjectListPageAction
                     context =
                         createContextFromSearch(context,
                                                 form,
-                                                defaultSearch.getDefaultSearchId(),
-                                                request);
+                                                defaultSearch.getDefaultSearchId()/*,
+                                                request*/);
                 }
                 else
                 {
                     // No default search. Return ACTIVE projects.
-                    addMessage(new ActionMessage("project.search.list.active"),
-                               request);
+                    // addMessage(new ActionMessage("project.search.list.active"),
+                    //            request);
                     context.setProjectStatuses(StatusCodeData.STATUS_CODE_ACTIVE);
                 }
             }
@@ -460,7 +460,7 @@ public class ProjectListPageAction
         return context;
     }
 
-    private EcProjectSearchCommandContext createContextFromSearch(EcProjectSearchCommandContext context, ProjectSearchListForm form, Integer searchId, HttpServletRequest request)
+    private EcProjectSearchCommandContext createContextFromSearch(EcProjectSearchCommandContext context, ProjectSearchListForm form, Integer searchId/*, HttpServletRequest request*/)
     {
         // get saved search id and load search
         EcSearch
@@ -526,7 +526,7 @@ public class ProjectListPageAction
                       + searchId);
             LOG.error(e.getMessage());
         }
-        String
+        /*String
             searchName =
             search.getName();
         if (searchName
@@ -540,7 +540,7 @@ public class ProjectListPageAction
             {searchName};
         addMessage(new ActionMessage("project.search.list.user.search",
                                      parameters),
-                   request);
+                   request);*/
         return context;
     }
 
@@ -570,8 +570,8 @@ public class ProjectListPageAction
         context.setPermitAuthName(form.getSearchPermitAuthName());
         context.setPermiteeName(form.getSearchPermiteeName());
         context.setInspectorName(form.getSearchInspectorName());
-        addMessage(new ActionMessage("project.search.list.adhoc"),
-                   request);
+        /*addMessage(new ActionMessage("project.search.list.adhoc"),
+                   request);*/
         return context;
     }
 

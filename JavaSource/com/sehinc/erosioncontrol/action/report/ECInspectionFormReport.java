@@ -14,11 +14,6 @@ import java.io.File;
 public class ECInspectionFormReport
     extends Report
 {
-    private static
-    Logger
-        LOG =
-        Logger.getLogger(ECInspectionReport.class);
-
     public ECInspectionFormReport()
     {
     }
