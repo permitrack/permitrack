@@ -34,7 +34,8 @@
         <%--</div>--%>
     <%--</div>--%>
     <div class="row">
-        <div class="span4"> <%-- TODO
+        <div class="span4">
+            <%-- TODO
             <html:form styleClass="form-signin"
                        action="/htmlLoginAction.do">
                 <p>
@@ -62,7 +63,8 @@
                     Sign up for PermiTrack
                 </button>
             </html:form>
---%> </div>
+            --%>
+        </div>
         <div class="span4">
             <html:form styleClass="form-signin"
                        action="/htmlLoginAction.do">
@@ -103,6 +105,7 @@
                 </span>
             </html:form>
             <!--Open IDs login-->
+            <%--
             <form class="form-signin"
                   action="/sehsvc/id?identifier=https://www.google.com/accounts/o8/id"
                   method="post">
@@ -119,8 +122,11 @@
                     In order to use this feature, your PermiTrack email address must match your Google email address.
                 </div>
             </form>
+            --%>
         </div>
+        <%--
         <div class="span4"></div>
+        --%>
     </div>
 </div>
 <tiles:definition id="scripts"
