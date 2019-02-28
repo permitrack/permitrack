@@ -453,6 +453,10 @@ public class SessionKeys
         "ec.inspection.reason.list";
     public final static
     String
+        EC_INSPECTION_INSPECTION_REASON_LIST =
+        "ec.inspection.inspection.reason.list";
+    public final static
+    String
         EC_INSPECTION_ACTION_LIST =
         "ec.inspection.action.list";
     public final static

@@ -970,6 +970,11 @@
       <primary-key name="PK_ECInspectionReason" columns="ID" />
       <index name="IX_ECInspectionReason_InspectionReasonName" unique="false" columns="NAME" />
     </table>
+    <table name="EC_INSPECTION_REASONS" schema="dbo" catalog="sehtechdb" type="VIEW">
+      <column name="ID" sqlType="int" length="10" precision="0" nullable="false" jdbcType="4" />
+      <column name="INSPECTION_ID" sqlType="int" length="10" precision="0" nullable="false" jdbcType="4" />
+      <column name="NAME" sqlType="nvarchar" length="1073741823" precision="0" nullable="true" jdbcType="2005" />
+    </table>
     <table name="EC_INSPECTION_TEMPLATE" schema="dbo" catalog="sehtechdb" type="TABLE">
       <column name="ID" sqlType="int identity" length="10" precision="0" nullable="false" jdbcType="4" />
       <column name="CLIENT_ID" sqlType="int" length="10" precision="0" nullable="false" jdbcType="4" />

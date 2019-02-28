@@ -202,7 +202,7 @@
     </dt>
     <dd>
         <bean:write name="inspectionForm"
-                    property="inspectionReason.name" />
+                    property="inspectionReason" />
     </dd>
     <logic:notEqual name='inspectionForm'
                     property='inspectionAction.id'

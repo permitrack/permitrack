@@ -114,6 +114,9 @@ public class InspectionCreatePageAction
         setSessionAttribute(SessionKeys.EC_INSPECTION_REASON_LIST,
                             InspectionService.getInspectionReasonValueList(),
                             request);
+        setSessionAttribute(SessionKeys.EC_INSPECTION_INSPECTION_REASON_LIST,
+                            InspectionService.getInspectionInspectionReasonValueList(0),
+                            request);
         setSessionAttribute(SessionKeys.EC_INSPECTION_BMP_STATUS_LIST,
                             InspectionService.getInspectionBmpStatusValueList(),
                             request);

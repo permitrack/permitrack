@@ -1,0 +1,22 @@
+<?xml version="1.0"?><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <!--
+            Auto-generated mapping file from
+            the hibernate.org cfg2hbm engine
+    -->
+    <class name="com.sehinc.erosioncontrol.db.inspection.EcInspectionInspectionReason"
+           table="EC_INSPECTION_INSPECTION_REASON">
+        <id name="id"
+            type="integer">
+            <column name="ID"/>
+            <generator class="identity"/>
+        </id>
+        <property name="inspectionId"
+                  type="integer"
+                  column="INSPECTION_ID"/>
+        <property name="inspectionReasonId"
+                  type="integer"
+                  column="INSPECTION_REASON_ID"/>
+    </class>
+</hibernate-mapping>

@@ -4,8 +4,10 @@ import com.sehinc.common.db.contact.CapContact;
 import com.sehinc.common.db.hibernate.HibernateUtil;
 import com.sehinc.common.db.user.StatusData;
 import com.sehinc.erosioncontrol.db.code.StatusCodeData;
+import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
@@ -67,9 +69,6 @@ public class EcInspection
     private
     EcInspectionAction
         inspectionAction;
-    private
-    EcInspectionReason
-        inspectionReason;
     private
     long
         version;
@@ -255,15 +254,25 @@ public class EcInspection
             inspectionAction;
     }
 
-    public EcInspectionReason getInspectionReason()
+    public String getInspectionReason()
     {
-        return this.inspectionReason;
-    }
-
-    public void setInspectionReason(EcInspectionReason inspectionReason)
-    {
-        this.inspectionReason =
-            inspectionReason;
+        List<String> inspectionReasonStringArray = new ArrayList<String>() {};
+        List<EcInspectionInspectionReason>
+                inspectionInspectionReasonList =
+                EcInspectionInspectionReason.findByInspectionId(getId());
+        if (inspectionInspectionReasonList
+                != null)
+        {
+            for (EcInspectionInspectionReason reason : inspectionInspectionReasonList)
+            {
+                EcInspectionReason inspectionReason = new EcInspectionReason(reason.getInspectionReasonId());
+                if(inspectionReason.load())
+                {
+                    inspectionReasonStringArray.add(inspectionReason.getName());
+                }
+            }
+        }
+        return StringUtils.join(inspectionReasonStringArray.toArray(), ", ");
     }
 
     public static List findAllByProjectId(Integer projectId)

@@ -56,7 +56,7 @@ public class InspectionValue
     InspectionActionValue
         inspectionAction;
     private
-    InspectionReasonValue
+    String
         inspectionReason;
     private
     String
@@ -101,7 +101,7 @@ public class InspectionValue
         this.inspectionAction =
             new InspectionActionValue(inspection.getInspectionAction());
         this.inspectionReason =
-            new InspectionReasonValue(inspection.getInspectionReason());
+            inspection.getInspectionReason();
         this.statusCode =
             inspection.getStatus()
                 .getCode();
@@ -292,21 +292,14 @@ public class InspectionValue
             .getDescription();
     }
 
-    public InspectionReasonValue getInspectionReason()
+    public String getInspectionReason()
     {
         return this.inspectionReason;
     }
 
     public String getInspectionReasonString()
     {
-        return this.inspectionReason
-            .getDescription();
-    }
-
-    public void setInspectionReason(InspectionReasonValue inspectionReason)
-    {
-        this.inspectionReason =
-            inspectionReason;
+        return this.inspectionReason;
     }
 
     public final String getStatusCode()

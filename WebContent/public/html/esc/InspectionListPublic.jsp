@@ -397,8 +397,7 @@
                                                           .getLastName()) %>
                     </td>
                     <td>
-                                <%= StringUtil.filterHTML(inspectionMapValue.getInspectionReason()
-                                                                  .getName()) %>
+                        <%= StringUtil.filterHTML(inspectionMapValue.getInspectionReason()) %>
                     </td>
                 </tr>
                 <%

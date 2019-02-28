@@ -18,6 +18,10 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.Date;
 
+@SuppressWarnings(value = {
+        "serial",
+        "unused",
+        "unchecked"})
 public class InspectionListValue
     implements java.io.Serializable
 {
@@ -65,7 +69,7 @@ public class InspectionListValue
     InspectionActionValue
         inspectionAction;
     private
-    InspectionReasonValue
+    String
         inspectionReason;
     private
     String
@@ -122,7 +126,7 @@ public class InspectionListValue
         this.inspectionAction =
             new InspectionActionValue(inspection.getInspectionAction());
         this.inspectionReason =
-            new InspectionReasonValue(inspection.getInspectionReason());
+            inspection.getInspectionReason();
         if (inspection.isFailed())
         {
             bmpStatus =
@@ -361,18 +365,17 @@ public class InspectionListValue
             .getDescription();
     }
 
-    public InspectionReasonValue getInspectionReason()
+    public String getInspectionReason()
     {
         return this.inspectionReason;
     }
 
     public String getInspectionReasonString()
     {
-        return this.inspectionReason
-            .getDescription();
+        return this.inspectionReason;
     }
 
-    public void setInspectionReason(InspectionReasonValue inspectionReason)
+    public void setInspectionReason(String inspectionReason)
     {
         this.inspectionReason =
             inspectionReason;

@@ -30,7 +30,7 @@
                 EC_INSPECTION.TIME_HOUR TIME_HOUR, EC_INSPECTION.TIME_MINUTE TIME_MINUTE, EC_INSPECTION.TIME_PERIOD TIME_PERIOD,
                 EC_INSPECTION.COMMENT INSPECTION_COMMENT, EC_INSPECTION.PRECIP_END_DATE PRECIP_END_DATE, EC_INSPECTION.PRECIP_AMOUNT PRECIP_AMOUNT,
                 EC_INSPECTION.PRECIP_SOURCE PRECIP_SOURCE, EC_INSPECTION.INSPECTION_ACTION_COMMENT INSPECTION_ACTION_COMMENT,
-                EC_INSPECTION.INSPECTION_ACTION_ID INSPECTION_ACTION_ID, EC_INSPECTION.INSPECTION_REASON_ID INSPECTION_REASON_ID,
+                EC_INSPECTION.INSPECTION_ACTION_ID INSPECTION_ACTION_ID,
                 EC_INSPECTION.UPDATE_USER_ID UPDATE_USER_ID, EC_INSPECTION.STATUS_CD STATUS_CODE, EC_INSPECTION_BMP.ID INSPECTION_BMP_ID
                 FROM EC_INSPECTION LEFT OUTER JOIN EC_INSPECTION_BMP ON EC_INSPECTION.ID = EC_INSPECTION_BMP.INSPECTION_ID
                 WHERE EC_INSPECTION.ID = $P{InspectionId}]]>
@@ -50,7 +50,6 @@
 	<field name="PRECIP_SOURCE" class="java.lang.String"/>
 	<field name="INSPECTION_ACTION_COMMENT" class="java.lang.String"/>
 	<field name="INSPECTION_ACTION_ID" class="java.lang.Integer"/>
-	<field name="INSPECTION_REASON_ID" class="java.lang.Integer"/>
 	<field name="UPDATE_USER_ID" class="java.lang.Integer"/>
 	<field name="STATUS_CODE" class="java.lang.Integer"/>
 	<field name="INSPECTION_BMP_ID" class="java.lang.Integer"/>
@@ -255,7 +254,7 @@
 					<textElement>
 						<font reportFont="Arial_Normal"/>
 					</textElement>
-					<textFieldExpression class="java.lang.String"><![CDATA[((com.sehinc.erosioncontrol.action.report.ECInspectionReportScriptlet)$P{REPORT_SCRIPTLET}).getInspectionReason($F{INSPECTION_REASON_ID})]]></textFieldExpression>
+					<textFieldExpression class="java.lang.String"><![CDATA[((com.sehinc.erosioncontrol.action.report.ECInspectionReportScriptlet)$P{REPORT_SCRIPTLET}).getInspectionReason($F{INSPECTION_ID})]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
 					<reportElement x="10" y="126" width="140" height="15"/>

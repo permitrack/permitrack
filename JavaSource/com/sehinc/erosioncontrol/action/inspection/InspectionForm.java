@@ -7,7 +7,6 @@ import com.sehinc.common.util.DateUtil;
 import com.sehinc.erosioncontrol.db.code.StatusCodeData;
 import com.sehinc.erosioncontrol.value.inspection.InspectionActionValue;
 import com.sehinc.erosioncontrol.value.inspection.InspectionDocumentValue;
-import com.sehinc.erosioncontrol.value.inspection.InspectionReasonValue;
 import org.apache.log4j.Logger;
 import org.apache.struts.action.ActionErrors;
 import org.apache.struts.upload.FormFile;
@@ -15,6 +14,10 @@ import org.apache.struts.upload.FormFile;
 import java.util.ArrayList;
 import java.util.Date;
 
+@SuppressWarnings(value = {
+        "serial",
+        "unused",
+        "unchecked"})
 public class InspectionForm
     extends BaseValidatorForm
 {
@@ -78,9 +81,13 @@ public class InspectionForm
         inspectionAction =
         new InspectionActionValue();
     private
-    InspectionReasonValue
+    String
         inspectionReason =
-        new InspectionReasonValue();
+        "";
+    private
+    String[]
+        inspectionReasonStringArray =
+        new String[] {};
     private
     String
         statusCode;
@@ -458,15 +465,23 @@ public class InspectionForm
             inspectionAction;
     }
 
-    public InspectionReasonValue getInspectionReason()
-    {
+    public String getInspectionReason() {
         return this.inspectionReason;
     }
 
-    public void setInspectionReason(InspectionReasonValue inspectionReason)
+    public void setInspectionReason(String inspectionReason)
     {
-        this.inspectionReason =
-            inspectionReason;
+        this.inspectionReason = inspectionReason;
+    }
+
+    public String[] getEcInspectionReasonItems()
+    {
+        return this.inspectionReasonStringArray;
+    }
+
+    public void setEcInspectionReasonItems(String[] ecInspectionReasonItems)
+    {
+        this.inspectionReasonStringArray = ecInspectionReasonItems;
     }
 
     public final String getStatusCode()
@@ -804,7 +819,9 @@ public class InspectionForm
         this.inspectionAction =
             new InspectionActionValue();
         this.inspectionReason =
-            new InspectionReasonValue();
+            "";
+        this.inspectionReasonStringArray =
+            new String[] {};
         this.statusCode =
             null;
         this.isWorkInProgress =

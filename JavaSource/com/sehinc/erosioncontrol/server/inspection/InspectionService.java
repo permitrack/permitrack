@@ -14,6 +14,7 @@ import com.sehinc.common.value.user.UserValue;
 import com.sehinc.erosioncontrol.action.inspection.InspectorComparator;
 import com.sehinc.erosioncontrol.db.code.StatusCodeData;
 import com.sehinc.erosioncontrol.db.inspection.*;
+import com.sehinc.erosioncontrol.resources.ApplicationResources;
 import com.sehinc.erosioncontrol.server.project.ProjectService;
 import com.sehinc.erosioncontrol.value.inspection.*;
 import com.sehinc.erosioncontrol.value.project.ProjectBmpValue;
@@ -24,6 +25,10 @@ import org.apache.log4j.Logger;
 import javax.servlet.http.HttpServletRequest;
 import java.util.*;
 
+@SuppressWarnings(value = {
+        "serial",
+        "unused",
+        "unchecked"})
 public class InspectionService
 {
     private static
@@ -187,6 +192,23 @@ public class InspectionService
             inspectionReasonValueList.add(new InspectionReasonValue(inspectionReason));
         }
         return inspectionReasonValueList;
+    }
+
+    public static List getInspectionInspectionReasonValueList(Integer inspectionId) {
+        ArrayList<InspectionInspectionReasonValue>
+                inspectionInspectionReasonValueList =
+                new ArrayList<InspectionInspectionReasonValue>();
+        List<EcInspectionInspectionReason>
+                inspectionInspectionReasonList =
+                EcInspectionInspectionReason.findByInspectionId(inspectionId);
+        for (EcInspectionInspectionReason inspectionInspectionReason : inspectionInspectionReasonList)
+        {
+            InspectionInspectionReasonValue
+                    inspectionInspectionReasonValue =
+                    new InspectionInspectionReasonValue(inspectionInspectionReason);
+            inspectionInspectionReasonValueList.add(inspectionInspectionReasonValue);
+        }
+        return inspectionInspectionReasonValueList;
     }
 
     public static List getInspectionBmpStatusValueList()
@@ -517,6 +539,114 @@ public class InspectionService
             }
         }
         return inspectionValueList;
+    }
+
+    public static List getUpdatedInspectionInspectionReasonValueList(Integer inspectionId, String[] ecInspectionReasonItems)
+    {
+        List<InspectionInspectionReasonValue> inspectionInspectionReasonValueList =
+            InspectionService.getInspectionInspectionReasonValueList(inspectionId);
+
+        for (InspectionInspectionReasonValue inspectionInspectionReasonValue : inspectionInspectionReasonValueList)
+        {
+            inspectionInspectionReasonValue.setIsDeleted(true);
+        }
+
+        for (
+                int
+                        i =
+                        0; i
+                < ecInspectionReasonItems.length; i++)
+        {
+            boolean alreadyExists = false;
+            Integer inspectionReasonId = Integer.parseInt(ecInspectionReasonItems[i]);
+            for (InspectionInspectionReasonValue inspectionInspectionReasonValue : inspectionInspectionReasonValueList)
+            {
+                if (inspectionReasonId.equals(inspectionInspectionReasonValue.getInspectionReasonId())) {
+                    inspectionInspectionReasonValue.setIsDeleted(false);
+                    alreadyExists = true;
+                    break;
+                }
+            }
+            if (!alreadyExists) {
+                InspectionInspectionReasonValue
+                        inspectionInspectionReasonValue = new InspectionInspectionReasonValue();
+                inspectionInspectionReasonValue.setInspectionId(inspectionId);
+                inspectionInspectionReasonValue.setInspectionReasonId(inspectionReasonId);
+                inspectionInspectionReasonValueList.add(inspectionInspectionReasonValue);
+            }
+        }
+        return inspectionInspectionReasonValueList;
+    }
+
+    public static void processInspectionReasons(Integer inspectionId, String[] ecInspectionReasonItems)
+    {
+        List<InspectionInspectionReasonValue> inspectionInspectionReasonValueList =
+            InspectionService.getUpdatedInspectionInspectionReasonValueList(inspectionId, ecInspectionReasonItems);
+
+        /* Update Inspection Reasons, can have 1 or more */
+        for (InspectionInspectionReasonValue inspectionInspectionReasonValue : inspectionInspectionReasonValueList)
+        {
+            if(inspectionInspectionReasonValue.getIsDeleted())
+            {
+                if (inspectionInspectionReasonValue.getId()
+                        != null
+                        && inspectionInspectionReasonValue.getId()
+                        > 0)
+                {
+                    try
+                    {
+                        EcInspectionInspectionReason
+                                ecInspectionInspectionReason =
+                                new EcInspectionInspectionReason();
+                        ecInspectionInspectionReason.setId(inspectionInspectionReasonValue.getId());
+                        if (ecInspectionInspectionReason.load())
+                        {
+                            ecInspectionInspectionReason.delete();
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                        Object[]
+                                parameters =
+                                {inspectionInspectionReasonValue.getId()};
+                        LOG.error(ApplicationResources.getProperty("inspection.bmp.error.could.not.delete",
+                                parameters));
+                        LOG.error(e.getMessage());
+                    }
+                }
+            }
+            else
+            {
+                if (inspectionInspectionReasonValue.getId()
+                        != null
+                        && inspectionInspectionReasonValue.getId()
+                        > 0)
+                {
+                    // no-op? already exists
+                }
+                else
+                {
+                    try
+                    {
+                        EcInspectionInspectionReason
+                                ecInspectionInspectionReason =
+                                new EcInspectionInspectionReason();
+                        ecInspectionInspectionReason.setInspectionId(inspectionInspectionReasonValue.getInspectionId());
+                        ecInspectionInspectionReason.setInspectionReasonId(inspectionInspectionReasonValue.getInspectionReasonId());
+                        ecInspectionInspectionReason.insert();
+                    }
+                    catch (Exception e)
+                    {
+                        Object[]
+                                parameters =
+                                {inspectionInspectionReasonValue.getInspectionReasonId()};
+                        LOG.error(ApplicationResources.getProperty("inspection.reason.error.could.not.insert",
+                                parameters));
+                        LOG.error(e.getMessage());
+                    }
+                }
+            }
+        }
     }
 
     public static boolean getInspectionPermissions(ProjectValue projectValue, SecurityManager securityManager, Integer createClientId, Integer updateClientId, String statusCode)

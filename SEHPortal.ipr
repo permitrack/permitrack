@@ -257,7 +257,7 @@
       <option name="prefixLines" value="false" />
     </LanguageOptions>
   </component>
-  <component name="DataSourceManagerImpl" compressed="false" hash="3035578641" />
+  <component name="DataSourceManagerImpl" compressed="false" hash="635581901" />
   <component name="DependencyValidationManager">
     <scope name="erosioncontrol" pattern="((file:JavaSource/com/sehinc/erosioncontrol//*||file:WebContent/html/esc//*||file:WebContent/public//*||file:WebContent/reports/esc//*||file:WebContent/WEB-INF//*)&amp;&amp;!file:WebContent/WEB-INF/html//*||file:WebContent/WEB-INF/html/esc//*)&amp;&amp;!file:WebContent/WEB-INF/lib//*&amp;&amp;!file:WebContent/WEB-INF/status//*&amp;&amp;!file:WebContent/WEB-INF/tld//*" />
     <option name="SKIP_IMPORT_STATEMENTS" value="false" />
@@ -673,6 +673,7 @@
   <component name="WebContextManager">
     <option name="state">
       <map>
+        <entry key="file://$PROJECT_DIR$/WebContent/html/esc/inspection/inspectioncreate.jsp" value="file://$PROJECT_DIR$/WebContent/html/esc/inspection" />
         <entry key="file://$PROJECT_DIR$/WebContent/html/esc/inspection/inspectionedit.jsp" value="file://$PROJECT_DIR$/WebContent/html/esc/inspection" />
         <entry key="file://$PROJECT_DIR$/WebContent/web/manual/manual-esc.html" value="file://$PROJECT_DIR$/WebContent/web/manual" />
       </map>

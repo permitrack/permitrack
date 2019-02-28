@@ -66,10 +66,6 @@
                      class="com.sehinc.erosioncontrol.db.inspection.EcInspectionAction"
                      column="INSPECTION_ACTION_ID"
                      lazy="false" />
-        <many-to-one name="inspectionReason"
-                     class="com.sehinc.erosioncontrol.db.inspection.EcInspectionReason"
-                     column="INSPECTION_REASON_ID"
-                     lazy="false" />
         <property name="createTimestamp"
                   type="timestamp"
                   column="CREATE_TS" />
@@ -139,16 +135,22 @@
         order by inspector.lastName DESC, inspector.firstName DESC
     </query>
     <query name="com.sehinc.erosioncontrol.db.inspection.EcInspection.inspectionListByReasonAsc">
-        from com.sehinc.erosioncontrol.db.inspection.EcInspection as inspection
-        where inspection.projectId = :projectId and
+        select inspection
+        from com.sehinc.erosioncontrol.db.inspection.EcInspection as inspection,
+             com.sehinc.erosioncontrol.db.inspection.EcInspectionReasons as inspectionReasons
+        where inspection.id = inspectionReasons.inspectionId and
+        inspection.projectId = :projectId and
         inspection.status.code in (1, 4)
-        order by inspection.inspectionReason.name ASC
+        order by inspectionReasons.name ASC
     </query>
     <query name="com.sehinc.erosioncontrol.db.inspection.EcInspection.inspectionListByReasonDesc">
-        from com.sehinc.erosioncontrol.db.inspection.EcInspection as inspection
-        where inspection.projectId = :projectId and
+        select inspection
+        from com.sehinc.erosioncontrol.db.inspection.EcInspection as inspection,
+             com.sehinc.erosioncontrol.db.inspection.EcInspectionReasons as inspectionReasons
+        where inspection.id = inspectionReasons.inspectionId and
+        inspection.projectId = :projectId and
         inspection.status.code in (1, 4)
-        order by inspection.inspectionReason.name Desc
+        order by inspectionReasons.name Desc
     </query>
     <query name="com.sehinc.erosioncontrol.db.inspection.EcInspection.inspectionListByStatusAsc">
         from com.sehinc.erosioncontrol.db.inspection.EcInspection as inspection

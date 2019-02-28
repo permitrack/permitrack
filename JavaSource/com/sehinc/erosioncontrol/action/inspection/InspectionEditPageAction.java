@@ -195,7 +195,6 @@ public class InspectionEditPageAction
         inspectionForm.setPrecipSource(inspection.getPrecipSource());
         inspectionForm.setInspectionActionComment(inspection.getInspectionActionComment());
         inspectionForm.setInspectionAction(new InspectionActionValue(inspection.getInspectionAction()));
-        inspectionForm.setInspectionReason(new InspectionReasonValue(inspection.getInspectionReason()));
         inspectionForm.setStatusCode(inspection.getStatus()
                                          .getCode());
         inspectionForm.setReportURL(inspectionValue.getUrl());
@@ -262,6 +261,9 @@ public class InspectionEditPageAction
                             request);
         setSessionAttribute(SessionKeys.EC_INSPECTION_REASON_LIST,
                             InspectionService.getInspectionReasonValueList(),
+                            request);
+        setSessionAttribute(SessionKeys.EC_INSPECTION_INSPECTION_REASON_LIST,
+                            InspectionService.getInspectionInspectionReasonValueList(inspectionValue.getId()),
                             request);
         setSessionAttribute(SessionKeys.EC_INSPECTION_BMP_STATUS_LIST,
                             InspectionService.getInspectionBmpStatusValueList(),

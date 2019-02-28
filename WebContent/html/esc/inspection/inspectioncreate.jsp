@@ -18,7 +18,9 @@
                  com.sehinc.erosioncontrol.db.inspection.EcInspectionBmpStatus,
                  com.sehinc.erosioncontrol.value.inspection.InspectionBmpConditionValue,
                  com.sehinc.erosioncontrol.value.inspection.InspectionBmpStatusValue,
+                 com.sehinc.erosioncontrol.value.inspection.InspectionReasonValue,
                  com.sehinc.erosioncontrol.value.project.ProjectBmpValue,
+                 java.util.Collection,
                  java.util.Date,
                  java.util.Iterator,
                  java.util.List" %>
@@ -206,6 +208,8 @@
                         name="precipSource"
                         onchange="return precipSourceOnChange();"
                         class="span2">
+                    <option value="">
+                    </option>
                     <logic:iterate id="precipSourceOption"
                                    name="<%= SessionKeys.EC_INSPECTION_PRECIP_SOURCE_LIST %>"
                                    scope="session">
@@ -238,22 +242,33 @@
             </div>
         </div>
         <div class="control-group">
-            <label class="control-label"
-                   for="inspectionReason.id">
+            <label class="control-label">
                 <bean:message key="inspection.reason" /> *
             </label>
             <div class="controls">
-                <select id="inspectionReason.id"
-                        name="inspectionReason.id">
-                    <option value="">Select...</option>
-                    <logic:iterate id="inspectionReasonValue"
-                                   name="<%= SessionKeys.EC_INSPECTION_REASON_LIST %>">
-                        <option value="<bean:write name='inspectionReasonValue' property='id'/>">
-                            <bean:write name='inspectionReasonValue'
-                                        property='name' />
-                        </option>
-                    </logic:iterate>
-                </select>
+                <%
+                    Iterator
+                            inspectionReasonListIter =
+                            ((Collection) request.getSession()
+                                    .getAttribute(SessionKeys.EC_INSPECTION_REASON_LIST)).iterator();
+                    while (inspectionReasonListIter.hasNext())
+                    {
+                        InspectionReasonValue
+                                inspectionReasonItem =
+                                (InspectionReasonValue) inspectionReasonListIter.next();
+                %>
+                        <div>
+                            <label class="checkbox" style="display: inline-block;">
+                                <input type="checkbox"
+                                       id="<%= "inspectionReason" + inspectionReasonItem.getId() %>"
+                                       name="ecInspectionReasonItems"
+                                       value="<%= inspectionReasonItem.getId() %>">
+                                <%= inspectionReasonItem.getName() %>
+                            </label>
+                        </div>
+                <%
+                    }
+                %>
             </div>
         </div>
         <div class="control-group">
@@ -670,12 +685,7 @@
                         $('#dialog').html("Inspection Date is required").dialog('open');
                         return false;
                     }
-                    if (document.getElementById("inspectionReason.id").value
-                                == null
-                                || document.getElementById("inspectionReason.id").value
-                            == ''
-                            || document.getElementById("inspectionReason.id").value
-                            == '0')
+                    if ($("[id^=inspectionReason]:checked").length < 1)
                     {
                         $('#dialog').html("Inspection Reason is required").dialog('open');
                         return false;

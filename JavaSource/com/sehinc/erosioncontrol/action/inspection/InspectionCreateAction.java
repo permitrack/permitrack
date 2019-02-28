@@ -11,6 +11,7 @@ import com.sehinc.erosioncontrol.db.inspection.*;
 import com.sehinc.erosioncontrol.db.project.EcProject;
 import com.sehinc.erosioncontrol.db.project.EcProjectBmp;
 import com.sehinc.erosioncontrol.resources.ApplicationResources;
+import com.sehinc.erosioncontrol.server.inspection.InspectionService;
 import com.sehinc.erosioncontrol.service.impl.InspectorServiceImpl;
 import com.sehinc.erosioncontrol.value.inspection.InspectionBmpDocumentValue;
 import com.sehinc.erosioncontrol.value.inspection.InspectionBmpValue;
@@ -145,7 +146,9 @@ public class InspectionCreateAction
             inspection.setPrecipEndDate(inspectionForm.getPrecipEndDate());
             inspection.setPrecipAmount(inspectionForm.getPrecipAmount());
             if (inspectionForm.getPrecipSource()
-                .equalsIgnoreCase("Other"))
+                != null
+                && inspectionForm.getPrecipSource()
+                    .equalsIgnoreCase("Other"))
             {
                 inspection.setPrecipSource(inspectionForm.getPrecipSourceOther());
             }
@@ -157,9 +160,6 @@ public class InspectionCreateAction
                                                                                    inspectionForm.getInspectionAction()
                                                                                        .getId()));
             inspection.setInspectionActionComment(inspectionForm.getInspectionActionComment());
-            inspection.setInspectionReason((EcInspectionReason) HibernateUtil.load(EcInspectionReason.class,
-                                                                                   inspectionForm.getInspectionReason()
-                                                                                       .getId()));
             inspection.setStatusCode(inspectionForm.getStatusCode());
             inspection.setInspector(InspectorServiceImpl.getInspectorFromForm(inspectionForm,
                                                                               userValue));
@@ -186,6 +186,8 @@ public class InspectionCreateAction
                      request);
             return mapping.findForward("inspection.list.page");
         }
+        // Update Inspection Reasons, one or more
+        InspectionService.processInspectionReasons(inspection.getId(), inspectionForm.getEcInspectionReasonItems());
         //	Check to see if this is the most recent inspection date to be entered
         boolean
             isMostRecentInspection =

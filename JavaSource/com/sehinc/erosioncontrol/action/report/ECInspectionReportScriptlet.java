@@ -7,7 +7,7 @@ import com.sehinc.common.service.user.UserService;
 import com.sehinc.erosioncontrol.db.code.StatusCodeData;
 import com.sehinc.erosioncontrol.db.inspection.EcInspection;
 import com.sehinc.erosioncontrol.db.inspection.EcInspectionAction;
-import com.sehinc.erosioncontrol.db.inspection.EcInspectionReason;
+import com.sehinc.erosioncontrol.db.inspection.EcInspectionReasons;
 import com.sehinc.erosioncontrol.db.project.EcProject;
 import com.sehinc.erosioncontrol.server.report.ReportService;
 import com.sehinc.erosioncontrol.value.inspection.InspectionBmpValue;
@@ -148,13 +148,13 @@ public class ECInspectionReportScriptlet
         return null;
     }
 
-    public String getInspectionReason(Integer inspectionReasonId)
+    public String getInspectionReason(Integer inspectionId)
         throws JRScriptletException
     {
-        EcInspectionReason
+        EcInspectionReasons
             inspectionReason =
-            new EcInspectionReason();
-        inspectionReason.setId(inspectionReasonId);
+            new EcInspectionReasons();
+        inspectionReason.setId(inspectionId);
         if (inspectionReason.load())
         {
             return inspectionReason.getName();

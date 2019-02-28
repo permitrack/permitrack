@@ -18,7 +18,6 @@ import com.sehinc.erosioncontrol.server.inspection.InspectionService;
 import com.sehinc.erosioncontrol.server.project.ProjectService;
 import com.sehinc.erosioncontrol.value.inspection.InspectionActionValue;
 import com.sehinc.erosioncontrol.value.inspection.InspectionDocumentValue;
-import com.sehinc.erosioncontrol.value.inspection.InspectionReasonValue;
 import com.sehinc.erosioncontrol.value.inspection.InspectionReportValue;
 import com.sehinc.erosioncontrol.value.project.ProjectValue;
 import com.sehinc.erosioncontrol.value.security.SecurityPermissionValue;
@@ -157,7 +156,7 @@ public class InspectionViewPageAction
         inspectionForm.setPrecipSource(inspection.getPrecipSource());
         inspectionForm.setInspectionActionComment(inspection.getInspectionActionComment());
         inspectionForm.setInspectionAction(new InspectionActionValue(inspection.getInspectionAction()));
-        inspectionForm.setInspectionReason(new InspectionReasonValue(inspection.getInspectionReason()));
+        inspectionForm.setInspectionReason(inspection.getInspectionReason());
         inspectionForm.setStatusCode(inspection.getStatus()
                                          .getCode());
         inspectionForm.setReportURL(inspectionValue.getUrl());
