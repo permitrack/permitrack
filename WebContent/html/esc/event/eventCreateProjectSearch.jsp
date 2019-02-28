@@ -5,9 +5,6 @@
 <%@ include file="eventPageHeader.jsp" %>
 <html:form styleClass="form-horizontal"
            action="/eventCreateProjectSearchAction">
-    <fieldset><legend>
-        Search
-    </legend></fieldset>
     <html:hidden name="eventCreateForm"
                  property="page"
                  value="2" />
