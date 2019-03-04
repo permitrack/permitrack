@@ -48,7 +48,15 @@ public class UserDeleteAction
             LOG.error("User not found on request or session");
             addError(new ActionMessage("error.user.not.found.in.session"),
                      request);
-            return mapping.findForward("user.view.page");
+            return mapping.findForward("user.list.page");
+        }
+        if (mintUserId == 4) {
+            LOG.error("Cannot delete user ID "
+                    + mintUserId);
+            addError(new ActionMessage("error.load.user.failed",
+                    mintUserId),
+                    request);
+            return mapping.findForward("user.list.page");
         }
         try
         {
@@ -62,7 +70,7 @@ public class UserDeleteAction
                 addError(new ActionMessage("error.load.user.failed",
                                            mintUserId),
                          request);
-                return mapping.findForward("user.view.page");
+                return mapping.findForward("user.list.page");
             }
             if (PortalUtils.userHasMultipleClients(new UserValue(userData)))
             {
@@ -116,7 +124,7 @@ public class UserDeleteAction
             addError(new ActionMessage("delete.user.failed",
                                        mintUserId),
                      request);
-            return mapping.findForward("user.view.page");
+            return mapping.findForward("user.list.page");
         }
         return mapping.findForward("continue");
     }

@@ -59,8 +59,6 @@
             value="${base.public.web.path}" />
     <filter token="base.public.web.url"
             value="${base.public.web.url}" />
-    <filter token="portal.admin"
-            value="${portal.admin}" />
     <filter token="base.document.directory"
             value="${base.document.directory}" />
     <filter token="base.webapp.context"

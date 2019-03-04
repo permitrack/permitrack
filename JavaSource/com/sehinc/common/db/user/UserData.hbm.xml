@@ -146,8 +146,7 @@
         com.sehinc.common.db.client.ClientUserData as clientUser
         where user.id = clientUser.userId and
         clientUser.clientId = :clientId and
-        user.statusCode = :statusCode and
-        user.username != 'wpsadmin'
+        user.statusCode = :statusCode
         order by user.lastName, user.firstName
     </query>
 </hibernate-mapping>

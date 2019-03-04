@@ -24,7 +24,6 @@
         where cu.clientId = :clientId
         and u.id = cu.userId
         and u.status.code = :statusCode
-        and u.username != 'wpsadmin'
         order by u.lastName, u.firstName
     </query>
 </hibernate-mapping>

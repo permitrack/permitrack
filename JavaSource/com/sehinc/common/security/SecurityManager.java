@@ -3,7 +3,6 @@ package com.sehinc.common.security;
 import com.sehinc.common.CommonConstants;
 import com.sehinc.common.action.base.SessionKeys;
 import com.sehinc.common.action.base.SessionService;
-import com.sehinc.common.config.ApplicationProperties;
 import com.sehinc.common.db.client.CapClientTypeInfo;
 import com.sehinc.common.db.client.ClientModule;
 import com.sehinc.common.db.group.GroupData;
@@ -104,10 +103,6 @@ public class SecurityManager
     int
         MIN_USERNAME_LENGTH =
         4;
-    public static final
-    String
-        PORTAL_ADMIN =
-        ApplicationProperties.getProperty("portal.admin");
     private
     Integer
         _clientId;
