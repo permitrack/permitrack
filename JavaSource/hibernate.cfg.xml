@@ -135,7 +135,6 @@
         <mapping resource="com/sehinc/erosioncontrol/db/gis/EcGISCoord.hbm.xml" />
         <mapping resource="com/sehinc/erosioncontrol/db/project/ProjectStatusCodeData.hbm.xml" />
         <mapping resource="com/sehinc/erosioncontrol/db/code/StatusCodeData.hbm.xml" />
-        <mapping resource="com/sehinc/erosioncontrol/action/project/ProjectSearchListForm.hbm.xml" />
         <mapping resource="com/sehinc/erosioncontrol/db/user/EcUserSearch.hbm.xml" />
         <mapping resource="com/sehinc/erosioncontrol/db/user/EcUserDefaultSearch.hbm.xml" />
         <mapping resource="com/sehinc/erosioncontrol/db/user/EcSearch.hbm.xml" />

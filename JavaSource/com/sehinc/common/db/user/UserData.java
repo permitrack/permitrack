@@ -66,9 +66,6 @@ public class UserData
     private
     Integer
         contactId;
-    private
-    Set<ProjectSearchListForm>
-        searches;
     private static final
     String
         FIND_BY_CLIENT_ID_AND_STATUS_CODE =
@@ -517,16 +514,5 @@ public class UserData
         return HibernateUtil.findTop(queryString,
                                      parameters,
                                      20);
-    }
-
-    public Set<ProjectSearchListForm> getSearches()
-    {
-        return searches;
-    }
-
-    public void setSearches(Set<ProjectSearchListForm> searches)
-    {
-        this.searches =
-            searches;
     }
 }

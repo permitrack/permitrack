@@ -77,12 +77,6 @@
         <property name="contactId"
                   type="integer"
                   column="CONTACT_ID" />
-        <set name="searches"
-             cascade="save-update"
-             lazy="false">
-            <key column="USER_ID" />
-            <one-to-many class="com.sehinc.erosioncontrol.action.project.ProjectSearchListForm" />
-        </set>
     </class>
     <class name="com.sehinc.common.value.user.UserValue"
            table="`USER`">

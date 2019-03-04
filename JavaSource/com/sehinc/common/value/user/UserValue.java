@@ -88,8 +88,6 @@ public class UserValue
             userData.getPassword();
         this.contactId =
             userData.getContactId();
-        this.searches =
-            userData.getSearches();
     }
 
     public Integer getId()
@@ -263,16 +261,5 @@ public class UserValue
                 .equals(id);
         }
         return false;
-    }
-
-    public Set<ProjectSearchListForm> getSearches()
-    {
-        return searches;
-    }
-
-    public void setSearches(Set<ProjectSearchListForm> searches)
-    {
-        this.searches =
-            searches;
     }
 }
