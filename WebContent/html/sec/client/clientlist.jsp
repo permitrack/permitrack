@@ -8,7 +8,7 @@
            prefix="logic" %>
 <%@ taglib uri="/WEB-INF/tld/struts-tiles.tld"
            prefix="tiles" %>
-<%@ page import="com.sehinc.common.config.ApplicationProperties" %>
+<%--<%@ page import="com.sehinc.common.config.ApplicationProperties" %>--%>
 <%@ page import="com.sehinc.security.action.base.RequestKeys" %>
 <%@ page import="java.util.List" %>
 <%
@@ -23,8 +23,10 @@
         pageContext.setAttribute("count",
                                  ((List) (request.getSession()
                                                   .getAttribute(RequestKeys.CURRENT_CLIENT_LIST))).size());
+        /*
         pageContext.setAttribute("url",
                                  ApplicationProperties.getProperty("service.crm.url"));
+        */
     }
     catch (Exception e)
     {
@@ -37,6 +39,7 @@
     </logic:notEmpty>
 </h4>
 <div>
+    <%--
     <logic:notEmpty name="cap.security.current.client.list">
         <div class="progress progress-warning"
              style="margin-bottom: 0;">
@@ -45,6 +48,7 @@
             </div>
         </div>
     </logic:notEmpty>
+    --%>
     <table id="clientlist"
            class="table table-hover tablesorter">
         <%--
@@ -68,9 +72,11 @@
                 <th>
                     Last Active&nbsp;&nbsp;
                 </th>
+                <%--
                 <th>
                     Status&nbsp;&nbsp;
                 </th>
+                --%>
             </tr>
         </thead>
         <tbody>
@@ -114,6 +120,7 @@
                                         property="comment" />
                         </div>
                     </td>
+                    <%--
                     <td>
                         <div class="status"
                              id="c<bean:write name="client" property="id" />">
@@ -121,6 +128,7 @@
                             <br />
                         </div>
                     </td>
+                    --%>
                 </tr>
             </logic:iterate>
         </tbody>
@@ -155,6 +163,7 @@
                type="string"
                direct="true">
         <script type="text/javascript">
+            <%--
             var lastId;
             setTimeout(function ()
                        {
@@ -258,6 +267,7 @@
                                                        + '<br>Finished.');
                        },
                        5000);
+            --%>
             $(function ()
               {
                   $(".tablesorter").tablesorter({
