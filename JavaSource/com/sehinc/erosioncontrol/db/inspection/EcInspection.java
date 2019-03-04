@@ -410,11 +410,13 @@ public class EcInspection
             overdueLogEntries;
     }
 
-    public boolean isFailed()
+    public Integer isFailed()
     {
         List<EcInspectionBmp>
             bmps =
             EcInspectionBmp.findByInspectionId(getId());
+        Boolean hasFailure = false;
+        Boolean hasWarn = false;
         if (bmps
             != null
             && bmps.size()
@@ -428,19 +430,31 @@ public class EcInspection
                     bmp.getIsInspected()
                     != null
                     &&
-                    (!bmp.getInspectionBmpStatus()
+                    !bmp.getInspectionBmpStatus()
                         .getName()
-                        .equals("Inactive"))
-                    &&
-                    (!bmp.getInspectionBmpCondition()
-                        .getIsPassCondition())
+                        .equals("Inactive")
                     && bmp.getIsInspected()
                        == 1)
                 {
-                    return true;
+                    if(!bmp.getInspectionBmpCondition()
+                            .getIsPassCondition()) {
+                        hasFailure = true;
+                        break;
+                    }
+                    if(bmp.getInspectionBmpCondition()
+                            .getIsWarnCondition()) {
+                        hasWarn = true;
+                    }
                 }
             }
         }
-        return false;
+
+        if (hasFailure) {
+            return 1;
+        }
+        else if(hasWarn) {
+            return 2;
+        }
+        return 0;
     }
 }

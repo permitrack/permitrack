@@ -1,13 +1,8 @@
 package com.sehinc.security.action.user;
 
-import com.sehinc.common.db.user.CapState;
-import com.sehinc.common.service.spring.SpringServiceLocator;
-import com.sehinc.erosioncontrol.db.code.CodeData;
-import com.sehinc.erosioncontrol.db.project.EcProjectType;
-import com.sehinc.erosioncontrol.db.project.EcZone;
-import com.sehinc.erosioncontrol.db.project.ProjectStatusCodeData;
 import com.sehinc.erosioncontrol.db.user.EcSearch;
 import com.sehinc.erosioncontrol.db.user.EcUserDefaultSearch;
+import com.sehinc.erosioncontrol.server.project.ProjectService;
 import com.sehinc.security.action.base.RequestKeys;
 import com.sehinc.security.action.navigation.PrimaryMenu;
 import com.sehinc.security.action.navigation.SecondaryMenu;
@@ -21,7 +16,7 @@ import org.apache.struts.action.ActionMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Arrays;
 
 public class UserSearchEditPageAction
     extends UserBaseAction
@@ -61,12 +56,13 @@ public class UserSearchEditPageAction
             addError(new ActionMessage("error.user.not.found.in.session"), request);
             return mapping.findForward("user.search.list.page");
         }
-        setProjectZonesOnRequest(request,
-                                 mintClientId);
-        setProjectTypesOnRequest(request,
-                                 mintClientId);
-        setProjectStatusesOnRequest(request);
-        setStateListOnRequest(request);
+        ProjectService.setProjectZonesOnRequest(request,
+                new ArrayList<Integer>(Arrays.asList(mintClientId)));
+        ProjectService.setProjectTypesOnRequest(request,
+                new ArrayList<Integer>(Arrays.asList(mintClientId)));
+        ProjectService.setProjectStatusesOnRequest(request);
+        ProjectService.setStateListOnRequest(request);
+        ProjectService.setProjectLastInspectionStatusesOnRequest(request);
         Integer
             searchId;
         if (request.getParameter(RequestKeys.SEARCH_ID)
@@ -146,6 +142,7 @@ public class UserSearchEditPageAction
         objEditSearchForm.setSearchProjectStatusesString(ecSearch.getStatuses());
         objEditSearchForm.setSearchProjectTypesString(ecSearch.getTypes());
         objEditSearchForm.setSearchZonesString(ecSearch.getZones());
+        objEditSearchForm.setSearchInspectionStatusTypesString(ecSearch.getInspectionStatuses());
         return mapping.findForward("continue");
     }
 
@@ -160,44 +157,5 @@ public class UserSearchEditPageAction
             SecondaryMenu.getInstance(SecondaryMenu.USER_VIEW_MENU_NAME);
         sec.setCurrentItem(SecondaryMenu.X_USER_SEARCHES_MENU_ITEM_NAME);
         setSecondaryMenu(sec, request);
-    }
-
-    private void setProjectZonesOnRequest(HttpServletRequest request, Integer clientId)
-    {
-        List
-            lstZones =
-            new ArrayList();
-        lstZones.addAll(EcZone.findByClientId(clientId));
-        request.setAttribute(com.sehinc.erosioncontrol.action.base.SessionKeys.EC_ZONE_LIST,
-                             lstZones);
-    }
-
-    private void setProjectTypesOnRequest(HttpServletRequest request, Integer clientId)
-    {
-        List
-            lstTypes =
-            new ArrayList();
-        lstTypes.addAll(EcProjectType.findByClientId(clientId));
-        request.setAttribute(com.sehinc.erosioncontrol.action.base.SessionKeys.EC_PROJECT_TYPE_LIST,
-                             lstTypes);
-    }
-
-    private void setProjectStatusesOnRequest(HttpServletRequest request)
-    {
-        List<CodeData>
-            lstStatuses =
-            SpringServiceLocator.getLookupService()
-                .fetchCodes(ProjectStatusCodeData.class);
-        request.setAttribute(com.sehinc.erosioncontrol.action.base.SessionKeys.PROJECT_STATUS_CODE_LIST,
-                             lstStatuses);
-    }
-
-    private void setStateListOnRequest(HttpServletRequest request)
-    {
-        List
-            lstC =
-            CapState.findNonArmedForcesStates();
-        request.setAttribute(com.sehinc.erosioncontrol.action.base.SessionKeys.EC_STATE_LIST,
-                             lstC);
     }
 }

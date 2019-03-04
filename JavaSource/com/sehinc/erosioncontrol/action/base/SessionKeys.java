@@ -351,6 +351,10 @@ public class SessionKeys
         "project.status.code.list";
     public final static
     String
+        PROJECT_LAST_INSPECTION_STATUS_LIST =
+        "project.last.inspection.status.list";
+    public final static
+    String
         EC_FILE_DOC_ARRAY =
         "ec.file.doc.array";
     public final static

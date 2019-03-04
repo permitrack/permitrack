@@ -23,6 +23,22 @@
                                styleId="searchPermitNumber" />
                 </div>
             </div>
+            <div class="control-group">
+                <label class="control-label">
+                    Last Final Inspection
+                </label>
+                <div class="controls">
+                    <html:select styleClass="input-medium"
+                                 name="projectSearchListForm"
+                                 property="searchInspectionStatusTypes"
+                                 styleId="searchInspectionStatusTypes"
+                                 multiple="true">
+                        <html:options collection="<%=SessionKeys.PROJECT_LAST_INSPECTION_STATUS_LIST%>"
+                                      property="code"
+                                      labelProperty="description" />
+                    </html:select>
+                </div>
+            </div>
         </div>
         <div class="span4 well well-small">
             <div class="control-group">

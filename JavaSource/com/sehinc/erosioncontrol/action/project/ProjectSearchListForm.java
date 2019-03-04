@@ -72,6 +72,10 @@ public class ProjectSearchListForm
         searchProjectStatuses =
         null;
     private
+    String[]
+        searchInspectionStatusTypes =
+        null;
+    private
     String
         sortColumn =
         null;
@@ -301,6 +305,48 @@ public class ProjectSearchListForm
         return null;
     }
 
+    public void setSearchInspectionStatusTypesString(String statuses)
+    {
+        if (statuses
+                != null)
+        {
+            StringTokenizer
+                    tokenizer =
+                    new StringTokenizer(statuses,
+                            " ,",
+                            false);
+            ArrayList<String>
+                    list =
+                    new ArrayList<String>();
+            while (tokenizer.hasMoreTokens())
+            {
+                list.add(tokenizer.nextToken());
+            }
+            this.searchInspectionStatusTypes =
+                    list.toArray(new String[list.size()]);
+        }
+    }
+
+    public String getSearchInspectionStatusTypesString()
+    {
+        StringBuilder
+                builder =
+                new StringBuilder();
+        if (searchInspectionStatusTypes
+                != null)
+        {
+            for (String i : searchInspectionStatusTypes)
+            {
+                builder.append(i);
+                builder.append(", ");
+            }
+            return builder.substring(0,
+                    builder.length()
+                            - 2);
+        }
+        return null;
+    }
+
     public Boolean getProjectsPerPageChanged()
     {
         return projectsPerPageChanged;
@@ -453,6 +499,17 @@ public class ProjectSearchListForm
     {
         this.searchProjectStatuses =
             searchProjectStatuses;
+    }
+
+    public String[] getSearchInspectionStatusTypes()
+    {
+        return searchInspectionStatusTypes;
+    }
+
+    public void setSearchInspectionStatusTypes(String[] searchInspectionStatusTypes)
+    {
+        this.searchInspectionStatusTypes =
+                searchInspectionStatusTypes;
     }
 
     public void reset()

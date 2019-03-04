@@ -127,10 +127,15 @@ public class InspectionListValue
             new InspectionActionValue(inspection.getInspectionAction());
         this.inspectionReason =
             inspection.getInspectionReason();
-        if (inspection.isFailed())
+        if (inspection.isFailed() == 1)
         {
             bmpStatus =
                 "Failed";
+        }
+        else if (inspection.isFailed() == 2)
+        {
+            bmpStatus =
+                "Warning";
         }
         else
         {
@@ -187,6 +192,10 @@ public class InspectionListValue
         else if (bmpStatus.equals("Failed"))
         {
             return "/sehsvc/img/icons/sehdelete.png";
+        }
+        else if (bmpStatus.equals("Warning"))
+        {
+            return "/sehsvc/img/icons/sehwarning.png";
         }
         else
         {

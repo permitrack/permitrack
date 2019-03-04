@@ -165,6 +165,31 @@ public class UserSearchCreateAction
             }
             ecSearch.setZones(zonesStr.toString());
         }
+        if (objNewSearchForm.getSearchInspectionStatusTypes()
+                != null) {
+            StringBuffer
+                    inspectionStatusStr =
+                    new StringBuffer();
+            String[]
+                    inspectionStatuses =
+                    objNewSearchForm.getSearchInspectionStatusTypes();
+            for (
+                    int
+                            i =
+                            0; i
+                    < inspectionStatuses.length; i++) {
+                String
+                        inspectionStatus =
+                        inspectionStatuses[i];
+                inspectionStatusStr.append(inspectionStatus);
+                if (i
+                        != (inspectionStatuses.length
+                        - 1)) {
+                    inspectionStatusStr.append(",");
+                }
+            }
+            ecSearch.setInspectionStatuses(inspectionStatusStr.toString());
+        }
         Integer
             ecSearchId =
             ecSearch.insert(getUserValue(request));

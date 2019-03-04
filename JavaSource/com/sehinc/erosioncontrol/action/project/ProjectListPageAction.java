@@ -1,9 +1,7 @@
 package com.sehinc.erosioncontrol.action.project;
 
 import com.sehinc.common.CommonConstants;
-import com.sehinc.common.db.user.CapState;
 import com.sehinc.common.security.SecurityManager;
-import com.sehinc.common.service.spring.SpringServiceLocator;
 import com.sehinc.common.util.LabelValueBean;
 import com.sehinc.common.util.StringUtil;
 import com.sehinc.common.value.client.ClientValue;
@@ -14,12 +12,8 @@ import com.sehinc.erosioncontrol.action.base.SessionKeys;
 import com.sehinc.erosioncontrol.action.navigation.SecondaryMenu;
 import com.sehinc.erosioncontrol.command.EcProjectSearchCommand;
 import com.sehinc.erosioncontrol.command.EcProjectSearchCommandContext;
-import com.sehinc.erosioncontrol.db.code.CodeData;
 import com.sehinc.erosioncontrol.db.code.StatusCodeData;
 import com.sehinc.erosioncontrol.db.project.EcProjectSearchData;
-import com.sehinc.erosioncontrol.db.project.EcProjectType;
-import com.sehinc.erosioncontrol.db.project.EcZone;
-import com.sehinc.erosioncontrol.db.project.ProjectStatusCodeData;
 import com.sehinc.erosioncontrol.db.user.EcSearch;
 import com.sehinc.erosioncontrol.db.user.EcUserDefaultSearch;
 import com.sehinc.erosioncontrol.db.user.EcUserSearch;
@@ -30,7 +24,6 @@ import org.apache.log4j.Logger;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
-import org.apache.struts.action.ActionMessage;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -64,15 +57,16 @@ public class ProjectListPageAction
         setMapLink(request,
                    clientValue,
                    0);
-        setStateListOnRequest(request);
-        setProjectStatusesOnRequest(request);
+        ProjectService.setStateListOnRequest(request);
+        ProjectService.setProjectStatusesOnRequest(request);
+        ProjectService.setProjectLastInspectionStatusesOnRequest(request);
         List<Integer>
             clientIds =
             getClientIds(clientValue);
-        setProjectTypesOnRequest(request,
-                                 clientIds);
-        setProjectZonesOnRequest(request,
-                                 clientIds);
+        ProjectService.setProjectTypesOnRequest(request,
+                clientIds);
+        ProjectService.setProjectZonesOnRequest(request,
+                clientIds);
         setUserSearchesOnRequest(request,
                                  userValue);
         clearCurrentProject(request);
@@ -98,19 +92,6 @@ public class ProjectListPageAction
         return clients;
     }
 
-    private void setProjectZonesOnRequest(HttpServletRequest request, List<Integer> clientIds)
-    {
-        List
-            lstZones =
-            new ArrayList();
-        for (Integer id : clientIds)
-        {
-            lstZones.addAll(EcZone.findByClientId(id));
-        }
-        request.setAttribute(SessionKeys.EC_ZONE_LIST,
-                             lstZones);
-    }
-
     private void setUserSearchesOnRequest(HttpServletRequest request, UserValue userValue)
     {
         List
@@ -118,38 +99,6 @@ public class ProjectListPageAction
             EcUserSearch.findByUserId(userValue.getId());
         request.setAttribute(SessionKeys.USER_SEARCH_LIST,
                              userSearchList);
-    }
-
-    private void setProjectTypesOnRequest(HttpServletRequest request, List<Integer> clientIds)
-    {
-        List
-            lstTypes =
-            new ArrayList();
-        for (Integer id : clientIds)
-        {
-            lstTypes.addAll(EcProjectType.findByClientId(id));
-        }
-        request.setAttribute(SessionKeys.EC_PROJECT_TYPE_LIST,
-                             lstTypes);
-    }
-
-    private void setProjectStatusesOnRequest(HttpServletRequest request)
-    {
-        List<CodeData>
-            lstStatuses =
-            SpringServiceLocator.getLookupService()
-                .fetchCodes(ProjectStatusCodeData.class);
-        request.setAttribute(SessionKeys.PROJECT_STATUS_CODE_LIST,
-                             lstStatuses);
-    }
-
-    private void setStateListOnRequest(HttpServletRequest request)
-    {
-        List
-            lstC =
-            CapState.findNonArmedForcesStates();
-        request.setAttribute(SessionKeys.EC_STATE_LIST,
-                             lstC);
     }
 
     private void clearCurrentProject(HttpServletRequest request)
@@ -308,21 +257,6 @@ public class ProjectListPageAction
         projectList =
             context.getResults();
         form.setTotalPages(context.getTotalPages());
-        /*int
-            totalPages =
-            form.getTotalPages();
-        Object[]
-            parameters =
-            {
-                totalPages
-                > 1
-                    ? "~"
-                      + (totalPages
-                         * context.getProjectsPerPage())
-                    : projectList.size()};
-        addMessage(new ActionMessage("project.search.list.returned",
-                                     parameters),
-                   request);*/
         return projectList;
     }
 
@@ -395,6 +329,8 @@ public class ProjectListPageAction
                    == null
                 && form.getSearchZones()
                    == null
+                && form.getSearchInspectionStatusTypes()
+                    == null
                 && StringUtil.isEmpty(form.getSearchPermitNumber())
                 && StringUtil.isEmpty(form.getSearchAreaSizeMin())
                 && StringUtil.isEmpty(form.getSearchAreaSizeMax())
@@ -478,6 +414,7 @@ public class ProjectListPageAction
             context.setProjectStatuses(convertToStringList(search.getStatuses()));
             context.setProjectTypes(convertToIntList(search.getTypes()));
             context.setZones(convertToIntList(search.getZones()));
+            context.setInspectionStatuses(convertToStringList(search.getInspectionStatuses()));
             context.setPermitNumber(search.getPermitNum());
             context.setAreaSizeMin(search.getAreaMin());
             context.setAreaSizeMax(search.getAreaMax());
@@ -502,6 +439,7 @@ public class ProjectListPageAction
             form.setSearchProjectStatuses(convertToStringList(search.getStatuses()));
             form.setSearchProjectTypes(convertToIntList(search.getTypes()));
             form.setSearchZones(convertToIntList(search.getZones()));
+            form.setSearchInspectionStatusTypes(convertToStringList(search.getInspectionStatuses()));
             form.setSearchPermitNumber(search.getPermitNum());
             form.setSearchAreaSizeMin(search.getAreaMin());
             form.setSearchAreaSizeMax(search.getAreaMax());
@@ -554,6 +492,7 @@ public class ProjectListPageAction
         context.setProjectStatuses(form.getSearchProjectStatuses());
         context.setProjectTypes(form.getSearchProjectTypes());
         context.setZones(form.getSearchZones());
+        context.setInspectionStatuses(form.getSearchInspectionStatusTypes());
         context.setPermitNumber(form.getSearchPermitNumber());
         context.setAreaSizeMin(form.getSearchAreaSizeMin());
         context.setAreaSizeMax(form.getSearchAreaSizeMax());

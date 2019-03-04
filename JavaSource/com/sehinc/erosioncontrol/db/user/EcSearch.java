@@ -48,6 +48,10 @@ public class EcSearch
         null;
     private
     String
+        inspectionStatuses =
+        null;
+    private
+    String
         permitNum =
         null;
     private
@@ -338,6 +342,17 @@ public class EcSearch
     {
         this.statuses =
             statuses;
+    }
+
+    public String getInspectionStatuses()
+    {
+        return inspectionStatuses;
+    }
+
+    public void setInspectionStatuses(String inspectionStatuses)
+    {
+        this.inspectionStatuses =
+                inspectionStatuses;
     }
 
     public String getTotalAreaMax()

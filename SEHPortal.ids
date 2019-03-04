@@ -892,6 +892,7 @@
       <column name="NAME" sqlType="varchar" length="50" precision="0" nullable="false" jdbcType="12" />
       <column name="DESCRIPTION" sqlType="varchar" length="200" precision="0" nullable="false" jdbcType="12" />
       <column name="IS_PASS_CONDITION" sqlType="bit" length="1" precision="0" nullable="true" jdbcType="-7" />
+      <column name="IS_WARN_CONDITION" sqlType="bit" length="1" precision="0" nullable="true" jdbcType="-7" />
       <primary-key name="PK_ECInspectionBMPCondition" columns="ID" />
       <index name="IX_ECInspectionBMPCondition" unique="false" columns="ID" />
       <index name="IX_ECInspectionBMPCondition_Name" unique="false" columns="NAME" />
@@ -1184,6 +1185,7 @@
       <column name="PERMIT_AUTH_NAME" sqlType="varchar" length="100" precision="0" nullable="true" jdbcType="12" />
       <column name="PERMITEE_NAME" sqlType="varchar" length="100" precision="0" nullable="true" jdbcType="12" />
       <column name="INSPECTOR_NAME" sqlType="varchar" length="100" precision="0" nullable="true" jdbcType="12" />
+      <column name="INSPECTION_STATUSES" sqlType="varchar" length="100" precision="0" nullable="true" jdbcType="12" />
       <index name="IX_EC_SEARCH" unique="true" columns="ID" />
     </table>
     <table name="EC_USER_CONFIG" schema="dbo" catalog="sehtechdb" type="TABLE">
@@ -2144,6 +2146,7 @@
       <column name="SEARCH_PROJECT_STATUSES" sqlType="varchar" length="100" precision="0" nullable="true" jdbcType="12" />
       <column name="SORT_COLUMN" sqlType="varchar" length="100" precision="0" nullable="false" jdbcType="12" />
       <column name="SORT_DIRECTION" sqlType="varchar" length="100" precision="0" nullable="false" jdbcType="12" />
+      <column name="SEARCH_INSPECTION_STATUSES" sqlType="varchar" length="100" precision="0" nullable="true" jdbcType="12" />
       <primary-key name="PK_USER_SEARCHES" columns="ID" />
       <foreign-key name="FK_USR_SC_CON_ID_CP_CON_ID" columns="USER_ID" ref-table="USER" ref-schema="dbo" ref-catalog="sehtechdb" ref-columns="ID" update-rule="0" delete-rule="1" deferrability="2" />
     </table>

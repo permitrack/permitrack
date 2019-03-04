@@ -596,6 +596,10 @@ public class EcProjectSearchData
         {
             return "/sehsvc/img/icons/sehdelete.png";
         }
+        else if (lastInspectionBmpStatus.equals("WARN"))
+        {
+            return "/sehsvc/img/icons/sehwarning.png";
+        }
         else
         {
             return "";

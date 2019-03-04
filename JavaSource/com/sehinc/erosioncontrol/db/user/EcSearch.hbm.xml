@@ -87,6 +87,9 @@
         <property name="inspectorName"
                   type="string"
                   column="INSPECTOR_NAME" />
+        <property name="inspectionStatuses"
+                  type="string"
+                  column="INSPECTION_STATUSES" />
     </class>
 </hibernate-mapping>
 

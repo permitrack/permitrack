@@ -52,16 +52,18 @@ public class EcProjectSearchCommand
                                       true));
         builder.append(formatStrToSql(context.getZip(),
                                       true));
-        builder.append(formatStrToSql(convertListToCommaSeperatedString(context.getProjectStatuses()),
+        builder.append(formatStrToSql(convertListToCommaSeperatedString(context.getProjectStatuses(), ""),
                                       true));
-        builder.append(formatStrToSql(convertListToCommaSeperatedString(context.getProjectTypes()),
+        builder.append(formatStrToSql(convertListToCommaSeperatedString(context.getProjectTypes(), ""),
                                       true));
-        builder.append(formatStrToSql(convertListToCommaSeperatedString(context.getZones()),
+        builder.append(formatStrToSql(convertListToCommaSeperatedString(context.getZones(), ""),
+                                      true));
+        builder.append(formatStrToSql(convertListToCommaSeperatedString(context.getInspectionStatuses(), "'"),
                                       true));
         builder.append(formatStrToSql(context.getClient()
                                           .getId(),
                                       true));
-        builder.append(formatStrToSql(convertListToCommaSeperatedString(context.getOrderColumns()),
+        builder.append(formatStrToSql(convertListToCommaSeperatedString(context.getOrderColumns(), ""),
                                       true));
         builder.append(formatStrToSql(context.getPermitNumber(),
                                       true));
@@ -121,7 +123,7 @@ public class EcProjectSearchCommand
             string =
                 StringUtil.replace(string.toString(),
                                    "'",
-                                   "");
+                                   "''");
             returnString.append("'")
                 .append(string)
                 .append("'");
@@ -133,7 +135,7 @@ public class EcProjectSearchCommand
         return returnString.toString();
     }
 
-    private String convertListToCommaSeperatedString(List items)
+    private String convertListToCommaSeperatedString(List items, String surroundWith)
     {
         StringBuilder
             builder =
@@ -143,7 +145,13 @@ public class EcProjectSearchCommand
         {
             for (Object o : items)
             {
+                if (!surroundWith.isEmpty()) {
+                    builder.append(surroundWith);
+                }
                 builder.append(o.toString());
+                if (!surroundWith.isEmpty()) {
+                    builder.append(surroundWith);
+                }
                 builder.append(", ");
             }
             int

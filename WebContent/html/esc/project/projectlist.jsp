@@ -14,16 +14,6 @@
 <%@ page import="com.sehinc.erosioncontrol.action.project.ProjectSearchListForm" %>
 <%@ page import="com.sehinc.erosioncontrol.db.project.EcProjectSearchData" %>
 <%@ page import="java.util.Date" %>
-<%
-    pageContext.setAttribute("searchZones",
-                             request.getAttribute(SessionKeys.EC_ZONE_LIST));
-    pageContext.setAttribute("searchProjectTypes",
-                             request.getAttribute(SessionKeys.EC_PROJECT_TYPE_LIST));
-    pageContext.setAttribute("searchProjectStatuses",
-                             request.getAttribute(SessionKeys.PROJECT_STATUS_CODE_LIST));
-    pageContext.setAttribute("stateList",
-                             request.getAttribute(SessionKeys.EC_STATE_LIST));
-%>
 <html:form styleClass="form-horizontal small-labels"
            action="/projectlistpage"
            method="get">

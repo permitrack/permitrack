@@ -21,5 +21,8 @@
         <property name="isPassCondition"
                   type="boolean"
                   column="IS_PASS_CONDITION" />
+        <property name="isWarnCondition"
+                  type="boolean"
+                  column="IS_WARN_CONDITION" />
     </class>
 </hibernate-mapping>

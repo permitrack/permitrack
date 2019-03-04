@@ -99,6 +99,9 @@ public class EcProjectSearchCommandContext
     List<Integer>
         zones;
     private
+    List<String>
+        inspectionStatuses;
+    private
     ClientValue
         client;
     private
@@ -248,6 +251,23 @@ public class EcProjectSearchCommandContext
                 new ArrayList<Integer>(zones.length);
             this.zones
                 .addAll(Arrays.asList(zones));
+        }
+    }
+
+    public List<String> getInspectionStatuses()
+    {
+        return inspectionStatuses;
+    }
+
+    public void setInspectionStatuses(String... inspectionStatuses)
+    {
+        if (inspectionStatuses
+                != null)
+        {
+            this.inspectionStatuses =
+                    new ArrayList<String>(inspectionStatuses.length);
+            this.inspectionStatuses
+                    .addAll(Arrays.asList(inspectionStatuses));
         }
     }
 

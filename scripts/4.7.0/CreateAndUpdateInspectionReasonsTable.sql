@@ -345,11 +345,19 @@ AS
 SELECT     ei.ID, ei.PROJECT_ID, ei.CLIENT_ID, ei.INSPECTION_DATE, ei.ENTERED_DATE, ei.WEATHER_TRENDS, ei.TEMPERATURE, ei.COMMENT, ei.PRECIP_END_DATE, 
                       ei.PRECIP_AMOUNT, ei.PRECIP_SOURCE, ei.INSPECTION_ACTION_COMMENT, ei.INSPECTION_ACTION_ID, ei.CREATE_TS, 
                       ei.UPDATE_TS, ei.UPDATE_USER_ID, ei.STATUS_CD, ei.VERSION, ei.INSPECTOR_ID, ei.TIME_HOUR, ei.TIME_MINUTE, ei.TIME_PERIOD, 
-                      CASE WHEN EXISTS
+                      CASE 
+						WHEN EXISTS
                           (SELECT     a.id
                             FROM          ec_inspection AS a, ec_inspection_bmp AS b
-                            WHERE      b.inspection_id = a.id AND inspection_bmp_condition_id <> 2 AND inspection_bmp_condition_id <> 1 AND is_inspected = 1 AND ei.id = a.id) 
-                      THEN 'FAIL' ELSE 'PASS' END AS bmp_status,
+                            WHERE      b.inspection_id = a.id AND inspection_bmp_condition_id IN (3, 4) AND is_inspected = 1 AND ei.id = a.id) 
+						THEN 'FAIL' 
+						WHEN EXISTS
+                          (SELECT     a.id
+                            FROM          ec_inspection AS a, ec_inspection_bmp AS b
+                            WHERE      b.inspection_id = a.id AND inspection_bmp_condition_id IN (5) AND is_inspected = 1 AND ei.id = a.id) 
+						THEN 'WARN' 
+						ELSE 'PASS' 
+					  END AS bmp_status,
                       inspectionCount
 FROM         dbo.EC_INSPECTION AS ei INNER JOIN
                           (SELECT     PROJECT_ID, MAX(CONVERT(CHAR(8), INSPECTION_DATE, 112) + CONVERT(CHAR(8), ENTERED_DATE, 112) + CONVERT(char(10), ID)) AS maxDate, COUNT(dbo.EC_INSPECTION.ID) as inspectionCount
@@ -414,6 +422,216 @@ INSERT INTO
            ,'BMP needs routine maintenance'
            ,1
 		   )
+GO
+
+
+----------------------------------------------------
+-- ADD COLUMN TO BMP CONDITION
+----------------------------------------------------
+ALTER TABLE EC_INSPECTION_BMP_CONDITION ADD
+	IS_WARN_CONDITION bit NULL
+GO
+
+UPDATE EC_INSPECTION_BMP_CONDITION SET IS_WARN_CONDITION = 0
+GO
+
+UPDATE EC_INSPECTION_BMP_CONDITION SET IS_WARN_CONDITION = 1 WHERE ID = 5
+GO
+
+
+
+----------------------------------------------------
+-- ADD COLUMNS FOR NEW PROJECT FILTER REGARDING LAST INSPECTION STATUS (FAIL/WARN/PASS)
+----------------------------------------------------
+ALTER TABLE EC_SEARCH ADD
+	INSPECTION_STATUSES varchar(100) NULL
+GO
+
+ALTER TABLE USER_SEARCHES ADD
+	SEARCH_INSPECTION_STATUSES varchar(100) NULL
+GO
+
+
+----------------------------------------------------
+-- UPDATE PROJECT SEARCH FOR NEW PROJECT FILTER REGARDING LAST INSPECTION STATUS (FAIL/WARN/PASS)
+----------------------------------------------------
+ALTER PROCEDURE [dbo].[sp_project_search]
+	@projectName varchar(500) = NULL,
+	@address varchar(200) = NULL,
+	@city varchar(50) = NULL,
+	@state varchar(30) = NULL,
+	@zip varchar(12) = NULL,
+	@projectStatusList varchar(255) = NULL,
+	@projectTypeList varchar(255) = NULL,
+	@zoneList varchar(255) = NULL,
+	@inspectionStatusList varchar(255) = NULL,
+	@clientId varchar(10),
+	@orderColumns varchar(255) = NULL,
+	@permitNumber varchar(50) = NULL,
+	@areaSizeMin varchar(30) = NULL,
+	@areaSizeMax varchar(30) = NULL,
+	@impAreaSizeMin varchar(30) = NULL,
+	@impAreaSizeMax varchar(30) = NULL,
+	@totalAreaSizeMin varchar(30) = NULL,
+	@totalAreaSizeMax varchar(30) = NULL,
+	@startDateA varchar(30) = NULL,
+	@startDateB varchar(30) = NULL,
+	@effDateA varchar(30) = NULL,
+	@effDateB varchar(30) = NULL,
+	@seedDateA varchar(30) = NULL,
+	@seedDateB varchar(30) = NULL,
+	@permitAuthName varchar(100) = NULL,
+	@permiteeName varchar(100) = NULL,
+	@inspectorName varchar(100) = NULL,
+	@pageNumber int = 1,
+	@rowsPerPage int = 100
+AS
+DECLARE 
+	@sql nvarchar(4000),
+	@paramlist nvarchar(4000),
+	@firstRow int,
+	@lastRow int
+
+set @lastRow = @pageNumber * @rowsPerPage
+set @firstRow = @lastRow - @rowsPerPage + 1;
+
+SELECT @sql = 
+    '
+    with Projects as
+    (
+    SELECT
+	project.id,
+	project.name as project_name,
+	project.permit_number,
+	permit_auth.name as permit_auth_name,
+	permitee.name as permitee_name,
+	last_final_inspections.inspection_date as last_inspection_date,
+	project.disturbed_area,
+	project.disturbed_area_units,
+	project_status.description as project_status_description,
+	zone.name as zone_name,
+	type.name as project_type,
+	project.address,
+	project.city,
+	project.state,
+	project.zip,
+	project.start_date,
+	project.effective_date,
+	project.seed_date,
+	project.total_site_area,
+	project.total_site_area_units,
+	project.new_impervious_area,
+	project.new_impervious_area_units,
+	inspector.name as inspector_name,
+	owner.name as owner_name,
+	last_final_inspections.bmp_status,
+	project.rfa_number,
+	project.block_number,
+	project.lot_number,
+	project.inspection_frequency,
+	last_final_inspections.inspectionCount,
+    row_number() over (order by '
+    
+    IF @orderColumns IS NOT NULL
+		SELECT @sql = @sql + @orderColumns
+	ELSE
+		SELECT @sql = @sql + 'project.id'
+	
+	SELECT @sql = @sql + ') as RowNumber
+    FROM
+	ec_project as project
+	inner join client AS permit_auth ON project.permit_authority_client_id = permit_auth.id
+	inner join client AS permitee ON project.permitted_client_id = permitee.id
+	inner join lookup_project_status_code AS project_status ON project.project_status_cd = project_status.code
+	inner join ec_zone AS zone ON project.zone_id = zone.id
+	left join ec_project_type as type ON project.project_type_id = type.id
+	left join client as inspector ON project.authorized_inspector_client_id = inspector.id
+	inner join client as owner ON project.owner_client_id = owner.id
+	left join last_final_inspections ON last_final_inspections.project_id = project.id
+WHERE
+    (   project.owner_client_id = ' + @clientId + '
+        or project.permit_authority_client_id = ' + @clientId + '
+        or project.permitted_client_id = ' + @clientId + '
+        or project.authorized_inspector_client_id =  ' + @clientId + '
+	)'
+IF @projectName IS NOT NULL
+	SELECT @sql = @sql + ' and project.name like ''%'' + @xname + ''%'''
+IF @address IS NOT NULL
+	SELECT @sql = @sql + ' and project.address like ''%'' + @xaddress + ''%'''
+IF @city IS NOT NULL
+	SELECT @sql = @sql + ' and project.city like ''%'' + @xcity + ''%'''
+IF @state IS NOT NULL
+	SELECT @sql = @sql + ' and project.state like ''%'' + @xstate + ''%'''
+IF @zip IS NOT NULL
+	SELECT @sql = @sql + ' and project.zip like ''%'' + @xzip + ''%'''
+IF @projectStatusList IS NOT NULL
+	SELECT @sql = @sql + ' and project.project_status_cd in (' + @projectStatusList + ')'
+IF @projectTypeList IS NOT NULL
+	SELECT @sql = @sql + ' and project.project_type_id in (' + @projectTypeList  + ')'
+IF @zoneList IS NOT NULL
+	SELECT @sql = @sql + ' and project.zone_id in (' + @zoneList + ')'
+IF @inspectionStatusList IS NOT NULL
+	SELECT @sql = @sql + ' and last_final_inspections.bmp_status in (' + @inspectionStatusList + ')'
+IF @permitNumber IS NOT NULL
+	SELECT @sql = @sql + ' and project.permit_number like ''%'' + @xpermitnum + ''%'''
+IF @areaSizeMin IS NOT NULL AND @areaSizeMax IS NOT NULL
+	SELECT @sql = @sql + ' and project.disturbed_area between ' + @areaSizeMin + ' AND ' + @areaSizeMax + ' '
+IF @impAreaSizeMin IS NOT NULL AND @impAreaSizeMax IS NOT NULL
+	SELECT @sql = @sql + ' and project.new_impervious_area between ' + @impAreaSizeMin + ' AND ' + @impAreaSizeMax + ' '
+IF @totalAreaSizeMin IS NOT NULL AND @totalAreaSizeMax IS NOT NULL
+	SELECT @sql = @sql + ' and project.total_site_area between ' + @totalAreaSizeMin + ' AND ' + @totalAreaSizeMax + ' '
+IF @startDateA IS NOT NULL AND @startDateB IS NOT NULL
+	SELECT @sql = @sql + ' and project.start_date between ''' + @startDateA + ''' AND ''' + @startDateB + ''' '
+IF @effDateA IS NOT NULL AND @effDateB IS NOT NULL
+	SELECT @sql = @sql + ' and project.effective_date between ''' + @effDateA + ''' AND ''' + @effDateB + ''' '
+IF @seedDateA IS NOT NULL AND @seedDateB IS NOT NULL
+	SELECT @sql = @sql + ' and project.seed_date between ''' + @seedDateA + ''' AND ''' + @seedDateB + ''' '
+IF @permitAuthName IS NOT NULL
+	SELECT @sql = @sql + ' and permit_auth.name like ''%'' + @xpermitauthname + ''%'''
+IF @permiteeName IS NOT NULL
+	SELECT @sql = @sql + ' and permitee.name like ''%'' + @xpermiteename + ''%'''
+IF @inspectorName IS NOT NULL
+	SELECT @sql = @sql + ' and inspector.name like ''%'' + @xinspectorname + ''%'''
+
+SELECT @sql = @sql + ')
+	select *
+	from Projects
+	where RowNumber between ' + CAST( @firstRow as nvarchar(4000) ) + ' and ' + CAST( @lastRow as nvarchar(4000) )
+
+--IF @orderColumns IS NOT NULL
+	--SELECT @sql = @sql + ' order by  ' + @orderColumns
+
+SELECT @sql = @sql + ' UNION SELECT (count(*) / ' + CAST( @rowsPerPage as nvarchar(4000) ) + ') + 1 as TotalPages, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, ' + CAST( (@pageNumber * @rowsPerPage) + 1 as nvarchar(4000) ) + ' FROM Projects'
+
+SELECT @sql = @sql + ' ORDER BY RowNumber'
+
+PRINT @sql
+
+SELECT @paramlist =
+	'@xname		varchar(500),
+	@xaddress	varchar(200),
+	@xcity		varchar(50),
+	@xstate		varchar(30),
+	@xzip		varchar(12),
+	@xpermitnum         varchar(50),
+	@xpermitauthname    varchar(100),
+	@xpermiteename      varchar(100),
+	@xinspectorname     varchar(100)'
+EXEC sp_executesql  @sql, @paramlist, @projectName, @address, @city, @state, @zip,
+@permitNumber, @permitAuthName, @permiteeName, @inspectorName
+
+GO
+
+
+----------------------------------------------------
+-- ADD INDEX TO EC_INSPECTION_BMP TO HELP SEARCH PERFORMANCE
+----------------------------------------------------
+CREATE NONCLUSTERED INDEX [IX_ECInspectionBMP_InspectionIdIsInspectedInspectionBMPConditionID] ON [dbo].[EC_INSPECTION_BMP]
+(
+	[INSPECTION_ID] ASC,
+	[IS_INSPECTED] ASC,
+	[INSPECTION_BMP_CONDITION_ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 GO
 
 

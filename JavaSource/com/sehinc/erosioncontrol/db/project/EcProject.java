@@ -834,7 +834,7 @@ public class EcProject
         if (inspection
             != null)
         {
-            return inspection.isFailed();
+            return inspection.isFailed() == 1;
         }
         return false;
     }

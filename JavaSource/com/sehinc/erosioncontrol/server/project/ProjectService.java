@@ -6,7 +6,9 @@ import com.sehinc.common.db.contact.CapContactOrganization;
 import com.sehinc.common.db.hibernate.HibernateUtil;
 import com.sehinc.common.db.sql.SQLHelper;
 import com.sehinc.common.db.sql.SQLHelperPreparedStatement;
+import com.sehinc.common.db.user.CapState;
 import com.sehinc.common.security.SecurityManager;
+import com.sehinc.common.service.spring.SpringServiceLocator;
 import com.sehinc.common.util.LabelValueBean;
 import com.sehinc.common.util.StringUtil;
 import com.sehinc.common.util.crypto.CryptoException;
@@ -14,8 +16,10 @@ import com.sehinc.common.util.crypto.CryptoUtils;
 import com.sehinc.common.value.client.ClientValue;
 import com.sehinc.common.value.user.UserValue;
 import com.sehinc.erosioncontrol.action.base.RequestKeys;
+import com.sehinc.erosioncontrol.action.base.SessionKeys;
 import com.sehinc.erosioncontrol.action.project.ProjectContactValueComparator;
 import com.sehinc.erosioncontrol.action.project.ProjectListItem;
+import com.sehinc.erosioncontrol.db.code.CodeData;
 import com.sehinc.erosioncontrol.db.code.StatusCodeData;
 import com.sehinc.erosioncontrol.db.project.*;
 import com.sehinc.erosioncontrol.db.user.EcUserPreferences;
@@ -1376,5 +1380,79 @@ public class ProjectService
             list.add(contact.getEmail());
         }
         return list;
+    }
+
+    public static void setProjectZonesOnRequest(HttpServletRequest request, List<Integer> clientIds)
+    {
+        List
+                lstZones =
+                new ArrayList();
+        for (Integer id : clientIds)
+        {
+            lstZones.addAll(EcZone.findByClientId(id));
+        }
+        request.setAttribute(SessionKeys.EC_ZONE_LIST,
+                lstZones);
+    }
+
+    public static void setProjectTypesOnRequest(HttpServletRequest request, List<Integer> clientIds)
+    {
+        List
+                lstTypes =
+                new ArrayList();
+        for (Integer id : clientIds)
+        {
+            lstTypes.addAll(EcProjectType.findByClientId(id));
+        }
+        request.setAttribute(SessionKeys.EC_PROJECT_TYPE_LIST,
+                lstTypes);
+    }
+
+    public static void setProjectStatusesOnRequest(HttpServletRequest request)
+    {
+        List<CodeData>
+                lstStatuses =
+                SpringServiceLocator.getLookupService()
+                        .fetchCodes(ProjectStatusCodeData.class);
+        request.setAttribute(SessionKeys.PROJECT_STATUS_CODE_LIST,
+                lstStatuses);
+    }
+
+    public static void setProjectLastInspectionStatusesOnRequest(HttpServletRequest request)
+    {
+        List<CodeData>
+                lstStatuses =
+                new ArrayList<CodeData>();
+
+        CodeData pass = new CodeData();
+        pass.setCode("PASS");
+        pass.setDescription("Pass");
+        pass.setDisplayOrder(1);
+
+        CodeData fail = new CodeData();
+        fail.setCode("FAIL");
+        fail.setDescription("Failed");
+        fail.setDisplayOrder(2);
+
+        CodeData warn = new CodeData();
+        warn.setCode("WARN");
+        warn.setDescription("Warning");
+        warn.setDisplayOrder(3);
+
+        lstStatuses.add(pass);
+        lstStatuses.add(fail);
+        lstStatuses.add(warn);
+
+        request.setAttribute(SessionKeys.PROJECT_LAST_INSPECTION_STATUS_LIST,
+                lstStatuses);
+    }
+
+    public static void setStateListOnRequest(HttpServletRequest request)
+    {
+        List
+                lstC =
+                CapState.findNonArmedForcesStates();
+        request.setAttribute(SessionKeys.EC_STATE_LIST,
+                lstC);
     }
 }

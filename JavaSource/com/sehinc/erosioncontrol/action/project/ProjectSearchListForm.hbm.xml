@@ -46,6 +46,9 @@
         <property name="searchProjectStatusesString"
                   type="string"
                   column="SEARCH_PROJECT_STATUSES" />
+        <property name="searchInspectionStatusTypesString"
+                  type="string"
+                  column="SEARCH_INSPECTION_STATUSES" />
         <property name="sortColumn"
                   type="string"
                   column="SORT_COLUMN" />

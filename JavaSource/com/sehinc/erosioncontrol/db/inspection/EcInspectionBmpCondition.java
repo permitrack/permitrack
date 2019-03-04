@@ -26,6 +26,10 @@ public class EcInspectionBmpCondition
     Integer
         BMP_CONDITION_INEFFECTIVE =
         new Integer(4);
+    public final static
+    Integer
+        BMP_CONDITION_ROUTINE =
+        new Integer(5);
     private static
     Logger
         LOG =
@@ -39,6 +43,9 @@ public class EcInspectionBmpCondition
     private
     Boolean
         isPassCondition;
+    private
+    Boolean
+        isWarnCondition;
 
     public EcInspectionBmpCondition()
     {
@@ -80,6 +87,17 @@ public class EcInspectionBmpCondition
     {
         this.isPassCondition =
             isPassCondition;
+    }
+
+    public Boolean getIsWarnCondition()
+    {
+        return this.isWarnCondition;
+    }
+
+    public void setIsWarnCondition(Boolean isWarnCondition)
+    {
+        this.isWarnCondition =
+                isWarnCondition;
     }
 
     public static List findAllSortedByName()
