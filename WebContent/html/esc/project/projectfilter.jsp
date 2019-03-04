@@ -24,7 +24,7 @@
                 </div>
             </div>
             <div class="control-group">
-                <label class="control-label">
+                <label class="control-label" style="line-height: 12px">
                     Last Final Inspection
                 </label>
                 <div class="controls">
