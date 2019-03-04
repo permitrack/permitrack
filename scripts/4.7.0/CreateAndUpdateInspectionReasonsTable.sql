@@ -635,3 +635,9 @@ CREATE NONCLUSTERED INDEX [IX_ECInspectionBMP_InspectionIdIsInspectedInspectionB
 GO
 
 
+----------------------------------------------------
+-- REMOVE UNUSED TABLE
+----------------------------------------------------
+DROP TABLE [dbo].[USER_SEARCHES]
+GO
+
