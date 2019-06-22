@@ -32,7 +32,7 @@
 <html:form styleClass="form-horizontal"
            action="/inspectioneditaction"
            enctype="multipart/form-data"
-           onsubmit="return validateForm(this);">
+           onsubmit="return validateFormDisableSave(this);">
     <fieldset>
         <legend>
             Inspection for
@@ -567,7 +567,8 @@
                 <logic:equal name="inspectionSecurityValue"
                              property="isDelete"
                              value="true">
-                    <input class="btn btn-danger btn-large warn-delete"
+                    <input styleId="deleteButton"
+                           class="btn btn-danger btn-large warn-delete"
                            type="submit"
                            name="submit"
                            value="Delete" />
@@ -587,7 +588,8 @@
                             <option value="1">Final</option>
                         </select>
                     </label>
-                    <html:submit styleClass="btn btn-success btn-large"
+                    <html:submit styleId="saveButton"
+                                 styleClass="btn btn-success btn-large"
                                  property="submit"
                                  value="Save" />
                 </span>
@@ -2494,14 +2496,25 @@
                   });
                 function refreshYesNo(a)
                 {
-//                    var btn = $.fn.button.noConflict(); // reverts $.fn.button to jqueryui btn
                     if($.fn.button.noConflict) {
                         $.fn.btn = $.fn.button.noConflict();
                     }
                     $(a).buttonset();
-//                    $.fn.button
-//                            = btn; // assigns bootstrap button functionality to $.fn.btn
-                }// -->
+                }
+                function validateFormDisableSave(form)
+                {
+                    $("#saveButton").attr("disabled", "disabled");
+                    $("#deleteButton").attr("disabled", "disabled");
+
+                    var isValid = validateForm(form);
+
+                    if(!isValid) {
+                        $("#saveButton").removeProp("disabled")
+                        $("#deleteButton").removeProp("disabled")
+                    }
+
+                    return isValid;
+                }
             </script>
         </tiles:put>
     </tiles:definition>

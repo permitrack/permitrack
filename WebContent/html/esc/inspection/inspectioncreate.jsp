@@ -27,7 +27,7 @@
 <html:form styleClass="form-horizontal"
            action="/inspectioncreateaction"
            enctype="multipart/form-data"
-           onsubmit="return validateForm(this);">
+           onsubmit="return validateFormDisableSave(this);">
     <fieldset>
         <legend>
             New Inspection
@@ -299,7 +299,8 @@
                 <textarea id="inspectionActionComment"
                           name="inspectionActionComment"
                           cols="75"
-                          rows="2"></textarea>
+                          rows="2"
+                          maxlength="800"></textarea>
             </div>
         </div>
     </div>
@@ -635,7 +636,8 @@
                             <option value="1">Final</option>
                         </select>
                     </label>
-                    <html:submit styleClass="btn btn-success btn-large"
+                    <html:submit styleId="saveButton"
+                                 styleClass="btn btn-success btn-large"
                                  property="submit"
                                  value="Save" />
                 </span>
@@ -2464,7 +2466,6 @@
                 displayBmpList();// End -->
             </script>
             <script type="text/javascript">
-                //<!--
                 $(function ()
                   {
                       $("#inspectionDateString").datepicker({autoclose:true});
@@ -2473,14 +2474,23 @@
                   });
                 function refreshYesNo(a)
                 {
-//                    var btn = $.fn.button.noConflict(); // reverts $.fn.button to jqueryui btn
                     if($.fn.button.noConflict) {
                         $.fn.btn = $.fn.button.noConflict();
                     }
                     $(a).buttonset();
-//                    $.fn.button
-//                            = btn; // assigns bootstrap button functionality to $.fn.btn
-                }// -->
+                }
+                function validateFormDisableSave(form)
+                {
+                    $("#saveButton").attr("disabled", "disabled");
+
+                    var isValid = validateForm(form);
+
+                    if(!isValid) {
+                        $("#saveButton").removeProp("disabled")
+                    }
+
+                    return isValid;
+                }
             </script>
         </tiles:put>
     </tiles:definition>
