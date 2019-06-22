@@ -33,7 +33,7 @@
                     property="complianceDate"
                     scope="request">
         <dt>
-            <bean:message key="event.compiancebydate" />
+            <bean:message key="event.compliancebydate" />
         </dt>
         <dd>
             <bean:write name="<%= RequestKeys.EC_EVENT_VALUE %>"

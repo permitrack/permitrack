@@ -61,7 +61,7 @@
             </field>
             <field property="complianceDateString"
                    depends="date">
-                <arg0 key="event.compiancebydate" />
+                <arg0 key="event.compliancebydate" />
                 <var>
                     <var-name>datePatternStrict</var-name>
                     <var-value>MM/dd/yyyy</var-value>
@@ -69,7 +69,7 @@
             </field>
             <field property="complianceHours"
                    depends="integer,intRange">
-                <arg0 key="event.compiancebyhours" />
+                <arg0 key="event.compliancebyhours" />
                 <arg1 name="intRange"
                       key="${var:min}"
                       resource="false" />

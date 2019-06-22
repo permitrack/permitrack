@@ -95,7 +95,7 @@ public class EventCreateProjectSearchResultsAction
                            != null)
                     {
                         event.setComplianceHours(eventForm.getComplianceHours());
-                        // TO MAKE THINGS EASIER FOR QUERIES, ALSO STORE THE COMPLIANCE DATE, (MAYBE WE DON'T NEED THE COMPIANCE_HOURS COLUMN FOR PURPOSE)
+                        // TO MAKE THINGS EASIER FOR QUERIES, ALSO STORE THE COMPLIANCE DATE, (MAYBE WE DON'T NEED THE COMPLIANCE_HOURS COLUMN FOR PURPOSE)
                         event.setComplianceDate(EventService.determineEventTimeFrameEnd(eventForm.getEventDate(),
                                                                                         eventForm.getComplianceHours()));
                     }

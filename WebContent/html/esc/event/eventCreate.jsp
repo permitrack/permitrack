@@ -12,7 +12,7 @@
                  property="nextPage" />
     <div class="control-group">
         <label class="control-label">
-            <bean:message key="event.type.description" />
+            <bean:message key="event.type.description" /> *
         </label>
         <div class="controls">
             <html:select styleId="eventType"
@@ -67,7 +67,7 @@
                 <html:radio styleId="compDate"
                             property="isComplianceByDate"
                             value="true" />
-                <bean:message key="event.compiance.date.description" />
+                <bean:message key="event.compliance.date.description" />
             </label>
             <html:text styleId="complianceDateString"
                        property="complianceDateString"
@@ -81,7 +81,7 @@
                 <html:radio styleId="compHrs"
                             property="isComplianceByDate"
                             value="false" />
-                <bean:message key="event.compiance.time.description" />
+                <bean:message key="event.compliance.time.description" />
             </label>
             <html:text styleId="complianceHours"
                        property="complianceHours"
