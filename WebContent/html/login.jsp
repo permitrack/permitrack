@@ -20,19 +20,17 @@
     </div>
     <tiles:insert page="messages.jsp"
                   flush="false" />
-    <%--<div class="row">--%>
-        <%--<div class="span12">--%>
-            <%--<div class="alert alert-block alert-success">--%>
-                <%--
-                <h3>
-                    Please Note
-                </h3>
-                --%>
+    <div class="row">
+        <div class="span12">
+            <div class="alert alert-block alert-success">
+                <%--<h3>--%>
+                    <%--Hello!--%>
+                <%--</h3>--%>
                 <%--MyPermiTrack.com is currently experience issues with our SSL Certificate. We are urgently working on these issues and we sincerely apologize for any inconvenience. It is completely SAFE to proceed past the SSL Certificate Warning by clicking "Continue" or equivalent if your browser allows it.--%>
-                <%--We have added new features to Erosion Control (ESC)! <html:link action="/inspection" anchor="features" target="blank">Click here to view the list of new features.</html:link>--%>
-            <%--</div>--%>
-        <%--</div>--%>
-    <%--</div>--%>
+                We have added new features to Erosion Control (ESC)! <html:link action="/inspection" anchor="features" target="blank">View the list of recently added features.</html:link>
+            </div>
+        </div>
+    </div>
     <div class="row">
         <div class="span4">
             <%-- TODO

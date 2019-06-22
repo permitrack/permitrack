@@ -154,6 +154,16 @@
                 </h3>
                 <ul>
                     <li>
+                        You can now search and sort ESC Projects based on Last Inspection Status.
+                        Last Inspection Status is either Pass, Warning, or Failure, based on the BMPs within the Inspection. (June 2019)
+                    </li>
+                    <li>
+                        An ESC Inspection can now have multiple Inspection Reasons. (June 2019)
+                    </li>
+                    <li>
+                        Fixed an issue where an ESC Inspection could be duplicated and cleaned up some verbiage within ESC Events. (June 2019)
+                    </li>
+                    <li>
                         You can now set Overdue Notifications on a per-project basis, including "number of days since last inspection" and the "email message" that is sent out.
                         Previously, this could only be set on or off for all projects.
                     </li>
